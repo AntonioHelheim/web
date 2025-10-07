@@ -1,14 +1,14 @@
-# Sistemas / temporales
+# temporales / SO
 .DS_Store
 Thumbs.db
 *.log
 
-# Node / Python / PHP comunes
+# Node / Python
 node_modules/
 venv/
 __pycache__/
 
-# Builds / exportables / paquetes
+# builds / paquetes
 dist/
 build/
 *.zip
@@ -16,7 +16,7 @@ build/
 *.tar
 *.tar.gz
 
-# Fuentes de diseño / medios pesados (ajusta a tu realidad)
+# medios y fuentes pesadas (ajusta a tu realidad)
 *.xcf
 *.psd
 *.ai
@@ -28,6 +28,3 @@ build/
 *.tiff
 *.blend
 *.stl
-
-# Rutas específicas que no deben versionarse (ajusta según tu estructura)
-Proyectos/RevistaMittoFire/BannerProyectoSembrando.xcf
