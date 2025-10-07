@@ -16,15 +16,8 @@ build/
 *.tar
 *.tar.gz
 
-# medios y fuentes pesadas (ajusta a tu realidad)
+# medios y fuentes pesadas
 *.xcf
 *.psd
 *.ai
 *.mp4
-*.mov
-*.avi
-*.mkv
-*.wav
-*.tiff
-*.blend
-*.stl
