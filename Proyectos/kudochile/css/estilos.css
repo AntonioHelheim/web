@@ -1,0 +1,51 @@
+  
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif; }
+
+h2{
+    font-size: 2.5em; /* Reducir el tamaño del título */
+    margin-bottom: 10px; /* Agregar espacio inferior */
+  }
+
+  p {
+    font-size: 1.5em; /* Reducir el tamaño del texto */
+    margin-bottom: 10px; /* Agregar más espacio inferior */
+  }
+
+.w3-row-padding img {margin-bottom: 12px; }
+    /* Set the width of the sidebar to 120px */
+
+.w3-sidebar {width: 100px;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+
+#main {margin-left: 100px}
+    /* Remove margins from "page content" on small screens 
+
+
+
+/* Reglas de estilo para dispositivos con un ancho máximo de 600px (como iPhones) */
+@media only screen and (max-width: 600px) {
+   
+    #main {margin-left: 0px}
+
+    h2 {
+      font-size: 1.2em; /* Reducir el tamaño del título */
+      margin-bottom: 10px; /* Agregar espacio inferior */
+    }
+    hr {
+      width: 100px; /* Reducir el ancho de la línea horizontal */
+    }
+    h6 {
+      font-size: 0.8em; /* Reducir el tamaño del texto */
+      margin-bottom: 10px; /* Agregar más espacio inferior */
+    }
+    p {
+      font-size: 1em; /* Reducir el tamaño del texto */
+      margin-bottom: 10px; /* Agregar más espacio inferior */
+    }
+
+    
+    iframe {
+      width: 100%; /* Hacer que los iframes se ajusten al ancho del contenedor */
+      height: auto; /* Permitir que la altura se ajuste automáticamente */
+    }
+  }

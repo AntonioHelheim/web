@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pet Bakery | Pastelería para Mascotas</title>
+
+  <!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
+<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+
+<!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
+
+<!--==================== Meta Tags Generated with https://metatags.io ====================-->
+
+    <!-- Primary Meta Tags -->
+    <title>Big Chomp</title>
+    <meta name="title" content="Big Chomp"/>
+    <meta name="description" content="Tienda de mascotas, pasteleria de mascotas, tortas perros, tortas gatos"/>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="#"/>
+    <meta property="og:title" content="Big Chomp"/>
+    <meta property="og:description" content="Pasteleria de mascotas, tienda de mascotas, tortas para perros y gatos"/>
+    <meta property="og:image" content="./images/logo-bakery.PNG"/>
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="#"/>
+    <meta property="twitter:title" content="Big Chomp"/>
+    <meta property="twitter:description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
+    <meta property="twitter:image" content="./images/logo-bakery.PNG"/>
+
+
+<!--==================== Meta Tags Generated with https://metatags.io ====================-->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons actualizado -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Fonts: Chewy -->
+<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
+<!-- Preload hero -->
+<link rel="preload" as="image" href="images/hero/hero-1920x1200-1.png" fetchpriority="high">
+<link rel="preload" as="image" href="images/hero/hero-mobile-1080x1350-1.png" media="(max-width: 576px)" fetchpriority="high">
+<link rel="preload" as="image" href="images/hero/hero-1920x1200-2.png" fetchpriority="low">
+
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+  <div class="container align-items-center">
+    <a class="navbar-brand fw-bold text-brand d-flex align-items-center gap-2" href="#">
+      <img src="images/logo-32x32.png" class="brand-mark" width="32" height="32">
+      <span class="brand-name">Big Chomp</span>
+    </a>
+
+    <div class="d-flex ms-auto align-items-center gap-2 order-lg-2">
+      <button class="btn btn-ghost position-relative" data-bs-toggle="offcanvas" data-bs-target="#cart" aria-label="Abrir carrito">
+        <i class="bi bi-bag-heart"></i>
+        <span id="cartCount" class="cart-badge d-none">0</span>
+      </button>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Alternar navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse order-lg-1" id="nav">
+      <ul class="navbar-nav ms-lg-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#productos">Pastelería</a></li>
+        <li class="nav-item"><a class="nav-link" href="#packs">Packs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#accesorios">Accesorios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Pedidos</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- BARRA PROMO -->
+<div class="promo-bar">
+  <div class="container">
+    <div class="promo-ticker" aria-hidden="true">
+      <div class="promo-track">
+        <span>Despacho gratis dentro del área urbana de Puerto Varas</span>
+        <span>Despacho gratis dentro del área urbana de Puerto Varas</span>
+        <span>Despacho gratis dentro del área urbana de Puerto Varas</span>
+        <span>Despacho gratis dentro del área urbana de Puerto Varas</span>
+        <span>Despacho gratis dentro del área urbana de Puerto Varas</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <span class="badge badge-accent mb-3">Cumpleañeros felices en Puerto Varas</span>
+        <h1 class="display-5 fw-bold title-hand">Pastelería saludable & Petshop para <span class="text-brand">perros y gatos</span></h1>
+        <p class="lead mb-4">Tortas, galletas con nombre, cupcakes y muffins. Además, juguetes y accesorios temáticos para celebrar.</p>
+        <div class="d-flex gap-2">
+          <a class="btn btn-brand btn-lg" href="#productos"><i class="bi bi-cake2 me-1"></i> Ver pastelería</a>
+          <a class="btn btn-fern btn-lg" href="#accesorios"><i class="bi bi-balloon-heart me-1"></i> Ver accesorios</a>
+        </div>
+        <div class="mt-4 d-flex gap-2 flex-wrap">
+          <span class="category-pill"><i class="bi bi-heart"></i> Ingredientes naturales</span>
+          <span class="category-pill"><i class="bi bi-geo-alt"></i> Entrega local</span>
+          <span class="category-pill"><i class="bi bi-shield-check"></i> Hecho con cariño</span>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div id="heroCarousel" class="carousel slide rounded-3xl overflow-hidden" data-bs-ride="carousel" data-bs-interval="4500">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <picture>
+                <source media="(max-width: 576px)" srcset="images/hero/hero-mobile-1080x1350-1.png">
+                <img src="images/hero/hero-1920x1200-1.png" class="d-block w-100 object-fit-cover" alt="Torta Big Chomp" decoding="async" fetchpriority="high">
+              </picture>
+            </div>
+            <div class="carousel-item">
+              <picture>
+                <source media="(max-width: 576px)" srcset="images/hero/hero-mobile-1080x1350-2.png">
+                <img src="images/hero/hero-1920x1200-2.png" class="d-block w-100 object-fit-cover" alt="Gato feliz" decoding="async" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span><span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICIOS (íconos válidos y visibles) -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-6 col-md-3">
+        <div class="p-3 h-100 bg-white rounded-4 shadow-soft">
+          <i class="bi bi-cake2 fs-2 text-brand" aria-hidden="true"></i>
+          <h6 class="mt-2 title-hand">Pastelería</h6>
+          <p class="small mb-0">Tortas, galletas, cupcakes, muffins.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 h-100 bg-white rounded-4 shadow-soft">
+          <i class="bi bi-bag-heart fs-2 text-brand" aria-hidden="true"></i>
+          <h6 class="mt-2 title-hand">Accesorios</h6>
+          <p class="small mb-0">Bandanas, velas, packs fiesta.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 h-100 bg-white rounded-4 shadow-soft">
+          <i class="bi bi-brush fs-2 text-brand" aria-hidden="true"></i>
+          <h6 class="mt-2 title-hand">Personalización</h6>
+          <p class="small mb-0">Galleta con nombre incluida.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 h-100 bg-white rounded-4 shadow-soft">
+          <i class="bi bi-balloon-heart fs-2 text-brand" aria-hidden="true"></i>
+          <h6 class="mt-2 title-hand">Pastelería temática</h6>
+          <p class="small mb-0">Diseños y toppers para celebrar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASTELERÍA -->
+<section id="productos" class="py-5 bg-cream">
+  <div class="container">
+
+    <!-- CALCULADORA -->
+    <div id="portionCalc" class="collapse portion-calc">
+      <div class="card border-0 shadow-soft rounded-4 portion-card">
+        <div class="card-body">
+          <div class="row g-3 align-items-end">
+            <div class="col-6 col-md-3">
+              <label class="form-label">Especie</label>
+              <select id="pc_especie" class="form-select">
+                <option value="perro">Perro</option>
+                <option value="gato">Gato</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">Peso del cumpleañero (kg)</label>
+              <input id="pc_peso" type="number" min="1" step="0.1" class="form-control" placeholder="ej. 12">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">Invitados (mascotas)</label>
+              <input id="pc_invitados" type="number" min="0" step="1" class="form-control" placeholder="ej. 3">
+            </div>
+            <div class="col-6 col-md-3 d-grid gap-2">
+              <button id="pc_btn" class="btn btn-calc"><i class="bi bi-calculator"></i> Calcular</button>
+              <!-- ahora con color de fondo -->
+              <button id="pc_nutri" class="btn btn-sun" data-bs-toggle="modal" data-bs-target="#nutriModal">
+                <i class="bi bi-clipboard2-pulse"></i> Ver tabla nutricional
+              </button>
+            </div>
+          </div>
+          <div id="pc_result" class="mt-3 small text-muted"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-4 section-title">
+      <div class="title-with-action">
+        <h2 class="h1 title-hand mb-0">Tortas Big Chomp</h2>
+        <button class="btn btn-calc" data-bs-toggle="collapse" data-bs-target="#portionCalc" aria-expanded="false">
+          <i class="bi bi-calculator me-1"></i> Calculadora
+        </button>
+      </div>
+      <div class="bar mx-auto mt-2"></div>
+      <p class="text-muted mt-2">Elige sabor, color, tamaño y extras. Imagen a la derecha en desktop.</p>
+    </div>
+
+    <div id="productsRow" class="row g-4 products-row">
+      <!-- (P1, P2, P3) — se mantienen idénticas a tu última versión con personalizador, ingredientes y precios -->
+      <!-- P1 -->
+      <div id="col-p1" class="col-12 col-md-6 col-lg-4 product-col">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <div class="product-image-wrap" data-img-for="p1">
+            <picture>
+              <source media="(max-width: 576px)" srcset="images/products/product-800x800-1.png">
+              <img src="images/products/product-1000x1000-1.png" class="card-img-top"
+                   alt="Torta para perros" onclick="openPersonalizer('p1','col-p1')" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="card-title title-hand mb-1">Torta para perros</h6>
+                <p class="small text-muted mb-2">Sabores clásicos y full proteína</p>
+              </div>
+              <button class="btn btn-personalize btn-sm d-none d-lg-inline" onclick="openPersonalizer('p1','col-p1')">
+                <i class="bi bi-magic"></i> Personalizar
+              </button>
+            </div>
+            <button class="btn btn-personalize w-100 mb-2 d-lg-none" onclick="openPersonalizer('p1','col-p1')">
+              <i class="bi bi-magic"></i> Personalizar torta
+            </button>
+            <div class="collapse" id="p1">
+              <div class="border rounded-3 p-3 row g-3 align-items-start">
+                <div class="col-12 col-lg-9">
+                  <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Sabor</label>
+                      <select class="form-select" id="p1_sabor" onchange="updateDogPricing('p1'); updateDogIngredients('p1');">
+                        <option data-p10="10000" data-p14="12000" data-base="zanahoria y manzana">Zanahoria/Manzana</option>
+                        <option data-p10="10000" data-p14="12000" data-base="plátano y maní">Plátano/Maní</option>
+                        <option data-p10="12000" data-p14="14000" data-base="pollo y verduras">Pollo & Verduras</option>
+                        <option data-p10="16000" data-p14="18000" data-base="pollo">Full proteína (Pollo)</option>
+                        <option data-p10="16000" data-p14="18000" data-base="vacuno">Full proteína (Vacuno)</option>
+                      </select>
+                      <small id="p1_ing" class="text-muted d-block mt-1"></small>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Color de cubierta</label>
+                      <select class="form-select" id="p1_color">
+                        <option>Azul</option><option>Amarillo</option><option>Blanco</option>
+                        <option>Verde suave</option><option>Morado</option><option>Negro</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Tamaño</label>
+                      <select class="form-select" id="p1_size" data-price10="10000" data-price14="12000">
+                        <option value="10 cm">10 cm ($10.000)</option>
+                        <option value="14 cm">14 cm ($12.000)</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="p1_galletas" data-extra="2000">
+                        <label class="form-check-label" for="p1_galletas">Galletas alrededor (+$2.000)</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Diseño</label>
+                      <div class="design-icons">
+                        <input class="visually-hidden" type="radio" id="p1_d1" name="p1_design" value="Clásico" checked>
+                        <label for="p1_d1" title="Clásico"><i class="bi bi-cake2"></i><span class="visually-hidden">Clásico</span></label>
+                        <input class="visually-hidden" type="radio" id="p1_d2" name="p1_design" value="Festivo">
+                        <label for="p1_d2" title="Festivo"><i class="bi bi-cake2"></i><span class="visually-hidden">Festivo</span></label>
+                        <input class="visually-hidden" type="radio" id="p1_d3" name="p1_design" value="Minimal">
+                        <label for="p1_d3" title="Minimal"><i class="bi bi-cake2"></i><span class="visually-hidden">Minimal</span></label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Solicitudes especiales</label>
+                      <input class="form-control" id="p1_notes" placeholder="Nombre del peludo, topper, fecha, etc.">
+                    </div>
+                    <div class="col-12">
+                      <div class="d-grid d-sm-flex gap-2">
+                        <button class="btn btn-brand flex-fill" onclick="addCake('p1','Torta para perros')"><i class="bi bi-bag-plus"></i> Agregar al carrito</button>
+                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#p1">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3"><div class="img-slot" data-img-for="p1"></div></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- P2 -->
+      <div id="col-p2" class="col-12 col-md-6 col-lg-4 product-col">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <div class="product-image-wrap" data-img-for="p2">
+            <picture>
+              <source media="(max-width: 576px)" srcset="images/products/product-800x800-2.png">
+              <img src="images/products/product-1000x1000-2.png" class="card-img-top"
+                   alt="Torta para gatos" onclick="openPersonalizer('p2','col-p2')" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="card-title title-hand mb-1">Torta para gatos (10 cm)</h6>
+                <p class="small text-muted mb-2">Pollo, Atún o Vacuno</p>
+              </div>
+              <button class="btn btn-personalize btn-sm d-none d-lg-inline" onclick="openPersonalizer('p2','col-p2')">
+                <i class="bi bi-magic"></i> Personalizar
+              </button>
+            </div>
+            <button class="btn btn-personalize w-100 mb-2 d-lg-none" onclick="openPersonalizer('p2','col-p2')">
+              <i class="bi bi-magic"></i> Personalizar torta
+            </button>
+            <div class="collapse" id="p2">
+              <div class="border rounded-3 p-3 row g-3 align-items-start">
+                <div class="col-12 col-lg-9">
+                  <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Sabor</label>
+                      <select class="form-select" id="p2_sabor" onchange="updateCatPricing('p2'); updateCatIngredients('p2');">
+                        <option data-p10="12000" data-base="pollo">Pollo</option>
+                        <option data-p10="13000" data-base="atún">Atún</option>
+                        <option data-p10="14000" data-base="vacuno">Vacuno</option>
+                      </select>
+                      <small id="p2_ing" class="text-muted d-block mt-1"></small>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Color de cubierta</label>
+                      <select class="form-select" id="p2_color">
+                        <option>Azul</option><option>Amarillo</option><option>Blanco</option>
+                        <option>Verde suave</option><option>Morado</option><option>Negro</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Tamaño</label>
+                      <select class="form-select" id="p2_size" data-price10="12000" disabled>
+                        <option value="10 cm">10 cm (según sabor)</option>
+                      </select>
+                      <small class="text-muted">Para gatos ofrecemos 10 cm.</small>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="p2_galletas" data-extra="2000">
+                        <label class="form-check-label" for="p2_galletas">Galletas alrededor (+$2.000)</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Diseño</label>
+                      <div class="design-icons">
+                        <input class="visually-hidden" type="radio" id="p2_d1" name="p2_design" value="Clásico" checked>
+                        <label for="p2_d1" title="Clásico"><i class="bi bi-cake2"></i><span class="visually-hidden">Clásico</span></label>
+                        <input class="visually-hidden" type="radio" id="p2_d2" name="p2_design" value="Festivo">
+                        <label for="p2_d2" title="Festivo"><i class="bi bi-cake2"></i><span class="visually-hidden">Festivo</span></label>
+                        <input class="visually-hidden" type="radio" id="p2_d3" name="p2_design" value="Minimal">
+                        <label for="p2_d3" title="Minimal"><i class="bi bi-cake2"></i><span class="visually-hidden">Minimal</span></label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Solicitudes especiales</label>
+                      <input class="form-control" id="p2_notes" placeholder="Nombre del michi, topper, fecha, etc.">
+                    </div>
+                    <div class="col-12">
+                      <div class="d-grid d-sm-flex gap-2">
+                        <button class="btn btn-brand flex-fill" onclick="addCake('p2','Torta para gatos')"><i class="bi bi-bag-plus"></i> Agregar al carrito</button>
+                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#p2">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3"><div class="img-slot" data-img-for="p2"></div></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- P3 -->
+      <div id="col-p3" class="col-12 col-md-6 col-lg-4 product-col">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <div class="product-image-wrap" data-img-for="p3">
+            <picture>
+              <source media="(max-width: 576px)" srcset="images/products/product-800x800-3.png">
+              <img src="images/products/product-1000x1000-3.png" class="card-img-top"
+                   alt="Torta BARF 100% proteína" onclick="openPersonalizer('p3','col-p3')" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="card-title title-hand mb-1">Torta BARF 100% proteína</h6>
+                <p class="small text-muted mb-2">Elige proteína y si es para perro o gato</p>
+              </div>
+              <button class="btn btn-personalize btn-sm d-none d-lg-inline" onclick="openPersonalizer('p3','col-p3')">
+                <i class="bi bi-magic"></i> Personalizar
+              </button>
+            </div>
+            <button class="btn btn-personalize w-100 mb-2 d-lg-none" onclick="openPersonalizer('p3','col-p3')">
+              <i class="bi bi-magic"></i> Personalizar torta
+            </button>
+            <div class="collapse" id="p3">
+              <div class="border rounded-3 p-3 row g-3 align-items-start">
+                <div class="col-12 col-lg-9">
+                  <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Proteína</label>
+                      <select class="form-select" id="p3_prot" onchange="updateBarfPricing('p3'); updateBarfIngredients('p3');">
+                        <option>Pollo</option>
+                        <option>Vacuno</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">¿Para quién?</label>
+                      <div class="d-flex gap-3 mt-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="p3_tipo" id="p3_perro" value="Perro" checked onchange="updateBarfPricing('p3'); updateBarfIngredients('p3');">
+                          <label class="form-check-label" for="p3_perro">Perro <span class="text-muted">(lleva un poco de verduras)</span></label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="p3_tipo" id="p3_gato" value="Gato" onchange="updateBarfPricing('p3'); updateBarfIngredients('p3');">
+                          <label class="form-check-label" for="p3_gato">Gato</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Color de cubierta</label>
+                      <select class="form-select" id="p3_color">
+                        <option>Azul</option><option>Amarillo</option><option>Blanco</option>
+                        <option>Verde suave</option><option>Morado</option><option>Negro</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Tamaño</label>
+                      <select class="form-select" id="p3_size" data-price10="16000" data-price14="18000">
+                        <option value="10 cm">10 cm ($16.000)</option>
+                        <option value="14 cm">14 cm ($18.000)</option>
+                      </select>
+                      <small id="p3_note" class="text-muted d-block mt-1"></small>
+                      <small id="p3_ing" class="text-muted d-block mt-1"></small>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="p3_galletas" data-extra="2000">
+                        <label class="form-check-label" for="p3_galletas">Galletas alrededor (+$2.000)</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Solicitudes especiales</label>
+                      <input class="form-control" id="p3_notes" placeholder="Nombre, topper, fecha, etc.">
+                    </div>
+                    <div class="col-12">
+                      <div class="d-grid d-sm-flex gap-2">
+                        <button class="btn btn-brand flex-fill" onclick="addCake('p3','Torta BARF 100% proteína')"><i class="bi bi-bag-plus"></i> Agregar al carrito</button>
+                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#p3">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3"><div class="img-slot" data-img-for="p3"></div></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Torta especial -->
+    <div class="text-center mt-4">
+      <div class="container-sm">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8">
+            <button class="btn btn-pink btn-lg w-100 mb-2" data-bs-toggle="collapse" data-bs-target="#specialCollapse" aria-expanded="false">
+              <i class="bi bi-carrot me-1"></i> Torta especial
+            </button>
+            <div class="collapse" id="specialCollapse">
+              <textarea id="customCakeNotes" class="form-control" rows="2" placeholder="Describe lo que necesitas (mascota no convencional, restricciones, tamaño, etc.)"></textarea>
+              <small class="text-muted d-block mt-1">Se agrega una <strong>torta especial</strong> por <strong>$10.000</strong> como <em>precio referencial</em> (no es el valor final).</small>
+              <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-pink btn-icon" onclick="addSpecialCake()" aria-label="Agregar torta especial">
+                  <i class="bi bi-bag-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ESPECIALES -->
+<section id="packs" class="py-5">
+  <div class="container">
+    <div class="text-center mb-4 section-title">
+      <h2 class="h1 title-hand">Especiales de cumpleaños</h2>
+      <div class="bar mx-auto mt-2"></div>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <article class="card h-100 border-0 shadow-soft">
+          <picture>
+            <source media="(max-width: 576px)" srcset="images/banners/banner-900x675.png">
+            <img src="images/banners/banner-1400x1050.png" class="card-img-top img-fluid" alt="Galletas personalizadas" decoding="async" loading="lazy">
+          </picture>
+          <div class="card-body">
+            <h6 class="card-title title-hand">Galletas personalizadas (6u)</h6>
+            <p class="small mb-2">Hueso con nombre · surtidas</p>
+            <div class="price mb-3">$3.000</div>
+            <button class="btn btn-sun w-100" onclick="addSimple('Galletas personalizadas (6u)',3000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <article class="card h-100 border-0 shadow-soft">
+          <picture>
+            <source media="(max-width: 576px)" srcset="images/banners/banner-900x675.png">
+            <img src="images/banners/banner-1400x1050.png" class="card-img-top img-fluid" alt="Cupcakes" decoding="async" loading="lazy">
+          </picture>
+          <div class="card-body">
+            <h6 class="card-title title-hand">Cupcakes</h6>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <label for="cup_qty" class="small mb-0">Cantidad:</label>
+              <select id="cup_qty" class="form-select form-select-sm" style="max-width:160px" onchange="updateCupPrice()">
+                <option value="2" data-price="3500">2 unidades</option>
+                <option value="6" data-price="10000">6 unidades</option>
+              </select>
+            </div>
+            <div id="cup_price" class="price mb-3">$3.500</div>
+            <button class="btn btn-sun w-100" onclick="addCupcakes()">Agregar</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <article class="card h-100 border-0 shadow-soft">
+          <picture>
+            <source media="(max-width: 576px)" srcset="images/banners/banner-900x675.png">
+            <img src="images/banners/banner-1400x1050.png" class="card-img-top img-fluid" alt="Muffins de patita" decoding="async" loading="lazy">
+          </picture>
+          <div class="card-body">
+            <h6 class="card-title title-hand">Muffins de patita (6u)</h6>
+            <p class="small mb-2">Rellenos</p>
+            <div class="price mb-3">$5.000</div>
+            <button class="btn btn-sun w-100" onclick="addSimple('Muffins de patita (6u)',5000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <article class="card h-100 border-0 shadow-soft">
+          <picture>
+            <source media="(max-width: 576px)" srcset="images/banners/banner-900x675.png">
+            <img src="images/banners/banner-1400x1050.png" class="card-img-top img-fluid" alt="Caja surtida" decoding="async" loading="lazy">
+          </picture>
+          <div class="card-body">
+            <h6 class="card-title title-hand">Caja surtida cumpleañera</h6>
+            <p class="small mb-2">6 galletas + 1 cupcake + 4 muffins</p>
+            <div class="price mb-3">$8.000</div>
+            <button class="btn btn-sun w-100" onclick="addSimple('Caja surtida cumpleañera',8000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACCESORIOS -->
+<section id="accesorios" class="py-5 bg-cream">
+  <div class="container">
+    <div class="text-center mb-4 section-title">
+      <h2 class="h1 title-hand">Accesorios & juguetes</h2>
+      <div class="bar mx-auto mt-2"></div>
+      <p class="text-muted">Bandanas, velas, topper con nombre, juguetes masticables y más.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <img src="images/products/product-800x800.png" class="card-img-top" alt="Bandana" decoding="async" loading="lazy">
+          <div class="card-body">
+            <h6 class="card-title title-hand">Bandana cumpleañera</h6>
+            <p class="small text-muted mb-2">Tallas S–L</p>
+            <button class="btn btn-fern w-100" onclick="addSimple('Bandana cumpleañera',5000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <img src="images/products/product-800x800.png" class="card-img-top" alt="Juguete masticable" decoding="async" loading="lazy">
+          <div class="card-body">
+            <h6 class="card-title title-hand">Juguete masticable</h6>
+            <p class="small text-muted mb-2">Resistente</p>
+            <button class="btn btn-fern w-100" onclick="addSimple('Juguete masticable',6000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <img src="images/products/product-800x800.png" class="card-img-top" alt="Pack fiesta" decoding="async" loading="lazy">
+          <div class="card-body">
+            <h6 class="card-title title-hand">Pack fiesta</h6>
+            <p class="small text-muted mb-2">Gorro + vela + topper + bandana</p>
+            <button class="btn btn-fern w-100" onclick="addSimple('Pack fiesta',9000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <article class="card product-card h-100 border-0 shadow-soft">
+          <img src="images/products/product-800x800.png" class="card-img-top" alt="Plato" decoding="async" loading="lazy">
+          <div class="card-body">
+            <h6 class="card-title title-hand">Plato antideslizante</h6>
+            <p class="small text-muted mb-2">Fácil limpieza</p>
+            <button class="btn btn-fern w-100" onclick="addSimple('Plato antideslizante',7000)">Agregar</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-5">
+  <div class="container">
+    <div class="text-center mb-4 section-title">
+      <h2 class="h1 title-hand">Haz tu pedido</h2>
+      <div class="bar mx-auto mt-2"></div>
+      <p class="text-muted">O escríbenos por Instagram.</p>
+      <a class="btn btn-outline-dark" href="https://www.instagram.com/big_chomp_mascotas/" target="_blank" rel="noopener"><i class="bi bi-instagram me-1"></i> @big_chomp_mascotas</a>
+    </div>
+  </div>
+</section>
+
+<!-- OFFCANVAS CART -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cart">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="bi bi-bag-heart me-2"></i>Tu pedido</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <ul id="cartList" class="list-group mb-3"></ul>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <strong>Total</strong><strong id="cartTotal">$0</strong>
+    </div>
+    <label class="form-label">Fecha del pedido</label>
+    <input id="orderDate" type="date" class="form-control mb-2" required>
+    <div id="dateHelp" class="form-text">Mínimo 2 días de anticipación.</div>
+    <input id="notes" class="form-control mb-2" placeholder="Nombre del peludo, retiro/delivery, horario...">
+    <button class="btn btn-brand w-100" onclick="sendWhatsApp()"><i class="bi bi-whatsapp me-1"></i>Enviar por WhatsApp</button>
+  </div>
+</div>
+
+<!-- MODAL NUTRICIONAL -->
+<div class="modal fade" id="nutriModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4 shadow-soft">
+      <div class="modal-header">
+        <h5 class="modal-title title-hand"><i class="bi bi-clipboard2-pulse me-2"></i>Tabla nutricional (estimada)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p class="small text-muted mb-3">Estimaciones orientativas con base en promedios de ingredientes (avena, huevo, papa, frutas, pollo/vacuno/atún) según referencias públicas (WSAVA/UC Davis/USDA). No sustituye consejo veterinario.</p>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Nutriente (% en húmedo)</th>
+                <th>Torta clásica (Perro)</th>
+                <th>Torta 10 cm (Gato)</th>
+                <th>BARF 100% prot.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Proteína</td><td>12–16%</td><td>16–20%</td><td>18–22%</td></tr>
+              <tr><td>Grasa</td><td>6–8%</td><td>8–12%</td><td>10–14%</td></tr>
+              <tr><td>Carbohidratos</td><td>55–65%</td><td>1–5%</td><td>0–6%</td></tr>
+              <tr><td>Fibra</td><td>2–4%</td><td>1–2%</td><td>~1%</td></tr>
+              <tr><td>Humedad</td><td>30–35%</td><td>60–68%</td><td>60–70%</td></tr>
+              <tr><td>Sodio</td><td>0.1–0.3%</td><td>0.1–0.3%</td><td>0.1–0.3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small text-muted">Notas: “Clásica perro” considera avena + huevo + papa + fruta; “Gato” prioriza proteína animal; “BARF” es alta en proteína y baja en carbohidratos (con pequeñas verduras en versión perro).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer text-white">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <img src="images/logo/isotipo.svg" class="brand-mark brand-mark-lg" alt="" width="48" height="48">
+          <span class="brand-name fs-3">Big Chomp</span>
+        </div>
+        <p class="opacity-75 mb-2">Pastelería & Petshop · Puerto Varas</p>
+        <a class="btn btn-pink btn-sm" href="https://wa.me/56958513034" target="_blank" rel="noopener"><i class="bi bi-whatsapp me-1"></i> +56 9 5851 3034</a>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h6 class="title-hand">Pastelería</h6>
+        <ul class="list-unstyled small">
+          <li><a class="link-light" href="#productos">Tortas</a></li>
+          <li><a class="link-light" href="#packs">Cumpleañeros</a></li>
+          <li><a class="link-light" href="#accesorios">Accesorios</a></li>
+          <li><a class="link-light" href="https://www.instagram.com/big_chomp_mascotas/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h6 class="title-hand">Links de interés</h6>
+        <ul class="list-unstyled small">
+          <li><a class="link-light" href="https://wsava.org/wp-content/uploads/2024/06/Feeding-treats-to-your-dog-v2.pdf" target="_blank" rel="noopener">Regla del 10% (WSAVA)</a></li>
+          <li><a class="link-light" href="https://wsava.org/wp-content/uploads/2021/04/Selecting-a-pet-food-for-your-pet-updated-2021_WSAVA-Global-Nutrition-Toolkit.pdf" target="_blank" rel="noopener">Alimentación responsable (WSAVA)</a></li>
+          <li><a class="link-light" href="https://www.merckvetmanual.com/integumentary-system/food-allergy/cutaneous-food-allergy-in-animals" target="_blank" rel="noopener">Alergias alimentarias (Merck Vet)</a></li>
+          <li><a class="link-light" href="https://www.vet.cornell.edu/departments-centers-and-institutes/cornell-feline-health-center/health-information/feline-health-topics/chronic-kidney-disease" target="_blank" rel="noopener">Problemas renales en gatos (Cornell)</a></li>
+          <li><a class="link-light" href="https://www.bcn.cl/leychile/navegar?idNorma=1106037" target="_blank" rel="noopener">Ley Cholito (BCN)</a></li>
+          <li><a class="link-light" href="https://registratumascota.cl/" target="_blank" rel="noopener">Registro Nacional de Mascotas</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-lg-3">
+        <h6 class="title-hand">Boletín y contacto</h6>
+        <p class="small">Recibe ideas para celebrar, tips de alimentación y novedades.</p>
+        <div class="input-group mb-2">
+          <input type="email" class="form-control" placeholder="tu@email.com" aria-label="Correo">
+          <button class="btn btn-sun" type="button">Suscribirme</button>
+        </div>
+        <div class="d-flex gap-3 fs-5">
+          <a class="link-light" href="https://www.instagram.com/big_chomp_mascotas/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a class="link-light" href="https://wa.me/56958513034" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-3 mt-4 border-top border-light-subtle d-flex justify-content-between small">
+      <small>© 2025 Big Chomp — Marca registrada.</small>
+      <small class="opacity-75">Sitio creado por <a class="link-light" href="https://helheim.cl" target="_blank" rel="noopener">Helheim.cl</a></small>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

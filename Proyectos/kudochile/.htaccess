@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^kudochile\.cl$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.kudochile\.cl$
+RewriteRule ^/?$ "https\:\/\/helheim\.cl\/Proyectos\/kudochile\/index\.html" [R=301,L]
+

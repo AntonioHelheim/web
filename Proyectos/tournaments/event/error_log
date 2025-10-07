@@ -1,0 +1,5 @@
+[08-Apr-2025 10:27:26 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'helheimc'@'localhost' (using password: YES) in /home/helheimc/public_html/Proyectos/tournaments/event/submit_form.php:9
+Stack trace:
+#0 /home/helheimc/public_html/Proyectos/tournaments/event/submit_form.php(9): mysqli->__construct()
+#1 {main}
+  thrown in /home/helheimc/public_html/Proyectos/tournaments/event/submit_form.php on line 9

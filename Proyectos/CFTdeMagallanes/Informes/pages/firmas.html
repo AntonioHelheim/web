@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano"/>
+  <meta name="copyright" content="CFT de Magallanes"/>
+  <title>Generador de Firmas</title>
+  <meta name="description" content="Pagina Web del CFT de Magallanes destinada a generar firmas banner."/>
+
+   <!-- Favicon -->
+   <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
+   <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon_io/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon_io/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon_io/favicon-16x16.png">
+   
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+    html, body {
+      height: 100%;
+    }
+    #canvas {
+      display: none;
+    }
+    .card {
+      font-size: 0.85rem;
+    }
+    .form-label {
+      margin-bottom: 0.25rem;
+    }
+    input.form-control {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.85rem;
+    }
+    button.btn {
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+    }
+    .accordion-button {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+    .accordion-body {
+      font-size: 0.75rem;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-3" style="height: 100vh;">
+    <div class="text-center mb-3">
+      <h5 class="fw-bold text-white">Generador de firmas CFT de Magallanes</h5>
+    </div>
+
+    <div class="row justify-content-center align-items-start" style="height: calc(100% - 60px);">
+      <div class="col-md-6 d-flex flex-column justify-content-between h-100">
+        <div class="card shadow-sm p-3">
+          <form onsubmit="event.preventDefault(); generarFirma();">
+            <div class="mb-2">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan A. Concha">
+            </div>
+            <div class="mb-2">
+              <label for="cargo" class="form-label">Cargo</label>
+              <input type="text" id="cargo" class="form-control" placeholder="Ej: Desarrollo Web">
+            </div>
+            <div class="mb-2">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="text" id="telefono" class="form-control" placeholder="+56 9 5845 3672">
+            </div>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-light">Generar y Descargar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="accordion mt-3" id="accordionGmail">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingGmail">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGmail" aria-expanded="false" aria-controls="collapseGmail">
+                ¿Cómo configurar tu firma en Gmail?
+              </button>
+            </h2>
+            <div id="collapseGmail" class="accordion-collapse collapse" aria-labelledby="headingGmail" data-bs-parent="#accordionGmail">
+              <div class="accordion-body bg-light text-dark">
+                <ol class="ps-3">
+                  <li><a href="https://mail.google.com" target="_blank">Ingresa a Gmail</a>.</li>
+                  <li>Haz clic en el engranaje > "Ver toda la configuración".</li>
+                  <li>En "General", baja hasta "Firma".</li>
+                  <li>Crea una nueva firma: "CFT 2025".</li>
+                  <li>Haz clic en 🖼️ y sube tu firma generada.</li>
+                  <li>Activa como firma predeterminada.</li>
+                  <li>Haz clic en "Guardar cambios".</li>
+                </ol>
+                <p class="mt-2 mb-0 text-muted"><small>Recomendamos configurar desde computador.</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="canvas" width="1000" height="194"></canvas>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function dividirTexto(ctx, texto, maxWidth) {
+      const palabras = texto.split(' ');
+      const lineas = [];
+      let linea = '';
+      for (let palabra of palabras) {
+        const prueba = linea + palabra + ' ';
+        if (ctx.measureText(prueba).width > maxWidth) {
+          lineas.push(linea.trim());
+          linea = palabra + ' ';
+        } else {
+          linea = prueba;
+        }
+      }
+      if (linea) lineas.push(linea.trim());
+      return lineas;
+    }
+  
+    async function generarFirma() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const cargo = document.getElementById('cargo').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+  
+      if (!nombre || !cargo || !telefono) {
+        alert("Por favor, completa todos los campos antes para poder generar la firma.");
+        return;
+      }
+  
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      const imagenBase = new Image();
+      imagenBase.src = 'firmas-2025.png';
+      await new Promise(resolve => { imagenBase.onload = resolve; });
+  
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(imagenBase, 0, 0);
+  
+      const x = 490;
+      let y = 55;
+      const maxWidth = 480;
+  
+      ctx.font = 'bold 28px Arial';
+      ctx.fillStyle = '#000';
+      dividirTexto(ctx, nombre, maxWidth).forEach(linea => {
+        ctx.fillText(linea, x, y);
+        y += 30;
+      });
+  
+      ctx.font = 'italic 20px Arial';
+      ctx.fillStyle = '#B12C2D';
+      const lineasCargo = dividirTexto(ctx, cargo, maxWidth);
+      lineasCargo.forEach(linea => {
+        ctx.fillText(linea, x, y);
+        y += 24;
+      });
+  
+      ctx.font = 'bold 20px Arial';
+      ctx.fillStyle = '#000';
+      const yTelefono = lineasCargo.length > 1 ? 140 : 115;
+      ctx.fillText(telefono, x, yTelefono);
+  
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'firma-2025.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+  </script>
+
+
+</body>
+</html>

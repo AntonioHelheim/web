@@ -1,0 +1,268 @@
+  
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil');
+@import url('https://www.w3schools.com/w3css/4/w3.css');
+
+.w3-allerta {
+  font-family: "Allerta Stencil", Sans-serif;
+}
+
+body, h1,h2,h3,h6,p
+{
+  font-family: "Allerta Stencil", Sans-serif;
+      
+            
+}
+
+
+h2{
+    font-size: 3.5em; /* Reducir el tamaño del título */
+    margin-bottom: 10px; /* Agregar espacio inferior */
+  }
+
+h3{
+    font-size: 2.7em; /* Reducir el tamaño del título */
+    margin-bottom: 10px; /* Agregar espacio inferior */
+  }
+
+h4{
+  font-family: "poppins", Sans-serif;
+  font-size: 1.7em; /* Reducir el tamaño del título */
+  margin-bottom: 10px; /* Agregar espacio inferior */
+  }
+
+h5 {
+    font-size: 1em; /* Reducir el tamaño del texto */
+    margin-bottom: 10px; /* Agregar más espacio inferior */
+  }
+
+p {
+    font-size: 0.7em; /* Reducir el tamaño del texto */
+    margin-bottom: 10px; /* Agregar más espacio inferior */
+  }
+
+#timer{
+    font-family: "poppins", Sans-serif;
+    font-size: 1.7em; /* Reducir el tamaño del título */
+    margin-bottom: 10px; /* Agregar espacio inferior */
+    }
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Formulario de torneo */
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 1200px;
+}
+
+#eventForm {
+  background: rgb(117, 24, 24);/* Color de fondo */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  align-items: center; /* Alinea verticalmente */
+  justify-content: center; /* Alinea horizontalmente */
+  width: auto; /* Adapta el ancho al contenido */
+  max-width: 1200px; /* Máximo ancho permitido */
+}
+
+.input-group {
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ /*Orden*/
+
+label {
+  margin-top: 15px;
+  display: block;
+  font-weight: bold;
+}
+
+  /*Formulario de torneo Inputs*/
+
+input[type=email], 
+input[type="text"],
+input[type="date"],
+input[type="time"]{
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.buttonform {
+  background-color: #007BFF;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.reset-password {
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.responsive-image {
+  width: 100%; /* Ajusta el div al ancho del contenedor */
+  height: 100vh; /* Usa 100% del alto de la ventana del visualizador */
+  background-size: cover; /* Cubrirá todo el div sin perder las proporciones */
+  background-position: center; /* Centra la imagen en el div */
+}
+
+/*End formulario Torneo*/
+
+/*Footer- Uso exclusivo del h6*/
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background-color: black;
+}
+
+.footer-logo {
+  height: 30px;
+  margin-right: 25px; /* Espacio entre el logo y el texto */
+}
+
+.footer-text {
+  text-align: left;
+}
+
+.w3-center {
+  text-align: center;
+}
+
+h6 {
+  font-size: 0.9em; /* Reducir el tamaño del texto */
+}
+
+/*END Footer- Uso exclusivo del h6*/
+
+  /* Reglas de estilo para dispositivos con un ancho máximo de 600px (como iPhones) */
+  
+  @media (max-width:799px){
+    
+  h2{
+      font-size: 2.5em; /* Reducir el tamaño del título */
+      margin-bottom: 10px; /* Agregar espacio inferior */
+    }
+
+  h3{
+      font-size: 2em; /* Reducir el tamaño del título */
+      margin-bottom: 10px; /* Agregar espacio inferior */
+    }
+  h4{
+    font-family: "poppins", Sans-serif;
+    font-size: 1.5em; /* Reducir el tamaño del título */
+    margin-bottom: 10px; /* Agregar espacio inferior */
+    }
+  h5 {
+      font-size: 1em; /* Reducir el tamaño del texto */
+      margin-bottom: 10px; /* Agregar más espacio inferior */
+    }
+ 
+  
+  p {
+      font-size: 0.7em; /* Reducir el tamaño del texto */
+      margin-bottom: 10px; /* Agregar más espacio inferior */
+    }
+  
+  #timer{
+      font-family: "poppins", Sans-serif;
+      font-size: 1.5em; /* Reducir el tamaño del título */
+      margin-bottom: 10px; /* Agregar espacio inferior */
+      }
+
+    /*Inicio Formulario web*/
+    .container {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 390px;
+    }
+    
+    #eventForm {
+      background: rgb(117, 24, 24);/* Color de fondo */
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      align-items: center; /* Alinea verticalmente */
+      justify-content: center; /* Alinea horizontalmente */
+      width: auto; /* Adapta el ancho al contenido */
+      max-width: 380px; /* Máximo ancho permitido */
+    }
+    .input-group {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .input-group h4{
+      font-size: 1em; /* Reducir el tamaño del título */
+    }
+
+
+input[type=email], 
+input[type="text"],
+input[type="date"],
+input[type="time"]{
+    width: 95%;
+    padding: 8px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+  /*End formulario Torneo*/
+
+/*Footer- Uso exclusivo del h6*/
+.footer-logo {
+  height: 30px;
+  margin-right: 15px; /* Espacio entre el logo y el texto */
+}
+h6 {
+  font-size: 0.5em; /* Reducir el tamaño del texto */
+  }
+/*END Footer- Uso exclusivo del h6*/
+
+}
+
+
+
+
+

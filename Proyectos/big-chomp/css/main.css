@@ -1,0 +1,142 @@
+:root{
+  --brand-900:#0b3d5c;
+  --brand-800:#33baff;
+  --brand-700:#1a66bf;
+  --brand-600:#1f6feb;         /* azul botón Calculadora */
+  --brand-500:#569afb;
+  --accent-400:#ff8635;
+  --accent-500:#dc9609;
+  --fern-600:#57bead;
+  --pink-600:#fe537b;
+  --cream-25:#fffaec; --cream-100:#f9e1a3;
+  --ink:#222; --rose-300:#f4a7a3;
+}
+
+/* Base */
+html,body{
+  background:var(--cream-25);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif
+}
+.text-brand{color:var(--brand-800)}
+.btn-brand{background:var(--brand-600);border-color:var(--brand-600);color:#fff}
+.btn-brand:hover{background:var(--brand-500);border-color:var(--brand-500)}
+.btn-fern{background:var(--fern-600);border-color:var(--fern-600);color:#fff}
+.btn-fern:hover{filter:brightness(1.05)}
+.btn-sun{background:var(--accent-400);border-color:var(--accent-400);color:#222}
+.btn-sun:hover{filter:brightness(1.03)}
+.btn-pink{background:var(--pink-600);border-color:var(--pink-600);color:#fff}
+.btn-pink:hover{filter:brightness(1.05)}
+.badge-accent{background:var(--accent-500);color:#222}
+.bg-cream{background:var(--cream-100)}
+.btn-ghost{border:1px solid #e6e6e6;background:#fff}
+.shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.rounded-3xl{border-radius:2rem}
+.section-title .bar{width:72px;height:4px;background:var(--brand-600);border-radius:2px}
+.category-pill{display:inline-flex;gap:.5rem;align-items:center;padding:.45rem .9rem;border:1px solid #e9ecef;background:#fff;border-radius:999px}
+.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--rose-300);color:#222;border-radius:999px;font-size:.7rem;padding:.1rem .4rem}
+.object-fit-cover{object-fit:cover}
+
+/* Tipografía Chewy para marca y títulos */
+.brand-name, .title-hand, h1, h2, h3, .h1{
+  font-family:"Chewy", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing:.2px;
+}
+.brand-mark{height:32px;width:auto}
+.brand-mark-lg{height:48px;width:auto}
+.navbar-brand .brand-name{font-size:1.4rem;line-height:1}
+
+/* Hero fondo */
+.hero{
+  background:
+    radial-gradient(1300px 520px at -12% -20%, #e6f1ff 0, #ffffff 45%),
+    radial-gradient(900px 600px at 110% 5%, #fff2bf 0, #ffffff 45%);
+}
+
+/* Botón personalizar */
+.btn-personalize{
+  background:linear-gradient(90deg,var(--brand-600),var(--brand-500));
+  color:#fff;border:0;border-radius:999px;padding:.8rem 1.1rem;
+  display:flex;align-items:center;gap:.5rem;justify-content:center;
+}
+
+/* Tarjeta producto + imagen */
+.product-card img{object-fit:cover;aspect-ratio:1/1;cursor:pointer}
+.img-slot img{border-radius:.75rem;display:block;width:100%}
+
+/* Layout panel + separación */
+#productos .products-row{align-items:flex-start; row-gap:1.5rem;}
+#productos .product-col{position:relative; z-index:1; min-width:0;}
+#productos .product-card{overflow:hidden;}
+#productos .product-card .collapse{position:relative; width:100%; margin-top:1.25rem; z-index:0;}
+
+/* Reordenamiento y mini-cards cuando hay personalización abierta */
+.products-row.personalizing .product-col.active{ order:1; }
+.products-row.personalizing .product-col:not(.active){ order:2; transform:scale(.96); opacity:.9; }
+@media (min-width: 992px){
+  .products-row.personalizing .product-col.active{ flex:0 0 100%; max-width:100% }
+  .products-row.personalizing .product-col:not(.active){ flex:0 0 25%; max-width:25% }
+}
+
+/* Estado inválido del date */
+input[type="date"].is-invalid{border-color:#dc3545}
+input[type="date"].is-invalid:focus{box-shadow:0 0 0 .25rem rgba(220,53,69,.15)}
+
+/* Diseño: icon-only square options */
+.design-icons{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.design-icons input[type="radio"]{position:absolute; left:-9999px;}
+.design-icons label{
+  width:56px; height:56px; display:inline-flex; align-items:center; justify-content:center;
+  border:2px solid #e6e6e6; border-radius:.75rem; background:#fff; cursor:pointer;
+  transition:all .15s ease; font-size:1.4rem; color:var(--brand-700);
+}
+.design-icons label:hover{transform:translateY(-1px)}
+.design-icons input[type="radio"]:checked + label{
+  border-color:var(--brand-600); box-shadow:0 0 0 .2rem rgba(31,111,235,.15);
+}
+
+/* Promo bar (loop) con texto blanco y sombra */
+.promo-bar{
+  background:var(--accent-400);
+  color:#fff;
+  text-shadow:0 1px 0 rgba(0,0,0,.15);
+  border-top:1px solid rgba(0,0,0,.05);
+  border-bottom:1px solid rgba(0,0,0,.05);
+  font-weight:700;
+  font-size:.95rem;
+}
+.promo-ticker{ overflow:hidden; white-space:nowrap }
+.promo-track{ display:inline-block; padding:.55rem 0; animation:promoTicker 30s linear infinite; }
+.promo-track span{ margin-right:12rem; letter-spacing:.2px; }
+@keyframes promoTicker{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
+@media (prefers-reduced-motion: reduce){ .promo-track{ animation:none } }
+
+/* Botones extra */
+.btn-icon{ width:46px; height:46px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:.75rem; }
+.title-with-action{ display:inline-flex; gap:.75rem; align-items:center; }
+.btn-calc{ background:var(--brand-600); color:#fff; border:0; border-radius:999px; padding:.35rem .9rem; }
+.btn-calc:hover{ filter:brightness(1.05) }
+
+/* Calculadora */
+.portion-calc{ margin-bottom:1rem; }
+.portion-card{
+  background:
+    radial-gradient(600px 200px at 0% 0%, rgba(31,111,235,.12), transparent 60%),
+    radial-gradient(600px 200px at 100% 100%, rgba(255,134,53,.12), transparent 60%),
+    #fff;
+  position:relative;
+}
+.portion-card::after{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(10px 10px at 15% 25%, rgba(31,111,235,.12) 40%, transparent 41%),
+    radial-gradient(10px 10px at 80% 70%, rgba(255,134,53,.12) 40%, transparent 41%);
+  pointer-events:none;
+}
+.portion-calc .card-body{ padding:1rem 1rem; }
+@media (min-width: 768px){ .portion-calc .card-body{ padding:1rem 1.25rem; } }
+
+/* Footer */
+.footer{ background:var(--brand-900); }
+.footer .link-light{ text-decoration:none }
+.footer .link-light:hover{ text-decoration:underline }

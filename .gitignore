@@ -1,0 +1,33 @@
+# Sistemas / temporales
+.DS_Store
+Thumbs.db
+*.log
+
+# Node / Python / PHP comunes
+node_modules/
+venv/
+__pycache__/
+
+# Builds / exportables / paquetes
+dist/
+build/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Fuentes de diseño / medios pesados (ajusta a tu realidad)
+*.xcf
+*.psd
+*.ai
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wav
+*.tiff
+*.blend
+*.stl
+
+# Rutas específicas que no deben versionarse (ajusta según tu estructura)
+Proyectos/RevistaMittoFire/BannerProyectoSembrando.xcf
