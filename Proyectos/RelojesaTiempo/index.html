@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Juan Antonio Concha L. & Maite Lazcano"/>
+<meta name="copyright" content="Relojes a Tiempo Chile"/>
+<meta name="robots" content="index"/>
+
+<!--==================== Estructura HTML 5 
+Head Favicon, Metadata y CSS
+Header(cabecera)
+Nav(Menu navegacion)
+Aside (Panel Informacion Adicional)
+Main (Contenido Principal)
+Article (Entradas o articulos)
+Figure (Imagen)
+Section
+Footer (Pie de pagina) 
+==================== Estructura HTML 5 ====================-->
+
+<!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ===-->
+<link rel="shortcut icon" href="./images/Logo_Relojes a tiempo/SVG/favicon_io/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="./images/Logo_Relojes a tiempo/SVG/favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./images/Logo_Relojes a tiempo/SVG/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./images/Logo_Relojes a tiempo/SVG/favicon_io/favicon-16x16.png">
+<!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ====-->
+
+<!--==================== Meta Tags Generated with https://metatags.io ====================-->
+<!-- Primary Meta Tags -->
+<title>.:: Relojes a Tiempo Chile ::.</title>
+<meta name="title" content="Relojes a Tiempo Chile" />
+<meta name="description" content="Relojes a Tiempo Chile" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="www.Relojesatiempo.cl">
+<meta property="og:title" content="Relojes a Tiempo Chile">
+<meta property="og:description" content="Reloj, Watch, Relojes, Relojeria, Venta, Asesorias"/>
+<meta property="og:image" content="./images/Logo_Relojes a tiempo/SVG/favicon_io/favicon-32x32.png"/>
+
+<!--CDN (Content Delivery Network). 
+jsDelivr provides CDN support for Bootstrap's CSS and JavaScript: -->
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css?v=1.0.1">
+<link rel="stylesheet" href="./css/normalize.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  -->
+
+<!--Aplicaciones Web Progresivas (PWA)-->
+<!-- <link rel="manifest" href="./images/site.webmanifest">-->
+<!-- Este archivo es clave para hacer que las aplicaciones web progresivas sean más funcionales y amigables para los usuarios.-->
+
+</head>
+<!-- Contenedor principal -->
+<body class="container-fluid bg-black text-white text-center">
+<!--Conteneder del menu -->
+<div class="container-fluid fixed-menu pt-2 ">
+    <div class="row text-center">
+        <div class="col">
+            <a href="#QuienesSomos" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para saber más sobre nosotros">
+                <h4>
+                    <i class="fas fa-users me-2"></i>Quienes Somos
+                </h4>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#videos-destacados" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para ver los videos destacados">
+                <h4>
+                    <i class="fas fa-video me-2"></i>Videos Destacados
+                </h4>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para saber cómo comprar">
+                <h4>
+                    <i class="fas fa-shopping-cart me-2"></i>¿Como Comprar?
+                </h4>
+            </a>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center gap-5 ">
+                <a href="https://www.youtube.com/@relojesatiempo" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestro canal de YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/relojesatiempo.cl/" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestro perfil de Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://web.facebook.com/people/Relojes-a-tiempo/61566825357791" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestra página de Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://wa.me/56965734976?text=Hola, Vi un producto en la pagina www.relojesatiempo.cl y me interesa mas informacion" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para enviar un mensaje por WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Contenedor de Seccion Carrusel de imagenes -->
+<div id="carousel" class="carousel slide mx-auto pt-5 my-5" style="max-width: 1400px; max-height: 680px;" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="3"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="./images/Logo_Relojes a tiempo/SVG/Logo_Relojes a tiempo_fondo negro_blanco.svg" alt="NegroBlanco" class="d-block w-100" style="max-height: 680px; object-fit: cover;">
+        </div>
+        <div class="carousel-item">
+            <img src="./images/Logo_Relojes a tiempo/SVG/Logo_Relojes a tiempo_Fondo blanco_negro.svg" alt="BlancoNegro" class="d-block w-100" style="max-height: 680px; object-fit: cover;">
+        </div>
+        <div class="carousel-item">
+            <img src="./images/Logo_Relojes a tiempo/SVG/Logo_Relojes a tiempo_Fondo azul_plateado.svg" alt="AzulPlateado" class="d-block w-100" style="max-height: 680px; object-fit: cover;">
+        </div>
+        <div class="carousel-item">
+            <img src="./images/Logo_Relojes a tiempo/SVG/Logo_Relojes a tiempo_Fondo azul_dorado.svg" alt="AzulDorado" class="d-block w-100" style="max-height: 680px; object-fit: cover;">
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!--Conteneder de seccion Quienes Somos-->
+    <section id="QuienesSomos" class="container text-center pt-5 my-5">
+        <h4>Quienes Somos</h4>
+        <h6>
+            En Relojes a Tiempo, somos apasionados por el arte y la precisión de la relojería. Con años de experiencia en el mercado, ofrecemos una selección que abarca desde piezas de alta gama hasta opciones accesibles, incluyendo personalizaciones y reparaciones. Nos diferenciamos por nuestra atención al cliente, brindando un servicio cercano y especializado que convierte cada interacción en una experiencia única.
+        </h6>
+        <h6>
+            Tienes alguna duda, escríbenos a nuestras redes, siempre estaremos felices de responderte.
+        </h6>
+    </section>
+    <br>
+
+<!--Contenedor de Seccion de videos destacados-->
+    <!-- <section id="videos-destacados" class="container text-center pt-5 my-5">
+        <h4 class="mb-4">Videos Destacados</h4>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <iframe class="responsive-video shadow-3d" src="https://www.youtube.com/embed/VIkbsDtPI2c" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-4 mb-4">
+                <iframe class="responsive-video shadow-3d" src="https://www.youtube.com/embed/HBq3vglJLaU" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-4 mb-4">
+                <iframe class="responsive-video shadow-3d" src="https://www.youtube.com/embed/C0V7cJz8rTM" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section> -->
+
+    <div class="container-fluid fixed-menu pt-2 ">
+        <div class="row text-center">
+            <div class="col">
+                <a href="#QuienesSomos" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para saber más sobre nosotros">
+                    <h4>
+                        <i class="fas fa-users me-2"></i>Quienes Somos
+                    </h4>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#videos-destacados" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para ver los videos destacados">
+                    <h4>
+                        <i class="fas fa-video me-2"></i>Videos Destacados
+                    </h4>
+                </a>
+            </div>
+            <div class="col">
+                <a href="#" class="text-white text-decoration-none" data-bs-toggle="tooltip" title="Haz clic para saber cómo comprar">
+                    <h4>
+                        <i class="fas fa-shopping-cart me-2"></i>¿Como Comprar?
+                    </h4>
+                </a>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center gap-5 ">
+                    <a href="https://www.youtube.com/@relojesatiempo" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestro canal de YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.instagram.com/relojesatiempo.cl/" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestro perfil de Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://web.facebook.com/people/Relojes-a-tiempo/61566825357791" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para ir a nuestra página de Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://wa.me/56965734976?text=Hola, Vi un producto en la pagina www.relojesatiempo.cl y me interesa mas informacion" target="_blank" class="text-white fs-4" data-bs-toggle="tooltip" title="Haz clic para enviar un mensaje por WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botón Scroll Up -->
+    <button id="scrollUpButton" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px; display: none; z-index: 1000;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <section id="videos-destacados" class="container text-center pt-5 my-5">
+        <h4 class="mb-4">Videos Destacados</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <iframe class="w-100" style="height: 350px;" src="https://www.youtube.com/embed/VIkbsDtPI2c" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-4">
+                <iframe class="w-100" style="height: 350px;" src="https://www.youtube.com/embed/HBq3vglJLaU" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-4">
+                <iframe class="w-100" style="height: 350px;" src="https://www.youtube.com/embed/C0V7cJz8rTM" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+<br>
+
+
+
+
+<!--Contenedor Footer-->
+<footer class="container-fluid bg-dark text-white pt-4 text-center mt-2">
+    <div class="container">
+        <div class="row">
+            <!-- Columna de marca y ubicación -->
+            <div class="col-md-3 mb-4">
+                <h4 class="fw-bold">Relojes a Tiempo</h4>
+                <p>Direccion Comercial</p>
+                <p><strong> Curacavi </strong>- Camino de Los Collihuales #114</p>
+                <a href="https://maps.app.goo.gl/HWQv2XDrCRN2a1Xz8" target="_blank" class="btn btn-outline-light btn-sm">¿Cómo llegar?</a>
+            </div>
+            <!-- Columna de redes sociales -->
+            <div class="col-md-3 mb-4 text-center">
+                <h5>Síguenos</h5>
+                <p>¡Visítanos en nuestras Redes sociales!</p>
+                <div class="d-flex justify-content-center gap-3 mt-2">
+                    <a href="https://www.youtube.com/@relojesatiempo" target="_blank" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/relojesatiempo.cl/" target="_blank" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+                    <a href="https://web.facebook.com/people/Relojes-a-tiempo/61566825357791" target="_blank" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/56965734976?text=Hola, Vi un producto en la pagina www.relojesatiempo.cl y me interesa mas informacion" target="_blank" class="text-white fs-4"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <!-- Columna de navegación -->
+            <div class="col-md-2 mb-4">
+                <h5>Navega</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Relojes de Hombre</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Relojes de Mujer</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Todos los Relojes</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Ofertas</a></li>
+                </ul>
+            </div>
+            <!-- Columna de información -->
+            <div class="col-md-2 mb-4">
+                <h5>Información</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">¿Cómo Comprar?</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Despachos</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Ayuda</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Garantías y Devoluciones</a></li>
+                </ul>
+            </div>
+            <!-- Columna de servicio al cliente -->
+            <div class="col-md-2 mb-4">
+                <h5>Servicio al Cliente</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Ayuda con tu pedido</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Preguntas Frecuentes</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Cambios</a></li>
+                    <li><a href="#" target="_blank" class="text-white text-decoration-none">Cuidado de Relojes</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="border-secondary">
+        <div class="text-center">
+            <h6 class="mb-0">© 2024 Relojes a Tiempo. Todos los derechos reservados.</h6>
+            <h6>Web diseñada por <a href="https://www.helheim.cl" target="_blank" class="text-white text-decoration-none">helheim.cl</a></h6>
+        </div>
+    </div>
+</footer>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./js/Scripts.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
+
+<!-- Script de tooltips -->
+<script>
+    // Inicializar tooltips en todos los elementos con el atributo data-bs-toggle="tooltip"
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+
+<!-- Script Botón Scroll Up -->
+<button id="scrollUpButton" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px; display: none; z-index: 1000;">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+    // Mostrar el botón al descender un 10% en la página
+    window.addEventListener('scroll', function () {
+        const scrollUpButton = document.getElementById('scrollUpButton');
+        if (window.scrollY > window.innerHeight * 0.1) {
+            scrollUpButton.style.display = 'block';
+        } else {
+            scrollUpButton.style.display = 'none';
+        }
+    });
+
+    // Scroll hacia arriba al hacer clic en el botón
+    document.getElementById('scrollUpButton').addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+:root{
+  /* Paleta */
+  --brand-600:#198754;
+  --brand-700:#14724a;
+  --text-900:#212529;
+  --text-600:#495057;
+  --bg-50:#ffffff;
+  --bg-900:#0b0d0f;
+
+  /* Dimensiones y radios */
+  --radius-xl:1.25rem;
+  --radius-full:999px;
+  --space-1:.25rem;
+  --space-2:.5rem;
+  --space-3:.75rem;
+  --space-4:1rem;
+  --space-6:1.5rem;
+  --space-8:2rem;
+
+  /* Sombras */
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 8px 24px rgba(0,0,0,.1);
+
+  /* ScrollUp color dinámico */
+  --to-top-bg: var(--brand-600);
+}
+
+[data-bs-theme="dark"]{
+  --bg-50:#0b0d0f;
+  --text-900:#e9ecef;
+  --text-600:#ced4da;
+}
+
+/* ======= Resumen (card profesional como Educación) ======= */
+.section--summary .sum-card{
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-xl);
+  background: rgba(25,135,84,.05); /* fallback */
+  background: color-mix(in oklab, var(--brand-600) 5%, transparent);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.section--summary .sum-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.section--summary .sum-badge{
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--bg-50);
+  color: var(--brand-600);
+  border: 1px solid var(--bs-border-color);
+  box-shadow: var(--shadow-sm);
+  flex: 0 0 44px;
+  font-size: 20px;
+}
+
+.section--summary .sum-text{
+  color: var(--text-900);
+  line-height: 1.6;
+}
+
+/* Si hubiera enlaces dentro del resumen, coherentes con Educación */
+.section--summary .sum-text a{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: .08em;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: text-decoration-color .15s ease, color .15s ease, background-color .15s ease;
+  border-radius: .25rem;
+  padding: 0 .1rem;
+}
+.section--summary .sum-text a:hover{ text-decoration-color: currentColor; }
+.section--summary .sum-text a:focus{
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+  background: color-mix(in oklab, var(--brand-600) 10%, transparent);
+}
+a:focus-visible{
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+
+[data-bs-theme="dark"] .section--summary .sum-card{
+  background: color-mix(in oklab, var(--brand-600) 12%, transparent);
+}
+
+
+/* Utilidades */
+.brand-dot{width:.8rem;height:.8rem;border-radius:50%;background:var(--brand-600);display:inline-block}
+.section{padding-block:var(--space-8)}
+.chip{display:inline-flex;align-items:center;padding:var(--space-1) var(--space-2);border-radius:var(--radius-full);border:1px solid var(--bs-border-color);font-size:.8rem}
+.muted-list{color:var(--text-600)}
+.card-cta{
+  background: rgba(25,135,84,.07); /* fallback */
+  background:color-mix(in oklab, var(--brand-600) 7%, transparent); border-radius:var(--radius-xl); box-shadow:var(--shadow-sm)}
+.timeline{position:relative}
+.timeline::before{content:"";position:absolute;inset:0 auto 0 .9rem;width:2px;background:var(--bs-border-color)}
+.timeline-item{position:relative;padding-left:2rem;margin-bottom:1.25rem}
+.timeline-item .dot{position:absolute;left:.25rem;top:.35rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--brand-600)}
+.company-logo{width:22px;height:22px;object-fit:contain;border-radius:.25rem;margin-right:.5rem}
+.btn-toggle-theme{white-space:nowrap}
+.logo-link{display:inline-flex;align-items:center;gap:.5rem}
+
+/* Impresión y accesibilidad de movimiento */
+@media print{.no-print{display:none!important}.section{padding-block:1.2rem}}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto;animation:none!important;transition:none!important}
+}
+
+/* === Scroll Up Button === */
+.btn-to-top{
+  position: fixed;
+  inset: auto 1.25rem 1.25rem auto; /* bottom-right */
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: none;
+  border-radius: var(--radius-full, 999px);
+  background: var(--to-top-bg);
+  color: #fff;
+  outline: 2px solid #fff;
+  box-shadow: var(--shadow-md, 0 8px 24px rgba(0,0,0,.10));
+  opacity: 0; 
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s, background-color .2s linear;
+  z-index: 1050;
+}
+[data-bs-theme="dark"] .btn-to-top{
+  background: var(--to-top-bg);
+  color: #fff;
+}
+.btn-to-top:hover{ filter: brightness(1.03); }
+.btn-to-top:focus{
+  outline: 2px solid var(--brand-600, #198754);
+  outline-offset: 2px;
+}
+.btn-to-top.is-visible{
+  opacity: 1; 
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ======= Barras de habilidades (verticales) ======= */
+.skill-bars{
+  /* Variables de layout */
+  --bar-min: 88px;       /* ancho mínimo por gráfico en tablet/escritorio */
+  --bar-height: 180px;   /* altura del gráfico por defecto */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--bar-min), 1fr));
+  gap: 1rem;
+
+  /* Alineación consistente de todos los gráficos */
+  align-items: end;      /* alinea la base de todas las barras */
+  justify-items: center; /* centra cada gráfico dentro de su celda */
+}
+
+.bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: var(--bar-min); /* garantiza mínimo consistente */
+}
+
+.bar-figure{
+  position: relative;
+  width: 100%;
+  height: var(--bar-height); /* altura unificada por variable */
+  border: 1px solid var(--bs-border-color);
+  background: color-mix(in oklab, var(--brand-600) 6%, transparent);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Idiomas un poco más bajos, misma alineación, misma altura y SIEMPRE 3 en línea */
+.skill-bars--lang{
+  --bar-height: 160px;               /* lo que ya usas */
+  --bar-min: 0;                      /* permite encoger sin romper fila */
+  grid-template-columns: repeat(3, minmax(0, 1fr));  /* clave: 3 columnas fijas */
+}
+
+.bar-fill{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: calc(var(--value, 0) * 1%);
+  background: linear-gradient(
+    to top,
+    var(--brand-600),
+    color-mix(in oklab, var(--brand-600) 46%, transparent)
+  );
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  transition: height .6s ease;
+}
+
+.bar-label{
+  margin-top: .5rem;
+  font-size: .8rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--text-900);
+
+  /* Normaliza la altura del área de etiqueta para que
+     las barras queden visualmente alineadas aunque el nombre sea largo */
+  min-height: 2.4em; /* ~2 líneas con line-height 1.2 */
+}
+
+@media (max-width: 575.98px){ /* Bootstrap: xs - <576px */
+  .skill-bars{
+    --bar-min: 70px;     /* permite 4 columnas sin desbordar */
+    --bar-height: 150px; /* baja un poco la altura en móvil */
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* máximo 4 por fila */
+  }
+/* Override SOLO para Idiomas */
+  .skill-bars--lang{
+    --bar-height: 140px;                          /* opcional: un poco más bajo en móvil */
+    grid-template-columns: repeat(3, minmax(0, 1fr));  /* mantiene 3 fijas en móvil */
+  }
+  .bar{
+    min-width: 0; /* deja que el grid gestione el ancho */
+  }
+}
+
+
+
+/* ======= Conjunto de blandas ======= */
+.skill-cluster{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .75rem;
+  justify-content: center;
+  padding: var(--space-4);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-xl);
+  background: color-mix(in oklab, var(--brand-600) 5%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-bs-theme="dark"] .skill-cluster{
+  background: color-mix(in oklab, var(--brand-600) 12%, transparent);
+}
+
+.skill-token{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .45rem .75rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-50);
+  color: var(--text-900);
+  box-shadow: var(--shadow-sm);
+  font-size: .85rem;
+}
+
+/* ======= Educación (card profesional) ======= */
+.section--edu .edu-card{
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-xl);
+  background: color-mix(in oklab, var(--brand-600) 5%, transparent);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.section--edu .edu-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.section--edu .edu-badge{
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--bg-50);
+  color: var(--brand-600);
+  border: 1px solid var(--bs-border-color);
+  box-shadow: var(--shadow-sm);
+  flex: 0 0 44px;
+  font-size: 20px;
+}
+
+/* Texto y enlace (profesional, accesible) */
+.section--edu .edu-text{
+  color: var(--text-900);
+  line-height: 1.6;
+}
+
+.section--edu .edu-text a{
+  color: inherit; /* usa el color del texto para verse consistente en light/dark */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: .08em;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: text-decoration-color .15s ease, color .15s ease, background-color .15s ease;
+  border-radius: .25rem; /* mejora foco */
+  padding: 0 .1rem;      /* área de foco sutil */
+}
+
+.section--edu .edu-text a:hover{
+  text-decoration-color: currentColor;
+}
+
+.section--edu .edu-text a:focus{
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+  background: color-mix(in oklab, var(--brand-600) 10%, transparent);
+}
+
+[data-bs-theme="dark"] .section--edu .edu-card{
+  background: color-mix(in oklab, var(--brand-600) 12%, transparent);
+}
+
+/* ======= Certificaciones (card profesional) ======= */
+.section--certs .cert-card{
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-xl);
+  background: color-mix(in oklab, var(--brand-600) 5%, transparent);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.section--certs .cert-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .5rem;
+}
+
+.section--certs .cert-item{
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  padding-block: .4rem;
+  color: var(--text-900);
+  line-height: 1.6;
+}
+
+/* separador sutil entre ítems */
+.section--certs .cert-item + .cert-item{
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: .8rem;
+  margin-top: .4rem;
+}
+
+.section--certs .cert-badge{
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--bg-50);
+  color: var(--brand-600);
+  border: 1px solid var(--bs-border-color);
+  box-shadow: var(--shadow-sm);
+  flex: 0 0 36px;
+  font-size: 18px;
+}
+
+/* Enlaces dentro de certificaciones: coherentes con Educación */
+.section--certs .cert-item a{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: .08em;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: text-decoration-color .15s ease, color .15s ease, background-color .15s ease;
+  border-radius: .25rem;
+  padding: 0 .1rem;
+}
+
+.section--certs .cert-item a:hover{
+  text-decoration-color: currentColor;
+}
+
+.section--certs .cert-item a:focus{
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+  background: color-mix(in oklab, var(--brand-600) 10%, transparent);
+}
+
+[data-bs-theme="dark"] .section--certs .cert-card{
+  background: color-mix(in oklab, var(--brand-600) 12%, transparent);
+}
+
+/* Asegura contraste del icono del toggler en ambos temas */
+.navbar .navbar-toggler-icon{
+  background-image: var(--bs-navbar-toggler-icon-bg) !important;
+}
+[data-bs-theme="dark"] .navbar{
+  --bs-navbar-color: #e9ecef;
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(233,236,239,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+:target{ scroll-margin-top: calc(56px + 1rem); } /* 56px ~ altura navbar Bootstrap */
+@media (min-width: 992px){
+  :target{ scroll-margin-top: calc(64px + 1.25rem); }
+}
+
+@media (max-width: 360px){
+  .skill-bars{ --bar-min: 64px; --bar-height: 140px; }
+  .bar-label{ font-size: .75rem; }
+}
+

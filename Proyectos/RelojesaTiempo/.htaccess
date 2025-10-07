@@ -1,0 +1,5 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^relojesatiempo\.cl$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.relojesatiempo\.cl$
+RewriteRule ^/?$ "https\:\/\/helheim\.cl\/Proyectos\/RelojesaTiempo\/index\.html" [R=301,L]

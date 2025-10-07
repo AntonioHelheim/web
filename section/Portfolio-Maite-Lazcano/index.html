@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" data-theme="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Maite Lazcano — Designer (Industrial / Gráfico / Web)</title>
+  <meta content="Portfolio y CV de Maite Lazcano Gaedicke: Diseño Industrial, Gráfico y Web. Proyectos, experiencia, educación, habilidades y contacto." name="description"/>
+
+  <!-- Open Graph -->
+  <meta content="Maite Lazcano — Designer" property="og:title"/>
+  <meta content="Diseño Industrial, Gráfico y Web. Proyectos, experiencia, educación, habilidades y contacto." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://images.unsplash.com/photo-1545235617-9465d2a55698?w=1200&q=80" property="og:image"/>
+  <meta content="https://helheim.cl/section/Portfolio-Maite-Lazcano/index.html" property="og:url"/>
+
+  <!--==================== Favicon ====================-->
+  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+
+  <!-- Persistencia de tema muy temprana -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        document.documentElement.setAttribute('data-bs-theme', saved);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+      }
+    })();
+  </script>
+
+  <!-- Performance: preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Styles -->
+  <link href="./css/styles.css?v=2025-09-30-1328" rel="stylesheet"/>
+</head>
+<body class="px-3 px-sm-0">
+<header class="border-bottom bg-surface">
+  <!-- NAVBAR FIJO -->
+  <nav aria-label="Main" class="navbar navbar-expand-lg fixed-top bg-surface border-bottom" id="mainNav">
+    <div class="container py-3">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#home">
+        <span aria-hidden="true" class="brand-dot"></span> Maite Lazcano
+        <span class="visually-hidden" data-i18n="nav.home_sr">Inicio</span>
+      </a>
+
+      <!-- Toggler -->
+      <button aria-controls="nav" aria-expanded="false" aria-label="Menú" class="navbar-toggler ms-auto" data-bs-target="#nav" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Panel colapsado -->
+      <div class="collapse navbar-collapse menu-panel" id="nav">
+
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="https://helheim.cl/" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav.about">Sobre mí</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience" data-i18n="nav.experience">Experiencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills" data-i18n="nav.skills">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio" data-i18n="nav.portfolio">Portafolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education" data-i18n="nav.education">Educación</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav.contact">Contacto</a></li>
+        </ul>
+
+        <!-- Controles: idioma + tema -->
+        <div class="menu-actions d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+          <div class="dropdown">
+            <button class="btn btn-outline-accent btn-sm dropdown-toggle" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-translate me-1"></i><span id="langLabel">ES</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+              <li><button class="dropdown-item lang-opt" data-lang="es">ES — Español</button></li>
+              <li><button class="dropdown-item lang-opt" data-lang="en">EN — English</button></li>
+              <li><button class="dropdown-item lang-opt" data-lang="da">DA — Dansk</button></li>
+            </ul>
+          </div>
+
+          <!-- Botón tema -->
+          <button id="themeToggle" class="btn btn-outline-accent btn-sm" type="button" aria-pressed="false" aria-label="Toggle theme">
+            <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+            <span class="visually-hidden" data-i18n="actions.toggle_theme">Cambiar tema</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="home">
+  <!-- HERO (variante 2 activa) -->
+  <section class="hero container py-5 py-lg-6">
+    <div class="row g-5 align-items-center">
+      <!-- TEXTO -->
+      <div class="col-lg-7 order-1 order-lg-1">
+        <h1 class="fw-bold title-hero lh-1 display-4 text-break reveal" data-reveal="up">
+          Maite <span class="text-accent">Lazcano</span>
+        </h1>
+        <blockquote class="lead fst-italic mb-4 reveal" data-reveal="up" style="--reveal-delay:80ms">
+          <span data-i18n="hero.quote">“El diseño es la unión de estética y funcionalidad en cada proyecto.”</span>
+        </blockquote>
+        <div class="d-flex flex-wrap gap-2 reveal" data-reveal="up" style="--reveal-delay:160ms">
+          <a class="btn btn-outline-accent btn-lg rounded-pill lift" href="#contact" data-i18n="hero.cta">Contactar</a>
+          <a id="cvBtn" class="btn btn-outline-accent btn-lg rounded-pill lift" target="_blank" rel="noopener" href="#" data-i18n="hero.cv">Descargar CV</a>
+        </div>
+        <ul class="list-inline mt-4 small text-muted d-flex flex-wrap gap-3 reveal" data-reveal="up" style="--reveal-delay:240ms">
+          <li class="list-inline-item"><i class="bi bi-envelope"></i> <a class="text-decoration-none" href="mailto:Malazga99@gmail.com">Malazga99@gmail.com</a></li>
+          <li class="list-inline-item"><i class="bi bi-telephone"></i> <a class="text-decoration-none" href="tel:+56931966126">+56 9 3196 6126</a></li>
+          <li class="list-inline-item"><i class="bi bi-geo-alt"></i> <span data-i18n="hero.location">Puerto Varas, Chile (disponible para trabajo remoto o híbrido)</span></li>
+        </ul>
+      </div>
+
+      <!-- HIGHLIGHTS -->
+      <div class="col-lg-5 order-2 order-lg-2 mt-3 mt-lg-0 d-flex flex-column gap-3 reveal-group">
+        <article class="card highlight lift reveal" style="--i:0" data-reveal="right">
+          <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi bi-rocket-takeoff fs-3"></i>
+            <div>
+              <h3 class="h6 mb-1" data-i18n="hi.1.title">Project & Product Innovation</h3>
+              <p class="small text-muted mb-0" data-i18n="hi.1.copy">Liderazgo en proyectos de diseño gráfico, prototipado 3D e impresión láser, integrando desarrollo web front-end con enfoque en innovación y trabajo remoto internacional.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card highlight lift reveal" style="--i:1" data-reveal="right">
+          <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi bi-easel fs-3"></i>
+            <div>
+              <h3 class="h6 mb-1" data-i18n="hi.2.title">Diseño para Marcas y Eventos Públicos</h3>
+              <p class="small text-muted mb-0" data-i18n="hi.2.copy">Experiencia colaborando con clientes institucionales como INDAP y Ministerio de la Mujer, diseñando material gráfico, presentaciones y supervisión de eventos en terreno.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card highlight lift reveal" style="--i:2" data-reveal="right">
+          <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi bi-laptop fs-3"></i>
+            <div>
+              <h3 class="h6 mb-1" data-i18n="hi.3.title">Front-End Development & UX</h3>
+              <p class="small text-muted mb-0" data-i18n="hi.3.copy">Creación de landing pages responsivas, banners y campañas digitales para e-commerce y empresas internacionales, aplicando HTML5, CSS3, Bootstrap, PHP y MySQL.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="section container" id="about">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-5">
+        <h2 class="mb-3 text-break fw-bold display-6 reveal" data-reveal="up" data-i18n="about.title">Sobre mí</h2>
+      </div>
+      <div class="col-lg-7">
+        <p class="mb-0 reveal" data-reveal="up" style="--reveal-delay:80ms" data-i18n="about.p1">
+          Soy <strong>Diseñadora Industrial</strong> con experiencia en proyectos <strong>gráficos, digitales y de desarrollo de productos</strong>. Me apasiona transformar ideas en <strong>soluciones creativas y funcionales</strong>, combinando <strong>investigación</strong>, <strong>diseño visual</strong>, <strong>modelado 3D</strong> y <strong>desarrollo web front-end</strong>. He trabajado en áreas como <strong>identidad visual</strong>, <strong>marketing digital</strong>, <strong>prototipado</strong>, <strong>diseño web y móvil</strong>. Mi enfoque está en aportar <strong>innovación</strong>, <strong>organización</strong> y <strong>creatividad</strong> para alcanzar resultados de alto impacto.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="section container" id="experience">
+    <h2 class="text-break fw-bold display-6 reveal" data-reveal="up" data-i18n="exp.title">Experiencia</h2>
+    <div class="timeline mt-4">
+      <!-- Helheim prueba -->
+      <article class="timeline-item reveal" data-reveal="left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <header class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h3 class="h6 mb-1">
+              <a class="logo-link text-reset text-decoration-none" href="https://www.helheim.cl" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Helheim.cl">
+                <img src="./images/Logo_Helheim-HBB.png" alt="Logo Helheim" class="company-logo" width="22" height="22" loading="lazy" decoding="async">
+                Helheim.cl — <span data-i18n="exp.h.rol">Diseñadora</span>
+              </a>
+            </h3>
+            <span class="badge bg-light text-dark" data-i18n="exp.h.date">abr. 2023 · actualidad</span>
+          </header>
+          <p class="text-muted mb-2" data-i18n="exp.h.loc">Tierra del Fuego, Chile</p>
+          <ul class="icon-list" data-i18n="exp.h.list">
+            <li>Proyectos en diseño gráfico, impresión 3D, grabado láser y desarrollo web (Front end).</li>
+            <li>Implementación de estrategias de marketing digital y comunicación.</li>
+            <li>Fotografía y retoque para RRSS.</li>
+          </ul>
+          <p class="tools small text-muted" data-i18n="exp.h.tools">Herramientas: BootStrap 5, CC3, PHP, MySQL, VS Code, Adobe CC, Blender, Inventor, Rhino, 3ds Max, AutoCAD,  MS Office, Kanban.</p>
+        </div>
+      </article>
+
+      <!-- DPmas -->
+      <article class="timeline-item reveal" data-reveal="left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <header class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h3 class="h6 mb-1">
+              <a class="logo-link text-reset text-decoration-none" href="https://www.linkedin.com/company/dpmas/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Dpmas">
+                <img src="./images/dpmas_logo.jpeg" alt="Logo dpmas" class="company-logo" width="22" height="22" loading="lazy" decoding="async">
+                DPmas Producciones — <span data-i18n="exp.d.rol">Diseñadora</span>
+              </a>
+            </h3>
+            <span class="badge bg-light text-dark" data-i18n="exp.d.date">sept. 2022 · ene. 2023</span>
+          </header>
+          <p class="text-muted mb-2" data-i18n="exp.d.loc">Puerto Varas, Chile (Presencial)</p>
+          <ul class="icon-list" data-i18n="exp.d.list">
+            <li>Diseño para eventos (INDAP, Ministerio de la Mujer, etc.).</li>
+            <li>Layouts, coordinación con proveedores y supervisión de montaje.</li>
+            <li>Diseño de presentaciones para Mercado Público.</li>
+          </ul>
+          <p class="tools small text-muted" data-i18n="exp.d.tools">Herramientas: Photoshop, Ilustrator, Indesign, Blender, Inventor, AutoCAD, MS Office.</p>
+        </div>
+      </article>
+
+      <!-- miCocaCola.cl -->
+      <article class="timeline-item reveal" data-reveal="left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <header class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h3 class="h6 mb-1">
+              <a class="logo-link text-reset text-decoration-none" href="https://landing.infracommerce.lat/infradigital-growth-and-marketing?utm_term=ecomsur&utm_campaign=(DM)+Brand+-+Search&utm_source=adwords&utm_medium=ppc&hsa_acc=6993665075&hsa_cam=22686133917&hsa_grp=182261989138&hsa_ad=759294996450&hsa_src=g&hsa_tgt=kwd-322724557898&hsa_kw=ecomsur&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=22686133917&gbraid=0AAAAADfaK_9k2B0mEC1JwQ5wDgx1HIgNd&gclid=Cj0KCQjw3OjGBhDYARIsADd-uX5jH0Rz37SxvhW4mYqQsJxfyEoeVpK8bKde1No6O5gXFKjm_0H6e8waAqnEEALw_wcB" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Ecomsur">
+                <img src="./images/Ecomsur.png" alt="Logo ecomsur-a" class="company-logo" width="22" height="22" loading="lazy" decoding="async">
+                Ecomsur — <span data-i18n="exp.c.rol">Diseñadora Jr — miCocaCola.cl</span>
+              </a>
+            </h3>
+            <span class="badge bg-light text-dark" data-i18n="exp.c.date">abr. 2022 · sept. 2022</span>
+          </header>
+          <p class="text-muted mb-2" data-i18n="exp.c.loc">Las Condes, Chile (Remoto)</p>
+          <ul class="icon-list" data-i18n="exp.c.list">
+            <li>Creación y adaptación de banners y mailings para página web.</li>
+            <li>Prototipos landing para eventos y festividades</li>
+          </ul>
+          <p class="tools small text-muted" data-i18n="exp.e.tools">Herramientas: Photoshop, Ilustrator, Indesign, MS Office.</p>
+        </div>
+      </article>
+
+      <!-- Ecomsur Comunicaciones -->
+      <article class="timeline-item reveal" data-reveal="left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <header class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h3 class="h6 mb-1">
+              <a class="logo-link text-reset text-decoration-none" href="https://landing.infracommerce.lat/infradigital-growth-and-marketing?utm_term=ecomsur&utm_campaign=(DM)+Brand+-+Search&utm_source=adwords&utm_medium=ppc&hsa_acc=6993665075&hsa_cam=22686133917&hsa_grp=182261989138&hsa_ad=759294996450&hsa_src=g&hsa_tgt=kwd-322724557898&hsa_kw=ecomsur&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=22686133917&gbraid=0AAAAADfaK_9k2B0mEC1JwQ5wDgx1HIgNd&gclid=Cj0KCQjw3OjGBhDYARIsADd-uX5jH0Rz37SxvhW4mYqQsJxfyEoeVpK8bKde1No6O5gXFKjm_0H6e8waAqnEEALw_wcB" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Ecomsur">
+                <img src="./images/Ecomsur.png" alt="Logo ecomsur-b" class="company-logo" width="22" height="22" loading="lazy" decoding="async">
+                Ecomsur — <span data-i18n="exp.e.rol">Diseñadora — Comunicaciones Corporativas</span>
+              </a>
+            </h3>
+            <span class="badge bg-light text-dark" data-i18n="exp.e.date">feb. 2021 · abr. 2022</span>
+          </header>
+          <p class="text-muted mb-2" data-i18n="exp.e.loc">Las Condes, Chile (Remoto)</p>
+          <ul class="icon-list" data-i18n="exp.e.list">
+            <li>Comunicaciones internas con RRHH y diseño para clientes.</li>
+            <li>Prototipos de landing para eventos.</li>
+          </ul>
+          <p class="tools small text-muted" data-i18n="exp.e.tools">Herramientas: Photoshop, Ilustrator, Indesign, MS Office.</p>
+        </div>
+      </article>
+
+      <!-- Práctica -->
+      <article class="timeline-item reveal" data-reveal="left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <header class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h3 class="h6 mb-1">
+              <a class="logo-link text-reset text-decoration-none" href="https://landing.infracommerce.lat/infradigital-growth-and-marketing?utm_term=ecomsur&utm_campaign=(DM)+Brand+-+Search&utm_source=adwords&utm_medium=ppc&hsa_acc=6993665075&hsa_cam=22686133917&hsa_grp=182261989138&hsa_ad=759294996450&hsa_src=g&hsa_tgt=kwd-322724557898&hsa_kw=ecomsur&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=22686133917&gbraid=0AAAAADfaK_9k2B0mEC1JwQ5wDgx1HIgNd&gclid=Cj0KCQjw3OjGBhDYARIsADd-uX5jH0Rz37SxvhW4mYqQsJxfyEoeVpK8bKde1No6O5gXFKjm_0H6e8waAqnEEALw_wcB" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio de Ecomsur">
+                <img src="./images/Ecomsur.png" alt="Logo ecomsur-c" class="company-logo" width="22" height="22" loading="lazy" decoding="async">
+                Ecomsur — <span data-i18n="exp.p.rol">Práctica</span>
+              </a>
+            </h3>
+            <span class="badge bg-light text-dark" data-i18n="exp.p.date">dic. 2020 · feb. 2021</span>
+          </header>
+          <p class="text-muted mb-2" data-i18n="exp.p.loc">Las Condes, Chile (Remoto)</p>
+          <ul class="icon-list" data-i18n="exp.p.list">
+            <li>Apoyo en presentaciones y piezas para RRSS, banners, POPs y mailings.</li>
+          </ul>
+          <p class="tools small text-muted" data-i18n="exp.p.tools">Herramientas: Photoshop, Ilustrator, Indesign, MS Office.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="section container" id="skills">
+    <h2 class="text-break fw-bold display-6 reveal" data-reveal="up" data-i18n="skills.title">Habilidades</h2>
+
+    <div class="row g-4 mt-1 reveal-group" style="--stagger:90ms">
+      <div class="col-lg-4">
+        <h3 class="text-break h6 text-muted mb-2 reveal" style="--i:0" data-reveal="up" data-i18n="skills.prof">Profesionales</h3>
+        <!-- Chips creadas por i18n -->
+        <div class="chips reveal-group" data-reveal="up" style="--stagger:90ms" data-i18n-list="skills.prof.list"></div>
+      </div>
+
+      <div class="col-lg-4">
+        <h3 class="text-break h6 text-muted mb-2 reveal" style="--i:0" data-reveal="up" data-i18n="skills.tech">Técnicas</h3>
+        <div class="chips reveal-group" data-reveal="up" style="--stagger:90ms" data-i18n-list="skills.tech.list"></div>
+      </div>
+
+      <div class="col-lg-4">
+        <h3 class="text-break h6 text-muted mb-2 reveal" style="--i:0" data-reveal="up" data-i18n="skills.soft">Blandas</h3>
+        <div class="chips reveal-group" data-reveal="up" style="--stagger:90ms" data-i18n-list="skills.soft.list"></div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-3 reveal-group" style="--stagger:90ms">
+      <div class="col-md-6">
+        <label class="form-label small mb-1" data-i18n="skills.adobe">Adobe Creative Suite</label>
+        <div class="progress reveal" role="progressbar" aria-label="Nivel Adobe" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" data-to="85" style="--i:0">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small mb-1" data-i18n="skills.frontend">Diseño Web (Front End)</label>
+        <div class="progress reveal" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" data-to="80" style="--i:3">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small mb-1" data-i18n="skills.branding">Branding &amp; Comunicación</label>
+        <div class="progress reveal" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" data-to="80" style="--i:2">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small mb-1" data-i18n="skills.model3d">Modelado 3D / Prototipos</label>
+        <div class="progress reveal" role="progressbar" aria-label="Nivel 3D" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" data-to="60" style="--i:1">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 mt-2">
+        <h3 class="text-break h6 text-muted mb-2 reveal" data-reveal="up" data-i18n="skills.langs.title">Idiomas</h3>
+        <ul class="list-unstyled mb-0 reveal" data-reveal="up" style="--reveal-delay:80ms" data-i18n="skills.langs.list">
+          <li>Español — Nativo</li>
+          <li>Inglés — B2</li>
+          <li>Danés — A1</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+<!-- PORTAFOLIO -->
+  <section class="section container" id="portfolio">
+    <div class="d-flex align-items-end justify-content-between flex-wrap gap-3">
+      <h2 class="text-break fw-bold mb-0 display-6 reveal" data-reveal="up" data-i18n="port.title">Portafolio destacados</h2>
+      <div aria-label="Filtros" class="flex-wrap d-flex gap-2 filters reveal" data-reveal="up" style="--reveal-delay:80ms" role="group">
+        <button class="btn btn-outline-secondary active" data-filter="all" data-i18n="port.filter.all">Todo</button>
+        <button class="btn btn-outline-secondary" data-filter="branding" data-i18n="port.filter.branding">Branding</button>
+        <button class="btn btn-outline-secondary" data-filter="frontend" data-i18n="port.filter.frontend">Front end</button>
+        <button class="btn btn-outline-secondary" data-filter="3d" data-i18n="port.filter.3d">3D</button>
+      </div>
+    </div>
+
+    <div class="row g-3 g-md-4 mt-4 reveal-group" style="--stagger:120ms">
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <article class="project-card lift reveal" style="--i:0" data-reveal="up" data-bs-target="#proj1" data-bs-toggle="modal" data-category="frontend">
+          <div class="project-media">
+            <img alt="Landing Helheim" class="img-fit img-fluid" loading="lazy" src="./images/Proyecto-helheim.png"/>
+          </div>
+          <div class="project-body">
+            <h3 class="text-break h6 mb-1" data-i18n="port.card1.title">Landing diseño Helheim.cl</h3>
+            <div class="chips d-flex gap-2 flex-wrap"><span class="chip">web</span><span class="chip">bootstrap</span><span class="chip" data-i18n="common.design">diseño</span><span class="chip">scrum</span></div>
+          </div>
+        </article>
+      </div>
+      
+
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <article class="project-card lift reveal" style="--i:1" data-reveal="right" data-bs-target="#proj2" data-bs-toggle="modal" data-category="frontend">
+          <div class="project-media">
+            <img alt="Landing Constructora" class="img-fit img-fluid" loading="lazy" src="./images/proyecto-constructora.png"/>
+          </div>
+          <div class="project-body">
+            <h3 class="text-break h6 mb-1" data-i18n="port.card2.title">Landing Constructora</h3>
+            <div class="chips d-flex gap-2 flex-wrap"><span class="chip" data-i18n="common.webdesign">diseñoweb</span><span class="chip">bootstrap</span><span class="chip">html5</span><span class="chip" data-i18n="common.responsive">responsivedesign</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <article class="project-card lift reveal" style="--i:2" data-reveal="left" data-bs-target="#proj3" data-bs-toggle="modal" data-category="branding">
+          <div class="project-media">
+            <img alt="Gráficas Expo Mundo Rural" class="img-fit img-fluid" loading="lazy" src="./images/Expo-mundo-rural-2022-01.png"/>
+          </div>
+          <div class="project-body">
+            <h3 class="text-break h6 mb-1" data-i18n="port.card3.title">Graficas Expo mundo rural</h3>
+            <div class="chips d-flex gap-2 flex-wrap"><span class="chip">branding</span><span class="chip" data-i18n="common.producer">productora</span><span class="chip" data-i18n="common.social">redes sociales</span><span class="chip" data-i18n="common.graphics">graficas</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <article class="project-card lift reveal" style="--i:3" data-reveal="up" data-bs-target="#proj4" data-bs-toggle="modal" data-category="3d">
+          <div class="project-media">
+            <img alt="Prototipo 3D mueble" class="img-fit img-fluid" loading="lazy" src="./images/Katua-mueble.png"/>
+          </div>
+          <div class="project-body">
+            <h3 class="text-break h6 mb-1" data-i18n="port.card4.title">Prototipo 3D mueble</h3>
+            <div class="chips d-flex gap-2 flex-wrap"><span class="chip">3D</span><span class="chip" data-i18n="common.prototype">prototipo</span><span class="chip">render3D</span><span class="chip" data-i18n="common.petfriendly">petfriendly</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+   <!-- EDUCACIÓN -->
+  <section class="section container" id="education">
+    <h2 class="text-break fw-bold display-6 reveal" data-reveal="up" data-i18n="edu.title">Educación &amp; Certificaciones</h2>
+    <div class="timeline mt-4">
+      <article class="timeline-item reveal" data-reveal="up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-break h6 mb-1">
+            <a href="https://learndigital.withgoogle.com/digitalgarage/course/web-development"
+               target="_blank" rel="noopener noreferrer"
+               class="text-reset text-decoration-none d-inline-flex align-items-center">
+              <i class="bi bi-award me-2"></i>
+              <span data-i18n="edu.1.title">Curso de introducción al desarrollo web (HTML/CSS) — Google Digital Academy</span>
+            </a>
+          </h3>
+          <p class="small text-muted mb-0">ID: 256889668 / 283146383 · 16 abr. 2024</p>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal" data-reveal="up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-break h6 mb-1">
+            <a href="https://certiprof.com/pages/scrum-foundation-professional-certificate-sfpc" 
+               target="_blank" rel="noopener noreferrer" 
+               class="text-reset text-decoration-none d-inline-flex align-items-center">
+              <i class="bi bi-award me-2"></i>
+              <span data-i18n="edu.2.title">SFPC Scrum Foundation — CertiProf</span>
+            </a>
+          </h3>
+          <p class="small text-muted mb-0">ID: 87809701 · 26 jul. 2023</p>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal" data-reveal="up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-break h6 mb-1">
+            <a href="https://soylider.net/" 
+               target="_blank" rel="noopener noreferrer" 
+               class="text-reset text-decoration-none d-inline-flex align-items-center">
+              <i class="bi bi-award me-2"></i>
+              <span data-i18n="edu.3.title">Fundamentos de Gestión de Proyectos PMP — SoyLíder</span>
+            </a>
+          </h3>
+          <p class="small text-muted mb-0">ID: EADZPO-CE001685 · 25 jul. 2023</p>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal" data-reveal="up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-break h6 mb-1">
+            <a href="https://profesorcavendish.cl/inicio/" 
+               target="_blank" rel="noopener noreferrer" 
+               class="text-reset text-decoration-none d-inline-flex align-items-center">
+              <i class="bi bi-award me-2"></i>
+              <span data-i18n="edu.4.title">Hidrógeno Verde — Beca Profesor Cavendish</span>
+            </a>
+          </h3>
+          <p class="small text-muted mb-0">UMAG &amp; CFT de Magallanes · 2 mar. 2023</p>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal" data-reveal="up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-break h6 mb-1">
+            <a href="https://www.duoc.cl/" 
+               target="_blank" rel="noopener noreferrer" 
+               class="text-reset text-decoration-none d-inline-flex align-items-center">
+              <i class="bi bi-award me-2"></i>
+              <span data-i18n="edu.5.title">Título profesional en Diseño Industrial — Duoc UC</span>
+            </a>
+          </h3>
+          <p class="small text-muted mb-0">2018–2021</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+ <section class="section container" id="contact">
+    <h2 class="text-break fw-bold display-6 reveal" data-reveal="up" data-i18n="contact.title">Contacto</h2>
+    <div class="row g-4 mt-1 align-items-stretch reveal-group" style="--stagger:120ms">
+      <!-- CTA WhatsApp -->
+      <div class="col-lg-6">
+        <article class="card contact-cta h-100 border-0 overflow-hidden position-relative lift reveal" style="--i:0" data-reveal="up">
+          <div class="card-body p-4 p-lg-5">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <i aria-hidden="true" class="bi bi-whatsapp fs-1"></i>
+              <div>
+                <h3 class="text-break mb-1 h4" data-i18n="contact.wh.title">¿Hablamos por WhatsApp?</h3>
+                <p class="mb-0 text-muted" data-i18n="contact.wh.copy">Respuesta rápida. Cuéntame sobre tu proyecto.</p>
+              </div>
+            </div>
+            <p class="mt-3 mb-4" data-i18n="contact.wh.pitch">
+              Diseño <strong>Industrial / Gráfico / Web</strong> con foco en resultados.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <a
+                class="btn btn-accent btn-lg rounded-pill w-100 w-sm-auto text-wrap lift"
+                data-phone="56931966126"
+                id="whCTA" rel="noopener" target="_blank" data-i18n="contact.wh.cta">
+                <i aria-hidden="true" class="bi bi-send-fill me-2"></i>Escríbeme por WhatsApp
+              </a>
+            </div>
+          </div>
+          <div aria-hidden="true" class="contact-cta__pattern"></div>
+        </article>
+      </div>
+
+      <!-- Otras cuentas -->
+      <div class="col-lg-6">
+        <div class="card h-100 reveal" style="--i:1" data-reveal="up">
+          <div class="card-body">
+            <h3 class="text-break h6" data-i18n="contact.also">También en</h3>
+            <ul class="list-unstyled mt-2">
+              <li class="mb-2">
+                <i aria-hidden="true" class="bi bi-linkedin me-2"></i>
+                <a class="text-reset text-decoration-none" href="https://www.linkedin.com/in/maite-lazcano-gaedicke-042064182/" rel="noopener" target="_blank">LinkedIn</a>
+              </li>
+              <li class="mb-2">
+                <i aria-hidden="true" class="bi bi-github me-2"></i>
+                <a class="text-reset text-decoration-none" href="https://github.com/Malazga99" rel="noopener" target="_blank">GitHub</a>
+              </li>
+              <li class="mb-2">
+                <i aria-hidden="true" class="bi bi-envelope me-2"></i>
+                <a class="text-reset text-decoration-none" href="mailto:Malazga99@gmail.com">Malazga99@gmail.com</a>
+              </li>
+              <li class="mb-2">
+                <i aria-hidden="true" class="bi bi-geo-alt me-2"></i><span data-i18n="contact.city">Puerto Varas, Los Lagos, Chile</span>
+              </li>
+              <li class="mb-2">
+                <p data-i18n="contact.remote"><strong>Disponible para incorporación inmediata en modalidades remota o híbrida.</strong></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div><!-- 🔧 Cierre correcto del .row -->
+  </section>
+</main>
+
+<footer class="border-top py-4">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+    <span class="small text-muted" data-i18n="footer.copy">© <span id="year"></span> Maite Lazcano — Todos los derechos reservados</span>
+    <a class="small text-decoration-none reveal" data-reveal="up" href="#home" data-i18n="footer.top">Volver arriba</a>
+  </div>
+</footer>
+
+<!-- Modales de proyectos (se mantienen imágenes y estructura) -->
+<div aria-hidden="true" class="modal fade" id="proj1" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-break" data-i18n="m1.title">Landing diseño Helheim.cl</h5>
+        <button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <article class="case">
+          <h6 class="text-break" data-i18n="modal.problem">Problema</h6>
+          <p data-i18n="m1.p">Posicionar un estudio emergente de diseño gráfico, web e industrial con identidad propia y diferenciada en un mercado competitivo.</p>
+          <h6 class="text-break" data-i18n="modal.process">Proceso</h6>
+          <p data-i18n="m1.pr">Desarrollo de landing page con narrativa de marca, identidad visual minimalista, estructura clara de áreas de diseño y CTA estratégicos.</p>
+          <h6 class="text-break" data-i18n="modal.result">Resultado</h6>
+          <p data-i18n="m1.r">Un sitio moderno y atractivo que comunica la propuesta de valor de forma clara, potenciando la visibilidad digital de los servicios de Helheim.</p>
+          <img alt="Mockups del sistema de marca" class="w-100 rounded-3 mt-3 img-fluid" loading="lazy" src="./images/Proyecto-helheim.png"/>
+          <div class="gap-2 d-flex flex-wrap chips mt-3"><span class="chip">web</span><span class="chip">bootstrap</span><span class="chip" data-i18n="common.design">diseño</span><span class="chip">scrum</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="proj2" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-break" data-i18n="m2.title">Landing constructora</h5>
+        <button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <article class="case">
+          <h6 class="text-break" data-i18n="modal.problem">Problema</h6>
+          <p data-i18n="m2.p">La constructora requería un sitio web profesional y responsivo que reflejara experiencia, confianza y calidad en proyectos de arquitectura y construcción.</p>
+          <h6 class="text-break" data-i18n="modal.process">Proceso</h6>
+          <p data-i18n="m2.pr">Diseño y desarrollo del sitio con enfoque en usabilidad, fotografía profesional de obras, estructura clara con secciones de historia, obras y contacto.</p>
+          <h6 class="text-break" data-i18n="modal.result">Resultado</h6>
+          <p data-i18n="m2.r">Página web corporativa moderna y funcional, alineada con la identidad de la empresa, optimizada para dispositivos móviles y orientada a la captación de clientes.</p>
+          <img alt="UI ecommerce" class="w-100 rounded-3 mt-3 img-fluid" loading="lazy" src="./images/proyecto-constructora.png"/>
+          <div class="gap-2 d-flex flex-wrap chips mt-3"><span class="chip" data-i18n="common.webdesign">diseñoweb</span><span class="chip">bootstrap</span><span class="chip">html5</span><span class="chip" data-i18n="common.responsive">responsivedesign</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="proj3" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-break" data-i18n="m3.title">Graficas Expo mundo rural</h5>
+        <button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <article class="case">
+          <h6 class="text-break" data-i18n="modal.problem">Problema</h6>
+          <p data-i18n="m3.p">La Expo Mundo Rural necesitaba una identidad gráfica coherente y atractiva para difundir sus ferias en distintas regiones del país y conectar con un público masivo.</p>
+          <h6 class="text-break" data-i18n="modal.process">Proceso</h6>
+          <p data-i18n="m3.pr">Diseño de gráficas para redes sociales, piezas impresas y señalética. Identidad visual adaptable y coordinación con producción del evento.</p>
+          <h6 class="text-break" data-i18n="modal.result">Resultado</h6>
+          <p data-i18n="m3.r">Campañas gráficas que dieron coherencia y visibilidad al evento, logrando alto alcance en difusión y experiencia consistente.</p>
+          <img alt="Packaging mockups" class="w-100 rounded-3 mt-3 img-fluid" loading="lazy" src="./images/Expo-mundo-rural-2022.jpg"/>
+          <div class="gap-2 d-flex flex-wrap chips mt-3"><span class="chip">branding</span><span class="chip" data-i18n="common.producer">productora</span><span class="chip" data-i18n="common.social">redes sociales</span><span class="chip" data-i18n="common.graphics">graficas</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="proj4" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-break" data-i18n="m4.title">Prototipo 3D mueble</h5>
+        <button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <article class="case">
+          <h6 class="text-break" data-i18n="modal.problem">Problema</h6>
+          <p data-i18n="m4.p">Los areneros de gatos suelen ser poco estéticos e invasivos en el hogar.</p>
+          <h6 class="text-break" data-i18n="modal.process">Proceso</h6>
+          <p data-i18n="m4.pr">Diseño y prototipado de un mueble-arenero funcional y estético mediante modelado 3D y pruebas de uso.</p>
+          <h6 class="text-break" data-i18n="modal.result">Resultado</h6>
+          <p data-i18n="m4.r">Un prototipo que se integra armónicamente a espacios interiores, uniendo diseño industrial y practicidad.</p>
+          <img alt="Prototipo 3D" class="w-100 rounded-3 mt-3 img-fluid" loading="lazy" src="./images/Katua-mueble.png"/>
+          <div class="gap-2 d-flex flex-wrap chips mt-3"><span class="chip">3D</span><span class="chip" data-i18n="common.prototype">prototipo</span><span class="chip">render3D</span><span class="chip" data-i18n="common.petfriendly">petfriendly</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Botón subir / Scroll Up -->
+<button id="backToTop" class="btn-to-top" type="button" aria-label="Volver al inicio" title="Volver al inicio">
+  <i class="bi bi-arrow-up" aria-hidden="true"></i>
+  <span class="visually-hidden">Volver al inicio</span>
+</button>
+
+<!-- JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="./js/main.js?v=2025-09-30-1420" type="module"></script>
+
+</body>
+</html>

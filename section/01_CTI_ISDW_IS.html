@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano"/>
+    <meta name="copyright" content="Helheim Tierra del Fuego"/>
+    <meta name="robots" content="index"/>
+
+<!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+
+<!--==================== END Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
+
+<!--==================== Meta Tags Generated with https://metatags.io ====================-->
+
+    <!-- Primary Meta Tags -->
+    <title>Helheim</title>
+    <meta name="title" content="Helheim Tierra del Fuego"/>
+    <meta name="description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://www.helheim.cl"/>
+    <meta property="og:title" content="Helheim Tierra del Fuego"/>
+    <meta property="og:description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
+    <meta property="og:image" content="./images/images/Logo_Helheim-Metadata_1200x640.png"/>
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://www.helheim.cl"/>
+    <meta property="twitter:title" content="Helheim Tierra del Fuego"/>
+    <meta property="twitter:description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
+    <meta property="twitter:image" content="./images/Logo_Helheim-Metadata_1200x640.png"/>
+
+
+<!--==================== END Meta Tags Generated with https://metatags.io ====================-->
+
+<!--=============== BootStrap CSS ===============-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+
+
+<!--=============== END BootStrap CSS ===============-->
+
+<style>
+  /* Compensa la altura del navbar para secciones ancladas */
+  #ConsultoriaTI,
+  #disenoindustrial,
+  #formcontacto {
+    scroll-margin-top: 70px; /* ajustar según la altura real del navbar */
+  }
+
+  html {
+    scroll-behavior: smooth; /* scroll suave opcional */
+  }
+</style>
+
+</head> 
+<body class="bg-black">
+    <!--==================== HEADER ====================-->
+<header class="header" id="header">
+  <!--==================== NavBar ====================--> 
+  <nav class="navbar bg-black navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Helheim Tierra del Fuego</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+            <a href="../index.html" class="nav-link text-success fs-6">
+              <i class="bi bi-globe"></i> INICIO
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.helheim.cl/section/01_CTI_ISDW_IS.html" class="nav-link text-success fs-6">
+              <i class="bi bi-laptop me-1"></i> CONSULTORÍA TI
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.helheim.cl/section/10_DIN_IyC_DG.html" class="nav-link text-success fs-6">
+              <i class="bi bi-palette me-1"></i> DISEÑO INDUSTRIAL
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#formcontacto" class="nav-link text-success fs-6">
+              <i class="bi bi-envelope me-1"></i> FORMULARIO DE CONTACTO
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a href="https://helheim.cl/ruko/index.php?module=users/login" target="_blank" class="nav-link text-success fs-6">
+              <i class="bi bi-box-arrow-in-right me-1"></i> INTRANET HELHEIM
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://helheim.cl:2096/" target="_blank" class="nav-link text-success fs-6">
+              <i class="bi bi-envelope-open me-1"></i> CORREO HELHEIM
+            </a>
+          </li>
+
+          <!-- Separador -->
+          <li class="mt-4 text-decoration-none text-success fs-6">
+            Escríbenos a nuestro WhatsApp o Redes Sociales
+          </li>
+
+          <li class="nav-item">
+            <div class="row">
+              <div class="col-2 "></div>
+              <div class="col-2 text-center fs-3">
+                <a href="https://wa.me/56958453672?text=Hola, quiero saber mas sobre los Helheim y sus servicios" 
+                   target="_blank" 
+                   class="nav__link text-decoration-none text-danger">
+                  <i class="bi bi-whatsapp"></i>
+                </a>
+              </div>
+              <div class="col-2 text-center fs-3">
+                <a href="https://www.instagram.com/helheim_tierra_del_fuego/" target="_blank" 
+                class="nav__link text-decoration-none text-danger">
+                  <i class="bi bi-instagram"></i>
+                </a>
+              </div>
+              <div class="col-2 text-center fs-3">
+                <a href="https://www.linkedin.com/company/103153651/" target="_blank" 
+                class="nav__link text-decoration-none text-danger">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+              </div>
+              <div class="col-2 text-center fs-3">
+                <a href="https://web.facebook.com/HelheimTierradelfuego/" target="_blank" 
+                class="nav__link text-decoration-none text-danger">
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </div>
+              <div class="col-2 "></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!--==================== END HEADER ====================-->
+
+  <div class="container py-5 mt-2 text-white">
+    <!-- Versión en Español -->
+    <h2>CONSULTORIA TI</h2>
+    <p>En Helheim ofrecemos soluciones integrales de consultoría en Tecnologías de la Información, abarcando desarrollo web de punta a punta (Front-End y Back-End), metodologías avanzadas de gestión de proyectos, 
+        e integración de tecnologías innovadoras como el hidrógeno verde y drones de última generación.</p>
+    <br>
+
+ <hr class="my-3">
+
+    <!-- Título -->
+<h3 class="text-white">Desarrollo Web Front-End</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Nuestro equipo crea interfaces de usuario atractivas y responsivas, utilizando las siguientes tecnologías clave:
+  </p>
+  <ul class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-bootstrap-fill me-1 text-secondary"></i>
+        <a href="https://getbootstrap.com/" target="_blank" class="text-decoration-none text-secondary">
+          Bootstrap 5
+        </a>
+      </strong>: framework CSS líder que asegura diseños responsivos y mobile‑first de manera rápida.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-css me-1 text-secondary"></i>
+        <a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" class="text-decoration-none text-secondary">
+          CSS3
+        </a>
+      </strong> define la presentación visual moderna, mientras
+      <i class="bi bi-filetype-js me-1 text-secondary"></i>
+      <a href="https://developer.mozilla.org/es/docs/Web/JavaScript" target="_blank" class="text-decoration-none text-secondary">
+        JavaScript
+      </a> aporta interactividad y dinamismo a las páginas web.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-react me-1 text-secondary"></i>
+        <a href="https://reactjs.org/" target="_blank" class="text-decoration-none text-secondary">
+          React
+        </a>
+      </strong>: biblioteca JavaScript para construir interfaces de usuario como componentes reutilizables, ideal para aplicaciones de una sola página.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-angular me-1 text-secondary"></i>
+        <a href="https://angular.io/" target="_blank" class="text-decoration-none text-secondary">
+          Angular
+        </a>
+      </strong>: framework front‑end desarrollado por Google que facilita la creación de aplicaciones web escalables y de alto rendimiento.
+    </li>
+  </ul>
+  <p class="text-justify mt-4" style="font-size: 0.8rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+  <ul style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://www.helheim.cl/Proyectos/kudochile/index.html" target="_blank" class="text-decoration-none text-danger">Kudo Chile Oficial</a></strong></li>
+    <li><strong><a href="https://www.helheim.cl/Proyectos/RelojesaTiempo/index.html" target="_blank" class="text-decoration-none text-danger">Relojes a tiempo</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/index.html" target="_blank" class="text-decoration-none text-danger">Informes transparencia CFT de Magallanes</a></strong></li>
+  </ul>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Nuestro equipo crea interfaces de usuario atractivas y responsivas, utilizando las siguientes tecnologías clave:
+  </p>
+  <ul class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-bootstrap-fill me-1 text-secondary"></i>
+        <a href="https://getbootstrap.com/" target="_blank" class="text-decoration-none text-secondary">
+          Bootstrap 5
+        </a>
+      </strong>: framework CSS líder que asegura diseños responsivos y mobile‑first de manera rápida.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-css me-1 text-secondary"></i>
+        <a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" class="text-decoration-none text-secondary">
+          CSS3
+        </a>
+      </strong> define la presentación visual moderna, mientras
+      <i class="bi bi-filetype-js me-1 text-secondary"></i>
+      <a href="https://developer.mozilla.org/es/docs/Web/JavaScript" target="_blank" class="text-decoration-none text-secondary">
+        JavaScript
+      </a> aporta interactividad y dinamismo a las páginas web.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-react me-1 text-secondary"></i>
+        <a href="https://reactjs.org/" target="_blank" class="text-decoration-none text-secondary">
+          React
+        </a>
+      </strong>: biblioteca JavaScript para construir interfaces de usuario como componentes reutilizables, ideal para aplicaciones de una sola página.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-angular me-1 text-secondary"></i>
+        <a href="https://angular.io/" target="_blank" class="text-decoration-none text-secondary">
+          Angular
+        </a>
+      </strong>: framework front‑end desarrollado por Google que facilita la creación de aplicaciones web escalables y de alto rendimiento.
+    </li>
+  </ul>
+  <p class="text-justify mt-4" style="font-size: 1.2rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+  <ul style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://www.helheim.cl/Proyectos/kudochile/index.html" target="_blank" 
+      class="text-decoration-none text-danger">Kudo Chile Oficial</a></strong></li>
+    <li><strong><a href="https://www.helheim.cl/Proyectos/RelojesaTiempo/index.html" target="_blank" 
+      class="text-decoration-none text-danger">Relojes a tiempo</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/index.html" target="_blank" 
+      class="text-decoration-none text-danger">Informes transparencia CFT de Magallanes</a></strong></li>
+  </ul>
+</div>
+
+
+ <hr class="my-3">
+
+<!-- Título -->
+<h3 class="text-white">Desarrollo Web Back-End</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    En el lado del servidor implementamos la lógica de negocio y la gestión de datos con tecnologías confiables:
+  </p>
+  <ul class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-filetype-php me-1 text-secondary"></i>
+        <a href="https://www.php.net/" target="_blank" class="text-decoration-none text-secondary">PHP</a>
+      </strong>: lenguaje de scripting ampliamente utilizado para desarrollo web, rápido y flexible, perfecto para crear sitios y APIs dinámicas.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-py me-1 text-secondary"></i>
+        <a href="https://www.python.org/" target="_blank" class="text-decoration-none text-secondary">Python</a>
+      </strong>: lenguaje versátil y claro; con frameworks como
+      <i class="bi bi-filetype-django me-1 text-secondary"></i>
+      <a href="https://www.djangoproject.com/" target="_blank" class="text-decoration-none text-secondary">Django</a> o
+      <i class="bi bi-flask me-1 text-secondary"></i>
+      <a href="https://flask.palletsprojects.com/" target="_blank" class="text-decoration-none text-secondary">Flask</a>,
+      permite desarrollar aplicaciones web escalables y mantenibles de forma eficiente.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-database me-1 text-secondary"></i>
+        <a href="https://www.mysql.com/" target="_blank" class="text-decoration-none text-secondary">MySQL</a>
+      </strong>: sistema de gestión de bases de datos relacional, reconocido por su robustez y capacidad de manejar transacciones complejas con integridad.
+      (También trabajamos con otras bases de datos según requerimientos, como
+      <i class="bi bi-filetype-sql me-1 text-secondary"></i>
+      <a href="https://www.postgresql.org/" target="_blank" class="text-decoration-none text-secondary">PostgreSQL</a>.)
+    </li>
+  </ul>
+    <p class="text-justify mt-4" style="font-size: 0.8rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+  <ul style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_01_isdb_Historico/Estado_Proyectos_04-07-2025%2013_32.pdf" target="_blank" class="text-decoration-none text-danger">Informe Directivo de proyectos</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_03_PdA_graphic.php" target="_blank" class="text-decoration-none text-danger">Informe Graficos Pendientes</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_03_PdA_Buscar_generar_pdf.php" target="_blank" class="text-decoration-none text-danger">Informe de actividades realizadas</a></strong></li>
+  </ul>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    En el lado del servidor implementamos la lógica de negocio y la gestión de datos con tecnologías confiables:
+  </p>
+  <ul class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-filetype-php me-1 text-secondary"></i>
+        <a href="https://www.php.net/" target="_blank" class="text-decoration-none text-secondary">PHP</a>
+      </strong>: lenguaje de scripting ampliamente utilizado para desarrollo web, rápido y flexible, perfecto para crear sitios y APIs dinámicas.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-filetype-py me-1 text-secondary"></i>
+        <a href="https://www.python.org/" target="_blank" class="text-decoration-none text-secondary">Python</a>
+      </strong>: lenguaje versátil y claro; con frameworks como
+      <i class="bi bi-filetype-django me-1 text-secondary"></i>
+      <a href="https://www.djangoproject.com/" target="_blank" class="text-decoration-none text-secondary">Django</a> o
+      <i class="bi bi-flask me-1 text-secondary"></i>
+      <a href="https://flask.palletsprojects.com/" target="_blank" class="text-decoration-none text-secondary">Flask</a>,
+      permite desarrollar aplicaciones web escalables y mantenibles de forma eficiente.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-database me-1 text-secondary"></i>
+        <a href="https://www.mysql.com/" target="_blank" class="text-decoration-none text-secondary">MySQL</a>
+      </strong>: sistema de gestión de bases de datos relacional, reconocido por su robustez y capacidad de manejar transacciones complejas con integridad.
+      (También trabajamos con otras bases de datos según requerimientos, como
+      <i class="bi bi-filetype-sql me-1 text-secondary"></i>
+      <a href="https://www.postgresql.org/" target="_blank" class="text-decoration-none text-secondary">PostgreSQL</a>.)
+    </li>
+  </ul>
+    <p class="text-justify mt-4" style="font-size: 1.2rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+    <ul style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_01_isdb_Historico/Estado_Proyectos_04-07-2025%2013_32.pdf" target="_blank" class="text-decoration-none text-danger">Informe Directivo de proyectos</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_03_PdA_graphic.php" target="_blank" class="text-decoration-none text-danger">Informe Graficos Pendientes</a></strong></li>
+    <li><strong><a href="https://www.proyectos.cftdemagallanes.cl/Informes/pages/index_03_PdA_Buscar_generar_pdf.php" target="_blank" class="text-decoration-none text-danger">Informe de actividades realizadas</a></strong></li>
+  </ul>
+</div>
+
+
+ <hr class="my-3">
+<h3 class="text-white">Full‑Stack Development</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    El desarrollo Full‑Stack abarca tanto el Front‑End como el Back‑End de aplicaciones web, permitiendo a los desarrolladores construir interfaces visuales, lógica del servidor, bases de datos y APIs desde una sola visión integral.
+  </p>
+  <ul class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><strong>Front‑End:</strong> 
+      <a href="https://getbootstrap.com/" target="_blank" class="text-decoration-none text-secondary">Bootstrap</a>, 
+      HTML, CSS, JavaScript y frameworks como 
+      <a href="https://react.dev/" target="_blank" class="text-decoration-none text-secondary">React</a> o 
+      <a href="https://angular.io/" target="_blank" class="text-decoration-none text-secondary">Angular</a>.
+    </li>
+    <li><strong>Back‑End:</strong> 
+      <a href="https://www.php.net/" target="_blank" class="text-decoration-none text-secondary">PHP</a> con 
+      <a href="https://laravel.com/" target="_blank" class="text-decoration-none text-secondary">Laravel</a>, 
+      <a href="https://www.python.org/" target="_blank" class="text-decoration-none text-secondary">Python</a> (con 
+      <a href="https://www.djangoproject.com/" target="_blank" class="text-decoration-none text-secondary">Django</a> o 
+      <a href="https://flask.palletsprojects.com/" target="_blank" class="text-decoration-none text-secondary">Flask</a>), y 
+      <a href="https://nodejs.org/" target="_blank" class="text-decoration-none text-secondary">Node.js</a>, con bases de datos SQL como 
+      <a href="https://www.mysql.com/" target="_blank" class="text-decoration-none text-secondary">MySQL</a> o NoSQL como 
+      <a href="https://www.mongodb.com/" target="_blank" class="text-decoration-none text-secondary">MongoDB</a>.
+    </li>
+  </ul>
+  <p class="text-justify mt-2" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <strong>Beneficios:</strong> acelera el desarrollo, permite iteraciones ágiles, reduce costos y mejora la integración entre capas.
+  </p>
+      <p class="text-justify mt-4" style="font-size: 0.8rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+  <ul style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://proyectos.cftdemagallanes.cl/index.php?module=users/login" target="_blank" class="text-decoration-none text-danger">Sistema de Gestion CFT de Magallanes</a></strong></li>
+    <li><strong><a href="https://www.helheim.cl/Proyectos/tournaments/index.html" target="_blank" class="text-decoration-none text-danger">Sistema Gestion de torneos</a></strong></li>
+    <li><strong><a href="https://helheim.cl/ruko/index.php?module=users/login" target="_blank" class="text-decoration-none text-danger">Sistema de Gestion Helheim</a></strong></li>
+  </ul>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    El desarrollo Full‑Stack combina el trabajo de Front‑End y Back‑End, permitiendo construir sistemas completos que integran experiencia de usuario, lógica de negocio, procesamiento de datos y conectividad con servidores y bases de datos.
+  </p>
+  <ul class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><strong>Front‑End:</strong> 
+      <a href="https://getbootstrap.com/" target="_blank" class="text-decoration-none text-secondary">Bootstrap</a>, 
+      HTML, CSS, JavaScript y frameworks como 
+      <a href="https://react.dev/" target="_blank" class="text-decoration-none text-secondary">React</a> o 
+      <a href="https://angular.io/" target="_blank" class="text-decoration-none text-secondary">Angular</a>.
+    </li>
+    <li><strong>Back‑End:</strong> 
+      <a href="https://www.php.net/" target="_blank" class="text-decoration-none text-secondary">PHP</a> con 
+      <a href="https://laravel.com/" target="_blank" class="text-decoration-none text-secondary">Laravel</a>, 
+      <a href="https://www.python.org/" target="_blank" class="text-decoration-none text-secondary">Python</a> (con 
+      <a href="https://www.djangoproject.com/" target="_blank" class="text-decoration-none text-secondary">Django</a> o 
+      <a href="https://flask.palletsprojects.com/" target="_blank" class="text-decoration-none text-secondary">Flask</a>), y 
+      <a href="https://nodejs.org/" target="_blank" class="text-decoration-none text-secondary">Node.js</a>, junto con bases de datos como 
+      <a href="https://www.mysql.com/" target="_blank" class="text-decoration-none text-secondary">MySQL</a> y 
+      <a href="https://www.mongodb.com/" target="_blank" class="text-decoration-none text-secondary">MongoDB</a>.
+    </li>
+  </ul>
+  <p class="text-justify mt-2" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <strong>Beneficios:</strong> permite construir MVPs eficientes, unificar criterios técnicos entre equipos y desarrollar soluciones web completas desde una misma base de conocimiento.
+  </p>
+        <p class="text-justify mt-4" style="font-size: 1.2rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+  <ul style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><strong><a href="https://proyectos.cftdemagallanes.cl/index.php?module=users/login" target="_blank" class="text-decoration-none text-danger">Sistema de Gestion CFT de Magallanes</a></strong></li>
+    <li><strong><a href="https://www.helheim.cl/Proyectos/tournaments/index.html" target="_blank" class="text-decoration-none text-danger">Sistema Gestion de torneos</a></strong></li>
+    <li><strong><a href="https://helheim.cl/ruko/index.php?module=users/login" target="_blank" class="text-decoration-none text-danger">Sistema de Gestion Helheim</a></strong></li>
+  </ul>
+</div>
+
+
+
+
+
+
+ <hr class="my-3">
+<h3 class="text-white">Metodologías de Desarrollo y Gestión de Proyectos</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Adoptamos prácticas ágiles y tradicionales de acuerdo a las necesidades de cada proyecto, garantizando eficiencia y calidad en la entrega:
+  </p>
+  <ul class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-kanban me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Scrum_(desarrollo_de_software)" target="_blank" class="text-decoration-none text-secondary">Scrum</a>
+      </strong> (Ágil): marco de trabajo ágil que fomenta la colaboración continua, entregas incrementales de valor y adaptación rápida.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-arrow-down-left me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Modelo_en_cascada" target="_blank" class="text-decoration-none text-secondary">Modelo en Cascada</a>
+      </strong>: enfoque secuencial donde el proyecto avanza en fases fijas (análisis, diseño, implementación, pruebas, despliegue), ideal para requisitos bien definidos.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-lightning-fill me-1 text-secondary"></i>
+        <a href="https://www.extremeprogramming.org/" target="_blank" class="text-decoration-none text-secondary">Programación Extrema (XP)</a>
+      </strong>: metodología ágil que enfatiza buenas prácticas (iteraciones cortas, pruebas automáticas, feedback continuo) para aumentar calidad y satisfacción del cliente.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-diagram-2 me-1 text-secondary"></i>
+        <a href="#" class="text-decoration-none text-secondary">OMT++</a>
+      </strong>: metodología de modelado orientado a objetos que permite diseñar sistemas de forma clara y estructurada, con documentación y entendimiento mejorados.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-building me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Proceso_Unificado_de_Rational" target="_blank" class="text-decoration-none text-secondary">Proceso Unificado de Rational (RUP)</a>
+      </strong>: marco iterativo que proporciona disciplina en gestión y enfoque en arquitecturas robustas, ideal para proyectos complejos y bien documentados.
+    </li>
+  </ul>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Adoptamos prácticas ágiles y tradicionales de acuerdo a las necesidades de cada proyecto, garantizando eficiencia y calidad en la entrega:
+  </p>
+  <ul class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li>
+      <strong>
+        <i class="bi bi-kanban me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Scrum_(desarrollo_de_software)" target="_blank" 
+        class="text-decoration-none text-secondary">Scrum</a>
+      </strong> (Ágil): marco de trabajo ágil que fomenta la colaboración continua, entregas incrementales de valor y adaptación rápida.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-arrow-down-left me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Modelo_en_cascada" target="_blank" 
+        class="text-decoration-none text-secondary">Modelo en Cascada</a>
+      </strong>: enfoque secuencial donde el proyecto avanza en fases fijas (análisis, diseño, implementación, pruebas, despliegue), ideal para requisitos bien definidos.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-lightning-fill me-1 text-secondary"></i>
+        <a href="https://www.extremeprogramming.org/" target="_blank" 
+        class="text-decoration-none text-secondary">Programación Extrema (XP)</a>
+      </strong>: metodología ágil que enfatiza buenas prácticas (iteraciones cortas, pruebas automáticas, feedback continuo) para aumentar calidad y satisfacción del cliente.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-diagram-2 me-1 text-secondary"></i>
+        <a href="#" class="text-decoration-none text-secondary">OMT++</a>
+      </strong>: metodología de modelado orientado a objetos que permite diseñar sistemas de forma clara y estructurada, con documentación y entendimiento mejorados.
+    </li>
+    <li>
+      <strong>
+        <i class="bi bi-building me-1 text-secondary"></i>
+        <a href="https://es.wikipedia.org/wiki/Proceso_Unificado_de_Rational" target="_blank" 
+        class="text-decoration-none text-secondary">Proceso Unificado de Rational (RUP)</a>
+      </strong>: marco iterativo que proporciona disciplina en gestión y enfoque en arquitecturas robustas, ideal para proyectos complejos y bien documentados.
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+ <hr class="my-3">
+ <h3 class="text-white">Desarrollo con Drones DJI</h3>
+
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Incorporamos drones de 
+    <a href="https://www.dji.com/" target="_blank" class="text-decoration-none text-secondary">DJI</a> 
+    en soluciones tecnológicas para diversos sectores, aprovechando su versatilidad para agilizar operaciones y recolectar datos.
+  </p>
+
+  <ul class="list-unstyled text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><i class="bi bi-tools me-2 text-secondary"></i><strong class="text-secondary">Inspecciones industriales:</strong> evaluamos infraestructuras y detectamos fallas rápidamente y con seguridad.</li>
+    <li><i class="bi bi-map me-2 text-secondary"></i><strong class="text-secondary">Levantamientos topográficos:</strong> generamos mapas 3D de alta precisión para obras y análisis de terreno.</li>
+    <li><i class="bi bi-camera me-2 text-secondary"></i><strong class="text-secondary">Monitoreo visual de obras:</strong> capturas aéreas periódicas para documentar el avance de proyectos.</li>
+        <li><i class="bi bi-wrench me-2 text-secondary"></i><strong class="text-secondary">Pruebas de prototipos:</strong> validación de productos en entornos reales con drones.</li>
+    <li><i class="bi bi-camera-video me-2 text-secondary"></i><strong class="text-secondary">Marketing y documentación:</strong> producción audiovisual profesional con drones DJI.</li>
+  </ul>
+
+
+
+
+<p class="text-justify mt-4" style="font-size: 1.2rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+
+    <ul class="list-unstyled text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li><i class="bi bi-speedometer2 me-2 text-danger"></i><strong class="text-danger">Cobertura en rallyes:</strong> imágenes dinámicas durante eventos. Ver en nuestro 
+      <i class="bi bi-instagram me-1 text-danger"></i>
+      <a href="https://www.instagram.com/helheim_tierra_del_fuego/" target="_blank" class="text-decoration-none text-danger">Instagram</a>
+    </li>
+    <li><i class="bi bi-pin-map-fill me-2 text-danger"></i><strong class="text-danger">Monitoreo de aerogeneradores:</strong> en la <strong>Beca Cavendish</strong> capturamos vistas aéreas. Revisa nuestras 
+      <i class="bi bi-instagram me-1 text-danger"></i>
+      <a href="https://www.instagram.com/stories/highlights/17959824872384594/" target="_blank" class="text-decoration-none text-danger">Stories</a>
+    </li>
+  </ul>
+
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Incorporamos drones de 
+    <a href="https://www.dji.com/" target="_blank" class="text-decoration-none text-secondary">DJI</a> 
+    en soluciones tecnológicas para diversos sectores, aprovechando su versatilidad para agilizar operaciones y recolectar datos.
+  </p>
+
+  <ul class="list-unstyled text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><i class="bi bi-tools me-2 text-secondary"></i><strong class="text-secondary">Inspecciones industriales:</strong> evaluamos infraestructuras y detectamos fallas rápidamente y con seguridad.</li>
+    <li><i class="bi bi-map me-2 text-secondary"></i><strong class="text-secondary">Levantamientos topográficos:</strong> generamos mapas 3D de alta precisión para obras y análisis de terreno.</li>
+    <li><i class="bi bi-camera me-2 text-secondary"></i><strong class="text-secondary">Monitoreo visual de obras:</strong> capturas aéreas periódicas para documentar el avance de proyectos.</li>
+    <li><i class="bi bi-airplane me-2 text-secondary"></i><strong class="text-secondary">Entregas internas:</strong> transporte ágil de insumos dentro de instalaciones industriales.</li>
+    <li><i class="bi bi-wrench me-2 text-secondary"></i><strong class="text-secondary">Pruebas de prototipos:</strong> validación de productos en entornos reales con drones.</li>
+    <li><i class="bi bi-camera-video me-2 text-secondary"></i><strong class="text-secondary">Marketing y documentación:</strong> producción audiovisual profesional con drones DJI.</li>
+  </ul>
+
+<p class="text-justify mt-4" style="font-size: 1.2rem; transition: all 0.3s ease;">Proyectos destacados: </p>
+
+    <ul class="list-unstyled text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li><i class="bi bi-speedometer2 me-2 text-danger"></i><strong class="text-danger">Cobertura en rallyes:</strong> imágenes dinámicas durante eventos. Ver en nuestro 
+      <i class="bi bi-instagram me-1 text-danger"></i>
+      <a href="https://www.instagram.com/helheim_tierra_del_fuego/" target="_blank" class="text-decoration-none text-danger">Instagram</a>
+    </li>
+    <li><i class="bi bi-pin-map-fill me-2 text-danger"></i><strong class="text-danger">Monitoreo de aerogeneradores:</strong> en la <strong>Beca Cavendish</strong> capturamos vistas aéreas. Revisa nuestras 
+      <i class="bi bi-instagram me-1 text-danger"></i>
+      <a href="https://www.instagram.com/stories/highlights/17959824872384594/" target="_blank" class="text-decoration-none text-danger">Stories</a>
+    </li>
+  </ul>
+</div>
+
+ <hr class="my-3">
+  <h3 class="text-white">DevOps & Automatización</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Integramos <strong>DevOps</strong> para acelerar el desarrollo, pruebas y entrega continua de software. Automatizamos procesos clave y garantizamos entornos reproducibles, estables y seguros.
+  </p>
+
+  <ul class="list-unstyled text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li>
+      <i class="bi bi-cloud-arrow-up me-2 text-secondary"></i>
+      <strong class="text-secondary">CI/CD:</strong> implementamos 
+      <a href="https://docs.github.com/en/actions" target="_blank" class="text-decoration-none text-secondary">GitHub Actions</a> 
+      y 
+      <a href="https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/" target="_blank" class="text-decoration-none text-secondary">GitLab CI</a> 
+      para despliegues automáticos y pruebas continuas.
+    </li>
+    <li>
+      <i class="bi bi-terminal me-2 text-secondary"></i>
+      <strong class="text-secondary">Contenedores:</strong> usamos 
+      <a href="https://www.docker.com/" target="_blank" class="text-decoration-none text-secondary">Docker</a> 
+      para crear entornos estandarizados que funcionan igual en desarrollo y producción.
+    </li>
+    <li>
+      <i class="bi bi-diagram-3 me-2 text-secondary"></i>
+      <strong class="text-secondary">Orquestación:</strong> aplicamos 
+      <a href="https://kubernetes.io/" target="_blank" class="text-decoration-none text-secondary">Kubernetes</a> 
+      cuando se requiere escalar múltiples servicios con alta disponibilidad.
+    </li>
+    <li>
+      <i class="bi bi-gear me-2 text-secondary"></i>
+      <strong class="text-secondary">Infraestructura como Código:</strong> automatizamos servidores con 
+      <a href="https://www.terraform.io/" target="_blank" class="text-decoration-none text-secondary">Terraform</a> 
+      y 
+      <a href="https://www.ansible.com/" target="_blank" class="text-decoration-none text-secondary">Ansible</a>.
+    </li>
+    <li>
+      <i class="bi bi-shield-lock me-2 text-secondary"></i>
+      <strong class="text-secondary">Seguridad:</strong> integramos análisis estático (SAST) y escaneo de vulnerabilidades para proteger los flujos DevOps.
+    </li>
+  </ul>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Integramos <strong>DevOps</strong> para acelerar el desarrollo, pruebas y entrega continua de software. Automatizamos procesos clave y garantizamos entornos reproducibles, estables y seguros.
+  </p>
+
+  <ul class="list-unstyled text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li>
+      <i class="bi bi-cloud-arrow-up me-2 text-secondary"></i>
+      <strong class="text-secondary">CI/CD:</strong> implementamos 
+      <a href="https://docs.github.com/en/actions" target="_blank" class="text-decoration-none text-secondary">GitHub Actions</a> 
+      y 
+      <a href="https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/" target="_blank" class="text-decoration-none text-secondary">GitLab CI</a> 
+      para despliegues automáticos y pruebas continuas.
+    </li>
+    <li>
+      <i class="bi bi-terminal me-2 text-secondary"></i>
+      <strong class="text-secondary">Contenedores:</strong> usamos 
+      <a href="https://www.docker.com/" target="_blank" class="text-decoration-none text-secondary">Docker</a> 
+      para crear entornos estandarizados que funcionan igual en desarrollo y producción.
+    </li>
+    <li>
+      <i class="bi bi-diagram-3 me-2 text-secondary"></i>
+      <strong class="text-secondary">Orquestación:</strong> aplicamos 
+      <a href="https://kubernetes.io/" target="_blank" class="text-decoration-none text-secondary">Kubernetes</a> 
+      cuando se requiere escalar múltiples servicios con alta disponibilidad.
+    </li>
+    <li>
+      <i class="bi bi-gear me-2 text-secondary"></i>
+      <strong class="text-secondary">Infraestructura como Código:</strong> automatizamos servidores con 
+      <a href="https://www.terraform.io/" target="_blank" class="text-decoration-none text-secondary">Terraform</a> 
+      y 
+      <a href="https://www.ansible.com/" target="_blank" class="text-decoration-none text-secondary">Ansible</a>.
+    </li>
+    <li>
+      <i class="bi bi-shield-lock me-2 text-secondary"></i>
+      <strong class="text-secondary">Seguridad:</strong> integramos análisis estático (SAST) y escaneo de vulnerabilidades para proteger los flujos DevOps.
+    </li>
+  </ul>
+</div>
+
+ <hr class="my-3">
+<h3 class="text-white">Integración de Soluciones en Hidrógeno Verde</h3>
+
+<!-- Versión móvil -->
+<div class="d-block d-md-none text-white">
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Helheim está a la vanguardia de las <strong>tecnologías sustentables</strong>, ofreciendo asesoría estratégica a empresas en proyectos de 
+    <a href="https://es.wikipedia.org/wiki/Hidrógeno_verde" target="_blank" class="text-decoration-none text-secondary">hidrógeno verde</a>. 
+    Este combustible limpio, generado mediante electrólisis con energías renovables y sin emisiones de carbono, posiciona a Chile—gracias a su enorme potencial solar y eólico—como 
+    líder mundial en producción y exportación.
+  </p>
+
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    La <strong>consultoría TI</strong> de Helheim impulsa soluciones digitales a lo largo de toda la cadena de valor del H₂ verde: 
+    desde sistemas de monitoreo y control en plantas de producción, hasta plataformas de análisis de datos que mejoran eficiencia, seguridad y trazabilidad. 
+    Complementamos esto con un <strong>diseño industrial optimizado</strong>, generando prototipos físicos y modelos 3D para tanques, electrolizadores y sistemas de almacenamiento, 
+    integrando criterios de usabilidad, durabilidad y sostenibilidad.
+  </p>
+
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Durante el periodo octubre 2023–marzo 2024, el equipo Helheim participó en la <strong>Beca Profesor Cavendish Magallanes</strong>, un programa formativo organizado por el Club de Innovación y CORFO, 
+    con clases presenciales y visitas a terreno en Porvenir y Punta Arenas.
+  </p>
+
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">Ejemplos de impacto:</p>
+
+  <ul class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    <li>Desarrollo de sistemas en tiempo real para <strong>control de electrolizadores</strong> y optimización energética.</li>
+    <li>Prototipado industrial de <strong>unidades de almacenamiento</strong> con simulaciones 3D y prueba de materiales resistentes.</li>
+    <li>Visualización de datos en dashboards, facilitando la toma de decisiones operativas.</li>
+  </ul>
+
+  <p class="text-justify" style="font-size: 0.8rem; transition: all 0.3s ease;">
+    Gracias a nuestra sólida formación y redes activas en la industria local post-Beca Cavendish, Helheim está preparada para ofrecer consultoría e innovación en proyectos de 
+    hidrógeno verde a nivel nacional y regional. Podemos ayudarte a diseñar, implementar y escalar soluciones que integren TI avanzada y diseño industrial para un futuro más 
+    limpio y eficiente.
+  </p>
+</div>
+
+<!-- Versión escritorio -->
+<div class="d-none d-md-block text-white">
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Helheim está a la vanguardia de las <strong>tecnologías sustentables</strong>, ofreciendo asesoría estratégica a empresas en proyectos de 
+    <a href="https://es.wikipedia.org/wiki/Hidrógeno_verde" target="_blank" class="text-decoration-none text-secondary">hidrógeno verde</a>. 
+    Este combustible limpio, generado mediante electrólisis con energías renovables y sin emisiones de carbono, posiciona a Chile—gracias a su enorme potencial solar y eólico—como 
+    líder mundial en producción y exportación.
+  </p>
+
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    La <strong>consultoría TI</strong> de Helheim impulsa soluciones digitales a lo largo de toda la cadena de valor del H₂ verde: 
+    desde sistemas de monitoreo y control en plantas de producción, hasta plataformas de análisis de datos que mejoran eficiencia, seguridad y trazabilidad. 
+    Complementamos esto con un <strong>diseño industrial optimizado</strong>, generando prototipos físicos y modelos 3D para tanques, electrolizadores y sistemas de almacenamiento, 
+    integrando criterios de usabilidad, durabilidad y sostenibilidad.
+  </p>
+
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Durante el periodo octubre 2023–marzo 2024, el equipo Helheim participó en la <strong>Beca Profesor Cavendish Magallanes</strong>, un programa formativo organizado por el Club de Innovación y CORFO, 
+    con clases presenciales y visitas a terreno en Porvenir y Punta Arenas.
+  </p>
+
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">Ejemplos de impacto:</p>
+
+  <ul class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    <li>Desarrollo de sistemas en tiempo real para <strong>control de electrolizadores</strong> y optimización energética.</li>
+    <li>Prototipado industrial de <strong>unidades de almacenamiento</strong> con simulaciones 3D y prueba de materiales resistentes.</li>
+    <li>Visualización de datos en dashboards, facilitando la toma de decisiones operativas.</li>
+  </ul>
+
+  <p class="text-justify" style="font-size: 1.2rem; transition: all 0.3s ease;">
+    Gracias a nuestra sólida formación y redes activas en la industria local post-Beca Cavendish, Helheim está preparada para ofrecer consultoría e innovación en proyectos de 
+    hidrógeno verde a nivel nacional y regional. Podemos ayudarte a diseñar, implementar y escalar soluciones que integren TI avanzada y diseño industrial para un futuro más 
+    limpio y eficiente.
+  </p>
+</div>
+
+ <hr class="my-3">
+<div class="text-center my-4">
+  <strong class="text-white fs-5">¿Quieres impulsar tus proyectos con tecnología de vanguardia?</strong>
+  <div class="d-flex justify-content-center gap-3 mt-3">
+    <a href="https://wa.me/56958453672"
+       class="btn btn-dark shadow-lg border border-success rounded-pill px-4 py-2">
+      <i class="bi bi-whatsapp me-2"></i>WhatsApp +56 9 5845 3672
+    </a>
+    <a href="mailto:contacto@helheim.cl"
+       class="btn btn-dark shadow-lg border border-success rounded-pill px-4 py-2">
+      <i class="bi bi-envelope me-2"></i>Escríbenos por correo
+    </a>
+  </div>
+</div>
+</div>
+
+
+
+<!--==================== FOOTER ====================-->
+<footer class="footer bg-dark text-white py-4">
+  <div class="container">
+    <hr class="border-secondary">
+
+    <div class="text-center small">
+      <h5 class="mb-1">
+        &copy; 
+        <a href="https://helheim.cl" target="_blank" class="text-white text-decoration-none fw-semibold">
+          Helheim
+        </a> 
+        - 🏢 Fundada en 2023 en Tierra del Fuego, Porvenir
+      </h5>
+      
+      <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA. RUT: 77.742.346-0</p>
+      
+      <p class="mb-1">
+        Web desarrollada por 
+        <a href="https://www.linkedin.com/in/jacl140288/" target="_blank" class="text-white text-decoration-none">
+          JACL
+        </a> 
+        y 
+        <a href="https://www.linkedin.com/in/maite-lazcano-gaedicke-042064182/" target="_blank" class="text-white text-decoration-none">
+          MCLG
+        </a>
+      </p>
+      
+      <p class="mb-0">Últ. act. 17 Julio 2025</p>
+    </div>
+  </div>
+</footer>
+
+<!--==================== END FOOTER ====================-->
+
+
+
+</body>
+
+
+
+
+
+
+
+
+<!--=============== Latest compiled JavaScript ===============-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

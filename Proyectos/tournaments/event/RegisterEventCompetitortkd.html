@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <!-- Header --->
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href ="../images/favicon-16x16.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+     <!--<link rel="stylesheet" href="./css/normalize.css">-->
+     <link rel="stylesheet" href="./estilos.css">
+
+     <meta name="theme-color" content="#2091F9"> 
+    <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano" />
+    <meta name="copyright" content="TournamentsCL" />
+    <meta name="robots" content="index"/>
+    <title>.:: Sistema Gestion de Torneos ::.</title>
+    <meta name="title" content="Torneos Chile" />
+    <meta name="description" content="Pagina web de gestion de torneos deportivos" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="www.helheim.cl">
+    <meta property="og:title" content="helheim.cl">
+    <!-- Meta Tags Generated with https://metatags.io -->
+  </head>
+  <!-- END Head --->
+
+
+
+
+  <body class="w3-black">
+        <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="https://www.helheim.cl/" target="_blank" class="w3-bar-item w3-button"><b>helheim.cl</b></a>
+      <a href="../index.html" target="_blank" class="w3-bar-item w3-button w3-right"><b>Back</b></a>
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <!--<a href="../index.html" class="w3-bar-item w3-button">back</a>-->
+      </div>
+    </div>
+  </div>
+  <!-- Header -->
+    <br><br>
+  ><h3>&nbsp;Registro de competidores </h3>
+    <br>
+
+    <div class="container" style="max-width:800px; margin:auto;" >
+
+      <form id="eventForm" action="submit_form.php" method="post">
+
+        <div class="input-group">
+            <h4>DATOS DEL COMPETIDOR</h4>
+            <label for="email">Email del competidor:</label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@gmail.com" required><br>
+    
+            <label for="rut">RUT:</label>
+            <input type="text" id="rut" name="rut" placeholder="ingrese su rut 12.123.123-k" required><br>
+    
+            <label for="nameC">Nombre del competidor:</label>
+            <input type="text" id="nameC" name="nameC" placeholder="Ingrese su nombre" required><br>
+    
+            <label for="ageCategory">Categoría de edad:</label>
+            <select id="ageCategory" name="ageCategory" required>
+                <option value="">Seleccione categoría de edad</option>
+                <option value="Cadetes">Cadetes</option>
+                <option value="Infantil">Infantil</option>
+                <option value="Juvenil">Juvenil</option>
+                <option value="LDES">LDES</option>
+            </select><br>
+            
+            <label for="birthday">Fecha de nacimiento:</label>
+            <input type="date" id="birthday" name="birthday">
+
+            <label for="NombreComuna">Comuna:</label>
+            <input type="text" id="NombreComuna" name="NombreComuna" placeholder="Ingrese su comuna:" required><br>
+
+            <label for="grade">Grado:</label>
+            <select id="grade" name="grade" required>
+                <option value="">Seleccione grado</option>
+                <option value="Principiantes">Principiantes 10° a 9° Gup</option>
+                <option value="Novatos">Novatos 8° a 5° Gup</option>
+                <option value="Intermedio">Intermedio 4° a 1° Gup</option>
+                <option value="Danes">Danes</option>
+            </select><br>
+    
+            <label for="gender">Sexo:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Seleccione sexo</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select><br>
+    
+            <label for="weight">Peso (kg):</label>
+            <input type="number" id="weight" name="weight" placeholder="20" required min="20"><br>
+    
+            <label for="nationalRanking">Ranking Nacional:</label>
+            <input type="number" id="nationalRanking" name="nationalRanking" placeholder="Ingrese su posición en ranking nacional" min="1"><br>
+    
+            <label for="internationalRanking">Ranking Internacional:</label>
+            <input type="number" id="internationalRanking" name="internationalRanking" placeholder="Ingrese su posición en ranking internacional" min="1"><br>
+
+            <label for="Club">Colegio o Universidad:</label>
+            <select id="Club" name="Club" required>
+                <option value="">Colegio o Universidad</option>
+                <option value="Colegio">Colegio</option>
+                <option value="Universidad">Universidad</option>
+            </select><br>
+
+            <label for="NombreClub">Nombre institucion:</label>
+            <input type="text" id="NombreClub" name="NombreClub" placeholder="Ingrese el nombre del Colegio o Universidad" required><br>
+
+            <label for="Coach">Nombre Coach:</label>
+            <input type="text" id="Coach" name="Coach" placeholder="Ingrese el nombre del Coach" required><br>
+    
+            <button type="submit">Enviar</button>
+        </div>    
+    </form>
+    <br>
+    <div class="w3-black">
+      <h4><p>Sus datos seran guardados en nuestra base de datos para posteriormente informar las llaves del campeonato</p>
+      <p>Las llaves seran informadas por este mismo medio al cerrar el proceso de inscripcion el lunes 27 de Mayo 23:59 horas.</p>
+      <p>En caso de tener problemas con su registro escribanos a nuestro 
+      <a href="https://wa.me/message/7YGRCLPIBPB3D1" target="_blank" class="nav__links">Whatsapp</a></p>
+      <p>Si desea cargar masivamente participantes, por favor descargue el siguiente 
+        <a href="./FichaTKDFinalRegionalTemuco2024.xlsx" download="FichaTKDFinalRegionalTemuco2024.xlsx">Archivo Excel</a>
+        para luego completar todos los datos necesarios, una vez completo todos los campos por favor enviarlo a nuestro correo contacto@helheim.cl o a nuestro 
+        <a href="https://wa.me/message/7YGRCLPIBPB3D1" target="_blank" class="nav__links">Whatsapp</a></p></h4>
+      </div>
+</div>
+
+
+
+</body>
+
+<script src="../js/script.js"></script>
+</script>
+
+
+<!-- Footer Helheim 2024-->
+  <footer class="w3-center w3-black w3-padding-16" style="max-height:100px; margin:auto;">
+    <div class="footer-content">
+        <img src="../images/Template_Logo-identidad visual_Helheim_Logo-blanco sin fondo.png" alt="Logo" class="footer-logo">
+        <div class="footer-text">
+            <h6>This website was made by <a href="https://www.helheim.cl/" target="_blank" >helheim.cl</a>
+            - <a href="https://www.linkedin.com/in/juan-antonio-c-b87777106/" target="_blank" >JACL</a>
+            - <a href="https://www.linkedin.com/in/maite-lazcano-gaedicke-042064182/" target="_blank" >MCLG</a></h6>
+        </div>
+        &nbsp;&nbsp;
+        <img src="../images/2024HelheimLogo.png" alt="Logo" class="footer-logo">
+    </div>
+</footer>
+<!-- END Footer Helheim 2024-->
+
+</html>

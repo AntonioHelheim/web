@@ -1,0 +1,46 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Titan+One&display=swap");
+
+.fixed-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Asegura que esté encima de otros elementos */
+    background-color:black;
+}
+
+.fixed-menu .row {
+    background-color: #000; /* Fondo negro para consistencia */
+}
+
+.fixed-menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.fixed-menu h4:hover {
+    color: red;
+}
+
+.fixed-menu i:hover {
+    color: red;
+}
+
+.videos-destacados{
+    height: 350px;
+}
+
+.responsive-video {
+    width: 100%;
+    height: 350px; /* Ajusta según tus necesidades */
+    border: 5px;
+    border-radius: 10px; /* Opcional, para esquinas redondeadas */
+}
+
+.shadow-3d {
+    box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5), 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel{
+    width:auto 1200px;;
+}
