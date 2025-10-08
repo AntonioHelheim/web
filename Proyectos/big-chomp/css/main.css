@@ -1,142 +1,446 @@
+/* ==========================================================================
+   main.css — Consolidado
+   ========================================================================= */
+
+/* ========== 0) Tokens / variables ========== */
 :root{
-  --brand-900:#0b3d5c;
-  --brand-800:#33baff;
-  --brand-700:#1a66bf;
-  --brand-600:#1f6feb;         /* azul botón Calculadora */
+  --ink:#1b1b1b;
+
+  --brand-600:#1f6feb;      /* botones calc */
   --brand-500:#569afb;
-  --accent-400:#ff8635;
-  --accent-500:#dc9609;
-  --fern-600:#57bead;
-  --pink-600:#fe537b;
-  --cream-25:#fffaec; --cream-100:#f9e1a3;
-  --ink:#222; --rose-300:#f4a7a3;
+
+  --lilac-100:#faf5ff;
+  --lilac-500:#ac67e4;
+  --lilac-600:#6820CC;
+
+  --accent-yellow-300:#fff6bf;
+  --accent-yellow-500:#ffd34d;
+
+  --green-rect:#e7f7ef;
+  --orange-rect:#fff0e1;
+  --purple-rect:#efe7ff;
+
+  --soft-shadow:0 10px 30px rgba(0,0,0,.06);
 }
 
-/* Base */
-html,body{
-  background:var(--cream-25);
-  color:var(--ink);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif
-}
-.text-brand{color:var(--brand-800)}
-.btn-brand{background:var(--brand-600);border-color:var(--brand-600);color:#fff}
-.btn-brand:hover{background:var(--brand-500);border-color:var(--brand-500)}
-.btn-fern{background:var(--fern-600);border-color:var(--fern-600);color:#fff}
-.btn-fern:hover{filter:brightness(1.05)}
-.btn-sun{background:var(--accent-400);border-color:var(--accent-400);color:#222}
-.btn-sun:hover{filter:brightness(1.03)}
-.btn-pink{background:var(--pink-600);border-color:var(--pink-600);color:#fff}
-.btn-pink:hover{filter:brightness(1.05)}
-.badge-accent{background:var(--accent-500);color:#222}
-.bg-cream{background:var(--cream-100)}
-.btn-ghost{border:1px solid #e6e6e6;background:#fff}
-.shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.06)}
-.rounded-3xl{border-radius:2rem}
-.section-title .bar{width:72px;height:4px;background:var(--brand-600);border-radius:2px}
-.category-pill{display:inline-flex;gap:.5rem;align-items:center;padding:.45rem .9rem;border:1px solid #e9ecef;background:#fff;border-radius:999px}
-.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--rose-300);color:#222;border-radius:999px;font-size:.7rem;padding:.1rem .4rem}
-.object-fit-cover{object-fit:cover}
+/* ========== 1) Base y resets ========== */
+html,body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);}
+img{max-width:100%;height:auto;}
+a{text-decoration:none} a:hover{text-decoration:underline}
 
-/* Tipografía Chewy para marca y títulos */
-.brand-name, .title-hand, h1, h2, h3, .h1{
-  font-family:"Chewy", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  letter-spacing:.2px;
-}
-.brand-mark{height:32px;width:auto}
-.brand-mark-lg{height:48px;width:auto}
-.navbar-brand .brand-name{font-size:1.4rem;line-height:1}
+/* ========== 2) Navbar y stacking ========== */
+.navbar{position:sticky;top:0;z-index:1080;background:#fff;}
+.navbar .brand-mark{height:32px;width:auto}
 
-/* Hero fondo */
-.hero{
+/* ========== 3) Hero fullscreen (texto SIEMPRE al frente) ========== */
+.hero-fullscreen{min-height:80vh;position:relative;isolation:isolate;}
+.hero-fullscreen .hero-bg{height:100vh;object-fit:cover;}
+.hero-fullscreen .hero-overlay{
+  position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45));
+  z-index:0;
+}
+.hero-fullscreen .hero-caption{
+  position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45);
+}
+.hero-fullscreen .caption-inner{max-width:840px}
+.badge-accent{background:#ffc94d;color:#2b1b00;border-radius:999px;padding:.35rem .7rem;font-weight:800}
+
+/* ========== 4) Servicios (5 rectángulos lila + 3 rectángulos de frases) ========== */
+.service-card-lilac{
+  background:var(--lilac-100);
+  border:2px solid var(--lilac-500);
+  border-radius:1rem;
+  min-height:120px;
+  box-shadow:var(--soft-shadow);
+  text-align:center;
+}
+.service-card-lilac .svc-icon{font-size:1.5rem;margin-right:.35rem;color:var(--lilac-500)}
+.service-card-lilac .svc-title{font-weight:800;letter-spacing:.2px}
+
+.svc-ribbon{gap:.75rem}
+.svc-rect{
+  border-radius:1rem;padding:.65rem 1rem;font-weight:800;box-shadow:var(--soft-shadow);border:2px solid transparent;
+}
+.svc-rect-green{background:var(--green-rect);border-color:#59c28f}
+.svc-rect-orange{background:var(--orange-rect);border-color:#ffa45f}
+.svc-rect-purple{background:var(--purple-rect);border-color:var(--lilac-500)}
+
+
+
+/* ========== 6) Grid pastelería y personalizador ========== */
+.products-row{position:relative;z-index:1;}
+.product-col.active .btn-select{display:none !important;} /* ocultar botón Seleccionar al abrir */
+.pastry-card{border-radius:1rem;overflow:hidden;box-shadow:var(--soft-shadow);}
+.pastry-personalizer{background:#fff;border:1px solid #eef1f4;border-radius:1rem;padding:1rem}
+
+/* Reflujo cuando hay una abierta (sin usar order) */
+@media(min-width:992px){
+  .products-row.personalizing .product-col.active{flex:0 0 100%;max-width:100%}
+  .products-row.personalizing .product-col:not(.active){flex:0 0 25%;max-width:25%;transform:scale(.98);opacity:.96}
+}
+@media(max-width:991.98px){
+  .products-row.personalizing .product-col.active{flex:0 0 100%;max-width:100%}
+  .products-row.personalizing .product-col:not(.active){flex:0 0 50%;max-width:50%}
+}
+
+/* Oculta la imagen cuadrada del card cuando el panel está abierto (evita “pantalla completa”) */
+.products-row.personalizing .product-col.active .pastry-imgwrap{display:none !important}
+
+/* ========== 7) Mini-carrusel 250x250 centrado (mobile perfecto) ========== */
+.mini-carousel{width:100%;display:grid;place-items:center}
+.mini-carousel .carousel-inner{display:grid;place-items:center;min-height:260px}
+.mini-carousel .carousel-item{display:flex;justify-content:center;align-items:center}
+.preview-cake{width:250px;height:250px;object-fit:contain;border-radius:1rem;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.04)}
+.mini-carousel.locked .carousel-control-prev,
+.mini-carousel.locked .carousel-control-next{display:none}
+
+/* variantes visuales del carrusel (opcional) */
+.mini-carousel.variant-classic .preview-cake{box-shadow:0 0 0 6px #fff,0 0 0 10px #eee,0 10px 24px rgba(0,0,0,.08)}
+.mini-carousel.variant-flowers{position:relative}
+.mini-carousel.variant-flowers::after{
+  content:"";position:absolute;inset:12px;border-radius:1rem;pointer-events:none;
   background:
-    radial-gradient(1300px 520px at -12% -20%, #e6f1ff 0, #ffffff 45%),
-    radial-gradient(900px 600px at 110% 5%, #fff2bf 0, #ffffff 45%);
+    radial-gradient(circle at 20% 30%, rgba(125,39,245,.18) 4px, transparent 5px),
+    radial-gradient(circle at 70% 60%, rgba(255,216,77,.22) 4px, transparent 5px),
+    radial-gradient(circle at 40% 80%, rgba(31,111,235,.18) 4px, transparent 5px),
+    radial-gradient(circle at 80% 25%, rgba(254,83,123,.18) 4px, transparent 5px);
 }
+.mini-carousel.variant-minimal .preview-cake{filter:saturate(.9) contrast(1.05);box-shadow:0 0 0 4px #eaeaea inset, 0 8px 20px rgba(0,0,0,.06)}
 
-/* Botón personalizar */
-.btn-personalize{
-  background:linear-gradient(90deg,var(--brand-600),var(--brand-500));
-  color:#fff;border:0;border-radius:999px;padding:.8rem 1.1rem;
-  display:flex;align-items:center;gap:.5rem;justify-content:center;
+/* ========== 8) Botones (tortas, grid y estilos) ========== */
+.btn-select{
+  background:linear-gradient(180deg,var(--accent-yellow-300),var(--accent-yellow-500));
+  color:var(--ink);border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;
+  box-shadow:0 10px 22px rgba(255,196,0,.34),0 2px 0 rgba(0,0,0,.05) inset;
+  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
 }
+.btn-select:hover{transform:translateY(-1px);filter:brightness(1.03)}
+.btn-select:active{transform:translateY(0);box-shadow:0 6px 16px rgba(255,196,0,.34)}
+.btn-select.btn-sm{padding:.45rem .9rem;font-size:.875rem}
 
-/* Tarjeta producto + imagen */
-.product-card img{object-fit:cover;aspect-ratio:1/1;cursor:pointer}
-.img-slot img{border-radius:.75rem;display:block;width:100%}
-
-/* Layout panel + separación */
-#productos .products-row{align-items:flex-start; row-gap:1.5rem;}
-#productos .product-col{position:relative; z-index:1; min-width:0;}
-#productos .product-card{overflow:hidden;}
-#productos .product-card .collapse{position:relative; width:100%; margin-top:1.25rem; z-index:0;}
-
-/* Reordenamiento y mini-cards cuando hay personalización abierta */
-.products-row.personalizing .product-col.active{ order:1; }
-.products-row.personalizing .product-col:not(.active){ order:2; transform:scale(.96); opacity:.9; }
-@media (min-width: 992px){
-  .products-row.personalizing .product-col.active{ flex:0 0 100%; max-width:100% }
-  .products-row.personalizing .product-col:not(.active){ flex:0 0 25%; max-width:25% }
+.btn-lilac{
+  color:#fff;background:linear-gradient(180deg,var(--lilac-100),var(--lilac-500));
+  border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;padding:.45rem .9rem;
+  box-shadow:0 10px 22px rgba(125,39,245,.28),0 2px 0 rgba(0,0,0,.05) inset;
+  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
 }
+.btn-lilac:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn-lilac:active{transform:translateY(0);box-shadow:0 6px 16px rgba(125,39,245,.24)}
+.btn-lilac.btn-sm{font-size:.875rem}
 
-/* Estado inválido del date */
-input[type="date"].is-invalid{border-color:#dc3545}
-input[type="date"].is-invalid:focus{box-shadow:0 0 0 .25rem rgba(220,53,69,.15)}
-
-/* Diseño: icon-only square options */
-.design-icons{ display:flex; gap:.5rem; flex-wrap:wrap; }
-.design-icons input[type="radio"]{position:absolute; left:-9999px;}
-.design-icons label{
-  width:56px; height:56px; display:inline-flex; align-items:center; justify-content:center;
-  border:2px solid #e6e6e6; border-radius:.75rem; background:#fff; cursor:pointer;
-  transition:all .15s ease; font-size:1.4rem; color:var(--brand-700);
+/* Botones de estilos: TODOS iguales (círculos) + Sorpréndeme icon-only */
+.design-icons{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.design-icons input[type="radio"]{position:absolute;left:-9999px}
+.style-circle{
+  width:56px;height:56px;display:inline-grid;place-items:center;border-radius:50%;
+  border:2px solid #e6e6e6;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);
+  cursor:pointer;transition:transform .08s ease,border-color .2s ease;
+  font-size:1.35rem;color:#444;
 }
-.design-icons label:hover{transform:translateY(-1px)}
-.design-icons input[type="radio"]:checked + label{
-  border-color:var(--brand-600); box-shadow:0 0 0 .2rem rgba(31,111,235,.15);
-}
+.style-circle:hover{transform:translateY(-1px)}
+.design-icons input:checked + .style-circle{border-color:var(--accent-yellow-500);box-shadow:0 0 0 .2rem rgba(255,211,77,.35)}
+.btn-surprise{width:56px;height:56px;border-radius:50%;border:2px dashed var(--accent-yellow-500);background:#fff;color:#7a4d00;display:inline-grid;place-items:center}
+.btn-surprise:hover{filter:brightness(1.05)}
 
-/* Promo bar (loop) con texto blanco y sombra */
-.promo-bar{
-  background:var(--accent-400);
+/* ========== 9) Calculadora: botón + “ingredientes base” + efectos ========== */
+.btn-portion{
+  background:linear-gradient(180deg,var(--brand-600),var(--brand-500));
+  color:#fff;border:0;border-radius:999px;padding:.45rem .9rem;font-weight:800;
+  box-shadow:0 10px 22px rgba(31,111,235,.28),0 2px 0 rgba(0,0,0,.05) inset;
+  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
+}
+.btn-portion:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn-portion:active{transform:translateY(0);box-shadow:0 6px 16px rgba(31,111,235,.24)}
+.portion-card{background:#fff9ef}
+.form-label{font-weight:700}
+#pc_base{font-size:.85rem;color:#6b7280}
+
+/* ========== 10) Ingredientes (píldoras + panel) ========== */
+#ingredientes{scroll-margin-top:88px}
+.flavor-pill{
+  border:2px solid #ffd877;background:linear-gradient(180deg,#fff6bf,#ffd34d);
+  border-radius:999px;font-weight:700;padding:.25rem .6rem;font-size:.85rem;cursor:pointer;
+}
+.flavor-pill.active{border-color:#ffbf00;box-shadow:0 0 0 3px rgba(255,223,128,.5) inset}
+.info-card{background:#fff;border:1px solid #eef1f4;border-radius:1rem;padding:1rem 1.25rem;box-shadow:var(--soft-shadow)}
+.okpill{display:inline-block;background:#e8f5e9;border:1px solid #b6e0c0;padding:.1rem .4rem;border-radius:.5rem}
+
+/* ========== 11) Utiles ==========\ */
+.section-title .bar{width:80px;height:6px;background:var(--accent-yellow-500);border-radius:999px}
+
+
+
+.btn-lilac{
   color:#fff;
-  text-shadow:0 1px 0 rgba(0,0,0,.15);
-  border-top:1px solid rgba(0,0,0,.05);
-  border-bottom:1px solid rgba(0,0,0,.05);
-  font-weight:700;
-  font-size:.95rem;
+  background: linear-gradient(180deg,#7D27F5,#6820CC);
+  border:0; border-radius:999px; font-weight:800; letter-spacing:.15px; padding:.45rem .9rem;
+  box-shadow: 0 10px 22px rgba(125,39,245,.28), 0 2px 0 rgba(0,0,0,.05) inset;
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
 }
-.promo-ticker{ overflow:hidden; white-space:nowrap }
-.promo-track{ display:inline-block; padding:.55rem 0; animation:promoTicker 30s linear infinite; }
-.promo-track span{ margin-right:12rem; letter-spacing:.2px; }
-@keyframes promoTicker{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
-@media (prefers-reduced-motion: reduce){ .promo-track{ animation:none } }
+.btn-lilac:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.btn-lilac:active{ transform: translateY(0); box-shadow: 0 6px 16px rgba(125,39,245,.24); }
+.btn-lilac.btn-sm{ font-size:.875rem; line-height:1.1; }
 
-/* Botones extra */
-.btn-icon{ width:46px; height:46px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:.75rem; }
-.title-with-action{ display:inline-flex; gap:.75rem; align-items:center; }
-.btn-calc{ background:var(--brand-600); color:#fff; border:0; border-radius:999px; padding:.35rem .9rem; }
-.btn-calc:hover{ filter:brightness(1.05) }
 
-/* Calculadora */
-.portion-calc{ margin-bottom:1rem; }
-.portion-card{
+#ingredientes{ scroll-margin-top: 88px; }
+.flavor-pill{
+  border:2px solid #ffd877;
+  background:linear-gradient(180deg,#fff6bf,#ffd34d);
+  border-radius:999px; font-weight:700; padding:.25rem .6rem; font-size:.85rem; cursor:pointer;
+}
+.flavor-pill.active{
+  border-color:#ffbf00;
+  box-shadow:0 0 0 3px rgba(255,223,128,.5) inset;
+}
+.info-card{
+  background:#fff; border:1px solid #eef1f4; border-radius:1rem;
+  padding:1rem 1.25rem; box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.okpill{ display:inline-block; background:#e8f5e9; border:1px solid #b6e0c0; padding:.1rem .4rem; border-radius:.5rem; }
+
+
+
+/* ===========================
+   Pastelería: mini–carrusel
+   =========================== */
+.mini-carousel { position: relative; }
+.mini-carousel .carousel-inner{
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+}
+.mini-carousel .carousel-item { display: none; }
+.mini-carousel .carousel-item.active { display: grid; }
+.preview-cake{
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0,0,0,.08);
+  margin-inline: auto; /* centrado */
+}
+@media (max-width: 576px){
+  .mini-carousel .carousel-inner{ min-height: 220px; }
+}
+
+/* Variantes visuales por estilo (aplicadas al contenedor del carrusel) */
+.mini-carousel.variant-classic .preview-cake{
+  box-shadow: 0 0 0 6px #ffffff, 0 0 0 10px #d7e2f0;
+}
+.mini-carousel.variant-festive .preview-cake{
+  box-shadow: 0 0 0 6px #fff, 0 0 0 12px #ffd84d, 0 12px 26px rgba(0,0,0,.12);
+  position: relative;
+}
+.mini-carousel.variant-festive::after{
+  content:""; position:absolute; inset:12px;
   background:
-    radial-gradient(600px 200px at 0% 0%, rgba(31,111,235,.12), transparent 60%),
-    radial-gradient(600px 200px at 100% 100%, rgba(255,134,53,.12), transparent 60%),
-    #fff;
-  position:relative;
+    radial-gradient(circle at 20% 30%, rgba(255,0,0,.25) 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, rgba(0,150,255,.25) 2px, transparent 3px),
+    radial-gradient(circle at 40% 80%, rgba(120,200,0,.25) 2px, transparent 3px),
+    radial-gradient(circle at 80% 25%, rgba(180,0,255,.25) 2px, transparent 3px);
+  pointer-events: none;
 }
-.portion-card::after{
-  content:""; position:absolute; inset:0;
-  background:
-    radial-gradient(10px 10px at 15% 25%, rgba(31,111,235,.12) 40%, transparent 41%),
-    radial-gradient(10px 10px at 80% 70%, rgba(255,134,53,.12) 40%, transparent 41%);
-  pointer-events:none;
+.mini-carousel.variant-minimal .preview-cake{
+  box-shadow: 0 0 0 4px #e5e7eb;
+  filter: contrast(1.05) saturate(.95);
 }
-.portion-calc .card-body{ padding:1rem 1rem; }
-@media (min-width: 768px){ .portion-calc .card-body{ padding:1rem 1.25rem; } }
 
-/* Footer */
-.footer{ background:var(--brand-900); }
-.footer .link-light{ text-decoration:none }
-.footer .link-light:hover{ text-decoration:underline }
+/* Fondo de imagen al fondo-fondo (no toca el contenido) */
+.pastry-section{
+  position: relative;
+  isolation: isolate;           /* asegura el stacking correcto */
+  background: transparent !important;
+  -webkit-mask: none !important;
+          mask: none !important;
+}
+.pastry-section > *{
+  position: relative;
+  z-index: 1;                   /* contenido por delante de la imagen */
+}
+.pastry-section .section-bg{
+  position: absolute;
+  inset: 0;
+  z-index: -1;                  /* fondo real */
+  pointer-events: none;
+  overflow: hidden;
+}
+/* La imagen llena todo y recorta lo que sobre con cover */
+.pastry-section .section-bg picture,
+.pastry-section .section-bg img{
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;            /* llena sin deformar */
+  object-position: center;      /* centra el encuadre */
+}
+
+/* (Opcional) Sutil overlay para legibilidad de texto */
+.pastry-section .section-bg::after{
+  content:"";
+  position:absolute; inset:0;
+  /* ajusta opacidad a gusto (0.0–0.25) */
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.12));
+}
+
+/* === Pastelería: fondo de imagen SIN sombras === */
+
+/* 1) Quita cualquier sombra/efecto en el contenedor de fondo */
+.pastry-section .section-bg,
+.pastry-section .section-bg picture,
+.pastry-section .section-bg img{
+  box-shadow: none !important;
+  filter: none !important;
+  background: transparent !important;
+}
+
+/* 2) Elimina el overlay que estaba generando una "sombra" detrás */
+.pastry-section .section-bg::after{
+  content: none !important;   /* elimina el pseudo-elemento */
+  background: none !important;
+}
+
+/* 3) El contenedor de la sección tampoco debe tener sombras */
+.pastry-section > .container{
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+
+/* INGREDIENTES: carrusel sin sombras, solo imagen */
+.ing-gallery .carousel { margin-bottom: 1rem; }
+.ing-gallery .carousel-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Píldoras por grupo */
+.flavor-pill[data-group="galletas"]{
+  background: #E8F2FF; color:#0B3B8C;
+  border: 1px solid #BBD6FF;
+}
+.flavor-pill[data-group="snacks"]{
+  background: #FFE8F0; color:#7C1037;
+  border: 1px solid #FFC2D4;
+}
+.flavor-pill.active{
+  filter: saturate(1.2) brightness(0.98);
+  box-shadow: 0 0 0 2px rgba(0,0,0,.05) inset;
+}
+
+/* Carrusel simple, sin sombras extras */
+#ingCarousel .carousel-item img{
+  width:100%; height:auto; display:block;
+}
+#ingCarousel{ margin-top: .75rem; }
+
+
+/* Ingredientes: centrar píldoras y variantes por grupo */
+#ingredientes .pill-bar{ justify-content: center !important; }
+
+.flavor-pill[data-group="galletas"]{
+  background:#E8F2FF; color:#0B3B8C; border:1px solid #BBD6FF;
+}
+.flavor-pill[data-group="snacks"]{
+  background:#FFE8F0; color:#7C1037; border:1px solid #FFC2D4;
+}
+.flavor-pill.active{
+  filter:saturate(1.1) brightness(.98);
+  box-shadow:0 0 0 2px rgba(0,0,0,.05) inset;
+}
+
+/* Ingredientes: centrar píldoras + variantes por grupo */
+#ingredientes .pill-bar{ justify-content: center !important; }
+
+.flavor-pill[data-group="galletas"]{
+  background:#E8F2FF; color:#0B3B8C; border:1px solid #BBD6FF;
+}
+.flavor-pill[data-group="snacks"]{
+  background:#FFE8F0; color:#7C1037; border:1px solid #FFC2D4;
+}
+.flavor-pill.active{
+  filter:saturate(1.1) brightness(.98);
+  box-shadow:0 0 0 2px rgba(0,0,0,.05) inset;
+}
+
+/* Carrusel simple, sin sombras extras */
+#ingCarousel .carousel-item img{ width:100%; height:auto; display:block; }
+#ingCarousel{ margin-top:.75rem; }
+
+/* Modal de zoom: que la imagen arranque "entera" (contain) */
+#ingLightbox .modal-content{ background: rgba(0,0,0,.75); }
+
+.zoom-wrap{
+  position: relative;
+  width: 100%;
+  height: min(86vh, 900px);
+  overflow: hidden;
+  display: flex;               /* centra la imagen inicialmente */
+  align-items: center;
+  justify-content: center;
+  touch-action: none;          /* pan/zoom personalizados */
+  background: transparent;
+}
+
+#zoomImg{
+  /* Mostrar completa dentro del contenedor */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+
+  /* Preparado para zoom posterior */
+  transform-origin: center center;
+  transform: translate3d(0,0,0) scale(1);
+  transition: transform .08s linear;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: grab;
+}
+
+
+/* ===== Footer: capa de patrón aleatorio con bi-cake2 ===== */
+.footer{
+  position: relative;
+  isolation: isolate;
+  background-color: #326bdc; /* mantén tu color de base */
+  color: #fff;
+}
+
+/* Capa del patrón al fondo-fondo */
+.footer-pattern{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Degradado MUY sutil opcional para legibilidad */
+  background: radial-gradient(120% 100% at 50% 0, rgba(65, 115, 255, 0.203), transparent 60%);
+}
+
+/* Cada icono (bi-cake2) generado por JS */
+.footer-pattern .pattern-icon{
+  position: absolute;
+  left: 0; top: 0;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.382); /* color del icono */
+  line-height: 1;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* El contenido del footer queda encima del patrón */
+.footer > .container,
+.footer > *:not(.footer-pattern){
+  position: relative;
+  z-index: 1;
+}
+
+/* (Opcional) Si antes usabas un patrón con ::before/::after, elimínalo: */
+/*
+.footer::before, .footer::after{ content:none !important; background:none !important; }
+*/
