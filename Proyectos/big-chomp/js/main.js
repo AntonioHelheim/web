@@ -28,7 +28,22 @@ const CART = [];
 function renderCart(){
   const list = document.getElementById('cartList');
   const total = document.getElementById('cartTotal');
+  const badge = document.getElementById('cartCount');
   if(!list || !total) return;
+
+  // total de ítems (sumando cantidades)
+  const itemsCount = CART.reduce((a,b)=> a + (b.qty||0), 0);
+
+  // Badge: muestra/oculta + número
+  if(badge){
+    if(itemsCount > 0){
+      badge.classList.remove('d-none');
+      badge.textContent = itemsCount;
+    }else{
+      badge.classList.add('d-none');
+      badge.textContent = '0';
+    }
+  }
 
   if(!CART.length){
     list.innerHTML = `<li class="list-group-item text-center text-muted">Tu carrito está vacío</li>`;
@@ -44,9 +59,9 @@ function renderCart(){
           ${it.options.tipo? it.options.tipo+' · ':''}
           ${it.options.prot? it.options.prot+' · ':''}
           ${it.options.sabor? it.options.sabor+' · ':''}
-          ${it.options.color? it.options.color+' · ':''}
+          ${it.options.colors? it.options.colors.join(' / ') + ' · ' :''}
           ${it.options.size? it.options.size+' · ':''}
-          ${it.options.design? it.options.design:''}
+          ${it.options.style? 'Estilo: '+it.options.style:''}
         </small>`:''}
         ${it.options && it.options.notes ? `<small class="text-muted d-block">Notas: ${it.options.notes}</small>`:''}
         <div class="mt-1">
@@ -66,13 +81,6 @@ function renderCart(){
   total.textContent = currency(sum);
 }
 
-function plus(i){ CART[i].qty++; renderCart(); }
-function minus(i){
-  CART[i].qty = Math.max(0, CART[i].qty - 1);
-  if(!CART[i].qty) CART.splice(i,1);
-  renderCart();
-}
-function removeFromCart(i){ CART.splice(i,1); renderCart(); }
 
 /* =====================================================
    [PRODUCTOS SIMPLES] y CUPCAKES (precio dinámico)
@@ -104,38 +112,63 @@ function addCupcakes(){
    ===================================================== */
 function addCake(cakeId, baseName){
   const options = {};
-  ['sabor','color','size','prot'].forEach(k=>{
+
+  // Sabor / Proteína / Tamaño
+  ['sabor','prot','size','style'].forEach(k=>{
     const el = document.getElementById(`${cakeId}_${k}`);
     if(el) options[k] = el.value;
   });
 
-  const design = document.querySelector(`input[name="${cakeId}_design"]:checked`);
-  if(design) options.design = design.value;
+  // Frosting (puede no existir en P4)
+  let frostingExtra = 0;
+  const frostEl = document.getElementById(`${cakeId}_frost`);
+  if(frostEl){
+    options.frosting = frostEl.value;
+    const x = frostEl.selectedOptions[0]?.dataset.extra || '0';
+    frostingExtra = Number(x);
+  }
 
+  // Hasta 2 colores principales (checkbox)
+  const colorWrap = document.getElementById(`${cakeId}_colors`);
+  if(colorWrap){
+    const picked = Array.from(colorWrap.querySelectorAll('.pcolor:checked')).map(i=>i.value);
+    options.colors = picked.slice(0,2); // seguridad por si el límite no se aplicó
+  }
+
+  // Tipo (perro/gato) si existe (P3 BARF)
   const tipo = document.querySelector(`input[name="${cakeId}_tipo"]:checked`);
   if(tipo) options.tipo = tipo.value;
 
+  // Tamaño y base de precio segun dataset del <select size>
   const sizeEl = document.getElementById(`${cakeId}_size`);
   const price10 = Number(sizeEl?.dataset.price10 || 0);
   const price14 = Number(sizeEl?.dataset.price14 || 0);
   const size   = options.size || '10 cm';
   const base   = size === '14 cm' ? price14 : price10;
 
+  // Extras (galletas alrededor) — puede que no exista (P4)
   const galletasEl = document.getElementById(`${cakeId}_galletas`);
   const extra = galletasEl && galletasEl.checked ? Number(galletasEl.dataset.extra||0) : 0;
 
+  // Notas
   const notesEl = document.getElementById(`${cakeId}_notes`);
   if(notesEl) options.notes = notesEl.value.trim();
 
-  const key = JSON.stringify({baseName, options, base, extra});
+  // Precio final
+  const finalPrice = base + extra + frostingExtra;
+
+  // Unificar ítems iguales
+  const key = JSON.stringify({baseName, options, base, extra, frostingExtra});
   const found = CART.find(i => i.key===key);
   if(found){ found.qty++; }
   else {
-    CART.push({ name: baseName, price: base + extra, qty: 1, key, options });
+    CART.push({ name: baseName, price: finalPrice, qty: 1, key, options });
   }
+
   renderCart();
   new bootstrap.Offcanvas('#cart').show();
 }
+
 
 /* =====================================================
    [WHATSAPP] Enviar pedido
@@ -315,7 +348,7 @@ function initStyleControls(pid){
 }
 
 function openPersonalizer(productId, colId) {
-  // Cierra otros (acordeón)
+  // Cierra cualquier otra abierta (acordeón manual)
   document.querySelectorAll('#productsRow .collapse.show').forEach(el=>{
     if (el.id !== productId) bootstrap.Collapse.getOrCreateInstance(el).hide();
   });
@@ -325,26 +358,22 @@ function openPersonalizer(productId, colId) {
   const collapseEl = document.getElementById(productId);
   if (!row || !col || !collapseEl) return;
 
-  // Marca activa (para ocultar botón "Seleccionar")
+  // Marca activa y aplica layout de personalización
   row.classList.add('personalizing');
   row.querySelectorAll('.product-col').forEach(c=>c.classList.remove('active'));
   col.classList.add('active');
 
-  // Abre colapsable sin mover imagen
+  // Abre el panel
   bootstrap.Collapse.getOrCreateInstance(collapseEl, { toggle:true });
 
-  // Inicializa UI del panel
-  unlockMiniCarousel(productId);
-  initStyleControls(productId);
-
-  // Al cerrar: limpia estados
+  // Al cerrar: solo quitamos "personalizing" si NO queda otra abierta
   collapseEl.addEventListener('hidden.bs.collapse', ()=>{
-    row.classList.remove('personalizing');
     col.classList.remove('active');
-    setCarouselTo(productId, 0);
-    unlockMiniCarousel(productId);
+    const anyOpen = row.querySelector('.collapse.show');
+    if(!anyOpen) row.classList.remove('personalizing');
   }, { once:true });
 }
+
 
 /* =====================================================
    [INGREDIENTES] Píldoras → Mostrar panel correspondiente
@@ -370,34 +399,69 @@ document.addEventListener('click', (e) => {
    [CALCULADORA DE PORCIONES]
    ===================================================== */
 (function(){
-  const portion = document.getElementById('portionCalc');
-  if(!portion) return;
-
   const especieEl = document.getElementById('pc_especie');
+  const tamanoEl  = document.getElementById('pc_tamano');
   const pesoEl    = document.getElementById('pc_peso');
   const invEl     = document.getElementById('pc_invitados');
   const btnCalc   = document.getElementById('pc_btn');
   const out       = document.getElementById('pc_result');
 
-  const PRESETS = { perro: { base: 80, extra: 15 }, gato: { base: 50, extra: 10 } };
+  if(!btnCalc || !especieEl) return;
 
-  function porcionGramos(especie, pesoKg){
-    const p = PRESETS[especie] || PRESETS.perro;
-    return Math.round(p.base + p.extra * Math.log2(Math.max(1,pesoKg)));
+  // al cambiar especie, habilitar tamaño de perro
+  especieEl.addEventListener('change', ()=>{
+    const isDog = especieEl.value === 'perro';
+    tamanoEl.disabled = !isDog;
+  });
+
+  // Porciones sugeridas por mascota (en gramos) — internas
+  const BASE = {
+    perro: {
+      pequeno: { base: 60, extra: 12 },
+      mediano: { base: 80, extra: 15 },
+      grande:  { base: 100, extra: 18 }
+    },
+    gato: { base: 50, extra: 10 }
+  };
+
+  // Cálculo de porción por mascota (no se muestra “gramos” al usuario)
+  function porcionGramos(especie, pesoKg, tamano){
+    if(especie==='perro'){
+      const p = BASE.perro[tamano||'mediano'];
+      return Math.round(p.base + p.extra * Math.log2(Math.max(1,pesoKg)));
+    }
+    const g = BASE.gato;
+    return Math.round(g.base + g.extra * Math.log2(Math.max(1,pesoKg)));
   }
-  function elegirTortas(gramos){
-    const piezas = [{ s:'10 cm', g:400 },{ s:'14 cm', g:650 }];
-    let rest = gramos, taken=[];
-    while(rest>0){ const pick = rest>500 ? piezas[1] : piezas[0]; taken.push(pick); rest-=pick.g; }
-    const desc = taken.map(t=>t.s).join(' + ');
-    return { texto:`${desc}`, tortas:taken, totalG:gramos };
+
+  // Mapeo interno de tamaños de torta a su rendimiento (NO mostrar gramos)
+  // 10 cm ~ 270 g, 14 cm ~ 420 g (solo para cálculo)
+  const TORTAS = [{ size:'10 cm', g:270 }, { size:'14 cm', g:420 }];
+
+  function seleccionarTortas(gramosNecesarios){
+    let rest = gramosNecesarios, seleccion=[];
+    while(rest > 0){
+      const pick = rest > 360 ? TORTAS[1] : TORTAS[0]; // 14 si se necesita más, si no 10
+      seleccion.push(pick);
+      rest -= pick.g;
+      // seguridad para no loop infinito
+      if(seleccion.length>6) break;
+    }
+    return seleccion; // array de objetos { size, g }
+  }
+
+  function textoSugerenciaExtras(nTortas){
+    if(nTortas <= 1) return '';
+    return `<div class="mt-1"><em>Sugerencia:</em> si necesitas más de una torta, puedes complementar con cup cakes o galletas como extras.</div>`;
   }
 
   function calc(){
+    out.classList.remove('text-danger');
+
     const especie = especieEl.value;
     const peso = parseFloat(pesoEl.value);
     const invitados = Math.max(0, parseInt(invEl.value||'0',10));
-    out.classList.remove('text-danger');
+    const tamano = especie==='perro' ? (tamanoEl.value || 'mediano') : null;
 
     if(!peso || peso<=0){
       out.classList.add('text-danger');
@@ -405,28 +469,29 @@ document.addEventListener('click', (e) => {
       return;
     }
 
-    const gramosPorMascota = porcionGramos(especie, peso);
+    const porcionPorMascota = porcionGramos(especie, peso, tamano);
     const asistentes = 1 + invitados;
-    const gramosNecesarios = asistentes * gramosPorMascota;
+    const gramosTotales = asistentes * porcionPorMascota;
 
-    const recomend = elegirTortas(gramosNecesarios);
-    const porcionesEstimadas = Math.floor(recomend.totalG / gramosPorMascota);
+    const seleccion = seleccionarTortas(gramosTotales);
+    const sizesDesc = seleccion.map(s=>s.size).join(' + ');
 
-    const baseIng = especie === 'gato'
-      ? 'proteína animal, huevo (prioridad proteína)'
-      : 'avena, huevo, papa y fruta (bases clásicas)';
+    // Porciones estimadas (no mostrar gramos)
+    const porcionesEstimadas = asistentes; // 1 porción por asistente según la porción sugerida
+
+    // “Qué tamaño corresponde a la porción sugerida”
+    const porcionSola = porcionPorMascota <= 270 ? '10 cm' : '14 cm';
 
     out.innerHTML = `
-      <strong>Recomendación:</strong> ${recomend.texto}.<br>
-      <strong>Porción aprox. ${especie==='gato'?'por gato':'por perro'}:</strong> ${gramosPorMascota} g.<br>
-      <strong>Asistentes (mascotas):</strong> ${asistentes} · <strong>Porciones estimadas:</strong> ${porcionesEstimadas}.<br>
-      <div class="mt-1"><strong>Ingredientes base:</strong> ${baseIng}.</div>
-      ${recomend.tortas.length>1 ? '<div class="mt-1"><em>Sugerencia:</em> para tu grupo conviene pedir más de una torta.</div>' : ''}
-      <div class="mt-1"><small class="text-muted">Porciones como referencia; consulta a tu vet si tu mascota tiene condiciones especiales.</small></div>
+      <strong>Porción sugerida:</strong> corresponde a una torta de <strong>${porcionSola}</strong> por mascota.<br>
+      <strong>Recomendación para tu evento:</strong> ${sizesDesc}.<br>
+      <strong>Asistentes (mascotas):</strong> ${asistentes} · <strong>Porciones estimadas:</strong> ${porcionesEstimadas}.
+      ${textoSugerenciaExtras(seleccion.length)}
+      <div class="mt-1"><small class="text-muted">Valores referenciales; ajusta según el apetito y la actividad de tu mascota.</small></div>
     `;
   }
 
-  btnCalc?.addEventListener('click', calc);
+  btnCalc.addEventListener('click', calc);
 })();
 
 /* =====================================================
@@ -457,6 +522,17 @@ document.addEventListener('click', (e) => {
    [INIT] DOM ready
    ===================================================== */
 document.addEventListener('DOMContentLoaded', ()=>{
+  // Limitar colores a 2 (para p1, p2, p3)
+['p1','p2','p3'].forEach(pid=>{
+  const wrap = document.getElementById(`${pid}_colors`);
+  if(!wrap) return;
+  wrap.addEventListener('change', ()=>{
+    const checks = Array.from(wrap.querySelectorAll('.pcolor:checked'));
+    if(checks.length <= 2) return;
+    // si marcó un 3ro, desmarcar el más antiguo
+    checks[0].checked = false;
+  });
+});
   // Acordeón garantizado en tortas
   document.querySelectorAll('#productsRow .collapse[id^="p"]').forEach(c=>{
     if(!c.hasAttribute('data-bs-parent')) c.setAttribute('data-bs-parent','#productsRow');
@@ -487,44 +563,6 @@ window.updateBarfIngredients = window.updateBarfIngredients || function(){};
 window.sendWhatsApp = window.sendWhatsApp || sendWhatsApp;
 
 
-/* =====================================================
-   [INGREDIENTES] Píldoras → controlar carouseles
-   ===================================================== */
-const ING_CAROUSEL_MAP = {
-  galletas: ['vacuno','pollo','verduras'],
-  snacks: ['pollo-desh','vacuno-desh']
-};
-
-function gotoIngredientSlide(group, flavor){
-  const index = ING_CAROUSEL_MAP[group]?.indexOf(flavor);
-  if (index < 0) return;
-
-  const ids = group === 'galletas'
-    ? ['ingCarouselGalletas','ingCarouselGalletasM']
-    : ['ingCarouselSnacks','ingCarouselSnacksM'];
-
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if(!el) return;
-    const c = bootstrap.Carousel.getOrCreateInstance(el, { interval:false, ride:false, wrap:false, touch:true });
-    c.to(index);
-  });
-}
-
-document.addEventListener('click', (e) => {
-  const pill = e.target.closest('.flavor-pill');
-  if (!pill) return;
-
-  const group = pill.dataset.group;
-  const flavor = pill.dataset.flavor;
-
-  // Activar píldora
-  document.querySelectorAll(`.flavor-pill[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
-  pill.classList.add('active');
-
-  // Ir a la diapositiva correspondiente (desktop y mobile sincronizados)
-  gotoIngredientSlide(group, flavor);
-});
 /* =====================================================
    [INGREDIENTES] Píldoras ↔ Carrusel ÚNICO + Lightbox con Zoom
    ===================================================== */
@@ -749,3 +787,15 @@ modalEl.addEventListener('shown.bs.modal', () => {
   // Primera ejecución
   renderPattern();
 })();
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const especieEl = document.getElementById('pc_especie');
+  const tamanoEl  = document.getElementById('pc_tamano');
+  if(especieEl && tamanoEl){
+    const toggleDogSize = ()=> tamanoEl.disabled = (especieEl.value !== 'perro');
+    especieEl.addEventListener('change', toggleDogSize);
+    toggleDogSize();
+  }
+});
+
