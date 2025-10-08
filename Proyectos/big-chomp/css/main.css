@@ -45,29 +45,160 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .hero-fullscreen .caption-inner{max-width:840px}
 .badge-accent{background:#ffc94d;color:#2b1b00;border-radius:999px;padding:.35rem .7rem;font-weight:800}
 
-/* ========== 4) Servicios (5 rectángulos lila + 3 rectángulos de frases) ========== */
-.service-card-lilac{
-  background:var(--lilac-100);
-  border:2px solid var(--lilac-500);
-  border-radius:1rem;
-  min-height:120px;
-  box-shadow:var(--soft-shadow);
-  text-align:center;
-}
-.service-card-lilac .svc-icon{font-size:1.5rem;margin-right:.35rem;color:var(--lilac-500)}
-.service-card-lilac .svc-title{font-weight:800;letter-spacing:.2px}
+/* ===== HERO: centrar título + quitar sombreado ===== */
 
-.svc-ribbon{gap:.75rem}
-.svc-rect{
-  border-radius:1rem;padding:.65rem 1rem;font-weight:800;box-shadow:var(--soft-shadow);border:2px solid transparent;
+/* Quitar la capa de sombreado/overlay */
+.hero-fullscreen .hero-overlay{
+  display: none !important;
+  background: none !important;
 }
-.svc-rect-green{background:var(--green-rect);border-color:#59c28f}
-.svc-rect-orange{background:var(--orange-rect);border-color:#ffa45f}
-.svc-rect-purple{background:var(--purple-rect);border-color:var(--lilac-500)}
+
+/* El texto del hero SIEMPRE centrado (desktop y mobile) */
+.hero-fullscreen{
+  position: relative;
+}
+.hero-fullscreen .hero-caption{
+  position: absolute;
+  inset: 0;                     /* ocupa todo el hero */
+  display: grid;
+  place-items: center;          /* centra vertical y horizontal */
+  text-align: center;
+  padding: 0 1rem;              /* respiración lateral en mobile */
+  z-index: 1;
+}
+
+/* Ajuste para que la imagen rellene sin deformar */
+.hero-fullscreen .hero-bg{
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Si estás usando el formato 1080x1350 (4:5) en mobile, mantenemos la proporción */
+@media (max-width: 576px){
+  .hero-fullscreen{
+    aspect-ratio: 4 / 5;        /* 1080x1350 */
+    height: auto;
+    min-height: unset;
+  }
+  .hero-fullscreen .hero-bg{
+    height: 100%;               /* rellena el alto del contenedor 4:5 */
+  }
+  /* En mobile también centrado total (reconfirma por si antes lo cambiamos) */
+  .hero-fullscreen .hero-caption{
+    display: grid !important;
+    place-items: center !important;
+    padding: 0 1rem;
+  }
+}
+
+
+
+/* =========================
+/* =========================
+   SERVICIOS — responsivos, centrados y tamaño menor
+   ========================= */
+
+/* Contenedor: que nunca se pegue a los bordes en mobile */
+.service-wrap {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+/* Tamaño fijo RESPONSIVO con clamp:
+   - ancho: 160px (min) → hasta 220px (max)
+   - alto: 78px (min) → hasta 110px (max)
+   Se mantienen todos iguales y se adaptan al viewport.
+*/
+.svc-card{
+  background: var(--lilac-100);           /* lavanda suave */
+  border: 3px solid var(--lilac-500);     /* borde lavanda */
+  border-radius: 1rem;
+  box-shadow: var(--soft-shadow);
+
+  width: clamp(160px, 28vw, 220px);
+  height: clamp(78px, 10.5vw, 110px);
+
+  padding: .75rem 1rem;
+  display: flex;
+  justify-content: center;                /* centra conjunto icono+texto */
+  align-items: center;                    /* centra vertical */
+  gap: .5rem;                             /* separación icono-texto */
+  text-align: center;
+  transition: transform .2s ease-in-out;
+}
+
+.svc-card:hover{ transform: translateY(-4px); }
+
+.svc-ico{
+  font-size: 1.35rem;                     /* ligeramente menor para el nuevo tamaño */
+  color: var(--lilac-600);
+}
+
+.svc-title{
+  font-weight: 900;
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem); /* título responsivo */
+  color: var(--lilac-700);
+  line-height: 1.1;
+}
+
+/* En >= md, deja un poco más de “aire” sin crecer demasiado */
+@media (min-width: 768px){
+  .service-wrap { gap: .25rem; }          /* el gap visual lo maneja Bootstrap con .gap-3; esto es fino */
+}
+
+/* ===============================
+   3 Rectángulos de “frases clave”
+   =============================== */
+
+/* Contenedor: en >=md queremos 3 columnas iguales */
+@media (min-width: 768px){
+  .kv-badges{ grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+/* Pastillas: mismo tamaño, texto centrado en blanco */
+.kv-pill{
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 68px;               /* todas la misma altura */
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: var(--soft-shadow);
+}
+
+/* Variantes de color */
+.kv-pill.is-green{
+  background: #2fb37a;            /* puedes ajustar */
+  border: 2px solid #59c28f;
+}
+.kv-pill.is-orange{
+  background: #ff8c42;
+  border: 2px solid #ffa45f;
+}
+.kv-pill.is-purple{
+  background: #7D27F5;
+  border: 2px solid var(--lilac-500);
+}
+
+/* Texto centrado vertical/horizontal y legible */
+.kv-pill .kv-text{
+  display: inline-block;
+  color: #fff;
+  font-size: clamp(.95rem, 2vw, 1.1rem);
+  line-height: 1.2;
+}
+
+/* Si el texto ocupa dos líneas (como “48 hrs ...”), seguirá centrado */
 
 
 
 /* ========== 6) Grid pastelería y personalizador ========== */
+#packs{ scroll-margin-top: 90px; }
 .products-row{position:relative;z-index:1;}
 .product-col.active .btn-select{display:none !important;} /* ocultar botón Seleccionar al abrir */
 .pastry-card{border-radius:1rem;overflow:hidden;box-shadow:var(--soft-shadow);}
@@ -143,14 +274,16 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .btn-surprise:hover{filter:brightness(1.05)}
 
 /* ========== 9) Calculadora: botón + “ingredientes base” + efectos ========== */
+/* Botón calculadora AMARILLO */
 .btn-portion{
-  background:linear-gradient(180deg,var(--brand-600),var(--brand-500));
-  color:#fff;border:0;border-radius:999px;padding:.45rem .9rem;font-weight:800;
-  box-shadow:0 10px 22px rgba(31,111,235,.28),0 2px 0 rgba(0,0,0,.05) inset;
-  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
+  background: linear-gradient(180deg, var(--accent-yellow-300), var(--accent-yellow-500));
+  color:#2b1b00; border:0; border-radius:999px; padding:.45rem .9rem; font-weight:800;
+  box-shadow: 0 10px 22px rgba(255,196,0,.34), 0 2px 0 rgba(0,0,0,.05) inset;
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
 }
-.btn-portion:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.btn-portion:active{transform:translateY(0);box-shadow:0 6px 16px rgba(31,111,235,.24)}
+.btn-portion:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+.btn-portion:active{ transform:translateY(0); box-shadow: 0 6px 16px rgba(255,196,0,.30); }
+
 .portion-card{background:#fff9ef}
 .form-label{font-weight:700}
 #pc_base{font-size:.85rem;color:#6b7280}
@@ -444,3 +577,88 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 /*
 .footer::before, .footer::after{ content:none !important; background:none !important; }
 */
+
+
+/* =========================
+   FUENTE CHEWY — Logo + Títulos
+   ========================= */
+
+/* Aplica la fuente Chewy al logo principal */
+.brand-name {
+  font-family: 'Chewy', cursive !important;
+  letter-spacing: 0.5px;
+}
+/* Logo del navbar en azul */
+.navbar .brand-name{
+  color: var(--brand-600) !important;   /* azul */
+}
+.navbar .brand-name:hover{ filter: brightness(.95); }
+
+
+/* Títulos principales (hero, secciones, footer) */
+.title-hand,
+.section-title h1,
+.section-title h2,
+.footer .title-hand {
+  font-family: 'Chewy', cursive !important;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  color: inherit;
+}
+
+/* Ajuste opcional para que Chewy se vea más centrada verticalmente */
+.title-hand {
+  line-height: 1.1;
+}
+
+/* Mejora para responsividad del logo */
+.navbar .brand-name {
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+}
+
+.footer .brand-name {
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+}
+
+/* Badge del carrito sobre el ícono */
+.btn .cart-badge{
+  position:absolute; top:-6px; right:-4px;
+  min-width: 22px; height: 22px; border-radius: 999px;
+  background:#ff4d6d; color:#fff; font-weight:800; font-size:.8rem;
+  display:inline-grid; place-items:center; padding:0 .35rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+
+/* Botón "Agregar al carrito" con color azul brand */
+.btn-brand{
+  background: linear-gradient(180deg, var(--brand-600), var(--brand-500));
+  color:#fff; border:0; border-radius:999px; font-weight:800;
+  box-shadow: 0 10px 22px rgba(31,111,235,.28), 0 2px 0 rgba(0,0,0,.05) inset;
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btn-brand:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+.btn-brand:active{ transform:translateY(0); box-shadow: 0 6px 16px rgba(31,111,235,.24); }
+
+/* Checkboxes de colores: más visibles */
+#p1_colors .form-check-input,
+#p2_colors .form-check-input,
+#p3_colors .form-check-input{
+  width: 1.1rem; height: 1.1rem; cursor:pointer;
+}
+#p1_colors .form-check-label,
+#p2_colors .form-check-label,
+#p3_colors .form-check-label{
+  cursor:pointer; font-weight:600;
+}
+
+
+/* Centrado suave del módulo calculadora */
+.portion-card .form-label { font-weight: 600; }
+
+/* Miniatura fija que reemplaza al mini carrusel */
+.mini-thumb img.preview-cake{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit: cover;
+}
