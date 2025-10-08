@@ -1,254 +1,53 @@
- /* ----------------------------------------------------------
-   1. Importaciones para normalización y Bootstrap
------------------------------------------------------------ */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
-@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+/* -------------------------------
+   1) Variables y tipografías
+-------------------------------- */
+:root{
+  --font-primary: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+  --font-secondary: 'Montserrat', var(--font-primary);
 
-/* ----------------------------------------------------------
-   2. Variables CSS: Tipografías y Paleta de Colores
------------------------------------------------------------ */
-:root {
-    /* Tipografías */
-    --font-primary: 'Inter', sans-serif;
-    --font-secondary: 'Montserrat', sans-serif;
+  --black: #000000;
+  --dark-moss-green: #505A3C;
+  --aurora-green: #2AFFA8;
+  --lava-red: #CF1020;
+  --wine-red: #722F37;
+  --magallanes-blue: #004E89;
+  --ash-gray: #B2BEB5;
+  --bone-white: #E3DAC9;
 
-    /* Paleta de Colores */
-    --black: #000000;
-    --dark-moss-green: #505A3C;
-    --aurora-green: #2AFFA8;
-    --lava-red: #CF1020;
-    --wine-red: #722F37;
-    --magallanes-blue: #004E89;
-    --ash-gray: #B2BEB5;
-    --bone-white: E3DAC9#;
-    
-    /* Otros valores globales */
-    --header-height: 4.5rem;
-    --z-tooltip: 10;
-    --z-fixed: 100;
+  --brand-600: #198754;          /* Bootstrap success-600 */
+  --to-top-bg: #198754;
+
+  --header-height: 4.5rem;
+  --z-tooltip: 10;
+  --z-fixed: 100;
 }
 
-/* ----------------------------------------------------------
-   3. Estilos Globales y Reset Básico
------------------------------------------------------------ */
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+html{ scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
 }
 
-html {
-    scroll-behavior: smooth;
+body{
+  font-family: var(--font-primary);
+  color: var(--bone-white);
+  line-height: 1.6;
 }
+h1,h2,h3,h4,h5,h6{ font-weight: 600; margin-bottom: .5rem; }
+a{ color: var(--magallanes-blue); text-decoration: none; }
+a:hover{ color: var(--lava-red); }
 
-body {
-    font-family: var(--font-primary);
-    color: var(--black);
-    line-height: 1.5;
-}
-
-/* Encabezados */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    margin-bottom: 0.5em;
-}
-
-ul {
-    list-style: none;
-}
-
-/* Enlaces */
-a {
-    color: var(--magallanes-blue);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--lava-red);
-}
-
-/* Contenedor y secciones */
-/* .container {
-    max-width: 100%;
-    margin-inline: 1.5rem;
-} */
- .container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 3rem;   /* aire lateral */
-  padding-right: 3rem;  /* aire lateral */
-  max-width: 100%;
-}
-
-.section {
-    padding-block: 1rem;
-}
-
-.section__title {
-    font-family: var(--font-secondary);
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--dark-moss-green);
-}
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    z-index: var(--z-fixed);
-    transition: 0.5s;
-    background-color: black !important;
-
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    height: var(--header-height);
-    background-color: black !important;
-}
-
-.nav__menu {
-    position: fixed;
-    left: -100%;
-    top: 0;
-    background-color: var(--dark-moss-green);
-    width: 100%;
-    height: 100vh;
-    padding: 4rem /*arriba*/ 2.5rem /*right*/ 2rem /*buttom*/ 2.5rem /*left*/;
-    display: flex;
-    flex-direction: column;
-    transition: left 0.8s;
-}
-
-.nav__link {
-    color: var(--bone-white);
-    font-size: 1.5rem;
-    transition: 0.5s;
-}
-
-.nav__link:hover {
-    color: var(--lava-red);
-    font-size: 1.7rem;
-}
-
-/* Cambios solicitados: Botones nav-toggle y nav-close */
-.nav__toggle, .nav__close {
-    font-size: 2rem;
-    cursor: pointer;
-    color:var(--bone-white);
-    padding: 10px 15px;
-    transition: color 0.3s;
-    border: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-/* Hover en rojo */
-.nav__toggle:hover, .nav__close:hover {
-    color: var(--lava-red); /* Cambiado a rojo en hover */
-}
-
-/* Muestra el botón de cierre cuando el menú está abierto */
-.nav__menu.show-menu {
-    left: 0;
-}
-
-.btn-custom {
-    border: 2px solid var(--dark-moss-green);
-    color: var(--lava-red);
-    background-color: transparent;
-    transition: all 0.3s ease;
-}
-.btn-custom:hover {
-    color: #fff;
-    background-color: var(--lava-red);
-    border-color: var(--lava-red);
-}
-
-/* === Scroll Up Button === */
-.btn-to-top{
-  position: fixed;
-  inset: auto 1.25rem 1.25rem auto; /* bottom-right */
-  width: 44px; height: 44px;
-  display: grid; place-items: center;
-  border: none;
-  border-radius: var(--radius-full, 999px);
-  background: var(--to-top-bg);
-  color: #fff;
-  outline: 2px solid #fff;
-  box-shadow: var(--shadow-md, 0 8px 24px rgba(0,0,0,.10));
-  opacity: 0; 
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity .2s ease, transform .2s ease, visibility .2s, background-color .2s linear;
-  z-index: 1050;
-}
-[data-bs-theme="dark"] .btn-to-top{
-  background: var(--to-top-bg);
-  color: #fff;
-}
-.btn-to-top:hover{ filter: brightness(1.03); }
-.btn-to-top:focus{
-  outline: 2px solid var(--brand-600, #198754);
-  outline-offset: 2px;
-}
-.btn-to-top.is-visible{
-  opacity: 1; 
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* ----------------------------------------------------------
-   6. Footer
------------------------------------------------------------ */
-.footer {
-    padding: 1rem 0;
-    text-align: center;
-    color: var(--bone-white);
-}
-
-.footer p{
-    font-size: 10px;
-}
-
-
-
-
- /* Compensa la altura del navbar para secciones ancladas */
-  #ConsultoriaTI,
-  #disenoindustrial,
-  #formcontacto {
-    scroll-margin-top: 70px; /* ajustar según la altura real del navbar */
-  }
-
-  /* --------- Navegación fija y scroll suave --------- */
-html{ scroll-behavior:smooth; }
-
-:target{ scroll-margin-top: calc(56px + 1rem); }
+/* Compensación global de navbar fixed-top */
+body.bg-black{ padding-top: 56px; }
 @media (min-width: 992px){
-  :target{ scroll-margin-top: calc(64px + 1.25rem); }
+  body.bg-black{ padding-top: 64px; }
 }
 
-/* Compensación global de navbar fixed-top solo para esta página (bg-black del <body>) */
-body.bg-black{
-  padding-top: 56px;
-}
-@media (min-width: 992px){
-  body.bg-black{
-    padding-top: 64px;
-  }
-}
-
-/* --------- Utilidades locales --------- */
-/* Bootstrap 5 ya no trae .text-justify; la restauramos para el contenido de esta página */
+/* -------------------------------
+   2) Utilidades locales
+-------------------------------- */
 .text-justify{ text-align: justify; text-justify: inter-word; }
 
-/* Contenedor principal: mejorar legibilidad sin cambiar estructura */
-.container{
-  --section-gap: var(--space-8, 2rem);
-}
+.container{ --section-gap: 2rem; }
 .container > hr{
   opacity: 1;
   border: 0;
@@ -256,9 +55,88 @@ body.bg-black{
   background:
     linear-gradient(90deg,
       transparent 0%,
-      color-mix(in oklab, var(--brand-600, #198754) 55%, transparent) 15%,
-      color-mix(in oklab, var(--brand-600, #198754) 55%, transparent) 85%,
+      color-mix(in oklab, var(--brand-600) 55%, transparent) 15%,
+      color-mix(in oklab, var(--brand-600) 55%, transparent) 85%,
       transparent 100%
     );
-  margin-block: var(--space-6, 1.5rem);
+  margin-block: 1.5rem;
+}
+
+/* -------------------------------
+   3) Navbar / Header
+-------------------------------- */
+header .navbar{ background-color: #000 !important; }
+.navbar .nav-link{ transition: color .2s ease; }
+.navbar .nav-link:hover{ color: var(--lava-red) !important; }
+
+/* -------------------------------
+   4) Cards de secciones/proyectos
+-------------------------------- */
+.section-card{
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+.section-card .h6,
+.section-card .h5{ color: #fff; font-weight: 600; }
+.project-list li{
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  margin-bottom: .6rem;
+  transition: transform .2s ease;
+}
+.project-list li:hover{ transform: translateX(4px); }
+.project-link{ color: #fff; transition: color .2s ease, text-decoration .2s ease; }
+.project-link:hover{
+  color: var(--brand-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* -------------------------------
+   5) Botón Scroll Up
+-------------------------------- */
+.btn-to-top{
+  position: fixed;
+  inset: auto 1.25rem 1.25rem auto; /* bottom-right */
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: none;
+  border-radius: 999px;
+  background: var(--to-top-bg);
+  color: #fff;
+  outline: 2px solid #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.10);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s, background-color .2s linear;
+  z-index: 1050;
+}
+.btn-to-top:hover{ filter: brightness(1.05); }
+.btn-to-top:focus{
+  outline: 2px solid var(--brand-600);
+  outline-offset: 2px;
+}
+.btn-to-top.is-visible{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* -------------------------------
+   6) Footer
+-------------------------------- */
+.footer{ padding: 1rem 0; text-align: center; color: var(--bone-white); }
+.footer p{ font-size: 10px; }
+
+/* -------------------------------
+   7) Anclas compensadas por navbar
+-------------------------------- */
+#ConsultoriaTI, #disenoindustrial, #formcontacto{ scroll-margin-top: 70px; }
+:target{ scroll-margin-top: calc(56px + 1rem); }
+@media (min-width: 992px){
+  :target{ scroll-margin-top: calc(64px + 1.25rem); }
 }
