@@ -1,0 +1,321 @@
+/* ----------------------------------------------------------
+   1. Importaciones para normalización y Bootstrap
+----------------------------------------------------------- */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+
+/* ----------------------------------------------------------
+   2. Variables CSS: Tipografías y Paleta de Colores
+----------------------------------------------------------- */
+:root {
+    /* Tipografías */
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+
+    /* Paleta de Colores */
+    --black: #000000;
+    --dark-moss-green: #505A3C;
+    --aurora-green: #2AFFA8;
+    --lava-red: #CF1020;
+    --wine-red: #722F37;
+    --magallanes-blue: #004E89;
+    --ash-gray: #B2BEB5;
+    --bone-white: #E3DAC9;
+    
+    /* Otros valores globales */
+    --header-height: 4.5rem;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+/* ----------------------------------------------------------
+   3. Estilos Globales y Reset Básico
+----------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--black);
+    line-height: 1.5;
+}
+
+/* Encabezados */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Enlaces */
+a {
+    color: var(--magallanes-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--lava-red);
+}
+
+/* Contenedor y secciones */
+.container {
+    max-width: 100%;
+    margin-inline: 1.5rem;
+}
+
+.section {
+    padding-block: 1rem;
+}
+
+/* ----------------------------------------------------------
+   4. Navegación y Header
+----------------------------------------------------------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    z-index: var(--z-fixed);
+    transition: 0.5s;
+    background-color: black !important;
+
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    height: var(--header-height);
+    background-color: black !important;
+}
+
+.nav__menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    background-color: var(--dark-moss-green);
+    width: 100%;
+    height: 100vh;
+    padding: 4rem /*arriba*/ 2.5rem /*right*/ 2rem /*buttom*/ 2.5rem /*left*/;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.8s;
+}
+
+.nav__link {
+    color: var(--bone-white);
+    font-size: 1.5rem;
+    transition: 0.5s;
+}
+
+.nav__link:hover {
+    color: var(--lava-red);
+    font-size: 1.7rem;
+}
+
+/* Cambios solicitados: Botones nav-toggle y nav-close */
+.nav__toggle, .nav__close {
+    font-size: 2rem;
+    cursor: pointer;
+    color:var(--bone-white);
+    padding: 10px 15px;
+    transition: color 0.3s;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover en rojo */
+.nav__toggle:hover, .nav__close:hover {
+    color: var(--lava-red); /* Cambiado a rojo en hover */
+}
+
+/* Muestra el botón de cierre cuando el menú está abierto */
+.nav__menu.show-menu {
+    left: 0;
+}
+
+.btn-custom {
+    border: 2px solid var(--dark-moss-green);
+    color: var(--lava-red);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-custom:hover {
+    color: #fff;
+    background-color: var(--lava-red);
+    border-color: var(--lava-red);
+}
+.btn-outline-light:hover {
+  background-color: #505A3C !important;
+  color: white !important;
+  border-color: #505A3C !important;
+}
+
+/* ----------------------------------------------------------
+   5. Botón Scroll Up
+----------------------------------------------------------- */
+.scrollup {
+    position: fixed;
+    right: 2rem;
+    bottom: -50%;
+    background-color: var(--dark-moss-green);
+    color: var(--bone-white);
+    padding: 7px;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    z-index: var(--z-tooltip);
+    transition: bottom 0.4s, transform 0.4s;
+}
+
+.scrollup:hover {
+    transform: translateY(-1rem);
+    color: var(--lava-red);
+}
+
+.show-scroll {
+    bottom: 2rem;
+}
+
+/* ----------------------------------------------------------
+   6. Footer
+----------------------------------------------------------- */
+.footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--bone-white);
+}
+
+.footer p{
+    font-size: 10px;
+}
+
+/* ----------------------------------------------------------
+   7. Media Queries para Responsividad
+----------------------------------------------------------- */
+@media (min-width: 1024px) {
+    body {
+        background-color: var(--black)
+    }
+}
+
+/* @media (min-width: 600px) and (max-width: 1366px)
+    body {
+        background-color: var(--black)
+      }   */
+
+
+@media (max-width: 480px) {
+    body {
+        background-color: var(--black)
+    }
+}
+
+@media (min-width: 481px) and (max-width: 820px) {
+    body {
+        background-color: var(--black)
+    }
+}
+
+/* Expanding Cards - Estilos Completos */
+.expanding-cards {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+}
+
+.expanding-cards .panel {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 75vh;
+  border-radius: 24px;
+  color: white;
+  cursor: pointer;
+  flex: 0.5;
+  position: relative;
+  transition: all 0.7s ease-in-out;
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+  padding: 1.5rem;
+  min-width: 100px;
+  scroll-snap-align: center;
+  background-color: #1a1a1a;
+}
+
+.expanding-cards .panel h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in 0.4s;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+}
+
+.expanding-cards .panel.active {
+  flex: 5;
+}
+
+.expanding-cards .panel.active h3 {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .expanding-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .expanding-cards .panel {
+    min-width: unset;
+    width: 100%;
+    height: 8vh;
+    flex: unset;
+    transition: height 0.6s ease;
+  }
+
+  .expanding-cards .panel.active {
+    height: 60vh;
+  }
+
+  /* Encabezado principal */
+  .main .row.align-items-center.mb-5 {
+    margin-top: 2rem;
+  }
+
+  .main .col-md-6 img.img-fluid {
+    display: block;
+    width: 100vw;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .main .col-md-6.text-center {
+    position: relative;
+  }
+
+  .main .col-md-6.text-center .btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 10;
+  }
+}
+
