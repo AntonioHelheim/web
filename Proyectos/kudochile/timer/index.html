@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+ 
+  <link rel="shortcut icon" href="../images/favicon-32x32.png" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+  <link rel="manifest" href="../images/site.webmanifest">
+
+  <!--<link rel="stylesheet" href="./css/normalize.css">-->
+  <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--Iconos-->
+
+  <meta name="theme-color" content="#2091F9">
+
+  <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano" />
+  <meta name="copyright" content="Kudo Chile" />
+  <meta name="robots" content="index"/>
+  <title>.:: Kudo Chile ::.</title>
+  <meta name="title" content="Kudo Chile" />
+  <meta name="description" content="Pagina web de la federacion Chilena de Kudo" />
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="www.KudoChile.cl">
+  <meta property="og:title" content="KudoChile">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tablero Kudo – Competición (Escritorio)</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Bootstrap 5 (CSS) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- (Opcional) Bootstrap Icons si quieres que el icono de info se vea -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Estilos propios -->
+<link rel="stylesheet" href="./css/styles.css?v=2025-10-02-2208">
+</head>
+
+<body>
+  <div class="container-fluid px-3 py-3 py-lg-4 d-flex justify-content-center">
+    <div class="board w-100">
+      <!-- BARRA SUPERIOR -->
+      <div class="row g-3 align-items-stretch mb-3">
+  <div class="col-12">
+    <!-- CRONÓMETRO PRINCIPAL (arriba, solo) -->
+
+<div class="d-flex justify-content-center">
+  <div class="card shadow-sm border-0" style="background:rgba(255,255,255,.03);" aria-label="Cronómetro principal">
+    <div class="card-body d-flex flex-column align-items-center gap-3">
+      <div class="text-uppercase small fw-bold opacity-75"
+           data-bs-toggle="tooltip"
+           data-bs-title="Este cronómetro sonará 1 vez cuando queden 30 segundos y volverá a sonar al terminar.">
+        Tiempo de combate
+        <i class="bi bi-info-circle ms-1"></i>
+      </div>
+
+      <div class="main-timer" id="mainClock">03:00</div>
+
+      <!-- Barra de progreso cronómetro principal -->
+      <div class="progress w-100" style="min-width:260px; max-width:560px;">
+        <div class="progress-bar bg-success" id="mainBar" role="progressbar"
+             aria-valuemin="0" aria-valuemax="180" aria-valuenow="180" style="width: 100%;"></div>
+      </div>
+
+      <!-- Botones estilo 30s: Iniciar / Reset / Stop -->
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-success fw-bold" id="btnMainStart" title="Iniciar 3:00">Iniciar</button>
+        <button class="btn btn-outline-secondary fw-bold" id="btnMainReset" title="Resetear a 3:00 (R)">Reset</button>
+        <button class="btn btn-outline-danger fw-bold" id="btnMainStop" title="Detener">Stop</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- CRONOS DE 30s (abajo, en línea) -->
+    <div class="row g-3 mt-2 justify-content-center">
+      <!-- Suelo 1 -->
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="thirty-wrap d-flex align-items-center gap-3" aria-label="Cuenta de 30 segundos Suelo 1" data-bs-toggle="tooltip"
+     data-bs-title="Este cronómetro de suelo tiene un único sonido al vencerse los 30 segundos."> 
+          <div class="text-nowrap fw-bold small opacity-75">Suelo 1</div>
+          <div class="sub-timer" id="t30Left">00:30</div>
+          <div class="progress flex-grow-1" style="min-width:160px;">
+            <div class="progress-bar bg-warning" id="t30LeftBar" role="progressbar"
+                 aria-valuemin="0" aria-valuemax="30" aria-valuenow="30" style="width: 100%;"></div>
+          </div>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-warning" id="btnT30LeftStart" title="Iniciar 30s (1)" aria-label="Iniciar 30 segundos Suelo 1">Iniciar</button>
+            <button class="btn btn-outline-secondary" id="btnT30LeftReset" title="Resetear" aria-label="Resetear 30 segundos Suelo 1">Reset</button>
+            <button class="btn btn-outline-danger" id="btnT30LeftStop" title="Detener" aria-label="Detener 30 segundos Suelo 1">Stop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suelo 2 -->
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="thirty-wrap d-flex align-items-center gap-3" aria-label="Cuenta de 30 segundos Suelo 2" data-bs-toggle="tooltip"
+     data-bs-title="Este cronómetro de suelo tiene un único sonido al vencerse los 30 segundos.">
+          <div class="text-nowrap fw-bold small opacity-75">Suelo 2</div>
+          <div class="sub-timer" id="t30Right">00:30</div>
+          <div class="progress flex-grow-1" style="min-width:160px;">
+            <div class="progress-bar bg-info" id="t30RightBar" role="progressbar"
+                 aria-valuemin="0" aria-valuemax="30" aria-valuenow="30" style="width: 100%;"></div>
+          </div>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-info" id="btnT30RightStart" title="Iniciar 30s (2)" aria-label="Iniciar 30 segundos Suelo 2">Iniciar</button>
+            <button class="btn btn-outline-secondary" id="btnT30RightReset" title="Resetear" aria-label="Resetear 30 segundos Suelo 2">Reset</button>
+            <button class="btn btn-outline-danger" id="btnT30RightStop" title="Detener" aria-label="Detener 30 segundos Suelo 2">Stop</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <!-- ZONA PRINCIPAL -->
+      <div class="row g-3">
+        <!-- BLANCA -->
+        <div class="col-12 col-lg-6">
+          <div class="corner-card corner-white h-100">
+            <div class="corner-header d-flex align-items-center justify-content-between">
+              <span>Esquina Blanca</span>
+              <span class="pill text-dark bg-white">Faltas: <span id="foulsWhite" class="fouls ms-1">0</span></span>
+            </div>
+            <div class="p-3 p-lg-4">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div>
+                  <div class="text-uppercase small fw-bold opacity-75">Puntaje</div>
+                  <div class="score text-white" id="scoreWhite">0.00</div>
+                </div>
+                <div class="ctrl d-grid gap-2" id="controlsWhite">
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="100">Koka (+1)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="-100">Koka (-1)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="200">Yuko (+2)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="-200">Yuko (-2)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="400">Wazari (+4)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="-400">Wazari (-4)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="800">Ippon (+8)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="white" data-type="score" data-delta="-800">Ippon (-8)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-danger btn-wide" data-side="white" data-type="foul" data-delta="1">+ Falta</button>
+                    <button class="btn btn-outline-secondary btn-wide" data-side="white" data-type="foul" data-delta="-1">− Falta</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-warning" id="resetWhite">Reset Blanca</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AZUL -->
+        <div class="col-12 col-lg-6">
+          <div class="corner-card corner-blue h-100">
+            <div class="corner-header d-flex align-items-center justify-content-between">
+              <span>Esquina Azul</span>
+              <span class="pill bg-white text-dark">Faltas: <span id="foulsBlue" class="fouls ms-1">0</span></span>
+            </div>
+            <div class="p-3 p-lg-4">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div>
+                  <div class="text-uppercase small fw-bold opacity-75">Puntaje</div>
+                  <div class="score text-white" id="scoreBlue">0.00</div>
+                </div>
+                <div class="ctrl d-grid gap-2" id="controlsBlue">
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="100">Koka (+1)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="-100">Koka (-1)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="200">Yuko (+2)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="-200">Yuko (-2)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="400">Wazari (+4)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="-400">Wazari (-4)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="800">Ippon (+8)</button>
+                    <button class="btn btn-outline-light btn-wide" data-side="blue" data-type="score" data-delta="-800">Ippon (-8)</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-danger btn-wide" data-side="blue" data-type="foul" data-delta="1">+ Falta</button>
+                    <button class="btn btn-outline-secondary btn-wide" data-side="blue" data-type="foul" data-delta="-1">− Falta</button>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-warning" id="resetBlue">Reset Azul</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLES GENERALES -->
+      <div class="row mt-3">
+        <div class="col-12 d-flex flex-wrap gap-2 justify-content-center">
+          <button class="btn btn-outline-light" id="btnAllReset">Resetear Todo</button>
+          <button class="btn btn-outline-success" id="btnFullscreen">Pantalla Completa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--==================== FOOTER ====================-->
+<footer class="footer bg-dark text-white py-4">
+  <div class="container">
+    <hr class="border-secondary">
+
+    <div class="text-center small">
+      <h5 class="mb-1">
+        &copy; 
+        <a href="https://helheim.cl" target="_blank" class="text-white text-decoration-none fw-semibold">
+          Helheim
+        </a> 
+        - 🏢 Fundada en 2023 en Tierra del Fuego, Porvenir
+      </h5>
+      
+      <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA. RUT: 77.742.346-0</p>
+      
+      <p class="mb-1">
+        Web desarrollada por 
+        <a href="https://www.helheim.cl/section/Portfolio-Juan-Antonio-Concha-Loyola/index.html" target="_blank" class="text-white text-decoration-none">
+          JACL
+        </a> 
+        y 
+        <a href="https://helheim.cl/section/Portfolio-Maite-Lazcano/index.html" target="_blank" class="text-white text-decoration-none">
+          MCLG
+        </a>
+      </p>
+      
+      <p class="mb-0">Últ. act. octubre 2025</p>
+    </div>
+  </div>
+</footer>
+
+<!--==================== END FOOTER ====================-->
+
+  <!-- Bootstrap 5 (JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Lógica propia -->
+  <script src="./js/app.js?v=2025-10-02-2208"></script>
+
+
+</body>
+</html>

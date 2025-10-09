@@ -1,0 +1,167 @@
+:root{
+  --blue:#0d6efd;
+  --white:#f8f9fa;
+  --dark:#0b0f14;
+  --green:#20c997;
+  --danger:#dc3545;
+  --warning:#ffc107;
+}
+
+body{
+  background: radial-gradient(1200px 600px at 50% -200px, #1a2330 0%, #0b0f14 60%, #06090d 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.board{ max-width: 1500px; }  /* o directamente eliminar la restricción */
+
+
+/* Cronómetros */
+.main-timer{
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .5px;
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1;
+}
+
+.sub-timer{
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 32px);
+}
+
+/* Paneles competidores */
+.corner-card{
+  border-radius: 18px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(4px);
+}
+
+.corner-header{
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  padding: .75rem 1rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.corner-white .corner-header{
+  background: linear-gradient(180deg, #ffffff, #e9ecef);
+  color:#111;
+}
+
+.corner-blue .corner-header{
+  background: linear-gradient(180deg, var(--blue), #0a58ca);
+  color:#fff;
+}
+
+.score{
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: clamp(44px, 6vw, 72px);
+  line-height: 1;
+}
+
+.fouls{
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: clamp(22px, 4vw, 36px);
+  line-height: 1;
+}
+
+.pill{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  padding: .35rem .6rem;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.btn-wide{ min-width: 64px; font-weight: 700; }
+
+/* 30 segundos */
+.thirty-wrap{
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: .5rem .75rem;
+}
+
+.progress{ height: 10px; background: rgba(255,255,255,.08); }
+.progress-bar{ transition: width .15s linear; }
+
+/* Botones */
+.ctrl .btn{ padding: .55rem .7rem; font-weight: 700; }
+
+/* === Correcciones de responsividad para tablets y teléfonos grandes === */
+
+/* Permite que los grupos de botones (principal y 30s) salten de línea si no caben */
+.btn-group {
+  flex-wrap: wrap;
+}
+.btn-group > .btn {
+  flex: 1 1 auto;           /* que ocupen ancho disponible sin romper */
+  min-width: 100px;         /* evita botones ultra-estrechos */
+}
+
+/* Las barras de progreso no deben forzar ancho mínimo que rompa el layout */
+.progress {
+  min-width: 0;
+}
+.thirty-wrap .progress,
+.card .progress {
+  flex: 1 1 auto;           /* que crezcan y se encojan con el contenedor */
+}
+
+/* Ajustes de tipografías y paddings en tablets (iPad / tel. grandes en horizontal) */
+@media (max-width: 1024px) and (min-width: 576px) {
+  .main-timer { font-size: clamp(36px, 6vw, 64px); }
+  .sub-timer  { font-size: clamp(20px, 3.5vw, 28px); }
+  .score      { font-size: clamp(36px, 5.5vw, 56px); }
+  .fouls      { font-size: clamp(20px, 3.5vw, 28px); }
+
+  .thirty-wrap { padding: .45rem .6rem; }
+  .ctrl .btn   { padding: .5rem .6rem; }   /* botones un poco más compactos */
+
+  /* Botoneras de competidor: en pantallas medianas, que no desborden */
+  .ctrl .btn { min-width: 88px; }
+}
+
+/* Telefónos (ya te funcionaba, lo dejamos compacto y robusto) */
+@media (max-width: 575.98px) {
+  .main-timer { font-size: clamp(32px, 9vw, 56px); }
+  .score      { font-size: clamp(28px, 9vw, 48px); }
+  .fouls      { font-size: clamp(18px, 6vw, 28px); }
+
+  .thirty-wrap {
+    gap: .5rem;
+    padding: .4rem .5rem;
+  }
+
+  /* En móviles muy estrechos, los controles tienden a dos columnas de forma natural */
+  .ctrl .btn { min-width: 44%; }
+}
+
+/* Escalado general SOLO para pantallas muy grandes (evita borrosidad en iPad/iPhone) */
+@media (min-width: 1400px) {
+  .board {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+/* Quitamos el scale en >=992 de la regla anterior para que en iPad landscape (1024px) no se aplique */
+
+
+.footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--bone-white);
+}
+
+.footer p{
+    font-size: 10px;
+}
