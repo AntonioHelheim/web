@@ -1,0 +1,51 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" href="./styles/styles.css" />
+<script src="./scripts/jquery.js"></script>
+<script src="./scripts/keyboard.js" ></script>
+<script src="./scripts/locations.js"> </script>
+
+</head>
+
+<body>
+  <main class="game-layout">
+    <!-- Marco visual que centra el juego -->
+    <section class="game-viewport" aria-label="Game viewport">
+      <!-- 👇 CONTENIDO ORIGINAL, MISMO ORDEN E IDs -->
+      <div id='screen'>
+        <div id='borderTop'></div>
+        <div id='borderLeft'></div>
+        <div id='borderRight'></div>
+        <div id='borderDown'></div>
+
+        <div id='up'></div>
+        <div id='down'></div>
+
+        <div id='blackScreen'></div>
+
+        <div id='location'>
+          <div id='player'></div>
+        </div>
+
+        <audio src="" autostart=false width=1 height=1 id="soundOfGame"></audio>
+      </div>
+      <!-- ☝️ CONTENIDO ORIGINAL -->
+    </section>
+
+    <!-- HUD centrado y legible -->
+    <section class="hud" aria-live="polite">
+      <p>Location: <span id='locationOfPlayer'></span></p>
+      <p>Position: <span id='positionOfPlayer'></span></p>
+    </section>
+  </main>
+</body>
+
+<script>
+
+loadLocation("locations/route_1.txt",true);
+
+</script>
+
+</html>
