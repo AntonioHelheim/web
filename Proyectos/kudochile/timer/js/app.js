@@ -134,9 +134,13 @@ const foulEls = {
   blue:  document.getElementById('foulsBlue')
 };
 function renderSide(side){
-  scoreEls[side].textContent = (state[side].scoreCents/100).toFixed(2);
+  // Mostrar puntaje entero (sin decimales)
+  const points = Math.round(state[side].scoreCents / 100);
+  scoreEls[side].textContent = String(points);
+
   foulEls[side].textContent  = String(state[side].fouls);
 }
+
 function applyDelta(side, type, delta){
   if (type === 'score'){
     state[side].scoreCents = clamp(state[side].scoreCents + delta, 0, 99900);
