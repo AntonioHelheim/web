@@ -6,7 +6,7 @@
 :root{
   --ink:#1b1b1b;
 
-  --brand-600:#1f6feb;      /* botones calc */
+  --brand-600:#1f6feb;
   --brand-500:#569afb;
 
   --lilac-100:#faf5ff;
@@ -28,217 +28,84 @@ html,body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif
 img{max-width:100%;height:auto;}
 a{text-decoration:none} a:hover{text-decoration:underline}
 
-/* ========== 2) Navbar y stacking ========== */
+/* ========== 2) Navbar y stacking base ========== */
 .navbar{position:sticky;top:0;z-index:1080;background:#fff;}
 .navbar .brand-mark{height:32px;width:auto}
 
 /* ========== 3) Hero fullscreen (texto SIEMPRE al frente) ========== */
 .hero-fullscreen{min-height:80vh;position:relative;isolation:isolate;}
 .hero-fullscreen .hero-bg{height:100vh;object-fit:cover;}
-.hero-fullscreen .hero-overlay{
-  position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45));
-  z-index:0;
-}
-.hero-fullscreen .hero-caption{
-  position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45);
-}
+.hero-fullscreen .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45));z-index:0;}
+.hero-fullscreen .hero-caption{position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45);}
 .hero-fullscreen .caption-inner{max-width:840px}
 .badge-accent{background:#ffc94d;color:#2b1b00;border-radius:999px;padding:.35rem .7rem;font-weight:800}
 
-/* ===== HERO: centrar título + quitar sombreado ===== */
-
-/* Quitar la capa de sombreado/overlay */
-.hero-fullscreen .hero-overlay{
-  display: none !important;
-  background: none !important;
-}
-
-/* El texto del hero SIEMPRE centrado (desktop y mobile) */
-.hero-fullscreen{
-  position: relative;
-}
-.hero-fullscreen .hero-caption{
-  position: absolute;
-  inset: 0;                     /* ocupa todo el hero */
-  display: grid;
-  place-items: center;          /* centra vertical y horizontal */
-  text-align: center;
-  padding: 0 1rem;              /* respiración lateral en mobile */
-  z-index: 1;
-}
-
-/* Ajuste para que la imagen rellene sin deformar */
-.hero-fullscreen .hero-bg{
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Si estás usando el formato 1080x1350 (4:5) en mobile, mantenemos la proporción */
+/* El overlay del hero fuera + centrado total */
+.hero-fullscreen .hero-overlay{display:none!important;background:none!important;}
+.hero-fullscreen{position:relative;}
+.hero-fullscreen .hero-caption{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 1rem;z-index:1;}
+.hero-fullscreen .hero-bg{width:100%;height:100vh;object-fit:cover;object-position:center;}
 @media (max-width: 576px){
-  .hero-fullscreen{
-    aspect-ratio: 4 / 5;        /* 1080x1350 */
-    height: auto;
-    min-height: unset;
-  }
-  .hero-fullscreen .hero-bg{
-    height: 100%;               /* rellena el alto del contenedor 4:5 */
-  }
-  /* En mobile también centrado total (reconfirma por si antes lo cambiamos) */
-  .hero-fullscreen .hero-caption{
-    display: grid !important;
-    place-items: center !important;
-    padding: 0 1rem;
-  }
+  .hero-fullscreen{aspect-ratio:4/5;height:auto;min-height:unset;}
+  .hero-fullscreen .hero-bg{height:100%;}
+  .hero-fullscreen .hero-caption{display:grid!important;place-items:center!important;padding:0 1rem;}
 }
 
-
-
 /* =========================
-/* =========================
-   SERVICIOS — responsivos, centrados y tamaño menor
+   SERVICIOS
    ========================= */
-
-/* Contenedor: que nunca se pegue a los bordes en mobile */
-.service-wrap {
-  padding-left: .5rem;
-  padding-right: .5rem;
-}
-
-/* Tamaño fijo RESPONSIVO con clamp:
-   - ancho: 160px (min) → hasta 220px (max)
-   - alto: 78px (min) → hasta 110px (max)
-   Se mantienen todos iguales y se adaptan al viewport.
-*/
+.service-wrap{padding-left:.5rem;padding-right:.5rem;}
 .svc-card{
-  background: var(--lilac-100);           /* lavanda suave */
-  border: 3px solid var(--lilac-500);     /* borde lavanda */
-  border-radius: 1rem;
-  box-shadow: var(--soft-shadow);
-
-  width: clamp(160px, 28vw, 220px);
-  height: clamp(78px, 10.5vw, 110px);
-
-  padding: .75rem 1rem;
-  display: flex;
-  justify-content: center;                /* centra conjunto icono+texto */
-  align-items: center;                    /* centra vertical */
-  gap: .5rem;                             /* separación icono-texto */
-  text-align: center;
-  transition: transform .2s ease-in-out;
+  background:#fff;border:2px solid #d6d6d6;border-radius:3rem;
+  box-shadow:5px 5px 5px rgba(0,0,0,.25);
+  width:clamp(160px,28vw,220px);height:clamp(78px,10.5vw,110px);
+  padding:.5rem 1rem;display:flex;justify-content:center;align-items:center;gap:.4rem;text-align:center;
+  transition:transform .2s ease-in-out;
 }
-
-.svc-card:hover{ transform: translateY(-4px); }
-
-.svc-ico{
-  font-size: 1.35rem;                     /* ligeramente menor para el nuevo tamaño */
-  color: var(--lilac-600);
-}
-
-.svc-title{
-  font-weight: 900;
-  font-size: clamp(1.1rem, 1.9vw, 1.4rem); /* título responsivo */
-  color: var(--lilac-700);
-  line-height: 1.1;
-}
-
-/* En >= md, deja un poco más de “aire” sin crecer demasiado */
-@media (min-width: 768px){
-  .service-wrap { gap: .25rem; }          /* el gap visual lo maneja Bootstrap con .gap-3; esto es fino */
-}
+.svc-card:hover{transform:translateY(-4px);}
+.svc-ico{font-size:1.35rem;color:var(--lilac-600);}
+.svc-title{font-weight:900;font-size:clamp(1.1rem,1.9vw,1.4rem);line-height:1.1;}
+@media (min-width:768px){.service-wrap{gap:.25rem;}}
 
 /* ===============================
-   3 Rectángulos de “frases clave”
+   key value rectángulos
    =============================== */
-
-/* Contenedor: en >=md queremos 3 columnas iguales */
-@media (min-width: 768px){
-  .kv-badges{ grid-template-columns: repeat(3, 1fr) !important; }
-}
-
-/* Pastillas: mismo tamaño, texto centrado en blanco */
-.kv-pill{
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 68px;               /* todas la misma altura */
-  border-radius: 1rem;
-  padding: 1rem;
-  color: #fff;
-  font-weight: 800;
-  text-align: center;
-  box-shadow: var(--soft-shadow);
-}
-
-/* Variantes de color */
-.kv-pill.is-green{
-  background: #2fb37a;            /* puedes ajustar */
-  border: 2px solid #59c28f;
-}
-.kv-pill.is-orange{
-  background: #ff8c42;
-  border: 2px solid #ffa45f;
-}
-.kv-pill.is-purple{
-  background: #7D27F5;
-  border: 2px solid var(--lilac-500);
-}
-
-/* Texto centrado vertical/horizontal y legible */
-.kv-pill .kv-text{
-  display: inline-block;
-  color: #fff;
-  font-size: clamp(.95rem, 2vw, 1.1rem);
-  line-height: 1.2;
-}
-
-/* Si el texto ocupa dos líneas (como “48 hrs ...”), seguirá centrado */
-
-
+@media (min-width:768px){.kv-badges{grid-template-columns:repeat(3,1fr)!important;}}
+.kv-pill{display:grid;place-items:center;min-height:68px;border-radius:1rem;padding:1rem;color:#fff;font-weight:800;text-align:center;box-shadow:var(--soft-shadow);}
+.kv-pill.is-green{background:#2fb37a;border:2px solid #59c28f;}
+.kv-pill.is-orange{background:#ff8c42;border:2px solid #ffa45f;}
+.kv-pill.is-purple{background:#7D27F5;border:2px solid var(--lilac-500);}
+.kv-pill .kv-text{font-size:clamp(.95rem,2vw,1.1rem);line-height:1.2}
 
 /* ========== 6) Grid pastelería y personalizador ========== */
-#packs{ scroll-margin-top: 90px; }
+#packs{scroll-margin-top:90px;}
 .products-row{position:relative;z-index:1;}
-.product-col.active .btn-select{display:none !important;} /* ocultar botón Seleccionar al abrir */
+.product-col.active .btn-select{display:none!important;}
 .pastry-card{border-radius:1rem;overflow:hidden;box-shadow:var(--soft-shadow);}
 .pastry-personalizer{background:#fff;border:1px solid #eef1f4;border-radius:1rem;padding:1rem}
-
-/* Reflujo cuando hay una abierta (sin usar order) */
 @media(min-width:992px){
   .products-row.personalizing .product-col.active{flex:0 0 100%;max-width:100%}
-  .products-row.personalizing .product-col:not(.active){flex:0 0 25%;max-width:25%;transform:scale(.98);opacity:.96}
+  .products-row.personalizing .product-col:not(.active){flex:0 0 33.333%;max-width:33.333%;transform:scale(.98);opacity:.96}
 }
 @media(max-width:991.98px){
   .products-row.personalizing .product-col.active{flex:0 0 100%;max-width:100%}
   .products-row.personalizing .product-col:not(.active){flex:0 0 50%;max-width:50%}
 }
+/* Oculta la imagen cuadrada del card cuando el panel está abierto */
+.products-row.personalizing .product-col.active .pastry-imgwrap{display:none!important}
 
-/* Oculta la imagen cuadrada del card cuando el panel está abierto (evita “pantalla completa”) */
-.products-row.personalizing .product-col.active .pastry-imgwrap{display:none !important}
+/* Quitar sombras a botones Agregar */
+.products-row .btn-brand,
+#best .btn-brand,
+.best-grid .btn-brand{box-shadow:none!important;filter:none!important;}
+.products-row .btn-brand:hover,
+.products-row .btn-brand:active,
+#best .btn-brand:hover,
+#best .btn-brand:active,
+.best-grid .btn-brand:hover,
+.best-grid .btn-brand:active{box-shadow:none!important;transform:none!important;}
 
-/* ========== 7) Mini-carrusel 250x250 centrado (mobile perfecto) ========== */
-.mini-carousel{width:100%;display:grid;place-items:center}
-.mini-carousel .carousel-inner{display:grid;place-items:center;min-height:260px}
-.mini-carousel .carousel-item{display:flex;justify-content:center;align-items:center}
-.preview-cake{width:250px;height:250px;object-fit:contain;border-radius:1rem;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.04)}
-.mini-carousel.locked .carousel-control-prev,
-.mini-carousel.locked .carousel-control-next{display:none}
-
-/* variantes visuales del carrusel (opcional) */
-.mini-carousel.variant-classic .preview-cake{box-shadow:0 0 0 6px #fff,0 0 0 10px #eee,0 10px 24px rgba(0,0,0,.08)}
-.mini-carousel.variant-flowers{position:relative}
-.mini-carousel.variant-flowers::after{
-  content:"";position:absolute;inset:12px;border-radius:1rem;pointer-events:none;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(125,39,245,.18) 4px, transparent 5px),
-    radial-gradient(circle at 70% 60%, rgba(255,216,77,.22) 4px, transparent 5px),
-    radial-gradient(circle at 40% 80%, rgba(31,111,235,.18) 4px, transparent 5px),
-    radial-gradient(circle at 80% 25%, rgba(254,83,123,.18) 4px, transparent 5px);
-}
-.mini-carousel.variant-minimal .preview-cake{filter:saturate(.9) contrast(1.05);box-shadow:0 0 0 4px #eaeaea inset, 0 8px 20px rgba(0,0,0,.06)}
-
-/* ========== 8) Botones (tortas, grid y estilos) ========== */
+/* ========== Botones select ========== */
 .btn-select{
   background:linear-gradient(180deg,var(--accent-yellow-300),var(--accent-yellow-500));
   color:var(--ink);border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;
@@ -249,416 +116,586 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .btn-select:active{transform:translateY(0);box-shadow:0 6px 16px rgba(255,196,0,.34)}
 .btn-select.btn-sm{padding:.45rem .9rem;font-size:.875rem}
 
-.btn-lilac{
-  color:#fff;background:linear-gradient(180deg,var(--lilac-100),var(--lilac-500));
-  border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;padding:.45rem .9rem;
-  box-shadow:0 10px 22px rgba(125,39,245,.28),0 2px 0 rgba(0,0,0,.05) inset;
-  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
-}
-.btn-lilac:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.btn-lilac:active{transform:translateY(0);box-shadow:0 6px 16px rgba(125,39,245,.24)}
-.btn-lilac.btn-sm{font-size:.875rem}
-
-/* Botones de estilos: TODOS iguales (círculos) + Sorpréndeme icon-only */
+/* Estilos / sorpéndeme (si se usan) */
 .design-icons{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
 .design-icons input[type="radio"]{position:absolute;left:-9999px}
-.style-circle{
-  width:56px;height:56px;display:inline-grid;place-items:center;border-radius:50%;
-  border:2px solid #e6e6e6;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);
-  cursor:pointer;transition:transform .08s ease,border-color .2s ease;
-  font-size:1.35rem;color:#444;
-}
+.style-circle{width:56px;height:56px;display:inline-grid;place-items:center;border-radius:50%;border:2px solid #e6e6e6;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);cursor:pointer;transition:transform .08s ease,border-color .2s ease;font-size:1.35rem;color:#444;}
 .style-circle:hover{transform:translateY(-1px)}
 .design-icons input:checked + .style-circle{border-color:var(--accent-yellow-500);box-shadow:0 0 0 .2rem rgba(255,211,77,.35)}
 .btn-surprise{width:56px;height:56px;border-radius:50%;border:2px dashed var(--accent-yellow-500);background:#fff;color:#7a4d00;display:inline-grid;place-items:center}
 .btn-surprise:hover{filter:brightness(1.05)}
 
-/* ========== 9) Calculadora: botón + “ingredientes base” + efectos ========== */
-/* Botón calculadora AMARILLO */
+/* ========== Calculadora (si se usa en otra sección) ========== */
 .btn-portion{
-  background: linear-gradient(180deg, var(--accent-yellow-300), var(--accent-yellow-500));
-  color:#2b1b00; border:0; border-radius:999px; padding:.45rem .9rem; font-weight:800;
-  box-shadow: 0 10px 22px rgba(255,196,0,.34), 0 2px 0 rgba(0,0,0,.05) inset;
-  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  background:linear-gradient(180deg,var(--accent-yellow-300),var(--accent-yellow-500));
+  color:#2b1b00;border:0;border-radius:999px;padding:.45rem .9rem;font-weight:800;
+  box-shadow:0 10px 22px rgba(255,196,0,.34),0 2px 0 rgba(0,0,0,.05) inset;
+  transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;
 }
-.btn-portion:hover{ transform:translateY(-1px); filter:brightness(1.03); }
-.btn-portion:active{ transform:translateY(0); box-shadow: 0 6px 16px rgba(255,196,0,.30); }
-
+.btn-portion:hover{transform:translateY(-1px);filter:brightness(1.03);}
+.btn-portion:active{transform:translateY(0);box-shadow:0 6px 16px rgba(255,196,0,.30);}
 .portion-card{background:#fff9ef}
 .form-label{font-weight:700}
 #pc_base{font-size:.85rem;color:#6b7280}
 
-/* ========== 10) Ingredientes (píldoras + panel) ========== */
-#ingredientes{scroll-margin-top:88px}
-.flavor-pill{
-  border:2px solid #ffd877;background:linear-gradient(180deg,#fff6bf,#ffd34d);
-  border-radius:999px;font-weight:700;padding:.25rem .6rem;font-size:.85rem;cursor:pointer;
-}
-.flavor-pill.active{border-color:#ffbf00;box-shadow:0 0 0 3px rgba(255,223,128,.5) inset}
-.info-card{background:#fff;border:1px solid #eef1f4;border-radius:1rem;padding:1rem 1.25rem;box-shadow:var(--soft-shadow)}
-.okpill{display:inline-block;background:#e8f5e9;border:1px solid #b6e0c0;padding:.1rem .4rem;border-radius:.5rem}
-
-/* ========== 11) Utiles ==========\ */
+/* ========== Utiles ==========\ */
 .section-title .bar{width:80px;height:6px;background:var(--accent-yellow-500);border-radius:999px}
 
+/* Botón marca */
+.btn-lilac{color:#fff;background:linear-gradient(180deg,#7D27F5,#6820CC);border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;padding:.45rem .9rem;box-shadow:0 10px 22px rgba(125,39,245,.28),0 2px 0 rgba(0,0,0,.05) inset;transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;}
+.btn-lilac:hover{transform:translateY(-1px);filter:brightness(1.05);}
+.btn-lilac:active{transform:translateY(0);box-shadow:0 6px 16px rgba(125,39,245,.24);}
+.btn-lilac.btn-sm{font-size:.875rem;line-height:1.1}
 
-
-.btn-lilac{
-  color:#fff;
-  background: linear-gradient(180deg,#7D27F5,#6820CC);
-  border:0; border-radius:999px; font-weight:800; letter-spacing:.15px; padding:.45rem .9rem;
-  box-shadow: 0 10px 22px rgba(125,39,245,.28), 0 2px 0 rgba(0,0,0,.05) inset;
-  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+/* Swatches de colores (alineados con el título) */
+.cake-colors{display:flex;flex-wrap:wrap;gap:.5rem;}
+.cake-colors .form-check{margin:0;padding:0;}
+.cake-colors .form-check-input.pcolor{
+  appearance:none;-webkit-appearance:none;width:1.25rem;height:1.25rem;border-radius:50%;
+  border:2px solid #ddd;cursor:pointer;position:relative;outline:0;
 }
-.btn-lilac:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-.btn-lilac:active{ transform: translateY(0); box-shadow: 0 6px 16px rgba(125,39,245,.24); }
-.btn-lilac.btn-sm{ font-size:.875rem; line-height:1.1; }
-
-
-#ingredientes{ scroll-margin-top: 88px; }
-.flavor-pill{
-  border:2px solid #ffd877;
-  background:linear-gradient(180deg,#fff6bf,#ffd34d);
-  border-radius:999px; font-weight:700; padding:.25rem .6rem; font-size:.85rem; cursor:pointer;
+.cake-colors .form-check-input.pcolor:checked{border-color:#333;}
+.cake-colors .form-check-input.pcolor:checked::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #333;pointer-events:none;
 }
-.flavor-pill.active{
-  border-color:#ffbf00;
-  box-shadow:0 0 0 3px rgba(255,223,128,.5) inset;
-}
-.info-card{
-  background:#fff; border:1px solid #eef1f4; border-radius:1rem;
-  padding:1rem 1.25rem; box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-.okpill{ display:inline-block; background:#e8f5e9; border:1px solid #b6e0c0; padding:.1rem .4rem; border-radius:.5rem; }
+.cake-colors .form-check-label{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Colores */
+#p1_c_rojo,#p2_c_rojo{background:#e53935;}
+#p1_c_rosado,#p2_c_rosado{background:#ff6699;}
+#p1_c_verde,#p2_c_verde{background:#43a047;}
+#p1_c_amarillo,#p2_c_amarillo{background:#ffd54f;}
+#p1_c_morado,#p2_c_morado{background:#8e44ad;}
+#p1_c_blanco,#p2_c_blanco{background:#ffffff;}
+#p1_c_negro,#p2_c_negro{background:#000000;}
 
-
+/* Offcanvas carrito debajo del navbar (si existiera legacy) */
+#cart{top:var(--nav-offset,56px);}
 
 /* ===========================
-   Pastelería: mini–carrusel
+   Galería de tortas (carrusel + miniaturas)
    =========================== */
-.mini-carousel { position: relative; }
-.mini-carousel .carousel-inner{
-  display: grid;
-  place-items: center;
-  min-height: 260px;
+.cake-carousel{width:280px;margin:0 auto;}
+.cake-main{
+  width:280px;height:280px;object-fit:cover;border-radius:1rem;background:#fff;
+  box-shadow:0 8px 28px rgba(0,0,0,.08);display:block;margin:0 auto;
 }
-.mini-carousel .carousel-item { display: none; }
-.mini-carousel .carousel-item.active { display: grid; }
-.preview-cake{
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
-  border-radius: 1rem;
-  background: #fff;
-  box-shadow: 0 8px 28px rgba(0,0,0,.08);
-  margin-inline: auto; /* centrado */
+.thumbs{gap:.5rem;}
+.thumb-circle{
+  width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid #e6e6e6;background:#fff;
+  display:grid;place-items:center;transition:transform .08s ease,border-color .2s ease;
 }
-@media (max-width: 576px){
-  .mini-carousel .carousel-inner{ min-height: 220px; }
+.thumb-circle img{width:100%;height:100%;object-fit:cover;}
+.thumb-circle.active,.thumb-circle:focus{border-color:var(--accent-yellow-500);box-shadow:0 0 0 .2rem rgba(255,211,77,.35)}
+.thumb-circle:hover{transform:translateY(-1px)}
+@media (max-width:576px){
+  .cake-carousel{width:220px}
+  .cake-main{width:220px;height:220px}
+  .thumb-circle{width:44px;height:44px}
 }
 
-/* Variantes visuales por estilo (aplicadas al contenedor del carrusel) */
-.mini-carousel.variant-classic .preview-cake{
-  box-shadow: 0 0 0 6px #ffffff, 0 0 0 10px #d7e2f0;
-}
-.mini-carousel.variant-festive .preview-cake{
-  box-shadow: 0 0 0 6px #fff, 0 0 0 12px #ffd84d, 0 12px 26px rgba(0,0,0,.12);
-  position: relative;
-}
-.mini-carousel.variant-festive::after{
-  content:""; position:absolute; inset:12px;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,0,0,.25) 2px, transparent 3px),
-    radial-gradient(circle at 70% 60%, rgba(0,150,255,.25) 2px, transparent 3px),
-    radial-gradient(circle at 40% 80%, rgba(120,200,0,.25) 2px, transparent 3px),
-    radial-gradient(circle at 80% 25%, rgba(180,0,255,.25) 2px, transparent 3px);
-  pointer-events: none;
-}
-.mini-carousel.variant-minimal .preview-cake{
-  box-shadow: 0 0 0 4px #e5e7eb;
-  filter: contrast(1.05) saturate(.95);
-}
 
-/* Fondo de imagen al fondo-fondo (no toca el contenido) */
-.pastry-section{
-  position: relative;
-  isolation: isolate;           /* asegura el stacking correcto */
-  background: transparent !important;
-  -webkit-mask: none !important;
-          mask: none !important;
-}
-.pastry-section > *{
-  position: relative;
-  z-index: 1;                   /* contenido por delante de la imagen */
-}
-.pastry-section .section-bg{
-  position: absolute;
-  inset: 0;
-  z-index: -1;                  /* fondo real */
-  pointer-events: none;
-  overflow: hidden;
-}
-/* La imagen llena todo y recorta lo que sobre con cover */
+
+/* ===== Fondo sección pastelería ===== */
+.pastry-section{position:relative; isolation:isolate;}
+.pastry-section>*{position:relative; z-index:1;}
+.pastry-section .section-bg{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
 .pastry-section .section-bg picture,
-.pastry-section .section-bg img{
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;            /* llena sin deformar */
-  object-position: center;      /* centra el encuadre */
+.pastry-section .section-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+.pastry-section .section-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.12));}
+
+/* INGREDIENTES (sección aparte, intacta) */
+.ing-gallery .carousel{margin-bottom:1rem;}
+.ing-gallery .carousel-item img{width:100%;height:auto;display:block;}
+#ingCarousel .carousel-item img{width:100%;height:auto;display:block;}
+#ingCarousel{margin-top:.75rem;}
+#ingredientes .pill-bar{justify-content:center!important;}
+.flavor-pill[data-group="galletas"]{background:#E8F2FF;color:#0B3B8C;border:1px solid #BBD6FF;}
+.flavor-pill[data-group="snacks"]{background:#FFE8F0;color:#7C1037;border:1px solid #FFC2D4;}
+.flavor-pill.active{filter:saturate(1.1) brightness(.98);box-shadow:0 0 0 2px rgba(0,0,0,.05) inset;}
+#ingLightbox .modal-content{background:rgba(0,0,0,.75);}
+.zoom-wrap{position:relative;width:100%;height:min(86vh,900px);overflow:hidden;display:flex;align-items:center;justify-content:center;touch-action:none;background:transparent;}
+#zoomImg{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;transform:translate3d(0,0,0) scale(1);transition:transform .08s linear;user-select:none;-webkit-user-drag:none;cursor:grab;}
+
+/* ===== Footer patrón ===== */
+.footer{position:relative;isolation:isolate;background-color:#326bdc;color:#fff;}
+.footer-pattern{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 100% at 50% 0, rgba(65,115,255,.203), transparent 60%);}
+.footer-pattern .pattern-icon{position:absolute;left:0;top:0;transform:translate(-50%,-50%);color:rgba(255,255,255,.382);line-height:1;display:block;pointer-events:none;will-change:transform;}
+.footer>.container,.footer>*:not(.footer-pattern){position:relative;z-index:1}
+
+/* Tipografía Chewy */
+.brand-name{font-family:'Chewy',cursive!important;letter-spacing:.5px;}
+.navbar .brand-name{color:var(--brand-600)!important;}
+.navbar .brand-name:hover{filter:brightness(.95);}
+.title-hand,.section-title h1,.section-title h2,.footer .title-hand{font-family:'Chewy',cursive!important;font-weight:400;letter-spacing:.4px;color:inherit;}
+.title-hand{line-height:1.1;}
+.navbar .brand-name{font-size:clamp(1.4rem,2.8vw,1.9rem);}
+.footer .brand-name{font-size:clamp(1.6rem,2.5vw,2rem);}
+
+/* Badge carrito */
+.btn .cart-badge{position:absolute;top:-6px;right:-4px;min-width:22px;height:22px;border-radius:999px;background:#ff4d6d;color:#fff;font-weight:800;font-size:.8rem;display:inline-grid;place-items:center;padding:0 .35rem;box-shadow:0 2px 10px rgba(0,0,0,.12);}
+
+/* Botón marca azul */
+.btn-brand{background:linear-gradient(180deg,var(--brand-600),var(--brand-500));color:#fff;border:0;border-radius:999px;font-weight:800;box-shadow:0 10px 22px rgba(31,111,235,.28),0 2px 0 rgba(0,0,0,.05) inset;transition:transform .08s ease,filter .2s ease,box-shadow .2s ease;}
+.btn-brand:hover{transform:translateY(-1px);filter:brightness(1.05);}
+.btn-brand:active{transform:translateY(0);box-shadow:0 6px 16px rgba(31,111,235,.24);}
+
+/* Miniatura fija antigua: mantener por compatibilidad */
+.mini-thumb img.preview-cake{display:block;width:100%;height:auto;object-fit:cover;}
+.offcanvas#cart{top:var(--nav-offset,56px)!important;}
+
+/* === Corrección de orden y “minimizar abajo” en pastelería === */
+.products-row.personalizing { display: flex; flex-wrap: wrap; }
+.products-row.personalizing .product-col { order: 1; }     /* por defecto, todas abajo */
+.products-row.personalizing .product-col.active { order: 0; } /* la activa va primero (línea superior) */
+@media (min-width: 992px){
+  .products-row.personalizing .product-col.active{ flex: 0 0 100%; max-width: 100%; }
+  .products-row.personalizing .product-col:not(.active){ flex: 0 0 33.333%; max-width: 33.333%; }
+}
+@media (max-width: 991.98px){
+  .products-row.personalizing .product-col.active{ flex: 0 0 100%; max-width: 100%; }
+  .products-row.personalizing .product-col:not(.active){ flex: 0 0 50%; max-width: 50%; }
 }
 
-/* (Opcional) Sutil overlay para legibilidad de texto */
-.pastry-section .section-bg::after{
-  content:"";
-  position:absolute; inset:0;
-  /* ajusta opacidad a gusto (0.0–0.25) */
-  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.12));
+/* =========================================================
+   MODALES — Stacking + estilo referencia (ÚNICO BLOQUE)
+   ========================================================= */
+
+/* Stacking correcto: modal SIEMPRE sobre backdrop y navbar sigue visible */
+.modal-backdrop { z-index:1990 !important; background:rgba(0,0,0,.45); }
+.modal           { z-index:2000 !important; }
+.navbar          { z-index:1080 !important; }
+
+/* Modal de TORTAS */
+.modal.cake-modal .modal-dialog{ max-width:1120px; }
+.modal.cake-modal .modal-content{
+  border:0; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.20);
+}
+.modal.cake-modal .modal-header{ border:0; padding:1.25rem 1.5rem 0; }
+.modal.cake-modal .modal-body{ padding:0 1.5rem 1.5rem; }
+
+.cake-headline{ font-weight:800; letter-spacing:.2px; }
+.cake-price{ font-weight:900; font-size:clamp(24px,3.5vw,36px); color:#03c6d9; margin:.25rem 0 1rem; }
+
+.cake-modal .form-select,.cake-modal .form-control{ border-radius:12px; border:1px solid #e6eaf1; }
+.cake-modal .input-group>.input-group-text{
+  border-radius:12px 0 0 12px; border:1px solid #e6eaf1; background:#fff; min-width:160px; font-weight:700;
 }
 
-/* === Pastelería: fondo de imagen SIN sombras === */
+/* Cantidad tipo “pill” */
+.qty-pill{ display:flex; align-items:center; gap:.75rem; }
+.qty-pill .btn-qty{
+  width:44px; height:44px; border-radius:999px; border:2px solid #e6eaf1;
+  background:#fff; font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center;
+}
+.qty-pill input{ width:56px; text-align:center; border:0; background:transparent; font-weight:700; }
 
-/* 1) Quita cualquier sombra/efecto en el contenedor de fondo */
-.pastry-section .section-bg,
-.pastry-section .section-bg picture,
-.pastry-section .section-bg img{
-  box-shadow: none !important;
-  filter: none !important;
-  background: transparent !important;
+/* Botones de acción */
+.btn-primary-pill{
+  background:#03c6d9; color:#fff; border:0; border-radius:999px; padding:.8rem 1.2rem; font-weight:800;
+}
+.btn-primary-pill:hover{ filter:brightness(1.03); }
+.btn-secondary-pill{
+  background:#fff; color:#03c6d9; border:2px solid #03c6d9; border-radius:999px; padding:.8rem 1.2rem; font-weight:800;
 }
 
-/* 2) Elimina el overlay que estaba generando una "sombra" detrás */
-.pastry-section .section-bg::after{
-  content: none !important;   /* elimina el pseudo-elemento */
-  background: none !important;
+/* Thumbs circulares en modal */
+.cake-modal .thumbs .thumb-circle{ border-color:#e6eaf1; }
+.cake-modal .thumbs .thumb-circle.active{ border-color:#03c6d9; }
+
+/* Modal de CARRITO */
+.modal.cart-modal .modal-dialog{ max-width:760px; }
+.modal.cart-modal .modal-content{
+  border:0; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.20);
+}
+.modal.cart-modal .modal-header{ border:0; padding:1rem 1.25rem 0; }
+.modal.cart-modal .modal-body{ padding:0 1.25rem 1.25rem; }
+
+.cart-modal .cart-item{
+  background:#f4f7fb; border-radius:14px; padding:1rem; display:flex; gap:12px; align-items:center;
+}
+.cart-modal .cart-item .thumb{
+  width:56px; height:56px; border-radius:12px; overflow:hidden; background:#fff; flex:0 0 56px;
+}
+.cart-modal .cart-item .thumb img{ width:100%; height:100%; object-fit:cover; }
+.cart-modal .total-row{ font-weight:900; font-size:1.25rem; }
+
+.cart-modal .btn-wa{
+  background:#21a366; color:#fff; border:0; border-radius:999px; padding:.9rem 1rem; font-weight:800;
+}
+.cart-modal .btn-pay{
+  background:#03c6d9; color:#fff; border:0; border-radius:999px; padding:.9rem 1rem; font-weight:800;
 }
 
-/* 3) El contenedor de la sección tampoco debe tener sombras */
-.pastry-section > .container{
-  box-shadow: none !important;
-  background: transparent !important;
+/* Acordeón “Descripción” (estilo referencia) */
+.accordion-button { border-radius:12px !important; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+.accordion-button:not(.collapsed){ background:#f8fafc; color:#111; }
+.accordion-button:focus{ box-shadow:none; }
+.accordion-body{ background:#fff; border-radius:0 0 12px 12px; }
+
+/* Evitar jumps al abrir modal en móviles */
+.modal-open{ padding-right:0 !important; }
+
+/* Responsivo modal de tortas: imagen arriba en mobile */
+@media (max-width: 991.98px){
+  .input-group .input-group-text.w-25{ min-width:140px; }
 }
 
+/* Tamaño y base del modal */
+.cart-modal .modal-dialog{ max-width:760px; }
+.modal.cart-modal .modal-content{
+  border:0; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.20);
+}
+.modal.cart-modal .modal-header{ border:0; padding:1rem 1.25rem 0; }
+.modal.cart-modal .modal-body{ padding:0 1.25rem 1.25rem; }
 
-/* INGREDIENTES: carrusel sin sombras, solo imagen */
-.ing-gallery .carousel { margin-bottom: 1rem; }
-.ing-gallery .carousel-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Ítems tipo tarjeta (como en la referencia) */
+.cart-modal .cart-item{
+  background:#f4f7fb; border-radius:14px; padding:1rem;
+  display:flex; gap:12px; align-items:center;
+}
+.cart-modal .cart-item .thumb{
+  width:56px; height:56px; border-radius:12px; overflow:hidden; background:#fff; flex:0 0 56px;
+}
+.cart-modal .cart-item .thumb img{ width:100%; height:100%; object-fit:cover; }
+
+/* Inputs grandes con icono y borde turquesa */
+.cart-modal .cart-input .input-group-text,
+.cart-modal .cart-input .form-control{
+  border:2px solid #03c6d9;            /* turquesa como la referencia */
+  background:#fff; 
+}
+.cart-modal .cart-input .input-group-text{
+  border-right:0; border-radius:14px 0 0 14px;
+}
+.cart-modal .cart-input .form-control{
+  border-left:0; border-radius:0 14px 14px 0;
+  padding-top:.9rem; padding-bottom:.9rem;
 }
 
-/* Píldoras por grupo */
-.flavor-pill[data-group="galletas"]{
-  background: #E8F2FF; color:#0B3B8C;
-  border: 1px solid #BBD6FF;
+/* Total y botones */
+.cart-modal .total-row{ font-weight:900; font-size:1.25rem; }
+.cart-modal #cartTotalModal{ color:#03c6d9; }  /* color del total como en la imagen */
+
+.cart-modal .btn-wa{
+  background:#21a366; color:#fff; border:0; border-radius:999px; padding:.9rem 1rem; font-weight:800;
 }
-.flavor-pill[data-group="snacks"]{
-  background: #FFE8F0; color:#7C1037;
-  border: 1px solid #FFC2D4;
-}
-.flavor-pill.active{
-  filter: saturate(1.2) brightness(0.98);
-  box-shadow: 0 0 0 2px rgba(0,0,0,.05) inset;
+.cart-modal .btn-wa:focus{ outline:3px solid rgba(33,163,102,.25); }
+.cart-modal .btn-pay{
+  background:#03c6d9; color:#fff; border:0; border-radius:999px; padding:.9rem 1rem; font-weight:800;
 }
 
-/* Carrusel simple, sin sombras extras */
-#ingCarousel .carousel-item img{
-  width:100%; height:auto; display:block;
-}
-#ingCarousel{ margin-top: .75rem; }
-
-
-/* Ingredientes: centrar píldoras y variantes por grupo */
-#ingredientes .pill-bar{ justify-content: center !important; }
-
-.flavor-pill[data-group="galletas"]{
-  background:#E8F2FF; color:#0B3B8C; border:1px solid #BBD6FF;
-}
-.flavor-pill[data-group="snacks"]{
-  background:#FFE8F0; color:#7C1037; border:1px solid #FFC2D4;
-}
-.flavor-pill.active{
-  filter:saturate(1.1) brightness(.98);
-  box-shadow:0 0 0 2px rgba(0,0,0,.05) inset;
-}
-
-/* Ingredientes: centrar píldoras + variantes por grupo */
-#ingredientes .pill-bar{ justify-content: center !important; }
-
-.flavor-pill[data-group="galletas"]{
-  background:#E8F2FF; color:#0B3B8C; border:1px solid #BBD6FF;
-}
-.flavor-pill[data-group="snacks"]{
-  background:#FFE8F0; color:#7C1037; border:1px solid #FFC2D4;
-}
-.flavor-pill.active{
-  filter:saturate(1.1) brightness(.98);
-  box-shadow:0 0 0 2px rgba(0,0,0,.05) inset;
-}
-
-/* Carrusel simple, sin sombras extras */
-#ingCarousel .carousel-item img{ width:100%; height:auto; display:block; }
-#ingCarousel{ margin-top:.75rem; }
-
-/* Modal de zoom: que la imagen arranque "entera" (contain) */
-#ingLightbox .modal-content{ background: rgba(0,0,0,.75); }
-
-.zoom-wrap{
-  position: relative;
-  width: 100%;
-  height: min(86vh, 900px);
-  overflow: hidden;
-  display: flex;               /* centra la imagen inicialmente */
-  align-items: center;
-  justify-content: center;
-  touch-action: none;          /* pan/zoom personalizados */
-  background: transparent;
-}
-
-#zoomImg{
-  /* Mostrar completa dentro del contenedor */
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-
-  /* Preparado para zoom posterior */
-  transform-origin: center center;
-  transform: translate3d(0,0,0) scale(1);
-  transition: transform .08s linear;
-
-  user-select: none;
-  -webkit-user-drag: none;
-  cursor: grab;
-}
-
-
-/* ===== Footer: capa de patrón aleatorio con bi-cake2 ===== */
-.footer{
-  position: relative;
-  isolation: isolate;
-  background-color: #326bdc; /* mantén tu color de base */
-  color: #fff;
-}
-
-/* Capa del patrón al fondo-fondo */
-.footer-pattern{
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  /* Degradado MUY sutil opcional para legibilidad */
-  background: radial-gradient(120% 100% at 50% 0, rgba(65, 115, 255, 0.203), transparent 60%);
-}
-
-/* Cada icono (bi-cake2) generado por JS */
-.footer-pattern .pattern-icon{
-  position: absolute;
-  left: 0; top: 0;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.382); /* color del icono */
-  line-height: 1;
-  display: block;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* El contenido del footer queda encima del patrón */
-.footer > .container,
-.footer > *:not(.footer-pattern){
-  position: relative;
-  z-index: 1;
-}
-
-/* (Opcional) Si antes usabas un patrón con ::before/::after, elimínalo: */
-/*
-.footer::before, .footer::after{ content:none !important; background:none !important; }
-*/
-
-
-/* =========================
-   FUENTE CHEWY — Logo + Títulos
-   ========================= */
-
-/* Aplica la fuente Chewy al logo principal */
-.brand-name {
-  font-family: 'Chewy', cursive !important;
-  letter-spacing: 0.5px;
-}
-/* Logo del navbar en azul */
-.navbar .brand-name{
-  color: var(--brand-600) !important;   /* azul */
-}
-.navbar .brand-name:hover{ filter: brightness(.95); }
-
-
-/* Títulos principales (hero, secciones, footer) */
-.title-hand,
-.section-title h1,
-.section-title h2,
-.footer .title-hand {
-  font-family: 'Chewy', cursive !important;
-  font-weight: 400;
-  letter-spacing: 0.4px;
-  color: inherit;
-}
-
-/* Ajuste opcional para que Chewy se vea más centrada verticalmente */
-.title-hand {
-  line-height: 1.1;
-}
-
-/* Mejora para responsividad del logo */
-.navbar .brand-name {
-  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-}
-
-.footer .brand-name {
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
-}
-
-/* Badge del carrito sobre el ícono */
-.btn .cart-badge{
-  position:absolute; top:-6px; right:-4px;
-  min-width: 22px; height: 22px; border-radius: 999px;
-  background:#ff4d6d; color:#fff; font-weight:800; font-size:.8rem;
-  display:inline-grid; place-items:center; padding:0 .35rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.12);
-}
-
-/* Botón "Agregar al carrito" con color azul brand */
-.btn-brand{
-  background: linear-gradient(180deg, var(--brand-600), var(--brand-500));
-  color:#fff; border:0; border-radius:999px; font-weight:800;
-  box-shadow: 0 10px 22px rgba(31,111,235,.28), 0 2px 0 rgba(0,0,0,.05) inset;
-  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
-}
-.btn-brand:hover{ transform:translateY(-1px); filter:brightness(1.05); }
-.btn-brand:active{ transform:translateY(0); box-shadow: 0 6px 16px rgba(31,111,235,.24); }
-
-/* Checkboxes de colores: más visibles */
-#p1_colors .form-check-input,
-#p2_colors .form-check-input,
-#p3_colors .form-check-input{
-  width: 1.1rem; height: 1.1rem; cursor:pointer;
-}
-#p1_colors .form-check-label,
-#p2_colors .form-check-label,
-#p3_colors .form-check-label{
-  cursor:pointer; font-weight:600;
-}
-
-
-/* Centrado suave del módulo calculadora */
-.portion-card .form-label { font-weight: 600; }
-
-/* Miniatura fija que reemplaza al mini carrusel */
-.mini-thumb img.preview-cake{
+/* Cards de productos (ambos grids) */
+.pastry-card{border-radius:24px; overflow:hidden; box-shadow:var(--soft-shadow);}
+.pastry-card .card-img-top{
+  width:100%; height:auto; aspect-ratio: 4/3; object-fit:cover; /* imagen consistente */
   display:block;
-  width:100%;
-  height:auto;
-  object-fit: cover;
+}
+.pastry-card .card-body{padding:1rem 1rem 1.25rem;}
+.pastry-card .card-title{font-weight:800;}
+.pastry-card .price{color:#03c6d9; font-weight:900; font-size:1.125rem;} /* como la ref */
+
+/* Botón “Agregar” violeta (grid de packs) — ya lo usabas como .btn-lilac */
+.btn-lilac{ color:#fff; background:linear-gradient(180deg,#7D27F5,#6820CC);
+  border:0; border-radius:999px; font-weight:800; padding:.5rem .9rem; }
+
+/* Gaps y columnas responsivas */
+#productsRow .product-col, #packs .col-12{ display:flex; }
+#productsRow .pastry-card, #packs .pastry-card{ width:100%; }
+
+
+/* ===============================
+   Ajustes visuales precio + botón
+   =============================== */
+
+/* Contenedor fila (precio + botón) */
+.buy-row {
+  margin-top: 0.2rem !important; /* más juntos verticalmente */
+  gap: 0.5rem; /* espacio horizontal entre precio y botón */
+}
+
+/* Precio principal en cards */
+.price {
+  font-size: 1.45rem !important; /* antes ~1.1rem */
+  font-weight: 900 !important;
+  color: #03c6d9 !important; /* turquesa corporativo */
+  line-height: 1;
+}
+
+/* Botón "Agregar" o "Seleccionar" mantiene tamaño pero más balanceado */
+.btn-lilac,
+.btn-select {
+  padding: 0.55rem 1.1rem;
+  font-weight: 800;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Pequeño realce al pasar el mouse */
+.btn-lilac:hover,
+.btn-select:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* Versión responsive: reducir ligeramente el tamaño del precio en pantallas pequeñas */
+@media (max-width: 576px) {
+  .price {
+    font-size: 1.25rem !important;
+  }
+}
+
+
+/* Toast “producto agregado” */
+.cart-toast.toast {
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  background: #ffffff;
+}
+.cart-toast .toast-body { display:flex; align-items:center; gap:.75rem; }
+.cart-toast .thumb {
+  width:40px; height:40px; border-radius:10px; overflow:hidden; flex:0 0 40px; background:#f5f7fb;
+}
+.cart-toast .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.cart-toast .title { font-weight:800; line-height:1.1; }
+.cart-toast .meta { font-size:.85rem; color:#6b7280; }
+.cart-toast .btn-cta {
+  border:0; border-radius:999px; font-weight:800; padding:.35rem .8rem;
+  background:linear-gradient(180deg,var(--brand-600),var(--brand-500)); color:#fff;
+}
+
+
+/* ===== Notificador (arriba derecha, sobre todo) ===== */
+#alerts {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 4000;            /* > .modal (2000) y > backdrop (1990) que tienes */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;     /* no bloquea clics debajo */
+}
+
+.alert-pop {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #111827;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  min-width: 240px;
+  max-width: 360px;
+  animation: pop-in .18s ease-out, pop-hold 2.6s linear 0.18s forwards, pop-out .22s ease-in 2.78s forwards;
+}
+
+.alert-pop.success { background:#064e3b; } /* agregado */
+.alert-pop.danger  { background:#7f1d1d; } /* eliminado */
+.alert-pop.info    { background:#1f2937; }
+
+.alert-pop .thumb { width:36px; height:36px; border-radius:9px; overflow:hidden; flex:0 0 36px; background:#fff; }
+.alert-pop .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.alert-pop .text { line-height:1.1; }
+.alert-pop .title { font-weight:800; font-size:.95rem; margin-bottom:2px; }
+.alert-pop .meta  { font-size:.82rem; opacity:.9; }
+/* ===== Comportamiento "tipo notificación" en móviles ===== */
+@media (max-width: 576px){
+  #alerts{
+    top: auto;
+    bottom: 12px;
+    right: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .alert-pop{
+    width: 100%;
+    max-width: 520px; /* tope razonable */
+    min-width: unset;
+    border-radius: 14px;
+  }
+}
+
+
+/* Animaciones */
+@keyframes pop-in   { from {opacity:0; transform: translate3d(16px,-8px,0);} to {opacity:1; transform: translate3d(0,0,0);} }
+@keyframes pop-hold { from {opacity:1;} to {opacity:1;} }
+@keyframes pop-out  { to {opacity:0; transform: translate3d(16px,-8px,0);} }
+
+
+
+/* ===== Notificador (arriba derecha, sobre todo) ===== */
+#alerts {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 4000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.alert-pop {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #111827;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  min-width: 240px;
+  max-width: 360px;
+  animation: pop-in .18s ease-out, pop-hold 2.6s linear 0.18s forwards, pop-out .22s ease-in 2.78s forwards;
+}
+.alert-pop.success { background:#064e3b; } /* agregado */
+.alert-pop.danger  { background:#7f1d1d; } /* eliminado */
+.alert-pop.info    { background:#1f2937; }
+.alert-pop .thumb { width:36px; height:36px; border-radius:9px; overflow:hidden; flex:0 0 36px; background:#fff; }
+.alert-pop .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.alert-pop .text { line-height:1.1; }
+.alert-pop .title { font-weight:800; font-size:.95rem; margin-bottom:2px; }
+.alert-pop .meta  { font-size:.82rem; opacity:.9; }
+
+@media (max-width: 576px){
+  #alerts{
+    top: auto;
+    bottom: 12px;
+    right: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .alert-pop{
+    width: 100%;
+    max-width: 520px;
+    min-width: unset;
+    border-radius: 14px;
+  }
+}
+
+/* Animaciones */
+@keyframes pop-in   { from {opacity:0; transform: translate3d(16px,-8px,0);} to {opacity:1; transform: translate3d(0,0,0);} }
+@keyframes pop-hold { from {opacity:1;} to {opacity:1;} }
+@keyframes pop-out  { to {opacity:0; transform: translate3d(16px,-8px,0);} }
+
+
+/* =========================================
+   Big Chomp — Notificación (fondo blanco, texto oscuro)
+   ========================================= */
+:root {
+  --bc-note-bg: #ffffff;          /* fondo blanco */
+  --bc-note-fg: #1a1a1a;          /* texto oscuro */
+  --bc-note-shadow: 0 6px 20px rgba(0,0,0,.15);
+  --bc-note-trans: 0.15s;
+}
+
+/* Stack (se crea por JS) */
+#noteStack {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 19rem;
+  max-width: calc(100vw - 3rem);
+  z-index: 2100;
+  pointer-events: none;
+}
+
+/* Caja base */
+.bc-note {
+  background-color: var(--bc-note-bg);
+  color: var(--bc-note-fg);
+  border-radius: 0.75rem;
+  box-shadow: var(--bc-note-shadow);
+  height: 4rem;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  animation: flyIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* Contenido */
+.bc-note__content {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+.bc-note__icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+.bc-note__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.bc-note__text {
+  line-height: 1.35;
+}
+.bc-note__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.bc-note__meta {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+/* Botón lateral */
+.bc-note__btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 3.5rem;
+  border-left: 1px solid rgba(0,0,0,.1);
+}
+.bc-note__btn {
+  background: transparent;
+  border: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0 0.5rem;
+  color: var(--bc-note-fg);
+  transition: background-color var(--bc-note-trans);
+}
+.bc-note__btn:hover,
+.bc-note__btn:focus {
+  background-color: rgba(0,0,0,.05);
+}
+
+/* Variantes */
+.bc-note.success .bc-note__title { color: #198754; } /* verde Bootstrap */
+.bc-note.danger  .bc-note__title { color: #dc3545; } /* rojo Bootstrap */
+
+/* Animaciones */
+@keyframes flyIn {
+  from { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes flyOut {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(calc(100% + 1.5rem)); opacity: 0; }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  #noteStack {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+  }
+  .bc-note {
+    height: auto;
+  }
 }
