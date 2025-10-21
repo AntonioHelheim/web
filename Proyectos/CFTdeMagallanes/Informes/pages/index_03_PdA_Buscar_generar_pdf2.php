@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 }
 $conn->set_charset("utf8");
 
+//Actividades No Realizadas (id de estado 187)
 $sql = "SELECT 
 A.id, 
 A.field_496 AS actividad,
