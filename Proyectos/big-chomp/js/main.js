@@ -32,21 +32,25 @@ function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
 
 /* ---------- Miniatura por producto ---------- */
 function getProductThumb(item){
-  if (item.pid === 'p1') return 'images/products/product-1000x1000-1.png';
-  if (item.pid === 'p2') return 'images/products/product-1000x1000-2.png';
-  if (item.pid === 'p4') return 'images/products/product-1000x1000-4.png';
+  // Tortas
+  if (item.pid === 'p1') return 'images/products/product-1000x1000-1.png';           // Perro
+  if (item.pid === 'p2') return 'images/products/product-1000x1000-gato-1.png';      // Gato
+  if (item.pid === 'p4') return 'images/products/product-1000x1000-veggy-1.png';     // Herbívoros
+
+  // Otros productos (banners)
   const name = (item.name||'').toLowerCase();
   if (name.includes('galletas personalizadas')) return 'images/banners/banner-900x675-galleta-1.png';
-  if (name.includes('cupcakes')) return 'images/banners/banner-900x675-galleta-1.png';
-  if (name.includes('muffins')) return 'images/banners/banner-900x675-galleta-1.png';
+  if (name.includes('cupcakes')) return 'images/banners/banner-900x675_galleta-1.png';
+  if (name.includes('muffins')) return 'images/banners/banner-900x675-muffins-1.png';
   if (name.includes('caja surtida')) return 'images/banners/banner-900x675-galleta-1.png';
-  if (name.includes('galletas vacuno')) return 'images/banners/banner-900x675-galleta-1.png';
+  if (name.includes('galletas vacuno')) return 'images/banners/banner-900x675-galleta-2.png';
   if (name.includes('galletas pollo')) return 'images/banners/banner-900x675-galleta-1.png';
   if (name.includes('galletas verduras')) return 'images/banners/banner-900x675-galleta-1.png';
   if (name.includes('pack fiesta')) return 'images/banners/banner-900x675-galleta-1.png';
-  return 'images/products/product-1000x1000-1.png'; // fallback
-}
 
+  // Fallback
+  return 'images/products/product-1000x1000-1.png';
+}
 
 /* ---------- Carrito (estado y render) ---------- */
 const CART = [];
@@ -188,8 +192,9 @@ function addSimple(name, price){
     CART.push(item);
   }
   renderCart();
-  notifyAdded(item); // NO abre carrito
+  notifyAdded(item);   // pop-up ~3s + ding
 }
+
 function updateCupPrice(){
   const sel=document.getElementById('cup_qty');
   const price=sel?Number(sel.selectedOptions[0].dataset.price||0):0;
@@ -237,7 +242,14 @@ function addCake(cakeId, baseName){
     CART.push(item);
   }
   renderCart();
-  notifyAdded(item);   // pop-up ~3s
+  notifyAdded(item);   // pop-up ~3s + ding
+
+  // Cerrar el modal de esta torta si está abierto
+  const modalEl = document.getElementById(`modal-${cakeId}`);
+  if (modalEl) {
+    const inst = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
+    inst.hide();
+  }
 }
 
 /* ---------- WhatsApp (con validación 48h) ---------- */
@@ -250,10 +262,9 @@ function sendWhatsApp(){
   const dateEl = modalDate || legacyDate;
 
   let fechaTxt = '(por coordinar)';
-  let fechaISO = null;
 
   if (dateEl && dateEl.value) {
-    fechaISO = dateEl.value; // YYYY-MM-DD
+    const fechaISO = dateEl.value; // YYYY-MM-DD
     const picked = new Date(fechaISO + 'T00:00:00');
     if (picked < minDate48h()) {
       alert('Por favor elige una fecha con al menos 48 horas de anticipación.');
@@ -302,9 +313,9 @@ function updateDogPricing(id){
   previewCakePrice(id);
 }
 function updateDogIngredients(id){
-  const opt=document.getElementById(`${id}_sabor`)?.selectedOptions[0];
-  const base=opt?.dataset.base||''; const tag=document.getElementById(`${id}_ing`);
-  if(tag) tag.textContent=`Ingredientes base: avena, huevo y papa + ${base}.`;
+  // Se elimina la leyenda "Ingredientes base: ..."
+  const tag=document.getElementById(`${id}_ing`);
+  if(tag) tag.textContent='';
 }
 // P2 gato
 function updateCatPricing(id){
@@ -316,9 +327,9 @@ function updateCatPricing(id){
   previewCakePrice(id);
 }
 function updateCatIngredients(id){
-  const opt=document.getElementById(`${id}_sabor`)?.selectedOptions[0];
-  const base=opt?.dataset.base||''; const tag=document.getElementById(`${id}_ing`);
-  if(tag) tag.textContent=`Ingredientes base: avena y huevo + ${base}.`;
+  // Se elimina la leyenda "Ingredientes base: ..."
+  const tag=document.getElementById(`${id}_ing`);
+  if(tag) tag.textContent='';
 }
 // P3 BARF (compatibilidad si aún existiera)
 function updateBarfPricing(id){
@@ -338,8 +349,9 @@ function updateBarfPricing(id){
   previewCakePrice(id);
 }
 function updateBarfIngredients(id){
-  const isGato=document.getElementById(`${id}_gato`)?.checked; const tag=document.getElementById(`${id}_ing`);
-  if(tag) tag.textContent = isGato ? 'Ingredientes base: proteína seleccionada (100%), sin verduras.' : 'Ingredientes base: proteína seleccionada + pequeñas verduras.';
+  // Se elimina la leyenda "Ingredientes base: ..."
+  const tag=document.getElementById(`${id}_ing`);
+  if(tag) tag.textContent='';
 }
 function previewCakePrice(id){
   let frostingExtra=0; const frostEl=document.getElementById(`${id}_frost`);
@@ -646,8 +658,6 @@ window.updateBarfIngredients = updateBarfIngredients;
 window.openPersonalizer = openPersonalizer;
 window.updateMinPrice = updateMinPrice;
 
-
-
 /* =========================================
    Big Chomp — Notificador (flyIn / flyOut)
    ========================================= */
@@ -656,112 +666,125 @@ function ensureNoteStack() {
   if (!stack) {
     stack = document.createElement('div');
     stack.id = 'noteStack';
+    stack.setAttribute('aria-live', 'polite');
+    stack.setAttribute('aria-atomic', 'true');
+    // Fuerza z-index muy alto para quedar sobre modales/backdrops
+    stack.style.zIndex = '20000';
     document.body.appendChild(stack);
   }
   return stack;
 }
 
+/* beep cortito sin archivos (Web Audio) */
+function playConfirm(){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.value = 880; // A5
+    g.gain.value = 0.0001;
+    o.connect(g); g.connect(ctx.destination);
+    o.start();
+    // breve envolvente
+    const now = ctx.currentTime;
+    g.gain.exponentialRampToValueAtTime(0.06, now + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+    o.stop(now + 0.2);
+  }catch{}
+}
+
 /**
  * Crea y muestra un toast con efecto flyIn/flyOut
- * @param {Object} opts
- * @param {'success'|'danger'|'info'|'warning'} opts.variant
- * @param {string} opts.title
- * @param {string} [opts.meta]
+ * - Desktop: entra por derecha
+ * - Mobile: entra desde arriba (centrada)
  */
 function showNote({ variant = 'info', title = '', meta = '' }) {
   const stack = ensureNoteStack();
 
-  // Raíz
   const note = document.createElement('div');
   note.className = `bc-note ${variant}`;
 
-  // Contenido
   const content = document.createElement('div');
   content.className = 'bc-note__content';
 
-  // Icono (usa sprite SVG añadido en index.html)
   const iconWrap = document.createElement('div');
   iconWrap.className = 'bc-note__icon';
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','bc-note__icon-svg');
   svg.setAttribute('role','img');
   svg.setAttribute('aria-hidden','true');
   const use = document.createElementNS('http://www.w3.org/2000/svg','use');
-  use.setAttributeNS('http://www.w3.org/1999/xlink','href', variant === 'success' ? '#bc-success' : '#bc-error');
+  use.setAttributeNS('http://www.w3.org/1999/xlink','href',
+    variant === 'success' ? '#bc-success' : '#bc-error');
   svg.appendChild(use);
   iconWrap.appendChild(svg);
 
-  // Textos
   const text = document.createElement('div');
   text.className = 'bc-note__text';
-  const t = document.createElement('div');
-  t.className = 'bc-note__title';
-  t.textContent = title || 'Notificación';
-  const m = document.createElement('div');
-  m.className = 'bc-note__meta';
-  m.textContent = meta || '';
-  text.appendChild(t);
-  if (meta) text.appendChild(m);
+  const t = document.createElement('div'); t.className = 'bc-note__title'; t.textContent = title || 'Notificación';
+  const m = document.createElement('div'); m.className = 'bc-note__meta'; m.textContent = meta || '';
+  text.appendChild(t); if (meta) text.appendChild(m);
+
+  const btns = document.createElement('div'); btns.className = 'bc-note__btns';
+  const btn = document.createElement('button'); btn.type='button'; btn.className='bc-note__btn'; btn.textContent='OK';
+  // click + touchend para compatibilidad móvil
+  const closeHandler = (ev)=>{ ev.preventDefault(); dismissNote(note); };
+  btn.addEventListener('click', closeHandler);
+  btn.addEventListener('touchend', closeHandler, { passive:false });
+  btns.appendChild(btn);
 
   content.appendChild(iconWrap);
   content.appendChild(text);
-
-  // Botonera (solo 1 botón “OK” para cerrar manualmente)
-  const btns = document.createElement('div');
-  btns.className = 'bc-note__btns';
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'bc-note__btn';
-  btn.textContent = 'OK';
-  btn.addEventListener('click', () => dismissNote(note));
-  btns.appendChild(btn);
-
-  // Armar
   note.appendChild(content);
   note.appendChild(btns);
   stack.appendChild(note);
 
-  // Dismiss automático: 3s + animación de salida (300ms)
-  const auto = setTimeout(() => dismissNote(note), 3000);
-  note.addEventListener('pointerdown', () => { clearTimeout(auto); }, { once:true });
+  // animación de entrada (desktop desde la derecha / mobile desde arriba)
+  const isMobile = window.matchMedia('(max-width: 575.98px)').matches;
+  note.style.animation = (isMobile ? 'flyInTop' : 'flyIn') + ' .3s ease-out';
 
-  // Reacomodar el stack (se apila verticalmente como en la referencia)
-  shiftNotes();
+  // autodestruir a los 3s; si el usuario toca la notificación, cancelamos el timer
+  const timer = setTimeout(() => dismissNote(note), 3000);
+  note.addEventListener('pointerdown', () => clearTimeout(timer), { once:true });
 }
 
-function dismissNote(note) {
-  if (!note || !note.isConnected) return;
-  note.style.animation = 'flyOut .3s ease-out forwards';
-  note.addEventListener('animationend', () => {
-    note.remove();
-    shiftNotes();
-  }, { once: true });
-}
+function dismissNote(note){
+  if(!note || !note.isConnected) return;
+  const isMobile = window.matchMedia('(max-width: 575.98px)').matches;
+  note.style.animation = (isMobile ? 'flyOutTop' : 'flyOut') + ' .3s ease-out forwards';
 
-function shiftNotes() {
-  const stack = ensureNoteStack();
-  const items = Array.from(stack.children);
-  items.forEach((el, i) => {
-    el.style.transform = `translateY(${i * 100}%)`;
-  });
+  let removed = false;
+  const done = () => {
+    if (removed) return;
+    removed = true;
+    try { note.remove(); } catch {}
+  };
+
+  note.addEventListener('animationend', done, { once:true });
+  // Fallback por si el navegador no lanza animationend
+  setTimeout(done, 400);
 }
 
 /* Wrappers específicos del carrito */
 function notifyAdded(item) {
   const name = item?.name || 'Producto';
   const qty  = item?.qty || 1;
-  showNote({
-    variant: 'success',
-    title: '¡Agregado al carrito!',
-    meta: `${qty} × ${name}`
-  });
+  showNote({ variant:'success', title:'¡Agregado al carrito!', meta:`${qty} × ${name}` });
+  playConfirm();
 }
-
 function notifyRemoved(item) {
   const name = item?.name || 'Producto';
   const qty  = item?.qty || 1;
-  showNote({
-    variant: 'danger',
-    title: 'Eliminado del carrito',
-    meta: `${qty} × ${name}`
-  });
+  showNote({ variant:'danger', title:'Eliminado del carrito', meta:`${qty} × ${name}` });
 }
+
+/* Stepper para inputs #p1_qty / #p2_qty / #p4_qty */
+function stepQty(pid, delta){
+  const input = document.getElementById(`${pid}_qty`);
+  if(!input) return;
+  const cur = parseInt(input.value || '1', 10) || 1;
+  const next = Math.max(1, cur + (delta||0));
+  input.value = next;
+}
+window.stepQty = stepQty; // por los onclick del HTML
