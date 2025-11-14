@@ -1,0 +1,49 @@
+# Translation of Plugins - WP Post Page Clone - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - WP Post Page Clone - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2025-01-31 07:55:43+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - WP Post Page Clone - Stable (latest release)\n"
+
+#: wp-post-page-clone.php:153
+msgid "Click To Clone"
+msgstr "Haz clic para clonar"
+
+#: wp-post-page-clone.php:153
+msgid "Clone Post and Page"
+msgstr "Clonar entrada o página"
+
+#: wp-post-page-clone.php:124
+msgid "Post or Page creation failed, could not find original post:"
+msgstr "Ha fallado la creación de la entrada o página, no se ha podido encontrar la entrada original:"
+
+#. Author URI of the plugin
+#: wp-post-page-clone.php
+msgid "http://gaurangsondagar99.wordpress.com/"
+msgstr "http://gaurangsondagar99.wordpress.com/"
+
+#. Author of the plugin
+#: wp-post-page-clone.php
+msgid "Gaurang Sondagar"
+msgstr "Gaurang Sondagar"
+
+#. Description of the plugin
+#: wp-post-page-clone.php
+msgid "A plugin to generate duplicate post or page with contents and it's settings."
+msgstr "Un plugin para duplicar entradas o páginas con su contenido y ajustes."
+
+#. Plugin URI of the plugin
+#: wp-post-page-clone.php
+msgid "https://wordpress.org/plugins/wp-post-page-clone"
+msgstr "https://wordpress.org/plugins/wp-post-page-clone"
+
+#. Plugin Name of the plugin
+#: wp-post-page-clone.php
+msgid "WP Post Page Clone"
+msgstr "WP Post Page Clone"

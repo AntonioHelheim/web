@@ -1,0 +1,373 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  1.1 Theme Default
+/*----------------------------------------*/
+
+// Google Fonts
+
+
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+/*---------------------------------
+    Typography css start 
+---------------------------------*/
+body {
+	font-family: var(--rr-ff-body);
+	font-size: var(--rr-fs-body);
+	font-weight: normal;
+	color: var(--rr-text-body);
+	line-height: var(--rr-lh-body);
+	background: var(--rr-body-primary);
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: var(--rr-ff-heading);
+	color: var(--rr-heading-primary);
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: var(--rr-fw-bold);
+	word-break: break-word;
+}
+
+h1, .h1 {
+	font-size: var(--rr-fs-h1);
+	line-height: var(--rr-lh-h1);
+ 
+	@media #{$xl} {
+		font-size: 60px;
+		line-height:72px;
+	}
+	@media #{$lg} {
+		font-size: 52px;
+		line-height:64px;
+	}
+	@media #{$md} {
+		font-size: 50px;
+		line-height:52px;
+	}
+	@media #{$sm} {
+		font-size: 38px;
+		line-height:50px;
+	}
+	@media #{$xs} {
+		font-size: 32px;
+		line-height:44px;
+	}
+}
+  
+h2, .h2 {
+font-size: var(--rr-fs-h2);
+line-height: var(--rr-lh-h2);
+  @media #{$lg, $md, $sm} {
+	font-size: 38px;
+	line-height:50px;
+  }
+  @media #{$xs} {
+    font-size: 30px;
+	  line-height: 42px;
+  }
+  @media #{$xxs} {
+    font-size: 27px;
+	  line-height: 37px;
+  }
+}
+
+h2.xl {
+	font-size: var(--rr-fs-h2xl);
+	line-height: var(--rr-lh-h2xl);
+	@media #{$xl} {
+		font-size: 50px;
+		line-height:68px;
+	}
+	@media #{$lg} {
+		font-size: 38px;
+		line-height:50px;
+	}
+	@media #{$md, $sm} {
+		font-size: 34px;
+		line-height:46px;
+	}
+	@media #{$xs} {
+		font-size: 30px;
+		line-height: 42px;
+	}
+	@media #{$xxs} {
+		font-size: 22px;
+		line-height: 32px;
+	}
+}
+
+h2.lg {
+	font-size: var(--rr-fs-h2lg);
+	line-height: var(--rr-lh-h2lg);
+	@media #{$lg} {
+		font-size: 38px;
+		line-height:50px;
+	}
+	@media #{$md, $sm} {
+		font-size: 34px;
+		line-height:46px;
+	}
+	@media #{$xs} {
+		font-size: 30px;
+		line-height: 42px;
+	}
+	@media #{$xxs} {
+		font-size: 22px;
+		line-height: 32px;
+	}
+}
+
+h3, .h3 {
+font-size: var(--rr-fs-h3);;
+line-height: var(--rr-lh-h3);
+}
+
+h4, .h4 {
+font-size: var(--rr-fs-h4);
+line-height: var(--rr-lh-h4);
+}
+
+h5, .h5 {
+font-size: var(--rr-fs-h5);
+line-height: var(--rr-lh-h5);
+}
+
+h6, .h6 {
+font-size: var(--rr-fs-h6);
+line-height: var(--rr-lh-h6);
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+p {
+	font-size: var(--rr-fs-p);
+	font-weight: var(--rr-fw-normal);
+	color: var(--rr-text-body);
+	margin-bottom: 30px;
+	line-height: var(--rr-lh-p);
+}
+
+a {
+	text-decoration: none;
+}
+
+a,
+.btn,
+button,
+span,
+sub,
+sup,
+p,
+input,
+select,
+textarea,
+li,
+img,
+svg,
+.transition-3,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+svg path {
+	@extend %rr-transition-3;
+}
+
+a:focus,
+.button:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+a:focus,
+a:hover{
+	text-decoration: none;
+	color: inherit;
+}
+
+a,
+button {
+	color: inherit;
+	outline: none;
+	border: none;
+	background: transparent;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+button:focus{
+    outline: 0; 
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+.capitalize {
+	text-transform: capitalize;
+}
+hr:not([size]) {
+	margin: 0;
+	border-color: var(--rr-border-primary);
+	opacity: 1;
+	border-width: 1px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+textarea{
+	color: var(--rr-text-body) !important;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px;
+	outline: none;
+	background-color: var(--rr-common-white);
+	height: 50px;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+	@include border-radius(6px);
+	border: 1px solid rgba(3, 26, 38, 0.10);
+	@include rr-placeholder{
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 24px;
+		color: var(--rr-text-body) !important;
+	}
+	
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type="date" i]::-webkit-calendar-picker-indicator {
+	filter: brightness(0) invert(1);
+	opacity:.8;
+}
+
+*::-moz-selection {
+  	background: var(--rr-common-selection);
+	color: var(--rr-common-white);
+	text-shadow: none;
+}
+::-moz-selection {
+  	background: var(--rr-common-selection);
+	color: var(--rr-common-white);
+	text-shadow: none;
+}
+::selection {
+  	background: var(--rr-common-selection);
+	color: var(--rr-common-white);
+	text-shadow: none;
+}
+
+*::-moz-placeholder {
+	opacity: 1;
+	font-size: 15px;
+	@include rr-placeholder{
+		color: var(--rr-text-body);
+	}
+}
+*::placeholder {
+	opacity: 1;
+	font-size: 15px;
+	@include rr-placeholder{
+		color: var(--rr-menu-primary);
+	}
+}
+
+/*----------------------------------------
+   Bootstrap customize
+-----------------------------------------*/
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+	--bs-gutter-x: 30px;
+}
+@media (min-width: 1400px) {
+	
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl,
+	.container-xxl {
+		max-width: 1320px;
+	}
+}
+@media (min-width: 1400px) {
+	
+	.container-xxl {
+		max-width: 1630px;
+	}
+	.container-lg {
+		max-width: 1520px;
+	}
+}
+.row {
+	--bs-gutter-x: 30px;
+}
+
+.gap-30 {
+	gap: 30px;
+	@media #{$xs, $sm} {
+		gap: 15px;
+	}
+}
+
+.g-40,
+.gx-40 {
+	--bs-gutter-x: 40px;
+}
+
+.g-40,
+.gy-40 {
+	--bs-gutter-y: 40px;
+}
+
+.g-50,
+.gx-50 {
+	--bs-gutter-x: 50px;
+}
+
+.g-50,
+.gy-50 {
+	--bs-gutter-y: 50px;
+}
+
+.g-60,
+.gy-60 {
+	--bs-gutter-y: 60px;
+}
+.g-60,
+.gx-60 {
+	--bs-gutter-x: 60px;
+}
