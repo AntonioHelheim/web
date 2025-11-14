@@ -15,11 +15,11 @@ $password = '4S1)Xp60]4';
 */
 
 // ---- Configuración (con fallback a valores por defecto) ----
-$host     = getenv('DB_HOST') ?: '190.107.177.232';
+$host     = getenv('DB_HOST') ?: '190.113.0.106';
 $port     = (int) (getenv('DB_PORT') ?: 3306);
-$dbname   = getenv('DB_NAME') ?: 'unnffbpk_proyectos';
-$username = getenv('DB_USER') ?: 'unnffbpk_cft23';
-$password = getenv('DB_PASS') ?: '4S1)Xp60]4';
+$dbname   = getenv('DB_NAME') ?: 'proyectoscft_bbdd';
+$username = getenv('DB_USER') ?: 'proyectoscft_superadmin';
+$password = getenv('DB_PASS') ?: 'nokbub-3turqY-nybfiz';
 
 // Habilitar excepciones en mysqli (mejor manejo de errores)
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

@@ -1,0 +1,144 @@
+
+---Downloaded files---
+The import files for: Home 01 were successfully downloaded!
+Initial max execution time = 60
+Files info:
+Site URL = https://tecaivot.cl
+Data file = /home/tecaivot/domains/tecaivot.cl/public_html/wp-content/themes/weta/sample-data/contents-demo.xml
+Widget file = /home/tecaivot/domains/tecaivot.cl/public_html/wp-content/themes/weta/sample-data/widget-settings.json
+Customizer file = /home/tecaivot/domains/tecaivot.cl/public_html/wp-content/themes/weta/sample-data/customizer-data.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+product-sidebar : Sidebar does not exist in theme (moving widget to Inactive)
+
+Bloque - No Title - Imported to Inactive
+Bloque - No Title - Imported to Inactive
+
+Blog Sidebar : 
+
+Búsqueda - No Title - Imported
+Weta Sidebar Blog Posts - Recent Posts - Imported
+Categorías - Categories - Imported
+Nube de etiquetas - Related Tags - Imported
+
+Footer 1 : 
+
+Weta Footer Contact Info - No Title - Imported
+
+Footer 2 : 
+
+Menú de navegación - Quick Links - Imported
+
+Footer 3 : 
+
+Menú de navegación - Our Services - Imported
+
+Footer 4 : 
+
+Menú de navegación - Products - Imported
+
+Footer 5 : 
+
+Menú de navegación - Support - Imported
+
+Footer Style 2 : 1 : 
+
+Weta Footer Info 02 - No Title - Imported
+
+Footer Style 2 : 2 : 
+
+Menú de navegación - Quick Links - Imported
+
+Footer Style 2 : 3 : 
+
+Menú de navegación - Our Services - Imported
+
+Footer Style 2 : 4 : 
+
+Menú de navegación - Support - Imported
+
+Footer Style 2 : 5 : 
+
+WETA Footer Get In Touch - Get Apps On! - Imported
+
+Footer Style 3 : 1 : 
+
+Weta Footer Contact Info - No Title - Imported
+
+Footer Style 3 : 2 : 
+
+Menú de navegación - Quick Links - Imported
+
+Footer Style 3 : 3 : 
+
+Menú de navegación - Our Services - Imported
+
+Footer Style 3 : 4 : 
+
+Menú de navegación - Products - Imported
+
+Footer Style 3 : 5 : 
+
+Menú de navegación - Support - Imported
+
+Footer Style 4 : 1 : 
+
+Weta Footer Contact Info - No Title - Imported
+
+Footer Style 4 : 2 : 
+
+Menú de navegación - Quick Links - Imported
+
+Footer Style 4 : 3 : 
+
+Menú de navegación - Our Services - Imported
+
+Footer Style 4 : 4 : 
+
+Menú de navegación - Products - Imported
+
+Footer Style 4 : 5 : 
+
+Menú de navegación - Support - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+

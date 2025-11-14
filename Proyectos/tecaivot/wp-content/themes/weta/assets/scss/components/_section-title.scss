@@ -1,0 +1,143 @@
+@use "../utils" as *;
+
+/*----------------------------------------*/
+/*  2.6 sectiontitle
+/*----------------------------------------*/
+// Section subtitle 1
+.section {
+  &__title-wrapper {
+    position: relative;
+    z-index: 55;
+  }
+  
+  &__subtitle {
+    display: flex;
+    align-items: center;
+    font-family: var(--rr-ff-heading);
+    font-style: normal;
+    font-weight: var(--rr-fw-bold);
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    
+    span {
+      margin-right: 10px;
+      padding: 3px 12.19px;
+      background: var(--rr-theme-primary);
+      @include border-radius(100px);
+      font-family: var(--rr-ff-roboto);
+      font-style: normal;
+      font-weight: var(--rr-fw-medium);
+      font-size: 15px;
+      line-height: 18px;
+      color: var(--rr-common-white);
+    }
+    
+    img {
+      margin-left: 5px;
+      width: auto;
+    }
+  }
+  
+  &__title {
+    text-transform: capitalize;
+    color: var(--rr-heading-primary);
+    
+    &.mb-5 {
+      margin-bottom: 5px !important;
+    }
+  }
+  
+}
+
+.section-2 {
+  &__title-wrapper {
+    position: relative;
+    z-index: 55;
+  }
+  
+  &__subtitle {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--rr-ff-heading);
+    font-style: normal;
+    font-weight: var(--rr-fw-medium);
+    font-size: 13px;
+    line-height: 17px;
+    padding: 4.5px 16px;
+    text-transform: uppercase;
+    background: rgba(1, 9, 21, 0.06);
+    color: var(--rr-heading-primary);
+  }
+  
+  &__title {
+    text-transform: capitalize;
+    color: var(--rr-heading-primary);
+    
+    &.mb-5 {
+      margin-bottom: 5px !important;
+    }
+  }
+  
+}
+
+.section-3  {
+  &__title-wrapper {
+    position: relative;
+    z-index: 55;
+  }
+  
+  &__subtitle {
+    display: flex;
+    align-items: center;
+    font-family: var(--rr-ff-heading);
+    font-style: normal;
+    font-weight: var(--rr-fw-bold);
+    font-size: 15px;
+    color: var(--rr-text-primary1);
+    line-height: 20px;
+    text-transform: capitalize;
+    
+    
+    
+    span {
+      margin-right: 10px;
+      padding: 2px 10.19px;
+      background: var(--rr-text-primary1);
+      @include border-radius(4px);
+      font-family: var(--rr-ff-roboto);
+      font-style: normal;
+      font-weight: var(--rr-fw-medium);
+      font-size: 15px;
+      line-height: 18px;
+      color: var(--rr-common-white);
+      
+    }
+    
+    img {
+      margin-left: 6px;
+      width: auto;
+    }
+    
+    &-2 {
+      span {
+        margin-right: 0;
+        margin-left:10px;
+      }
+      img {
+        margin-left:0px;
+        margin-right: 6px;
+      }
+    }
+  }
+  
+  &__title {
+    text-transform: capitalize;
+    color: var(--rr-heading-primary);
+    
+    &.mb-5 {
+      margin-bottom: 5px !important;
+    }
+  }
+  
+}
