@@ -1,0 +1,306 @@
+/* ========== Variables ========== */
+:root{
+  --bc-ink:#1b1b1b;
+  --bc-yellow:#ffd34d;
+  --bc-brand:#1f6feb; /* azul Big Chomp */
+}
+
+/* ========== Base ========== */
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--bc-ink);
+}
+
+/* ========== NAVBAR ========== */
+#mainNav{
+  min-height:56px;
+}
+
+/* Marca */
+#mainNav .navbar-brand{
+  padding-left:0.25rem;
+  display:flex;
+  align-items:center;
+}
+
+#mainNav .navbar-brand img.brand-mark{
+  height:32px;          /* tamaño coherente para navbar */
+  max-height:32px;
+  width:auto;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+#mainNav .brand-name{
+  font-family:"Chewy", cursive;
+  font-size:1.6rem;
+  line-height:1;
+  color:var(--bc-brand); /* azul */
+}
+
+/* Menú principal */
+#mainNav .main-menu .nav-link{
+  position:relative;
+  padding:0.5rem 0.9rem;
+  font-weight:500;
+  color:var(--bc-ink);
+}
+
+#mainNav .main-menu .nav-link:hover,
+#mainNav .main-menu .nav-link:focus{
+  color:var(--bc-ink);
+}
+
+/* Subrayado amarillo en hover/activo */
+#mainNav .main-menu .nav-link::after{
+  content:"";
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:-4px;
+  height:2px;
+  background:var(--bc-yellow);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .2s ease;
+}
+
+#mainNav .main-menu .nav-link:hover::after,
+#mainNav .main-menu .nav-link:focus::after,
+#mainNav .main-menu .nav-link.active::after{
+  transform:scaleX(1);
+}
+
+/* Carrito */
+#mainNav .nav-cart-btn{
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+  padding:0;
+}
+
+#mainNav .nav-cart-btn i{
+  line-height:1;
+}
+
+/* Badge del carrito */
+#cartCount{
+  font-size:.7rem;
+}
+
+/* Redes sociales (sin borde) */
+#mainNav .nav-social .nav-link{
+  border:none;
+  background:transparent;
+}
+
+/* Colores de iconos */
+#mainNav .nav-social .bi-instagram{
+  color:#C13584;
+}
+#mainNav .nav-social .bi-whatsapp{
+  color:#25D366;
+}
+
+/* =========================================
+   DESKTOP ≥ 992px
+   brand | menú | carrito | redes
+   ========================================= */
+@media (min-width:992px){
+  #mainNav > .container{
+    display:grid;
+    grid-template-columns:auto 1fr auto auto;
+    grid-template-areas:"brand menu cart socials";
+    align-items:center;
+    gap:1rem;
+  }
+
+  #mainNav .navbar-brand{
+    grid-area:brand;
+  }
+
+  #mainNav .navbar-collapse{
+    grid-area:menu;
+    display:block !important;
+  }
+
+  #mainNav .main-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  #mainNav .nav-cart-btn{
+    grid-area:cart;
+  }
+
+  #mainNav .nav-social{
+    grid-area:socials;
+    display:flex !important;
+  }
+
+  /* ocultar hamburguesa en desktop */
+  #mainNav .navbar-toggler{
+    display:none !important;
+  }
+}
+
+/* =========================================
+   MOBILE & TABLET < 992px
+   fila: logo | (auto) | carrito | hamburguesa
+   menú colapsable debajo, en columna
+   ========================================= */
+@media (max-width:991.98px){
+  #mainNav > .container{
+    display:flex;
+    align-items:center;
+  }
+
+  #mainNav .navbar-brand{
+    flex-shrink:0;
+  }
+
+  /* carrito junto al icono hamburguesa */
+  #mainNav .nav-cart-btn{
+    margin-left:auto;
+  }
+
+  #mainNav .navbar-toggler{
+    margin-left:.5rem;
+  }
+
+  /* Panel colapsable ocupa todo el ancho y va debajo */
+  #mainNav .navbar-collapse{
+    width:100%;
+    margin-top:.5rem;
+    background:#fff;
+    border-top:1px solid rgba(0,0,0,.06);
+    border-radius:.75rem;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+  }
+
+  /* Menú en columna, centrado */
+  #mainNav .main-menu{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:.5rem 1rem;
+    margin-top:0;
+  }
+
+  #mainNav .main-menu .nav-item{
+    width:100%;
+  }
+
+  #mainNav .main-menu .nav-link{
+    width:100%;
+    padding:.5rem 0;
+  }
+
+  /* Redes ocultas en header mobile/tablet */
+  #mainNav .nav-social{
+    display:none !important;
+  }
+}
+
+
+/* Redes sociales dentro del menú mobile */
+.nav-social-mobile .social-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:12px;
+  background:#fff;
+}
+
+.nav-social-mobile .bi-instagram{
+  color:#C13584;
+}
+
+.nav-social-mobile .bi-whatsapp{
+  color:#25D366;
+}
+
+/* Separación respecto al menú */
+@media (max-width: 991.98px){
+  .nav-social-mobile{
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+  }
+}
+/* Quitar subrayado de los enlaces del navbar
+   (dejamos solo la línea amarilla decorativa) */
+#mainNav .main-menu .nav-link,
+#mainNav .main-menu .nav-link:hover,
+#mainNav .main-menu .nav-link:focus{
+  text-decoration: none;
+}
+
+/* ============================================
+   CENTRAR LOGO (imagen + Big Chomp) EN MOBILE
+   sin afectar la versión desktop
+   ============================================ */
+
+@media (max-width: 991.98px){
+  
+  /* Contenedor principal del navbar en mobile */
+  #mainNav > .container{
+    display: grid;
+    grid-template-columns: 1fr auto auto; /* logo centrado | carrito | hamburguesa */
+    grid-template-areas: 
+      "brand cart toggle";
+    align-items: center;
+    width: 100%;
+  }
+
+  /* LOGO al centro */
+  #mainNav .navbar-brand{
+    grid-area: brand;
+    justify-self: center;      /* centro horizontal */
+    margin: 0 auto;
+  }
+
+  /* Carrito a la derecha */
+  #mainNav .nav-cart-btn{
+    grid-area: cart;
+    justify-self: end;
+  }
+
+  /* Toggler hamburguesa también a la derecha */
+  #mainNav .navbar-toggler{
+    grid-area: toggle;
+    justify-self: end;
+    margin-left: .5rem;
+  }
+
+  /* Quitar el margin-left:auto que empujaba el carrito hacia el extremo */
+  #mainNav .nav-cart-btn{
+    margin-left: 0 !important;
+  }
+}
+
+/* NAVBAR SIEMPRE FIJO ARRIBA */
+#mainNav{
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000; /* encima de todo */
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Evitar que el contenido quede oculto detrás del navbar fijo */
+body{
+  padding-top: 70px; /* ajusta según la altura del navbar */
+}
+

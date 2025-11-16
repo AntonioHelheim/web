@@ -1,5 +1,5 @@
 /* ==========================================================================
-   main.css — Consolidado y optimizado
+   main.css — Consolidado y optimizado (Navbar v2 + resto del sitio)
    ========================================================================= */
 
 /* ========== 0) Tokens / variables ========== */
@@ -28,60 +28,107 @@ html,body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif
 img{max-width:100%;height:auto;}
 a{text-decoration:none} a:hover{text-decoration:underline}
 
-/* ========== 2) Navbar y stacking base ========== */
-.navbar{position:sticky;top:0;z-index:1080;background:#fff;overflow:visible;}
-.navbar .brand-mark{height:32px;width:auto}
-
-/* ===== Logo detrás del texto en el navbar ===== */
-.navbar .navbar-brand{position:relative;padding-left:.25rem;}
-.navbar .brand-name{position:relative;z-index:2;}
-.navbar .brand-mark{
-  position:absolute;left:-65px;bottom:-5px;height:60px;width:auto;z-index:1;pointer-events:none;
+/* ==========================================================================
+   2) NAVBAR — Versión limpia y responsiva (reemplaza cualquier regla previa)
+   Estructura esperada en HTML:
+   <nav id="mainNav" class="navbar navbar-expand-lg"> ... </nav>
+   -------------------------------------------------------------------------- */
+#mainNav.navbar{
+  --nav-h-desktop:64px;
+  --nav-h-mobile:56px;
+  --icon-box:42px;
+  position:sticky;top:0;z-index:1080;background:#fff;min-height:var(--nav-h-mobile);
 }
 
-/* ===== Navbar: centrar marca en mobile y mantener toggler ===== */
-@media (max-width:575.98px){
-  .navbar .container{justify-content:center;}
-  .navbar .navbar-brand{margin:0 auto;display:grid;place-items:center;position:relative;}
-  .navbar .brand-mark{left:-12px!important;transform:translateX(-50%)!important;bottom:-5px;height:50px;width:auto;z-index:1;}
-  .navbar .brand-name{text-align:center;z-index:2;}
-  .navbar .navbar-toggler{position:absolute;right:.5rem;top:.5rem;z-index:3;}
+/* Contenedor base */
+#mainNav > .container{display:flex;align-items:center;gap:.75rem;min-height:var(--nav-h-mobile);}
+
+/* Marca: texto + logo detrás (no tocar posiciones del antiguo) */
+#mainNav .navbar-brand{position:relative;display:flex;align-items:flex-end;padding-left:.25rem;overflow:visible;}
+#mainNav .brand-name{font-family:'Chewy',cursive;color:var(--brand-600);font-size:clamp(1.4rem,2.8vw,1.9rem);position:relative;z-index:2;}
+#mainNav .brand-mark{
+  position:absolute;left:-60px;bottom:-6px;height:60px;width:auto;z-index:1;pointer-events:none;
 }
 
-/* ===== Navbar — comportamiento SOLO en mobile ===== */
+/* Acciones derechas (desktop: redes + carrito; mobile: carrito + toggler) */
+#mainNav .nav-actions{margin-left:auto;display:inline-flex;align-items:center;gap:.5rem;}
+#mainNav .icon-btn,#mainNav .nav-cart-btn,#mainNav .navbar-toggler{
+  width:var(--icon-box);height:var(--icon-box);display:grid;place-items:center;padding:0;
+  border-radius:.75rem;border:1px solid rgba(0,0,0,.12);background:#fff;line-height:1;
+}
+#mainNav .nav-cart-btn{position:relative;}
+#mainNav .nav-cart-btn .badge,#cartCount{position:absolute;top:-6px;right:-6px;}
+#mainNav .nav-social .nav-link{display:grid;place-items:center;width:var(--icon-box);height:var(--icon-box);border-radius:.75rem;border:1px solid rgba(0,0,0,.12);background:#fff;}
+/* Colores de iconos (UX expectativa) */
+#mainNav .nav-social .bi-instagram{color:#C13584;}
+#mainNav .nav-social .bi-whatsapp{color:#25D366;}
+
+/* Menú principal centrado en desktop */
+#mainNav .navbar-collapse{flex:0 1 auto;}
+#mainNav .navbar-nav.main-menu{display:flex;align-items:center;gap:1.25rem;margin:0;}
+#mainNav .navbar-nav.main-menu .nav-link{position:relative;padding:.5rem 1rem;line-height:1;color:inherit;}
+/* Hover/activo: subrayado amarillo bajo el item */
+#mainNav .navbar-nav.main-menu .nav-link::after{
+  content:"";position:absolute;left:0;bottom:-10px;height:3px;width:0;background:var(--accent-yellow-500);
+  transition:width .28s ease;
+}
+#mainNav .navbar-nav.main-menu .nav-link:hover::after,
+#mainNav .navbar-nav.main-menu .nav-link:focus::after,
+#mainNav .navbar-nav.main-menu .nav-link.active::after{width:100%;}
+
+/* ======= Desktop (≥992px): grid 3 zonas (brand | menu | acciones) ======= */
+@media (min-width:992px){
+  #mainNav > .container{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;min-height:var(--nav-h-desktop);
+  }
+  /* Menú realmente centrado */
+  #navbarMain{grid-column:2;justify-self:center;}
+  .navbar-expand-lg #navbarMain{display:flex!important;}
+  #mainNav .navbar-nav.main-menu{justify-content:center;}
+  /* Redes visibles solo en desktop */
+  #mainNav .nav-social{display:inline-flex!important;}
+  /* El menú NO es desplegable en desktop (Bootstrap ya lo hace con navbar-expand-lg) */
+}
+
+/* ======= Mobile/Tablet (≤991.98px) ======= */
 @media (max-width:991.98px){
-  .navbar .navbar-collapse{
+  /* Layout: brand a la izquierda | acciones a la derecha, apoyadas abajo */
+  #mainNav > .container{
+    display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:end;min-height:var(--nav-h-mobile);
+  }
+  #mainNav .navbar-brand{align-self:center;}
+  #mainNav .nav-actions{grid-column:2;justify-self:end;align-items:end;height:var(--nav-h-mobile);gap:6px;}
+  #mainNav .icon-btn,#mainNav .nav-cart-btn,#mainNav .navbar-toggler{align-self:end;}
+  /* Orden: carrito a la izquierda del menú hamburguesa */
+  #mainNav .nav-cart-btn{order:1;} #mainNav .navbar-toggler{order:2;}
+  /* Redes ocultas en header móvil (aparecen dentro del menú colapsado) */
+  #mainNav .nav-social{display:none!important;}
+  /* Logo detrás: tamaño móvil, misma posición antigua */
+  #mainNav .brand-mark{left:-12px;bottom:-5px;height:50px;transform:translateX(-50%);}
+  /* Panel colapsable con sombra y borde arriba, no empuja el header */
+  #mainNav .navbar-collapse{
     position:static;background:#fff;border-top:1px solid rgba(0,0,0,.06);
     margin-top:.5rem;border-radius:.75rem;box-shadow:0 10px 28px rgba(0,0,0,.08);
   }
-  .navbar .navbar-toggler,
-  .navbar .nav-cart-btn{position:relative;z-index:1052;}
+  /* Redes centradas al final del menú colapsado */
+  .nav-social-mobile{display:flex!important;justify-content:center!important;gap:.75rem!important;padding:.75rem 0 .25rem!important;}
+  .nav-social-mobile .social-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(0,0,0,.12);border-radius:.65rem;background:#fff;}
 }
 
-/* ===== Navbar — alineación limpia y separación exacta en mobile ===== */
-@media (max-width:575.98px){
-  .navbar{min-height:56px;}
-  .navbar .ms-auto{
-    display:flex!important;align-items:center!important;gap:5px!important; /* ← separación exacta */
-    margin-left:auto!important;
-  }
-  .navbar .nav-cart-btn,
-  .navbar .navbar-toggler{
-    width:42px;height:42px;padding:0;display:inline-grid;place-items:center;
-    border-radius:.75rem;border:1px solid rgba(0,0,0,.12);background:#fff;line-height:1;
-  }
-  .navbar .nav-cart-btn .bi,
-  .navbar .navbar-toggler .navbar-toggler-icon{font-size:1.1rem;width:1.25rem;height:1.25rem;}
-  .navbar .nav-cart-btn .badge{position:absolute;top:-6px;right:-6px;}
-}
+/* Consistencia de padding en links del menú */
+#mainNav .nav-link{padding:.5rem 1rem;}
 
-/* ========== 3) Hero fullscreen ========== */
+/* ==========================================================================
+   3) HERO FULLSCREEN (igual que antes)
+   ========================================================================= */
 .hero-fullscreen{min-height:80vh;position:relative;isolation:isolate;}
 .hero-fullscreen .hero-bg{height:100vh;object-fit:cover;width:100%;}
 .hero-fullscreen .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45));z-index:0;}
 .hero-fullscreen .hero-caption{position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45);}
 .hero-fullscreen .caption-inner{max-width:840px}
-.badge-accent{background:#ffc94d;color:#2b1b00;border-radius:999px;padding:.35rem .7rem;font-weight:800}
+.badge-accent{background:#ffc94d;color:#2b1b00;border-radius:999px;padding:.45rem .8rem;font-weight:800}
 
 /* Overlay centrado total (compacto) */
 .hero-fullscreen .hero-overlay{display:none!important;background:none!important;}
@@ -94,7 +141,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 }
 
 /* =========================
-   SERVICIOS (chips)
+   4) SERVICIOS (chips)
    ========================= */
 .service-wrap{padding-left:.5rem;padding-right:.5rem;gap:16px;}
 .svc-card{
@@ -115,16 +162,19 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 }
 
 /* ===============================
-   Key-value rectángulos
+   5) Key-value rectángulos
    =============================== */
-@media (min-width:768px){.kv-badges{grid-template-columns:repeat(3,1fr)!important;}}
+@media (min-width:768px){.kv-badges{grid-template-columns:repeat(4,1fr)!important;}}
 .kv-pill{display:grid;place-items:center;min-height:68px;border-radius:1rem;padding:1rem;color:#fff;font-weight:800;text-align:center;box-shadow:var(--soft-shadow);}
 .kv-pill.is-green{background:#2fb37a;border:2px solid #59c28f;}
 .kv-pill.is-orange{background:#ff8c42;border:2px solid #ffa45f;}
 .kv-pill.is-purple{background:#7D27F5;border:2px solid var(--lilac-500);}
+.kv-pill.is-red{background:#ff4242;border:2px solid #ff5f5f;}
 .kv-pill .kv-text{font-size:clamp(.95rem,2vw,1.1rem);line-height:1.2}
 
-/* ========== 6) Grid pastelería y personalizador ========== */
+/* ===============================
+   6) Grid pastelería y personalizador
+   =============================== */
 #packs{scroll-margin-top:90px;}
 .products-row{position:relative;z-index:1;}
 .product-col.active .btn-select{display:none!important;}
@@ -147,7 +197,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 #best .btn-brand:hover,#best .btn-brand:active,
 .best-grid .btn-brand:hover,.best-grid .btn-brand:active{box-shadow:none!important;transform:none!important;}
 
-/* ========== Botones select ========== */
+/* Botones select */
 .btn-select{
   background:linear-gradient(180deg,var(--accent-yellow-300),var(--accent-yellow-500));
   color:var(--ink);border:0;border-radius:999px;font-weight:800;letter-spacing:.15px;
@@ -167,7 +217,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .btn-surprise{width:56px;height:56px;border-radius:50%;border:2px dashed var(--accent-yellow-500);background:#fff;color:#7a4d00;display:inline-grid;place-items:center}
 .btn-surprise:hover{filter:brightness(1.05)}
 
-/* ========== Calculadora (si se usa en otra sección) ========== */
+/* Calculadora */
 .btn-portion{
   background:linear-gradient(180deg,var(--accent-yellow-300),var(--accent-yellow-500));
   color:#2b1b00;border:0;border-radius:999px;padding:.45rem .9rem;font-weight:800;
@@ -180,7 +230,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .form-label{font-weight:700}
 #pc_base{font-size:.85rem;color:#6b7280}
 
-/* ========== Utiles ==========\ */
+/* Utiles */
 .section-title .bar{width:80px;height:6px;background:var(--accent-yellow-500);border-radius:999px}
 
 /* Botón marca */
@@ -189,7 +239,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .btn-lilac:active{transform:translateY(0);box-shadow:0 6px 16px rgba(125,39,245,.24);}
 .btn-lilac.btn-sm{font-size:.875rem;line-height:1.1}
 
-/* Swatches de colores (alineados con el título) */
+/* Swatches de colores */
 .cake-colors{display:flex;flex-wrap:wrap;gap:.5rem;}
 .cake-colors .form-check{margin:0;padding:0;}
 .cake-colors .form-check-input.pcolor{
@@ -212,9 +262,10 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 
 /* Offcanvas carrito debajo del navbar (compatibilidad) */
 #cart{top:var(--nav-offset,56px);}
+.offcanvas#cart{top:var(--nav-offset,56px)!important;}
 
 /* ===========================
-   Galería de tortas (carrusel + miniaturas)
+   7) Galería de tortas
    =========================== */
 .cake-carousel{width:280px;margin:0 auto;}
 .cake-main{
@@ -262,15 +313,14 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .footer-pattern .pattern-icon{position:absolute;left:0;top:0;transform:translate(-50%,-50%);color:rgba(255,255,255,.382);line-height:1;display:block;pointer-events:none;will-change:transform;}
 .footer>.container,.footer>*:not(.footer-pattern){position:relative;z-index:1}
 
-/* Tipografía Chewy */
+/* Tipografía Chewy (branding) */
 .brand-name{font-family:'Chewy',cursive!important;letter-spacing:.5px;}
-.navbar .brand-name{color:var(--brand-600)!important;font-size:clamp(1.4rem,2.8vw,1.9rem);}
-.navbar .brand-name:hover{filter:brightness(.95);}
 .title-hand,.section-title h1,.section-title h2,.footer .title-hand{font-family:'Chewy',cursive!important;font-weight:400;letter-spacing:.4px;color:inherit;}
 .title-hand{line-height:1.1;}
 .footer .brand-name{font-size:clamp(1.6rem,2.5vw,2rem);}
+.navbar .brand-name:hover{filter:brightness(.95);}
 
-/* Badge carrito */
+/* Badge carrito (botones sueltos) */
 .btn .cart-badge{position:absolute;top:-6px;right:-4px;min-width:22px;height:22px;border-radius:999px;background:#ff4d6d;color:#fff;font-weight:800;font-size:.8rem;display:inline-grid;place-items:center;padding:0 .35rem;box-shadow:0 2px 10px rgba(0,0,0,.12);}
 
 /* Botón marca azul */
@@ -280,7 +330,6 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 
 /* Miniatura fija antigua (compatibilidad) */
 .mini-thumb img.preview-cake{display:block;width:100%;height:auto;object-fit:cover;}
-.offcanvas#cart{top:var(--nav-offset,56px)!important;}
 
 /* === Orden en personalizador === */
 .products-row.personalizing{display:flex;flex-wrap:wrap;}
@@ -296,11 +345,11 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 }
 
 /* =========================================================
-   MODALES — Stacking + estilo
+   8) MODALES — Stacking + estilo
    ========================================================= */
 .modal-backdrop{z-index:1990!important;background:rgba(0,0,0,.45);}
 .modal{z-index:2000!important;}
-.navbar{z-index:1080!important;}
+/* la navbar ya tiene z-index 1080; no duplicar */
 
 /* Modal TORTAS */
 .modal.cake-modal .modal-dialog{max-width:1120px;}
@@ -350,19 +399,15 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 #productsRow .product-col,#packs .col-12{display:flex;}
 #productsRow .pastry-card,#packs .pastry-card{width:100%;}
 
-/* ===============================
-   Ajustes visuales precio + botón
-   =============================== */
+/* Ajustes visuales precio + botón */
 .buy-row{margin-top:.2rem!important;gap:.5rem;}
 .price{font-size:1.45rem!important;font-weight:900!important;color:#03c6d9!important;line-height:1;}
 .btn-lilac,.btn-select{padding:.55rem 1.1rem;font-weight:800;border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.08);}
 .btn-lilac:hover,.btn-select:hover{filter:brightness(1.05);transform:translateY(-1px);}
 @media (max-width:576px){.price{font-size:1.25rem!important;}}
 
-/* ===== Toast / Notificador (única definición) ===== */
-#alerts{
-  position:fixed;top:12px;right:12px;z-index:4000;display:flex;flex-direction:column;gap:8px;pointer-events:none;
-}
+/* ===== Toast / Notificador ===== */
+#alerts{position:fixed;top:12px;right:12px;z-index:4000;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
 .alert-pop{pointer-events:auto;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:#111827;color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.25);min-width:240px;max-width:360px;animation:pop-in .18s ease-out, pop-hold 2.6s linear .18s forwards, pop-out .22s ease-in 2.78s forwards;}
 .alert-pop.success{background:#064e3b;}
 .alert-pop.danger{background:#7f1d1d;}
@@ -380,7 +425,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 @keyframes pop-hold{from{opacity:1;}to{opacity:1;}}
 @keyframes pop-out{to{opacity:0;transform:translate3d(16px,-8px,0);}}
 
-/* ===== Nota (flyIn/flyOut) — única definición ===== */
+/* ===== Nota (flyIn/flyOut) ===== */
 #noteStack{position:fixed;top:1.25rem;right:1.25rem;width:20rem;max-width:calc(100vw - 2.5rem);pointer-events:none;z-index:20000;}
 .bc-note{pointer-events:auto;display:flex;align-items:stretch;background:#fff;color:#212529;border-radius:.75rem;box-shadow:0 .5rem 1rem rgba(0,0,0,.12);overflow:hidden;height:4rem;transform:translateY(0);margin-bottom:.75rem;animation:flyIn .3s ease-out both;}
 .bc-note__content{display:flex;align-items:center;gap:.75rem;padding:.5rem .875rem;flex:1 1 auto;}
@@ -402,14 +447,14 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 @keyframes flyInTop{from{transform:translateY(-120%);}to{transform:translateY(0);}}
 @keyframes flyOutTop{from{transform:translateY(0);}to{transform:translateY(-120%);opacity:.98;}}
 
-/* ============ Formularios redondeados y inputs ============ */
+/* ============ Formularios redondeados e inputs ============ */
 .form-control,.form-select,.input-group-text,.btn,.accordion-button{border-radius:.8rem!important;}
 .input-group .input-group-text{background:#f7f9ff;color:#1f2a37;font-weight:600;}
 .shadow-soft{box-shadow:0 .5rem 1.25rem rgba(0,0,0,.08)!important;}
 .cake-colors .form-check-input{width:1.15rem;height:1.15rem;}
 @media (max-width:575.98px){.cake-colors .form-check-input{width:1.35rem;height:1.35rem;}}
 
-/* ===== Centrado vertical de la galería en modales de tortas ===== */
+/* ===== Centrado vertical galería en modales de tortas ===== */
 .cake-modal .modal-content{max-height:88vh;}
 .cake-modal .modal-body{padding-top:.25rem;}
 .cake-modal .modal-body .row.align-items-start{align-items:stretch!important;min-height:calc(88vh - 4.5rem);}
@@ -419,7 +464,7 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 .cake-modal .thumbs{margin-top:.5rem;}
 .cake-modal .modal-body .col-12.col-lg-7{display:flex;flex-direction:column;justify-content:flex-start;}
 
-/* --- Input-group de fecha como un solo contenedor (fecha) --- */
+/* --- Input-group de fecha como un solo contenedor --- */
 .cart-modal .input-group,#cart .input-group{
   border:1px solid var(--bs-border-color);border-radius:.5rem;overflow:hidden;background:#fff;
 }
@@ -436,255 +481,3 @@ a{text-decoration:none} a:hover{text-decoration:underline}
 /* Notas mantienen su borde */
 .cart-modal textarea.form-control,#cart textarea.form-control{border:1px solid var(--bs-border-color);background:#fff;border-radius:.5rem;}
 
-
-/* Acciones del navbar (carrito + toggler) — MOBILE */
-@media (max-width: 575.98px){
-  .navbar{ min-height:56px; }
-
-  /* contenedor de acciones alineado y con gap exacto */
-  .nav-actions{
-    display:flex !important;
-    align-items:center !important;
-    gap:5px !important;           /* carrito 5px a la izquierda del menú */
-    margin-left:auto !important;
-  }
-
-  /* los dos botones con caja idéntica para que queden al ras */
-  .nav-cart-btn,
-  .navbar-toggler{
-    width:42px; height:42px; padding:0;
-    display:inline-grid; place-items:center;
-    border-radius:.75rem;
-    border:1px solid rgba(0,0,0,.12);
-    background:#fff; line-height:1;
-  }
-
-  .nav-cart-btn .bi,
-  .navbar-toggler .navbar-toggler-icon{ width:1.25rem; height:1.25rem; font-size:1.1rem; }
-  .nav-cart-btn .badge{ position:absolute; top:-6px; right:-6px; }
-}
-
-/* Panel colapsable: cae debajo del navbar sin deformarlo (ya lo tenías) */
-@media (max-width: 991.98px){
-  .navbar .navbar-collapse{
-    position:static; background:#fff; border-top:1px solid rgba(0,0,0,.06);
-    margin-top:.5rem; border-radius:.75rem; box-shadow:0 10px 28px rgba(0,0,0,.08);
-  }
-  .navbar .navbar-toggler, .navbar .nav-cart-btn{ position:relative; z-index:1052; }
-}
-
-/* Redes en navbar (desktop) y dentro del menú (mobile) */
-.nav-social .nav-link,
-.nav-social-mobile .social-icon{
-  display:inline-grid; place-items:center;
-  width:38px; height:38px; border-radius:.65rem;
-  border:1px solid rgba(0,0,0,.12); background:#fff;
-}
-.nav-social .nav-link i,
-.nav-social-mobile .social-icon i{ font-size:1.05rem; line-height:1; }
-.nav-social .nav-link:hover,
-.nav-social-mobile .social-icon:hover{ filter:brightness(0.98); }
-
-
-
-
-/* ===== Navbar base ===== */
-.navbar{position:sticky;top:0;z-index:1080;background:#fff;}
-.navbar .container{min-height:56px}
-
-/* Marca: texto por encima y logo por detrás, apoyado en el borde inferior */
-.navbar .navbar-brand{
-  position:relative;
-  display:flex;
-  align-items:end;
-}
-.navbar .brand-name{
-  font-family:'Chewy', cursive;
-  font-size:clamp(1.4rem,2.8vw,1.9rem);
-  color:#1f6feb; /* mantiene tu azul */
-  position:relative;
-  z-index:2; /* sobre el logo */
-}
-.navbar .brand-mark{
-  position:absolute;
-  left:-60px;        /* ajusta fino horizontal (recupera la posición original) */
-  bottom:-6px;       /* base del logo “apoyada” en borde inferior del navbar */
-  height:60px;       /* tamaño desktop */
-  width:auto;
-  z-index:1;         /* detrás del texto */
-  pointer-events:none;
-}
-
-/* ===== Menú centrado en desktop ===== */
-@media (min-width: 992px){
-  .navbar .navbar-collapse{flex-grow:0;}
-  .navbar .navbar-collapse .navbar-nav{
-    justify-content:center;
-    align-items:center;
-  }
-}
-
-/* ===== Acciones de la derecha (desktop): IG, WA, Carrito) ===== */
-.nav-actions{gap:.5rem}
-.icon-btn{
-  width:42px;height:42px;
-  display:inline-grid;place-items:center;
-  padding:0;border-radius:.75rem;
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;line-height:1;
-}
-.icon-btn .bi{font-size:1.2rem}
-.nav-cart-btn .badge{
-  position:absolute;top:-6px;right:-6px;
-}
-
-/* ===== Mobile: carrito + hamburguesa alineados y separados ===== */
-@media (max-width: 991.98px){
-  .navbar .icon-btn{width:42px;height:42px}
-  .navbar .navbar-toggler.icon-btn{border:1px solid rgba(0,0,0,.12)}
-  .navbar{min-height:56px}
-}
-
-/* Redes centradas dentro del menú móvil, con pequeña separación baja */
-@media (max-width: 991.98px){
-  #mainNav .icon-btn{margin-top:.25rem}
-  #mainNav .border-top{margin-top:.25rem}
-}
-
-/* ===== Logo tamaño móvil y centrado visual bajo el texto ===== */
-@media (max-width: 575.98px){
-  .navbar .brand-mark{
-    left:-12px;      /* suficiente para quedar “detrás” del texto */
-    bottom:-5px;
-    height:50px;     /* tamaño móvil */
-  }
-}
-
-/* ===== Colapso del menú sin deformar el navbar (solo mobile) ===== */
-@media (max-width: 991.98px){
-  .navbar .navbar-collapse{
-    position:static;
-    background:#fff;
-    border-top:1px solid rgba(0,0,0,.06);
-    margin-top:.5rem;
-    border-radius:.75rem;
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
-  }
-}
-
-/* ===== Alineación de los chips/servicios (sin tocar colores/efectos) ===== */
-.svc-card{
-  height:54px; padding:0 22px; border-radius:9999px;
-  border:2px solid rgba(0,174,239,.35);
-  background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.04);
-  display:flex; align-items:center; gap:10px; min-width:180px;
-  transition:.12s ease; cursor:pointer; user-select:none;
-}
-.svc-ico{font-size:1.25rem; line-height:1; opacity:.9;}
-.svc-title{font-weight:600; font-size:1rem; white-space:nowrap;}
-@media (max-width:575.98px){
-  .svc-card{height:50px; min-width:160px; gap:8px;}
-  .svc-ico{font-size:1.15rem}
-  .svc-title{font-size:.95rem}
-}
-
-
-/* ===== Navbar base ===== */
-.navbar{position:sticky;top:0;z-index:1080;background:#fff;}
-.navbar .container{min-height:56px}
-
-/* Marca: texto por encima y logo por detrás, apoyado en el borde inferior */
-.navbar .navbar-brand{
-  position:relative;
-  display:flex;
-  align-items:end;
-}
-.navbar .brand-name{
-  font-family:'Chewy', cursive;
-  font-size:clamp(1.4rem,2.8vw,1.9rem);
-  color:#1f6feb; /* mantiene tu azul */
-  position:relative;
-  z-index:2; /* sobre el logo */
-}
-.navbar .brand-mark{
-  position:absolute;
-  left:-60px;        /* ajusta fino horizontal (recupera la posición original) */
-  bottom:-6px;       /* base del logo “apoyada” en borde inferior del navbar */
-  height:60px;       /* tamaño desktop */
-  width:auto;
-  z-index:1;         /* detrás del texto */
-  pointer-events:none;
-}
-
-/* ===== Menú centrado en desktop ===== */
-@media (min-width: 992px){
-  .navbar .navbar-collapse{flex-grow:0;}
-  .navbar .navbar-collapse .navbar-nav{
-    justify-content:center;
-    align-items:center;
-  }
-}
-
-/* ===== Acciones de la derecha (desktop): IG, WA, Carrito) ===== */
-.nav-actions{gap:.5rem}
-.icon-btn{
-  width:42px;height:42px;
-  display:inline-grid;place-items:center;
-  padding:0;border-radius:.75rem;
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;line-height:1;
-}
-.icon-btn .bi{font-size:1.2rem}
-.nav-cart-btn .badge{
-  position:absolute;top:-6px;right:-6px;
-}
-
-/* ===== Mobile: carrito + hamburguesa alineados y separados ===== */
-@media (max-width: 991.98px){
-  .navbar .icon-btn{width:42px;height:42px}
-  .navbar .navbar-toggler.icon-btn{border:1px solid rgba(0,0,0,.12)}
-  .navbar{min-height:56px}
-}
-
-/* Redes centradas dentro del menú móvil, con pequeña separación baja */
-@media (max-width: 991.98px){
-  #mainNav .icon-btn{margin-top:.25rem}
-  #mainNav .border-top{margin-top:.25rem}
-}
-
-/* ===== Logo tamaño móvil y centrado visual bajo el texto ===== */
-@media (max-width: 575.98px){
-  .navbar .brand-mark{
-    left:-12px;      /* suficiente para quedar “detrás” del texto */
-    bottom:-5px;
-    height:50px;     /* tamaño móvil */
-  }
-}
-
-/* ===== Colapso del menú sin deformar el navbar (solo mobile) ===== */
-@media (max-width: 991.98px){
-  .navbar .navbar-collapse{
-    position:static;
-    background:#fff;
-    border-top:1px solid rgba(0,0,0,.06);
-    margin-top:.5rem;
-    border-radius:.75rem;
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
-  }
-}
-
-/* ===== Alineación de los chips/servicios (sin tocar colores/efectos) ===== */
-.svc-card{
-  height:54px; padding:0 22px; border-radius:9999px;
-  border:2px solid rgba(0,174,239,.35);
-  background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.04);
-  display:flex; align-items:center; gap:10px; min-width:180px;
-  transition:.12s ease; cursor:pointer; user-select:none;
-}
-.svc-ico{font-size:1.25rem; line-height:1; opacity:.9;}
-.svc-title{font-weight:600; font-size:1rem; white-space:nowrap;}
-@media (max-width:575.98px){
-  .svc-card{height:50px; min-width:160px; gap:8px;}
-  .svc-ico{font-size:1.15rem}
-  .svc-title{font-size:.95rem}
-}
