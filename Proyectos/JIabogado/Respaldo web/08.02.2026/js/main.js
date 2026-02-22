@@ -1,1 +1,0 @@
-window.addEventListener("scroll", () => { const hero = document.querySelector(".hero"); if (!hero) return; hero.style.opacity = Math.max(0, 1 - window.scrollY / 700); });
