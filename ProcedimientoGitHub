@@ -1,7 +1,6 @@
 Procedimiento seguro y rápido para:
 
-Subir tus cambios locales a GitHub, y
-Traer la última versión del remoto para quedar sincronizado.
+Subir tus cambios locales a GitHub, y Traer la última versión del remoto para  quedar sincronizado.
 
 Remoto: git@github.com:AntonioHelheim/web.git (rama main)
 Carpeta de trabajo: /home/antonio/Documentos/public_html
@@ -11,7 +10,6 @@ En GitBash o Terminal:
 Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
 
 cd /home/antonio/Documentos/public_html
-cd /home/antonio/Documentos/public_html/Proyectos/CFTdeMagallanes
 
 # 1) Ver estado actual de la carpeta y sus elementos
 git status
@@ -29,12 +27,10 @@ git stash pop
 
 # 5) Preparar y registrar tus cambios
 git add -A
-git commit -m "Describe claramente qué cambiaste y por qué"
-git commit -m "Actualiza contenido del proyecto (describe brevemente qué cambió)"
+git commit -m "Actualizacion de Codigo"
 
 # 6) Subir a GitHub
 git push origin main ->cd /home/antonio/Documentos/public_html
-git push -u origin Main ->cd /home/antonio/Documentos/public_html/Proyectos/CFTdeMagallanes
 
 
 
