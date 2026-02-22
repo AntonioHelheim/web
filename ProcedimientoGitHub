@@ -30,9 +30,4 @@ git add -A
 git commit -m "Actualizacion de Codigo"
 
 # 6) Subir a GitHub
-git push origin main ->cd /home/antonio/Documentos/public_html
-
-
-
-
-
+git push origin main 
