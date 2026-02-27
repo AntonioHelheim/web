@@ -7,27 +7,27 @@ Carpeta de trabajo: /home/antonio/Documentos/public_html
 
 
 En GitBash o Terminal:
-Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
 
+# 1) Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
 cd /home/antonio/Documentos/public_html
 
-# 1) Ver estado actual de la carpeta y sus elementos
+# 2) Ver estado actual de la carpeta y sus elementos
 git status
 
-# 2) Guardar temporalmente cambios sin commit (incluye untracked)
+# 3) Guardar temporalmente cambios sin commit (incluye untracked)
 git stash push -u -m "backup antes de pull"
 
-# 3) Traer cambios más recientes del remoto
+# 4) Traer cambios más recientes del remoto
 git fetch origin
 git checkout main
 git pull --rebase origin main   
 
-# 4) Recuperar tus cambios guardados
+# 5) Recuperar tus cambios guardados
 git stash pop
 
-# 5) Preparar y registrar tus cambios
+# 6) Preparar y registrar tus cambios
 git add -A
 git commit -m "Actualizacion de Codigo"
 
-# 6) Subir a GitHub
+# 7) Subir a GitHub
 git push origin main 
