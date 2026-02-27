@@ -42,7 +42,8 @@
 <!--==================== END Meta Tags Generated with https://metatags.io ====================-->
 
 <!--=============== BootStrap CSS ===============-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <!--=============== END BootStrap CSS ===============-->
 <!-- Styles -->
@@ -145,28 +146,117 @@
 
     <!--==================== END HEADER ====================-->
     
+<!--==================== Carousel Desktop (md+) ====================-->
+<div id="CarouselDesktopContainer" class="overflow-hidden d-none d-md-block" style="max-height: 650px;">
+  <div id="CarouselDesktop" class="carousel slide h-100" data-bs-ride="carousel">
+    <div class="carousel-inner h-100">
+      <!-- Ajusta las rutas e imágenes al tamaño y diseño de desktop -->
+      
+      <div class="carousel-item active h-100" data-bs-interval="3000">
+        <img src="./images/desk/004-bannerdesk-soldigi.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerSolucionesDigitales">
+      </div>
+
+      <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="./images/desk/002-bannerdesk-gespro.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerGestionProyectos">
+      </div>
+      
+      <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="./images/desk/007-bannerdesk-scanner.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerEscanerVehicular">
+      </div>
+
+      <div class="carousel-item  h-100" data-bs-interval="3000">
+        <img src="./images/desk/001-bannerdesk-desweb.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerDesarrolloWeb">
+      </div>
+
+      <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="./images/desk/005-bannerdesk-disind.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerDiseñoIndustrial">
+      </div>
+
+      <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="./images/desk/006-bannerdesk-disgra.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerDiseñoGráfico">
+      </div>
+
+      <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="./images/desk/003-bannerdesk-tecdron.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerTecnologiaDrones">
+      </div>
+
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+</div>
+<!--==================== END Carousel Desktop ====================-->
+
 <!--==================== Carousel Móvil ====================-->
 <div id="CarouselMovil" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="3500">
-      <img src="./images/movil/001-bannermobile-desweb.png" class="d-block w-100" alt="...">
+    
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="./images/movil/004-bannermobile-soldigi.png" 
+      class="d-block w-100" alt="BannerSolucionesDigitales">
     </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="./images/movil/002-bannermobile-gespro.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/002-bannermobile-gespro.png" 
+      class="d-block w-100" alt="BannerGestiónProyectos">
     </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="./images/movil/003-bannermobile-tecdron.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/007-bannerdesk-scanner.png" 
+      class="d-block w-100" alt="BannerEscanerVehicular">
     </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="./images/movil/004-bannermobile-soldigi.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/001-bannermobile-desweb.png" 
+      class="d-block w-100" alt="BannerDesarrolloWeb">
     </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="./images/movil/005-bannermobile-disind.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/005-bannermobile-disind.png" 
+      class="d-block w-100" alt="BannerDiseñoIndustrial">
     </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="./images/movil/006-bannermobile-disgra.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/006-bannermobile-disgra.png" 
+      class="d-block w-100" alt="BannerDiseñoGráfico">
     </div>
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="./images/movil/003-bannermobile-tecdron.png" 
+      class="d-block w-100" alt="BannerTecnologíaDrones">
+    </div>
+
   </div>
+
   <button class="carousel-control-prev" type="button" data-bs-target="#CarouselMovil" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
@@ -178,59 +268,6 @@
 </div>
 <!--==================== END Carousel Móvil ====================-->
 
-<!--==================== Carousel Desktop (md+) ====================-->
-<div id="CarouselDesktopContainer" class="overflow-hidden d-none d-md-block" style="max-height: 650px;">
-  <div id="CarouselDesktop" class="carousel slide h-100" data-bs-ride="carousel">
-    <div class="carousel-inner h-100">
-      <!-- Ajusta las rutas e imágenes al tamaño y diseño de desktop -->
-      <div class="carousel-item active h-100" data-bs-interval="3500">
-        <img src="./images/desk/001-bannerdesk-desweb.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 1">
-      </div>
-      <div class="carousel-item h-100" data-bs-interval="3500">
-        <img src="./images/desk/002-bannerdesk-gespro.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 2">
-      </div>
-      <div class="carousel-item h-100" data-bs-interval="3500">
-        <img src="./images/desk/003-bannerdesk-tecdron.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 3">
-      </div>
-      <div class="carousel-item h-100" data-bs-interval="3500">
-        <img src="./images/desk/004-bannerdesk-soldigi.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 4">
-      </div>
-      <div class="carousel-item h-100" data-bs-interval="3500">
-        <img src="./images/desk/005-bannerdesk-disind.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 5">
-      </div>
-      <div class="carousel-item h-100" data-bs-interval="3500">
-        <img src="./images/desk/006-bannerdesk-disgra.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="Banner Desktop 6">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div>
-<!--==================== END Carousel Desktop ====================-->
 
 <div class="container"></div>
 
@@ -343,46 +380,6 @@
 
 <!--==================== END PRUEBA 01 CARDS ====================-->
 
-
-
-<!--==================== CARDS TI y DI ====================-->
-<!-- <div class="container mt-4" id="ConsultoriaTI">
-  <div class="card mb-3 border-0">
-    <div class="row g-0">
-      <div class="col">
-        <div class="card-body">
-          <h2 class="card-title">
-            <a href="https://www.helheim.cl/section/01_CTI_ISDW_IS.html"
-               class="fw-bold text-body text-decoration-none">
-               Consultoría TI</a></h2>
-                <p>Implementación de sistemas y desarrollo web con Bootstrap, JavaScript, PHP, MySQL, Python, React y Angular. Gestión de proyectos mediante Scrum o cascada. Integración de soluciones en hidrógeno verde y desarrollo en uso de drones DJI.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-<!--==================== Diseño Industrial ====================-->
-<!-- <div class="container mt-4" id="disenoindustrial">
-  <div class="card mb-3 border-0">
-    <div class="row g-0">
-      <div class="col">
-        <div class="card-body">
-          <h2 class="card-title">
-            <a href="https://www.helheim.cl/section/10_DIN_IyC_DG.html"
-               class="fw-bold text-body text-decoration-none">
-               Diseño Industrial</a></h2>
-                <p>Desarrollo y producción con modelado 3D y creación de prototipos físicos o virtuales.Diseño de animación, diseño de banner web y gráfico orientado al producto, identidad visual y marketing, para soluciones innovadoras, funcionales y coherentes.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
 <!--==================== END CARDS TI y DI ====================-->
 <div class="container mt-2">
   <p class="text-success fs-5 text-center mb-2">
@@ -472,6 +469,8 @@
 </section>
 
 <script>
+
+
 // Bootstrap 5 form validation script :contentReference[oaicite:1]{index=1}
 (function () {
     'use strict'
@@ -506,17 +505,7 @@
       </h5>
       
       <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA. RUT: 77.742.346-0</p>
-      
-      <p class="mb-1">
-        Web desarrollada por 
-        <a href="https://www.helheim.cl/section/Portfolio-Juan-Antonio-Concha-Loyola/index.html" target="_blank" class="text-white text-decoration-none">
-          JACL
-        </a> 
-        y 
-        <a href="https://helheim.cl/section/Portfolio-Maite-Lazcano/index.html" target="_blank" class="text-white text-decoration-none">
-          MCLG
-        </a>
-      </p>
+     
       
       <p class="mb-0">Últ. act. febrero 2026</p>
     </div>
@@ -524,9 +513,6 @@
 </footer>
 
 <!--==================== END FOOTER ====================-->
-
-
-
 <!--=============== Latest compiled JavaScript ===============-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
