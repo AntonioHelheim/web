@@ -97,7 +97,6 @@ if ($formatter === null) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -142,7 +141,8 @@ if ($formatter === null) {
 <!--==================== END Meta Tags Generated with https://metatags.io ====================-->
 
 <!--=============== BootStrap CSS ===============-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <!--=============== END BootStrap CSS ===============-->
 <!-- Styles -->
@@ -150,15 +150,14 @@ if ($formatter === null) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-<link href="https://www.helheim.cl/css/styles_v_1.css?v=2025-10-02-1925" rel="stylesheet"/>
+<link href="./css/styles_v_1.css?v=2025-10-02-1925" rel="stylesheet"/>
 
 
 </head> 
-
-<body class="bg-black text-light">
-
-<!--==================== HEADER ====================-->
+<body class="bg-black">
+    <!--==================== HEADER ====================-->
 <header class="header" id="header">
+  
   <!--==================== NavBar ====================--> 
   <nav class="navbar bg-black navbar-dark fixed-top">
     <div class="container-fluid">
@@ -242,9 +241,82 @@ if ($formatter === null) {
     </div>
   </nav>
 </header>
+<!--==================== END HEADER ====================-->
 
+<!--==================== Carousel Desktop (md+) ====================-->
+<div id="CarouselDesktopContainer" class="overflow-hidden d-none d-md-block" style="max-height: 650px;">
+  <div id="CarouselDesktop" class="carousel slide h-100" data-bs-ride="carousel">
+    <div class="carousel-inner h-100">
+      <!-- Ajusta las rutas e imágenes al tamaño y diseño de desktop -->
+      
+      <div class="carousel-item active h-100" data-bs-interval="3000">
+        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerEscanerVehicular">
+      </div>
 
-    <!--==================== END HEADER ====================-->
+            <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerEscanerVehicular">
+      </div>
+
+            <div class="carousel-item h-100" data-bs-interval="3000">
+        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
+             class="d-block w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="BannerEscanerVehicular">
+      </div>
+      
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+</div>
+<!--==================== END Carousel Desktop ====================-->
+
+<!--==================== Carousel Móvil ====================-->
+<div id="CarouselMovil" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
+      class="d-block w-100" alt="BannerEscanerVehicular">
+    </div>
+
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
+      class="d-block w-100" alt="BannerEscanerVehicular">
+    </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
+      class="d-block w-100" alt="BannerEscanerVehicular">
+    </div>
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#CarouselMovil" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#CarouselMovil" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!--==================== END Carousel Móvil ====================-->
+
 
 <div class="container mt-5 pt-5">
 
@@ -323,7 +395,7 @@ if ($formatter === null) {
                         <?php else: ?>
                             <tr>
                                 <td colspan="6" class="text-center text-muted">
-                                    No existen registros para esta patente.
+                                    No existen registros en nuestro sistema para esta patente.
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -338,14 +410,36 @@ if ($formatter === null) {
 
 </div>
 
-<footer class="footer bg-dark text-white py-4 mt-5 text-center">
-    <small>
-        &copy; <?= date('Y') ?> Helheim Tierra del Fuego
-    </small>
+
+<!--==================== FOOTER ====================-->
+<footer class="footer bg-dark text-white py-4">
+  <div class="container">
+    <hr class="border-secondary">
+
+    <div class="text-center small">
+      <h5 class="mb-1">
+        &copy; 
+        <a href="https://helheim.cl" target="_blank" class="text-white text-decoration-none fw-semibold">
+          Helheim
+        </a> 
+        - 🏢 Fundada en 2023 en Tierra del Fuego, Porvenir
+      </h5>
+      
+      <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA. RUT: 77.742.346-0</p>
+    
+     
+      <p class="mb-0">Últ. act. febrero 2026</p>
+    </div>
+  </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<!--==================== END FOOTER ====================-->
+<!--=============== Latest compiled JavaScript ===============-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="./js/main.js?v=2025-10-02-1925"></script>
 </body>
+
 </html>
 
 <?php
