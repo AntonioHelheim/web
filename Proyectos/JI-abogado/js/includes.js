@@ -1,11 +1,13 @@
+// 👇 Actualiza este número cada vez que subas cambios
+const CACHE_VERSION = "2026-03-11-1800";
+
 function loadSection(id, file, callback) {
-  fetch(file)
+  fetch(`${file}?v=${CACHE_VERSION}`)
     .then(res => res.text())
     .then(data => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = data;
 
-      // ejecutar callback después de cargar partial
       if (callback) callback();
     })
     .catch(err => console.error(`Error cargando ${file}`, err));

@@ -2,21 +2,40 @@
   <div class="container">
     <h2 class="section-title">Inicie la Defensa de sus Derechos Hoy</h2>
 
-    <form class="contact-form mt-5">
-      <input type="text" class="form-control" placeholder="Nombre completo">
-      <input type="tel" class="form-control" placeholder="Teléfono">
-      <input type="email" class="form-control" placeholder="Correo electrónico">
+    <form
+  action="https://formspree.io/f/maqpopva"
+  method="POST"
+  class="needs-validation"
+  novalidate
+>
+  <div class="mb-3">
+    <label for="name" class="form-label text-darker">Tu nombre:</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+    <div class="invalid-feedback text-darker bg-danger bg-opacity-25 rounded px-2">
+      Por favor ingresa tu nombre.
+    </div>
+  </div>
 
-      <select class="form-select">
-        <option>Motivo de consulta</option>
-        <option>Laboral</option>
-        <option>Fraude</option>
-        <option>Compliance</option>
-        <option>Cibercrimen</option>
-        <option>Familia</option>
-      </select>
+  <div class="mb-3">
+    <label for="email" class="form-label text-darker">Tu correo electrónico:</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="nombre@correo.com" required>
+    <div class="invalid-feedback text-white bg-danger bg-opacity-25 rounded px-2">
+      Por favor ingresa un correo válido.
+    </div>
+  </div>
 
-      <button class="btn btn-success mt-3">Enviar Consulta</button>
-    </form>
+  <div class="mb-3">
+    <label for="message" class="form-label text-darker">Tu mensaje:</label>
+    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Cuéntanos sobre tu problema legal..." required></textarea>
+    <div class="invalid-feedback text-white bg-danger bg-opacity-25 rounded px-2">
+      Por favor escribe tu mensaje.
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="submit" class="btn btn-outline-dark">Enviar</button>
+  </div>
+</form>
+        
   </div>
 </section>
