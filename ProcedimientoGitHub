@@ -31,3 +31,7 @@ git commit -m "Actualizacion de Codigo"
 
 # 7) Subir a GitHub
 git push origin main 
+
+# 8) Comprobamos que todo esté correcto
+git status
+
