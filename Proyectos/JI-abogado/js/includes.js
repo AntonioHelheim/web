@@ -1,4 +1,4 @@
-// 👇 Actualiza este número cada vez que subas cambios
+//  Actualiza este número cada vez que subas cambios
 const CACHE_VERSION = "2026-03-11-1800";
 
 function loadSection(id, file, callback) {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSection("contacto", "./partials/contacto.html");
   loadSection("footer", "./partials/footer.html");
 
-  // 🔴 MOBILE MENU
+  // MOBILE MENU
   loadSection("mobileMenu", "./partials/menu.html", () => {
     if (typeof initMobileMenu === "function") {
       initMobileMenu();
