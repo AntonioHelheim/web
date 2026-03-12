@@ -1,0 +1,63 @@
+#0 Abrir Terminal
+Control+Alt+T
+
+#1 Detener servidores en localhost
+sudo systemctl stop apache2
+sudo systemctl stop mysql
+sudo /opt/lampp/lampp stop
+
+#2 Identificar que servidor tienes instalado
+
+#XAMPP
+    ls /opt
+    #Si devuelve algo como:
+        /opt/lampp/lampp
+        #(En este caso "brave.com  google  lampp  zoom")
+        #Entonces tienes XAMPP instalado
+            #Para iniciar el servidor:
+            sudo /opt/lampp/lampp start
+            #Luego abre en navegador:
+            http://localhost
+            #Si ves la página de bienvenida de XAMPP, entonces tu servidor web está funcionando correctamente.
+            #Para acceder a phpMyAdmin:
+            http://localhost/phpmyadmin    
+
+
+-------------------------------------------------------------------------------
+#LAMP (No lo usamos en este curso, pero es bueno saberlo)
+    which apache2
+    #Si devuelve algo como:
+        /usr/sbin/apache2
+        #Entonces tienes Apache instalado (LAMP)
+            #Ahora revisa si está corriendo:
+            sudo systemctl status apache2
+            #Si aparece active (running) tu servidor web ya está activo.
+            #Para iniciarlo si está apagado:
+            sudo systemctl start apache2
+            #Ahora revisa si está corriendo:
+            sudo systemctl status apache2
+            #Luego abre en navegador:
+            http://localhost
+            #Si ves la página de bienvenida de Apache, entonces tu servidor web está funcionando correctamente.
+        #Ver si tienes Mysql instalado
+            mysql --version
+            #Luego revisa el servicio:
+            sudo systemctl status mysql
+            #Si no está activo, inícialo:
+            sudo systemctl start mysql
+            #Revisa nuevamente el estado:
+            sudo systemctl status mysql
+            #Si ambos servicios están activos, entonces tu entorno de desarrollo local está listo para usar.    
+        #Ver si tienes PHP instalado
+            php --version
+            #Si ves la versión de PHP, entonces PHP está instalado correctamente.
+            #Luego abre en navegador:
+            http://localhost/phpmyadmin
+            #Si ves la página de phpMyAdmin, entonces tu entorno de desarrollo local está completamente funcional.
+
+
+
+
+    #Desarrollo frecuente con backEnd
+    sudo systemctl enable apache2
+    sudo systemctl enable mysql

@@ -17,8 +17,8 @@ if (getenv('APP_ENV') === 'production') {
 | Conexión
 |--------------------------------------------------------------------------
 */
-/*require __DIR__ . '/pages/dblocalhost.php';/*LocalHost*/
-require __DIR__ . '/pages/db.php';/*Produccion*/
+require __DIR__ . '/pages/dblocalhost.php';/*LocalHost*/
+/*require __DIR__ . '/pages/db.php';/*Produccion*/
 date_default_timezone_set('America/Santiago');
 
 /*
