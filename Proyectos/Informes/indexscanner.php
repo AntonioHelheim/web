@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Configuración de errores (CAMBIAR EN PRODUCCIÓN)
+| Configuración de errores
 |--------------------------------------------------------------------------
 */
 if (getenv('APP_ENV') === 'production') {
@@ -14,7 +14,7 @@ if (getenv('APP_ENV') === 'production') {
 
 /*
 |--------------------------------------------------------------------------
-| Conexión
+| Conexión y dependencias
 |--------------------------------------------------------------------------
 */
 require __DIR__ . '/pages/dblocalhost.php';/*LocalHost*/
@@ -23,28 +23,23 @@ date_default_timezone_set('America/Santiago');
 
 /*
 |--------------------------------------------------------------------------
-| Inicialización
+| Procesamiento de búsqueda (lógica de negocio centralizada aquí)
 |--------------------------------------------------------------------------
 */
-$results = [];
-$error = null;
+$results  = [];
+$error    = null;
 $searched = false;
 
-/*
-|--------------------------------------------------------------------------
-| Procesamiento de búsqueda
-|--------------------------------------------------------------------------
-*/
 $patente = strtoupper(trim($_GET['patente'] ?? ''));
 $patente = preg_replace('/[^A-Z0-9]/', '', $patente);
+
 if ($patente !== '') {
     $searched = true;
-    // Validación formato chileno común
     if (!preg_match('/^[A-Z]{4}[0-9]{2}$|^[A-Z]{2}[0-9]{4}$/', $patente)) {
         $error = "Formato de patente inválido.";
     } else {
         $stmt = $conn->prepare("
-            SELECT 
+            SELECT
                 field_279,
                 field_280,
                 field_281,
@@ -60,7 +55,7 @@ if ($patente !== '') {
         } else {
             $stmt->bind_param("s", $patente);
             if ($stmt->execute()) {
-                $result = $stmt->get_result();
+                $result  = $stmt->get_result();
                 $results = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
             } else {
                 $error = "Error al ejecutar la consulta.";
@@ -70,31 +65,45 @@ if ($patente !== '') {
     }
 }
 
+/*
+|--------------------------------------------------------------------------
+| Helper: formatear fecha desde timestamp
+|--------------------------------------------------------------------------
+*/
 function formatearFecha($valor) {
-    if (empty($valor) || !is_numeric($valor)) {
-        return '-';
-    }
+    if (empty($valor) || !is_numeric($valor)) return '-';
     $timestamp = (int)$valor;
-
-    if ($timestamp > 9999999999) {
-        $timestamp /= 1000;
-    }
+    if ($timestamp > 9999999999) $timestamp /= 1000;
     $fecha = new DateTime();
     $fecha->setTimestamp($timestamp);
     static $formatter = null;
-
-if ($formatter === null) {
-    $formatter = new IntlDateFormatter(
-        'es_CL',
-        IntlDateFormatter::LONG,
-        IntlDateFormatter::SHORT,
-        'America/Santiago',
-        IntlDateFormatter::GREGORIAN,
-        "d 'de' MMMM 'de' yyyy - HH:mm 'hrs'"
-    );
-    return $formatter->format($fecha);
+    if ($formatter === null) {
+        $formatter = new IntlDateFormatter(
+            'es_CL',
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::SHORT,
+            'America/Santiago',
+            IntlDateFormatter::GREGORIAN,
+            "d 'de' MMMM 'de' yyyy - HH:mm 'hrs'"
+        );
     }
+    return $formatter->format($fecha);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Pasar variables al scope de los componentes vía JSON (para JS si se necesita)
+|--------------------------------------------------------------------------
+*/
+$pageData = json_encode([
+    'patente'  => $patente,
+    'searched' => $searched,
+    'error'    => $error,
+    'count'    => count($results),
+]);
+
+$VERSION = '2026-03-12';
+//JACL
 
 ?>
 <!DOCTYPE html>
@@ -104,344 +113,122 @@ if ($formatter === null) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano"/>
+    <meta name="author"    content="Juan Antonio Concha Loyola"/>
     <meta name="copyright" content="Helheim Tierra del Fuego"/>
-    <meta name="robots" content="index"/>
+    <meta name="robots"    content="index"/>
 
-<!--==================== Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
-<link rel="shortcut icon" href="https://www.helheim.cl//images/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" sizes="180x180" href="https://www.helheim.cl//images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.helheim.cl//images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://www.helheim.cl//images/favicon-16x16.png">
+    <!-- Favicon -->
+    <link rel="shortcut icon"          href="https://www.helheim.cl/images/favicon.ico"              type="image/x-icon">
+    <link rel="apple-touch-icon"       sizes="180x180" href="https://www.helheim.cl/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png"  sizes="32x32"   href="https://www.helheim.cl/images/favicon-32x32.png">
+    <link rel="icon" type="image/png"  sizes="16x16"   href="https://www.helheim.cl/images/favicon-16x16.png">
 
-<!--==================== END Favicon Generated with https://favicon.io/favicon-converter/ ====================-->
-
-<!--==================== Meta Tags Generated with https://metatags.io ====================-->
-
-    <!-- Primary Meta Tags -->
-    <title>Helheim</title>
+    <!-- SEO / OG / Twitter -->
+    <title>Helheim.cl</title>
     <meta name="title" content="Helheim Tierra del Fuego"/>
     <meta name="description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://www.helheim.cl"/>
-    <meta property="og:title" content="Helheim Tierra del Fuego"/>
-    <meta property="og:description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
-    <meta property="og:image" content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png"/>
+    <meta property="og:type"        content="website"/>
+    <meta property="og:url"         content="https://www.helheim.cl"/>
+    <meta property="og:title"       content="Helheim Tierra del Fuego"/>
+    <meta property="og:description" content="Consultoria TI y Diseño Industrial"/>
+    <meta property="og:image"       content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png"/>
+    <meta property="twitter:card"        content="summary_large_image"/>
+    <meta property="twitter:url"         content="https://www.helheim.cl"/>
+    <meta property="twitter:title"       content="Helheim Tierra del Fuego"/>
+    <meta property="twitter:description" content="Consultoria TI y Diseño Industrial"/>
+    <meta property="twitter:image"       content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png"/>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content="https://www.helheim.cl"/>
-    <meta property="twitter:title" content="Helheim Tierra del Fuego"/>
-    <meta property="twitter:description" content="Gestion de proyectos, Desarrollo Web, Diseño Industrial y Diseño Grafico"/>
-    <meta property="twitter:image" content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
 
-<!--==================== END Meta Tags Generated with https://metatags.io ====================-->
+    <!--Normalizador de estilos para consistencia cross-browser-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-<!--=============== BootStrap CSS ===============-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
-integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<!--=============== END BootStrap CSS ===============-->
-<!-- Styles -->
- <!-- Fuente elegante para la cita -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-<link href="./css/styles_v_1.css?v=2025-10-02-1925" rel="stylesheet"/>
-
-
-</head> 
-<body class="bg-black">
-    <!--==================== HEADER ====================-->
-<header class="header" id="header">
-  
-  <!--==================== NavBar ====================--> 
-  <nav class="navbar bg-black navbar-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Helheim Tierra del Fuego</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto ">
-            <li class="nav-item">
-              <a href="https://www.helheim.cl" class="nav-link text-success fs-6">
-                <i class="bi bi-globe"></i> INICIO
-              </a>
-            </li>
-          <li class="nav-item">
-            <a href="https://www.helheim.cl/section/01_CTI_ISDW_IS.html" class="nav-link text-success fs-6">
-              <i class="bi bi-laptop me-1"></i> CONSULTORÍA TI
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://www.helheim.cl/section/10_DIN_IyC_DG.html" class="nav-link text-success fs-6">
-              <i class="bi bi-palette me-1"></i> DISEÑO INDUSTRIAL
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#formcontacto" class="nav-link text-success fs-6">
-              <i class="bi bi-envelope me-1"></i> FORMULARIO DE CONTACTO
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://helheim.cl/ruko/index.php?module=users/login" target="_blank" class="nav-link text-success fs-6">
-              <i class="bi bi-box-arrow-in-right me-1"></i>INTRANET HELHEIM
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://helheim.cl:2096/" target="_blank" class="nav-link text-success fs-6">
-              <i class="bi bi-envelope-open me-1"></i> CORREO HELHEIM
-            </a>
-          </li>
-
-          <!-- Separador -->
-          <li class="mt-4 text-decoration-none text-success fs-6">
-            Escríbenos a nuestro WhatsApp o Redes Sociales
-          </li>
-
-          <li class="nav-item">
-            <div class="row">
-              <div class="col-2 "></div>
-              <div class="col-2 text-center fs-3">
-                <a href="https://wa.me/56958453672?text=Hola, quiero saber mas sobre los Helheim y sus servicios" 
-                   target="_blank" 
-                   class="nav__link text-decoration-none text-danger">
-                  <i class="bi bi-whatsapp"></i>
-                </a>
-              </div>
-              <div class="col-2 text-center fs-3">
-                <a href="https://www.instagram.com/helheim_tierra_del_fuego/" target="_blank" 
-                class="nav__link text-decoration-none text-danger">
-                  <i class="bi bi-instagram"></i>
-                </a>
-              </div>
-              <div class="col-2 text-center fs-3">
-                <a href="https://www.linkedin.com/company/103153651/" target="_blank" 
-                   class="nav__link text-decoration-none text-danger">
-                  <i class="bi bi-linkedin"></i>
-                </a>
-              </div>
-              <div class="col-2 text-center fs-3">
-                <a href="https://web.facebook.com/HelheimTierradelfuego/" target="_blank" 
-                class="nav__link text-decoration-none text-danger">
-                  <i class="bi bi-facebook"></i>
-                </a>
-              </div>
-              <div class="col-2 "></div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-<!--==================== END HEADER ====================-->
-
-<!--==================== Carousel Desktop (md+) ====================-->
-<div id="CarouselDesktopContainer" class="overflow-hidden d-none d-md-block" style="max-height: 650px;">
-  <div id="CarouselDesktop" class="carousel slide h-100" data-bs-ride="carousel">
-    <div class="carousel-inner h-100">
-      <!-- Ajusta las rutas e imágenes al tamaño y diseño de desktop -->
-      
-      <div class="carousel-item active h-100" data-bs-interval="3000">
-        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="BannerEscanerVehicular">
-      </div>
-
-            <div class="carousel-item h-100" data-bs-interval="3000">
-        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="BannerEscanerVehicular">
-      </div>
-
-            <div class="carousel-item h-100" data-bs-interval="3000">
-        <img src="https://www.helheim.cl/images/desk/007-bannerdesk-scanner.png"
-             class="d-block w-100 h-100"
-             style="object-fit: cover; object-position: center;"
-             alt="BannerEscanerVehicular">
-      </div>
-      
-
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#CarouselDesktop" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-</div>
-<!--==================== END Carousel Desktop ====================-->
-
-<!--==================== Carousel Móvil ====================-->
-<div id="CarouselMovil" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
-  <div class="carousel-inner">
+    <!-- =============================================
+         DESIGN SYSTEM — orden de carga obligatorio
+         1. tokens globales (variables CSS)
+         2. CSS de cada componente
+    ============================================== -->
     
-    <div class="carousel-item active" data-bs-interval="3000">
-      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
-      class="d-block w-100" alt="BannerEscanerVehicular">
-    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    
+    <link rel="stylesheet" href="./shared/globals/variables.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/navbar/navbar.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/hero/hero.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/busqueda/busqueda.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/resultados/resultados.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/competencias/competencias.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/servicios/servicios.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./components/footer/footer.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./shared/scroll-top/scroll-top.css?v=<?= $VERSION ?>">
+    <link rel="stylesheet" href="./shared/whatsapp-btn/whatsapp-btn.css?v=<?= $VERSION ?>">
+</head>
+<body>
 
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
-      class="d-block w-100" alt="BannerEscanerVehicular">
-    </div>
+    <!-- ── NAVBAR ───────────────────────────────── -->
+    <?php include __DIR__ . '/components/navbar/navbar.php'; ?>
 
-        <div class="carousel-item" data-bs-interval="3000">
-      <img src="https://www.helheim.cl/images/movil/007-bannerdesk-scanner.png" 
-      class="d-block w-100" alt="BannerEscanerVehicular">
-    </div>
+    <!-- ── HERO (Carousels) ─────────────────────── -->
+    <?php include __DIR__ . '/components/hero/hero.php'; ?>
 
-  </div>
+    <!-- ── MAIN CONTENT ─────────────────────────── -->
+    <main class="main-section">
+        <div class="container">
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#CarouselMovil" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#CarouselMovil" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<!--==================== END Carousel Móvil ====================-->
-
-
-<div class="container mt-5 pt-5">
-
-    <!-- ==================== BUSQUEDA ==================== -->
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-
-                    <h5 class="text-center mb-3">Buscar Vehículo por Patente</h5>
-
-                    <form method="GET">
-                        <div class="input-group">
-                            <input 
-                                type="text"
-                                name="patente"
-                                class="form-control text-uppercase"
-                                placeholder="Ej: ABCD12"
-                                value="<?= htmlspecialchars($patente, ENT_QUOTES, 'UTF-8') ?>"
-                                required
-                            >
-                            <button class="btn btn-success" type="submit">
-                                Buscar
-                            </button>
-                        </div>
-                    </form>
-
+            <!-- Encabezado de página -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8 text-center text-md-start">
+                    <h1 class="section-heading">Escáner <span>Vehicular</span></h1>
+                    <div class="section-rule mx-auto mx-md-0"></div>
                 </div>
             </div>
+
+            <!-- ── BÚSQUEDA ──────────────────────── -->
+            <?php include __DIR__ . '/components/busqueda/busqueda.php'; ?>
+
+            <!-- ── RESULTADOS ───────────────────── -->
+            <?php include __DIR__ . '/components/resultados/resultados.php'; ?>
+
         </div>
-    </div>
+    </main>
 
-    <!-- ==================== RESULTADOS ==================== -->
-    <?php if ($searched): ?>
-        <div class="mt-4">
+    <!-- ── COMPETENCIAS ─────────────────────────── -->
+    <?php include __DIR__ . '/components/competencias/competencias.php'; ?>
 
-            <?php if ($error): ?>
-                <div class="alert alert-danger">
-                    <?= htmlspecialchars($error) ?>
-                </div>
+    <!-- ── SERVICIOS ESCÁNER ────────────────────── -->
+    <?php include __DIR__ . '/components/servicios/servicios.php'; ?>
 
-            <?php else: ?>
+    <!-- ── FOOTER ───────────────────────────────── -->
+    <?php include __DIR__ . '/components/footer/footer.php'; ?>
 
-                <div class="mb-2">
-                    <strong>Resultados para:</strong> <?= htmlspecialchars($patente) ?><br>
-                    <small><?= count($results) ?> registro(s) encontrado(s)</small>
-                </div>
+    <!-- ── UTILIDADES FLOTANTES ─────────────────── -->
+    <?php include __DIR__ . '/shared/scroll-top/scroll-top.php'; ?>
+    <?php include __DIR__ . '/shared/whatsapp-btn/whatsapp-btn.php'; ?>
 
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped table-bordered align-middle">
-                        <thead class="table-success text-dark">
-                            <tr>
-                                <th>Patente</th>
-                                <th>Fecha ejecucion</th>
-                                <th>Vin</th>
-                                <th>ThinkCar</th>
-                                <th>Conclusion Tecnica</th>
-                                <th>Propietario</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    <!-- =============================================
+         SCRIPTS — orden de carga obligatorio
+         1. Bootstrap bundle
+         2. JS de cada componente
+         3. main.js (inicialización global)
+    ============================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
-                        <?php if (!empty($results)): ?>
-                            <?php foreach ($results as $row): ?>
-                                <tr>
-                                    <td><?= htmlspecialchars($row['field_279']) ?></td>
-                                    
-<td><?= htmlspecialchars(formatearFecha($row['field_280'])) ?></td>
+    <script src="./components/navbar/navbar.js?v=<?= $VERSION ?>"></script>
+    <script src="./components/busqueda/busqueda.js?v=<?= $VERSION ?>"></script>
+    <script src="./shared/scroll-top/scroll-top.js?v=<?= $VERSION ?>"></script>
+    <script src="./js/main.js?v=<?= $VERSION ?>"></script>
 
-                                    <td><?= htmlspecialchars($row['field_281']) ?></td>
-                                    <td><?= htmlspecialchars($row['field_282']) ?></td>
-                                    <td><?= htmlspecialchars($row['field_327']) ?></td>
-                                    <td><?= htmlspecialchars($row['field_331']) ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="6" class="text-center text-muted">
-                                    No existen registros en nuestro sistema para esta patente.
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
-
-</div>
-
-
-<!--==================== FOOTER ====================-->
-<footer class="footer bg-dark text-white py-4">
-  <div class="container">
-    <hr class="border-secondary">
-
-    <div class="text-center small">
-      <h5 class="mb-1">
-        &copy; 
-        <a href="https://helheim.cl" target="_blank" class="text-white text-decoration-none fw-semibold">
-          Helheim
-        </a> 
-        - 🏢 Fundada en 2023 en Tierra del Fuego, Porvenir
-      </h5>
-      
-      <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA. RUT: 77.742.346-0</p>
-    
-     
-      <p class="mb-0">Últ. act. febrero 2026</p>
-    </div>
-  </div>
-</footer>
-
-<!--==================== END FOOTER ====================-->
-<!--=============== Latest compiled JavaScript ===============-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="./js/main.js?v=2025-10-02-1925"></script>
 </body>
-
 </html>
-
-<?php
-$conn->close();
-?>
+<?php $conn->close(); ?>

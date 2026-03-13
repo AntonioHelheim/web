@@ -1,0 +1,93 @@
+/*
+ * ============================================================
+ *  COMPONENTE: navbar
+ *  Archivo:    components/navbar/navbar.css
+ *  Requiere:   shared/globals/variables.css cargado antes
+ *  Reutilizable: sí
+ * ============================================================
+ */
+
+/* ── Barra de navegación ──────────────────────────── */
+.navbar {
+    background-color: rgba(8, 10, 8, .92) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--clr-border);
+    padding: .75rem 1.25rem;
+}
+
+/* ── Brand / Logo ─────────────────────────────────── */
+.navbar-brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem !important;
+    letter-spacing: .1em;
+    color: var(--clr-accent) !important;
+    text-transform: uppercase;
+    transition: color var(--transition), letter-spacing var(--transition);
+}
+.navbar-brand:hover {
+    color: var(--clr-accent-lt) !important;
+    letter-spacing: .16em;
+}
+
+/* ── Links de navegación ──────────────────────────── */
+.navbar-nav .nav-link {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: .85rem !important;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clr-muted) !important;
+    padding: .4rem .75rem !important;
+    border-radius: var(--radius);
+    transition: color var(--transition), background var(--transition);
+    position: relative;
+}
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: .75rem;
+    right: .75rem;
+    height: 1px;
+    background: var(--clr-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+.navbar-nav .nav-link:hover {
+    color: var(--clr-accent-lt) !important;
+    background: rgba(34, 197, 94, .06);
+}
+.navbar-nav .nav-link:hover::after { transform: scaleX(1); }
+
+/* ── Iconos sociales en el menú ───────────────────── */
+.navbar-nav .nav-social-row a {
+    color: var(--clr-muted);
+    font-size: 1.3rem;
+    transition: color var(--transition), transform var(--transition);
+    display: inline-block;
+}
+.navbar-nav .nav-social-row a:hover {
+    color: var(--clr-danger);
+    transform: scale(1.2);
+}
+
+/* ── Toggler móvil ────────────────────────────────── */
+.navbar-toggler {
+    border-color: var(--clr-border) !important;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(34,197,94,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* ── Etiqueta de sección en el menú ──────────────── */
+.nav-section-label {
+    font-family: var(--font-cond);
+    font-size: .7rem;
+    letter-spacing: .15em;
+    color: var(--clr-accent) !important;
+    text-transform: uppercase;
+    opacity: .6;
+    padding: 1.2rem .75rem .3rem;
+}

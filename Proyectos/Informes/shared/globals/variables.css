@@ -1,0 +1,74 @@
+/*
+ * ============================================================
+ *  HELHEIM DESIGN SYSTEM — variables.css
+ *  Tokens globales de color, tipografía, espaciado y motion.
+ *  Importar SIEMPRE como primer stylesheet en cualquier proyecto.
+ * ============================================================
+ */
+
+:root {
+    /* ── Paleta principal ─────────────────────────── */
+    --clr-bg:        #080a08;
+    --clr-surface:   #0e1210;
+    --clr-border:    #1f2b1f;
+    --clr-accent:    #22c55e;
+    --clr-accent-dk: #15803d;
+    --clr-accent-lt: #4ade80;
+    --clr-danger:    #ef4444;
+    --clr-text:      #e2e8e2;
+    --clr-muted:     #6b7c6b;
+
+    /* ── Tipografía ───────────────────────────────── */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'Barlow', sans-serif;
+    --font-cond:    'Barlow Condensed', sans-serif;
+    --font-serif:   'Playfair Display', serif;
+
+    /* ── Layout ───────────────────────────────────── */
+    --radius:       4px;
+
+    /* ── Motion ───────────────────────────────────── */
+    --transition:   .25s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Reset mínimo ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+/* Noise overlay — profundidad atmosférica */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: .025;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ── Helpers globales reutilizables ───────────────── */
+.text-accent   { color: var(--clr-accent) !important; }
+.divider-line  { border: none; border-top: 1px solid var(--clr-border); margin: 2rem 0; }
+.section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: .08em;
+    color: var(--clr-text);
+    line-height: 1;
+}
+.section-heading span { color: var(--clr-accent); }
+.section-rule {
+    width: 3rem;
+    height: 2px;
+    background: var(--clr-accent);
+    margin: 1rem 0 2rem;
+}
+.main-section { padding: 3.5rem 0 5rem; }

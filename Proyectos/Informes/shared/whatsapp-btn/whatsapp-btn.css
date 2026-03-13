@@ -1,0 +1,39 @@
+/*
+ * ============================================================
+ *  COMPONENTE: whatsapp-btn  (utilidad compartida)
+ *  Archivo:    shared/whatsapp-btn/whatsapp-btn.css
+ *  Requiere:   shared/globals/variables.css cargado antes
+ *  Reutilizable: sí — sin modificaciones necesarias
+ * ============================================================
+ */
+
+.whatsapp-float {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    border: 1px solid var(--clr-border);
+    background: var(--clr-surface);
+    color: var(--clr-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    text-decoration: none;
+    z-index: 1040;
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .2s ease,
+        box-shadow .25s ease;
+}
+
+.whatsapp-float:hover {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(34, 197, 94, .35);
+}

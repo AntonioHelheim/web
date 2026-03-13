@@ -1,0 +1,47 @@
+/*
+ * ============================================================
+ *  COMPONENTE: scroll-top  (utilidad compartida)
+ *  Archivo:    shared/scroll-top/scroll-top.css
+ *  Requiere:   shared/globals/variables.css cargado antes
+ *  Reutilizable: sí — sin modificaciones necesarias
+ * ============================================================
+ */
+
+.back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    border: 1px solid var(--clr-border);
+    background: var(--clr-surface);
+    color: var(--clr-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    z-index: 1040;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: #000;
+    box-shadow: 0 0 18px rgba(34, 197, 94, .35);
+}
