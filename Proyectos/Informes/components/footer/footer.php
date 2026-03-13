@@ -1,0 +1,41 @@
+<!-- ============================================================
+     COMPONENTE: footer
+     Archivo:    components/footer/footer.php
+     Depende de: footer.css
+     Reutilizable: sí — ajustar links y datos legales
+     ============================================================ -->
+<footer class="footer-helheim">
+    <div class="container">
+
+        <div class="text-center">
+            <div class="footer-brand mb-1">Helheim.cl</div>
+        </div>
+
+        <hr class="footer-rule">
+
+        <div class="text-center">
+            <!-- Redes sociales -->
+            <div class="footer-social d-flex justify-content-center gap-2 mb-3">
+                <a href="https://wa.me/56958453672?text=Hola, quiero saber mas sobre los Helheim y sus servicios"
+                   target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/helheim_tierra_del_fuego/"
+                   target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/103153651/"
+                   target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://web.facebook.com/HelheimTierradelfuego/"
+                   target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            </div>
+
+            <!-- Texto legal -->
+            <div class="footer-text">
+                <p class="mb-1">
+                    &copy; <a href="https://helheim.cl" target="_blank">Helheim</a>
+                    &nbsp;&mdash;&nbsp; Fundada en 2023 en Tierra del Fuego, Porvenir
+                </p>
+                <p class="mb-1">CONSULTORÍA HELHEIM TIERRA DEL FUEGO LIMITADA &nbsp;&middot;&nbsp; RUT: 77.742.346-0</p>
+                <p class="mb-0" style="opacity:.5;">Últ. act. <?= date('d-F-Y') ?></p>
+            </div>
+        </div>
+
+    </div>
+</footer>

@@ -1,0 +1,108 @@
+/*
+ * ============================================================
+ *  COMPONENTE: busqueda
+ *  Archivo:    components/busqueda/busqueda.css
+ *  Requiere:   shared/globals/variables.css cargado antes
+ * ============================================================
+ */
+
+/* ── Card contenedora ─────────────────────────────── */
+.search-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+}
+.search-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+}
+
+/* ── Header de la card ────────────────────────────── */
+.search-card .card-header-custom {
+    padding: 1.25rem 1.5rem .75rem;
+    border-bottom: 1px solid var(--clr-border);
+}
+.search-card .card-header-custom h5 {
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--clr-muted);
+    margin: 0;
+}
+.search-card .card-header-custom h5 i {
+    color: var(--clr-accent);
+    margin-right: .4rem;
+}
+
+.search-card .card-body { padding: 1.5rem; }
+
+/* ── Input de patente ─────────────────────────────── */
+.search-input {
+    background: rgba(0, 0, 0, .4) !important;
+    border: 1px solid var(--clr-border) !important;
+    border-right: none !important;
+    color: var(--clr-text) !important;
+    font-family: var(--font-cond) !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .18em !important;
+    text-transform: uppercase !important;
+    border-radius: var(--radius) 0 0 var(--radius) !important;
+    padding: .7rem 1rem !important;
+    height: auto !important;
+    transition: border-color var(--transition), box-shadow var(--transition) !important;
+}
+.search-input:focus {
+    border-color: var(--clr-accent) !important;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, .15) !important;
+    background: rgba(0, 0, 0, .6) !important;
+    outline: none !important;
+}
+.search-input::placeholder {
+    color: var(--clr-muted) !important;
+    font-weight: 400 !important;
+    letter-spacing: .05em !important;
+}
+
+/* ── Botón buscar ─────────────────────────────────── */
+.btn-search {
+    background: var(--clr-accent) !important;
+    border: 1px solid var(--clr-accent) !important;
+    color: #000 !important;
+    font-family: var(--font-cond) !important;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .12em !important;
+    text-transform: uppercase !important;
+    padding: .7rem 1.5rem !important;
+    border-radius: 0 var(--radius) var(--radius) 0 !important;
+    transition: background var(--transition), box-shadow var(--transition) !important;
+    white-space: nowrap;
+}
+.btn-search:hover {
+    background: var(--clr-accent-lt) !important;
+    border-color: var(--clr-accent-lt) !important;
+    box-shadow: 0 0 20px rgba(34, 197, 94, .3) !important;
+}
+
+/* ── Hint de formato ──────────────────────────────── */
+.format-hint {
+    font-family: var(--font-cond);
+    font-size: .75rem;
+    color: var(--clr-muted);
+    letter-spacing: .08em;
+    margin-top: .6rem;
+}
+.format-hint span {
+    color: var(--clr-accent);
+    font-weight: 600;
+}
