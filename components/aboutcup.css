@@ -1,0 +1,176 @@
+
+
+/* TAZA*/
+.cup-stage {
+  /* Ajusta el canvas visible de la ilustración */
+  width: 280px;            /* puedes subir a 320 si quieres más grande */
+  height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;          /* centrado del canvas */
+}
+
+/* La taza actúa como "referencia" para los absolutos internos */
+#cup {
+  position: relative;      /* IMPORTANTE para posicionar internos */
+  width: 260px;            /* cercano al ancho del cup-body + márgenes */
+  height: 220px;
+  z-index: 1;
+  --steam-start: 72px;
+}
+
+
+/* Base visual del vapor: ahora sí se ve */
+.steam{
+  position: absolute;
+  top: var(--steam-start);         /* antes: top: 10px; */
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  filter: blur(1px);
+  opacity: 0;
+}
+
+/* Ligeras variaciones de arranque para cada columna de vapor */
+#steam1 { 
+  left: 70px;  
+  width: 25px; height: 25px; 
+  animation: steam1 4s ease-out infinite; 
+  top: calc(var(--steam-start) + 2px);
+}
+#steam2 { 
+  left: 110px; 
+  width: 50px; height: 50px; 
+  animation: steam2 4s ease-out 0.5s infinite; 
+  top: calc(var(--steam-start) + 0px);
+}
+#steam3 { 
+  left: 150px; 
+  width: 30px; height: 30px; 
+  animation: steam3 4s ease-out 1s infinite; 
+  top: calc(var(--steam-start) + 4px);
+}
+#steam4 { 
+  left: 190px; 
+  width: 18px; height: 18px; 
+  animation: steam2 4s ease-out 1.5s infinite; 
+  top: calc(var(--steam-start) + 1px);
+}
+
+/* ===== ABOUT Section ===== */
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  border-bottom: 3px solid var(--aurora-green); /* línea verde */
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+section.container.my-5.py-5 {
+  margin-top: 4rem !important;
+  margin-bottom: 4rem !important;
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Ajustes para que el body y el platillo calcen dentro del #cup */
+#cup-body {
+  position: absolute;
+  top: 60px;               /* Ubica el cuerpo dentro del #cup */
+  left: 5px;
+  height: 150px;
+  width: 250px;
+  border-radius: 0 0 150px 150px;
+  background-color: #fff;
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#cup-shade {
+  position: relative;
+  height: 250px;
+  width: 200px;
+  background-color: #f3f3f3;
+  display: inline-block;
+  margin-left: 42%;
+  margin-top: -3px;
+  transform: rotate(50deg);
+  z-index: 1;
+}
+
+#cup-handle {
+  position: absolute;      /* anclar al #cup */
+  right: -35px;            /* mejor control que margin-left */
+  top: 75px;
+  height: 75px;
+  width: 80px;
+  border-radius: 0 150px 150px 0;
+  border: 15px solid #f3f3f3;
+  display: inline-block;
+  z-index: 0;
+}
+
+#saucer {
+  position: absolute;
+  left: 5px;
+  top: 200px;              /* debajo del cuerpo de la taza */
+  height: 20px;
+  width: 250px;
+  border-radius: 0 0 100px 100px;
+  background-color: #f9f9f9;
+  z-index: 2;
+}
+
+#shadow {
+  position: absolute;
+  left: 6px;
+  top: 218px;
+  height: 10px;
+  width: 250px;
+  border-radius: 50%;
+  background-color: #7bb8d4;
+}
+
+/* Animaciones (ya las tenías, las dejo completas) */
+@keyframes steam1 {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0; }
+  30%  { opacity: 0.8; }
+  100% { transform: translateY(-100px) scale(2); opacity: 0; }
+}
+@keyframes steam2 {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0; }
+  30%  { opacity: 0.8; }
+  100% { transform: translateY(-100px) scale(2); opacity: 0; }
+}
+@keyframes steam3 {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0; }
+  30%  { opacity: 0.8; }
+  100% { transform: translateY(-100px) scale(2); opacity: 0; }
+}
+
+/* Responsivo: reduce el canvas en móviles estrechos si lo necesitas */
+@media (max-width: 420px) {
+  .cup-stage { width: 240px; height: 210px; }
+  #cup      { width: 230px; height: 200px; --steam-start: 62px;}
+  #cup-body { width: 220px; left: 5px; }
+  #saucer, #shadow { width: 220px; left: 5px; }
+  #steam1 { left: 55px; }
+  #steam2 { left: 90px; }
+  #steam3 { left: 125px; }
+  #steam4 { left: 160px; }
+  
+}
+
+
+

@@ -1,0 +1,221 @@
+
+/* CARDS */
+/* ===== Espaciado general de la sección Servicios (un poco menos margen) ===== */
+.services-section {
+  position: relative;
+  overflow: hidden;           /* evita scroll por partículas */
+  padding-block: clamp(1.5rem, 3.5vw, 3rem); /* ↓ menos que antes */
+  margin-block: 0;            /* evita separación extra entre secciones */
+}
+
+/* El fondo ocupa como mínimo el viewport y se adapta; sin scroll horizontal */
+.service-bg{
+  position: relative;
+  background: #000;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;           /* clave para no tener scroll horizontal */
+}
+
+/* Contenido por encima de partículas */
+.service-bg > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Variables de cuadrícula responsiva para el “Matrix” ===== */
+:root{
+  --matrix-grid: clamp(48px, 6vw, 96px);
+  --matrix-grid-2: clamp(36px, 5vw, 72px);
+}
+
+/* Partículas responsivas y verticales */
+.service-bg::before,
+.service-bg::after{
+  content: "";
+  position: absolute;
+  inset: 0;                   /* ocupa exactamente el fondo */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Capa 1 (más separada) */
+.service-bg::before{
+  opacity: .35;
+  background-image:
+    radial-gradient(circle at center, rgba(42,255,168,0.9) 1.5px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,0.6) 1px, transparent 2px);
+  background-size:
+    var(--matrix-grid) var(--matrix-grid),
+    var(--matrix-grid) var(--matrix-grid);
+  background-position:
+    0 0,
+    calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2);
+  animation: matrixDown1 30s linear infinite;
+  filter: drop-shadow(0 0 2px rgba(42,255,168,0.5));
+}
+
+/* Capa 2 (rejilla intermedia) */
+.service-bg::after{
+  opacity: .22;
+  background-image:
+    radial-gradient(circle at center, rgba(42,255,168,0.8) 1.2px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,0.5) 0.8px, transparent 1.8px);
+  background-size:
+    var(--matrix-grid-2) var(--matrix-grid-2),
+    var(--matrix-grid-2) var(--matrix-grid-2);
+  background-position:
+    0 0,
+    calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2);
+  animation: matrixDown2 48s linear infinite;
+  filter: drop-shadow(0 0 1.5px rgba(42,255,168,0.45));
+}
+
+/* Movimiento vertical continuo */
+@keyframes matrixDown1 { 
+  0%   { background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2); }
+  100% { background-position: 0 200%, calc(var(--matrix-grid)/2) calc(200% + var(--matrix-grid)/2); }
+}
+@keyframes matrixDown2 { 
+  0%   { background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2); }
+  100% { background-position: 0 200%, calc(var(--matrix-grid-2)/2) calc(200% + var(--matrix-grid-2)/2); }
+}
+
+/* Respeta usuarios con 'prefers-reduced-motion' */
+@media (prefers-reduced-motion: reduce){
+  .service-bg::before,
+  .service-bg::after{ animation: none; }
+}
+
+/* ===== Cards con borde normal/parejo y colores distintos por contenedor ===== */
+.service-card-plain {
+  border-radius: 16px;
+  border: 2px solid #2a2a2a;     /* base por si no hay modificador */
+  background: #0b0b0b;
+  color: #fff;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.service-card-plain:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+}
+
+/* Borde parejo y fondo tenue por servicio */
+.card-ti {
+  border-color: var(--aurora-green);
+  background: rgba(42,255,168,0.08);
+}
+.card-di {
+  border-color: var(--magallanes-blue);
+  background: rgba(0,78,137,0.10);
+}
+
+/* Quitar barra superior decorativa si la tenías antes */
+.card-ti::before,
+.card-di::before { display: none !important; }
+
+/* Ajuste de padding interno */
+.service-card-plain .card-body {
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+@media (min-width: 768px){
+  .service-card-plain .card-body { padding: 1.5rem 1.75rem 1.75rem; }
+}
+
+/* Opcional: evitar scroll horizontal global si alguna otra sección lo provoca */
+body { overflow-x: hidden; }
+
+/* Título de sección: centrado y con más separación hacia las cards */
+.services-title{
+  display: inline-block;               /* mantiene el subrayado */
+  text-align: center;
+  margin-bottom: clamp(1rem, 2.5vw, 2rem); /* más aire sobre las cards */
+}
+
+/* Menos margen vertical de la sección y sin scroll horizontal */
+.services-section{
+  padding-top: clamp(1rem, 2.5vw, 2rem);   /* ↓ menos que antes */
+  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.service-bg{
+  width: 100%;
+  min-height: 60vh;  /* ocupa pantalla pero no genera scroll lateral */
+  overflow: hidden;
+}
+body{ overflow-x: hidden; } /* seguro ante cualquier pseudo-elemento */
+
+/* Cards: borde normal y fondo sólido */
+.service-card-plain{
+  border-radius: 16px;
+  border: 2px solid #2a2a2a;           /* borde uniforme */
+  background: #0b0b0b;                 /* sólido por defecto */
+  color: #fff;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.service-card-plain:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+}
+
+/* Colores sólidos por contenedor (diferentes entre sí) */
+.card-ti{
+  border-color: var(--aurora-green);
+  background-color: #0f1f1a;           /* sólido verde muy oscuro */
+}
+.card-di{
+  border-color: var(--magallanes-blue);
+  background-color: #0b1722;           /* sólido azul muy oscuro */
+}
+
+/* (Opcional) Ajuste fino del espaciado interno de las cards */
+.service-card-plain .card-body{ padding: 1.25rem 1.25rem 1.5rem; }
+@media (min-width: 768px){
+  .service-card-plain .card-body{ padding: 1.5rem 1.75rem 1.75rem; }
+}
+
+/* Fondo "Matrix" ya responsivo; por si no lo tenías con clamp() */
+:root{
+  --matrix-grid: clamp(48px, 6vw, 96px);
+  --matrix-grid-2: clamp(36px, 5vw, 72px);
+}
+.service-bg::before,
+.service-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.service-bg::before{
+  opacity:.35;
+  background-image:
+    radial-gradient(circle at center, rgba(42,255,168,0.9) 1.5px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,0.6) 1px, transparent 2px);
+  background-size: var(--matrix-grid) var(--matrix-grid), var(--matrix-grid) var(--matrix-grid);
+  background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2);
+  animation: matrixDown1 30s linear infinite;
+}
+.service-bg::after{
+  opacity:.22;
+  background-image:
+    radial-gradient(circle at center, rgba(42,255,168,0.8) 1.2px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,0.5) 0.8px, transparent 1.8px);
+  background-size: var(--matrix-grid-2) var(--matrix-grid-2), var(--matrix-grid-2) var(--matrix-grid-2);
+  background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2);
+  animation: matrixDown2 48s linear infinite;
+}
+@keyframes matrixDown1{
+  0%{   background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2); }
+  100%{ background-position: 0 200%, calc(var(--matrix-grid)/2) calc(200% + var(--matrix-grid)/2); }
+}
+@keyframes matrixDown2{
+  0%{   background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2); }
+  100%{ background-position: 0 200%, calc(var(--matrix-grid-2)/2) calc(200% + var(--matrix-grid-2)/2); }
+}
+@media (prefers-reduced-motion: reduce){
+  .service-bg::before, .service-bg::after{ animation: none; }
+}
+
+
