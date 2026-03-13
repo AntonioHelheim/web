@@ -1,6 +1,6 @@
 (function(){
 
-const VERSION="2026-03-13-1525"
+const VERSION="2026-03-13-1600"
 
 async function loadComponent(el){
 
