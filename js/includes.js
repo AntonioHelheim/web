@@ -1,95 +1,52 @@
-/**
- * includes.js — Helheim component loader
- * Carga fragmentos HTML en los contenedores definidos por [data-include].
- *
- * Uso en HTML:
- *   <div data-include="components/navbar.html"></div>
- *
- * También admite IDs explícitos mapeados en COMPONENT_MAP (compatibilidad
- * con el patrón <div id="navbar"></div>).
- */
+(function(){
 
-(function () {
-    'use strict';
+const VERSION="2026-03-13-1525"
 
-    /* ------------------------------------------------------------------ */
-    /* Mapa de IDs → rutas de componentes (patrón legacy por id)           */
-    /* ------------------------------------------------------------------ */
-    const COMPONENT_MAP = {
-        'navbar'           : 'components/navbar.html',
-        'carousel-desktop' : 'components/carousel-desktop.html',
-        'carousel-movil'   : 'components/carousel-movil.html',
-        'aboutcup'         : 'components/aboutcup.html',
-        'servicios'        : 'components/servicios.html',
-        'contacto'         : 'components/contacto.html',
-        'footer'           : 'components/footer.html',
-    };
+async function loadComponent(el){
 
-    /* ------------------------------------------------------------------ */
-    /* Carga un fragmento HTML en un elemento destino                      */
-    /* ------------------------------------------------------------------ */
-    async function loadComponent(element, url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.warn(`[includes.js] No se pudo cargar: ${url} (${response.status})`);
-                return;
-            }
-            const html = await response.text();
-            element.innerHTML = html;
+const url=el.dataset.include
 
-            /* Re-ejecutar scripts incrustados dentro del fragmento, si los hay */
-            element.querySelectorAll('script').forEach(oldScript => {
-                const newScript = document.createElement('script');
-                [...oldScript.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                newScript.textContent = oldScript.textContent;
-                oldScript.parentNode.replaceChild(newScript, oldScript);
-            });
+try{
 
-            /* Disparar evento personalizado para que otros scripts reaccionen */
-            element.dispatchEvent(new CustomEvent('component:loaded', {
-                bubbles: true,
-                detail: { url }
-            }));
+const res=await fetch(url+"?v="+VERSION)
 
-        } catch (err) {
-            console.error(`[includes.js] Error al cargar ${url}:`, err);
-        }
-    }
+if(!res.ok) throw new Error(res.status)
 
-    /* ------------------------------------------------------------------ */
-    /* Punto de entrada — recolecta todos los contenedores a inyectar      */
-    /* ------------------------------------------------------------------ */
-    async function init() {
-        const tasks = [];
+const html=await res.text()
 
-        /* 1. Atributo data-include="ruta/componente.html" (método preferido) */
-        document.querySelectorAll('[data-include]').forEach(el => {
-            const url = el.dataset.include;
-            tasks.push(loadComponent(el, url));
-        });
+el.innerHTML=html
 
-        /* 2. IDs registrados en COMPONENT_MAP (compatibilidad con patrón legacy) */
-        Object.entries(COMPONENT_MAP).forEach(([id, url]) => {
-            const el = document.getElementById(id);
-            /* Solo actuar si el elemento existe Y no viene ya cubierto por data-include */
-            if (el && !el.dataset.include) {
-                tasks.push(loadComponent(el, url));
-            }
-        });
+}catch(err){
 
-        /* Esperar a que todos los componentes estén inyectados */
-        await Promise.all(tasks);
+console.error("Error cargando componente:",url,err)
 
-        /* Disparar evento global cuando todo esté listo */
-        document.dispatchEvent(new CustomEvent('includes:ready'));
-    }
+}
 
-    /* Arrancar cuando el DOM esté disponible */
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+}
 
-})();
+function init(){
+
+const elements=document.querySelectorAll("[data-include]")
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+loadComponent(entry.target)
+observer.unobserve(entry.target)
+
+}
+
+})
+
+},{rootMargin:"200px"})
+
+elements.forEach(el=>observer.observe(el))
+
+}
+
+document.addEventListener("DOMContentLoaded",init)
+
+})()

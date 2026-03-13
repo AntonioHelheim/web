@@ -1,19 +1,92 @@
-/* CONTACTO */
-.contact-box{
-  border: 2px solid var(--aurora-green);
-  background-color: #0b0b0b;           /* coherente con el tema oscuro */
-  max-width: 1100px;                   /* centra y limita el ancho */
-  margin-inline: auto;                 /* centrado horizontal */
+/* ============================================================
+   CONTACTO
+============================================================ */
+
+/* Iconos sociales — contenedor */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-/* Tamaño del logo y orden visual */
-.contact-logo img{
-  max-width: 260px;                    /* ajusta si lo quieres más grande/pequeño */
+/* El hover debe ir en el <a>, no en el <i> */
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-accent);
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition:
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+.nav__link:hover {
+  color: #000;
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, .3);
+}
+
+/* Contact box */
+.contact-box {
+  border: 1px solid var(--clr-border);   /* ← antes: var(#fff) que es inválido */
+  border-radius: 12px;
+  background: var(--clr-surface);
+  max-width: 1100px;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+}
+/* Línea decorativa superior — coherente con .search-card del sitio */
+.contact-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+}
+
+/* Campos del formulario */
+.contact-box .form-control {
+  background: #111;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.contact-box .form-control::placeholder { color: var(--clr-muted); }
+.contact-box .form-control:focus {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, .15);
+  background: #111;
+  color: var(--clr-text);
+}
+
+/* Botón enviar */
+.contact-box .btn-outline-light:hover {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #000;
+}
+
+/* Logo */
+.contact-logo img {
+  max-width: 260px;
   width: 100%;
   height: auto;
 }
 
-/* Ajustes responsivos finos */
-@media (max-width: 576px){
-  .contact-logo img{ max-width: 220px; }
+@media (max-width: 576px) {
+  .contact-logo img { max-width: 220px; }
 }

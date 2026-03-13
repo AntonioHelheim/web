@@ -1,221 +1,346 @@
+/* ============================================================
+   SERVICIOS — Flip 3D + entrada escalonada
+   Depende de las variables globales de helheim.css:
+   --clr-bg, --clr-surface, --clr-border, --clr-accent,
+   --clr-text, --clr-muted, --radius, --transition,
+   --font-display, --font-cond
+============================================================ */
 
-/* CARDS */
-/* ===== Espaciado general de la sección Servicios (un poco menos margen) ===== */
+/* ---- Variables locales de la sección ---- */
+.services-section {
+  --flip-dur: .55s;
+  --card-h:   300px;
+}
+
 .services-section {
   position: relative;
-  overflow: hidden;           /* evita scroll por partículas */
-  padding-block: clamp(1.5rem, 3.5vw, 3rem); /* ↓ menos que antes */
-  margin-block: 0;            /* evita separación extra entre secciones */
+  padding-block: clamp(2rem, 4vw, 4rem);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
-/* El fondo ocupa como mínimo el viewport y se adapta; sin scroll horizontal */
-.service-bg{
+/* ---- Fondo Matrix ---- */
+.service-bg {
   position: relative;
   background: #000;
-  min-height: 100vh;
+  min-height: 60vh;
   width: 100%;
-  overflow: hidden;           /* clave para no tener scroll horizontal */
-}
-
-/* Contenido por encima de partículas */
-.service-bg > .container {
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== Variables de cuadrícula responsiva para el “Matrix” ===== */
-:root{
-  --matrix-grid: clamp(48px, 6vw, 96px);
+  overflow: hidden;
+  --matrix-grid:   clamp(48px, 6vw, 96px);
   --matrix-grid-2: clamp(36px, 5vw, 72px);
 }
 
-/* Partículas responsivas y verticales */
 .service-bg::before,
-.service-bg::after{
+.service-bg::after {
   content: "";
   position: absolute;
-  inset: 0;                   /* ocupa exactamente el fondo */
-  z-index: 0;
+  inset: 0;
   pointer-events: none;
+  z-index: 0;
 }
 
-/* Capa 1 (más separada) */
-.service-bg::before{
-  opacity: .35;
+.service-bg::before {
+  opacity: .30;
   background-image:
-    radial-gradient(circle at center, rgba(42,255,168,0.9) 1.5px, transparent 2px),
-    radial-gradient(circle at center, rgba(42,255,168,0.6) 1px, transparent 2px);
+    radial-gradient(circle at center, rgba(42,255,168,.9) 1.5px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,.6) 1px,   transparent 2px);
   background-size:
     var(--matrix-grid) var(--matrix-grid),
     var(--matrix-grid) var(--matrix-grid);
   background-position:
     0 0,
-    calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2);
+    calc(var(--matrix-grid) / 2) calc(var(--matrix-grid) / 2);
   animation: matrixDown1 30s linear infinite;
-  filter: drop-shadow(0 0 2px rgba(42,255,168,0.5));
 }
 
-/* Capa 2 (rejilla intermedia) */
-.service-bg::after{
-  opacity: .22;
+.service-bg::after {
+  opacity: .18;
   background-image:
-    radial-gradient(circle at center, rgba(42,255,168,0.8) 1.2px, transparent 2px),
-    radial-gradient(circle at center, rgba(42,255,168,0.5) 0.8px, transparent 1.8px);
+    radial-gradient(circle at center, rgba(42,255,168,.8) 1.2px, transparent 2px),
+    radial-gradient(circle at center, rgba(42,255,168,.5) 0.8px, transparent 1.8px);
   background-size:
     var(--matrix-grid-2) var(--matrix-grid-2),
     var(--matrix-grid-2) var(--matrix-grid-2);
   background-position:
     0 0,
-    calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2);
+    calc(var(--matrix-grid-2) / 2) calc(var(--matrix-grid-2) / 2);
   animation: matrixDown2 48s linear infinite;
-  filter: drop-shadow(0 0 1.5px rgba(42,255,168,0.45));
 }
 
-/* Movimiento vertical continuo */
-@keyframes matrixDown1 { 
-  0%   { background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2); }
-  100% { background-position: 0 200%, calc(var(--matrix-grid)/2) calc(200% + var(--matrix-grid)/2); }
+@keyframes matrixDown1 {
+  from { background-position: 0 0,    calc(var(--matrix-grid)   / 2) calc(var(--matrix-grid)   / 2); }
+  to   { background-position: 0 200%, calc(var(--matrix-grid)   / 2) calc(200% + var(--matrix-grid)   / 2); }
 }
-@keyframes matrixDown2 { 
-  0%   { background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2); }
-  100% { background-position: 0 200%, calc(var(--matrix-grid-2)/2) calc(200% + var(--matrix-grid-2)/2); }
+@keyframes matrixDown2 {
+  from { background-position: 0 0,    calc(var(--matrix-grid-2) / 2) calc(var(--matrix-grid-2) / 2); }
+  to   { background-position: 0 200%, calc(var(--matrix-grid-2) / 2) calc(200% + var(--matrix-grid-2) / 2); }
 }
 
-/* Respeta usuarios con 'prefers-reduced-motion' */
-@media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce) {
   .service-bg::before,
-  .service-bg::after{ animation: none; }
+  .service-bg::after { animation: none; }
+  .service-card-inner { transition: none !important; }
 }
 
-/* ===== Cards con borde normal/parejo y colores distintos por contenedor ===== */
-.service-card-plain {
-  border-radius: 16px;
-  border: 2px solid #2a2a2a;     /* base por si no hay modificador */
-  background: #0b0b0b;
-  color: #fff;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.service-card-plain:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+.service-bg > .container {
+  position: relative;
+  z-index: 1;
 }
 
-/* Borde parejo y fondo tenue por servicio */
-.card-ti {
-  border-color: var(--aurora-green);
-  background: rgba(42,255,168,0.08);
-}
-.card-di {
-  border-color: var(--magallanes-blue);
-  background: rgba(0,78,137,0.10);
-}
-
-/* Quitar barra superior decorativa si la tenías antes */
-.card-ti::before,
-.card-di::before { display: none !important; }
-
-/* Ajuste de padding interno */
-.service-card-plain .card-body {
-  padding: 1.25rem 1.25rem 1.5rem;
-}
-@media (min-width: 768px){
-  .service-card-plain .card-body { padding: 1.5rem 1.75rem 1.75rem; }
-}
-
-/* Opcional: evitar scroll horizontal global si alguna otra sección lo provoca */
-body { overflow-x: hidden; }
-
-/* Título de sección: centrado y con más separación hacia las cards */
-.services-title{
-  display: inline-block;               /* mantiene el subrayado */
+/* ---- Título ---- */
+.services-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: .08em;
+  color: var(--clr-text);
   text-align: center;
-  margin-bottom: clamp(1rem, 2.5vw, 2rem); /* más aire sobre las cards */
+  line-height: 1;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.services-title span { color: var(--clr-accent); }
+
+/* ---- Grilla ---- */
+.services-grid {
+  display: grid;
+  gap: 1.5rem;
 }
 
-/* Menos margen vertical de la sección y sin scroll horizontal */
-.services-section{
-  padding-top: clamp(1rem, 2.5vw, 2rem);   /* ↓ menos que antes */
-  padding-bottom: clamp(1.5rem, 3vw, 3rem);
-  margin-top: 0;
-  margin-bottom: 0;
+/* ===== Desktop (≥1200px) → 3 columnas ===== */
+@media (min-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-.service-bg{
-  width: 100%;
-  min-height: 60vh;  /* ocupa pantalla pero no genera scroll lateral */
+
+/* ===== Tablet (768px – 1199px) → 2 columnas ===== */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== Mobile (<768px) → 1 columna ===== */
+@media (max-width: 767px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   ENTRADA ESCALONADA al cargar
+============================================================ */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.service-card-wrap {
+  opacity: 0;
+  animation: cardIn .55s ease forwards;
+}
+.service-card-wrap:nth-child(1) { animation-delay: .05s; }
+.service-card-wrap:nth-child(2) { animation-delay: .15s; }
+.service-card-wrap:nth-child(3) { animation-delay: .25s; }
+.service-card-wrap:nth-child(4) { animation-delay: .35s; }
+.service-card-wrap:nth-child(5) { animation-delay: .45s; }
+.service-card-wrap:nth-child(6) { animation-delay: .55s; }
+
+/* ============================================================
+   FLIP 3D
+============================================================ */
+.service-card-wrap {
+  perspective: 900px;
+  height: var(--card-h);
   overflow: hidden;
 }
-body{ overflow-x: hidden; } /* seguro ante cualquier pseudo-elemento */
 
-/* Cards: borde normal y fondo sólido */
-.service-card-plain{
-  border-radius: 16px;
-  border: 2px solid #2a2a2a;           /* borde uniforme */
-  background: #0b0b0b;                 /* sólido por defecto */
-  color: #fff;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.service-card-plain:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+.service-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--flip-dur) cubic-bezier(.4, 0, .2, 1);
 }
 
-/* Colores sólidos por contenedor (diferentes entre sí) */
-.card-ti{
-  border-color: var(--aurora-green);
-  background-color: #0f1f1a;           /* sólido verde muy oscuro */
-}
-.card-di{
-  border-color: var(--magallanes-blue);
-  background-color: #0b1722;           /* sólido azul muy oscuro */
+.service-card-wrap:hover        .service-card-inner,
+.service-card-wrap:focus-within .service-card-inner {
+  transform: rotateY(180deg);
 }
 
-/* (Opcional) Ajuste fino del espaciado interno de las cards */
-.service-card-plain .card-body{ padding: 1.25rem 1.25rem 1.5rem; }
-@media (min-width: 768px){
-  .service-card-plain .card-body{ padding: 1.5rem 1.75rem 1.75rem; }
+/* ---- Propiedades comunes de ambas caras ---- */
+.service-card-front,
+.service-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
 }
 
-/* Fondo "Matrix" ya responsivo; por si no lo tenías con clamp() */
-:root{
-  --matrix-grid: clamp(48px, 6vw, 96px);
-  --matrix-grid-2: clamp(36px, 5vw, 72px);
+/* ---- Cara frontal ---- */
+.service-card-front {
+  background: var(--clr-surface);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: .75rem;
 }
-.service-bg::before,
-.service-bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
+
+.service-card-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
 }
-.service-bg::before{
-  opacity:.35;
-  background-image:
-    radial-gradient(circle at center, rgba(42,255,168,0.9) 1.5px, transparent 2px),
-    radial-gradient(circle at center, rgba(42,255,168,0.6) 1px, transparent 2px);
-  background-size: var(--matrix-grid) var(--matrix-grid), var(--matrix-grid) var(--matrix-grid);
-  background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2);
-  animation: matrixDown1 30s linear infinite;
+
+.service-card-icon {
+  font-size: 1.7rem;
+  color: var(--clr-accent);
+  line-height: 1;
 }
-.service-bg::after{
-  opacity:.22;
-  background-image:
-    radial-gradient(circle at center, rgba(42,255,168,0.8) 1.2px, transparent 2px),
-    radial-gradient(circle at center, rgba(42,255,168,0.5) 0.8px, transparent 1.8px);
-  background-size: var(--matrix-grid-2) var(--matrix-grid-2), var(--matrix-grid-2) var(--matrix-grid-2);
-  background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2);
-  animation: matrixDown2 48s linear infinite;
+
+.service-divider {
+  border: none;
+  border-top: 1px solid var(--clr-border);
+  margin: 0;
 }
-@keyframes matrixDown1{
-  0%{   background-position: 0 0, calc(var(--matrix-grid)/2) calc(var(--matrix-grid)/2); }
-  100%{ background-position: 0 200%, calc(var(--matrix-grid)/2) calc(200% + var(--matrix-grid)/2); }
+
+.service-card-title {
+  font-family: var(--font-cond);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--clr-text);
+  margin: 0;
 }
-@keyframes matrixDown2{
-  0%{   background-position: 0 0, calc(var(--matrix-grid-2)/2) calc(var(--matrix-grid-2)/2); }
-  100%{ background-position: 0 200%, calc(var(--matrix-grid-2)/2) calc(200% + var(--matrix-grid-2)/2); }
+
+.service-card-text {
+  font-size: .85rem;
+  line-height: 1.75;
+  color: var(--clr-muted);
+  margin: 0;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-@media (prefers-reduced-motion: reduce){
-  .service-bg::before, .service-bg::after{ animation: none; }
+
+/* ---- Cara trasera ---- */
+.service-card-back {
+  background: var(--clr-surface);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1.5rem;
+  gap: 1rem;
+  text-align: center;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* icono */
+.back-icon {
+  font-size: 2.2rem;
+  color: var(--clr-accent);
+  opacity: .9;
+}
+
+/* titulo */
+.back-title {
+  font-family: var(--font-cond);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--clr-text);
+  margin: 0;
+}
+
+/* descripción */
+.back-hint {
+  font-size: .82rem;
+  color: var(--clr-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.service-card-back::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+}
+
+/* Borde animado tipo "scan" */
+.service-card-back::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+
+  background:
+    linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box,
+    linear-gradient(135deg, var(--clr-accent) 0%, transparent 50%, var(--clr-accent) 100%) border-box;
+
+  animation: borderScan 2s linear infinite;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.service-card-back > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes borderScan {
+  0%   { background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box, linear-gradient(  0deg, var(--clr-accent), transparent 60%) border-box; }
+  25%  { background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box, linear-gradient( 90deg, var(--clr-accent), transparent 60%) border-box; }
+  50%  { background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box, linear-gradient(180deg, var(--clr-accent), transparent 60%) border-box; }
+  75%  { background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box, linear-gradient(270deg, var(--clr-accent), transparent 60%) border-box; }
+  100% { background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box, linear-gradient(360deg, var(--clr-accent), transparent 60%) border-box; }
 }
 
 
+.back-hint {
+  font-size: .82rem;
+  color: var(--clr-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.service-card-link {
+  display: inline-block;
+  font-family: var(--font-cond);
+  font-size: .82rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  text-decoration: none;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius);
+  padding: .4rem 1.1rem;
+  position: relative;
+  z-index: 1;
+  transition: background var(--transition), color var(--transition);
+}
+.service-card-link:hover {
+  background: var(--clr-accent);
+  color: #000;
+  border-color: var(--clr-accent);
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 576px) {
+  .services-section { --card-h: 300px; }
+  .services-grid    { grid-template-columns: 1fr; }
+}
