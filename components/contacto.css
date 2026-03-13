@@ -1,0 +1,19 @@
+/* CONTACTO */
+.contact-box{
+  border: 2px solid var(--aurora-green);
+  background-color: #0b0b0b;           /* coherente con el tema oscuro */
+  max-width: 1100px;                   /* centra y limita el ancho */
+  margin-inline: auto;                 /* centrado horizontal */
+}
+
+/* Tamaño del logo y orden visual */
+.contact-logo img{
+  max-width: 260px;                    /* ajusta si lo quieres más grande/pequeño */
+  width: 100%;
+  height: auto;
+}
+
+/* Ajustes responsivos finos */
+@media (max-width: 576px){
+  .contact-logo img{ max-width: 220px; }
+}

@@ -158,8 +158,7 @@ $VERSION = '2026-03-12';
          2. CSS de cada componente
     ============================================== -->
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    
+   
     <link rel="stylesheet" href="./shared/globals/variables.css?v=<?= $VERSION ?>">
     <link rel="stylesheet" href="./components/navbar/navbar.css?v=<?= $VERSION ?>">
     <link rel="stylesheet" href="./components/hero/hero.css?v=<?= $VERSION ?>">
@@ -171,6 +170,8 @@ $VERSION = '2026-03-12';
     <link rel="stylesheet" href="./shared/scroll-top/scroll-top.css?v=<?= $VERSION ?>">
     <link rel="stylesheet" href="./shared/whatsapp-btn/whatsapp-btn.css?v=<?= $VERSION ?>">
 </head>
+
+
 <body>
 
     <!-- ── NAVBAR ───────────────────────────────── -->
