@@ -11,11 +11,13 @@ En GitBash o Terminal:
 # 1) Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
 cd "D:\Usuario\Documents\FrontEnd\helheim-git"
 
-# 2) Ver estado actual de la carpeta y sus elementos
+# 2) Inicializamos
 git init
+
+# 3) Ver estado actual de la carpeta y sus elementos
 git status
 
-# 3) Guardar temporalmente cambios sin commit (incluye untracked)
+# 4) Guardar temporalmente cambios sin commit (incluye untracked)
 git stash push -u -m "backup antes de pull"
 
 # 4) Traer cambios más recientes del remoto
@@ -28,11 +30,13 @@ git stash pop
 
 # 6) Preparar y registrar tus cambios 
 git add -A
+
+# 7) Registrar tus cambios
 git commit -m "Actualizacion de Codigo por Maite"
 
-# 7) Subir a GitHub
+# 8) Subir a GitHub
 git push origin main 
 
-# 8) Comprobamos que todo esté correcto
+# 9) Comprobamos que todo esté correcto
 git status
 
