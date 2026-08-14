@@ -27,7 +27,7 @@ git stash pop
 
 # 6) Preparar y registrar tus cambios 
 git add -A
-git commit -m "Actualizacion de Codigo"
+git commit -m "Actualizacion de Codigo "
 
 # 7) Subir a GitHub
 git push origin main 
