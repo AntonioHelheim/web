@@ -2,14 +2,23 @@
 /**
  * login.php
  * Recibe { email, password } por POST (JSON) desde el modal de login,
- * verifica contra la tabla `users` (id_users = identificador, rut = contraseña)
- * y responde en JSON.
+ * verifica contra la tabla `users` y responde en JSON.
  *
- * IMPORTANTE: ajusta el nombre real de la columna que guarda el correo
- * si "id_users" no es el correo, sino un ID/username distinto.
+ * Seguridad implementada:
+ * - Verificación con password_hash/password_verify, con migración
+ *   automática y transparente desde el esquema viejo (rut en texto plano).
+ * - Rate limiting: bloqueo temporal tras varios intentos fallidos.
+ * - Cookie de sesión endurecida (httponly, secure, samesite=Strict).
+ * - Validación de formato de correo.
+ * - Tiempo de respuesta equivalente exista o no el usuario.
  */
 
-session_start();
+// --- Config de rate limiting ---
+const MAX_INTENTOS       = 5;   // intentos fallidos permitidos
+const VENTANA_MINUTOS    = 15;  // ventana de tiempo para contar intentos
+const BLOQUEO_MINUTOS    = 15;  // minutos de bloqueo tras exceder el límite
+
+require __DIR__ . '/session_bootstrap.php';
 header('Content-Type: application/json; charset=utf-8');
 
 require __DIR__ . '/config.php';
@@ -29,6 +38,7 @@ if (!$input) {
 
 $email    = trim($input['email'] ?? '');
 $password = trim($input['password'] ?? '');
+$ip       = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
 if ($email === '' || $password === '') {
     http_response_code(400);
@@ -36,17 +46,88 @@ if ($email === '' || $password === '') {
     exit;
 }
 
-// Rate limiting básico por IP (opcional pero recomendable en producción real)
+// Validar formato de correo antes de tocar la base de datos
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Correo electrónico no válido.']);
+    exit;
+}
+
+/**
+ * Registra un intento de login (exitoso o fallido) para efectos de rate limiting.
+ */
+function registrarIntento(PDO $pdo, string $identifier, string $ip, bool $success): void
+{
+    $stmt = $pdo->prepare(
+        'INSERT INTO login_attempts (identifier, ip_address, success) VALUES (:identifier, :ip, :success)'
+    );
+    $stmt->execute([
+        'identifier' => $identifier,
+        'ip'         => $ip,
+        'success'    => $success ? 1 : 0,
+    ]);
+}
+
+/**
+ * Cuenta los intentos fallidos recientes para un correo o IP dados.
+ */
+function intentosFallidosRecientes(PDO $pdo, string $identifier, string $ip, int $minutos): int
+{
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*) FROM login_attempts
+         WHERE success = 0
+           AND created_at >= (NOW() - INTERVAL :minutos MINUTE)
+           AND (identifier = :identifier OR ip_address = :ip)'
+    );
+    $stmt->execute([
+        'minutos'    => $minutos,
+        'identifier' => $identifier,
+        'ip'         => $ip,
+    ]);
+    return (int) $stmt->fetchColumn();
+}
 
 try {
-    // Ajusta "id_users" si esa columna no corresponde al correo electrónico
-    $stmt = $pdo->prepare(
-        'SELECT * FROM users WHERE id_users = :identifier LIMIT 1'
-    );
+    // --- 1. Verificar si está bloqueado por demasiados intentos fallidos ---
+    $intentosFallidos = intentosFallidosRecientes($pdo, $email, $ip, VENTANA_MINUTOS);
+
+    if ($intentosFallidos >= MAX_INTENTOS) {
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'message' => "Demasiados intentos fallidos. Intenta nuevamente en unos " . BLOQUEO_MINUTOS . " minutos."
+        ]);
+        exit;
+    }
+
+    // --- 2. Buscar usuario ---
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE id_users = :identifier LIMIT 1');
     $stmt->execute(['identifier' => $email]);
     $user = $stmt->fetch();
 
-    if (!$user) {
+    // Hash "señuelo" para que la verificación tarde lo mismo aunque el usuario no exista
+    // (evita que el tiempo de respuesta revele si un correo está registrado).
+    static $dummyHash = '$2y$10$abcdefghijklmnopqrstuuVQjV1n0z0e0e0e0e0e0e0e0e0e0e0e';
+
+    $passwordValida = false;
+    $necesitaMigrarHash = false;
+
+    if ($user) {
+        if (!empty($user['password_hash'])) {
+            // Camino nuevo: ya tiene hash guardado
+            $passwordValida = password_verify($password, $user['password_hash']);
+        } else {
+            // Camino de transición: aún no se ha migrado, compara contra rut
+            $passwordValida = hash_equals((string) $user['rut'], $password);
+            $necesitaMigrarHash = $passwordValida; // solo migramos si el login fue correcto
+        }
+    } else {
+        // Usuario no existe: igualamos el costo de tiempo verificando contra un hash señuelo
+        password_verify($password, $dummyHash);
+    }
+
+    if (!$user || !$passwordValida) {
+        registrarIntento($pdo, $email, $ip, false);
         http_response_code(401);
         echo json_encode([
             'success' => false,
@@ -55,26 +136,24 @@ try {
         exit;
     }
 
-    // --- Verificación actual: comparación directa contra el campo "rut" ---
-    // ADVERTENCIA: esto asume que la contraseña se guarda en texto plano
-    // igual al RUT. No es seguro a largo plazo (ver recomendación de migración
-    // a password_hash / password_verify más abajo).
-    $passwordValida = hash_equals((string) $user['rut'], $password);
-
-    if (!$passwordValida) {
-        http_response_code(401);
-        echo json_encode([
-            'success' => false,
-            'message' => 'Usuario o contraseña incorrectos.'
+    // --- 3. Migración transparente a password_hash ---
+    if ($necesitaMigrarHash) {
+        $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
+        $update = $pdo->prepare('UPDATE users SET password_hash = :hash WHERE id_users = :identifier');
+        $update->execute([
+            'hash'       => $nuevoHash,
+            'identifier' => $user['id_users'],
         ]);
-        exit;
     }
 
-    // Login correcto: crear sesión
+    // --- 4. Login correcto: registrar y crear sesión ---
+    registrarIntento($pdo, $email, $ip, true);
+
     session_regenerate_id(true);
-    $_SESSION['user_id']    = $user['id_users'];
-    $_SESSION['user_email'] = $email;
-    $_SESSION['logged_in']  = true;
+    $_SESSION['user_id']       = $user['id_users'];
+    $_SESSION['user_email']    = $email;
+    $_SESSION['logged_in']     = true;
+    $_SESSION['last_activity'] = time();
 
     echo json_encode([
         'success'  => true,
@@ -86,16 +165,3 @@ try {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Error al verificar el usuario.']);
 }
-
-/*
- * ---------------------------------------------------------------
- * MIGRACIÓN RECOMENDADA A FUTURO (contraseñas hasheadas):
- *
- * 1. Añadir columna `password_hash` a la tabla `users`.
- * 2. Al migrar cada usuario:
- *    UPDATE users SET password_hash = ? WHERE id_users = ?
- *    -- generado con password_hash($rutActual, PASSWORD_DEFAULT) en PHP
- * 3. Reemplazar la verificación por:
- *    $passwordValida = password_verify($password, $user['password_hash']);
- * ---------------------------------------------------------------
- */

@@ -184,67 +184,6 @@ if (contactForm) {
 
 
 /* ==========================================================
-   LOGIN FORM
-   ========================================================== */
-
-const loginForm =
-    document.getElementById("loginForm");
-
-if (loginForm) {
-
-    loginForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            const button =
-                loginForm.querySelector(
-                    'button[type="submit"]'
-                );
-
-            const originalText =
-                button.innerHTML;
-
-            button.disabled = true;
-
-            button.innerHTML = `
-                Verificando...
-                <i class="bi bi-arrow-repeat"></i>
-            `;
-
-
-            /*
-             * IMPORTANTE:
-             *
-             * Esta parte es solamente UX.
-             *
-             * Cuando exista el backend,
-             * reemplazar este comportamiento
-             * por la autenticación real.
-             */
-
-
-            setTimeout(function () {
-
-                button.disabled = false;
-
-                button.innerHTML =
-                    originalText;
-
-                alert(
-                    "Aquí se conectará el sistema de inicio de sesión de Safety Control Tower."
-                );
-
-            }, 1000);
-
-        }
-    );
-
-}
-
-
-/* ==========================================================
    SCROLL REVEAL
    ========================================================== */
 

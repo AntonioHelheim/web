@@ -30,5 +30,5 @@ if (ini_get('session.use_cookies')) {
 session_destroy();
 
 // Volver al inicio
-header('Location: index.html');
+header('Location: index.php');
 exit;

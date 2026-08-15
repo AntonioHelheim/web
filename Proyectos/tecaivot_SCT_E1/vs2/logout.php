@@ -7,7 +7,7 @@
  * 3. Destruye la sesión en el servidor.
  */
 
-session_start();
+require __DIR__ . '/session_bootstrap.php';
 
 // 1. Vaciar datos de sesión
 $_SESSION = [];

@@ -1,11 +1,13 @@
 <?php
-session_start();
+require __DIR__ . '/session_bootstrap.php';
 
 // Si no hay sesión activa, no se puede ver esta página.
 if (empty($_SESSION['logged_in'])) {
     header('Location: acceso-denegado.php');
     exit;
 }
+
+aplicarCabecerasSeguridad();
 
 $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8');
 

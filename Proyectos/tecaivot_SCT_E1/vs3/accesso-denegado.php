@@ -54,7 +54,7 @@ unset($_SESSION['session_expired']);
                 Inicia sesión para continuar.
             </p>
 
-            <a href="index.html" class="btn btn-primary-custom mt-3">
+            <a href="index.php" class="btn btn-primary-custom mt-3">
                 Volver a intentar
                 <i class="bi bi-arrow-right"></i>
             </a>

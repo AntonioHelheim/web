@@ -1,3 +1,9 @@
+<?php
+require __DIR__ . '/session_bootstrap.php';
+
+$sesionExpirada = !empty($_SESSION['session_expired']);
+unset($_SESSION['session_expired']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -39,8 +45,9 @@
             <h1>Acceso denegado</h1>
 
             <p class="lead">
-                No tienes una sesión activa o no cuentas con permisos
-                para ver esta página.
+                <?php echo $sesionExpirada
+                    ? 'Tu sesión expiró por inactividad.'
+                    : 'No tienes una sesión activa o no cuentas con permisos para ver esta página.'; ?>
             </p>
 
             <p class="text-muted">
