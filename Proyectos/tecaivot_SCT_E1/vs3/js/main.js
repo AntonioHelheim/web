@@ -8,60 +8,82 @@
    NAVBAR SCROLL
    ========================================================== */
 
-const navbar = document.getElementById("mainNavbar");
+const navbar =
+    document.getElementById("mainNavbar");
 
-window.addEventListener("scroll", function () {
+window.addEventListener(
+    "scroll",
+    function () {
 
-    if (window.scrollY > 30) {
+        if (!navbar) {
+            return;
+        }
 
-        navbar.classList.add("scrolled");
+        if (window.scrollY > 30) {
 
-    } else {
+            navbar.classList.add(
+                "scrolled"
+            );
 
-        navbar.classList.remove("scrolled");
+        } else {
+
+            navbar.classList.remove(
+                "scrolled"
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* ==========================================================
    CLOSE MOBILE NAVBAR AFTER CLICK
    ========================================================== */
 
-const navLinks = document.querySelectorAll(
-    ".navbar-nav .nav-link"
-);
+const navLinks =
+    document.querySelectorAll(
+        ".navbar-nav .nav-link"
+    );
 
-const navbarCollapse = document.getElementById(
-    "navbarContent"
-);
+const navbarCollapse =
+    document.getElementById(
+        "navbarContent"
+    );
 
-navLinks.forEach(function (link) {
+navLinks.forEach(
+    function (link) {
 
-    link.addEventListener("click", function () {
+        link.addEventListener(
+            "click",
+            function () {
 
-        if (
-            window.innerWidth < 992 &&
-            navbarCollapse.classList.contains("show")
-        ) {
+                if (
+                    navbarCollapse &&
+                    window.innerWidth < 992 &&
+                    navbarCollapse.classList.contains(
+                        "show"
+                    )
+                ) {
 
-            const bsCollapse =
-                bootstrap.Collapse.getInstance(
-                    navbarCollapse
-                );
+                    const bsCollapse =
+                        bootstrap.Collapse.getInstance(
+                            navbarCollapse
+                        );
 
-            if (bsCollapse) {
+                    if (bsCollapse) {
 
-                bsCollapse.hide();
+                        bsCollapse.hide();
+
+                    }
+
+                }
 
             }
+        );
 
-        }
-
-    });
-
-});
+    }
+);
 
 
 /* ==========================================================
@@ -69,7 +91,9 @@ navLinks.forEach(function (link) {
    ========================================================== */
 
 const currentYear =
-    document.getElementById("currentYear");
+    document.getElementById(
+        "currentYear"
+    );
 
 if (currentYear) {
 
@@ -80,56 +104,13 @@ if (currentYear) {
 
 
 /* ==========================================================
-   PASSWORD VISIBILITY
-   ========================================================== */
-
-const togglePassword =
-    document.getElementById("togglePassword");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-if (togglePassword && loginPassword) {
-
-    togglePassword.addEventListener(
-        "click",
-        function () {
-
-            const isPassword =
-                loginPassword.type === "password";
-
-            loginPassword.type =
-                isPassword ? "text" : "password";
-
-            const icon =
-                togglePassword.querySelector("i");
-
-            if (isPassword) {
-
-                icon.classList.remove("bi-eye");
-
-                icon.classList.add("bi-eye-slash");
-
-            } else {
-
-                icon.classList.remove("bi-eye-slash");
-
-                icon.classList.add("bi-eye");
-
-            }
-
-        }
-    );
-
-}
-
-
-/* ==========================================================
    CONTACT FORM
    ========================================================== */
 
 const contactForm =
-    document.getElementById("contactForm");
+    document.getElementById(
+        "contactForm"
+    );
 
 if (contactForm) {
 
@@ -139,15 +120,22 @@ if (contactForm) {
 
             event.preventDefault();
 
+
             const button =
                 contactForm.querySelector(
                     'button[type="submit"]'
                 );
 
+            if (!button) {
+                return;
+            }
+
+
             const originalText =
                 button.innerHTML;
 
-            button.disabled = true;
+            button.disabled =
+                true;
 
             button.innerHTML = `
                 Enviando...
@@ -155,27 +143,34 @@ if (contactForm) {
             `;
 
 
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                button.innerHTML = `
-                    Solicitud enviada
-                    <i class="bi bi-check-circle"></i>
-                `;
-
-
-                contactForm.reset();
+                    button.innerHTML = `
+                        Solicitud enviada
+                        <i class="bi bi-check-circle"></i>
+                    `;
 
 
-                setTimeout(function () {
+                    contactForm.reset();
 
-                    button.disabled = false;
 
-                    button.innerHTML =
-                        originalText;
+                    setTimeout(
+                        function () {
 
-                }, 2500);
+                            button.disabled =
+                                false;
 
-            }, 1000);
+                            button.innerHTML =
+                                originalText;
+
+                        },
+                        2500
+                    );
+
+                },
+                1000
+            );
 
         }
     );
@@ -192,35 +187,55 @@ const revealElements =
         ".problem-card, .feature-card, .benefit-item, .step-item"
     );
 
-// Observar elementos con animaciones
+
+/*
+ * Observar elementos con animaciones
+ */
+
 document.querySelectorAll(
     ".problem-card, .feature-card, .case-card, .pricing-card, .benefit-item"
-).forEach((element) => {
-    element.classList.add("reveal");
-    animationObserver.observe(element);
-});
+).forEach(
+    function (element) {
+
+        element.classList.add(
+            "reveal"
+        );
+
+        animationObserver.observe(
+            element
+        );
+
+    }
+);
 
 
+/* ==========================================================
+   INTERSECTION OBSERVER
+   ========================================================== */
 
 const observer =
     new IntersectionObserver(
         function (entries) {
 
-            entries.forEach(function (entry) {
+            entries.forEach(
+                function (entry) {
 
-                if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                    entry.target.classList.add(
-                        "visible"
-                    );
+                        entry.target.classList.add(
+                            "visible"
+                        );
 
-                    observer.unobserve(
-                        entry.target
-                    );
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         },
         {
@@ -229,13 +244,19 @@ const observer =
     );
 
 
-revealElements.forEach(function (element) {
+revealElements.forEach(
+    function (element) {
 
-    element.classList.add("reveal");
+        element.classList.add(
+            "reveal"
+        );
 
-    observer.observe(element);
+        observer.observe(
+            element
+        );
 
-});
+    }
+);
 
 
 /* ==========================================================
@@ -244,46 +265,64 @@ revealElements.forEach(function (element) {
 
 document.querySelectorAll(
     'a[href^="#"]'
-).forEach(function (anchor) {
+).forEach(
+    function (anchor) {
 
-    anchor.addEventListener(
-        "click",
-        function (event) {
+        anchor.addEventListener(
+            "click",
+            function (event) {
 
-            const targetId =
-                this.getAttribute("href");
+                const targetId =
+                    this.getAttribute(
+                        "href"
+                    );
 
-            if (
-                targetId === "#" ||
-                !document.querySelector(targetId)
-            ) {
 
-                return;
+                if (
+                    targetId === "#" ||
+                    !document.querySelector(
+                        targetId
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                const navbarHeight =
+                    navbar
+                        ? navbar.offsetHeight
+                        : 0;
+
+
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    navbarHeight;
+
+
+                window.scrollTo({
+
+                    top:
+                        targetPosition,
+
+                    behavior:
+                        "smooth"
+
+                });
 
             }
+        );
 
-            event.preventDefault();
-
-            const target =
-                document.querySelector(targetId);
-
-            const navbarHeight =
-                navbar.offsetHeight;
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                navbarHeight;
-
-            window.scrollTo({
-
-                top: targetPosition,
-
-                behavior: "smooth"
-
-            });
-
-        }
-    );
-
-});
+    }
+);

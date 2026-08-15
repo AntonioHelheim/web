@@ -2,16 +2,14 @@
 /**
  * index.php
  * Ensambla la página principal a partir de los partials en /partials.
- * El orden de los require es el mismo orden en que aparecía cada
- * sección en el index.html original — no se alteró contenido ni maquetación.
  */
 
-// Cabeceras de seguridad básicas (sin iniciar sesión: la home no necesita
-// $_SESSION todavía, y abrir sesión para cada visitante anónimo sería
-// overhead innecesario en la página más visitada del sitio).
-header('X-Frame-Options: DENY');
-header('X-Content-Type-Options: nosniff');
-header('Referrer-Policy: strict-origin-when-cross-origin');
+// Inicia la sesión ANTES de cualquier salida (obligatorio: login-modal.php
+// necesita $_SESSION['csrf_token'] disponible, y session_start() debe
+// ejecutarse antes de que se envíe HTML o cualquier otra salida).
+// También aplica las cabeceras de seguridad básicas (X-Frame-Options, etc.)
+require __DIR__ . '/session_bootstrap.php';
+aplicarCabecerasSeguridad();
 
 const PARTIALS_DIR = __DIR__ . '/partials';
 

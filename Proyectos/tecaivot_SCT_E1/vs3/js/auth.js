@@ -1,60 +1,534 @@
 /**
- * auth.js
- * Conecta el formulario #loginForm del modal con login.php.
- * Inclúyelo en tu HTML después de Bootstrap:
- *   <script src="auth.js"></script>
+ * ==========================================================
+ * AUTH.JS
+ * SAFETY CONTROL TOWER
+ *
+ * Responsabilidades:
+ * - Login
+ * - Validación del formulario
+ * - CSRF
+ * - Mostrar / ocultar contraseña
+ * - Estados del botón
+ * - Manejo de errores
+ * ==========================================================
  */
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('loginForm');
-    if (!form) return;
 
-    // Contenedor para mensajes de error (se crea si no existe)
-    let errorBox = document.getElementById('loginError');
-    if (!errorBox) {
-        errorBox = document.createElement('div');
-        errorBox.id = 'loginError';
-        errorBox.className = 'alert alert-danger d-none mt-2';
-        form.prepend(errorBox);
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("loginForm");
+
+    if (!form) {
+        return;
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
 
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-        const submitBtn = form.querySelector('button[type="submit"]');
+    /* ==========================================================
+       ELEMENTOS DEL FORMULARIO
+    ========================================================== */
 
-        errorBox.classList.add('d-none');
-        errorBox.textContent = '';
+    const emailInput =
+        document.getElementById("loginEmail");
 
-        // Estado de carga
-        const originalBtnHTML = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Verificando...';
+    const passwordInput =
+        document.getElementById("loginPassword");
 
-        try {
-            const response = await fetch('login.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+    const emailError =
+        document.getElementById("loginEmailError");
 
-            const data = await response.json();
+    const passwordError =
+        document.getElementById("loginPasswordError");
 
-            if (data.success) {
-                // Login correcto -> página de bienvenida
-                window.location.href = data.redirect || 'bienvenida.php';
-            } else {
-                // Login rechazado -> error inline en el modal (sin redirigir)
-                errorBox.textContent = data.message || 'Usuario o contraseña incorrectos.';
-                errorBox.classList.remove('d-none');
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const submitBtn =
+        document.getElementById("loginSubmit");
+
+    const alertBox =
+        document.getElementById("loginAlert");
+
+    const rememberInput =
+        document.getElementById("remember");
+
+    const csrfInput =
+        form.querySelector('[name="csrf_token"]');
+
+
+    /* ==========================================================
+       VALIDACIÓN DE ELEMENTOS
+    ========================================================== */
+
+    if (
+        !emailInput ||
+        !passwordInput ||
+        !submitBtn ||
+        !alertBox
+    ) {
+        console.error(
+            "AUTH.JS: Faltan elementos requeridos del formulario de login."
+        );
+
+        return;
+    }
+
+
+    /* ==========================================================
+       MOSTRAR / OCULTAR CONTRASEÑA
+    ========================================================== */
+
+    if (togglePassword) {
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+                passwordInput.type =
+                    isPassword ? "text" : "password";
+
+
+                /*
+                 * Actualizar estado accesible
+                 */
+
+                togglePassword.setAttribute(
+                    "aria-pressed",
+                    String(isPassword)
+                );
+
+                togglePassword.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Ocultar contraseña"
+                        : "Mostrar contraseña"
+                );
+
+
+                /*
+                 * Actualizar icono
+                 */
+
+                const icon =
+                    togglePassword.querySelector("i");
+
+                if (icon) {
+
+                    icon.classList.toggle(
+                        "bi-eye",
+                        !isPassword
+                    );
+
+                    icon.classList.toggle(
+                        "bi-eye-slash",
+                        isPassword
+                    );
+
+                }
+
             }
-        } catch (err) {
-            errorBox.textContent = 'No se pudo conectar con el servidor. Intenta nuevamente.';
-            errorBox.classList.remove('d-none');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnHTML;
+        );
+
+    }
+
+
+    /* ==========================================================
+       MOSTRAR / OCULTAR ERROR DE CAMPO
+    ========================================================== */
+
+    function showFieldError(
+        input,
+        errorElement,
+        show
+    ) {
+
+        input.classList.toggle(
+            "is-invalid",
+            show
+        );
+
+        if (errorElement) {
+
+            errorElement.classList.toggle(
+                "d-none",
+                !show
+            );
+
         }
+
+    }
+
+
+    /* ==========================================================
+       VALIDAR FORMULARIO
+    ========================================================== */
+
+    function validateForm() {
+
+        let valid = true;
+
+
+        /*
+         * Email
+         */
+
+        const emailValid =
+            emailInput.checkValidity();
+
+        showFieldError(
+            emailInput,
+            emailError,
+            !emailValid
+        );
+
+        if (!emailValid) {
+            valid = false;
+        }
+
+
+        /*
+         * Password
+         */
+
+        const passwordValid =
+            passwordInput.checkValidity();
+
+        showFieldError(
+            passwordInput,
+            passwordError,
+            !passwordValid
+        );
+
+        if (!passwordValid) {
+            valid = false;
+        }
+
+
+        return valid;
+
+    }
+
+
+    /* ==========================================================
+       ESTADO DE CARGA
+    ========================================================== */
+
+    function setLoading(isLoading) {
+
+        submitBtn.disabled =
+            isLoading;
+
+
+        const label =
+            submitBtn.querySelector(".btn-label");
+
+        const icon =
+            submitBtn.querySelector(".btn-icon");
+
+        const spinner =
+            submitBtn.querySelector(".spinner-border");
+
+
+        if (label) {
+
+            label.classList.toggle(
+                "d-none",
+                isLoading
+            );
+
+        }
+
+
+        if (icon) {
+
+            icon.classList.toggle(
+                "d-none",
+                isLoading
+            );
+
+        }
+
+
+        if (spinner) {
+
+            spinner.classList.toggle(
+                "d-none",
+                !isLoading
+            );
+
+        }
+
+    }
+
+
+    /* ==========================================================
+       MOSTRAR ALERTA
+    ========================================================== */
+
+    function showAlert(
+        message,
+        variant = "error"
+    ) {
+
+        alertBox.textContent =
+            message;
+
+        alertBox.classList.remove(
+            "d-none",
+            "login-alert--error",
+            "login-alert--warning"
+        );
+
+        alertBox.classList.add(
+            "login-alert--" + variant
+        );
+
+    }
+
+
+    /* ==========================================================
+       OCULTAR ALERTA
+    ========================================================== */
+
+    function hideAlert() {
+
+        alertBox.classList.add(
+            "d-none"
+        );
+
+        alertBox.classList.remove(
+            "login-alert--error",
+            "login-alert--warning"
+        );
+
+        alertBox.textContent = "";
+
+    }
+
+
+    /* ==========================================================
+       LIMPIAR ERROR AL ESCRIBIR
+    ========================================================== */
+
+    [
+        emailInput,
+        passwordInput
+    ].forEach(function (input) {
+
+        input.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    input.classList.contains(
+                        "is-invalid"
+                    )
+                ) {
+
+                    validateForm();
+
+                }
+
+                hideAlert();
+
+            }
+        );
+
     });
+
+
+    /* ==========================================================
+       SUBMIT LOGIN
+    ========================================================== */
+
+    form.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            /*
+             * Limpiar mensajes anteriores
+             */
+
+            hideAlert();
+
+
+            /*
+             * Validar formulario
+             */
+
+            if (!validateForm()) {
+
+                return;
+
+            }
+
+
+            /*
+             * Activar estado de carga
+             */
+
+            setLoading(true);
+
+
+            try {
+
+                /*
+                 * Construir payload.
+                 *
+                 * IMPORTANTE:
+                 * El CSRF se envía explícitamente.
+                 */
+
+                const payload = {
+
+                    email:
+                        emailInput.value.trim(),
+
+                    password:
+                        passwordInput.value,
+
+                    remember:
+                        !!(
+                            rememberInput &&
+                            rememberInput.checked
+                        ),
+
+                    csrf_token:
+                        csrfInput
+                            ? csrfInput.value
+                            : ""
+
+                };
+
+
+                /*
+                 * Enviar solicitud
+                 */
+
+                const response =
+                    await fetch(
+                        form.action,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "X-Requested-With":
+                                    "XMLHttpRequest"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+                        }
+                    );
+
+
+                /*
+                 * Intentar interpretar JSON
+                 */
+
+                let data;
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    throw new Error(
+                        "Respuesta inválida del servidor."
+                    );
+
+                }
+
+
+                /* ==================================================
+                   LOGIN CORRECTO
+                ================================================== */
+
+                if (data.success) {
+
+                    window.location.href =
+                        data.redirect ||
+                        "bienvenida.php";
+
+                    return;
+
+                }
+
+
+                /* ==================================================
+                   RATE LIMIT
+                ================================================== */
+
+                if (response.status === 429) {
+
+                    showAlert(
+                        data.message ||
+                        "Demasiados intentos fallidos. Intenta más tarde.",
+                        "warning"
+                    );
+
+
+                    submitBtn.disabled =
+                        true;
+
+
+                    setTimeout(
+                        function () {
+
+                            submitBtn.disabled =
+                                false;
+
+                        },
+                        30000
+                    );
+
+
+                    return;
+
+                }
+
+
+                /* ==================================================
+                   LOGIN RECHAZADO
+                ================================================== */
+
+                showAlert(
+                    data.message ||
+                    "Correo o contraseña incorrectos.",
+                    "error"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "AUTH.JS:",
+                    error
+                );
+
+
+                showAlert(
+                    "No se pudo conectar con el servidor. Intenta nuevamente.",
+                    "error"
+                );
+
+            } finally {
+
+                setLoading(false);
+
+            }
+
+        }
+    );
+
 });

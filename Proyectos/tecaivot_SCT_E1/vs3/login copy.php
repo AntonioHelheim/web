@@ -1,11 +1,10 @@
 <?php
 /**
  * login.php
- * Recibe { email, password, csrf_token } por POST (JSON) desde el modal de login,
+ * Recibe { email, password } por POST (JSON) desde el modal de login,
  * verifica contra la tabla `users` y responde en JSON.
  *
  * Seguridad implementada:
- * - Validación de token CSRF contra el guardado en sesión.
  * - Verificación con password_hash/password_verify, con migración
  *   automática y transparente desde el esquema viejo (rut en texto plano).
  * - Rate limiting: bloqueo temporal tras varios intentos fallidos.
@@ -37,22 +36,9 @@ if (!$input) {
     $input = $_POST;
 }
 
-$email      = trim($input['email'] ?? '');
-$password   = trim($input['password'] ?? '');
-$csrfToken  = (string) ($input['csrf_token'] ?? '');
-$ip         = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-
-// --- Validación de token CSRF ---
-// Debe existir un token en sesión (generado al mostrar el modal) y coincidir
-// exactamente con el enviado por el formulario. hash_equals evita timing attacks.
-if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
-    http_response_code(403);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Tu sesión expiró o la página quedó desactualizada. Recarga e intenta nuevamente.'
-    ]);
-    exit;
-}
+$email    = trim($input['email'] ?? '');
+$password = trim($input['password'] ?? '');
+$ip       = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
 if ($email === '' || $password === '') {
     http_response_code(400);
@@ -168,9 +154,6 @@ try {
     $_SESSION['user_email']    = $email;
     $_SESSION['logged_in']     = true;
     $_SESSION['last_activity'] = time();
-
-    // Se regenera el token CSRF tras un login exitoso para evitar su reutilización.
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
     echo json_encode([
         'success'  => true,

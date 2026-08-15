@@ -1,147 +1,267 @@
-    <!-- =====================================================
-         LOGIN MODAL
-    ====================================================== -->
+<?php
+/**
+ * Genera el token CSRF para el formulario de login si aún no existe
+ * en la sesión. Requiere que session_bootstrap.php ya haya iniciado
+ * la sesión antes de incluir este partial.
+ */
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
 
-    <div
-        class="modal fade"
-        id="loginModal"
-        tabindex="-1"
-        aria-labelledby="loginModalLabel"
-        aria-hidden="true">
+<!-- =====================================================
+     LOGIN MODAL
+====================================================== -->
 
-        <div class="modal-dialog modal-dialog-centered">
+<div
+    class="modal fade"
+    id="loginModal"
+    tabindex="-1"
+    aria-labelledby="loginModalLabel"
+    aria-hidden="true">
 
-            <div class="modal-content login-modal">
+    <div class="modal-dialog modal-dialog-centered">
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Cerrar">
-                </button>
+        <div class="modal-content login-modal">
 
-              <div class="modal-brand">
-
-    <div class="modal-symbol">
-        <img
-            src="./images/logos/Logo-SCT-white.svg"
-            alt="Safety Control Tower">
-    </div>
-
-    <div class="modal-brand-text">
-        <strong>Safety Control</strong>
-        <small>TOWER</small>
-    </div>
-
-</div>
-
-                    <h2 id="loginModalLabel">
-                        Bienvenido de vuelta
-                    </h2>
-
-                    <p>
-                        Ingresa a tu cuenta para acceder a tu plataforma.
-                    </p>
-
-                    <form id="loginForm">
-
-                        <div class="mb-3">
-
-                            <label for="loginEmail">
-                                Correo electrónico
-                            </label>
-
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="loginEmail"
-                                placeholder="correo@empresa.cl"
-                                autocomplete="email"
-                                required>
-
-                        </div>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar">
+            </button>
 
 
-                        <div class="mb-3">
+            <!-- =====================================================
+                 BRAND
+            ====================================================== -->
 
-                            <label for="loginPassword">
-                                Contraseña
-                            </label>
+            <div class="modal-brand">
 
-                            <div class="password-wrapper">
+                <div class="modal-symbol">
 
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="loginPassword"
-                                    placeholder="••••••••"
-                                    autocomplete="current-password"
-                                    required>
+                    <img
+                        src="./images/logos/Logo-SCT-white.svg"
+                        alt="Safety Control Tower">
 
-                                <button
-                                    type="button"
-                                    id="togglePassword"
-                                    class="password-toggle"
-                                    aria-label="Mostrar u ocultar contraseña">
+                </div>
 
-                                    <i class="bi bi-eye"></i>
+                <div class="modal-brand-text">
 
-                                </button>
+                    <strong>Safety Control</strong>
 
-                            </div>
+                    <small>TOWER</small>
 
-                        </div>
+                </div>
+
+            </div>
 
 
-                        <div class="d-flex justify-content-between mb-4">
+            <!-- =====================================================
+                 TITLE
+            ====================================================== -->
 
-                            <div class="form-check">
+            <h2 id="loginModalLabel">
+                Bienvenido de vuelta
+            </h2>
 
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    id="remember">
-
-                                <label
-                                    class="form-check-label"
-                                    for="remember">
-
-                                    Recordarme
-
-                                </label>
-
-                            </div>
-
-                            <a href="#">
-                                ¿Olvidaste tu contraseña?
-                            </a>
-
-                        </div>
+            <p>
+                Ingresa a tu cuenta para acceder a tu plataforma.
+            </p>
 
 
-                        <button
-                            type="submit"
-                            class="btn btn-primary-custom w-100">
+            <!-- =====================================================
+                 LOGIN ALERT
+            ====================================================== -->
 
-                            Iniciar sesión
+            <div
+                id="loginAlert"
+                class="login-alert d-none"
+                role="alert"
+                aria-live="polite">
+            </div>
 
-                            <i class="bi bi-arrow-right"></i>
 
-                        </button>
+            <!-- =====================================================
+                 LOGIN FORM
+            ====================================================== -->
 
-                    </form>
+            <form
+                id="loginForm"
+                method="post"
+                action="login.php"
+                novalidate>
 
-                    <div class="login-help">
+                <!-- CSRF -->
 
-                        ¿Aún no eres cliente?
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="<?php echo htmlspecialchars(
+                        $_SESSION['csrf_token'] ?? '',
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>">
 
-                        <a href="#contacto" data-bs-dismiss="modal">
-                            Solicita información
-                        </a>
+
+                <!-- =====================================================
+                     EMAIL
+                ====================================================== -->
+
+                <div class="mb-3">
+
+                    <label for="loginEmail">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="loginEmail"
+                        name="email"
+                        placeholder="correo@empresa.cl"
+                        autocomplete="email"
+                        maxlength="150"
+                        aria-describedby="loginEmailError"
+                        required>
+
+                    <div
+                        id="loginEmailError"
+                        class="field-error d-none"
+                        aria-live="polite">
+
+                        Ingresa un correo electrónico válido.
 
                     </div>
 
                 </div>
+
+
+                <!-- =====================================================
+                     PASSWORD
+                ====================================================== -->
+
+                <div class="mb-3">
+
+                    <label for="loginPassword">
+                        Contraseña
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            minlength="8"
+                            aria-describedby="loginPasswordError"
+                            required>
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Mostrar contraseña"
+                            aria-pressed="false"
+                            data-target="loginPassword">
+
+                            <i
+                                class="bi bi-eye"
+                                aria-hidden="true">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="loginPasswordError"
+                        class="field-error d-none"
+                        aria-live="polite">
+
+                        La contraseña debe tener al menos 8 caracteres.
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================================
+                     OPTIONS
+                ====================================================== -->
+
+                <div class="d-flex justify-content-between mb-4">
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="remember"
+                            name="remember"
+                            value="1">
+
+                        <label
+                            class="form-check-label"
+                            for="remember">
+
+                            Recordarme
+
+                        </label>
+
+                    </div>
+
+                    <a href="recuperar-contrasena.php">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+
+                </div>
+
+
+                <!-- =====================================================
+                     SUBMIT
+                ====================================================== -->
+
+                <button
+                    type="submit"
+                    id="loginSubmit"
+                    class="btn btn-primary-custom w-100">
+
+                    <span class="btn-label">
+                        Iniciar sesión
+                    </span>
+
+                    <i class="bi bi-arrow-right btn-icon"></i>
+
+                    <span
+                        class="spinner-border spinner-border-sm d-none"
+                        role="status"
+                        aria-hidden="true">
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- =====================================================
+                 HELP
+            ====================================================== -->
+
+            <div class="login-help">
+
+                ¿Aún no eres cliente?
+
+                <a
+                    href="#contacto"
+                    data-bs-dismiss="modal">
+
+                    Solicita información
+
+                </a>
 
             </div>
 
@@ -149,4 +269,4 @@
 
     </div>
 
-
+</div>
