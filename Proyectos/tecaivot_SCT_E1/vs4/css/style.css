@@ -19,6 +19,11 @@
     --accent-dark: #6c54ad;
 
     --success: #BFFA00;
+    /* Verde convencional para iconografía de éxito (checks, confirmaciones).
+       El "success" oficial de marca (#BFFA00) es un lima muy saturado que no
+       lee bien como ícono pequeño sobre fondo claro. No está en el Manual de
+       Marca v1: confirmar con diseño si se formaliza en la paleta funcional. */
+    --success-dark: #16a34a;
 
     --error: #EF4444;
     --warning: #F59E0B;
@@ -31,6 +36,8 @@
     --text: #0F172A;
     --text-secondary: #64748B;
     --border: #E2E8F0;
+
+    --transition-smooth: all 0.3s ease;
 
     --radius-sm: 10px;
     --radius-md: 16px;
@@ -238,6 +245,51 @@ button {
 .btn-login:hover {
 
     background: var(--background-soft);
+
+}
+
+/* ==========================================================
+   SELECTOR DE IDIOMA (navbar)
+   ========================================================== */
+
+.lang-switcher .btn-lang {
+
+    border: 1px solid var(--border);
+    background: transparent;
+
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+}
+
+.lang-switcher .btn-lang:hover {
+
+    background: var(--background-soft);
+
+}
+
+.lang-switcher .dropdown-menu {
+
+    min-width: 140px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+
+}
+
+.lang-switcher .dropdown-item.active,
+.lang-switcher .dropdown-item:active {
+
+    background: var(--primary);
+    color: var(--white);
 
 }
 
@@ -1070,6 +1122,21 @@ button {
 
 /* ==========================================================
    PROBLEM
+   ========================================================== */
+
+/* ==========================================================
+   ABOUT (Nosotros)
+   ========================================================== */
+
+.about-section {
+
+    background: var(--white);
+
+}
+
+/* ==========================================================
+   PROBLEM (clase .problem-card reutilizada por nosotros.php;
+   .problem-section ya no se usa, problema.php quedó fuera del alcance)
    ========================================================== */
 
 .problem-section {
@@ -2243,6 +2310,127 @@ button {
 
     box-shadow:
         0 0 0 3px rgba(85,157,244,0.1);
+
+}
+
+/* ==========================================================
+   LOGIN ALERT (credenciales incorrectas / rate limit / código inválido)
+========================================================== */
+
+.login-alert {
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+
+    font-size: 0.9rem;
+    line-height: 1.4;
+
+}
+
+.login-alert--error {
+
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--error);
+
+}
+
+.login-alert--warning {
+
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #b45309;
+
+}
+
+.login-alert--success {
+
+    background: rgba(22, 163, 74, 0.08);
+    border-color: rgba(22, 163, 74, 0.3);
+    color: var(--success-dark);
+
+}
+
+/* ==========================================================
+   FIELD ERROR (validación por campo: correo / código)
+========================================================== */
+
+.field-error {
+
+    color: var(--error);
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+
+}
+
+.login-modal input.is-invalid {
+
+    border-color: var(--error);
+
+}
+
+.login-modal input.is-invalid:focus {
+
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+
+}
+
+/* ==========================================================
+   CÓDIGO DE ACCESO (paso 2 del login)
+========================================================== */
+
+.login-code-input {
+
+    text-align: center;
+    letter-spacing: 0.5em;
+    font-size: 1.4rem;
+    font-weight: 700;
+
+}
+
+.login-step-actions .btn-link-plain {
+
+    background: none;
+    border: none;
+    padding: 0;
+
+    color: var(--primary-dark);
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.login-step-actions .btn-link-plain:hover {
+
+    text-decoration: underline;
+
+}
+
+.login-step-actions .btn-link-plain:disabled {
+
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    text-decoration: none;
+
+}
+
+/* ==========================================================
+   UTILIDAD DE COLOR
+========================================================== */
+
+.text-primary-dark {
+
+    color: var(--primary-dark);
 
 }
 

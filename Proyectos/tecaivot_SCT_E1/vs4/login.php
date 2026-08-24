@@ -1,91 +1,103 @@
 <?php
 /**
  * login.php
- * Recibe { email, password, csrf_token } por POST (JSON) desde el modal de login,
- * verifica contra la tabla `users` y responde en JSON.
+ * Login sin contraseña, en 2 pasos, vía JSON:
+ *   action=request_code  { email, csrf_token }
+ *   action=verify_code   { email, code, csrf_token }
  *
  * Seguridad implementada:
- * - Validación de token CSRF contra el guardado en sesión.
- * - Verificación con password_hash/password_verify, con migración
- *   automática y transparente desde el esquema viejo (rut en texto plano).
- * - Rate limiting: bloqueo temporal tras varios intentos fallidos.
- * - Cookie de sesión endurecida (httponly, secure, samesite=Strict).
- * - Validación de formato de correo.
- * - Tiempo de respuesta equivalente exista o no el usuario.
+ * - CSRF contra el token guardado en sesión.
+ * - No se revela si un correo está o no registrado (mismo mensaje siempre).
+ * - Rate limiting independiente para solicitar código (por IP) y para
+ *   verificarlo (por correo + IP, igual que el login anterior).
+ * - El código se guarda con password_hash (nunca en texto plano) y expira
+ *   a los 10 minutos; se invalida tras usarse una vez.
+ * - Cookie de sesión endurecida (heredada de session_bootstrap.php).
  */
 
-// --- Config de rate limiting ---
-const MAX_INTENTOS       = 5;   // intentos fallidos permitidos
-const VENTANA_MINUTOS    = 15;  // ventana de tiempo para contar intentos
-const BLOQUEO_MINUTOS    = 15;  // minutos de bloqueo tras exceder el límite
+const CODIGO_LARGO               = 6;
+const CODIGO_VIGENCIA_MINUTOS    = 10;
+const MAX_SOLICITUDES_CODIGO_IP  = 8;    // solicitudes de código por IP
+const MAX_SOLICITUDES_CODIGO_USR = 3;    // solicitudes de código por correo
+const VENTANA_SOLICITUD_MINUTOS  = 15;
+
+const MAX_INTENTOS_VERIFICACION  = 5;    // intentos de código fallidos
+const VENTANA_VERIFICACION_MIN   = 15;
+const BLOQUEO_MINUTOS            = 15;
 
 require __DIR__ . '/session_bootstrap.php';
 header('Content-Type: application/json; charset=utf-8');
 
 require __DIR__ . '/config.php';
 
-// Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
     exit;
 }
 
-// Leer body JSON (o form-urlencoded como fallback)
 $input = json_decode(file_get_contents('php://input'), true);
 if (!$input) {
     $input = $_POST;
 }
 
-$email      = trim($input['email'] ?? '');
-$password   = trim($input['password'] ?? '');
-$csrfToken  = (string) ($input['csrf_token'] ?? '');
-$ip         = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$action    = (string) ($input['action'] ?? '');
+$email     = trim((string) ($input['email'] ?? ''));
+$code      = trim((string) ($input['code'] ?? ''));
+$csrfToken = (string) ($input['csrf_token'] ?? '');
+$ip        = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
-// --- Validación de token CSRF ---
-// Debe existir un token en sesión (generado al mostrar el modal) y coincidir
-// exactamente con el enviado por el formulario. hash_equals evita timing attacks.
 if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
     http_response_code(403);
     echo json_encode([
         'success' => false,
-        'message' => 'Tu sesión expiró o la página quedó desactualizada. Recarga e intenta nuevamente.'
+        'message' => 'Tu sesión expiró o la página quedó desactualizada. Recarga e intenta nuevamente.',
     ]);
     exit;
 }
 
-if ($email === '' || $password === '') {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Correo y contraseña son obligatorios.']);
-    exit;
-}
-
-// Validar formato de correo antes de tocar la base de datos
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Correo electrónico no válido.']);
     exit;
 }
 
 /**
- * Registra un intento de login (exitoso o fallido) para efectos de rate limiting.
+ * Genera un código numérico de CODIGO_LARGO dígitos, con ceros a la izquierda.
  */
-function registrarIntento(PDO $pdo, string $identifier, string $ip, bool $success): void
+function generarCodigo(): string
+{
+    return str_pad((string) random_int(0, 10 ** CODIGO_LARGO - 1), CODIGO_LARGO, '0', STR_PAD_LEFT);
+}
+
+/**
+ * Envío del código por correo.
+ * NOTA: mail() depende de que el servidor tenga un MTA local configurado
+ * (habitual en hosting cPanel). Para asegurar entrega a la bandeja de
+ * entrada en producción, se recomienda migrar a un proveedor transaccional
+ * (SMTP + PHPMailer, SendGrid, Mailgun, Amazon SES, etc.) en vez de mail().
+ */
+function enviarCodigoPorCorreo(string $email, string $codigo): bool
+{
+    $asunto = 'Tu código de acceso — Tecaivot';
+    $cuerpo = "Tu código de acceso es: {$codigo}\n\n"
+            . 'Este código vence en ' . CODIGO_VIGENCIA_MINUTOS . " minutos.\n"
+            . 'Si no solicitaste este código, puedes ignorar este mensaje.';
+    $cabeceras = "From: Tecaivot <no-responder@tecaivot.cl>\r\n"
+               . "Content-Type: text/plain; charset=UTF-8\r\n";
+
+    return @mail($email, $asunto, $cuerpo, $cabeceras);
+}
+
+function registrarIntentoVerificacion(PDO $pdo, string $identifier, string $ip, bool $success): void
 {
     $stmt = $pdo->prepare(
         'INSERT INTO login_attempts (identifier, ip_address, success) VALUES (:identifier, :ip, :success)'
     );
-    $stmt->execute([
-        'identifier' => $identifier,
-        'ip'         => $ip,
-        'success'    => $success ? 1 : 0,
-    ]);
+    $stmt->execute(['identifier' => $identifier, 'ip' => $ip, 'success' => $success ? 1 : 0]);
 }
 
-/**
- * Cuenta los intentos fallidos recientes para un correo o IP dados.
- */
-function intentosFallidosRecientes(PDO $pdo, string $identifier, string $ip, int $minutos): int
+function intentosVerificacionFallidosRecientes(PDO $pdo, string $identifier, string $ip, int $minutos): int
 {
     $stmt = $pdo->prepare(
         'SELECT COUNT(*) FROM login_attempts
@@ -93,92 +105,171 @@ function intentosFallidosRecientes(PDO $pdo, string $identifier, string $ip, int
            AND created_at >= (NOW() - INTERVAL :minutos MINUTE)
            AND (identifier = :identifier OR ip_address = :ip)'
     );
-    $stmt->execute([
-        'minutos'    => $minutos,
-        'identifier' => $identifier,
-        'ip'         => $ip,
-    ]);
+    $stmt->execute(['minutos' => $minutos, 'identifier' => $identifier, 'ip' => $ip]);
     return (int) $stmt->fetchColumn();
 }
 
 try {
-    // --- 1. Verificar si está bloqueado por demasiados intentos fallidos ---
-    $intentosFallidos = intentosFallidosRecientes($pdo, $email, $ip, VENTANA_MINUTOS);
 
-    if ($intentosFallidos >= MAX_INTENTOS) {
-        http_response_code(429);
-        echo json_encode([
-            'success' => false,
-            'message' => "Demasiados intentos fallidos. Intenta nuevamente en unos " . BLOQUEO_MINUTOS . " minutos."
-        ]);
-        exit;
-    }
+    /* =======================================================
+       PASO 1 — SOLICITAR CÓDIGO
+    ======================================================= */
+    if ($action === 'request_code') {
 
-    // --- 2. Buscar usuario ---
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE id_users = :identifier LIMIT 1');
-    $stmt->execute(['identifier' => $email]);
-    $user = $stmt->fetch();
+        // Rate limit por IP: aplica exista o no el correo, para no filtrar
+        // información sobre qué correos están registrados.
+        $stmt = $pdo->prepare(
+            'SELECT COUNT(*) FROM login_codes
+             WHERE ip_address = :ip AND created_at >= (NOW() - INTERVAL :minutos MINUTE)'
+        );
+        $stmt->execute(['ip' => $ip, 'minutos' => VENTANA_SOLICITUD_MINUTOS]);
+        $solicitudesPorIp = (int) $stmt->fetchColumn();
 
-    // Hash "señuelo" para que la verificación tarde lo mismo aunque el usuario no exista
-    // (evita que el tiempo de respuesta revele si un correo está registrado).
-    static $dummyHash = '$2y$10$abcdefghijklmnopqrstuuVQjV1n0z0e0e0e0e0e0e0e0e0e0e0e';
-
-    $passwordValida = false;
-    $necesitaMigrarHash = false;
-
-    if ($user) {
-        if (!empty($user['password_hash'])) {
-            // Camino nuevo: ya tiene hash guardado
-            $passwordValida = password_verify($password, $user['password_hash']);
-        } else {
-            // Camino de transición: aún no se ha migrado, compara contra rut
-            $passwordValida = hash_equals((string) $user['rut'], $password);
-            $necesitaMigrarHash = $passwordValida; // solo migramos si el login fue correcto
+        if ($solicitudesPorIp >= MAX_SOLICITUDES_CODIGO_IP) {
+            http_response_code(429);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Demasiadas solicitudes desde esta conexión. Intenta nuevamente en unos minutos.',
+            ]);
+            exit;
         }
-    } else {
-        // Usuario no existe: igualamos el costo de tiempo verificando contra un hash señuelo
-        password_verify($password, $dummyHash);
-    }
 
-    if (!$user || !$passwordValida) {
-        registrarIntento($pdo, $email, $ip, false);
-        http_response_code(401);
+        $stmt = $pdo->prepare('SELECT id_users FROM users WHERE id_users = :email AND state = 1 LIMIT 1');
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch();
+
+        if ($user) {
+            $stmt = $pdo->prepare(
+                'SELECT COUNT(*) FROM login_codes
+                 WHERE id_users = :identifier AND created_at >= (NOW() - INTERVAL :minutos MINUTE)'
+            );
+            $stmt->execute(['identifier' => $user['id_users'], 'minutos' => VENTANA_SOLICITUD_MINUTOS]);
+            $solicitudesPorUsuario = (int) $stmt->fetchColumn();
+
+            // Si ya se pasó del límite por usuario, no se genera ni envía un
+            // código nuevo, pero igual respondemos el mensaje genérico más
+            // abajo para no revelar el motivo exacto.
+            if ($solicitudesPorUsuario < MAX_SOLICITUDES_CODIGO_USR) {
+                $codigo     = generarCodigo();
+                $codigoHash = password_hash($codigo, PASSWORD_DEFAULT);
+                $expiraEn   = date('Y-m-d H:i:s', time() + CODIGO_VIGENCIA_MINUTOS * 60);
+
+                $stmt = $pdo->prepare(
+                    'INSERT INTO login_codes (id_users, code_hash, expires_at, ip_address)
+                     VALUES (:identifier, :hash, :expira, :ip)'
+                );
+                $stmt->execute([
+                    'identifier' => $user['id_users'],
+                    'hash'       => $codigoHash,
+                    'expira'     => $expiraEn,
+                    'ip'         => $ip,
+                ]);
+
+                enviarCodigoPorCorreo($email, $codigo);
+            }
+        }
+
+        // Respuesta idéntica exista o no el usuario / se haya enviado o no
+        // un código nuevo: evita que alguien pueda usar este endpoint para
+        // averiguar qué correos están registrados en el sistema.
         echo json_encode([
-            'success' => false,
-            'message' => 'Usuario o contraseña incorrectos.'
+            'success' => true,
+            'message' => 'Si el correo está registrado, recibirás un código de acceso.',
         ]);
         exit;
     }
 
-    // --- 3. Migración transparente a password_hash ---
-    if ($necesitaMigrarHash) {
-        $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
-        $update = $pdo->prepare('UPDATE users SET password_hash = :hash WHERE id_users = :identifier');
-        $update->execute([
-            'hash'       => $nuevoHash,
-            'identifier' => $user['id_users'],
+    /* =======================================================
+       PASO 2 — VERIFICAR CÓDIGO
+    ======================================================= */
+    if ($action === 'verify_code') {
+
+        if (!preg_match('/^\d{' . CODIGO_LARGO . '}$/', $code)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Código inválido.']);
+            exit;
+        }
+
+        // Mismo esquema de bloqueo por intentos fallidos que el login anterior.
+        $intentosFallidos = intentosVerificacionFallidosRecientes($pdo, $email, $ip, VENTANA_VERIFICACION_MIN);
+        if ($intentosFallidos >= MAX_INTENTOS_VERIFICACION) {
+            http_response_code(429);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Demasiados intentos fallidos. Solicita un nuevo código en ' . BLOQUEO_MINUTOS . ' minutos.',
+            ]);
+            exit;
+        }
+
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE id_users = :email AND state = 1 LIMIT 1');
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch();
+
+        // Hash señuelo para igualar el tiempo de respuesta si el usuario no existe.
+        static $dummyHash = '$2y$10$abcdefghijklmnopqrstuuVQjV1n0z0e0e0e0e0e0e0e0e0e0e0e';
+
+        $codigoValido = false;
+        $idLoginCode  = null;
+
+        if ($user) {
+            $stmt = $pdo->prepare(
+                'SELECT id_login_code, code_hash FROM login_codes
+                 WHERE id_users = :identifier
+                   AND used_at IS NULL
+                   AND expires_at >= NOW()
+                   AND attempts < :maxIntentos
+                 ORDER BY created_at DESC
+                 LIMIT 1'
+            );
+            $stmt->execute(['identifier' => $user['id_users'], 'maxIntentos' => MAX_INTENTOS_VERIFICACION]);
+            $registroCodigo = $stmt->fetch();
+
+            if ($registroCodigo) {
+                $codigoValido = password_verify($code, $registroCodigo['code_hash']);
+                $idLoginCode = $registroCodigo['id_login_code'];
+            } else {
+                password_verify($code, $dummyHash);
+            }
+        } else {
+            password_verify($code, $dummyHash);
+        }
+
+        if (!$user || !$codigoValido) {
+            registrarIntentoVerificacion($pdo, $email, $ip, false);
+            if ($idLoginCode) {
+                $pdo->prepare('UPDATE login_codes SET attempts = attempts + 1 WHERE id_login_code = :id')
+                    ->execute(['id' => $idLoginCode]);
+            }
+            http_response_code(401);
+            echo json_encode(['success' => false, 'message' => 'Código inválido o expirado.']);
+            exit;
+        }
+
+        // Código correcto: se marca usado (no se puede reutilizar) y se crea la sesión.
+        $pdo->prepare('UPDATE login_codes SET used_at = NOW() WHERE id_login_code = :id')
+            ->execute(['id' => $idLoginCode]);
+
+        registrarIntentoVerificacion($pdo, $email, $ip, true);
+
+        session_regenerate_id(true);
+        $_SESSION['user_id']       = $user['id_users'];
+        $_SESSION['user_email']    = $email;
+        $_SESSION['logged_in']     = true;
+        $_SESSION['last_activity'] = time();
+        $_SESSION['csrf_token']    = bin2hex(random_bytes(32));
+
+        echo json_encode([
+            'success'  => true,
+            'message'  => 'Inicio de sesión exitoso.',
+            'redirect' => 'bienvenida.php',
         ]);
+        exit;
     }
 
-    // --- 4. Login correcto: registrar y crear sesión ---
-    registrarIntento($pdo, $email, $ip, true);
-
-    session_regenerate_id(true);
-    $_SESSION['user_id']       = $user['id_users'];
-    $_SESSION['user_email']    = $email;
-    $_SESSION['logged_in']     = true;
-    $_SESSION['last_activity'] = time();
-
-    // Se regenera el token CSRF tras un login exitoso para evitar su reutilización.
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-    echo json_encode([
-        'success'  => true,
-        'message'  => 'Inicio de sesión exitoso.',
-        'redirect' => 'bienvenida.php'
-    ]);
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Acción no reconocida.']);
 
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Error al verificar el usuario.']);
+    echo json_encode(['success' => false, 'message' => 'Error al procesar la solicitud.']);
 }

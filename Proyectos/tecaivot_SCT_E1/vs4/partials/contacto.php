@@ -1,4 +1,4 @@
-        <!-- =====================================================
+<!-- =====================================================
              CONTACTO
         ====================================================== -->
 
@@ -11,21 +11,19 @@
                     <div class="col-lg-5">
 
                         <span class="section-label">
-                            HABLEMOS
+                            <?php echo htmlspecialchars(t('contacto_label'), ENT_QUOTES, 'UTF-8'); ?>
                         </span>
 
                         <h2 class="section-title">
 
-                            ¿Quieres saber si
-                            <span>Safety Control Tower es para ti?</span>
+                            <?php echo htmlspecialchars(t('contacto_title_1'), ENT_QUOTES, 'UTF-8'); ?>
+                            <span><?php echo htmlspecialchars(t('contacto_title_span'), ENT_QUOTES, 'UTF-8'); ?></span>
 
                         </h2>
 
                         <p class="section-description">
 
-                            Déjanos tus datos y nuestro equipo se pondrá
-                            en contacto contigo para conocer tus necesidades
-                            y orientarte.
+                            <?php echo htmlspecialchars(t('contacto_text'), ENT_QUOTES, 'UTF-8'); ?>
 
                         </p>
 
@@ -38,7 +36,7 @@
                                 </div>
 
                                 <div>
-                                    <small>Email</small>
+                                    <small><?php echo htmlspecialchars(t('contacto_email_label'), ENT_QUOTES, 'UTF-8'); ?></small>
                                     <strong>contacto@tecaivot.cl</strong>
                                 </div>
 
@@ -52,7 +50,7 @@
                                 </div>
 
                                 <div>
-                                    <small>Empresa</small>
+                                    <small><?php echo htmlspecialchars(t('contacto_empresa_label'), ENT_QUOTES, 'UTF-8'); ?></small>
                                     <strong>Tecaivot</strong>
                                 </div>
 
@@ -74,14 +72,14 @@
                                     <div class="col-md-6">
 
                                         <label for="name">
-                                            Nombre
+                                            <?php echo htmlspecialchars(t('form_name_label'), ENT_QUOTES, 'UTF-8'); ?>
                                         </label>
 
                                         <input
                                             type="text"
                                             id="name"
                                             name="name"
-                                            placeholder="Tu nombre"
+                                            placeholder="<?php echo htmlspecialchars(t('form_name_placeholder'), ENT_QUOTES, 'UTF-8'); ?>"
                                             required>
 
                                     </div>
@@ -90,14 +88,14 @@
                                     <div class="col-md-6">
 
                                         <label for="company">
-                                            Empresa
+                                            <?php echo htmlspecialchars(t('form_company_label'), ENT_QUOTES, 'UTF-8'); ?>
                                         </label>
 
                                         <input
                                             type="text"
                                             id="company"
                                             name="company"
-                                            placeholder="Nombre de empresa">
+                                            placeholder="<?php echo htmlspecialchars(t('form_company_placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                     </div>
 
@@ -105,14 +103,14 @@
                                     <div class="col-md-6">
 
                                         <label for="email">
-                                            Correo corporativo
+                                            <?php echo htmlspecialchars(t('form_email_label'), ENT_QUOTES, 'UTF-8'); ?>
                                         </label>
 
                                         <input
                                             type="email"
                                             id="email"
                                             name="email"
-                                            placeholder="nombre@empresa.cl"
+                                            placeholder="<?php echo htmlspecialchars(t('form_email_placeholder'), ENT_QUOTES, 'UTF-8'); ?>"
                                             required>
 
                                     </div>
@@ -121,14 +119,14 @@
                                     <div class="col-md-6">
 
                                         <label for="phone">
-                                            Teléfono
+                                            <?php echo htmlspecialchars(t('form_phone_label'), ENT_QUOTES, 'UTF-8'); ?>
                                         </label>
 
                                         <input
                                             type="tel"
                                             id="phone"
                                             name="phone"
-                                            placeholder="+56 9">
+                                            placeholder="<?php echo htmlspecialchars(t('form_phone_placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                     </div>
 
@@ -136,14 +134,14 @@
                                     <div class="col-12">
 
                                         <label for="message">
-                                            Cuéntanos qué necesitas
+                                            <?php echo htmlspecialchars(t('form_message_label'), ENT_QUOTES, 'UTF-8'); ?>
                                         </label>
 
                                         <textarea
                                             id="message"
                                             name="message"
                                             rows="4"
-                                            placeholder="Me gustaría conocer más sobre Safety Control Tower..."></textarea>
+                                            placeholder="<?php echo htmlspecialchars(t('form_message_placeholder'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
 
                                     </div>
 
@@ -162,8 +160,7 @@
                                                 class="form-check-label"
                                                 for="privacy">
 
-                                                Acepto ser contactado por
-                                                Tecaivot respecto a esta solicitud.
+                                                <?php echo htmlspecialchars(t('form_privacy_text'), ENT_QUOTES, 'UTF-8'); ?>
 
                                             </label>
 
@@ -178,7 +175,7 @@
                                             type="submit"
                                             class="btn btn-primary-custom btn-lg w-100">
 
-                                            Enviar solicitud
+                                            <?php echo htmlspecialchars(t('form_submit'), ENT_QUOTES, 'UTF-8'); ?>
 
                                             <i class="bi bi-arrow-right"></i>
 
@@ -201,5 +198,3 @@
         </section>
 
     </main>
-
-

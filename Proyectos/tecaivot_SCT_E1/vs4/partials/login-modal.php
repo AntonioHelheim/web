@@ -10,7 +10,7 @@ if (empty($_SESSION['csrf_token'])) {
 ?>
 
 <!-- =====================================================
-     LOGIN MODAL
+     LOGIN MODAL — flujo de 2 pasos: correo -> código enviado por email
 ====================================================== -->
 
 <div
@@ -58,19 +58,6 @@ if (empty($_SESSION['csrf_token'])) {
 
 
             <!-- =====================================================
-                 TITLE
-            ====================================================== -->
-
-            <h2 id="loginModalLabel">
-                Bienvenido de vuelta
-            </h2>
-
-            <p>
-                Ingresa a tu cuenta para acceder a tu plataforma.
-            </p>
-
-
-            <!-- =====================================================
                  LOGIN ALERT
             ====================================================== -->
 
@@ -82,167 +69,153 @@ if (empty($_SESSION['csrf_token'])) {
             </div>
 
 
-            <!-- =====================================================
-                 LOGIN FORM
-            ====================================================== -->
-
-            <form
-                id="loginForm"
-                method="post"
-                action="login.php"
-                novalidate>
+            <form id="loginForm" method="post" action="login.php" novalidate>
 
                 <!-- CSRF -->
-
                 <input
                     type="hidden"
                     name="csrf_token"
-                    value="<?php echo htmlspecialchars(
-                        $_SESSION['csrf_token'] ?? '',
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ); ?>">
+                    id="csrfToken"
+                    value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+
+                <!-- data-step indica en qué paso está el formulario; lo usa auth.js -->
+                <input type="hidden" id="loginStepInput" value="email">
 
 
                 <!-- =====================================================
-                     EMAIL
+                     PASO 1 — CORREO
                 ====================================================== -->
 
-                <div class="mb-3">
+                <div id="loginStepEmail">
 
-                    <label for="loginEmail">
-                        Correo electrónico
-                    </label>
+                    <h2 id="loginModalLabel">
+                        <?php echo htmlspecialchars(t('login_title'), ENT_QUOTES, 'UTF-8'); ?>
+                    </h2>
 
-                    <input
-                        type="email"
-                        class="form-control"
-                        id="loginEmail"
-                        name="email"
-                        placeholder="correo@empresa.cl"
-                        autocomplete="email"
-                        maxlength="150"
-                        aria-describedby="loginEmailError"
-                        required>
+                    <p>
+                        <?php echo htmlspecialchars(t('login_subtitle'), ENT_QUOTES, 'UTF-8'); ?>
+                    </p>
 
-                    <div
-                        id="loginEmailError"
-                        class="field-error d-none"
-                        aria-live="polite">
+                    <div class="mb-3">
 
-                        Ingresa un correo electrónico válido.
+                        <label for="loginEmail">
+                            <?php echo htmlspecialchars(t('login_email_label'), ENT_QUOTES, 'UTF-8'); ?>
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="loginEmail"
+                            name="email"
+                            placeholder="<?php echo htmlspecialchars(t('login_email_placeholder'), ENT_QUOTES, 'UTF-8'); ?>"
+                            autocomplete="email"
+                            maxlength="150"
+                            aria-describedby="loginEmailError"
+                            required>
+
+                        <div
+                            id="loginEmailError"
+                            class="field-error d-none"
+                            aria-live="polite">
+                        </div>
 
                     </div>
+
+                    <button
+                        type="submit"
+                        id="loginSendCode"
+                        class="btn btn-primary-custom w-100">
+
+                        <span class="btn-label">
+                            <?php echo htmlspecialchars(t('login_send_code_button'), ENT_QUOTES, 'UTF-8'); ?>
+                        </span>
+
+                        <i class="bi bi-arrow-right btn-icon"></i>
+
+                        <span
+                            class="spinner-border spinner-border-sm d-none"
+                            role="status"
+                            aria-hidden="true">
+                        </span>
+
+                    </button>
 
                 </div>
 
 
                 <!-- =====================================================
-                     PASSWORD
+                     PASO 2 — CÓDIGO (oculto hasta enviar el correo)
                 ====================================================== -->
 
-                <div class="mb-3">
+                <div id="loginStepCode" class="d-none">
 
-                    <label for="loginPassword">
-                        Contraseña
-                    </label>
+                    <h2>
+                        <?php echo htmlspecialchars(t('login_step2_title'), ENT_QUOTES, 'UTF-8'); ?>
+                    </h2>
 
-                    <div class="password-wrapper">
+                    <p>
+                        <?php echo htmlspecialchars(t('login_step2_subtitle'), ENT_QUOTES, 'UTF-8'); ?>
+                        <strong id="loginStepCodeEmail"></strong>
+                    </p>
+
+                    <div class="mb-3">
+
+                        <label for="loginCode">
+                            <?php echo htmlspecialchars(t('login_code_label'), ENT_QUOTES, 'UTF-8'); ?>
+                        </label>
 
                         <input
-                            type="password"
-                            class="form-control"
-                            id="loginPassword"
-                            name="password"
-                            placeholder="••••••••"
-                            autocomplete="current-password"
-                            minlength="8"
-                            aria-describedby="loginPasswordError"
-                            required>
+                            type="text"
+                            class="form-control login-code-input"
+                            id="loginCode"
+                            name="code"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            maxlength="6"
+                            placeholder="<?php echo htmlspecialchars(t('login_code_placeholder'), ENT_QUOTES, 'UTF-8'); ?>"
+                            aria-describedby="loginCodeError"
+                            autocomplete="one-time-code">
 
-                        <button
-                            type="button"
-                            id="togglePassword"
-                            class="password-toggle"
-                            aria-label="Mostrar contraseña"
-                            aria-pressed="false"
-                            data-target="loginPassword">
+                        <div
+                            id="loginCodeError"
+                            class="field-error d-none"
+                            aria-live="polite">
+                        </div>
 
-                            <i
-                                class="bi bi-eye"
-                                aria-hidden="true">
-                            </i>
+                    </div>
 
+                    <button
+                        type="submit"
+                        id="loginVerifyCode"
+                        class="btn btn-primary-custom w-100">
+
+                        <span class="btn-label">
+                            <?php echo htmlspecialchars(t('login_verify_button'), ENT_QUOTES, 'UTF-8'); ?>
+                        </span>
+
+                        <i class="bi bi-arrow-right btn-icon"></i>
+
+                        <span
+                            class="spinner-border spinner-border-sm d-none"
+                            role="status"
+                            aria-hidden="true">
+                        </span>
+
+                    </button>
+
+                    <div class="login-step-actions d-flex justify-content-between mt-3">
+
+                        <button type="button" id="loginResendCode" class="btn-link-plain">
+                            <?php echo htmlspecialchars(t('login_resend_code'), ENT_QUOTES, 'UTF-8'); ?>
+                        </button>
+
+                        <button type="button" id="loginChangeEmail" class="btn-link-plain">
+                            <?php echo htmlspecialchars(t('login_change_email'), ENT_QUOTES, 'UTF-8'); ?>
                         </button>
 
                     </div>
 
-                    <div
-                        id="loginPasswordError"
-                        class="field-error d-none"
-                        aria-live="polite">
-
-                        La contraseña debe tener al menos 8 caracteres.
-
-                    </div>
-
                 </div>
-
-
-                <!-- =====================================================
-                     OPTIONS
-                ====================================================== -->
-
-                <div class="d-flex justify-content-between mb-4">
-
-                    <div class="form-check">
-
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                            value="1">
-
-                        <label
-                            class="form-check-label"
-                            for="remember">
-
-                            Recordarme
-
-                        </label>
-
-                    </div>
-
-                    <a href="recuperar-contrasena.php">
-                        ¿Olvidaste tu contraseña?
-                    </a>
-
-                </div>
-
-
-                <!-- =====================================================
-                     SUBMIT
-                ====================================================== -->
-
-                <button
-                    type="submit"
-                    id="loginSubmit"
-                    class="btn btn-primary-custom w-100">
-
-                    <span class="btn-label">
-                        Iniciar sesión
-                    </span>
-
-                    <i class="bi bi-arrow-right btn-icon"></i>
-
-                    <span
-                        class="spinner-border spinner-border-sm d-none"
-                        role="status"
-                        aria-hidden="true">
-                    </span>
-
-                </button>
 
             </form>
 
@@ -253,14 +226,10 @@ if (empty($_SESSION['csrf_token'])) {
 
             <div class="login-help">
 
-                ¿Aún no eres cliente?
+                <?php echo htmlspecialchars(t('login_help_text'), ENT_QUOTES, 'UTF-8'); ?>
 
-                <a
-                    href="#contacto"
-                    data-bs-dismiss="modal">
-
-                    Solicita información
-
+                <a href="#contacto" data-bs-dismiss="modal">
+                    <?php echo htmlspecialchars(t('login_help_link'), ENT_QUOTES, 'UTF-8'); ?>
                 </a>
 
             </div>

@@ -184,29 +184,8 @@ if (contactForm) {
 
 const revealElements =
     document.querySelectorAll(
-        ".problem-card, .feature-card, .benefit-item, .step-item"
+        ".problem-card, .feature-card"
     );
-
-
-/*
- * Observar elementos con animaciones
- */
-
-document.querySelectorAll(
-    ".problem-card, .feature-card, .case-card, .pricing-card, .benefit-item"
-).forEach(
-    function (element) {
-
-        element.classList.add(
-            "reveal"
-        );
-
-        animationObserver.observe(
-            element
-        );
-
-    }
-);
 
 
 /* ==========================================================

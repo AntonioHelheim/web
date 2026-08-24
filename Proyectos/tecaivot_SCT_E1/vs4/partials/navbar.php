@@ -1,4 +1,4 @@
-    <!-- =====================================================
+<!-- =====================================================
          NAVBAR
     ====================================================== -->
 
@@ -11,12 +11,11 @@
                 <div class="brand-wrapper">
 
                     <div class="brand-symbol">
-    <img src="./images/logos/Logo-SCT-white.svg" alt="Safety Control">
+                        <img src="./images/logos/Logo_Tecaivot_principal-white.svg" alt="Tecaivot">
                     </div>
 
                     <div>
-                        <strong>Safety Control</strong>
-                        <small>TOWER</small>
+                        <strong>TECAIVOT</strong>
                     </div>
 
                 </div>
@@ -30,7 +29,7 @@
                 data-bs-target="#navbarContent"
                 aria-controls="navbarContent"
                 aria-expanded="false"
-                aria-label="Abrir navegación">
+                aria-label="Menu">
 
                 <i class="bi bi-list"></i>
 
@@ -41,38 +40,20 @@
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#producto">
-                            Producto
+                        <a class="nav-link" href="#nosotros">
+                            <?php echo htmlspecialchars(t('nav_nosotros'), ENT_QUOTES, 'UTF-8'); ?>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#funcionalidades">
-                            Funcionalidades
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#como-funciona">
-                            Cómo funciona
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#beneficios">
-                            Beneficios
-                        </a>
-                    </li>
-
-                     <li class="nav-item">
-                        <a class="nav-link" href="#precios">
-                            Precios
+                        <a class="nav-link" href="#productos">
+                            <?php echo htmlspecialchars(t('nav_productos'), ENT_QUOTES, 'UTF-8'); ?>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#contacto">
-                            Contacto
+                            <?php echo htmlspecialchars(t('nav_contacto'), ENT_QUOTES, 'UTF-8'); ?>
                         </a>
                     </li>
 
@@ -80,22 +61,43 @@
 
                 <div class="navbar-actions d-flex align-items-center gap-2">
 
+                    <!-- Selector de idioma: conserva la página actual, solo cambia ?lang= -->
+                    <div class="dropdown lang-switcher">
+
+                        <button
+                            class="btn btn-lang dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <i class="bi bi-globe2"></i>
+                            <?php echo strtoupper(idiomaActual()); ?>
+
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <?php foreach (idiomasDisponiblesConNombre() as $codigoIdioma => $nombreIdioma): ?>
+                            <li>
+                                <a class="dropdown-item <?php echo $codigoIdioma === idiomaActual() ? 'active' : ''; ?>"
+                                   href="?lang=<?php echo $codigoIdioma; ?>#inicio">
+                                    <?php echo htmlspecialchars($nombreIdioma, ENT_QUOTES, 'UTF-8'); ?>
+                                </a>
+                            </li>
+                            <?php endforeach; ?>
+
+                        </ul>
+
+                    </div>
+
                     <button
                         class="btn btn-login"
                         data-bs-toggle="modal"
                         data-bs-target="#loginModal">
 
-                        Iniciar sesión
+                        <?php echo htmlspecialchars(t('nav_login'), ENT_QUOTES, 'UTF-8'); ?>
 
                     </button>
-
-                    <a
-                        href="#contacto"
-                        class="btn btn-primary-custom">
-
-                        Solicitar cotización
-
-                    </a>
 
                 </div>
 
@@ -104,5 +106,3 @@
         </div>
 
     </nav>
-
-

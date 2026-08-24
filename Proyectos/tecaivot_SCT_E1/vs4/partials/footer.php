@@ -1,4 +1,4 @@
-    <!-- =====================================================
+<!-- =====================================================
          FOOTER
     ====================================================== -->
 
@@ -14,15 +14,14 @@
 
                     <img
                         src="images/logos/Logo_Tecaivot_principal-white.svg"
-                        alt="Safety Control Tower"
+                        alt="Tecaivot"
                         class="brand-logo">
 
                 </div>
 
                 <p class="footer-description">
 
-                    Una solución digital de Tecaivot para una gestión
-                    de seguridad más visible, conectada y eficiente.
+                    <?php echo htmlspecialchars(t('footer_description'), ENT_QUOTES, 'UTF-8'); ?>
 
                 </p>
 
@@ -31,23 +30,19 @@
 
                 <div class="col-6 col-lg-2">
 
-                    <h6>Producto</h6>
+                    <h6><?php echo htmlspecialchars(t('footer_col_empresa'), ENT_QUOTES, 'UTF-8'); ?></h6>
 
                     <ul>
 
                         <li>
-                            <a href="#producto">Producto</a>
-                        </li>
-
-                        <li>
-                            <a href="#funcionalidades">
-                                Funcionalidades
+                            <a href="#nosotros">
+                                <?php echo htmlspecialchars(t('nav_nosotros'), ENT_QUOTES, 'UTF-8'); ?>
                             </a>
                         </li>
 
                         <li>
-                            <a href="#demo">
-                                Demo
+                            <a href="#contacto">
+                                <?php echo htmlspecialchars(t('nav_contacto'), ENT_QUOTES, 'UTF-8'); ?>
                             </a>
                         </li>
 
@@ -58,19 +53,13 @@
 
                 <div class="col-6 col-lg-2">
 
-                    <h6>Empresa</h6>
+                    <h6><?php echo htmlspecialchars(t('footer_col_productos'), ENT_QUOTES, 'UTF-8'); ?></h6>
 
                     <ul>
 
                         <li>
-                            <a href="#beneficios">
-                                Beneficios
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#contacto">
-                                Contacto
+                            <a href="#productos">
+                                <?php echo htmlspecialchars(t('product_sct_name'), ENT_QUOTES, 'UTF-8'); ?>
                             </a>
                         </li>
 
@@ -81,10 +70,10 @@
 
                 <div class="col-lg-3">
 
-                    <h6>¿Ya eres cliente?</h6>
+                    <h6><?php echo htmlspecialchars(t('footer_login_prompt'), ENT_QUOTES, 'UTF-8'); ?></h6>
 
                     <p>
-                        Accede a tu plataforma Safety Control Tower.
+                        <?php echo htmlspecialchars(t('footer_login_text'), ENT_QUOTES, 'UTF-8'); ?>
                     </p>
 
                     <button
@@ -92,7 +81,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#loginModal">
 
-                        Iniciar sesión
+                        <?php echo htmlspecialchars(t('footer_login_button'), ENT_QUOTES, 'UTF-8'); ?>
 
                         <i class="bi bi-box-arrow-in-right"></i>
 
@@ -110,11 +99,7 @@
 
                 <span>
                     © <span id="currentYear"></span> Tecaivot.
-                    Todos los derechos reservados.
-                </span>
-
-                <span>
-                    Helheim agosto 2026
+                    <?php echo htmlspecialchars(t('footer_rights'), ENT_QUOTES, 'UTF-8'); ?>
                 </span>
 
             </div>
@@ -122,5 +107,3 @@
         </div>
 
     </footer>
-
-

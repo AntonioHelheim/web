@@ -1,7 +1,7 @@
 <?php
 /**
  * index.php
- * Ensambla la página principal a partir de los partials en /partials.
+ * Ensambla la página principal de Tecaivot a partir de los partials en /partials.
  */
 
 // Inicia la sesión ANTES de cualquier salida (obligatorio: login-modal.php
@@ -10,6 +10,10 @@
 // También aplica las cabeceras de seguridad básicas (X-Frame-Options, etc.)
 require __DIR__ . '/session_bootstrap.php';
 aplicarCabecerasSeguridad();
+
+// Selección de idioma (es/en/pt/fr/zh) y función t(). Debe ir después de
+// iniciar sesión (usa $_SESSION) y antes de cualquier partial (todos usan t()).
+require __DIR__ . '/i18n.php';
 
 const PARTIALS_DIR = __DIR__ . '/partials';
 
@@ -42,18 +46,9 @@ cargarPartial('head.php');
 <?php
 cargarPartial('navbar.php');
 cargarPartial('hero.php');           // incluye la apertura de <main>
-cargarPartial('trust-bar.php');
-cargarPartial('problema.php');
-cargarPartial('producto.php');
-cargarPartial('funcionalidades.php');
-cargarPartial('precios.php');
-cargarPartial('demo-section.php');
-cargarPartial('como-funciona.php');
-cargarPartial('beneficios.php');
-cargarPartial('cta.php');
-cargarPartial('faq.php');
+cargarPartial('nosotros.php');
+cargarPartial('productos.php');
 cargarPartial('contacto.php');       // incluye el cierre de </main>
 cargarPartial('footer.php');
 cargarPartial('login-modal.php');
-cargarPartial('demo-modal.php');
 cargarPartial('scripts.php');        // incluye Bootstrap JS, main.js, auth.js, </body></html>

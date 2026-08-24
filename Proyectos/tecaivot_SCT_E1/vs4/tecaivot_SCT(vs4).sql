@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-08-2026 a las 17:43:37
+-- Tiempo de generación: 24-08-2026 a las 14:36:45
 -- Versión del servidor: 10.11.18-MariaDB-cll-lve
 -- Versión de PHP: 8.4.24
 
@@ -260,7 +260,32 @@ INSERT INTO `login_attempts` (`id`, `identifier`, `ip_address`, `success`, `crea
 (26, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-15 14:19:16'),
 (27, 'spam@gmail.com', '179.4.50.96', 0, '2026-08-15 14:19:53'),
 (28, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-15 14:45:02'),
-(29, 'pablotroncoso@gmail.com', '190.162.229.170', 1, '2026-08-16 18:41:41');
+(29, 'pablotroncoso@gmail.com', '190.162.229.170', 1, '2026-08-16 18:41:41'),
+(30, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-20 17:47:43'),
+(31, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 13:20:25'),
+(32, 'fco.fredes.g@gmail.com', '179.4.50.96', 0, '2026-08-21 15:21:07'),
+(33, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:27'),
+(34, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:40'),
+(35, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:43'),
+(36, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:53'),
+(37, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-21 15:32:01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `login_codes`
+--
+
+CREATE TABLE `login_codes` (
+  `id_login_code` int(11) NOT NULL,
+  `id_users` varchar(50) NOT NULL COMMENT 'FK a users.id_users (email)',
+  `code_hash` varchar(255) NOT NULL COMMENT 'código de 6 dígitos, nunca en texto plano (password_hash)',
+  `expires_at` datetime NOT NULL COMMENT 'vigencia: 10 minutos desde su creación',
+  `used_at` datetime DEFAULT NULL COMMENT 'se marca al primer uso exitoso; evita reutilización',
+  `attempts` int(11) NOT NULL DEFAULT 0 COMMENT 'intentos fallidos de verificación contra este código',
+  `ip_address` varchar(45) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -499,7 +524,7 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('fco.fredes.g@gmail.com', 2, NULL, 'francisco', 'fredes', '1234', '$2y$10$GV6jDq5BKJrImfLVKKpti.oxbYxdjR8dQ1MdmCP8pyyiOlH4Ozwt6', 1, 'ESP', '2026-08-15 11:58:40', 'phpmyadmin', '2026-08-15 11:58:40', '2026-08-15 11:58:40'),
 ('juanantonioconchaloyola@gmail.com', 1, NULL, 'antonio', 'helheim', '16725278-8', '$2y$10$PGRe/y2lW9AwLK2MLi.thOaRnGY3f31zrynzexuE8tBq2XTNR2sHW', 1, 'ESP', '2026-08-14 20:46:32', 'phpmyadmin', '2026-08-14 20:46:30', '2026-08-14 20:46:30'),
 ('malazga99@gmail.com', 1, NULL, 'maite', 'lazcano', '20153481-k', NULL, 1, 'ESP', '2026-08-14 21:41:57', 'phpmyadmin', '2026-08-14 21:41:57', '2026-08-14 21:41:57'),
-('pablotroncoso@gmail.com', 1, NULL, 'pablo', 'troncoso', '1234', '$2y$10$QJNn.HuRSIAIXxC5IxYElOuJNaqPa3raIeq18aSyClXkAVBqF6MFm', 1, 'ESP', '2026-08-14 21:43:14', 'phpmyadmin', '2026-08-14 21:43:14', '2026-08-14 21:43:14');
+('pablotroncoso@gmail.com', 1, NULL, 'pablo', 'troncoso', '123456789', '', 1, 'ESP', '2026-08-14 21:43:14', 'phpmyadmin', '2026-08-14 21:43:14', '2026-08-14 21:43:14');
 
 -- --------------------------------------------------------
 
@@ -716,6 +741,14 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idx_identifier_time` (`identifier`,`created_at`),
   ADD KEY `idx_ip_time` (`ip_address`,`created_at`);
+
+--
+-- Indices de la tabla `login_codes`
+--
+ALTER TABLE `login_codes`
+  ADD PRIMARY KEY (`id_login_code`),
+  ADD KEY `idx_login_codes_user` (`id_users`),
+  ADD KEY `idx_login_codes_ip_created` (`ip_address`,`created_at`);
 
 --
 -- Indices de la tabla `password_resets`
@@ -939,7 +972,13 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT de la tabla `login_codes`
+--
+ALTER TABLE `login_codes`
+  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -1083,6 +1122,12 @@ ALTER TABLE `dynamic_form_fields`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `fk_log_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `login_codes`
+--
+ALTER TABLE `login_codes`
+  ADD CONSTRAINT `fk_logincodes_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `password_resets`
