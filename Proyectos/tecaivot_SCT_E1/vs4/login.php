@@ -13,6 +13,9 @@
  * - El código se guarda con password_hash (nunca en texto plano) y expira
  *   a los 10 minutos; se invalida tras usarse una vez.
  * - Cookie de sesión endurecida (heredada de session_bootstrap.php).
+ *
+ * Respuestas: todas vía responderJSON() (lib/response.php), para que el
+ * formato sea idéntico al resto de los endpoints del proyecto.
  */
 
 const CODIGO_LARGO               = 6;
@@ -26,14 +29,11 @@ const VENTANA_VERIFICACION_MIN   = 15;
 const BLOQUEO_MINUTOS            = 15;
 
 require __DIR__ . '/session_bootstrap.php';
-header('Content-Type: application/json; charset=utf-8');
-
-require __DIR__ . '/config.php';
+require __DIR__ . '/lib/response.php';
+require __DIR__ . '/lib/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
-    exit;
+    responderJSON(false, null, 'Método no permitido.', 405);
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -48,18 +48,11 @@ $csrfToken = (string) ($input['csrf_token'] ?? '');
 $ip        = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
 if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
-    http_response_code(403);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Tu sesión expiró o la página quedó desactualizada. Recarga e intenta nuevamente.',
-    ]);
-    exit;
+    responderJSON(false, null, 'Tu sesión expiró o la página quedó desactualizada. Recarga e intenta nuevamente.', 403);
 }
 
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Correo electrónico no válido.']);
-    exit;
+    responderJSON(false, null, 'Correo electrónico no válido.', 400);
 }
 
 /**
@@ -126,12 +119,7 @@ try {
         $solicitudesPorIp = (int) $stmt->fetchColumn();
 
         if ($solicitudesPorIp >= MAX_SOLICITUDES_CODIGO_IP) {
-            http_response_code(429);
-            echo json_encode([
-                'success' => false,
-                'message' => 'Demasiadas solicitudes desde esta conexión. Intenta nuevamente en unos minutos.',
-            ]);
-            exit;
+            responderJSON(false, null, 'Demasiadas solicitudes desde esta conexión. Intenta nuevamente en unos minutos.', 429);
         }
 
         $stmt = $pdo->prepare('SELECT id_users FROM users WHERE id_users = :email AND state = 1 LIMIT 1');
@@ -172,11 +160,7 @@ try {
         // Respuesta idéntica exista o no el usuario / se haya enviado o no
         // un código nuevo: evita que alguien pueda usar este endpoint para
         // averiguar qué correos están registrados en el sistema.
-        echo json_encode([
-            'success' => true,
-            'message' => 'Si el correo está registrado, recibirás un código de acceso.',
-        ]);
-        exit;
+        responderJSON(true, null, 'Si el correo está registrado, recibirás un código de acceso.');
     }
 
     /* =======================================================
@@ -185,20 +169,13 @@ try {
     if ($action === 'verify_code') {
 
         if (!preg_match('/^\d{' . CODIGO_LARGO . '}$/', $code)) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Código inválido.']);
-            exit;
+            responderJSON(false, null, 'Código inválido.', 400);
         }
 
         // Mismo esquema de bloqueo por intentos fallidos que el login anterior.
         $intentosFallidos = intentosVerificacionFallidosRecientes($pdo, $email, $ip, VENTANA_VERIFICACION_MIN);
         if ($intentosFallidos >= MAX_INTENTOS_VERIFICACION) {
-            http_response_code(429);
-            echo json_encode([
-                'success' => false,
-                'message' => 'Demasiados intentos fallidos. Solicita un nuevo código en ' . BLOQUEO_MINUTOS . ' minutos.',
-            ]);
-            exit;
+            responderJSON(false, null, 'Demasiados intentos fallidos. Solicita un nuevo código en ' . BLOQUEO_MINUTOS . ' minutos.', 429);
         }
 
         $stmt = $pdo->prepare('SELECT * FROM users WHERE id_users = :email AND state = 1 LIMIT 1');
@@ -240,9 +217,7 @@ try {
                 $pdo->prepare('UPDATE login_codes SET attempts = attempts + 1 WHERE id_login_code = :id')
                     ->execute(['id' => $idLoginCode]);
             }
-            http_response_code(401);
-            echo json_encode(['success' => false, 'message' => 'Código inválido o expirado.']);
-            exit;
+            responderJSON(false, null, 'Código inválido o expirado.', 401);
         }
 
         // Código correcto: se marca usado (no se puede reutilizar) y se crea la sesión.
@@ -258,18 +233,13 @@ try {
         $_SESSION['last_activity'] = time();
         $_SESSION['csrf_token']    = bin2hex(random_bytes(32));
 
-        echo json_encode([
-            'success'  => true,
-            'message'  => 'Inicio de sesión exitoso.',
-            'redirect' => 'bienvenida.php',
-        ]);
-        exit;
+        responderJSON(true, ['redirect' => 'bienvenida.php'], 'Inicio de sesión exitoso.');
     }
 
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Acción no reconocida.']);
+    responderJSON(false, null, 'Acción no reconocida.', 400);
 
 } catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Error al procesar la solicitud.']);
+    // El detalle real queda en el log del servidor; al cliente solo un mensaje genérico.
+    error_log('login.php: ' . $e->getMessage());
+    responderJSON(false, null, 'Error al procesar la solicitud.', 500);
 }

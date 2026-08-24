@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 24-08-2026 a las 14:36:45
+-- Tiempo de generación: 24-08-2026 a las 16:07:30
 -- Versión del servidor: 10.11.18-MariaDB-cll-lve
 -- Versión de PHP: 8.4.24
 
@@ -268,7 +268,9 @@ INSERT INTO `login_attempts` (`id`, `identifier`, `ip_address`, `success`, `crea
 (34, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:40'),
 (35, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:43'),
 (36, 'fco.fredes.g@gmail.com', '98.98.28.182', 0, '2026-08-21 15:23:53'),
-(37, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-21 15:32:01');
+(37, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-21 15:32:01'),
+(38, 'juanantonioconchaloyola@gmail.com', '179.4.50.96', 1, '2026-08-24 15:30:02'),
+(39, 'malazga99@gmail.com', '179.4.50.96', 1, '2026-08-24 15:58:50');
 
 -- --------------------------------------------------------
 
@@ -286,6 +288,14 @@ CREATE TABLE `login_codes` (
   `ip_address` varchar(45) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `login_codes`
+--
+
+INSERT INTO `login_codes` (`id_login_code`, `id_users`, `code_hash`, `expires_at`, `used_at`, `attempts`, `ip_address`, `created_at`) VALUES
+(1, 'juanantonioconchaloyola@gmail.com', '$2y$10$sSNMKCd/1fFLPLisPoqg1eev4yvIhYTfo/t4DjBRD6zAN/LVpLljy', '2026-08-24 15:39:35', '2026-08-24 15:30:02', 0, '179.4.50.96', '2026-08-24 15:29:35'),
+(2, 'malazga99@gmail.com', '$2y$10$.QAG4V/nLrB5ZHklKpqRTO4hUJxFingzCjHpef3YZIDoxdxBgSZJS', '2026-08-24 16:08:03', '2026-08-24 15:58:50', 0, '179.4.50.96', '2026-08-24 15:58:03');
 
 -- --------------------------------------------------------
 
@@ -972,13 +982,13 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `login_codes`
 --
 ALTER TABLE `login_codes`
-  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`

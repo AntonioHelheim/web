@@ -256,7 +256,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (data.success) {
-                window.location.href = data.redirect || "bienvenida.php";
+                const destino = (data.data && data.data.redirect) || "bienvenida.php";
+                window.location.href = destino;
                 return;
             }
 

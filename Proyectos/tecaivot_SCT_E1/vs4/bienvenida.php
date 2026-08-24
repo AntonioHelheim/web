@@ -1,11 +1,9 @@
 <?php
 require __DIR__ . '/session_bootstrap.php';
+require __DIR__ . '/lib/auth.php';
 
-// Si no hay sesión activa, no se puede ver esta página.
-if (empty($_SESSION['logged_in'])) {
-    header('Location: acceso-denegado.php');
-    exit;
-}
+// Si no hay sesión activa, no se puede ver esta página (redirige, no es un endpoint JSON).
+requireLoginPage();
 
 aplicarCabecerasSeguridad();
 
