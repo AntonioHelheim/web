@@ -18,6 +18,9 @@ return [
     'hero_text'         => 'Tecaivot diseña y desarrolla herramientas tecnológicas para digitalizar procesos, centralizar información y facilitar la toma de decisiones.',
     'hero_cta_productos' => 'Ver productos',
     'hero_cta_contacto'  => 'Hablemos',
+    'hero_trust_1' => 'Desarrollo a medida',
+    'hero_trust_2' => 'Acompañamiento continuo',
+    'hero_trust_3' => 'Estándares profesionales',
 
     // Nosotros
     'nosotros_label'    => 'NOSOTROS',

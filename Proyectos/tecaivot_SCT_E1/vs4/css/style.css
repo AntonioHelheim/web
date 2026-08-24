@@ -1377,6 +1377,110 @@ button {
 
 
 /* ==========================================================
+   PRODUCT FEATURE (franja destacada, para 1 o pocos productos —
+   evita que una sola .feature-card quede angosta y perdida en
+   pantallas anchas)
+   ========================================================== */
+
+.product-feature {
+
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px;
+
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+
+    transition: var(--transition-smooth);
+
+}
+
+.product-feature:hover {
+
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+
+}
+
+.product-feature-icon {
+
+    flex-shrink: 0;
+
+    width: 88px;
+    height: 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-md);
+    background: rgba(85, 157, 244, 0.1);
+
+}
+
+.product-feature-icon img {
+
+    width: 48px;
+    height: 48px;
+
+}
+
+.product-feature-body {
+
+    flex: 1;
+
+}
+
+.product-feature-body h3 {
+
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+
+}
+
+.product-feature-tagline {
+
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+
+}
+
+.product-feature-body p.product-feature-desc {
+
+    color: var(--text-secondary);
+    margin-bottom: 0;
+
+}
+
+.product-feature-cta {
+
+    flex-shrink: 0;
+
+}
+
+@media (max-width: 767px) {
+
+    .product-feature {
+
+        flex-direction: column;
+        text-align: center;
+        padding: 28px;
+
+    }
+
+}
+
+
+/* ==========================================================
    FEATURES
    ========================================================== */
 

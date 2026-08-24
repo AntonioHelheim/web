@@ -33,28 +33,41 @@
                 </div>
 
 
-                <!-- Grilla de productos: hoy solo SCT, pensada para sumar más adelante -->
-                <div class="row g-4 mt-4 justify-content-center">
+                <!-- Grilla de productos: hoy solo SCT, pensada para sumar más adelante.
+                     Se usa una franja destacada (no la tarjeta de grilla angosta) para
+                     que un solo producto no se vea perdido en pantallas anchas. -->
+                <div class="row justify-content-center mt-4">
 
-                    <div class="col-md-6 col-lg-5">
+                    <div class="col-12">
 
-                        <div class="feature-card feature-card-highlight">
+                        <div class="product-feature">
 
-                            <div class="feature-icon">
-                                <img src="./images/logos/Logo-SCT.svg" alt="Safety Control Tower" style="width: 36px; height: 36px;">
+                            <div class="product-feature-icon">
+                                <img src="./images/logos/Logo-SCT.svg" alt="Safety Control Tower">
                             </div>
 
-                            <h3><?php echo htmlspecialchars(t('product_sct_name'), ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <div class="product-feature-body">
 
-                            <p>
-                                <strong><?php echo htmlspecialchars(t('product_sct_tagline'), ENT_QUOTES, 'UTF-8'); ?></strong><br>
-                                <?php echo htmlspecialchars(t('product_sct_description'), ENT_QUOTES, 'UTF-8'); ?>
-                            </p>
+                                <h3><?php echo htmlspecialchars(t('product_sct_name'), ENT_QUOTES, 'UTF-8'); ?></h3>
 
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <?php echo htmlspecialchars(t('product_sct_cta'), ENT_QUOTES, 'UTF-8'); ?>
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
+                                <p class="product-feature-tagline">
+                                    <?php echo htmlspecialchars(t('product_sct_tagline'), ENT_QUOTES, 'UTF-8'); ?>
+                                </p>
+
+                                <p class="product-feature-desc">
+                                    <?php echo htmlspecialchars(t('product_sct_description'), ENT_QUOTES, 'UTF-8'); ?>
+                                </p>
+
+                            </div>
+
+                            <div class="product-feature-cta">
+
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary-custom">
+                                    <?php echo htmlspecialchars(t('product_sct_cta'), ENT_QUOTES, 'UTF-8'); ?>
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                            </div>
 
                         </div>
 

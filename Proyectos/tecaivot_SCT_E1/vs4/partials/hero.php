@@ -60,6 +60,25 @@
 
                             </div>
 
+                            <div class="hero-trust justify-content-center">
+
+                                <div class="trust-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <?php echo htmlspecialchars(t('hero_trust_1'), ENT_QUOTES, 'UTF-8'); ?>
+                                </div>
+
+                                <div class="trust-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <?php echo htmlspecialchars(t('hero_trust_2'), ENT_QUOTES, 'UTF-8'); ?>
+                                </div>
+
+                                <div class="trust-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <?php echo htmlspecialchars(t('hero_trust_3'), ENT_QUOTES, 'UTF-8'); ?>
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>

@@ -18,6 +18,9 @@ return [
     'hero_text'         => 'Tecaivot 设计并开发技术工具，帮助企业实现流程数字化、信息集中化，支持更好的决策。',
     'hero_cta_productos' => '查看产品',
     'hero_cta_contacto'  => '联系我们',
+    'hero_trust_1' => '定制开发',
+    'hero_trust_2' => '持续陪伴',
+    'hero_trust_3' => '专业标准',
 
     // 关于我们
     'nosotros_label'    => '关于我们',

@@ -18,6 +18,9 @@ return [
     'hero_text'         => 'Tecaivot designs and develops technology tools to digitize processes, centralize information, and support better decision-making.',
     'hero_cta_productos' => 'View products',
     'hero_cta_contacto'  => "Let's talk",
+    'hero_trust_1' => 'Custom development',
+    'hero_trust_2' => 'Ongoing support',
+    'hero_trust_3' => 'Professional standards',
 
     // About
     'nosotros_label'    => 'ABOUT US',
