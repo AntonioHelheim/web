@@ -1,0 +1,824 @@
+/* =========================================================
+   KUDO CHILE
+   SECCIONES Y COMPONENTES
+   Archivo: css/sections.css
+
+   HOME / HERO
+   ========================================================= */
+
+
+/* =========================================================
+   01. CONTENEDOR PRINCIPAL DEL HOME
+   ========================================================= */
+
+.kudo-home {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   02. HERO PRINCIPAL
+   ========================================================= */
+
+.kudo-hero {
+
+    position: relative;
+
+    min-height: 100vh;
+
+        width: 100%;
+    max-width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 120px 0 70px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #000000 0%,
+            #090909 45%,
+            #160307 100%
+        );
+
+}
+
+
+/* =========================================================
+   03. DECORACIÓN DE FONDO
+   ========================================================= */
+
+.kudo-hero-decoration {
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    right: -180px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(200, 16, 46, 0.12);
+
+    filter: blur(90px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+/* Decoración secundaria */
+
+.kudo-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 350px;
+
+    left: -180px;
+
+    bottom: -150px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(200, 16, 46, 0.07);
+
+    filter: blur(70px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+/* =========================================================
+   04. CONTENIDO DEL HERO
+   ========================================================= */
+
+.kudo-hero .container {
+
+    position: relative;
+
+    z-index: 2;
+
+     width: 100%;
+    max-width: 1320px;
+
+}
+
+
+/* =========================================================
+   05. COLUMNA DE TEXTO
+   ========================================================= */
+
+.kudo-hero-content {
+
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 540px;
+
+}
+
+
+/* =========================================================
+   06. TÍTULO
+   ========================================================= */
+
+.kudo-hero-title {
+
+    margin: 0 0 25px;
+
+    color:
+        var(--kudo-white);
+
+    font-size:
+        clamp(
+            2.8rem,
+            5vw,
+            5rem
+        );
+
+    font-weight: 800;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.04em;
+
+}
+
+
+/* =========================================================
+   07. DESCRIPCIÓN / KIF
+   ========================================================= */
+
+.kudo-hero-description {
+
+    margin: 0 0 35px;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        1.05rem;
+
+    line-height: 1.7;
+
+}
+
+
+/* Enlace KIF */
+
+.kudo-hero-description a {
+
+    color:
+        var(--kudo-white);
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease;
+
+}
+
+
+.kudo-hero-description a:hover {
+
+    color:
+        var(--kudo-red-light);
+
+}
+
+
+/* =========================================================
+   08. BOTONES
+   ========================================================= */
+
+.kudo-hero-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   09. BOTÓN PRINCIPAL
+   ========================================================= */
+
+.btn-kudo-primary {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 52px;
+
+    padding:
+        0 28px;
+
+    border:
+        1px solid var(--kudo-red);
+
+    border-radius:
+        4px;
+
+    background:
+        var(--kudo-red);
+
+    color:
+        var(--kudo-white);
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.05em;
+
+    text-decoration:
+        none;
+
+    transition:
+        all 0.3s ease;
+
+}
+
+
+.btn-kudo-primary:hover {
+
+    background:
+        var(--kudo-red-light);
+
+    border-color:
+        var(--kudo-red-light);
+
+    color:
+        var(--kudo-white);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   10. BOTÓN SECUNDARIO
+   ========================================================= */
+
+.btn-kudo-outline {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 52px;
+
+    padding:
+        0 28px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius:
+        4px;
+
+    background:
+        transparent;
+
+    color:
+        var(--kudo-white);
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.05em;
+
+    text-decoration:
+        none;
+
+    transition:
+        all 0.3s ease;
+
+}
+
+
+.btn-kudo-outline:hover {
+
+    border-color:
+        var(--kudo-white);
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color:
+        var(--kudo-white);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   11. CONTENEDOR DE LA IMAGEN
+   ========================================================= */
+
+.kudo-hero-image {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    min-height: 520px;
+
+}
+
+
+/* =========================================================
+   12. HALO DETRÁS DEL LOGO
+   ========================================================= */
+
+.kudo-hero-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 80%;
+
+    height: 80%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.07) 0%,
+            rgba(200, 16, 46, 0.06) 35%,
+            transparent 70%
+        );
+
+    filter:
+        blur(10px);
+
+    z-index: -1;
+
+}
+
+
+/* =========================================================
+   13. LINK DEL LOGO
+   ========================================================= */
+
+.kudo-hero-logo-link {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    text-decoration: none;
+
+}
+
+
+/* =========================================================
+   14. LOGO PRINCIPAL
+   ========================================================= */
+
+.kudo-hero-logo {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 550px;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+
+}
+
+
+/* Efecto suave */
+
+.kudo-hero-logo:hover {
+
+    transform:
+        scale(1.025);
+
+}
+
+
+/* =========================================================
+   15. DOJOS
+   CARRUSEL INFINITO
+   ========================================================= */
+
+.kudo-dojos {
+
+    position: relative;
+
+    z-index: 3;
+
+    width: 100%;
+
+    margin-top: 90px;
+
+    padding: 55px 0 60px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.07);
+
+}
+
+
+/* =========================================================
+   16. VENTANA DEL CARRUSEL
+   ========================================================= */
+
+.kudo-dojos-slider {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   17. EFECTO DE DESVANECIMIENTO EN LOS EXTREMOS
+   ========================================================= */
+
+.kudo-dojos-slider::before,
+.kudo-dojos-slider::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 100px;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+}
+
+
+/* Izquierda */
+
+.kudo-dojos-slider::before {
+
+    left: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            #090909 0%,
+            rgba(9, 9, 9, 0) 100%
+        );
+
+}
+
+
+/* Derecha */
+
+.kudo-dojos-slider::after {
+
+    right: 0;
+
+    background:
+        linear-gradient(
+            to left,
+            #090909 0%,
+            rgba(9, 9, 9, 0) 100%
+        );
+
+}
+
+
+/* =========================================================
+   18. TRACK
+   ========================================================= */
+
+.kudo-dojos-track {
+
+    display: flex;
+
+    width: max-content;
+
+    animation:
+        kudoDojoLoop
+        55s
+        linear
+        infinite;
+
+    will-change:
+        transform;
+
+}
+
+
+
+
+/* =========================================================
+   19. GRUPOS
+   ========================================================= */
+
+.kudo-dojos-group {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 55px;
+
+    padding-right: 55px;
+
+}
+
+
+/* =========================================================
+   20. LOGO INDIVIDUAL
+   ========================================================= */
+
+.kudo-dojo-logo {
+
+    flex:
+        0 0 130px;
+
+    width:
+        130px;
+
+    height:
+        95px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    opacity:
+        0.50;
+
+    filter:
+        grayscale(100%);
+
+    transition:
+        opacity 0.35s ease,
+        filter 0.35s ease,
+        transform 0.35s ease;
+
+}
+
+
+/* =========================================================
+   21. IMAGEN
+   ========================================================= */
+
+.kudo-dojo-logo img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    max-width:
+        115px;
+
+    height:
+        80px;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center;
+
+    border-radius:
+        0;
+
+}
+
+
+/* =========================================================
+   22. HOVER
+   ========================================================= */
+
+.kudo-dojo-logo:hover {
+
+    opacity:
+        0.9;
+
+    filter:
+        grayscale(100%);
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =========================================================
+   23. ANIMACIÓN INFINITA
+   ========================================================= */
+
+@keyframes kudoDojoLoop {
+
+    from {
+
+        transform:
+            translateX(0);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+/* =========================================================
+   24. ACCESIBILIDAD
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .kudo-dojos-track {
+
+        animation:
+            none;
+
+    }
+
+}
+
+/* =========================================================
+   INDICADOR INFERIOR
+   ========================================================= */
+
+.kudo-hero-scroll {
+
+    position: absolute;
+
+    bottom: 180px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 4;
+
+}
+
+
+.kudo-hero-scroll a {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-size:
+        0.65rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.15em;
+
+    transition:
+        color 0.3s ease;
+
+}
+
+
+.kudo-hero-scroll a:hover {
+
+    color:
+        var(--kudo-white);
+
+}
+
+
+.kudo-hero-scroll i {
+
+    font-size:
+        1rem;
+
+    animation:
+        kudoArrow 1.8s infinite;
+
+}
+
+
+/* Animación */
+
+@keyframes kudoArrow {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(6px);
+
+    }
+
+}
+
+

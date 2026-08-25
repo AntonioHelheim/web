@@ -1,0 +1,524 @@
+/* =========================================================
+   ABOUT — TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .about-section {
+
+        padding:
+            85px 0 105px;
+
+    }
+
+
+    .about-header {
+
+        min-height:
+            180px;
+
+        margin-bottom:
+            65px;
+
+    }
+
+
+    .about-story-intro {
+
+        margin-bottom:
+            70px;
+
+    }
+
+
+    .about-founder-block {
+
+        margin-bottom:
+            70px;
+
+    }
+
+
+    .about-founder-content {
+
+        padding:
+            55px 45px;
+
+    }
+
+
+
+    .about-founder-image {
+
+        min-height:
+            440px;
+
+    }
+
+    .about-founder-image img {
+
+        min-height:
+            440px;
+
+        max-height:
+            440px;
+
+    }
+
+
+
+    .about-international {
+
+        margin-top:
+            80px;
+
+        padding:
+            70px 0;
+
+    }
+
+
+    .about-videos {
+
+        margin-top:
+            90px;
+
+        padding-top:
+            70px;
+
+    }
+
+
+    .about-videos-layout {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .about-videos-secondary {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* =========================================================
+   ABOUT — MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .about-section {
+
+        padding:
+            65px 0 80px;
+
+    }
+
+
+    .about-header {
+
+        min-height:
+            auto;
+
+        margin-bottom:
+            50px;
+
+        padding-bottom:
+            35px;
+
+    }
+
+
+    .about-header h2 {
+
+        font-size:
+            clamp(2.5rem, 12vw, 4rem);
+
+    }
+
+
+    .about-story-intro {
+
+        margin-bottom:
+            55px;
+
+    }
+
+
+    .about-story-intro p {
+
+        font-size:
+            1.05rem;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .about-founder-block {
+
+        margin-bottom:
+            60px;
+
+    }
+
+
+    .about-founder-content {
+
+        padding:
+            42px 30px;
+
+    }
+
+
+    .about-founder-image {
+
+        min-height:
+            400px;
+
+    }
+
+    .about-founder-image img {
+
+        min-height:
+            400px;
+
+        max-height:
+            400px;
+
+    }
+
+
+
+    .about-founder-image figcaption {
+
+        left:
+            20px;
+
+        bottom:
+            20px;
+
+    }
+
+
+    .about-narrative p {
+
+        font-size:
+            1rem;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .about-narrative p + p {
+
+        margin-top:
+            35px;
+
+        padding-top:
+            35px;
+
+    }
+
+
+    .about-international {
+
+        margin-top:
+            70px;
+
+        padding:
+            60px 0;
+
+    }
+
+
+    .about-international-content p {
+
+        font-size:
+            1rem;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .about-international-kanji {
+
+        margin-top:
+            20px;
+
+        font-size:
+            8rem;
+
+    }
+
+
+    .about-world-data {
+
+        margin-top:
+            50px;
+
+        padding-top:
+            25px;
+
+    }
+
+
+    .about-world-data-item {
+
+        padding:
+            30px 15px;
+
+    }
+
+
+    .about-videos {
+
+        margin-top:
+            70px;
+
+        padding-top:
+            60px;
+
+    }
+
+
+    .about-videos-header {
+
+        display:
+            block;
+
+        margin-bottom:
+            40px;
+
+    }
+
+
+    .about-videos-line {
+
+        width:
+            90px;
+
+        margin-top:
+            25px;
+
+    }
+
+
+    .about-videos-layout {
+
+        gap:
+            20px;
+
+    }
+
+
+    .about-videos-secondary {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            20px;
+
+    }
+
+
+    .about-video-featured .about-video-info {
+
+        padding:
+            24px;
+
+    }
+
+}
+
+
+/* =========================================================
+   ABOUT — MOBILE PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .about-section {
+
+        padding:
+            55px 0 70px;
+
+    }
+
+
+    .about-header {
+
+        margin-bottom:
+            40px;
+
+    }
+
+
+    .about-header h2 {
+
+        font-size:
+            2.4rem;
+
+    }
+
+
+    .about-story-intro {
+
+        margin-bottom:
+            45px;
+
+    }
+
+
+    .about-founder-content {
+
+        padding:
+            35px 22px;
+
+    }
+
+
+    .about-founder-content p {
+
+        font-size:
+            0.95rem;
+
+        line-height:
+            1.8;
+
+    }
+
+
+    .about-founder-image {
+
+        min-height:
+            340px;
+
+    }
+
+    .about-founder-image img {
+
+        min-height:
+            340px;
+
+        max-height:
+            340px;
+
+    }
+
+
+    .about-founder-signature {
+
+        margin-top:
+            35px;
+
+    }
+
+
+    .about-narrative p {
+
+        font-size:
+            0.95rem;
+
+        line-height:
+            1.8;
+
+    }
+
+
+    .about-eyebrow {
+
+        font-size:
+            0.62rem;
+
+        line-height:
+            1.6;
+
+    }
+
+
+    .about-world-data-item {
+
+        padding:
+            25px 10px;
+
+    }
+
+
+    .about-world-data-item strong {
+
+        font-size:
+            2.35rem;
+
+    }
+
+
+    .about-world-data-item span {
+
+        font-size:
+            0.62rem;
+
+    }
+
+
+    .about-videos {
+
+        margin-top:
+            60px;
+
+        padding-top:
+            50px;
+
+    }
+
+
+    .about-videos-header h3 {
+
+        font-size:
+            3rem;
+
+    }
+
+
+    .about-video-info {
+
+        grid-template-columns:
+            32px minmax(0, 1fr);
+
+        gap:
+            12px;
+
+        padding:
+            18px;
+
+    }
+
+
+    .about-video-info p {
+
+        font-size:
+            0.82rem;
+
+    }
+
+
+    .about-video-featured .about-video-info p {
+
+        font-size:
+            0.9rem;
+
+    }
+
+}

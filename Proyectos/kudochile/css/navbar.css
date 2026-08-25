@@ -1,0 +1,306 @@
+/* =========================================================
+   KUDO CHILE
+   NAVBAR
+   Archivo: css/navbar.css
+   ========================================================= */
+
+
+/* =========================================================
+   NAVBAR PRINCIPAL
+   ========================================================= */
+
+.kudo-navbar {
+
+    background:
+        rgba(0, 0, 0, 0.92);
+
+    backdrop-filter:
+        blur(10px);
+
+    border-bottom:
+        1px solid var(--border-dark);
+
+    padding:
+        12px 0;
+
+    transition:
+        background var(--transition-normal);
+
+}
+
+
+/* =========================================================
+   LOGOTIPO / MARCA
+   ========================================================= */
+
+.kudo-navbar .navbar-brand {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    color:
+        var(--kudo-white);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+    text-decoration:
+        none;
+
+}
+
+
+/* =========================================================
+   LOGO REDONDO
+   ========================================================= */
+
+.kudo-navbar-logo {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    flex:
+        0 0 48px;
+
+}
+
+
+/* Imagen */
+
+.kudo-navbar-logo img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+}
+
+
+/* =========================================================
+   NOMBRE KUDO CHILE
+   ========================================================= */
+
+.kudo-navbar-title {
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        7px;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* KUDO */
+
+.kudo-navbar-mark {
+
+    color:
+        var(--kudo-white);
+
+    font-size:
+        1.25rem;
+
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+/* CHILE */
+
+.kudo-navbar-country {
+
+    margin:
+        0;
+
+    color:
+        var(--kudo-red);
+
+    font-size:
+        0.68rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.kudo-navbar .nav-link {
+
+    color:
+        var(--kudo-white-soft);
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    margin:
+        0 4px;
+
+    padding:
+        8px 10px !important;
+
+    transition:
+        color var(--transition-fast);
+
+}
+
+
+.kudo-navbar .nav-link:hover {
+
+    color:
+        var(--kudo-red-light);
+
+}
+
+
+.kudo-navbar .nav-link.active {
+
+    color:
+        var(--kudo-red);
+
+}
+
+
+/* =========================================================
+   REDES SOCIALES
+   ========================================================= */
+
+.nav-social {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 36px;
+
+    height: 36px;
+
+    color:
+        var(--kudo-white);
+
+    border-radius: 50%;
+
+    transition:
+        all var(--transition-fast);
+
+}
+
+
+.nav-social:hover {
+
+    color:
+        var(--kudo-white);
+
+    background:
+        var(--kudo-red);
+
+}
+
+
+/* =========================================================
+   BOTÓN MOBILE
+   ========================================================= */
+
+.kudo-navbar .navbar-toggler {
+
+    border:
+        1px solid var(--border-light);
+
+    padding:
+        7px 10px;
+
+}
+
+
+.kudo-navbar .navbar-toggler:focus {
+
+    box-shadow:
+        0 0 0 0.2rem
+        rgba(200, 16, 46, 0.25);
+
+}
+
+
+.kudo-navbar .navbar-toggler-icon {
+
+    width: 1.2em;
+
+    height: 1.2em;
+
+}
+
+
+/* =========================================================
+   NAVBAR AL HACER SCROLL
+   ========================================================= */
+
+.kudo-navbar.scrolled {
+
+    background:
+        rgba(0, 0, 0, 0.98);
+
+    box-shadow:
+        var(--shadow-small);
+
+}
