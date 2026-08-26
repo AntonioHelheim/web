@@ -3,7 +3,7 @@ require __DIR__ . '/session_bootstrap.php';
 
 // Si no hay sesión activa, no se puede ver esta página.
 if (empty($_SESSION['logged_in'])) {
-    header('Location: acceso-denegado.php');
+    header('Location: accesso-denegado.php');
     exit;
 }
 
@@ -98,7 +98,7 @@ if ($hour < 12) {
                 <?php echo $greeting; ?>, <span><?php echo $displayName; ?></span>
             </h1>
 
-            <p class="section-description">
+            <p class="section-description intro-description-centered">
                 Sesión iniciada como <strong><?php echo $userEmail; ?></strong>.
                 Este es tu punto de partida para monitorear y gestionar
                 la seguridad de tu operación.
@@ -126,7 +126,7 @@ if ($hour < 12) {
                 </div>
 
                 <div class="col-md-4">
-                    <div class="feature-card h-100">
+                    <a href="gestiones.php" class="feature-card h-100 d-block text-decoration-none" aria-label="Ir a Gestiones">
                         <div class="feature-icon">
                             <i class="bi bi-clipboard-check"></i>
                         </div>
@@ -135,7 +135,7 @@ if ($hour < 12) {
                             Da seguimiento a tareas, incidentes y procesos
                             pendientes de tu equipo.
                         </p>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">

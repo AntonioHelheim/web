@@ -169,6 +169,14 @@ try {
     $_SESSION['logged_in']     = true;
     $_SESSION['last_activity'] = time();
 
+    // Registrar ultimo acceso real sin bloquear el login si este update falla.
+    try {
+        $lastAccessStmt = $pdo->prepare('UPDATE users SET last_access = NOW(), last_update = NOW() WHERE id_users = :identifier LIMIT 1');
+        $lastAccessStmt->execute(['identifier' => $user['id_users']]);
+    } catch (PDOException $e) {
+        error_log('login.php: no se pudo actualizar last_access para ' . $user['id_users'] . ' - ' . $e->getMessage());
+    }
+
     // Se regenera el token CSRF tras un login exitoso para evitar su reutilización.
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 

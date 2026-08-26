@@ -1067,6 +1067,19 @@ button {
 
 }
 
+/* Descripciones introductorias centradas para pantallas privadas */
+.intro-description-centered {
+
+    text-align: center;
+
+    max-width: 760px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+}
+
 
 /* ==========================================================
    PROBLEM
