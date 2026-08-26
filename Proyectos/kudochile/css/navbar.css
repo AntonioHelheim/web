@@ -224,6 +224,17 @@
    REDES SOCIALES
    ========================================================= */
 
+.nav-socials {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+
 .nav-social {
 
     display: inline-flex;
@@ -236,24 +247,29 @@
 
     height: 36px;
 
-    color:
-        var(--kudo-white);
+    flex: 0 0 36px;
+
+    color: var(--kudo-white);
 
     border-radius: 50%;
 
+    text-decoration: none;
+
     transition:
-        all var(--transition-fast);
+        color var(--transition-fast),
+        background var(--transition-fast),
+        transform var(--transition-fast);
 
 }
 
 
 .nav-social:hover {
 
-    color:
-        var(--kudo-white);
+    color: var(--kudo-white);
 
-    background:
-        var(--kudo-red);
+    background: var(--kudo-red);
+
+    transform: translateY(-2px);
 
 }
 
@@ -302,5 +318,64 @@
 
     box-shadow:
         var(--shadow-small);
+
+}
+
+/* =========================================================
+   NAVBAR RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .kudo-navbar .navbar-collapse {
+
+        padding-top: 12px;
+
+    }
+
+
+    .kudo-navbar .navbar-nav {
+
+        align-items: flex-start;
+
+    }
+
+
+    .nav-socials-item {
+
+        width: 100%;
+
+        margin-top: 12px;
+
+        padding-top: 12px;
+
+        border-top:
+            1px solid var(--border-dark);
+
+    }
+
+
+    .nav-socials {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 8px;
+
+    }
+
+
+    .nav-social {
+
+        width: 40px;
+
+        height: 40px;
+
+        flex: 0 0 40px;
+
+    }
 
 }

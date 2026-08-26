@@ -1,0 +1,587 @@
+/* =========================================================
+   KUDO CHILE - NORMALIZE.CSS
+
+   Normalización segura y moderna.
+   Diseñado para trabajar junto a Bootstrap 5 y CSS personalizado.
+
+   IMPORTANTE:
+   Este archivo SOLO normaliza comportamientos inconsistentes
+   entre navegadores.
+
+   No debe definir diseño visual de componentes.
+   ========================================================= */
+
+
+/* =========================================================
+   1. BOX MODEL
+   ========================================================= */
+
+html {
+    box-sizing: border-box;
+
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+/* =========================================================
+   2. DOCUMENTO
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    /* Previene scroll horizontal accidental */
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   3. TIPOGRAFÍA Y HERENCIA
+   ========================================================= */
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    color: inherit;
+}
+
+
+/* =========================================================
+   4. TÍTULOS Y TEXTO
+   ========================================================= */
+
+/*
+   No eliminamos márgenes globalmente.
+
+   Bootstrap y el CSS propio del proyecto manejan
+   correctamente los márgenes de headings y párrafos.
+
+   Esto evita romper:
+   - Bootstrap spacing
+   - componentes personalizados
+   - contenido dinámico
+*/
+
+
+/* Negrita consistente */
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+
+/* Tamaño relativo para texto pequeño */
+
+small {
+    font-size: 80%;
+}
+
+
+/* Subíndices y superíndices */
+
+sub,
+sup {
+    position: relative;
+
+    font-size: 75%;
+    line-height: 0;
+
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+
+/* =========================================================
+   5. ENLACES
+   ========================================================= */
+
+a {
+    background-color: transparent;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   6. LISTAS
+   ========================================================= */
+
+/*
+   No eliminamos list-style globalmente.
+
+   Bootstrap utiliza estilos propios para algunas listas
+   y el contenido editorial puede necesitar viñetas.
+
+   Las listas sin estilo deben controlarse mediante
+   clases específicas, por ejemplo:
+
+   .list-unstyled
+*/
+
+
+/* =========================================================
+   7. IMÁGENES Y CONTENIDO MULTIMEDIA
+   ========================================================= */
+
+img,
+svg,
+picture,
+video,
+canvas {
+    max-width: 100%;
+}
+
+
+/*
+   Las imágenes se comportan como elementos de bloque
+   para evitar espacios inferiores causados por baseline.
+*/
+
+img,
+picture {
+    display: block;
+}
+
+
+/*
+   Mantiene la proporción natural de las imágenes.
+*/
+
+img {
+    height: auto;
+
+    border-style: none;
+}
+
+
+/*
+   Evita problemas de overflow en SVG.
+*/
+
+svg {
+    display: block;
+}
+
+
+/*
+   Videos responsivos.
+
+   No aplicamos height: auto a iframe, object o embed,
+   porque puede romper elementos como:
+   - Google Maps
+   - YouTube
+   - Bootstrap ratios
+   - embeds externos
+*/
+
+video {
+    display: block;
+
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* =========================================================
+   8. FORMULARIOS
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+
+    font: inherit;
+}
+
+
+/*
+   Los botones no reciben estilos visuales globales.
+
+   Bootstrap y las clases personalizadas del proyecto
+   son responsables de:
+   - background
+   - border
+   - padding
+   - hover
+   - active
+*/
+
+button {
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/*
+   Mantiene cursor apropiado para elementos deshabilitados.
+*/
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    cursor: not-allowed;
+}
+
+
+/*
+   Firefox:
+   elimina padding/borde interno inconsistente.
+*/
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+
+    border-style: none;
+}
+
+
+/*
+   Fieldset
+*/
+
+fieldset {
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+}
+
+
+/*
+   Legend
+*/
+
+legend {
+    display: table;
+
+    max-width: 100%;
+
+    padding: 0;
+
+    color: inherit;
+
+    white-space: normal;
+}
+
+
+/*
+   Labels
+
+   No definimos margin-bottom porque Bootstrap
+   y el CSS personalizado pueden necesitar
+   valores distintos.
+*/
+
+label {
+    display: inline-block;
+}
+
+
+/*
+   Textarea
+*/
+
+textarea {
+    overflow: auto;
+
+    resize: vertical;
+}
+
+
+/*
+   Placeholder
+
+   Normalización mínima sin imponer color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   9. INPUT TYPE SEARCH
+   ========================================================= */
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+
+    outline-offset: -2px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+
+/* =========================================================
+   10. CHECKBOX Y RADIO
+   ========================================================= */
+
+/*
+   No modificamos appearance.
+
+   Esto es importante porque eliminar appearance:
+   - puede romper Bootstrap
+   - puede romper inputs personalizados
+   - puede afectar accesibilidad
+*/
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   11. TABLAS
+   ========================================================= */
+
+/*
+   Normalización mínima.
+
+   No aplicamos:
+   - width: 100%
+   - padding
+   - borders
+   - backgrounds
+   - márgenes
+
+   Todo eso debe manejarlo Bootstrap o el CSS
+   específico del componente.
+*/
+
+table {
+    border-spacing: 0;
+
+    border-collapse: collapse;
+}
+
+
+/* =========================================================
+   12. ELEMENTOS SEMÁNTICOS
+   ========================================================= */
+
+main {
+    display: block;
+}
+
+
+/*
+   Evita problemas de overflow horizontal
+   en contenido preformateado.
+*/
+
+pre {
+    overflow: auto;
+}
+
+
+/*
+   Mantiene tipografía monoespaciada consistente.
+*/
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+
+    font-size: 1em;
+}
+
+
+/*
+   HR
+
+   No definimos color, margin ni diseño visual.
+*/
+
+hr {
+    box-sizing: content-box;
+
+    height: 0;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   13. ELEMENTOS INTERACTIVOS
+   ========================================================= */
+
+summary {
+    display: list-item;
+
+    cursor: pointer;
+}
+
+
+/*
+   No modificamos:
+   - details
+   - dialog
+   - collapse
+   - accordion
+
+   Bootstrap y los navegadores deben manejar
+   sus comportamientos nativos.
+*/
+
+
+/* =========================================================
+   14. ACCESIBILIDAD
+   ========================================================= */
+
+/*
+   IMPORTANTE:
+
+   NO usar:
+
+   [aria-hidden="true"] {
+       display: none;
+   }
+
+   aria-hidden controla accesibilidad,
+   NO visibilidad visual.
+
+   Elementos como iconos, flechas y símbolos
+   pueden usar aria-hidden="true" y seguir
+   siendo visibles.
+*/
+
+
+/*
+   Focus visible.
+
+   Se mantiene un indicador accesible sin
+   interferir con :focus normal.
+*/
+
+:focus-visible {
+    outline: 2px solid currentColor;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   15. REDUCCIÓN DE MOVIMIENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+
+}
+
+
+/* =========================================================
+   16. CORRECCIONES ESPECÍFICAS DE NAVEGADOR
+   ========================================================= */
+
+
+/* =========================================================
+   Safari / WebKit
+   ========================================================= */
+
+::-webkit-file-upload-button {
+    font: inherit;
+
+    -webkit-appearance: button;
+}
+
+
+/* =========================================================
+   Firefox
+   ========================================================= */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   Edge / Chromium
+   ========================================================= */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+
+/* =========================================================
+   17. RENDERIZADO DE FUENTES
+   ========================================================= */
+
+body {
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   FIN DEL NORMALIZADOR
+   ========================================================= */

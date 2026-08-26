@@ -1,66 +1,59 @@
 /* =========================================================
    KUDO CHILE
-   ESTILOS GENERALES
-   Archivo: css/global.css
+   ESTILOS GENERALES OPTIMIZADOS
+   Archivo: css/global.css (versión mejorada)
+   
+   NOTA: Incluir DESPUÉS de normalize.css
    ========================================================= */
-
 
 /* =========================================================
-   RESET BÁSICO
+   CONFIGURACIÓN DE BOX-SIZING GLOBAL
    ========================================================= */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
 }
 
-
 body {
-
     margin: 0;
-
     padding: 0;
-
-    background-color:
-        var(--background-main);
-
-    color:
-        var(--text-primary);
-
-    font-family:
-        var(--font-main);
-
+    background-color: var(--background-main);
+    color: var(--text-primary);
+    font-family: var(--font-main);
     font-size: 16px;
-
     line-height: 1.7;
-
     overflow-x: hidden;
+    
+    /* Mejorar renderizado de fuentes */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
 
 /* =========================================================
    CONTENEDORES
    ========================================================= */
 
 .container {
-
     width: 100%;
-
-    max-width:
-        var(--container-width);
-
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
+/* Contenedor fluid para Bootstrap */
+.container-fluid {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* =========================================================
-   TEXTOS
+   TIPOGRAFÍA - TÍTULOS
    ========================================================= */
 
 h1,
@@ -69,404 +62,637 @@ h3,
 h4,
 h5,
 h6 {
-
-    font-family:
-        var(--font-title);
-
+    font-family: var(--font-title);
     font-weight: 700;
-
-    color:
-        var(--text-primary);
-
+    color: var(--text-primary);
     line-height: 1.2;
-
+    margin-bottom: 1rem;
 }
-
 
 h1 {
-
-    font-size:
-        clamp(2.5rem, 6vw, 5rem);
-
+    font-size: clamp(2.5rem, 6vw, 5rem);
 }
-
 
 h2 {
-
-    font-size:
-        clamp(2rem, 4vw, 3.2rem);
-
+    font-size: clamp(2rem, 4vw, 3.2rem);
 }
-
 
 h3 {
-
-    font-size:
-        clamp(1.4rem, 3vw, 2rem);
-
+    font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+/* Removemos márgenes superiores */
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+    margin-top: 0;
+}
+
+/* =========================================================
+   TIPOGRAFÍA - PÁRRAFOS Y TEXTO
+   ========================================================= */
 
 p {
-
-    color:
-        var(--text-secondary);
-
+    color: var(--text-secondary);
     font-size: 1rem;
-
     margin-bottom: 1rem;
-
 }
 
+p:last-child {
+    margin-bottom: 0;
+}
 
 strong {
-
-    color:
-        var(--kudo-white);
-
+    color: var(--kudo-white);
+    font-weight: 700;
 }
 
+em {
+    font-style: italic;
+}
+
+small {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   ENLACES
+   ========================================================= */
 
 a {
-
-    color:
-        var(--kudo-red-light);
-
+    color: var(--kudo-red-light);
     text-decoration: none;
-
-    transition:
-        color var(--transition-fast);
-
+    transition: color var(--transition-fast);
+    outline-color: var(--kudo-red);
 }
-
 
 a:hover {
-
-    color:
-        var(--kudo-gold-light);
-
+    color: var(--kudo-gold-light);
+    text-decoration: none;
 }
 
+a:active {
+    color: var(--kudo-red-dark);
+}
+
+a:focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   LISTAS
+   ========================================================= */
+
+ul,
+ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+    margin-bottom: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+dl {
+    margin-bottom: 1rem;
+}
+
+dt {
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+dd {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================================
+   BLOCKQUOTE Y CITAS
+   ========================================================= */
+
+blockquote {
+    margin: 1rem 0;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--kudo-red);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+}
+
+blockquote p {
+    margin-bottom: 0;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   CÓDIGO
+   ========================================================= */
+
+code,
+kbd,
+pre,
+samp {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+code {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ff7b72;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    word-break: break-word;
+}
+
+pre {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    overflow-x: auto;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+}
 
 /* =========================================================
    LÍNEAS DECORATIVAS
    ========================================================= */
 
 .section-line {
-
     width: 80px;
-
     height: 3px;
-
-    background-color:
-        var(--kudo-red);
-
-    margin:
-        20px auto 40px;
-
+    background-color: var(--kudo-red);
+    margin: 20px auto 40px;
 }
 
+hr {
+    border: none;
+    border-top: 1px solid var(--border-dark);
+    margin: 2rem 0;
+}
 
 /* =========================================================
    SECCIONES GENERALES
    ========================================================= */
 
 .content-section {
-
     position: relative;
-
-    padding:
-        var(--section-padding) 0;
-
+    padding: var(--section-padding) 0;
 }
-
 
 .section-dark {
-
-    background:
-        var(--background-dark);
-
+    background: var(--background-dark);
 }
-
 
 .section-soft {
-
-    background:
-        var(--background-soft);
-
+    background: var(--background-soft);
 }
 
+main {
+    display: block;
+}
 
 /* =========================================================
    TÍTULOS DE SECCIÓN
    ========================================================= */
 
 .section-heading {
-
     text-align: center;
-
     margin-bottom: 60px;
-
 }
-
 
 .section-heading h2 {
-
     margin-bottom: 0;
-
 }
-
 
 .section-heading p {
-
     max-width: 750px;
-
-    margin:
-        20px auto 0;
-
-    color:
-        var(--text-muted);
-
+    margin: 20px auto 0;
+    color: var(--text-muted);
 }
-
 
 /* =========================================================
    BOTONES
    ========================================================= */
 
 .btn-kudo {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 8px;
-
-    padding:
-        12px 25px;
-
-    border-radius:
-        var(--radius-small);
-
-    border: 1px solid
-        var(--kudo-red);
-
-    background:
-        var(--kudo-red);
-
-    color:
-        var(--kudo-white);
-
+    padding: 12px 25px;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--kudo-red);
+    background: var(--kudo-red);
+    color: var(--kudo-white);
     font-weight: 700;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
-
-    transition:
-        all var(--transition-normal);
-
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
 }
-
 
 .btn-kudo:hover {
-
-    background:
-        var(--kudo-red-dark);
-
-    border-color:
-        var(--kudo-red-dark);
-
-    color:
-        var(--kudo-white);
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        var(--shadow-small);
-
+    background: var(--kudo-red-dark);
+    border-color: var(--kudo-red-dark);
+    color: var(--kudo-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
 }
 
+.btn-kudo:active {
+    transform: translateY(0);
+}
+
+.btn-kudo:disabled,
+.btn-kudo[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 .btn-kudo-outline {
-
-    background:
-        transparent;
-
-    border-color:
-        var(--kudo-white);
-
+    background: transparent;
+    border-color: var(--kudo-white);
+    color: var(--kudo-white);
 }
-
 
 .btn-kudo-outline:hover {
-
-    background:
-        var(--kudo-white);
-
-    color:
-        var(--kudo-black);
-
+    background: var(--kudo-white);
+    color: var(--kudo-black);
 }
 
+.btn-kudo-secondary {
+    background: transparent;
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}
+
+.btn-kudo-secondary:hover {
+    background: var(--kudo-red);
+    border-color: var(--kudo-red);
+    color: var(--kudo-white);
+}
 
 /* =========================================================
    IMÁGENES
    ========================================================= */
 
 img {
-
     max-width: 100%;
-
     height: auto;
-
+    display: block;
 }
 
+img[width],
+img[height] {
+    max-width: 100%;
+    height: auto;
+}
+
+picture {
+    display: block;
+}
 
 .content-image {
-
     display: block;
-
     width: 100%;
-
     height: auto;
-
     object-fit: contain;
-
 }
-
 
 .image-rounded {
-
-    border-radius:
-        var(--radius-medium);
-
+    border-radius: var(--radius-medium);
 }
-
 
 .image-shadow {
-
-    box-shadow:
-        var(--shadow-medium);
-
+    box-shadow: var(--shadow-medium);
 }
 
+/* Asegurar que las imágenes dentro de figcaption no causen problemas */
+figure {
+    margin: 0;
+}
+
+figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
 
 /* =========================================================
    VIDEOS
    ========================================================= */
 
 .video-wrapper {
-
     position: relative;
-
     width: 100%;
-
     overflow: hidden;
-
-    border-radius:
-        var(--radius-medium);
-
-    background:
-        #000;
-
-    box-shadow:
-        var(--shadow-medium);
-
+    border-radius: var(--radius-medium);
+    background: #000;
+    box-shadow: var(--shadow-medium);
 }
-
 
 .video-wrapper iframe {
-
     display: block;
-
     width: 100%;
-
     aspect-ratio: 16 / 9;
-
     height: auto;
-
     border: 0;
-
 }
 
+/* Soporte para YouTube embebido responsivo */
+.youtube-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.youtube-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 /* =========================================================
    CARDS
    ========================================================= */
 
 .kudo-card {
-
     height: 100%;
-
-    background:
-        var(--background-card);
-
-    border:
-        1px solid var(--border-dark);
-
-    border-radius:
-        var(--radius-medium);
-
+    background: var(--background-card);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-medium);
     padding: 30px;
-
     transition:
         transform var(--transition-normal),
         border-color var(--transition-normal),
         box-shadow var(--transition-normal);
-
 }
-
 
 .kudo-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        var(--border-red);
-
-    box-shadow:
-        var(--shadow-medium);
-
+    transform: translateY(-5px);
+    border-color: var(--border-red);
+    box-shadow: var(--shadow-medium);
 }
 
+.kudo-card:focus-within {
+    outline: 2px solid var(--kudo-red);
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   TABLAS
+   ========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+thead {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+thead th {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid var(--border-dark);
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-dark);
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+td {
+    padding: 0.75rem;
+}
+
+/* =========================================================
+   FORMULARIOS
+   ========================================================= */
+
+form {
+    margin-bottom: 1rem;
+}
+
+fieldset {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-small);
+}
+
+legend {
+    padding: 0 0.5rem;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="search"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-small);
+    background-color: var(--background-soft);
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: border-color var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--kudo-red);
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
 
 /* =========================================================
    SCROLLBAR
    ========================================================= */
 
 ::-webkit-scrollbar {
-
     width: 8px;
-
+    height: 8px;
 }
-
 
 ::-webkit-scrollbar-track {
-
-    background:
-        var(--background-dark);
-
+    background: var(--background-dark);
 }
-
 
 ::-webkit-scrollbar-thumb {
-
-    background:
-        var(--kudo-red);
-
+    background: var(--kudo-red);
     border-radius: 10px;
-
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
+    background: var(--kudo-red-light);
+}
 
-    background:
-        var(--kudo-red-light);
+/* Firefox */
+* {
+    scrollbar-color: var(--kudo-red) var(--background-dark);
+    scrollbar-width: thin;
+}
 
+/* =========================================================
+   UTILIDADES RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    h3 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Skip to main content link */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--kudo-red);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}
+
+/* =========================================================
+   UTILIDADES GENERALES
+   ========================================================= */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }

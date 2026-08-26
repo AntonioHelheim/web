@@ -1,47 +1,327 @@
 /* =========================================================
    KUDO CHILE
+
    MAIN.JS
 
    Este archivo:
+
    1. Carga los partials HTML
-   2. Inicializa Bootstrap
-   3. Inicializa navegación
-   4. Inicializa animaciones
-   5. Configura videos
-   6. Configura imágenes
-   7. Ejecuta funciones auxiliares
+   2. Normaliza recursos internos
+   3. Inicializa Bootstrap
+   4. Inicializa navegación
+   5. Inicializa animaciones
+   6. Configura videos
+   7. Configura imágenes
+   8. Inicializa Virtudes del Bushido
+   9. Ejecuta funciones auxiliares
+
    ========================================================= */
 
 
 /* =========================================================
-   1. CARGAR PARTIALS
+   1. RUTA RAÍZ DEL PROYECTO
    ========================================================= */
 
-async function loadPartial(containerId, filePath) {
+function getProjectRoot() {
 
-    const container = document.getElementById(containerId);
+    const scripts = document.querySelectorAll(
+        'script[src]'
+    );
+
+    for (const script of scripts) {
+
+        const src =
+            script.getAttribute('src');
+
+        if (!src) {
+            continue;
+        }
+
+        if (!src.includes('js-main.js')) {
+            continue;
+        }
+
+        const scriptURL =
+            new URL(
+                src,
+                document.baseURI
+            );
+
+        return new URL(
+            '../',
+            scriptURL
+        ).href;
+
+    }
+
+    console.warn(
+        'No se encontró la ubicación de js-main.js. ' +
+        'Se utilizará document.baseURI.'
+    );
+
+    return new URL(
+        './',
+        document.baseURI
+    ).href;
+
+}
+
+
+/* =========================================================
+   2. CONVERTIR RUTA DE RECURSO A RUTA ABSOLUTA
+   ========================================================= */
+
+function resolveProjectResource(resourcePath) {
+
+    if (!resourcePath) {
+        return resourcePath;
+    }
+
+    const trimmedPath =
+        resourcePath.trim();
+
+    /*
+     * No modificar URLs externas o especiales.
+     */
+
+    if (
+
+        trimmedPath.startsWith('http://') ||
+        trimmedPath.startsWith('https://') ||
+        trimmedPath.startsWith('//') ||
+        trimmedPath.startsWith('data:') ||
+        trimmedPath.startsWith('blob:') ||
+        trimmedPath.startsWith('#')
+
+    ) {
+
+        return trimmedPath;
+
+    }
+
+    const projectRoot =
+        getProjectRoot();
+
+    /*
+     * Eliminar ./ o ../ solamente
+     * al comienzo de la ruta.
+     */
+
+    const cleanPath =
+        trimmedPath.replace(
+            /^(?:\.\.\/|\.\/)+/,
+            ''
+        );
+
+    return new URL(
+        cleanPath,
+        projectRoot
+    ).href;
+
+}
+
+
+/* =========================================================
+   3. NORMALIZAR RECURSOS DE LOS PARTIALS
+   ========================================================= */
+
+function normalizePartialResources(container) {
 
     if (!container) {
+        return;
+    }
+
+    const images =
+        container.querySelectorAll(
+            'img[src]'
+        );
+
+    images.forEach(img => {
+
+        const originalSrc =
+            img.getAttribute('src');
+
+        if (!originalSrc) {
+            return;
+        }
+
+        const absolutePath =
+            resolveProjectResource(
+                originalSrc
+            );
+
+        img.setAttribute(
+            'src',
+            absolutePath
+        );
+
+        img.addEventListener(
+            'error',
+            function () {
+
+                console.error(
+                    '❌ ERROR CARGANDO IMAGEN:',
+                    absolutePath
+                );
+
+                console.error(
+                    'Ruta original:',
+                    originalSrc
+                );
+
+            },
+            {
+                once: true
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       SRCSET
+       ===================================================== */
+
+    const srcsetElements =
+        container.querySelectorAll(
+            '[srcset]'
+        );
+
+    srcsetElements.forEach(element => {
+
+        const srcset =
+            element.getAttribute(
+                'srcset'
+            );
+
+        if (!srcset) {
+            return;
+        }
+
+        const normalized =
+            srcset
+                .split(',')
+                .map(item => {
+
+                    const parts =
+                        item
+                            .trim()
+                            .split(/\s+/);
+
+                    const originalPath =
+                        parts[0];
+
+                    if (!originalPath) {
+                        return item.trim();
+                    }
+
+                    const absolutePath =
+                        resolveProjectResource(
+                            originalPath
+                        );
+
+                    return [
+                        absolutePath,
+                        ...parts.slice(1)
+                    ].join(' ');
+
+                })
+                .join(', ');
+
+        element.setAttribute(
+            'srcset',
+            normalized
+        );
+
+    });
+
+
+    /* =====================================================
+       POSTERS
+       ===================================================== */
+
+    const posters =
+        container.querySelectorAll(
+            '[poster]'
+        );
+
+    posters.forEach(element => {
+
+        const originalPath =
+            element.getAttribute(
+                'poster'
+            );
+
+        if (!originalPath) {
+            return;
+        }
+
+        const absolutePath =
+            resolveProjectResource(
+                originalPath
+            );
+
+        element.setAttribute(
+            'poster',
+            absolutePath
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   4. CARGAR PARTIAL
+   ========================================================= */
+
+async function loadPartial(
+    containerId,
+    filePath
+) {
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+    if (!container) {
+
         console.error(
             `No existe el contenedor #${containerId}`
         );
 
         return;
+
     }
 
     try {
 
-        const response = await fetch(filePath);
+        const response =
+            await fetch(filePath);
 
         if (!response.ok) {
+
             throw new Error(
                 `HTTP ${response.status} - ${response.statusText}`
             );
+
         }
 
-        const html = await response.text();
+        const html =
+            await response.text();
 
-        container.innerHTML = html;
+        container.innerHTML =
+            html;
+
+        /*
+         * Normalizar rutas de recursos
+         * después de insertar el partial.
+         */
+
+        normalizePartialResources(
+            container
+        );
 
         console.log(
             `✓ Partial cargado: ${filePath}`
@@ -62,12 +342,14 @@ async function loadPartial(containerId, filePath) {
                 </div>
             </div>
         `;
+
     }
+
 }
 
 
 /* =========================================================
-   2. CARGAR TODAS LAS SECCIONES
+   5. CARGAR TODAS LAS SECCIONES
    ========================================================= */
 
 async function loadAllPartials() {
@@ -81,7 +363,7 @@ async function loadAllPartials() {
 
         loadPartial(
             'home-container',
-            './partials/home.html'
+            './partials/header.html'
         ),
 
         loadPartial(
@@ -127,6 +409,11 @@ async function loadAllPartials() {
         loadPartial(
             'federation-container',
             './partials/federation.html'
+        ),
+
+        loadPartial(
+            'footer-container',
+            './partials/footer.html'
         )
 
     ]);
@@ -134,142 +421,546 @@ async function loadAllPartials() {
     console.log(
         '✓ Todos los partials fueron cargados.'
     );
+
 }
 
 
 /* =========================================================
-   3. SCROLL Y BOTÓN VOLVER ARRIBA
+   6. VIRTUDES DEL BUSHIDO
+   ========================================================= */
+
+function initBushidoVirtues() {
+
+    const virtueCards =
+        document.querySelectorAll(
+            '.virtue-card'
+        );
+
+    if (!virtueCards.length) {
+
+        console.warn(
+            'No se encontraron cards de virtudes.'
+        );
+
+        return;
+
+    }
+
+    virtueCards.forEach(card => {
+
+        const trigger =
+            card.querySelector(
+                '.bushido-virtue-trigger'
+            );
+
+        if (!trigger) {
+            return;
+        }
+
+        /*
+         * Evita duplicar listeners.
+         */
+
+        if (
+            trigger.dataset.virtueInitialized ===
+            'true'
+        ) {
+            return;
+        }
+
+        trigger.dataset.virtueInitialized =
+            'true';
+
+        /*
+         * Buscar el contenido asociado.
+         */
+
+        const targetSelector =
+            trigger.getAttribute(
+                'data-bs-target'
+            ) ||
+            trigger.getAttribute(
+                'data-target'
+            ) ||
+            trigger.getAttribute(
+                'href'
+            );
+
+        let target =
+            null;
+
+        if (
+            targetSelector &&
+            targetSelector.startsWith('#')
+        ) {
+
+            target =
+                document.querySelector(
+                    targetSelector
+                );
+
+        }
+
+        /*
+         * Fallback:
+         * buscar contenido dentro de la card.
+         */
+
+        if (!target) {
+
+            target =
+                card.querySelector(
+                    '.virtue-description, ' +
+                    '.virtue-content, ' +
+                    '.collapse'
+                );
+
+        }
+
+        if (!target) {
+
+            console.warn(
+                'No se encontró contenido para la virtud:',
+                card
+            );
+
+            return;
+
+        }
+
+        /*
+         * Estado inicial.
+         */
+
+        const initiallyOpen =
+            target.classList.contains('show');
+
+        trigger.setAttribute(
+            'aria-expanded',
+            initiallyOpen
+                ? 'true'
+                : 'false'
+        );
+
+        if (initiallyOpen) {
+
+            card.classList.add(
+                'is-open'
+            );
+
+        }
+
+        /*
+         * Evento click.
+         */
+
+        trigger.addEventListener(
+            'click',
+            function (event) {
+
+                /*
+                 * Si es un enlace interno,
+                 * evitar navegación.
+                 */
+
+                if (
+                    trigger.tagName === 'A'
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+                /*
+                 * Detectar si Bootstrap Collapse
+                 * está disponible.
+                 */
+
+                const hasBootstrapCollapse =
+
+                    typeof bootstrap !==
+                    'undefined' &&
+
+                    bootstrap.Collapse;
+
+
+                /*
+                 * Cerrar otras cards.
+                 */
+
+                virtueCards.forEach(otherCard => {
+
+                    if (
+                        otherCard === card
+                    ) {
+                        return;
+                    }
+
+                    const otherTrigger =
+                        otherCard.querySelector(
+                            '.bushido-virtue-trigger'
+                        );
+
+                    const otherTargetSelector =
+                        otherTrigger
+                            ? (
+                                otherTrigger.getAttribute(
+                                    'data-bs-target'
+                                ) ||
+                                otherTrigger.getAttribute(
+                                    'data-target'
+                                )
+                            )
+                            : null;
+
+                    let otherTarget =
+                        null;
+
+                    if (
+                        otherTargetSelector
+                    ) {
+
+                        otherTarget =
+                            document.querySelector(
+                                otherTargetSelector
+                            );
+
+                    }
+
+                    if (!otherTarget) {
+
+                        otherTarget =
+                            otherCard.querySelector(
+                                '.virtue-description, ' +
+                                '.virtue-content, ' +
+                                '.collapse'
+                            );
+
+                    }
+
+                    if (!otherTarget) {
+                        return;
+                    }
+
+                    /*
+                     * Cerrar usando Bootstrap
+                     * si está disponible.
+                     */
+
+                    if (
+                        hasBootstrapCollapse
+                    ) {
+
+                        const instance =
+                            bootstrap.Collapse
+                                .getOrCreateInstance(
+                                    otherTarget,
+                                    {
+                                        toggle: false
+                                    }
+                                );
+
+                        instance.hide();
+
+                    } else {
+
+                        otherTarget.classList.remove(
+                            'show'
+                        );
+
+                    }
+
+                    otherCard.classList.remove(
+                        'is-open'
+                    );
+
+                    if (otherTrigger) {
+
+                        otherTrigger.setAttribute(
+                            'aria-expanded',
+                            'false'
+                        );
+
+                    }
+
+                });
+
+
+                /*
+                 * Abrir/cerrar card seleccionada.
+                 */
+
+                if (
+                    hasBootstrapCollapse
+                ) {
+
+                    const instance =
+                        bootstrap.Collapse
+                            .getOrCreateInstance(
+                                target,
+                                {
+                                    toggle: false
+                                }
+                            );
+
+                    instance.toggle();
+
+                } else {
+
+                    target.classList.toggle(
+                        'show'
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Eventos de Bootstrap.
+         *
+         * Mantienen sincronizado el estado visual.
+         */
+
+        target.addEventListener(
+            'show.bs.collapse',
+            function () {
+
+                card.classList.add(
+                    'is-open'
+                );
+
+                trigger.setAttribute(
+                    'aria-expanded',
+                    'true'
+                );
+
+            }
+        );
+
+
+        target.addEventListener(
+            'hide.bs.collapse',
+            function () {
+
+                card.classList.remove(
+                    'is-open'
+                );
+
+                trigger.setAttribute(
+                    'aria-expanded',
+                    'false'
+                );
+
+            }
+        );
+
+
+        /*
+         * Fallback cuando Bootstrap
+         * no está disponible.
+         */
+
+        target.addEventListener(
+            'transitionend',
+            function () {
+
+                const isOpen =
+                    target.classList.contains(
+                        'show'
+                    );
+
+                card.classList.toggle(
+                    'is-open',
+                    isOpen
+                );
+
+                trigger.setAttribute(
+                    'aria-expanded',
+                    isOpen
+                        ? 'true'
+                        : 'false'
+                );
+
+            }
+        );
+
+    });
+
+    console.log(
+        '✓ Virtudes del Bushido inicializadas.'
+    );
+
+}
+
+
+/* =========================================================
+   7. SCROLL Y BOTÓN VOLVER ARRIBA
    ========================================================= */
 
 function initBackToTop() {
 
     const backToTopBtn =
-        document.getElementById('backToTop');
+        document.getElementById(
+            'backToTop'
+        );
 
     if (!backToTopBtn) {
         return;
     }
 
-    window.addEventListener('scroll', function () {
+    function updateBackToTop() {
 
-        if (window.scrollY > 300) {
+        backToTopBtn.classList.toggle(
+            'show',
+            window.scrollY > 300
+        );
 
-            backToTopBtn.classList.add('show');
+    }
 
-        } else {
+    window.addEventListener(
+        'scroll',
+        updateBackToTop,
+        {
+            passive: true
+        }
+    );
 
-            backToTopBtn.classList.remove('show');
+    updateBackToTop();
+
+    backToTopBtn.addEventListener(
+        'click',
+        function (event) {
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
         }
-
-    });
-
-
-    backToTopBtn.addEventListener('click', function (e) {
-
-        e.preventDefault();
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
-    });
+    );
 
 }
 
 
 /* =========================================================
-   4. NAVEGACIÓN INTERNA
+   8. NAVEGACIÓN INTERNA
    ========================================================= */
 
 function initInternalLinks() {
 
     document
-        .querySelectorAll('a[href^="#"]')
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
         .forEach(anchor => {
+
+            /*
+             * No interceptar controles
+             * de Bootstrap Collapse.
+             */
+
+            if (
+                anchor.hasAttribute(
+                    'data-bs-toggle'
+                )
+            ) {
+                return;
+            }
 
             anchor.addEventListener(
                 'click',
-                function (e) {
+                function (event) {
 
                     const href =
-                        this.getAttribute('href');
+                        this.getAttribute(
+                            'href'
+                        );
 
                     if (
                         !href ||
-                        href === '#' ||
-                        href.startsWith('#modal')
+                        href === '#'
                     ) {
                         return;
                     }
 
+                    let target;
 
-                    const target =
-                        document.querySelector(href);
+                    try {
+
+                        target =
+                            document.querySelector(
+                                href
+                            );
+
+                    } catch (error) {
+
+                        return;
+
+                    }
 
                     if (!target) {
                         return;
                     }
 
-
-                    e.preventDefault();
-
+                    event.preventDefault();
 
                     const navbar =
-                        document.querySelector('.navbar');
+                        document.querySelector(
+                            '.navbar'
+                        );
 
                     const navbarHeight =
                         navbar
                             ? navbar.offsetHeight
                             : 0;
 
-
                     const offsetTop =
-                        target.getBoundingClientRect().top +
+                        target
+                            .getBoundingClientRect()
+                            .top +
                         window.scrollY -
                         navbarHeight -
                         20;
 
-
                     window.scrollTo({
 
-                        top: offsetTop,
+                        top:
+                            Math.max(
+                                0,
+                                offsetTop
+                            ),
 
-                        behavior: 'smooth'
+                        behavior:
+                            'smooth'
 
                     });
 
 
-                    /* Cerrar menú móvil */
+                    /*
+                     * Cerrar navbar móvil.
+                     */
 
                     const navbarCollapse =
                         document.querySelector(
-                            '.navbar-collapse'
+                            '.navbar-collapse.show'
                         );
-
 
                     if (
                         navbarCollapse &&
-                        navbarCollapse.classList.contains('show')
+                        typeof bootstrap !==
+                        'undefined' &&
+                        bootstrap.Collapse
                     ) {
 
-                        const bsCollapse =
-                            bootstrap.Collapse.getInstance(
+                        bootstrap.Collapse
+                            .getOrCreateInstance(
                                 navbarCollapse
-                            );
-
-                        if (bsCollapse) {
-
-                            bsCollapse.hide();
-
-                        } else {
-
-                            navbarCollapse.classList.remove(
-                                'show'
-                            );
-
-                        }
+                            )
+                            .hide();
 
                     }
 
@@ -282,43 +973,36 @@ function initInternalLinks() {
 
 
 /* =========================================================
-   5. NAVBAR STICKY
+   9. NAVBAR STICKY
    ========================================================= */
 
 function initNavbar() {
 
     const navbar =
-        document.querySelector('.navbar');
+        document.querySelector(
+            '.navbar'
+        );
 
     if (!navbar) {
         return;
     }
 
-
     function updateNavbar() {
 
-        if (window.scrollY > 50) {
-
-            navbar.classList.add(
-                'navbar-scrolled'
-            );
-
-        } else {
-
-            navbar.classList.remove(
-                'navbar-scrolled'
-            );
-
-        }
+        navbar.classList.toggle(
+            'navbar-scrolled',
+            window.scrollY > 50
+        );
 
     }
 
-
     window.addEventListener(
         'scroll',
-        updateNavbar
+        updateNavbar,
+        {
+            passive: true
+        }
     );
-
 
     updateNavbar();
 
@@ -326,42 +1010,55 @@ function initNavbar() {
 
 
 /* =========================================================
-   6. ANIMACIONES AL HACER SCROLL
+   10. ANIMACIONES AL HACER SCROLL
    ========================================================= */
 
 function initScrollAnimations() {
 
     const elements =
         document.querySelectorAll(
+
             '.card-section, ' +
             '.dojo-card, ' +
             '.event-card, ' +
             '.virtue-card, ' +
             '.video-card'
-        );
 
+        );
 
     if (!elements.length) {
         return;
     }
 
+    if (
+        !('IntersectionObserver' in window)
+    ) {
 
-    const observerOptions = {
+        elements.forEach(element => {
 
-        threshold: 0.1,
+            element.classList.add(
+                'is-visible'
+            );
 
-        rootMargin: '0px 0px -80px 0px'
+        });
 
-    };
+        return;
 
+    }
 
     const observer =
         new IntersectionObserver(
+
             function (entries) {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (entry.isIntersecting) {
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
 
                         entry.target.classList.add(
                             'is-visible'
@@ -372,13 +1069,17 @@ function initScrollAnimations() {
                         );
 
                     }
-
-                });
+                );
 
             },
-            observerOptions
-        );
 
+            {
+                threshold: 0.1,
+                rootMargin:
+                    '0px 0px -80px 0px'
+            }
+
+        );
 
     elements.forEach(element => {
 
@@ -386,7 +1087,9 @@ function initScrollAnimations() {
             'scroll-animation'
         );
 
-        observer.observe(element);
+        observer.observe(
+            element
+        );
 
     });
 
@@ -394,62 +1097,67 @@ function initScrollAnimations() {
 
 
 /* =========================================================
-   7. TOOLTIPS BOOTSTRAP
+   11. TOOLTIPS BOOTSTRAP
    ========================================================= */
 
 function initTooltips() {
 
     if (
-        typeof bootstrap === 'undefined'
+
+        typeof bootstrap ===
+        'undefined' ||
+
+        !bootstrap.Tooltip
+
     ) {
         return;
     }
 
-
-    const tooltipElements =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             '[data-bs-toggle="tooltip"]'
-        );
+        )
+        .forEach(element => {
 
+            bootstrap.Tooltip
+                .getOrCreateInstance(
+                    element
+                );
 
-    tooltipElements.forEach(element => {
-
-        new bootstrap.Tooltip(element);
-
-    });
+        });
 
 }
 
 
 /* =========================================================
-   8. VIDEOS RESPONSIVOS
+   12. VIDEOS RESPONSIVOS
    ========================================================= */
 
 function makeVideosResponsive() {
 
     const iframes =
         document.querySelectorAll(
-            'iframe[src*="youtube"]'
+            'iframe[src*="youtube"], ' +
+            'iframe[src*="youtu.be"]'
         );
-
 
     iframes.forEach(iframe => {
 
-        /* Evitar envolver dos veces */
-
         if (
+
             iframe.parentElement &&
-            iframe.parentElement.classList.contains('ratio')
+            iframe.parentElement.classList.contains(
+                'ratio'
+            )
+
         ) {
-
             return;
-
         }
 
-
         const wrapper =
-            document.createElement('div');
-
+            document.createElement(
+                'div'
+            );
 
         wrapper.classList.add(
             'ratio',
@@ -457,12 +1165,10 @@ function makeVideosResponsive() {
             'video-wrapper'
         );
 
-
         iframe.parentNode.insertBefore(
             wrapper,
             iframe
         );
-
 
         wrapper.appendChild(
             iframe
@@ -474,7 +1180,7 @@ function makeVideosResponsive() {
 
 
 /* =========================================================
-   9. LAZY LOADING DE IMÁGENES
+   13. LAZY LOADING DE IMÁGENES
    ========================================================= */
 
 function initLazyImages() {
@@ -484,68 +1190,77 @@ function initLazyImages() {
             'img[data-src]'
         );
 
-
     if (!images.length) {
         return;
     }
 
+    function loadImage(img) {
+
+        const source =
+            img.dataset.src;
+
+        if (!source) {
+            return;
+        }
+
+        img.src =
+            resolveProjectResource(
+                source
+            );
+
+        img.removeAttribute(
+            'data-src'
+        );
+
+    }
 
     if (
         !('IntersectionObserver' in window)
     ) {
 
-        images.forEach(img => {
-
-            img.src =
-                img.dataset.src;
-
-        });
+        images.forEach(loadImage);
 
         return;
 
     }
 
-
     const imageObserver =
         new IntersectionObserver(
-            function (entries, observer) {
 
-                entries.forEach(entry => {
+            function (
+                entries,
+                observer
+            ) {
 
-                    if (
-                        !entry.isIntersecting
-                    ) {
-                        return;
-                    }
+                entries.forEach(
+                    entry => {
 
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
 
-                    const img =
-                        entry.target;
+                        loadImage(
+                            entry.target
+                        );
 
-
-                    if (img.dataset.src) {
-
-                        img.src =
-                            img.dataset.src;
-
-                        img.removeAttribute(
-                            'data-src'
+                        observer.unobserve(
+                            entry.target
                         );
 
                     }
-
-
-                    observer.unobserve(img);
-
-                });
+                );
 
             }
-        );
 
+        );
 
     images.forEach(img => {
 
-        imageObserver.observe(img);
+        imageObserver.observe(
+            img
+        );
 
     });
 
@@ -553,7 +1268,7 @@ function initLazyImages() {
 
 
 /* =========================================================
-   10. ESTADO DE EVENTOS
+   14. ESTADO DE EVENTOS
    ========================================================= */
 
 function updateEventStatus() {
@@ -562,21 +1277,6 @@ function updateEventStatus() {
         document.querySelectorAll(
             '.event-card'
         );
-
-
-    if (!eventCards.length) {
-        return;
-    }
-
-
-    /*
-     * Actualmente los eventos del sitio
-     * no poseen una fecha técnica mediante
-     * data-date.
-     *
-     * Por lo tanto, no modificamos
-     * automáticamente su estado.
-     */
 
     eventCards.forEach(card => {
 
@@ -588,8 +1288,9 @@ function updateEventStatus() {
 
 }
 
+
 /* =========================================================
-   11. VALIDACIÓN DE FORMULARIOS
+   15. VALIDACIÓN DE FORMULARIOS
    ========================================================= */
 
 function initForms() {
@@ -599,21 +1300,21 @@ function initForms() {
             'form'
         );
 
-
     forms.forEach(form => {
 
         form.addEventListener(
             'submit',
             function (event) {
 
-                if (!form.checkValidity()) {
+                if (
+                    !form.checkValidity()
+                ) {
 
                     event.preventDefault();
 
                     event.stopPropagation();
 
                 }
-
 
                 form.classList.add(
                     'was-validated'
@@ -628,7 +1329,7 @@ function initForms() {
 
 
 /* =========================================================
-   12. TEMA
+   16. TEMA
    ========================================================= */
 
 function initTheme() {
@@ -636,12 +1337,10 @@ function initTheme() {
     const html =
         document.documentElement;
 
-
     const savedTheme =
         localStorage.getItem(
             'theme'
         ) || 'dark';
-
 
     html.setAttribute(
         'data-bs-theme',
@@ -652,7 +1351,7 @@ function initTheme() {
 
 
 /* =========================================================
-   13. ESTADÍSTICAS ANIMADAS
+   17. ESTADÍSTICAS ANIMADAS
    ========================================================= */
 
 function animateStats() {
@@ -662,99 +1361,97 @@ function animateStats() {
             '.stat-number'
         );
 
-
-    if (!statNumbers.length) {
+    if (
+        !statNumbers.length ||
+        !('IntersectionObserver' in window)
+    ) {
         return;
     }
 
-
     const statsObserver =
         new IntersectionObserver(
+
             function (entries) {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (
-                        !entry.isIntersecting
-                    ) {
-                        return;
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        const target =
+                            entry.target;
+
+                        const finalValue =
+                            parseInt(
+                                target.textContent,
+                                10
+                            );
+
+                        if (
+                            isNaN(finalValue)
+                        ) {
+                            return;
+                        }
+
+                        let currentValue =
+                            0;
+
+                        const increment =
+                            Math.max(
+                                1,
+                                Math.ceil(
+                                    finalValue / 30
+                                )
+                            );
+
+                        const interval =
+                            setInterval(
+                                function () {
+
+                                    currentValue +=
+                                        increment;
+
+                                    if (
+                                        currentValue >=
+                                        finalValue
+                                    ) {
+
+                                        target.textContent =
+                                            finalValue;
+
+                                        clearInterval(
+                                            interval
+                                        );
+
+                                    } else {
+
+                                        target.textContent =
+                                            currentValue;
+
+                                    }
+
+                                },
+                                30
+                            );
+
+                        statsObserver.unobserve(
+                            target
+                        );
+
                     }
-
-
-                    const target =
-                        entry.target;
-
-
-                    const finalValue =
-                        parseInt(
-                            target.textContent,
-                            10
-                        );
-
-
-                    if (
-                        isNaN(finalValue)
-                    ) {
-                        return;
-                    }
-
-
-                    let currentValue = 0;
-
-
-                    const increment =
-                        Math.max(
-                            1,
-                            Math.ceil(
-                                finalValue / 30
-                            )
-                        );
-
-
-                    const interval =
-                        setInterval(
-                            function () {
-
-                                currentValue +=
-                                    increment;
-
-
-                                if (
-                                    currentValue >=
-                                    finalValue
-                                ) {
-
-                                    target.textContent =
-                                        finalValue;
-
-                                    clearInterval(
-                                        interval
-                                    );
-
-                                } else {
-
-                                    target.textContent =
-                                        currentValue;
-
-                                }
-
-                            },
-                            30
-                        );
-
-
-                    statsObserver.unobserve(
-                        target
-                    );
-
-                });
+                );
 
             },
+
             {
                 threshold: 0.5
             }
-        );
 
+        );
 
     statNumbers.forEach(stat => {
 
@@ -768,186 +1465,206 @@ function animateStats() {
 
 
 /* =========================================================
-   14. FILTRO DE DOJOS POR REGIÓN Y COMUNA
+   18. FILTRO DE DOJOS POR REGIÓN Y COMUNA
    ========================================================= */
 
 function initSearch() {
 
     const regionFilter =
-        document.getElementById('regionFilter');
+        document.getElementById(
+            'regionFilter'
+        );
 
     const comunaFilter =
-        document.getElementById('comunaFilter');
+        document.getElementById(
+            'comunaFilter'
+        );
 
     const clearButton =
-        document.getElementById('clearDojoFilters');
+        document.getElementById(
+            'clearDojoFilters'
+        );
 
     const dojoCards =
-        document.querySelectorAll('.dojo-card');
+        document.querySelectorAll(
+            '.dojo-card'
+        );
 
     const noResults =
-        document.getElementById('dojoNoResults');
+        document.getElementById(
+            'dojoNoResults'
+        );
 
     const dojoCount =
-        document.getElementById('dojoCount');
-
+        document.getElementById(
+            'dojoCount'
+        );
 
     if (
+
         !regionFilter ||
         !comunaFilter ||
         !dojoCards.length
+
     ) {
         return;
     }
-
-
-    /* =====================================================
-       NORMALIZAR TEXTO
-       ===================================================== */
 
     function normalizeText(text) {
 
         return text
             .toString()
             .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
+            .replace(
+                /[\u0300-\u036f]/g,
+                ''
+            )
             .toLowerCase()
             .trim();
 
     }
-
-
-    /* =====================================================
-       GENERAR COMUNAS
-       ===================================================== */
 
     function updateComunaOptions() {
 
         const selectedRegion =
             regionFilter.value;
 
-
-        const comunas = new Map();
-
+        const comunas =
+            new Map();
 
         dojoCards.forEach(card => {
 
             const region =
-                card.dataset.region || '';
+                card.dataset.region ||
+                '';
 
             const comuna =
-                card.dataset.comuna || '';
+                card.dataset.comuna ||
+                '';
 
             if (
+
                 !comuna ||
+
                 (
-                    selectedRegion !== 'all' &&
-                    region !== selectedRegion
+                    selectedRegion !==
+                    'all' &&
+
+                    region !==
+                    selectedRegion
                 )
+
             ) {
                 return;
             }
 
-
-            /*
-             * Utilizamos el texto visible
-             * de la ubicación como nombre.
-             */
+            let label =
+                comuna
+                    .replace(
+                        /-/g,
+                        ' '
+                    )
+                    .replace(
+                        /\b\w/g,
+                        letter =>
+                            letter.toUpperCase()
+                    );
 
             const location =
                 card.querySelector(
                     '.dojo-detail div span'
                 );
 
-
-            let label =
-                comuna
-                    .replace(/-/g, ' ')
-                    .replace(/\b\w/g, letter =>
-                        letter.toUpperCase()
-                    );
-
-
             if (location) {
 
                 const text =
                     location.textContent.trim();
 
-                /*
-                 * Para mantener nombres como
-                 * "Maipú" o "Concepción".
-                 */
+                const firstPart =
+                    text.split(',')[0].trim();
 
-                if (text) {
+                if (
 
-                    const firstPart =
-                        text.split(',')[0].trim();
+                    normalizeText(
+                        firstPart
+                    ) ===
 
-                    if (
-                        normalizeText(firstPart) ===
-                        normalizeText(comuna.replace(/-/g, ' '))
-                    ) {
+                    normalizeText(
+                        comuna.replace(
+                            /-/g,
+                            ' '
+                        )
+                    )
 
-                        label = firstPart;
+                ) {
 
-                    }
+                    label =
+                        firstPart;
 
                 }
 
             }
 
-
-            comunas.set(comuna, label);
+            comunas.set(
+                comuna,
+                label
+            );
 
         });
 
-
-        comunaFilter.innerHTML = '';
-
+        comunaFilter.innerHTML =
+            '';
 
         const allOption =
-            document.createElement('option');
+            document.createElement(
+                'option'
+            );
 
-        allOption.value = 'all';
+        allOption.value =
+            'all';
 
         allOption.textContent =
             'Todas las comunas';
 
-        comunaFilter.appendChild(allOption);
+        comunaFilter.appendChild(
+            allOption
+        );
 
-
-        Array.from(comunas.entries())
-            .sort((a, b) =>
-                a[1].localeCompare(
-                    b[1],
-                    'es'
-                )
+        Array.from(
+            comunas.entries()
+        )
+            .sort(
+                (a, b) =>
+                    a[1].localeCompare(
+                        b[1],
+                        'es'
+                    )
             )
             .forEach(
                 ([value, label]) => {
 
                     const option =
-                        document.createElement('option');
+                        document.createElement(
+                            'option'
+                        );
 
-                    option.value = value;
+                    option.value =
+                        value;
 
-                    option.textContent = label;
+                    option.textContent =
+                        label;
 
-                    comunaFilter.appendChild(option);
+                    comunaFilter.appendChild(
+                        option
+                    );
 
                 }
             );
-
 
         comunaFilter.disabled =
             comunas.size === 0;
 
     }
-
-
-    /* =====================================================
-       FILTRAR
-       ===================================================== */
 
     function filterDojos() {
 
@@ -957,52 +1674,43 @@ function initSearch() {
         const selectedComuna =
             comunaFilter.value;
 
-
-        let visibleCount = 0;
-
+        let visibleCount =
+            0;
 
         dojoCards.forEach(card => {
 
-            const cardRegion =
-                card.dataset.region || '';
-
-            const cardComuna =
-                card.dataset.comuna || '';
-
-
             const matchesRegion =
-                selectedRegion === 'all' ||
-                cardRegion === selectedRegion;
+
+                selectedRegion ===
+                'all' ||
+
+                card.dataset.region ===
+                selectedRegion;
 
 
             const matchesComuna =
-                selectedComuna === 'all' ||
-                cardComuna === selectedComuna;
+
+                selectedComuna ===
+                'all' ||
+
+                card.dataset.comuna ===
+                selectedComuna;
 
 
             const shouldShow =
+
                 matchesRegion &&
                 matchesComuna;
 
 
+            card.hidden =
+                !shouldShow;
+
             if (shouldShow) {
-
-                card.hidden = false;
-
                 visibleCount++;
-
-            } else {
-
-                card.hidden = true;
-
             }
 
         });
-
-
-        /* =================================================
-           ACTUALIZAR CONTADOR
-           ================================================= */
 
         if (dojoCount) {
 
@@ -1010,11 +1718,6 @@ function initSearch() {
                 visibleCount;
 
         }
-
-
-        /* =================================================
-           SIN RESULTADOS
-           ================================================= */
 
         if (noResults) {
 
@@ -1025,47 +1728,24 @@ function initSearch() {
 
     }
 
-
-    /* =====================================================
-       CAMBIO DE REGIÓN
-       ===================================================== */
-
     regionFilter.addEventListener(
         'change',
         function () {
 
-            /*
-             * Cada vez que cambia la región,
-             * reconstruimos las comunas disponibles.
-             */
-
             updateComunaOptions();
 
-            comunaFilter.value = 'all';
+            comunaFilter.value =
+                'all';
 
             filterDojos();
 
         }
     );
-
-
-    /* =====================================================
-       CAMBIO DE COMUNA
-       ===================================================== */
 
     comunaFilter.addEventListener(
         'change',
-        function () {
-
-            filterDojos();
-
-        }
+        filterDojos
     );
-
-
-    /* =====================================================
-       LIMPIAR FILTROS
-       ===================================================== */
 
     if (clearButton) {
 
@@ -1088,31 +1768,29 @@ function initSearch() {
 
     }
 
-
-    /* =====================================================
-       ESTADO INICIAL
-       ===================================================== */
-
     updateComunaOptions();
 
     filterDojos();
 
 }
 
+
 /* =========================================================
-   15. DETECCIÓN DE DISPOSITIVO
+   19. DETECCIÓN DE DISPOSITIVO
    ========================================================= */
 
 function isMobile() {
 
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-        .test(navigator.userAgent);
+        .test(
+            navigator.userAgent
+        );
 
 }
 
 
 /* =========================================================
-   16. SMOOTH SCROLL
+   20. SMOOTH SCROLL
    ========================================================= */
 
 function smoothScroll(
@@ -1125,118 +1803,62 @@ function smoothScroll(
             target
         );
 
-
     if (!element) {
         return;
     }
-
-
-    const start =
-        window.scrollY;
-
 
     const navbar =
         document.querySelector(
             '.navbar'
         );
 
-
     const navbarHeight =
         navbar
             ? navbar.offsetHeight
             : 0;
 
-
     const end =
-        element.offsetTop -
+        element
+            .getBoundingClientRect()
+            .top +
+        window.scrollY -
         navbarHeight -
         20;
 
+    window.scrollTo({
 
-    const distance =
-        end - start;
-
-
-    let position =
-        start;
-
-
-    const increment =
-        distance /
-        (duration / 16);
-
-
-    function animate() {
-
-        position += increment;
-
-
-        if (
-            (increment > 0 &&
-             position < end) ||
-
-            (increment < 0 &&
-             position > end)
-        ) {
-
-            window.scrollTo(
-                0,
-                position
-            );
-
-            requestAnimationFrame(
-                animate
-            );
-
-        } else {
-
-            window.scrollTo(
+        top:
+            Math.max(
                 0,
                 end
-            );
+            ),
 
-        }
+        behavior:
+            'smooth'
 
-    }
-
-
-    animate();
+    });
 
 }
 
 
 /* =========================================================
-   17. OBTENER PARÁMETRO URL
+   21. OBTENER PARÁMETRO URL
    ========================================================= */
 
 function getURLParameter(name) {
 
-    const results =
-        new RegExp(
-            '[?|&]' +
-            name +
-            '=' +
-            '([^&;]+?)(&|#|;|$)'
-        ).exec(
-            location.search
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
-
-    if (!results) {
-        return '';
-    }
-
-
-    return decodeURIComponent(
-        results[1]
-            .replace(/\+/g, '%20')
-    );
+    return params.get(name) || '';
 
 }
 
 
 /* =========================================================
-   18. VALIDAR EMAIL
+   22. VALIDAR EMAIL
    ========================================================= */
 
 function validateEmail(email) {
@@ -1244,24 +1866,108 @@ function validateEmail(email) {
     const regex =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
-    return regex.test(email);
+    return regex.test(
+        email
+    );
 
 }
 
 
 /* =========================================================
-   19. COPIAR AL PORTAPAPELES
+   23. COPIAR AL PORTAPAPELES
    ========================================================= */
 
 function copyToClipboard(text) {
 
     if (
-        !navigator.clipboard
+
+        navigator.clipboard &&
+        window.isSecureContext
+
     ) {
 
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+
+                console.log(
+                    '✓ Copiado al portapapeles'
+                );
+
+            })
+            .catch(error => {
+
+                console.error(
+                    'Error al copiar:',
+                    error
+                );
+
+            });
+
+        return;
+
+    }
+
+    /*
+     * Fallback para HTTP/local.
+     */
+
+    const textarea =
+        document.createElement(
+            'textarea'
+        );
+
+    textarea.value =
+        text;
+
+    textarea.style.position =
+        'fixed';
+
+    textarea.style.opacity =
+        '0';
+
+    document.body.appendChild(
+        textarea
+    );
+
+    textarea.select();
+
+    try {
+
+        document.execCommand(
+            'copy'
+        );
+
+    } catch (error) {
+
         console.error(
-            'El navegador no permite copiar al portapapeles.'
+            'Error al copiar:',
+            error
+        );
+
+    }
+
+    textarea.remove();
+
+}
+
+/* =========================================================
+   23. VIRTUDES DEL BUSHIDO
+   Bootstrap Collapse
+   ========================================================= */
+
+function initBushidoVirtues() {
+
+    const virtuesContainer =
+        document.getElementById(
+            'bushidoVirtues'
+        );
+
+
+    if (!virtuesContainer) {
+
+        console.warn(
+            'No se encontró el contenedor #bushidoVirtues'
         );
 
         return;
@@ -1269,31 +1975,163 @@ function copyToClipboard(text) {
     }
 
 
-    navigator.clipboard
-        .writeText(text)
+    const triggers =
+        virtuesContainer.querySelectorAll(
+            '.bushido-virtue-trigger'
+        );
 
-        .then(() => {
 
-            console.log(
-                '✓ Copiado al portapapeles'
+    if (!triggers.length) {
+
+        console.warn(
+            'No se encontraron cards de virtudes.'
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Verificar que Bootstrap esté disponible.
+     */
+
+    if (
+        typeof bootstrap === 'undefined' ||
+        !bootstrap.Collapse
+    ) {
+
+        console.error(
+            'Bootstrap Collapse no está disponible.'
+        );
+
+        return;
+
+    }
+
+
+    triggers.forEach(trigger => {
+
+        const targetSelector =
+            trigger.getAttribute(
+                'data-bs-target'
             );
 
-        })
 
-        .catch(error => {
+        if (!targetSelector) {
+            return;
+        }
 
-            console.error(
-                'Error al copiar:',
-                error
+
+        const target =
+            document.querySelector(
+                targetSelector
             );
 
-        });
+
+        if (!target) {
+
+            console.warn(
+                `No se encontró ${targetSelector}`
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Crear la instancia Bootstrap.
+         *
+         * toggle: false evita que se abra
+         * automáticamente al inicializar.
+         */
+
+        bootstrap.Collapse.getOrCreateInstance(
+            target,
+            {
+                toggle: false
+            }
+        );
+
+
+        /*
+         * El listener se agrega explícitamente.
+         *
+         * Esto es importante porque las cards
+         * son cargadas dinámicamente mediante
+         * fetch() desde bushido.html.
+         */
+
+        trigger.addEventListener(
+            'click',
+            function (event) {
+
+                event.preventDefault();
+
+
+                const collapse =
+                    bootstrap.Collapse.getOrCreateInstance(
+                        target,
+                        {
+                            toggle: false
+                        }
+                    );
+
+
+                collapse.toggle();
+
+            }
+        );
+
+
+        /*
+         * Sincronizar atributos ARIA y clases.
+         */
+
+        target.addEventListener(
+            'show.bs.collapse',
+            function () {
+
+                trigger.classList.remove(
+                    'collapsed'
+                );
+
+                trigger.setAttribute(
+                    'aria-expanded',
+                    'true'
+                );
+
+            }
+        );
+
+
+        target.addEventListener(
+            'hide.bs.collapse',
+            function () {
+
+                trigger.classList.add(
+                    'collapsed'
+                );
+
+                trigger.setAttribute(
+                    'aria-expanded',
+                    'false'
+                );
+
+            }
+        );
+
+    });
+
+
+    console.log(
+        '✓ Virtudes del Bushido inicializadas.'
+    );
 
 }
-
-
 /* =========================================================
-   20. INICIALIZACIÓN GENERAL
+   24. INICIALIZACIÓN GENERAL
    ========================================================= */
 
 async function initKudoChile() {
@@ -1303,19 +2141,25 @@ async function initKudoChile() {
     );
 
 
-    /*
-     * PRIMERO:
-     * Cargar los partials.
-     */
+    /* =====================================================
+       1. TEMA
+       ===================================================== */
+
+    initTheme();
+
+
+    /* =====================================================
+       2. CARGAR PARTIALS
+       ===================================================== */
 
     await loadAllPartials();
 
 
-    /*
-     * SEGUNDO:
-     * Ahora que los partials existen
-     * podemos inicializar JavaScript.
-     */
+    /* =====================================================
+       3. INICIALIZAR COMPONENTES
+       ===================================================== */
+
+    initBushidoVirtues();
 
     initBackToTop();
 
@@ -1335,11 +2179,11 @@ async function initKudoChile() {
 
     initForms();
 
-    initTheme();
+  animateStats();
 
-    animateStats();
+initSearch();
 
-    initSearch();
+initBushidoVirtues();
 
 
     console.log(
@@ -1361,16 +2205,20 @@ async function initKudoChile() {
 
 
 /* =========================================================
-   21. EJECUTAR CUANDO ESTÉ LISTO EL DOCUMENTO
+   25. EJECUTAR CUANDO EL DOCUMENTO ESTÉ LISTO
    ========================================================= */
 
 if (
-    document.readyState === 'loading'
+    document.readyState ===
+    'loading'
 ) {
 
     document.addEventListener(
         'DOMContentLoaded',
-        initKudoChile
+        initKudoChile,
+        {
+            once: true
+        }
     );
 
 } else {

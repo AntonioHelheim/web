@@ -4,10 +4,8 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <!-- =====================================================
          FAVICON
@@ -48,7 +46,7 @@
           content="Kudo Chile">
 
     <meta name="robots"
-          content="index">
+          content="index, follow">
 
     <title>.:: Kudo Chile ::.</title>
 
@@ -57,6 +55,9 @@
 
     <meta name="description"
           content="Pagina web de la federacion Chilena de Kudo">
+
+    <meta name="keywords"
+          content="Kudo, Artes Marciales, Karate, Chile, Federación">
 
 
     <!-- =====================================================
@@ -71,6 +72,35 @@
 
     <meta property="og:title"
           content="KudoChile">
+
+    <meta property="og:description"
+          content="Pagina web de la federacion Chilena de Kudo">
+
+    <meta property="og:locale"
+          content="es_CL">
+
+
+    <!-- =====================================================
+         TWITTER CARD
+         ===================================================== -->
+
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Kudo Chile">
+
+    <meta name="twitter:description"
+          content="Pagina web de la federacion Chilena de Kudo">
+
+
+    <!-- =====================================================
+         NORMALIZE CSS
+         CARGAR PRIMERO - Antes de Bootstrap y estilos personalizados
+         ===================================================== -->
+
+    <link rel="stylesheet"
+          href="./css/normalize.css">
 
 
     <!-- =====================================================
@@ -115,41 +145,58 @@
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qB2+8N1dMyCT0xWzVeJ3+5YLSxW3HS88cJ+P+6ONt/v0WU63sNsJrBJyWGD8iconic+PGFnCWstQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
 
 
     <!-- =====================================================
-         CSS DEL PROYECTO
+         CSS DEL PROYECTO (ORDEN IMPORTANTE)
+         
+         1. Variables (define custom properties)
+         2. Global (resets, tipografía, utilidades base)
+         3. Secciones (componentes específicos)
+         4. Responsive (media queries)
+         5. Hero (si lo tienes separado)
          ===================================================== -->
 
     <link rel="stylesheet"
-          href="./css/variables.css">
+          href="./css/variables.css?v=2026-08-26-1554">
 
     <link rel="stylesheet"
-          href="./css/global.css">
+          href="./css/global.css?v=2026-08-26-1554">
 
     <link rel="stylesheet"
-          href="./css/navbar.css">
+          href="./css/navbar.css?v=2026-08-26-1554">
 
     <link rel="stylesheet"
-          href="./css/sections.css">
+          href="./css/sections.css?v=2026-08-26-1554">
 
     <link rel="stylesheet"
-          href="./css/responsive.css">
+          href="./css/hero.css?v=2026-08-26-1554">
 
-     <link rel="stylesheet"
-          href="./css/hero.css">
+    <link rel="stylesheet"
+          href="./css/responsive.css?v=2026-08-26-1554">
 
 </head>
 
 
 <body>
 
+    <!-- =====================================================
+         SKIP TO MAIN CONTENT
+         Accesibilidad - Permite saltar el navegador
+         ===================================================== -->
+
+    <a href="#main-content" class="skip-to-main">
+        Saltar al contenido principal
+    </a>
+
 
     <!-- =====================================================
          NAVBAR
-         Archivo:
-         /partials/navbar.html
+         Archivo: /partials/navbar.html
          ===================================================== -->
 
     <div id="navbar-container"></div>
@@ -238,7 +285,7 @@
 
 
     <!-- =====================================================
-         FEDERACIÓN + FOOTER
+         FEDERACIÓN 
          /partials/federation.html
          ===================================================== -->
 
@@ -246,19 +293,17 @@
 
 
     <!-- =====================================================
-         BOOTSTRAP JAVASCRIPT
+         FOOTER
+         /partials/footer.html
          ===================================================== -->
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <div id="footer-container"></div>
 
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
 
-    <!-- =====================================================
-         JAVASCRIPT DEL PROYECTO
-         ===================================================== -->
-
-    <script src="./js/js-main.js"></script>
+<script src="./js/js-main.js"></script>
 
 
 </body>
