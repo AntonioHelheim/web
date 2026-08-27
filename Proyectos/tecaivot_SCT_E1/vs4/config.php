@@ -21,6 +21,7 @@ $port     = (int) (getenv('DB_PORT') ?: '3306');
 $dbname   = getenv('DB_NAME') ?: 'tecaivot_SCT';
 $username = getenv('DB_USER') ?: 'root';
 $password = getenv('DB_PASS') ?: '';
+//http://localhost/phpmyadmin
 
 
 /* =========================================================
