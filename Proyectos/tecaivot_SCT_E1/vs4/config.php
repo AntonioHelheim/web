@@ -51,7 +51,7 @@ $isLocal = detectarEntornoLocal();
 
 if ($isLocal) {
 
-    // Desarrollo en equipo local (XAMPP/MAMP/Laragon + phpMyAdmin).
+    // Desarrollo en equipo local (XAMPP + phpMyAdmin).
     $host     = getenv('DB_HOST') ?: '127.0.0.1';
     $port     = (int) (getenv('DB_PORT') ?: '3306');
     $dbname   = getenv('DB_NAME') ?: 'tecaivot_SCT';
