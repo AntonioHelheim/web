@@ -1,0 +1,52 @@
+// Antes de dibujar el mapa necesitamos saber en cuál (overworld, route1...),
+// en qué posición, y si el jugador ya creó su personaje. Esta escena resuelve
+// todo eso primero y decide a qué escena mandar al jugador.
+class PreloadScene extends Phaser.Scene {
+  constructor() {
+    super('PreloadScene');
+  }
+
+  preload() {
+    // Aquí cargarías spritesheets/tilesets reales cuando los tengas:
+    //   this.load.spritesheet('player', 'assets/sprites/player.png', { frameWidth: 16, frameHeight: 16 });
+  }
+
+  async create() {
+    const defaultAppearance = { gender: 'boy', skinColor: '#f1c27d', hairColor: '#2c1b18', eyeColor: '#3b2415' };
+    let initial = {
+      mapKey: 'overworld',
+      x: MAPS.overworld.spawn.x,
+      y: MAPS.overworld.spawn.y,
+      party: [],
+      inventory: { pokeball: 5 },
+      appearance: defaultAppearance,
+      characterCreated: false,
+    };
+
+    try {
+      const res = await fetch('api/load_game.php', { credentials: 'include' });
+      if (res.ok) {
+        const data = await res.json();
+        if (MAPS[data.mapKey]) {
+          initial = {
+            mapKey: data.mapKey,
+            x: data.x,
+            y: data.y,
+            party: data.party || [],
+            inventory: data.inventory || { pokeball: 5 },
+            appearance: data.appearance || defaultAppearance,
+            characterCreated: !!data.characterCreated,
+          };
+        }
+      }
+    } catch (err) {
+      // Backend no disponible: arrancamos igual con valores por defecto.
+    }
+
+    if (initial.characterCreated) {
+      this.scene.start('OverworldScene', initial);
+    } else {
+      this.scene.start('CharacterCreationScene', initial);
+    }
+  }
+}
