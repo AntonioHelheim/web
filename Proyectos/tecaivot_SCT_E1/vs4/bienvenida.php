@@ -124,7 +124,7 @@ if ($hour < 12) {
                 </div>
 
                 <div class="col-md-4">
-                    <div class="feature-card h-100">
+                    <a href="gestiones.php" class="feature-card h-100 d-block text-decoration-none" aria-label="Ir a Gestiones">
                         <div class="feature-icon">
                             <i class="bi bi-clipboard-check"></i>
                         </div>
@@ -133,7 +133,7 @@ if ($hour < 12) {
                             Da seguimiento a tareas, incidentes y procesos
                             pendientes de tu equipo.
                         </p>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">
