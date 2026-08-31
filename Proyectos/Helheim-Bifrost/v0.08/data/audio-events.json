@@ -1,0 +1,36 @@
+{
+  "bgm": {
+    "first_login": { "file": "Acacia.ogg", "description": "Suena la primera vez que haces login en el sistema." },
+    "menu_toggle": { "file": "arcN.ogg", "description": "Al abrir y cerrar el menú." },
+    "after_login": { "file": "ATrapWithNoReturn.ogg", "description": "Usada luego de lograr hacer login en el sistema." },
+    "character_select_female": { "file": "choose-female.ogg", "description": "Suena si en la selección de personaje eliges femenino." },
+    "map_transition": { "file": "CrossingEternities.ogg", "description": "Usada para los cambios entre mapas." },
+    "temple_air": { "file": "elementair.ogg", "description": "Al llegar al templo del aire, o al escuchar/leer información sobre él." },
+    "temple_dark": { "file": "elementdark.ogg", "description": "Al llegar al templo de la oscuridad, o al escuchar/leer información sobre él." },
+    "temple_electricity": { "file": "elementelectricity.ogg", "description": "Al llegar al templo de la electricidad, o al escuchar/leer información sobre él." },
+    "temple_fire": { "file": "elementfire.ogg", "description": "Al llegar al templo del fuego, o al escuchar/leer información sobre él." },
+    "temple_ice": { "file": "elementice.ogg", "description": "Al llegar al templo de hielo, o al escuchar/leer información sobre él." },
+    "temple_light": { "file": "elementlight.ogg", "description": "Al llegar al templo de luz, o al escuchar/leer información sobre él." },
+    "temple_mind": { "file": "elementmaind.ogg", "description": "Al llegar al templo de la mente, o al escuchar/leer información sobre él." },
+    "temple_strength": { "file": "elementstrength.ogg", "description": "Al llegar al templo de la fuerza, o al escuchar/leer información sobre él." },
+    "temple_water": { "file": "elementwater.ogg", "description": "Al llegar al templo del agua, o al escuchar/leer información sobre él." },
+    "renca_theme": { "file": "inmymemory.ogg", "description": "Tema base para el Pueblo Origen / Renca." },
+    "fainted": { "file": "ko.ogg", "description": "Cuando tu personaje queda inconsciente por algún motivo." },
+    "lab": { "file": "Lab.ogg", "description": "Usada para edificios como laboratorios y centros educacionales." },
+    "mission_info": { "file": "MainMission.ogg", "description": "Al escuchar, recordar o leer detalles de alguna misión." },
+    "grandma_house": { "file": "secretlounge.ogg", "description": "Al visitar a tu abuela en su edificio." },
+    "pokemon_lore": { "file": "pokemon.ogg", "description": "Al escuchar/leer información sobre Pokémon." },
+    "mythical_pact": { "file": "SPECIALZ.ogg", "description": "Al pactar o jurar con alguno de tus animales míticos/mágicos." }
+  },
+  "se": {
+    "door": { "file": "Door.ogg", "description": "Al abrir y cerrar puertas de edificios." },
+    "hit_1": { "file": "hit1.ogg", "description": "Golpe básico nivel 1." },
+    "hit_2": { "file": "hit2.ogg", "description": "Golpe básico nivel 2." },
+    "hit_3": { "file": "hit3.ogg", "description": "Golpe básico nivel 3." }
+  },
+  "me": {
+    "alarm": { "file": "Alarm.ogg", "description": "Alarmas." },
+    "access_request": { "file": "SolicitudAcceso.ogg", "description": "Al pedir permiso para ingresar a algún edificio o espacio cerrado." },
+    "item_get_basic": { "file": "art-level1.ogg", "description": "Al obtener un objeto básico." }
+  }
+}

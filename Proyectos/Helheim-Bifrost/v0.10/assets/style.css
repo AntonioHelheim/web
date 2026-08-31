@@ -1,0 +1,364 @@
+/* Paleta clásica de la pantalla LCD de Game Boy */
+:root {
+  --gb-darkest: #0f380f;
+  --gb-dark: #306230;
+  --gb-light: #8bac0f;
+  --gb-lightest: #9bbc0f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--gb-darkest);
+  font-family: 'Press Start 2P', monospace;
+  color: var(--gb-lightest);
+}
+
+/* Para páginas de una sola caja centrada (el juego, acceso denegado).
+   La página de aterrizaje (index.php) NO la usa: necesita flujo normal
+   de documento para poder apilar navbar/hero/secciones/footer. */
+body.gb-centered-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.gb-shell {
+  background: var(--gb-dark);
+  border: 6px solid var(--gb-lightest);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 0 0 4px var(--gb-darkest);
+  max-width: 94vw;
+}
+
+.gb-title {
+  text-align: center;
+  font-size: 14px;
+  margin: 0 0 20px;
+  letter-spacing: 1px;
+}
+
+.gb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(260px, 78vw);
+}
+
+.gb-form label {
+  font-size: 9px;
+}
+
+.gb-form input {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 8px;
+  background: var(--gb-lightest);
+  border: 3px solid var(--gb-darkest);
+  color: var(--gb-darkest);
+}
+
+.gb-form button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 10px;
+  background: var(--gb-lightest);
+  border: 3px solid var(--gb-darkest);
+  color: var(--gb-darkest);
+  cursor: pointer;
+}
+
+.gb-form button:hover {
+  background: var(--gb-light);
+}
+
+.gb-switch {
+  font-size: 8px;
+  text-align: center;
+  margin-top: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.gb-error {
+  font-size: 8px;
+  color: #e0453f;
+  min-height: 16px;
+  text-align: center;
+}
+
+.gb-dev-code {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 8px;
+  text-align: center;
+  color: var(--gb-darkest);
+  background: var(--gb-lightest);
+  border: 2px dashed var(--gb-darkest);
+  border-radius: 4px;
+}
+
+.gb-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gb-darkest);
+  font-size: 7px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.gb-footer a {
+  color: var(--gb-lightest);
+  text-decoration: underline;
+}
+
+/* Overlay/panel genérico reutilizado por el menú en juego (game.php) y
+   por el modal de login (index.php) — misma caja con borde grueso, en
+   ambos casos se abre encima de todo con fondo oscuro semitransparente. */
+.gb-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.gb-panel {
+  position: relative;
+  background: var(--gb-dark);
+  border: 4px solid var(--gb-lightest);
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 0 0 4px var(--gb-darkest);
+  max-width: 94vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.gb-panel h2 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--gb-lightest);
+  font-family: 'Press Start 2P', monospace;
+}
+
+.gb-panel > button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 12px 16px;
+  width: 220px;
+  background: var(--gb-lightest);
+  border: 2px solid var(--gb-darkest);
+  border-radius: 4px;
+  color: var(--gb-darkest);
+  cursor: pointer;
+}
+
+.gb-panel > button:hover {
+  background: var(--gb-light);
+}
+
+.gb-panel > .gb-modal-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: auto;
+  padding: 4px 10px;
+  background: none;
+  border: none;
+  color: var(--gb-lightest);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.gb-panel > .gb-modal-close:hover {
+  background: none;
+  color: #fff;
+}
+
+#game-container {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 15 / 11; /* misma proporción que VIEWPORT_COLS x VIEWPORT_ROWS en main.js */
+  margin: 0 auto;
+}
+
+#game-container canvas {
+  image-rendering: pixelated;
+  border: 6px solid var(--gb-lightest);
+  border-radius: 8px;
+}
+
+.gb-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 10px;
+  font-size: 9px;
+}
+
+.gb-topbar button {
+  font-family: inherit;
+  font-size: 8px;
+  padding: 6px 10px;
+  background: var(--gb-lightest);
+  border: 2px solid var(--gb-darkest);
+  cursor: pointer;
+}
+
+/* ============================================================
+   Página de aterrizaje (index.php): navbar + hero + secciones.
+   Flujo normal de documento (body sin la clase gb-centered-page).
+   ============================================================ */
+
+.gb-btn {
+  font-family: inherit;
+  font-size: 9px;
+  padding: 10px 16px;
+  background: var(--gb-lightest);
+  border: 3px solid var(--gb-darkest);
+  color: var(--gb-darkest);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.gb-btn:hover {
+  background: var(--gb-light);
+}
+
+.gb-btn-ghost {
+  background: transparent;
+  color: var(--gb-lightest);
+  border-color: var(--gb-lightest);
+}
+
+.gb-btn-ghost:hover {
+  background: rgba(155, 188, 15, 0.15);
+}
+
+.gb-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 3px solid var(--gb-dark);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gb-navbar-brand {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.gb-hero {
+  text-align: center;
+  padding: 56px 20px 46px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.gb-hero-title {
+  font-size: clamp(26px, 8vw, 46px);
+  margin: 0 0 18px;
+  letter-spacing: 2px;
+  color: var(--gb-lightest);
+  text-shadow: 4px 4px 0 var(--gb-darkest);
+}
+
+.gb-hero-tagline {
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--gb-light);
+  margin: 0 0 30px;
+}
+
+.gb-hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gb-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.gb-section h2 {
+  font-size: 15px;
+  text-align: center;
+  margin: 0 0 20px;
+  color: var(--gb-lightest);
+}
+
+.gb-section > p {
+  font-size: 10px;
+  line-height: 1.9;
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--gb-light);
+}
+
+.gb-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.gb-feature-card {
+  background: var(--gb-dark);
+  border: 3px solid var(--gb-darkest);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.gb-feature-card h3 {
+  font-size: 10px;
+  margin: 0 0 10px;
+  color: var(--gb-lightest);
+}
+
+.gb-feature-card p {
+  font-size: 8px;
+  line-height: 1.8;
+  margin: 0;
+  color: var(--gb-light);
+}
+
+.gb-landing-footer-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 20px 30px;
+}
+
+.gb-notice {
+  max-width: 620px;
+  margin: 0 auto 20px;
+  padding: 10px 14px;
+  font-size: 8px;
+  text-align: center;
+  color: var(--gb-darkest);
+  background: var(--gb-lightest);
+  border: 2px solid var(--gb-darkest);
+  border-radius: 4px;
+}

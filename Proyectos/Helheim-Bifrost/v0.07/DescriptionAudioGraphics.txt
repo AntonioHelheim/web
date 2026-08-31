@@ -1,0 +1,141 @@
+Carpeta Audio: 
+
+Subcarpeta BGM:
+Acacia.ogg (suena la primera vez que haces login en el sistema)
+arcN.ogg (debe sonar al abrir y cerrar el menu)
+ATrapWithNoReturn.ogg (usada luego de que logras hacer login en el sistema)
+choose-female.ogg (usada para sonar en caso de que en la seleccion de personaje tomes femenino)
+CrossingEternities.ogg (usada para los cambios entre mapas)
+elementair.ogg (usado para cuando llegas al templo del aire o cuando escuchas/lees informacion sobre el)
+elementdark.ogg (usado para cuando llegas al templo de la oscuridad o cuando escuchas/lees informacion sobre el)
+elementelectricity.ogg (usado para cuando llegas al templo de la electricidad o cuando escuchas/lees informacion sobre el)
+elementfire.ogg (usado para cuando llegas al templo del fuego o cuando escuchas/lees informacion sobre el)
+elementice.ogg (usado para cuando llegas al templo de hielo o cuando escuchas/lees informacion sobre el)
+elementlight.ogg (usado para cuando llegas al templo de luz o cuando escuchas/lees informacion sobre el)
+elementmaind.ogg (usado para cuando llegas al templo de la mente o cuando escuchas/lees informacion sobre el)
+elementstrength.ogg (usado para cuando llegas al templo de la fuerza o cuando escuchas/lees informacion sobre el)
+elementwater.ogg (usado para cuando llegas al templo del agua o cuando escuchas/lees informacion sobre el)
+inmymemory.ogg (usado para mostrar como base para el pueblo origen/renca)
+ko.ogg (cuando tu personaje queda inconciente por algun motivo)
+Lab.ogg (usado para los edificios como laboratorios y centros educacionales)
+MainMission.ogg (cuando escuchas, recuerdas o lees detalles de alguna mision)
+secretlounge.ogg (cuando vas a visitar a tu abuela en su edificio)
+pokemon.ogg (usado para cuando escuchas/lees informacion sobre pokemon)
+SPECIALZ.ogg (cuando pactas o juras con alguno de tus animales miticos/magicos)
+
+Subcarpeta BGM:
+Door.ogg (usado para abrir y cerrar puertas de edificios)
+hit1.ogg (usado para el sonido de los golpes basicos nivel 1)
+hit2.ogg (usado para el sonido de los golpes basicos nivel 2)
+hit3.ogg (usado para el sonido de los golpes basicos nivel 3)
+
+Subcarpeta ME:
+Alarm.ogg (usado para alarmas)
+SolicitudAcceso.ogg (para pedir permiso para ingresar a algun edificio o espacio cerrado)
+art-level1.ogg (cuando obtienes un objeto basico)
+
+
+Carpeta Graphics (contiene Animations, Autotiles, Builds, Characters, Pictures:
+Subcarpeta Animations:
+bkgindex1.png (imagen que debe cargar de fondo en el index.php, esta debe transicionar con las bkgindex2.png)
+bkgindex2.png (imagen que debe cargar de fondo en el index.php, esta debe transicionar con las bkgindex1.png)
+clouds.png (secuencia de imagenes para las nubes en moviento, son 10 imagenes distribuidas en 2x5)
+
+Subcarpeta Autotiles;
+Black.png (rectangulo negro)
+floorcave.png (imagen de fondo para el piso del interior de las cuevas)
+floorsand.png (imagen de fondo para el piso tipo arena)
+Flowers1.png (imagenes de flores)
+Flowers2.png (imagenes de flores)
+water.png (secuencia de imagenes para el agua)
+
+Subcarpeta Builds(imagenes compuestas cada  una por 16 imagenes pequeñas cuadradas en 4x4 dentro del cuadro);
+doors1.png (para el efecto de abrir las puertas)
+doors2.png (para el efecto de abrir las puertas)
+doors3.png (para el efecto de abrir las puertas)
+Object boulder.png (como borde limite de mapa)
+Object tree.png (para el efecto de arbol en movimiento con el viento)
+
+Subcarpeta Characters (contiene animals, people, tree)
+(imagenes compuestas cada  una por 16 imagenes pequeñas cuadradas en 4x4 dentro del cuadro)(todas las imagenes siguen la misma logica para tener el efecto de movimiento cubierto cargando una sola imagen poero haciendo enfoque en distinto lugar de ella;
+    Subcarpeta animasl(contiene bats, bird, dogs, horse);
+        Subcarpeta bats;
+            bat001.png (imagen de un muercielago, primera fila es el muercilago avanzando lo que seria la flecha abajo, son 4 imagenes en linea, luego una segunda fila con lo que seria el muercielago avanzando mirando a la  izquierda, luego una tercera fila con lo que seria el muercielago mirando y avanzando a la derecha, luego en la cuarta fila de izquierda a derecha se ve como el muercielago se fuera alejando de nosotros lo que seria la flecha arriba, esto en un perfecto 4x4) Esta logica de imagenes aplica a toda la carpera Characters.
+        Subcarpeta bird;
+            bird001.png (imagen de una gaviota siguiendo la misma logica de imagenes en movimiento 4x4 dentro de una sola)
+        Subcarpeta dogs;
+            streetdog1.png, streetdog2-png, streetdog3-png y streetdog4.png (todos y cadao uno de ellos para representar perros callejeros deambulando por distintos sitios de la ciudad) tienen la misma logica de 4x4 cada uno.
+        Subcarpeta horse;
+            horse001.png y horse002.png (imaganes de macho y hembra de caballos, ambas imagenes por separado tienen la misma logica 4x4 para el movimiento)
+.... luego agregaremos mas animales por subcarpetas
+
+***De aqui en adelante tendremos un cambio importante en la jugabilidad porque los usuarios tendran que seleccionar entre un pool de imagenes de perfil, ya no tendran la opcion de elegir libremente el color, deberan seleccionar una de las opciones preestablecidas***
+    Subcarpeta people contiene (female, male, NPC);
+        Subcarpeta female;
+        001.png (imagen para el movimiento en caso de elegir chica y primera opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+        002.png (imagen para el movimiento en caso de elegir chica y segunda opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+        003.png (imagen para el movimiento en caso de elegir chica y tercera opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+
+        Subcarpeta male;
+        001.png (imagen para el movimiento en caso de elegir chico y primera opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+        002.png (imagen para el movimiento en caso de elegir chica y segunda opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+        003.png (imagen para el movimiento en caso de elegir chica y tercera opcion) la imagen considera el tipico 4x4 para el movimiento del usuario
+
+        Subcarpeta NPC;
+        001.png (imagen para persona randon de la calle la imagen considera el tipico 4x4 para el movimiento del usuario)
+        002.png (imagen para persona randon de la calle la imagen considera el tipico 4x4 para el movimiento del usuario)
+        003.png (imagen para persona randon de la calle la imagen considera el tipico 4x4 para el movimiento del usuario)
+
+
+Subcarpeta tree 
+        001.png (imagen para representar un arbol, la primera fila es el periodo mas pequeño como un brote son 4 imagenes, la segunda fila de 4 imagenes de del tallo algo mas grande, la tercera y cuarta fila siguen esta misma logica. las 4 imagenes en linea buscan dar la percepcion de vida del arbol al tener un pequeño movimiento por simulacion de viento al pasar por las 4 imagenes en linea. la idea de la imagen en este caso es para representar distantas etapas de la vida del mismo arbol.
+        002.png (sigue la misma logica anterior)
+        003.png (sigue la misma logica anterior)
+        004.png (sigue la misma logica anterior)
+        005.png (sigue la misma logica anterior)
+        006.png (sigue la misma logica anterior)
+
+Subcarpeta Pictures (contiene female y male
+        Subcarpeta female 
+        001.png (imagen para mostrar solo de cara en opcion de chica 1 - la imagen no considera nada mas que una imagen del rostro del personaje)
+        002.png (imagen para mostrar solo de cara en opcion de chica 2 - la imagen no considera nada mas que una imagen del rostro del personaje)
+        003.png (imagen para mostrar solo de cara en opcion de chica 3 - la imagen no considera nada mas que una imagen del rostro del personaje)
+
+        Subcarpeta male
+        001.png (imagen para mostrar solo de cara en opcion de chico 1 - la imagen no considera nada mas que una imagen del rostro del personaje)
+        002.png (imagen para mostrar solo de cara en opcion de chico 2 - la imagen no considera nada mas que una imagen del rostro del personaje)
+        003.png (imagen para mostrar solo de cara en opcion de chico 3 - la imagen no considera nada mas que una imagen del rostro del personaje)   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
