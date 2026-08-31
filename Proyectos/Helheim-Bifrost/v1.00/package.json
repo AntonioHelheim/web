@@ -1,0 +1,12 @@
+{
+  "name": "bifrost",
+  "private": true,
+  "description": "Bifrost — juego 2D estilo Game Boy (multijugador). Este package.json no instala nada (0 dependencias) — solo da un comando único para correr las pruebas que ya existen en scripts/.",
+  "scripts": {
+    "test": "node scripts/check-maps.js && node scripts/test-battle-rules.js && php scripts/test-wild-battles.php && php scripts/test-csrf-and-rate-limit.php",
+    "test:maps": "node scripts/check-maps.js",
+    "test:battle-rules": "node scripts/test-battle-rules.js",
+    "test:wild-battles": "php scripts/test-wild-battles.php",
+    "test:csrf": "php scripts/test-csrf-and-rate-limit.php"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "_convencion_grilla_personajes": {
+    "descripcion": "La mayoría de las imágenes en characters/ (animales, personas, NPCs) siguen esta grilla 4x4 (16 cuadros pequeños dentro de una sola imagen): cada FILA son 4 cuadros de la animación de movimiento en una dirección.",
+    "filas": { "0": "down (avanzando hacia la cámara)", "1": "left", "2": "right", "3": "up (alejándose de la cámara)" },
+    "columnas": 4,
+    "excepcion": "characters/tree/ NO sigue esta convención — ver su propia entrada más abajo."
+  },
+  "_convencion_grilla_builds": {
+    "descripcion": "Las imágenes en Builds/ también vienen en grillas 4x4 (16 cuadros), pero representan una animación de un solo objeto (puerta abriéndose, árbol meciéndose), no direcciones de movimiento — el orden exacto de los 16 cuadros se define al integrar cada una."
+  },
+
+  "animations": {
+    "index_background_a": { "file": "Animations/bkgindex1.png", "role": "fondo de index.php", "description": "Transiciona con index_background_b (fundido cruzado, ver plan en ROADMAP-ARQUITECTURA.md)." },
+    "index_background_b": { "file": "Animations/bkgindex2.png", "role": "fondo de index.php", "description": "Transiciona con index_background_a." },
+    "clouds": { "file": "Animations/clouds.png", "role": "nubes en movimiento", "description": "10 cuadros en grilla 2 columnas x 5 filas.", "grid": { "cols": 2, "rows": 5, "frames": 10 } }
+  },
+
+  "autotiles": {
+    "black": { "file": "Autotiles/Black.png", "role": "relleno sólido negro" },
+    "floor_cave": { "file": "Autotiles/floorcave.png", "role": "piso — interior de cuevas" },
+    "floor_sand": { "file": "Autotiles/floorsand.png", "role": "piso — arena" },
+    "flowers_1": { "file": "Autotiles/Flowers1.png", "role": "decoración — flores, variante 1" },
+    "flowers_2": { "file": "Autotiles/Flowers2.png", "role": "decoración — flores, variante 2" },
+    "water": { "file": "Autotiles/water.png", "role": "agua animada" }
+  },
+
+  "builds": {
+    "doors_1": { "file": "Builds/doors1.png", "role": "puerta abriéndose, variante 1", "grid": { "cols": 4, "rows": 4 } },
+    "doors_2": { "file": "Builds/doors2.png", "role": "puerta abriéndose, variante 2", "grid": { "cols": 4, "rows": 4 } },
+    "doors_3": { "file": "Builds/doors3.png", "role": "puerta abriéndose, variante 3", "grid": { "cols": 4, "rows": 4 } },
+    "boulder": { "file": "Builds/Object boulder.png", "role": "roca — borde/límite de mapa", "grid": { "cols": 4, "rows": 4 } },
+    "tree_wind": { "file": "Builds/Object tree.png", "role": "árbol con efecto de viento", "grid": { "cols": 4, "rows": 4 } }
+  },
+
+  "characters": {
+    "animals": {
+      "bats": [
+        { "key": "bat_001", "file": "Characters/animals/bats/bat001.png" }
+      ],
+      "bird": [
+        { "key": "bird_001", "file": "Characters/animals/bird/bird001.png", "note": "gaviota" }
+      ],
+      "dogs": [
+        { "key": "streetdog_1", "file": "Characters/animals/dogs/streetdog1.png", "note": "perro callejero" },
+        { "key": "streetdog_2", "file": "Characters/animals/dogs/streetdog2.png", "note": "perro callejero" },
+        { "key": "streetdog_3", "file": "Characters/animals/dogs/streetdog3.png", "note": "perro callejero" },
+        { "key": "streetdog_4", "file": "Characters/animals/dogs/streetdog4.png", "note": "perro callejero" }
+      ],
+      "horse": [
+        { "key": "horse_001", "file": "Characters/animals/horse/horse001.png", "note": "macho" },
+        { "key": "horse_002", "file": "Characters/animals/horse/horse002.png", "note": "hembra" }
+      ]
+    },
+
+    "people": {
+      "_nota": "Cambio de jugabilidad (31-08-2026): el jugador elige UNA de estas 3 opciones por género en vez de un color libre. Ver sql/v1.1-appearance-presets-migration.sql y CharacterCreationScene.js.",
+      "female": [
+        { "key": "female_1", "file": "Characters/people/female/001.png", "estado": "pendiente — se subió pero se perdió por choque de nombre con male/001.png (mismo nombre de archivo); hay que volver a mandarla" },
+        { "key": "female_2", "file": "Characters/people/female/002.png" },
+        { "key": "female_3", "file": "Characters/people/female/003.png" }
+      ],
+      "male": [
+        { "key": "male_1", "file": "Characters/people/male/001.png", "estado": "cargado (31-08-2026), textura Phaser people_male_1", "grid": { "cols": 4, "rows": 4, "frameWidth": 32, "frameHeight": 48, "dimensionesTotales": "128x192" } },
+        { "key": "male_2", "file": "Characters/people/male/002.png" },
+        { "key": "male_3", "file": "Characters/people/male/003.png" }
+      ],
+      "npc": [
+        { "key": "npc_1", "file": "Characters/people/NPC/001.png" },
+        { "key": "npc_2", "file": "Characters/people/NPC/002.png" },
+        { "key": "npc_3", "file": "Characters/people/NPC/003.png" }
+      ]
+    },
+
+    "tree": {
+      "_nota": "NO sigue la convención de direcciones — cada fila es una etapa de crecimiento (brote -> tallo -> ... ), y las 4 columnas de cada fila son un pequeño ciclo de balanceo por viento (no direcciones de movimiento). 6 árboles distintos, cada uno con su propia progresión completa.",
+      "arboles": [
+        { "key": "tree_001", "file": "Characters/tree/001.png" },
+        { "key": "tree_002", "file": "Characters/tree/002.png" },
+        { "key": "tree_003", "file": "Characters/tree/003.png" },
+        { "key": "tree_004", "file": "Characters/tree/004.png" },
+        { "key": "tree_005", "file": "Characters/tree/005.png" },
+        { "key": "tree_006", "file": "Characters/tree/006.png" }
+      ]
+    }
+  },
+
+  "pictures": {
+    "_nota": "Retratos de solo rostro (sin cuerpo), para UI — ej. la vista previa en CharacterCreationScene o una futura ventana de diálogo.",
+    "female": [
+      { "key": "face_female_1", "file": "Pictures/female/001.png" },
+      { "key": "face_female_2", "file": "Pictures/female/002.png" },
+      { "key": "face_female_3", "file": "Pictures/female/003.png" }
+    ],
+    "male": [
+      { "key": "face_male_1", "file": "Pictures/male/001.png" },
+      { "key": "face_male_2", "file": "Pictures/male/002.png" },
+      { "key": "face_male_3", "file": "Pictures/male/003.png" }
+    ]
+  }
+}
