@@ -22,7 +22,7 @@
 // de "hice el cambio pero se sigue viendo/comportando igual". Al vivir
 // acá (un solo lugar), ya no hay riesgo de subirlo en un archivo y
 // olvidarlo en otro.
-$ASSET_VERSION = '2026-08-31-4';
+$ASSET_VERSION = '2026-08-31-5';
 
 const SESSION_IDLE_TIMEOUT = 1800; // 30 minutos de inactividad -> cierre automático
 

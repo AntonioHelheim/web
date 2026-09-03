@@ -24,29 +24,37 @@ class PreloadScene extends Phaser.Scene {
     this.load.json('speciesData', `data/species.json?v=${window.BIFROST_ASSET_VERSION || ''}`);
 
     // Sprites de personaje reales — se intentan cargar las 6
-    // combinaciones posibles (PEOPLE_SPRITE_COMBOS, en CharacterVisual.js).
-    // Las que no tengan archivo real todavía (ver PLAN-GRAPHICS-AUDIO.md
-    // para el estado exacto) van a fallar la carga con un 404 — es
-    // esperado y no rompe nada: Phaser sigue con el resto de la cola sin
-    // problema, y Player.js cae al dibujo a mano para esas
-    // automáticamente. En cuanto subas un archivo nuevo con el nombre
-    // correcto, empieza a usarse solo, sin tocar código de nuevo.
+    // combinaciones posibles (PEOPLE_SPRITE_COMBOS, en CharacterVisual.js),
+    // cada una con SU PROPIO tamaño de cuadro confirmado (no todas miden
+    // lo mismo — ver la nota en PEOPLE_SPRITE_COMBOS). Las que no tengan
+    // archivo real todavía (ver PLAN-GRAPHICS-AUDIO.md para el estado
+    // exacto) van a fallar la carga con un 404 — es esperado y no rompe
+    // nada: Phaser sigue con el resto de la cola sin problema, y
+    // Player.js cae al dibujo a mano para esas automáticamente. En
+    // cuanto subas un archivo nuevo con el nombre correcto, empieza a
+    // usarse solo, sin tocar código de nuevo.
     const v = window.BIFROST_ASSET_VERSION || '';
-    PEOPLE_SPRITE_COMBOS.forEach(({ folder, preset }) => {
+    PEOPLE_SPRITE_COMBOS.forEach(({ folder, preset, frameWidth, frameHeight }) => {
       const key = `people_${folder}_${preset}`;
       const path = `graphics/characters/people/${folder}/00${preset}.png`;
-      this.load.spritesheet(key, `${path}?v=${v}`, { frameWidth: 32, frameHeight: 48 });
+      this.load.spritesheet(key, `${path}?v=${v}`, { frameWidth, frameHeight });
     });
   }
 
   async create() {
     SPECIES = this.cache.json.get('speciesData') || {};
-    // Se registran las 4 animaciones de caminata de cada sprite real que
-    // se haya logrado cargar arriba — defineCharacterAnimations() no hace
-    // nada si esa textura en particular no existe, así que es seguro
-    // llamarla para las 6 aunque todavía falten varias.
+    // Se valida cada spritesheet cargado arriba (¿tiene los 16 cuadros
+    // esperados, o el archivo real no calzaba con el tamaño supuesto?) y
+    // se registran las 4 animaciones de caminata de los que sí calzan —
+    // ambas funciones no hacen nada si esa textura en particular no
+    // existe o no pasó la validación, así que es seguro llamarlas para
+    // las 6 aunque todavía falten varias o alguna tenga un tamaño
+    // distinto al esperado.
     PEOPLE_SPRITE_COMBOS.forEach(({ folder, preset }) => {
-      defineCharacterAnimations(this, `people_${folder}_${preset}`);
+      const key = `people_${folder}_${preset}`;
+      if (validateCharacterSpritesheet(this, key)) {
+        defineCharacterAnimations(this, key);
+      }
     });
 
     const defaultAppearance = { gender: 'boy', preset: 1, skinColor: '#f1c27d', hairColor: '#2c1b18', eyeColor: '#3b2415' };

@@ -1,23 +1,27 @@
 # Bifrost — juego 2D estilo Game Boy (multijugador)
 
-**v0.01** — primera versión funcional completa: login por código,
-personaje personalizable, multijugador, batallas silvestres y PvP, y el
-mapa principal ya inspirado en Renca (ver más abajo).
+## 🌱 v1.00-seed (31-08-2026) — punto de retorno
 
-**v1.0-seed de base de datos (31-08-2026):** `sql/schema.sql` quedó
-consolidado como línea base limpia — sin la tabla `species` (redundante,
-ver `data/species.json`), con índices en las consultas más frecuentes,
-con la relación entre retos y batallas PvP declarada como FK, y sin
-ningún nombre relacionado a marcas registradas en el proyecto (se
-renombró la clave interna del inventario). Si tu base es de antes de esta
-fecha, `sql/v1.0-seed-migration.sql` la actualiza sin perder cuentas ni
-progreso — ver la sección de instalación más abajo.
+Primera versión completa y estable de todo el proyecto — login,
+personaje, mundo, multijugador y batallas funcionando de punta a punta.
+Se marca **"seed"** porque el arte real (gráficos/audio) recién empieza a
+integrarse; todo lo demás ya está sólido. Ver **[CHANGELOG.md](./CHANGELOG.md)**
+para el detalle completo de qué incluye este hito, y
+**[VERSION](./VERSION)** para el marcador de versión actual.
+
+Este es el punto al que volver si algo sale mal en trabajo futuro — está
+etiquetado en git como `v1.00-seed` (`git checkout v1.00-seed` para
+volver exactamente a este estado).
 
 > 📋 **[ROADMAP-ARQUITECTURA.md](./ROADMAP-ARQUITECTURA.md)** — lista
 > priorizada de buenas prácticas de arquitectura a aplicar en las próximas
 > versiones (tilemaps reales, separar reglas del juego de Phaser, batallas
 > silvestres autoritativas en servidor, etc.). Consultar en cada versión
 > que revisemos de aquí en adelante.
+>
+> 🎨 **[PLAN-GRAPHICS-AUDIO.md](./PLAN-GRAPHICS-AUDIO.md)** — plan técnico
+> para integrar los archivos reales de `graphics/`/`audio/` a medida que
+> vayan llegando.
 
 Proyecto base: Phaser 3 (frontend) + PHP/MySQL (backend de cuentas, guardado
 y multijugador). Todo el arte del juego se dibuja con formas de Phaser
@@ -317,7 +321,7 @@ la ventana o girar el teléfono.
 > No se tocó la base de datos, así que **no** hace falta importar ninguna
 > migración nueva — solo vuelve a copiar/subir los archivos `.js` actualizados.
 
-## El mapa principal está inspirado en Renca, a escala real (v0.01)
+## El mapa principal está inspirado en Renca, a escala real
 
 A partir de esta versión, el mapa "Pueblo Origen" (`overworld` en el
 código) representa la comuna de **Renca**, en el sector norponiente de
@@ -558,6 +562,8 @@ bifrost/
 ├── session_bootstrap.php  # Sesión centralizada: cookies seguras, CSRF, $ASSET_VERSION
 ├── ROADMAP-ARQUITECTURA.md  # Buenas prácticas de arquitectura, priorizadas — leer antes de tocar código
 ├── PLAN-GRAPHICS-AUDIO.md   # Plan técnico para integrar graphics/audio reales cuando existan
+├── CHANGELOG.md             # Qué incluye cada versión — ver v1.00-seed para el hito actual
+├── VERSION                  # Marcador simple de versión actual (1.00-seed)
 ├── package.json           # 0 dependencias — solo `npm test` para correr scripts/
 ├── assets/style.css      # Estilos retro compartidos
 ├── data/                    # Única fuente de datos (ítem 4 del roadmap) — ver data/README.md

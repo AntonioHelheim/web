@@ -27,16 +27,53 @@ const APPEARANCE_PRESETS = {
 // 6 rutas; las que no tengan archivo real todavía simplemente no quedan
 // registradas como textura (Phaser sigue cargando el resto sin
 // problema), y Player.js cae al dibujo a mano para esas automáticamente.
-// Para agregar una combinación nueva más adelante (ej. NPCs), solo hay
-// que sumarla acá — nada más del código necesita cambiar.
+//
+// OJO — frameWidth/frameHeight es POR ARCHIVO, no un tamaño único para
+// todos: el masculino confirmado es 128×192px (32×48 por cuadro) y el
+// femenino confirmado es 256×256px (64×64 por cuadro) — tamaños de
+// cuadro distintos entre sí. Usar el tamaño equivocado para cargar un
+// archivo hace que Phaser lo recorte mal sin avisar (así se veía "raro"
+// el 31-08-2026 al probar un perfil que no fuera male/001). Las 4
+// combinaciones sin archivo confirmado todavía usan el tamaño de su
+// propia carpeta como mejor estimación — se corrige en cuanto se
+// confirme cada archivo real, y mientras tanto
+// validateCharacterSpritesheet() (más abajo) evita que un tamaño
+// equivocado se use silenciosamente: si no calza, cae al dibujo a mano
+// en vez de mostrar algo mal recortado.
 const PEOPLE_SPRITE_COMBOS = [
-  { folder: 'male', preset: 1 },
-  { folder: 'male', preset: 2 },
-  { folder: 'male', preset: 3 },
-  { folder: 'female', preset: 1 },
-  { folder: 'female', preset: 2 },
-  { folder: 'female', preset: 3 },
+  { folder: 'male', preset: 1, frameWidth: 32, frameHeight: 48 }, // confirmado 31-08-2026 (128x192)
+  { folder: 'male', preset: 2, frameWidth: 32, frameHeight: 48 }, // sin confirmar — misma estimación que male_1
+  { folder: 'male', preset: 3, frameWidth: 32, frameHeight: 48 }, // sin confirmar — misma estimación que male_1
+  { folder: 'female', preset: 1, frameWidth: 64, frameHeight: 64 }, // confirmado 31-08-2026 (256x256)
+  { folder: 'female', preset: 2, frameWidth: 64, frameHeight: 64 }, // sin confirmar — misma estimación que female_1
+  { folder: 'female', preset: 3, frameWidth: 64, frameHeight: 64 }, // sin confirmar — misma estimación que female_1
 ];
+
+// Verifica que un spritesheet de personaje ya cargado tenga exactamente
+// 16 cuadros (4x4). Si el frameWidth/frameHeight usado para cargarlo no
+// calza con las dimensiones reales del archivo (ej. un archivo nuevo con
+// un tamaño distinto al que se supuso en PEOPLE_SPRITE_COMBOS), Phaser
+// lo recorta igual pero mal, sin lanzar ningún error — el resultado se
+// ve "raro" en vez de dar un aviso claro. Si no calza, se quita la
+// textura (scene.textures.remove) para que scene.textures.exists()
+// pase a dar false en el resto del código sin tener que agregar
+// chequeos repetidos — así cae al dibujo a mano en vez de mostrar algo
+// mal recortado.
+function validateCharacterSpritesheet(scene, key, expectedFrames = 16) {
+  if (!scene.textures.exists(key)) return false;
+  const frameNames = scene.textures.get(key).getFrameNames();
+  if (frameNames.length !== expectedFrames) {
+    console.warn(
+      `Bifrost: "${key}" no tiene ${expectedFrames} cuadros (tiene ${frameNames.length}) — `
+      + 'sus dimensiones reales no calzan con el frameWidth/frameHeight configurado '
+      + 'en PEOPLE_SPRITE_COMBOS. Se usa el dibujo a mano en su lugar hasta confirmar '
+      + 'el tamaño real del archivo.'
+    );
+    scene.textures.remove(key);
+    return false;
+  }
+  return true;
+}
 
 // === Sprites reales de personaje (ver PLAN-GRAPHICS-AUDIO.md) ===
 //

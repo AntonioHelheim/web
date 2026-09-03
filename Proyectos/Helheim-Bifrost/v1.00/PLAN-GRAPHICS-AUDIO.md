@@ -16,10 +16,9 @@ el renderizado (hoy: muñeco dibujado con colores del preset) por el
 sprite real — el dato guardado (género + número de opción) no cambia.
 
 **✅ Primera capa real implementada (31-08-2026):** `Characters/people/male/001.png`
-(imagen conceptual de prueba, no arte final) ya está en el proyecto
-(`graphics/characters/people/male/001.png`, 128×192px confirmado, grilla
-4×4 = 32×48px por cuadro) y **`Player.js` ya lo usa de verdad** — no solo
-el plan:
+y `Characters/people/female/001.png` (imágenes conceptuales de prueba, no
+arte final) ya están en el proyecto y **`Player.js` ya los usa de
+verdad** — no solo el plan:
 - `PreloadScene.js` intenta cargar las **6 combinaciones completas**
   (`PEOPLE_SPRITE_COMBOS` en `CharacterVisual.js`: male/female × 1/2/3) y
   registra sus animaciones — las que no tienen archivo real todavía
@@ -37,21 +36,50 @@ el plan:
   opción 1" se ve con el sprite real también para los demás jugadores.
 - La vista previa en `CharacterCreationScene` también usa el sprite real
   cuando existe.
-- **Probado con un mock de la API de Phaser** (sin navegador real): 5
-  escenarios — sprite disponible, sprite no disponible (cae al dibujo),
-  cambio de dirección, reproducir/detener la animación de caminata al
-  moverse, y cambiar a un preset sin sprite real desde uno que sí tenía.
-  Los 5 pasaron. Además se verificaron programáticamente las 6 rutas
-  generadas por `PEOPLE_SPRITE_COMBOS` — coinciden exactas con la
-  convención de nombres esperada.
+- **Probado con un mock de la API de Phaser** (sin navegador real): 6
+  escenarios en total, incluyendo el cálculo correcto de posición
+  vertical con dos tamaños de cuadro distintos.
 
-**Estado real de los 6 archivos (31-08-2026):** solo existe
-`male/001.png` (imagen conceptual de prueba). Los otros 5
-(`male/002.png`, `male/003.png`, `female/001.png`, `female/002.png`,
-`female/003.png`) todavía no se subieron — `female/001.png` en
-particular se mandó pero se perdió por un choque de nombre con
-`male/001.png` (mismo nombre de archivo en la subida). El código ya está
-listo para las 6; solo falta que los archivos existan.
+**🐛 Bug real encontrado y corregido (31-08-2026):** el masculino
+(`male/001.png`) mide 128×192px (32×48px por cuadro) y el femenino
+(`female/001.png`) mide **256×256px (64×64px por cuadro)** — tamaños de
+cuadro totalmente distintos entre sí, no un tamaño único para todo
+`Characters/people/`. La primera versión de este sistema cargaba las 6
+combinaciones asumiendo siempre 32×48px — al probar un perfil que no
+fuera `male/001` con esa suposición equivocada, Phaser recortaba el
+archivo real en pedazos incorrectos sin avisar (con la imagen femenina,
+habría generado 40 "cuadros" de 8×5 en vez de los 16 esperados de 4×4),
+lo que se veía como comportamiento "raro" sin ningún error claro en
+consola.
+
+**Corrección aplicada:**
+1. `PEOPLE_SPRITE_COMBOS` ahora define `frameWidth`/`frameHeight` **por
+   combinación**, no un tamaño único global — 32×48 para las 3 del
+   masculino (confirmado con `male/001.png`), 64×64 para las 3 del
+   femenino (confirmado con `female/001.png`). Las 4 combinaciones sin
+   archivo confirmado todavía (`male_2`, `male_3`, `female_2`,
+   `female_3`) usan el tamaño de su propia carpeta como mejor estimación
+   — se corrige en cuanto llegue cada archivo real.
+2. **Red de seguridad nueva:** `validateCharacterSpritesheet()` revisa,
+   después de cargar cada spritesheet, que haya resultado en exactamente
+   16 cuadros. Si no calza (mismo problema que causó el bug, o cualquier
+   archivo futuro con un tamaño distinto al supuesto), se quita esa
+   textura antes de que el resto del código pueda usarla — cae al dibujo
+   a mano automáticamente en vez de mostrar algo mal recortado. Probado
+   con un mock que reproduce el escenario exacto del bug real (256×256
+   cargado con el tamaño del masculino → 40 cuadros detectados
+   correctamente como inválidos).
+
+**Estado real de los 6 archivos (31-08-2026):** `male/001.png` (128×192)
+y `female/001.png` (256×256) confirmados y funcionando. Los otros 4
+(`male/002.png`, `male/003.png`, `female/002.png`, `female/003.png`)
+todavía no se subieron — el código ya está listo para las 6 (con la red
+de seguridad activa), solo falta que los archivos existan. **Importante
+para cuando lleguen:** avisa si alguno tiene un tamaño de cuadro distinto
+a los ya confirmados de su propia carpeta (32×48 para male, 64×64 para
+female) — la validación los va a proteger de todos modos, pero corregir
+el tamaño exacto en `PEOPLE_SPRITE_COMBOS` es lo que hace que en verdad
+se vean (no solo que no se rompan).
 
 ## Antes de escribir código de carga real
 
@@ -125,24 +153,35 @@ punto de entrada para el ítem 7 del roadmap (máquinas de estado: IDLE,
 PATROL) ya con sprite real en vez de esperar más.
 
 ## 5. `Characters/people/` — jugador y NPCs humanos
-**🔶 Parcialmente implementado — ver nota al inicio del documento.**
+**🔶 2 de 6 confirmados — ver nota al inicio del documento.**
 
 female/male (3 opciones cada uno) + NPC (3 variantes). Reemplaza
-`buildCharacterVisual()` de `CharacterVisual.js`. Ya implementado para
-`male/001.png` (imagen conceptual de prueba); falta repetir para las
-otras 5 combinaciones cuando lleguen sus archivos — el mecanismo ya
-probado es:
-1. `PreloadScene.js` carga el spritesheet (`this.load.spritesheet`) y
-   registra sus 4 animaciones (`defineCharacterAnimations()`). Falta
-   agregar una línea por cada archivo nuevo que llegue.
-2. `Player.js` y `OverworldScene.createRemotePlayer()` detectan solos
+`buildCharacterVisual()` de `CharacterVisual.js`. Confirmados y
+funcionando: `male/001.png` (128×192, 32×48/cuadro) y `female/001.png`
+(256×256, 64×64/cuadro — **tamaño de cuadro distinto al masculino**, no
+asumir que todos miden lo mismo). Falta repetir para las otras 4
+combinaciones cuando lleguen sus archivos — el mecanismo ya probado es:
+1. `PreloadScene.js` carga el spritesheet (`this.load.spritesheet`) con
+   el `frameWidth`/`frameHeight` de `PEOPLE_SPRITE_COMBOS`
+   (`CharacterVisual.js`) y registra sus 4 animaciones
+   (`defineCharacterAnimations()`) — ya recorre las 6 combinaciones en un
+   bucle, así que un archivo nuevo con el nombre correcto no necesita
+   ninguna línea de código adicional. Sí hay que **actualizar el
+   `frameWidth`/`frameHeight` de esa combinación en `PEOPLE_SPRITE_COMBOS`**
+   una vez confirmadas las dimensiones reales del archivo (por ahora usan
+   el mismo tamaño que el preset 1 de su carpeta como estimación).
+2. `validateCharacterSpritesheet()` protege contra que un tamaño
+   equivocado se use silenciosamente — si no calza, cae al dibujo a mano
+   en vez de mostrar algo mal recortado (ver el bug real que motivó
+   esto, arriba).
+3. `Player.js` y `OverworldScene.createRemotePlayer()` detectan solos
    (`scene.textures.exists(...)`) si existe sprite real para esa
    combinación género+preset — no hace falta tocarlos de nuevo por cada
    archivo nuevo, ya generalizan automáticamente.
-3. **El dato guardado no cambia** — sigue siendo `gender + preset (1-3)`,
+4. **El dato guardado no cambia** — sigue siendo `gender + preset (1-3)`,
    por eso se implementó ya el selector de presets sin esperar los
    archivos.
-4. `CharacterVisual.js` (el dibujo a mano) queda como *fallback* — si el
+5. `CharacterVisual.js` (el dibujo a mano) queda como *fallback* — si el
    sprite no carga por algún motivo, seguir mostrando el muñeco dibujado
    en vez de nada, mismo espíritu que el resto del proyecto ("degradar
    con gracia" en vez de romper).

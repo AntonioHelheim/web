@@ -55,7 +55,7 @@
     "people": {
       "_nota": "Cambio de jugabilidad (31-08-2026): el jugador elige UNA de estas 3 opciones por género en vez de un color libre. Ver sql/v1.1-appearance-presets-migration.sql y CharacterCreationScene.js.",
       "female": [
-        { "key": "female_1", "file": "Characters/people/female/001.png", "estado": "pendiente — se subió pero se perdió por choque de nombre con male/001.png (mismo nombre de archivo); hay que volver a mandarla" },
+        { "key": "female_1", "file": "Characters/people/female/001.png", "estado": "cargado (31-08-2026), textura Phaser people_female_1", "grid": { "cols": 4, "rows": 4, "frameWidth": 64, "frameHeight": 64, "dimensionesTotales": "256x256" } },
         { "key": "female_2", "file": "Characters/people/female/002.png" },
         { "key": "female_3", "file": "Characters/people/female/003.png" }
       ],
