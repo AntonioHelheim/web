@@ -9,18 +9,13 @@
  */
 
 require __DIR__ . '/../../session_bootstrap.php';
-require __DIR__ . '/../../lib/db.php';
-require __DIR__ . '/../../lib/auth.php';
+require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/EmpresaRepository.php';
 
-requireRole($pdo, ['administrador', 'cliente', 'trabajador']);
-
-$esAdministrador = in_array('administrador', currentUserRoles($pdo), true);
+empresasRequireGlobalAdminApi($pdo);
 
 try {
-    $empresas = $esAdministrador
-        ? empresaListar($pdo)
-        : empresaListar($pdo, currentUserCompanyId($pdo));
+    $empresas = empresaListar($pdo);
 
     responderJSON(true, $empresas);
 } catch (PDOException $e) {

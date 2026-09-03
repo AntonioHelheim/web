@@ -92,4 +92,21 @@ return [
 
     'login_help_text' => 'Pas encore client ?',
     'login_help_link' => 'Demander des informations',
+
+    // Bienvenida
+    'welcome_page_title'          => 'Bienvenue — Safety Control Tower',
+    'welcome_logout'              => 'Se déconnecter',
+    'welcome_greeting_morning'    => 'Bonjour',
+    'welcome_greeting_afternoon'  => 'Bon après-midi',
+    'welcome_greeting_evening'    => 'Bonsoir',
+    'welcome_logged_in_as'        => 'Connecté en tant que',
+    'welcome_hero_description'    => 'C\'est votre point de départ pour surveiller et gérer la sécurité de vos opérations.',
+    'welcome_card_panel_title'    => 'Tableau de bord général',
+    'welcome_card_panel_text'     => 'Consultez l\'état actuel de vos opérations et les indicateurs clés les plus pertinents.',
+    'welcome_card_gestiones_title' => 'Gestion & Tâches',
+    'welcome_card_gestiones_text'  => 'Suivez les tâches, incidents et processus en attente de votre équipe.',
+    'welcome_card_alertas_title'   => 'Alertes',
+    'welcome_card_alertas_text'    => 'Consultez les notifications et éléments nécessitant votre attention.',
+    'welcome_support_question'    => 'Besoin d\'aide pour commencer ?',
+    'welcome_support_link'        => 'Contacter le support',
 ];

@@ -2,6 +2,9 @@
 require __DIR__ . '/session_bootstrap.php';
 require __DIR__ . '/lib/auth.php';
 
+// Carga el sistema de i18n tras iniciar la sesión
+require_once __DIR__ . '/i18n.php';
+
 // Si no hay sesión activa, no se puede ver esta página (redirige, no es un endpoint JSON).
 requireLoginPage();
 
@@ -16,22 +19,22 @@ $displayName = htmlspecialchars(
     'UTF-8'
 );
 
-// Saludo según la hora del día
+// Saludo según la hora del día (utilizando las claves i18n)
 $hour = (int) date('G');
 if ($hour < 12) {
-    $greeting = 'Buenos días';
+    $greeting = t('welcome_greeting_morning');
 } elseif ($hour < 19) {
-    $greeting = 'Buenas tardes';
+    $greeting = t('welcome_greeting_afternoon');
 } else {
-    $greeting = 'Buenas noches';
+    $greeting = t('welcome_greeting_evening');
 }
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?php echo htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido - Safety Control Tower</title>
+    <title><?php echo htmlspecialchars(t('welcome_page_title'), ENT_QUOTES, 'UTF-8'); ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -76,7 +79,7 @@ if ($hour < 12) {
             </div>
 
             <a href="logout.php" class="btn btn-outline-custom btn-sm">
-                Cerrar sesión
+                <?php echo htmlspecialchars(t('welcome_logout'), ENT_QUOTES, 'UTF-8'); ?>
                 <i class="bi bi-box-arrow-right"></i>
             </a>
 
@@ -97,9 +100,8 @@ if ($hour < 12) {
             </h1>
 
             <p class="section-description">
-                Sesión iniciada como <strong><?php echo $userEmail; ?></strong>.
-                Este es tu punto de partida para monitorear y gestionar
-                la seguridad de tu operación.
+                <?php echo htmlspecialchars(t('welcome_logged_in_as'), ENT_QUOTES, 'UTF-8'); ?> <strong><?php echo $userEmail; ?></strong>.
+                <?php echo htmlspecialchars(t('welcome_hero_description'), ENT_QUOTES, 'UTF-8'); ?>
             </p>
 
         </section>
@@ -115,25 +117,23 @@ if ($hour < 12) {
                         <div class="feature-icon">
                             <i class="bi bi-speedometer2"></i>
                         </div>
-                        <h3>Panel general</h3>
+                        <h3><?php echo htmlspecialchars(t('welcome_card_panel_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p>
-                            Revisa el estado actual de tu operación y los
-                            indicadores más relevantes.
+                            <?php echo htmlspecialchars(t('welcome_card_panel_text'), ENT_QUOTES, 'UTF-8'); ?>
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="feature-card h-100">
+                    <a href="./api/usuarios/gestiones.php" class="feature-card h-100 d-block text-decoration-none" aria-label="Ir a Gestiones">
                         <div class="feature-icon">
                             <i class="bi bi-clipboard-check"></i>
                         </div>
-                        <h3>Gestiones</h3>
+                        <h3><?php echo htmlspecialchars(t('welcome_card_gestiones_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p>
-                            Da seguimiento a tareas, incidentes y procesos
-                            pendientes de tu equipo.
+                            <?php echo htmlspecialchars(t('welcome_card_gestiones_text'), ENT_QUOTES, 'UTF-8'); ?>
                         </p>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">
@@ -141,10 +141,9 @@ if ($hour < 12) {
                         <div class="feature-icon">
                             <i class="bi bi-bell"></i>
                         </div>
-                        <h3>Alertas</h3>
+                        <h3><?php echo htmlspecialchars(t('welcome_card_alertas_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p>
-                            Consulta notificaciones y elementos que
-                            requieren tu atención.
+                            <?php echo htmlspecialchars(t('welcome_card_alertas_text'), ENT_QUOTES, 'UTF-8'); ?>
                         </p>
                     </div>
                 </div>
@@ -158,8 +157,8 @@ if ($hour < 12) {
         <section class="text-center mt-5 mb-5">
 
             <p class="text-muted">
-                ¿Necesitas ayuda para comenzar?
-                <a href="mailto:contacto@tecaivot.cl">Contacta a soporte</a>
+                <?php echo htmlspecialchars(t('welcome_support_question'), ENT_QUOTES, 'UTF-8'); ?>
+                <a href="mailto:contacto@tecaivot.cl"><?php echo htmlspecialchars(t('welcome_support_link'), ENT_QUOTES, 'UTF-8'); ?></a>
             </p>
 
         </section>

@@ -92,4 +92,21 @@ return [
 
     'login_help_text' => '还不是客户？',
     'login_help_link' => '索取信息',
+
+    // Bienvenida
+    'welcome_page_title'          => '欢迎 — Safety Control Tower',
+    'welcome_logout'              => '退出登录',
+    'welcome_greeting_morning'    => '早上好',
+    'welcome_greeting_afternoon'  => '下午好',
+    'welcome_greeting_evening'    => '晚上好',
+    'welcome_logged_in_as'        => '已登录为',
+    'welcome_hero_description'    => '这是您监控和管理运营安全的起点。',
+    'welcome_card_panel_title'    => '总览面板',
+    'welcome_card_panel_text'     => '查看您运营的当前状态和最相关的指标。',
+    'welcome_card_gestiones_title' => '管理事项',
+    'welcome_card_gestiones_text'  => '跟踪团队的任务、事件和待处理流程。',
+    'welcome_card_alertas_title'   => '预警提醒',
+    'welcome_card_alertas_text'    => '查看需要您关注的通知和事项。',
+    'welcome_support_question'    => '需要帮助？',
+    'welcome_support_link'        => '联系支持',
 ];

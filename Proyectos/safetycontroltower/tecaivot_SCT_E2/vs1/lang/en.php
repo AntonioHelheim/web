@@ -92,4 +92,21 @@ return [
 
     'login_help_text' => 'Not a client yet?',
     'login_help_link' => 'Request information',
+
+    // Bienvenida
+    'welcome_page_title'          => 'Welcome — Safety Control Tower',
+    'welcome_logout'              => 'Log out',
+    'welcome_greeting_morning'    => 'Good morning',
+    'welcome_greeting_afternoon'  => 'Good afternoon',
+    'welcome_greeting_evening'    => 'Good evening',
+    'welcome_logged_in_as'        => 'Logged in as',
+    'welcome_hero_description'    => 'This is your starting point for monitoring and managing your operation safety.',
+    'welcome_card_panel_title'    => 'General dashboard',
+    'welcome_card_panel_text'     => 'Review the current status of your operation and the most relevant key metrics.',
+    'welcome_card_gestiones_title' => 'Management & Tasks',
+    'welcome_card_gestiones_text'  => 'Track tasks, incidents, and pending processes across your team.',
+    'welcome_card_alertas_title'   => 'Alerts',
+    'welcome_card_alertas_text'    => 'Check notifications and items that require your immediate attention.',
+    'welcome_support_question'    => 'Need help getting started?',
+    'welcome_support_link'        => 'Contact support',
 ];
