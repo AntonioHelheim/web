@@ -3,13 +3,13 @@ Procedimiento seguro y rápido para:
 Subir tus cambios locales a GitHub, y Traer la última versión del remoto para  quedar sincronizado.
 
 Remoto: git@github.com:AntonioHelheim/web.git (rama main)
-Carpeta de trabajo: /home/antonio/Documentos/public_html
+Carpeta de trabajo: /opt/lampp/htdocs/www.helheim.cl
 
 
 En GitBash o Terminal:
 
 # 1) Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
-cd /home/antonio/Documentos/public_html
+  cd /opt/lampp/htdocs/www.helheim.cl
 
 # 2) Ver estado actual de la carpeta y sus elementos
 git status
