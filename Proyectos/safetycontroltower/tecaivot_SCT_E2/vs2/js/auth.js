@@ -1,7 +1,7 @@
 /**
  * ==========================================================
  * AUTH.JS
- * TECAIVOT — SAFETY CONTROL TOWER
+ * SAFETY CONTROL TOWER
  *
  * Flujo de login sin contraseña, en 2 pasos:
  *   1) El usuario ingresa su correo -> se le envía un código de 6 dígitos.

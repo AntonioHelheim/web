@@ -1,6 +1,8 @@
 /* ==========================================================
    SAFETY CONTROL TOWER
-   TECAIVOT
+   Paleta y estilos propios de SCT (ver sección VARIABLES).
+   El sitio de Tecaivot vive aparte, en /tecaivot-site, con su
+   propia hoja de estilos embebida y la paleta original de marca.
    ========================================================== */
 
 
@@ -10,13 +12,20 @@
 
 :root {
 
-    --primary: #559DF4;
-    --primary-dark: #3D66FA;
-    --primary-darker: #1C257C;
-    --primary-darkest: #0F172A;
+    /* Paleta oficial del proyecto SCT — extraída del isotipo circular
+       (SCT.jpeg) provisto para el rebrand. --primary y --primary-darkest
+       son los dos colores exactos muestreados del logo (celeste del
+       swoosh superior y navy del anillo/wordmark); --primary-dark y
+       --primary-darker son pasos intermedios interpolados entre esos dos
+       para que gradientes de 2 y 3 puntos (ya usados en el CSS) se vean
+       parejos, no inventados sueltos. */
+    --primary: #00A3F4;
+    --primary-dark: #0076BE;
+    --primary-darker: #004B8B;
+    --primary-darkest: #002259;
 
-    --accent: #8D78CB;
-    --accent-dark: #6c54ad;
+    --accent: #FDC500;
+    --accent-dark: #B68E00;
 
     --success: #BFFA00;
     /* Verde convencional para iconografía de éxito (checks, confirmaciones).
@@ -27,11 +36,11 @@
 
     --error: #EF4444;
     --warning: #F59E0B;
-    --info: #559DF4;
+    --info: #00A3F4;
 
     --white: #FFFFFF;
-    --background: #F7F9FC;
-    --background-soft: #f9f1fb;
+    --background: #F5F9FC;
+    --background-soft: #FFF9E8;
 
     --text: #0F172A;
     --text-secondary: #64748B;

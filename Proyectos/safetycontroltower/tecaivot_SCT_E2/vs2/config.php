@@ -52,6 +52,21 @@ $isLocal = detectarEntornoLocal();
 if ($isLocal) {
 
     // Desarrollo en equipo local (XAMPP + phpMyAdmin).
+    //
+    // SEPARACIÓN TECAIVOT / SCT — paso 1 (2026-09): la base local pasa a
+    // llamarse "safetyco_SCT" (antes "tecaivot_SCT"), igual que ya pasó
+    // en el servidor. Cada dev tiene que tener localmente una base con
+    // ese nombre exacto — no se renombra sola. Formas de dejarla lista:
+    //   a) Renombrar la base local existente "tecaivot_SCT" a
+    //      "safetyco_SCT" (phpMyAdmin > Operaciones > "Renombrar la
+    //      base de datos a"), o
+    //   b) Crear "safetyco_SCT" vacía e importar ahí
+    //      "safetyco_SCT(vs1).sql" (mismo archivo que ya se usó para
+    //      migrar el servidor — funciona igual en local).
+    // Si tu base local todavía se llama "tecaivot_SCT" y no quieres
+    // renombrarla todavía, se puede seguir apuntando a ella sin tocar
+    // este archivo: seteando la variable de entorno DB_NAME=tecaivot_SCT
+    // en tu máquina.
     $host     = getenv('DB_HOST') ?: '127.0.0.1';
     $port     = (int) (getenv('DB_PORT') ?: '3306');
     $dbname   = getenv('DB_NAME') ?: 'safetyco_SCT';
@@ -63,22 +78,25 @@ if ($isLocal) {
 
     // Servidor de desarrollo / producción (cPanel).
     //
-    // MIGRACIÓN 2026-09: este proyecto se movió del servidor
-    // 201.148.105.87 (base "tecaivot_SCT") al servidor 201.148.104.98
-    // (base "safetyco_SCT"). Host y nombre de base ya apuntan al
-    // servidor nuevo acá abajo.
+    // SEPARACIÓN TECAIVOT / SCT — paso 1 (2026-09): host, base y ahora
+    // también usuario/password ya apuntan al servidor nuevo
+    // (201.148.104.98, base "safetyco_SCT", usuario "safetyco"). Esto
+    // reemplaza el estado anterior de esta sección, donde a propósito
+    // no se dejaba usuario/password como fallback — el equipo decidió
+    // volver a dejarlos acá igual que estaban para el servidor viejo,
+    // así que si en algún momento este archivo termina en un
+    // repositorio compartido o público, hay que sacar estas credenciales
+    // de acá y dejarlas solo por variable de entorno (DB_USER/DB_PASS).
     //
-    // A propósito NO se dejan usuario/password como fallback hardcodeado
-    // como estaba antes: las credenciales del servidor viejo (usuario
-    // "tecaivot") no sirven para el servidor nuevo, y dejar cualquier
-    // valor fijo acá es peor que no dejar nada — falla en silencio
-    // contra el servidor equivocado en vez de avisar. DB_USER y DB_PASS
-    // son obligatorios por variable de entorno en este servidor (vhost
-    // de Apache / cPanel "Setup Node.js App" o .htaccess con SetEnv);
-    // si no están seteadas, la validación de la sección 3 corta la
-    // ejecución con un mensaje claro en vez de intentar conectar.
+    // Nota sobre el puerto: dejar '' como fallback (en vez de '3306')
+    // hace que $port termine en 0 — no es un error: el cliente de MySQL
+    // interpreta el puerto 0 como "usar el puerto por defecto (3306)",
+    // así que el resultado es el mismo, solo que resuelto por la
+    // librería de MySQL en vez de hardcodeado acá. Si el servidor nuevo
+    // llegara a usar un puerto no estándar, hay que setear DB_PORT por
+    // variable de entorno explícitamente.
     $host     = getenv('DB_HOST') ?: '201.148.104.98';
-    $port     = (int) (getenv('DB_PORT') ?: '3306');
+    $port     = (int) (getenv('DB_PORT') ?: '');
     $dbname   = getenv('DB_NAME') ?: 'safetyco_SCT';
     $username = getenv('DB_USER') ?: 'safetyco';
     $password = getenv('DB_PASS') ?: 'cBz1t89lJ6*Y+B';

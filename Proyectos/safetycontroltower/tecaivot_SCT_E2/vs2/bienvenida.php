@@ -75,7 +75,7 @@ if ($hour < 12) {
 
             <div class="brand-wrapper">
                 <div class="brand-symbol">
-                    <img src="./images/logos/Logo-SCT-white.svg" alt="Safety Control Tower">
+                    <img src="./images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                 </div>
             </div>
 
@@ -159,7 +159,7 @@ if ($hour < 12) {
 
             <p class="text-muted">
                 <?php echo htmlspecialchars(t('welcome_support_question'), ENT_QUOTES, 'UTF-8'); ?>
-                <a href="mailto:contacto@tecaivot.cl"><?php echo htmlspecialchars(t('welcome_support_link'), ENT_QUOTES, 'UTF-8'); ?></a>
+                <a href="mailto:contacto@safetycontroltower.cl"><?php echo htmlspecialchars(t('welcome_support_link'), ENT_QUOTES, 'UTF-8'); ?></a>
             </p>
 
         </section>

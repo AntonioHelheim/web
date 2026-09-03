@@ -72,7 +72,7 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
 
             <div class="brand-wrapper">
                 <div class="brand-symbol">
-                    <img src="../../images/logos/Logo-SCT-white.svg" alt="Safety Control Tower">
+                    <img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                 </div>
             </div>
 
@@ -143,6 +143,22 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
                     </div>
                 </div>
                 <?php endif; ?>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+                        <h3>Gestión de Trabajadores</h3>
+                        <p>
+                            Administra la ficha de los trabajadores de la
+                            empresa.
+                        </p>
+                        <a href="../trabajadores/gestion-trabajadores.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
 
                 <div class="col-md-6 col-lg-5">
                     <div class="feature-card h-100">

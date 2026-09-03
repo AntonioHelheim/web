@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="helheim.cl">
+<meta name="copyright" content="Tecaivot">
+<meta name="robots" content="noindex, nofollow">
+<!-- AMBIENTE DE DESARROLLO: cambiar a "index, follow" solo en producción definitiva. -->
+
+<title>Tecaivot — Servicios y desarrollo de herramientas TI</title>
+<meta name="description" content="Tecaivot: empresa de servicios y desarrollo de herramientas TI. Conoce Safety Control Tower, nuestra plataforma de gestión de seguridad y cumplimiento.">
+
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<meta name="theme-color" content="#1C257C">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+
+<style>
+    /* =========================================================
+       Paleta ORIGINAL de marca Tecaivot (la que tenía el proyecto
+       completo antes de que SCT pasara a su propia paleta navy/celeste/
+       dorado). Este sitio es intencionalmente independiente del CSS de
+       SCT — no comparte hoja de estilos, para poder vivir en un hosting
+       distinto sin arrastrar dependencias del otro sitio.
+       ========================================================= */
+    :root {
+        --primary: #559DF4;
+        --primary-dark: #3D66FA;
+        --primary-darker: #1C257C;
+        --primary-darkest: #0F172A;
+        --accent: #8D78CB;
+        --white: #FFFFFF;
+        --background: #F7F9FC;
+        --text: #0F172A;
+        --text-secondary: #64748B;
+        --border: #E2E8F0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    .section-padding { padding: 90px 0; }
+
+    /* --- Header --- */
+    .site-header {
+        padding: 22px 0;
+        background: var(--primary-darkest);
+    }
+    .brand-wrapper { display: flex; align-items: center; }
+    .brand-wrapper img { height: 30px; width: auto; }
+
+    /* --- Hero (fondo oscuro, mismo tono que el header) --- */
+    .hero-section {
+        background: linear-gradient(160deg, var(--primary-darkest) 0%, var(--primary-darker) 100%);
+        color: var(--white);
+        padding: 110px 0 130px;
+        text-align: center;
+    }
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        color: #C9D6F5;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+    }
+    .hero-section h1 {
+        font-size: 44px;
+        font-weight: 800;
+        line-height: 1.15;
+        max-width: 720px;
+        margin: 0 auto 20px;
+    }
+    .hero-section p {
+        font-size: 18px;
+        color: #C9D6F5;
+        max-width: 620px;
+        margin: 0 auto 34px;
+        line-height: 1.6;
+    }
+    .btn-hero-primary {
+        background: var(--white);
+        color: var(--primary-darker);
+        font-weight: 700;
+        padding: 14px 30px;
+        border-radius: 12px;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); color: var(--primary-darker); text-decoration: none; }
+
+    /* --- Valores --- */
+    .section-label {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--primary-dark);
+        margin-bottom: 14px;
+    }
+    .section-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--primary-darkest);
+        margin-bottom: 16px;
+    }
+    .section-description {
+        color: var(--text-secondary);
+        font-size: 16px;
+        line-height: 1.7;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .value-card {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 34px 28px;
+        height: 100%;
+    }
+    .value-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: var(--white);
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+    .value-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; color: var(--primary-darkest); }
+    .value-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin: 0; }
+
+    /* --- Banner CTA hacia SCT --- */
+    .sct-banner {
+        background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+        border-radius: 28px;
+        padding: 50px 44px;
+        color: var(--white);
+    }
+    .sct-banner h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+    .sct-banner p { color: rgba(255,255,255,0.9); font-size: 16px; margin-bottom: 0; max-width: 480px; }
+    .btn-sct {
+        background: var(--white);
+        color: var(--primary-darker);
+        font-weight: 700;
+        padding: 14px 26px;
+        border-radius: 12px;
+        border: none;
+        text-decoration: none;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s ease;
+    }
+    .btn-sct:hover { transform: translateY(-2px); color: var(--primary-darker); text-decoration: none; }
+
+    /* --- Contacto --- */
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--background);
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .contact-info-item small { display: block; color: var(--text-secondary); font-size: 12px; }
+    .contact-info-item strong { font-size: 15px; }
+
+    /* --- Footer --- */
+    .site-footer {
+        background: var(--primary-darkest);
+        color: #AAB7CC;
+        padding: 34px 0;
+        text-align: center;
+        font-size: 14px;
+    }
+    .site-footer a { color: #C9D6F5; }
+
+    @media (max-width: 767px) {
+        .hero-section h1 { font-size: 32px; }
+        .sct-banner { text-align: center; }
+        .sct-banner .row > div { justify-content: center !important; }
+    }
+</style>
+</head>
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="site-header">
+        <div class="container">
+            <div class="brand-wrapper">
+                <img src="images/Logo_Tecaivot_principal-white.svg" alt="Tecaivot">
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero-section">
+        <div class="container">
+            <span class="hero-eyebrow">
+                <i class="bi bi-code-slash"></i>
+                Servicios y desarrollo de herramientas TI
+            </span>
+            <h1>Construimos software a la medida de tu operación.</h1>
+            <p>
+                Tecaivot diseña y desarrolla herramientas tecnológicas para digitalizar
+                procesos, centralizar información y facilitar la toma de decisiones.
+            </p>
+            <a href="#contacto" class="btn-hero-primary">
+                Hablemos de tu proyecto
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===================== VALORES ===================== -->
+    <section class="section-padding">
+        <div class="container">
+
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-7">
+                    <span class="section-label">NOSOTROS</span>
+                    <h2 class="section-title">Una empresa de servicios y desarrollo de herramientas TI.</h2>
+                    <p class="section-description">
+                        Tecaivot acompaña a organizaciones que necesitan digitalizar procesos
+                        operacionales, reemplazando planillas y sistemas dispersos por
+                        herramientas propias, pensadas para su forma de trabajar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="bi bi-hand-thumbs-up"></i></div>
+                        <h3>Compromiso</h3>
+                        <p>Acompañamos cada proyecto de principio a fin, no solo entregamos software.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="bi bi-patch-check"></i></div>
+                        <h3>Calidad técnica</h3>
+                        <p>Desarrollamos con estándares profesionales y buenas prácticas de la industria.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="bi bi-people"></i></div>
+                        <h3>Cercanía</h3>
+                        <p>Escuchamos primero el problema real antes de proponer una solución.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===================== BANNER SCT ===================== -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="sct-banner">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <h2>¿Buscas información sobre Safety Control Tower?</h2>
+                        <p>
+                            SCT es nuestra plataforma de gestión de seguridad, cumplimiento
+                            normativo y trazabilidad operacional. Conoce sus funcionalidades
+                            y solicita acceso en su propio sitio.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 d-flex justify-content-lg-end">
+                        <a href="https://www.safetycontroltower.cl" target="_blank" rel="noopener" class="btn-sct">
+                            Ir a Safety Control Tower
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
+    <section class="section-padding pt-0" id="contacto">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-6">
+                    <span class="section-label">HABLEMOS</span>
+                    <h2 class="section-title">¿Tienes un proyecto que digitalizar?</h2>
+                    <p class="section-description">
+                        Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto contigo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                        <div>
+                            <small>Correo</small>
+                            <strong>contacto@tecaivot.cl</strong>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-globe2"></i></div>
+                        <div>
+                            <small>Sitio de nuestro producto</small>
+                            <strong>www.safetycontroltower.cl</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
+        <div class="container">
+            © <span id="currentYear"></span> Tecaivot. Todos los derechos reservados.
+            · Desarrollado por <a href="https://helheim.cl" target="_blank" rel="noopener">Helheim.cl</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

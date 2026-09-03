@@ -1,0 +1,19 @@
+# Defensa adicional: aunque subir-foto.php ya valida que el archivo sea
+# una imagen real (getimagesize) antes de guardarlo, esta carpeta nunca
+# debe poder ejecutar PHP, por si algún archivo se cuela igual.
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|php\d?|phtml|pht)$">
+    Require all denied
+</FilesMatch>
+
+# Apache 2.2 (algunos hostings cPanel viejos todavía lo usan)
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|php\d?|phtml|pht)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>

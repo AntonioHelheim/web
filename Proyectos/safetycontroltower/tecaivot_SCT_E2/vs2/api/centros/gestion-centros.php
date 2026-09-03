@@ -52,7 +52,7 @@ $assetVersionEscaped = htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8');
         <div class="welcome-topbar">
             <div class="brand-wrapper">
                 <div class="brand-symbol">
-                    <img src="../../images/logos/Logo-SCT-white.svg" alt="Safety Control Tower">
+                    <img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                 </div>
             </div>
 

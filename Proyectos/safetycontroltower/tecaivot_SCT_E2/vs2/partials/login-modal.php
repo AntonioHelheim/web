@@ -41,7 +41,7 @@ if (empty($_SESSION['csrf_token'])) {
                 <div class="modal-symbol">
 
                     <img
-                        src="./images/logos/Logo-SCT-white.svg"
+                        src="./images/logos/Logo-SCT-white.png"
                         alt="Safety Control Tower">
 
                 </div>

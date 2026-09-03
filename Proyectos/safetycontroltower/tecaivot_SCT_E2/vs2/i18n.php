@@ -1,7 +1,7 @@
 <?php
 /**
  * i18n.php
- * Selección de idioma sencilla para el sitio público de Tecaivot.
+ * Selección de idioma sencilla para el sitio público de Safety Control Tower.
  *
  * - Soporta los 5 idiomas contemplados en el contrato (Cl.1d.n): es, en, pt, fr, zh.
  * - El idioma se fija vía ?lang=xx (validado contra la lista blanca) y se

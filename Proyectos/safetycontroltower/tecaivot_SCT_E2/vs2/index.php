@@ -1,7 +1,7 @@
 <?php
 /**
  * index.php
- * Ensambla la página principal de Tecaivot a partir de los partials en /partials.
+ * Ensambla la página principal de Safety Control Tower a partir de los partials en /partials.
  */
 
 // Inicia la sesión ANTES de cualquier salida (obligatorio: login-modal.php
