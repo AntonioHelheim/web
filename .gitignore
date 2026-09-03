@@ -24,5 +24,4 @@ build/
 Proyectos/ruko/error_log
 
 # Backups automaticos del script de despliegue (no se versionan)
-**/*_bkp_*/
-**/*_bkp_*.*
+

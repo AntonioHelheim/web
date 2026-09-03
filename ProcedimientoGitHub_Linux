@@ -9,7 +9,7 @@ Carpeta de trabajo: /opt/lampp/htdocs/www.helheim.cl
 En GitBash o Terminal:
 
 # 1) Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
-  cd /opt/lampp/htdocs/www.helheim.cl
+cd /opt/lampp/htdocs/www.helheim.cl/
 
 # 2) Ver estado actual de la carpeta y sus elementos
 git status
