@@ -1,0 +1,369 @@
+# Roadmap de arquitectura — Bifrost (Helheim)
+
+Este documento nace de las indicaciones de buenas prácticas entregadas el
+30-08-2026 (ver resumen de principios más abajo) y es la referencia que
+debemos consultar **en cada versión que revisemos de Bifrost de ahora en
+adelante**, tal como se acordó. No es un checklist para tachar de una sola
+vez — es la brújula de priorización cuando decidamos en qué trabajar
+después.
+
+**Regla de oro para aplicar esta lista:** un ítem a la vez, con la misma
+disciplina de validación que ya usamos (sintaxis, conectividad de mapas,
+balance de PHP, etc. antes de dar por cerrado cualquier cambio). Nada de
+"big bang" — el riesgo de romper algo que ya funciona es demasiado alto
+como para migrar todo de golpe.
+
+**🔶 Hito: base de datos v1.0-seed (31-08-2026).** Se consolidó
+`sql/schema.sql` como línea base limpia (sin la tabla `species`
+redundante, con índices en las consultas más frecuentes, con la relación
+entre retos y batallas PvP declarada como FK, sin nombres de marcas
+registradas) — ver la migración `sql/v1.0-seed-migration.sql` para
+actualizar una base existente sin perder datos. No es un ítem numerado
+del roadmap original, pero valía la pena registrarlo acá como punto de
+referencia: de aquí en adelante, cualquier cambio de esquema parte de
+esta línea base.
+
+## Cómo leer las prioridades
+
+Cada ítem tiene:
+- **Por qué importa** (conectado al principio del documento original).
+- **Riesgo/esfuerzo** estimado si lo abordamos.
+- **Depende de** — si necesita que otro ítem esté resuelto antes, o si
+  necesita algo externo (como el listado de assets gráficos).
+
+---
+
+## 1. Sistema de tilemap con texturas reales (Tiled/Phaser Tilemap)
+**🔶 Parcial (31-08-2026) — agua/puerta/roca con textura real, piso de terreno pendiente.**
+
+Hoy cada tile se dibuja como 1-6 formas de Phaser individuales
+(rectángulos/círculos/triángulos), no una textura — salvo agua (tile 3),
+puerta/warp gate (tile 4) y roca (tile 6), que **ya usan textura real**
+con respaldo automático al dibujo a mano si la textura no carga (ver
+`TileVisuals.js` → `drawRealTile()`/`drawRealWaterTile()`, probado con
+mock de Phaser en 4 escenarios). Los tipos de terreno base (pasto,
+camino, arena, cueva) siguen sin textura — `floorcave.png`/
+`floorsand.png` no llegaron todavía en la entrega recibida. Con el mapa
+de Pueblo Origen ya vamos en ~16.500 objetos por carga — sigue siendo el cuello
+de botella de rendimiento más urgente para los tipos que faltan.
+
+- *Por qué importa:* "Tilemaps y reutilización de recursos" del documento
+  original — evitar duplicar imágenes, usar tilesets/spritesheets reales.
+- *Riesgo/esfuerzo:* Medio-alto para lo que falta — toca `TileVisuals.js`
+  (ya tiene el patrón establecido), `maps.js` no necesita cambios (los
+  layouts numéricos ya calzan). El agua se integró como imagen simple
+  recortada por posición en vez de spritesheet, porque su convención de
+  cuadros de animación no estaba confirmada (ver nota de seguridad en
+  `PLAN-GRAPHICS-AUDIO.md`) — evita repetir el mismo tipo de bug que tuvo
+  el sprite de personaje con tamaño equivocado.
+- *Depende de:* recibir `floorcave.png`/`floorsand.png` (terreno base) y
+  decidir la integración de `Flowers1/2.png`/`object_tree.png`
+  (recibidos y verificados, sin integrar todavía).
+
+## 2. Separar las reglas del juego de Phaser (núcleo independiente)
+**✅ Resuelto (30-08-2026).** Ver `js/core/battleRules.js` — daño, huida y
+recuperación tras desmayo ahora son funciones puras (sin `this.add...`,
+sin nada de Phaser adentro), probadas directo con Node en
+`scripts/test-battle-rules.js` (13/13 pruebas, corre con
+`node scripts/test-battle-rules.js`).
+
+**Actualización tras resolver el ítem 3:** `BattleScene.js` ya NO llama
+estas funciones directamente — desde que las batallas silvestres pasaron
+a resolverse en el servidor (`api/wild_battle_action.php`), la escena
+solo pide la acción y dibuja la respuesta, igual que `PvpBattleScene.js`.
+`battleRules.js` sigue en el proyecto (ya no se carga en `game.php`, pero
+el archivo queda) como la referencia probada que `calculate_damage()` en
+`config.php` (PHP) debe seguir replicando — y como base para un eventual
+"preview" de daño estimado en el cliente antes de atacar, si algún día
+se quiere esa mejora de UX.
+
+Prioridad original: muy alta — no depende de assets, se puede empezar ya.
+
+Hoy el cálculo de daño, tipos y catálogo de criaturas vive mezclado
+dentro de `BattleScene.js`/`OverworldScene.js`. El documento original lo
+dice explícito: *"el sistema de combate debe poder ejecutarse sin
+depender directamente de Phaser. Phaser debería representar visualmente
+el resultado del combate, no contener todas sus reglas."*
+
+- *Por qué importa:* es la base para el ítem 3 (batallas autoritativas),
+  para testing (ítem 10), y para arquitectura data-driven (ítem 4).
+- *Riesgo/esfuerzo:* Medio — extraer funciones puras (sin `this.add...`,
+  sin nada de Phaser) a un módulo nuevo (ej. `js/core/battleRules.js`) y
+  hacer que `BattleScene.js` solo lo llame y dibuje el resultado.
+- *Depende de:* nada externo. **Buen candidato para empezar ahora mismo**
+  mientras preparas el listado de `graphics`.
+
+## 3. Batallas silvestres autoritativas en el servidor
+**✅ Resuelto (30-08-2026).**
+
+`api/wild_battle_start.php` (genera al enemigo y usa el equipo GUARDADO
+del jugador como fuente de verdad, no lo que mande el cliente) +
+`api/wild_battle_action.php` (resuelve "attack"/"run" con
+`calculate_damage()`, la misma fórmula que `battleRules.js`, ahora también
+en `config.php` para que PvP y batallas silvestres usen una sola función
+en el servidor en vez de dos copias). `BattleScene.js` quedó igual de
+"tonta" visualmente que `PvpBattleScene.js` — solo pide la acción y dibuja
+la respuesta.
+
+**Efecto secundario intencional:** cada acción persiste de inmediato el
+HP del jugador en `saves.party_json` (`persist_party_first_hp()`), no
+solo al presionar "S" — antes, si cerrabas el navegador a mitad de una
+batalla sin guardar, ese daño se perdía. Ahora el servidor siempre tiene
+el HP real como única fuente de verdad, lo cual además es lo que hace
+posible que sea genuinamente autoritativo (no se puede confiar en
+"el HP que mande el cliente al iniciar la siguiente batalla").
+
+**Probado en 3 niveles** antes de dar por cerrado (no bastaba con que
+`php -l` no marcara errores):
+1. Funciones puras de PHP (`calculate_damage`, `faint_recovery_hp`) con
+   500+ tiradas verificando el rango de daño y el mínimo de 1.
+2. El flujo completo de `wild_battle_action.php` (con sus closures) contra
+   una base de datos SQLite real en memoria — no solo simulado a mano.
+3. Los 3 caminos posibles: ganar, perder (con recuperación del 30% del HP
+   máximo), y huir (~90% de éxito verificado estadísticamente en 100
+   intentos) — más protección contra reusar una batalla ya terminada, y
+   contra que un usuario actúe sobre la batalla de otro.
+
+*Por qué importaba:* *"el servidor debe ser autoritativo para
+operaciones críticas como combate, daño..."* — literal del documento.
+
+## 4. Arquitectura data-driven para contenido (una sola fuente de datos)
+**✅ Resuelto (30-08-2026).**
+
+`data/species.json` (24 criaturas, con `type` y `description` incluidos —
+antes esos dos campos solo existían del lado JS) y
+`data/battle-rules.json` (variación de daño, probabilidad de escape,
+fracción de recuperación tras desmayo) son ahora la única fuente. Ver
+`data/README.md` para el detalle de qué archivo lee cada lado.
+
+- `js/scenes/PreloadScene.js` carga `species.json` con el sistema propio
+  de Phaser (`this.load.json`) y puebla el global `SPECIES` antes de que
+  cualquier otra escena lo necesite — `js/data.js` ya no tiene el
+  catálogo hardcodeado, solo las funciones que lo usan.
+- `api/config.php` → `species_catalog()`, `battle_rules()`,
+  `calculate_damage()`, `attempt_escape()`, `faint_recovery_hp()` leen los
+  mismos `.json` directo del disco en el servidor.
+- `js/core/battleRules.js` (en Node, para `scripts/test-battle-rules.js`)
+  también lee `battle-rules.json` en vez de tener sus propias constantes
+  fijas — así el test siempre valida contra los números reales.
+
+**Cómo se validó** (más allá de que no hubiera errores de sintaxis):
+cambié cada `.json` real y confirmé que el cambio se reflejaba de
+inmediato tanto en `battleRules.js` (Node) como en `config.php` (PHP) —
+"prueba de fuego" en vez de solo confiar en la lectura del código. Nota
+técnica para el futuro: las primeras veces que probé el lado PHP usé
+`eval()` sobre fragmentos de texto extraídos, y `__DIR__` dentro de
+`eval()` apunta al archivo que llama a `eval()`, no a `api/` — así que
+esas primeras pruebas pasaban por la razón equivocada (caían al valor por
+defecto, que coincidía con el real por casualidad). Las repetí como
+archivos reales dentro de `api/` para que `__DIR__` resuelva igual que en
+producción, y ahí sí quedó confirmado de verdad.
+
+**Antes de este ítem:** la fórmula de daño y el catálogo vivían
+duplicados en 3 lugares (`js/data.js`, `js/core/battleRules.js`,
+`api/config.php`). Ahora hay 2 archivos de datos, y todo el código los
+lee — cero copias mantenidas a mano.
+
+*Por qué importaba:* *"Items, personajes, enemigos... deben definirse
+mediante datos y no mediante lógica hardcodeada."* — literal del
+documento original.
+
+## 5. CSRF y rate-limiting en el resto de los endpoints
+**✅ Resuelto (30-08-2026).**
+
+`require_csrf()` ahora protege los 9 endpoints POST que no lo tenían:
+`save_game.php`, `save_appearance.php`, `update_position.php`,
+`challenge_send.php`, `challenge_respond.php`, `battle_action.php`,
+`wild_battle_start.php`, `wild_battle_action.php` y `logout.php` (este
+último además sumó verificación de método POST, que no tenía). Los
+endpoints de solo lectura (`load_game.php`, `nearby_players.php`,
+`challenge_poll.php`, `pvp_battle_state.php`) se dejaron sin CSRF a
+propósito — es un GET que no cambia estado, no aplica el mismo riesgo.
+
+- `game.php` ahora expone `window.BIFROST_CSRF_TOKEN` (mismo patrón que
+  ya tenía `index.php`), y las 9 llamadas `fetch()` correspondientes en
+  el frontend lo mandan en el body.
+- **Rate-limiting** en `challenge_send.php`: máximo 10 retos por minuto
+  por jugador, reutilizando la columna `created_at` que ya existía en
+  `battle_challenges` — no hizo falta tabla nueva. Los demás endpoints no
+  recibieron rate-limiting dedicado por ahora (no hay evidencia de que lo
+  necesiten hoy — revisar si se abusa de alguno más adelante).
+
+**Probado con PHP real** (no solo que `php -l` no marcara errores):
+token vacío → bloqueado (403), token adivinado por un atacante →
+bloqueado, token correcto → pasa normalmente. El límite de retos se
+probó con 15 intentos seguidos: los primeros 10 pasan, del 11 en
+adelante quedan bloqueados.
+
+*Por qué importaba:* *"Toda operación crítica debe validarse en el
+servidor... protección contra XSS y CSRF... rate limiting."* — literal
+del documento original.
+
+## 6. Pipeline de assets gráficos y de audio
+**🔶 Catalogado por completo (31-08-2026) — bloqueado solo por los archivos físicos.**
+
+Diseñar cómo `PreloadScene.js` va a cargar `graphics/` (Characters,
+Autotiles, Builds, Animations, Pictures) y `audio/` (BGM/SE/ME) siguiendo
+esa misma convención de carpetas.
+
+**Avance (30-31 agosto 2026):** catálogo completo de `audio/` (27
+archivos) y `graphics/` (43 archivos + categorías nuevas de criaturas)
+en `data/audio-events.json`/`data/graphics-catalog.json`. Plan técnico
+detallado en **[PLAN-GRAPHICS-AUDIO.md](./PLAN-GRAPHICS-AUDIO.md)**.
+
+**✅ Ya implementado con archivos reales verificados:**
+- Apariencia del personaje: 2/6 combinaciones con sprite real (ítem 7
+  destrabado parcialmente).
+- Fondo animado de `index.php` (`bkgindex1/2.png` + `clouds.png`).
+- Tiles de agua, puerta y roca con textura real en el mapa, con
+  respaldo automático al dibujo a mano (`TileVisuals.js`).
+
+**⚠️ Se recibió un paquete grande de imágenes (~3.000 archivos) que
+resultó ser en su mayoría el pack de recursos de Pokémon Essentials** —
+ningún archivo con diseño de personaje protegido se integró al proyecto,
+ni siquiera los de nombre genérico (se verificó visualmente cada uno
+antes de usarlo; ver nota de seguridad en `data/graphics-catalog.json`).
+Solo se integraron los archivos individualmente confirmados como
+genéricos (fondos, agua, puertas, roca).
+
+**Sigue pendiente:** `floorcave.png`/`floorsand.png` (terreno base, no
+llegaron), todo `Pictures/` y todo `Audio/` (sin archivos recibidos
+todavía), y las categorías nuevas de criaturas (necesitan arte 100%
+original, no derivado de ningún paquete existente).
+
+- *Por qué importa:* es literalmente la integración del arte real que
+  reemplazará las formas dibujadas a mano — el salto de calidad visual
+  más grande que puede dar el proyecto.
+- *Riesgo/esfuerzo:* Medio — el patrón de integración (textura real +
+  respaldo automático + validación) ya está probado en 5 categorías
+  distintas; el trabajo que falta es repetirlo a medida que lleguen más
+  archivos, verificando cada uno individualmente antes de integrarlo.
+- *Depende de:* recibir el resto de los archivos reales — confirmados
+  como seguros o genuinamente originales, no derivados de paquetes de
+  franquicias existentes.
+
+## 7. Máquinas de estado explícitas (NPCs / IA)
+**🔶 Primera implementación real (31-08-2026) — 2 de 5 estados sugeridos.**
+
+`js/entities/NPC.js`: máquina de estados simple (IDLE ↔ PATROL) para
+personajes ambientales — esperan un rato, dan un paso a un tile
+transitable cercano dentro de un radio de merodeo, repiten. Sin
+diálogo/interacción todavía (eso es CHASE/ATTACK/DEAD, y necesita el
+ítem 8 primero para tener sentido). 3 NPCs ambientales ya colocados
+cerca del gran árbol en Pueblo Origen, usando sprites ya verificados
+(`people_male_1`, `people_female_2`) como marcador de posición — mismo
+criterio acordado con el usuario: reutilizar arte ya confirmado como
+seguro en vez de bloquear por archivos de `Characters/NPC/` que todavía
+no llegaron.
+
+**Probado:** 500 pasos de simulación por NPC (sin Phaser, solo la lógica
+de merodeo) — nunca quedan sin una dirección válida, nunca se salen del
+radio de merodeo respecto a su punto de origen.
+
+- *Depende de (para el resto de los estados):* CHASE/ATTACK necesitan
+  sentido de juego (¿qué atacan? ¿por qué?) que todavía no está
+  definido — DEAD depende de que haya combate contra NPCs, que no existe.
+
+## 8. Sistema de eventos para quests/diálogos
+**Prioridad: media — bloqueado por contenido narrativo real.**
+
+Mismo caso que el ítem 7: tiene sentido diseñarlo cuando empecemos a
+construir diálogos/quests de verdad (por ejemplo, cuando le demos
+funcionalidad real a "Cueva de Don Emilio", que hoy es solo un hito
+visual).
+
+## 9. Chunking / carga de mapas por regiones
+**Prioridad: baja por ahora.**
+
+El mapa más grande (Pueblo Origen, 90×65) todavía carga completo sin problemas
+perceptibles. Revisar esto si seguimos agrandando mapas mucho más, o si
+el número total de mapas crece lo suficiente como para que cargar todos
+de una sea un problema real. No hay evidencia hoy de que lo sea.
+
+## 10. Testing automatizado y observabilidad
+**✅ Resuelto (30-08-2026).**
+
+`scripts/check-maps.js` formaliza el flood-fill de conectividad que antes
+se corría a mano por consola en cada rediseño de mapa, más una validación
+nueva que antes NO se hacía sistemáticamente: que cada warp apunte a un
+mapa que existe, con coordenadas de destino dentro de rango y sobre un
+tile transitable. **Prueba de fuego:** reintroduje a propósito el mismo
+bug real que se coló al agrandar el pueblo (coordenadas de destino en el
+sistema equivocado) y el script lo detectó correctamente; con el archivo
+restaurado, vuelve a pasar limpio.
+
+`js/maps.js` ahora también funciona en Node (mismo patrón que
+`js/core/battleRules.js`, ítem 2) para que este script lo pueda `require`.
+
+**Testing de combate/API contra base de datos** (lo que faltaba):
+- `scripts/test-wild-battles.php`: ganar, perder (con recuperación
+  correcta), huir (tasa estadística correcta), y las 2 protecciones
+  (batalla terminada / usuario ajeno) — contra SQLite en memoria.
+- `scripts/test-csrf-and-rate-limit.php` (+ auxiliar `_csrf_case.php`):
+  token vacío/incorrecto/correcto, y el límite de 10 retos/minuto.
+- Para que esto fuera posible sin duplicar lógica a mano (como pasaba con
+  los arneses temporales de los ítems 3-5), extraje
+  `resolve_wild_battle_action()` y `count_recent_challenges()` de los
+  endpoints hacia `api/config.php` — mismo patrón que `battleRules.js`
+  (ítem 2): la lógica real vive en un solo lugar reutilizable, y tanto el
+  endpoint HTTP como el test la llaman igual. Los endpoints
+  (`wild_battle_action.php`, `challenge_send.php`) quedaron más cortos y
+  enfocados solo en la parte HTTP (leer input, validar sesión/CSRF,
+  responder).
+- Encontré y corregí un detalle real en el camino: la `respond()` del
+  proyecto usa `exit;` sin argumento, que en PHP **siempre** sale con
+  código 0 sin importar el `http_response_code()` fijado antes — mi
+  primer intento de probar CSRF verificando el código de salida del
+  proceso no detectaba nada. Se corrigió verificando el *contenido* de la
+  respuesta en su lugar.
+
+`package.json` (0 dependencias) corre las 4 suites con un solo comando:
+`npm test` → `check-maps.js` + `test-battle-rules.js` (Node) +
+`test-wild-battles.php` + `test-csrf-and-rate-limit.php` (PHP).
+
+*Por qué importaba:* *"El sistema debe disponer de logging suficiente
+para detectar errores... testing unitario, integración."* — literal del
+documento original.
+
+## 11. Caching en capas (Redis, etc.)
+**Prioridad: baja.** El documento mismo lo marca como algo para
+"posteriormente". A la escala actual de Bifrost (una BD chica, tráfico
+bajo) no hay problema de rendimiento que esto resuelva todavía.
+
+## 12. Object pooling
+**Prioridad: baja por ahora.** Relevante cuando haya elementos que
+aparecen/desaparecen con frecuencia (proyectiles, partículas de batalla,
+efectos). Hoy casi no hay nada de eso — buen candidato para cuando
+lleguemos a `graphics/animations` (animaciones de batalla).
+
+---
+
+## Resumen: por dónde seguir
+
+**Catalogado por completo, esperando archivos físicos:** ítem 1
+(tilemap/texturas) e ítem 6 (pipeline completo) — `graphics/` (43
+archivos) y `audio/` (27 archivos) ya están documentados con su rol y
+convención de grilla en `data/graphics-catalog.json` y
+`data/audio-events.json`, y el plan técnico de implementación de cada
+categoría está en `PLAN-GRAPHICS-AUDIO.md`. Lo único que falta es que los
+archivos reales existan en el proyecto — sin eso no se puede escribir el
+loader real ni probarlo de verdad.
+
+**Resueltos:** ítems 2, 3, 4, 5 y 10 (todos 30-08-2026), más el cambio de
+jugabilidad de apariencia (31-08-2026, presets en vez de color libre —
+adelantado sin esperar los sprites, ver `sql/v1.1-appearance-presets-migration.sql`).
+
+**Pendientes, bloqueados por contenido que todavía no existe:** ítem 7
+(NPCs/IA — necesita sprites de `graphics/characters`, ya catalogados),
+ítem 8 (quests/diálogos — necesita contenido narrativo real).
+
+**Sin urgencia (no hay evidencia de que se necesiten hoy):** ítem 9
+(chunking de mapas), ítem 11 (caching/Redis), ítem 12 (object pooling —
+esperando `graphics/animations`, ya catalogado).
+
+De los 12 ítems del roadmap original, quedan 5 resueltos y 7 con su
+catálogo/plan ya listo, esperando solo los archivos reales o contenido
+narrativo. **Próximo paso natural: subir los archivos `.png`/`.ogg`
+reales al proyecto** — con eso se puede empezar a implementar de verdad
+siguiendo el orden sugerido en `PLAN-GRAPHICS-AUDIO.md` (autotiles/tilemap
+primero, luego personajes, luego el resto).
