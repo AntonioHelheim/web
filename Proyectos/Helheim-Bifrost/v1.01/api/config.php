@@ -27,8 +27,8 @@ header('Content-Type: application/json; charset=utf-8');
  * Vuelve a dejarlo en `null` para que la detección automática decida.
  */
 
-//const FORZAR_ENTORNO_LOCAL = null; normalmente se deja en null para que la detección automática decida, pero si tu entorno local es poco común (proxys, puertos no estándar, etc.) puedes forzar true/false acá.
-const FORZAR_ENTORNO_LOCAL = false; //Esto forzará al sistema a usar las credenciales del hosting en TODO momento, sin importar cómo se detecte el entorno.
+const FORZAR_ENTORNO_LOCAL = null; // normalmente se deja en null para que la detección automática decida, pero si tu entorno local es poco común (proxys, puertos no estándar, etc.) puedes forzar true/false acá.
+//const FORZAR_ENTORNO_LOCAL = false; //Esto forzará al sistema a usar las credenciales del hosting en TODO momento, sin importar cómo se detecte el entorno.
 
 /**
  * Determina si estamos en un entorno local de desarrollo.
@@ -97,7 +97,8 @@ $isLocal = detectarEntornoLocal();
 if ($isLocal) {
     // Desarrollo en tu máquina (XAMPP + phpMyAdmin).
     if (!defined('DB_HOST')) {
-        define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+        define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+//        define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
         define('DB_PORT', (int) (getenv('DB_PORT') ?: '3306'));
         define('DB_NAME', getenv('DB_NAME') ?: 'helheim1_bifrost');
         define('DB_USER', getenv('DB_USER') ?: 'root');
@@ -110,7 +111,8 @@ if ($isLocal) {
     // como variables de entorno del servidor (DB_HOST/DB_NAME/DB_USER/DB_PASS)
     // en vez de escribirlos aquí.
     if (!defined('DB_HOST')) {
-        define('DB_HOST', getenv('DB_HOST') ?: '186.64.114.120');
+        //define('DB_HOST', getenv('DB_HOST') ?: '186.64.114.120');
+        define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
         define('DB_PORT', (int) (getenv('DB_PORT') ?: '3306'));
         define('DB_NAME', getenv('DB_NAME') ?: 'helheim1_bifrost');
         define('DB_USER', getenv('DB_USER') ?: 'helheim1');
