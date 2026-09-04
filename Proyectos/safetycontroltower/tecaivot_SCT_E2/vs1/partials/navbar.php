@@ -11,11 +11,12 @@
                 <div class="brand-wrapper">
 
                     <div class="brand-symbol">
-                        <img src="./images/logos/Logo_Tecaivot_principal-white.svg" alt="Tecaivot">
+                        <img src="./images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                     </div>
 
                     <div>
-                        <strong>TECAIVOT</strong>
+                        <strong>Safety Control</strong>
+                        <small>TOWER</small>
                     </div>
 
                 </div>

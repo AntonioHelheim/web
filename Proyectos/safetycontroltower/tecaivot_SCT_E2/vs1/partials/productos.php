@@ -43,7 +43,7 @@
                         <div class="product-feature">
 
                             <div class="product-feature-icon">
-                                <img src="./images/logos/Logo-SCT.svg" alt="Safety Control Tower">
+                                <img src="./images/logos/Logo-SCT.png" alt="Safety Control Tower">
                             </div>
 
                             <div class="product-feature-body">

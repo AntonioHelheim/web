@@ -37,7 +37,7 @@
 
                                 <div>
                                     <small><?php echo htmlspecialchars(t('contacto_email_label'), ENT_QUOTES, 'UTF-8'); ?></small>
-                                    <strong>contacto@tecaivot.cl</strong>
+                                    <strong>contacto@safetycontroltower.cl</strong>
                                 </div>
 
                             </div>
@@ -46,12 +46,12 @@
                             <div class="contact-info-item">
 
                                 <div class="contact-icon">
-                                    <i class="bi bi-building"></i>
+                                    <i class="bi bi-shield-check"></i>
                                 </div>
 
                                 <div>
                                     <small><?php echo htmlspecialchars(t('contacto_empresa_label'), ENT_QUOTES, 'UTF-8'); ?></small>
-                                    <strong>Tecaivot</strong>
+                                    <strong>Safety Control Tower</strong>
                                 </div>
 
                             </div>

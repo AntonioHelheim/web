@@ -39,7 +39,8 @@ if ($hour < 12) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- build: <?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?> -->
+    <link rel="stylesheet" href="css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>">
 
     <style>
         .welcome-hero {
@@ -74,7 +75,7 @@ if ($hour < 12) {
 
             <div class="brand-wrapper">
                 <div class="brand-symbol">
-                    <img src="./images/logos/Logo-SCT-white.svg" alt="Safety Control Tower">
+                    <img src="./images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                 </div>
             </div>
 
@@ -113,7 +114,7 @@ if ($hour < 12) {
             <div class="row g-4">
 
                 <div class="col-md-4">
-                    <div class="feature-card h-100">
+                    <a href="./api/dashboard/dashboard.php" class="feature-card h-100 d-block text-decoration-none" aria-label="Ir al Panel General">
                         <div class="feature-icon">
                             <i class="bi bi-speedometer2"></i>
                         </div>
@@ -121,7 +122,7 @@ if ($hour < 12) {
                         <p>
                             <?php echo htmlspecialchars(t('welcome_card_panel_text'), ENT_QUOTES, 'UTF-8'); ?>
                         </p>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">
@@ -158,7 +159,7 @@ if ($hour < 12) {
 
             <p class="text-muted">
                 <?php echo htmlspecialchars(t('welcome_support_question'), ENT_QUOTES, 'UTF-8'); ?>
-                <a href="mailto:contacto@tecaivot.cl"><?php echo htmlspecialchars(t('welcome_support_link'), ENT_QUOTES, 'UTF-8'); ?></a>
+                <a href="mailto:contacto@safetycontroltower.cl"><?php echo htmlspecialchars(t('welcome_support_link'), ENT_QUOTES, 'UTF-8'); ?></a>
             </p>
 
         </section>

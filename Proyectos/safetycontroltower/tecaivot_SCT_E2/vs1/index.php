@@ -1,7 +1,7 @@
 <?php
 /**
  * index.php
- * Ensambla la página principal de Tecaivot a partir de los partials en /partials.
+ * Ensambla la página principal de Safety Control Tower a partir de los partials en /partials.
  */
 
 // Inicia la sesión ANTES de cualquier salida (obligatorio: login-modal.php
@@ -25,6 +25,12 @@ const PARTIALS_DIR = __DIR__ . '/partials';
  */
 function cargarPartial(string $nombre): void
 {
+    // Los partials se incluyen desde acá adentro (scope de función), así
+    // que cualquier variable global que necesiten -como $ASSET_VERSION,
+    // calculada en session_bootstrap.php- hay que declararla acá antes
+    // del require, o el partial no la va a ver.
+    global $ASSET_VERSION;
+
     $ruta = PARTIALS_DIR . '/' . $nombre;
 
     if (!file_exists($ruta)) {

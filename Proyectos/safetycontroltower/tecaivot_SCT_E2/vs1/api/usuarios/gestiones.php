@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../session_bootstrap.php';
 require_once __DIR__ . '/common.php';
+require_once __DIR__ . '/../../lib/auth.php';
 
 // Si no hay sesión activa, no se puede ver esta página.
 if (empty($_SESSION['logged_in'])) {
@@ -18,6 +19,14 @@ try {
 
 $isGlobalAdmin = ((int) ($accessContext['actor_level'] ?? 0) === 1);
 
+// Roles vía lib/auth.php (el sistema que usan Proyectos/Centros/
+// Trabajadores/Inducción) — a propósito NO se reutiliza $isGlobalAdmin
+// de arriba (basado en el sistema de niveles de usuarios/common.php,
+// que solo reconoce administrador_completo) para no heredar ese mismo
+// desfase en las tarjetas nuevas.
+$rolesLibAuth = currentUserRoles($pdo);
+$puedeGestionInduccion = count(array_intersect($rolesLibAuth, ['administrador', 'administrador_completo', 'cliente', 'jefatura'])) > 0;
+
 aplicarCabecerasSeguridad();
 
 $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -32,7 +41,8 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <!-- build: <?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?> -->
+    <link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>">
 
     <style>
         .welcome-hero {
@@ -71,7 +81,7 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
 
             <div class="brand-wrapper">
                 <div class="brand-symbol">
-                    <img src="../../images/logos/Logo-SCT-white.svg" alt="Safety Control Tower">
+                    <img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
                 </div>
             </div>
 
@@ -142,6 +152,104 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
                     </div>
                 </div>
                 <?php endif; ?>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+                        <h3>Gestión de Trabajadores</h3>
+                        <p>
+                            Administra la ficha de los trabajadores de la
+                            empresa.
+                        </p>
+                        <a href="../trabajadores/gestion-trabajadores.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>Gestión de Proyectos</h3>
+                        <p>
+                            Registra proyectos por empresa y asocia trabajadores
+                            a cada uno.
+                        </p>
+                        <a href="../proyectos/gestion-proyectos.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <h3>Gestión de Centros/Sedes</h3>
+                        <p>
+                            Administra los centros o sedes de trabajo de cada
+                            empresa.
+                        </p>
+                        <a href="../centros/gestion-centros.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h3>Eventos e Incidentes</h3>
+                        <p>
+                            Reporta y da seguimiento a eventos de seguridad
+                            de tu empresa.
+                        </p>
+                        <a href="../eventos/gestion-eventos.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
+
+                <?php if ($puedeGestionInduccion): ?>
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h3>Gestión de Inducción</h3>
+                        <p>
+                            Administra cursos, preguntas, materiales y
+                            asignaciones de inducción.
+                        </p>
+                        <a href="../induccion/gestion-induccion.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <h3>Mis Inducciones</h3>
+                        <p>
+                            Revisa tus cursos asignados, ríndelos y descarga
+                            tus certificados.
+                        </p>
+                        <a href="../induccion/mis-induccion.php" class="btn btn-outline-custom btn-sm">
+                            Ingresar
+                        </a>
+                    </div>
+                </div>
 
             </div>
 

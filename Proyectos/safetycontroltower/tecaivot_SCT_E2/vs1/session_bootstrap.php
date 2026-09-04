@@ -52,3 +52,61 @@ function aplicarCabecerasSeguridad(): void
     header('X-Content-Type-Options: nosniff');
     header('Referrer-Policy: strict-origin-when-cross-origin');
 }
+
+/* =========================================================
+   VERSIÓN DE ASSETS (cache-busting)
+   ========================================================= */
+
+/**
+ * $ASSET_VERSION se agrega como "?v=" a cada CSS/JS propio del proyecto
+ * en todas las páginas, para forzar al navegador (y a cualquier caché
+ * intermedia del hosting) a pedir la copia nueva de un archivo después
+ * de subir un cambio, en vez de servir una versión vieja cacheada.
+ *
+ * Uso en cualquier página que ya haga require de session_bootstrap.php:
+ *
+ *   <!-- build: <?= $ASSET_VERSION ?> -->
+ *   <link rel="stylesheet" href="css/style.css?v=<?= $ASSET_VERSION ?>">
+ *   <script src="js/main.js?v=<?= $ASSET_VERSION ?>"></script>
+ *
+ * Se calcula solo, tomando la fecha de modificación más reciente entre
+ * todos los CSS/JS propios del proyecto (no los de CDN externos, esos ya
+ * llevan su propia versión en la URL) — así nadie tiene que acordarse de
+ * subir un número a mano en cada deploy: basta con subir el archivo
+ * nuevo y este número cambia solo.
+ *
+ * Si se sube un archivo nuevo y este valor NO cambia en la página, es
+ * señal de que el hosting (o el navegador) está sirviendo una copia
+ * vieja en caché del propio archivo PHP, no del CSS/JS — por eso el
+ * comentario "build:" conviene dejarlo visible en el HTML de cada
+ * página, es la forma más rápida de diagnosticar caché vieja desde
+ * "Ver código fuente" del navegador, sin tener que entrar al servidor.
+ */
+function calcularAssetVersion(): string
+{
+    $raiz = __DIR__;
+    $carpetas = ['css', 'js'];
+    $masReciente = 0;
+
+    foreach ($carpetas as $carpeta) {
+        $ruta = $raiz . '/' . $carpeta;
+        if (!is_dir($ruta)) {
+            continue;
+        }
+
+        $archivos = glob($ruta . '/*.{css,js}', GLOB_BRACE);
+        foreach ($archivos ?: [] as $archivo) {
+            $mtime = filemtime($archivo);
+            if ($mtime !== false && $mtime > $masReciente) {
+                $masReciente = $mtime;
+            }
+        }
+    }
+
+    // Respaldo si por algún motivo no se pudo leer ningún archivo (permisos,
+    // carpeta inexistente, etc.): nunca dejar la página sin versión ni
+    // frenar la ejecución por esto.
+    return $masReciente > 0 ? date('YmdHis', $masReciente) : date('YmdHis');
+}
+
+$ASSET_VERSION = calcularAssetVersion();

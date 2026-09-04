@@ -4,8 +4,8 @@
     </script>
 
     <!-- Main JS -->
-    <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/main.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
+    <script src="js/auth.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 
 </html>

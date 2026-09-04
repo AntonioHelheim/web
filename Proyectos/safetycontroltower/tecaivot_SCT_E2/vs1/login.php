@@ -226,7 +226,7 @@ function enviarCodigoPorCorreo(
 ): bool {
 
     $asunto =
-        'Tu código de acceso — Tecaivot';
+        'Tu código de acceso — Safety Control Tower';
 
     $cuerpo =
         "Tu código de acceso es: {$codigo}\n\n" .
@@ -236,7 +236,7 @@ function enviarCodigoPorCorreo(
         'Si no solicitaste este código, puedes ignorar este mensaje.';
 
     $cabeceras =
-        "From: Tecaivot <no-responder@tecaivot.cl>\r\n" .
+        "From: Safety Control Tower <no-responder@safetycontroltower.cl>\r\n" .
         "Content-Type: text/plain; charset=UTF-8\r\n";
 
     return @mail(
