@@ -1,0 +1,11 @@
+{
+  "_nota": "Pools de encuentros silvestres específicos por mapa (ítem 3/4 del roadmap — data-driven). Si un mapKey no aparece acá, wild_battle_start.php sigue usando el catálogo completo de data/species.json (comportamiento de siempre, sin restricción). Los 9 niveles nuevos del Gran Árbol y la Cueva de Don Emilio SÍ tienen su propio pool, para que las criaturas nuevas (Battlers/dragón/demonio) aparezcan específicamente ahí y no se mezclen con el resto del mapa.",
+  "tree_up_1": ["battler_glenys", "battler_hex"],
+  "tree_up_2": ["battler_ley", "battler_linail"],
+  "tree_up_3": ["dragon_ancestral"],
+  "tree_down_1": ["battler_prime", "battler_wyvera"],
+  "tree_down_2": ["battler_oratio", "battler_ouzo"],
+  "tree_down_3": ["demonio_menor"],
+  "cave_down_1": ["battler_hex", "battler_glenys"],
+  "cave_down_2": ["battler_linail", "battler_ley", "battler_wyvera"]
+}
