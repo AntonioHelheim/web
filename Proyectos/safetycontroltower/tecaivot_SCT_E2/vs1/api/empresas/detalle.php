@@ -9,16 +9,22 @@
 require __DIR__ . '/../../session_bootstrap.php';
 require __DIR__ . '/../../lib/db.php';
 require __DIR__ . '/../../lib/auth.php';
+require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/EmpresaRepository.php';
 
-requireRole($pdo, ['administrador', 'cliente', 'trabajador']);
+requireRole($pdo, ['administrador', 'administrador_completo', 'cliente', 'jefatura', 'trabajador']);
 
 $idCompany = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$idCompany) {
     responderJSON(false, null, 'Parámetro "id" inválido.', 400);
 }
 
-$esAdministrador = in_array('administrador', currentUserRoles($pdo), true);
+// Antes esto era in_array('administrador', ...), lo que dejaba que
+// CUALQUIER administrador de empresa viera los datos de OTRAS empresas con
+// solo cambiar el "id" en la URL. Ahora solo el super admin
+// (administrador_completo) puede ver cualquier empresa; el resto (incluido
+// administrador) solo ve la propia.
+$esAdministrador = empresasIsGlobalAdmin($pdo);
 if (!$esAdministrador && $idCompany !== currentUserCompanyId($pdo)) {
     // No se distingue "no existe" de "no es tuya": ambos casos devuelven
     // 403 genérico, para no filtrar qué IDs de empresa existen en el sistema.

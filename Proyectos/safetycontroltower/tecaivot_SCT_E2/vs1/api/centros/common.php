@@ -14,8 +14,13 @@ const CENTROS_ROLES_LECTURA = ['administrador', 'administrador_completo', 'clien
 
 function centrosIsGlobalAdmin(PDO $pdo): bool
 {
+    // Solo 'administrador_completo' (super admin) ve/gestiona centros de
+    // CUALQUIER empresa. 'administrador' es un rol acotado a su propia
+    // empresa (jerarquía definida en users_role_group); antes esta función
+    // lo trataba igual que al super admin, lo que rompía el aislamiento
+    // multiempresa exigido por el contrato.
     $roles = currentUserRoles($pdo);
-    return in_array('administrador', $roles, true) || in_array('administrador_completo', $roles, true);
+    return in_array('administrador_completo', $roles, true);
 }
 
 function centrosRequireGestionApi(PDO $pdo): void

@@ -20,8 +20,11 @@ const EVENTOS_ROLES_REPORTAR = ['administrador', 'administrador_completo', 'clie
 
 function eventosIsGlobalAdmin(PDO $pdo): bool
 {
+    // Solo 'administrador_completo' (super admin) ve/gestiona eventos de
+    // CUALQUIER empresa. 'administrador' es un rol acotado a su propia
+    // empresa; antes esta función lo trataba igual que al super admin.
     $roles = currentUserRoles($pdo);
-    return in_array('administrador', $roles, true) || in_array('administrador_completo', $roles, true);
+    return in_array('administrador_completo', $roles, true);
 }
 
 function eventosRequireGestionApi(PDO $pdo): void

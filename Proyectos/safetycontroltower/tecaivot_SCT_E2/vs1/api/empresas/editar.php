@@ -10,10 +10,11 @@
 require __DIR__ . '/../../session_bootstrap.php';
 require __DIR__ . '/../../lib/db.php';
 require __DIR__ . '/../../lib/auth.php';
+require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/validation.php';
 require __DIR__ . '/../../lib/repositorios/EmpresaRepository.php';
 
-requireRole($pdo, ['administrador', 'cliente']);
+requireRole($pdo, ['administrador', 'administrador_completo', 'cliente']);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     responderJSON(false, null, 'Método no permitido.', 405);
@@ -34,7 +35,11 @@ if (!$idCompany) {
     responderJSON(false, null, 'Empresa no válida.', 400);
 }
 
-$esAdministrador = in_array('administrador', currentUserRoles($pdo), true);
+// Antes esto era in_array('administrador', ...), lo que dejaba que
+// CUALQUIER administrador de empresa editara los datos de OTRAS empresas.
+// Ahora solo el super admin (administrador_completo) puede editar
+// cualquier empresa; el resto (incluido administrador) solo la propia.
+$esAdministrador = empresasIsGlobalAdmin($pdo);
 if (!$esAdministrador && $idCompany !== currentUserCompanyId($pdo)) {
     responderJSON(false, null, 'No tienes permisos para editar esta empresa.', 403);
 }

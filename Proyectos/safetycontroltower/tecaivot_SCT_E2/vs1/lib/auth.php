@@ -133,3 +133,88 @@ function requireRolePage(PDO $pdo, array $rolesPermitidos, string $redirectTo = 
         exit;
     }
 }
+
+/**
+ * Nombre, apellido e id_company del usuario actualmente autenticado, en
+ * una sola consulta (con el mismo criterio de caché en memoria que
+ * currentUserRoles()). Devuelve null si no hay sesión activa o la cuenta
+ * ya no existe.
+ */
+function currentUserProfile(PDO $pdo): ?array
+{
+    static $cache = null;
+    static $consultado = false;
+
+    if ($consultado) {
+        return $cache;
+    }
+    $consultado = true;
+
+    $idUsers = currentUserId();
+    if (!$idUsers) {
+        return $cache = null;
+    }
+
+    $stmt = $pdo->prepare('SELECT name, lastname, id_company FROM users WHERE id_users = :id_users LIMIT 1');
+    $stmt->execute(['id_users' => $idUsers]);
+    $row = $stmt->fetch();
+
+    return $cache = ($row ?: null);
+}
+
+/**
+ * Etiqueta legible en español para un nombre de rol técnico
+ * (users_role_group.name). Mismo criterio de nombres que
+ * USUARIOS_LEVEL_LABELS en api/usuarios/common.php — se mantiene acá en
+ * español sin pasar por i18n a propósito, para no mostrar una etiqueta de
+ * rol traducida en una pantalla mientras el módulo de Usuarios sigue
+ * mostrando el nombre del rol en español en todas las demás.
+ */
+function roleDisplayLabel(string $roleName): string
+{
+    static $labels = [
+        'administrador_completo' => 'Super Admin',
+        'administrador'          => 'Administrador de Empresa',
+        'cliente'                => 'Gerente de Empresa',
+        'jefatura'               => 'Jefatura de Empresa',
+        'trabajador'             => 'Trabajador',
+    ];
+
+    return $labels[$roleName] ?? ucfirst(str_replace('_', ' ', $roleName));
+}
+
+/**
+ * De los roles activos del usuario actual, el "más alto" según la
+ * jerarquía del sistema (mismo orden que USUARIOS_ROLE_LEVELS en
+ * api/usuarios/common.php). Se usa para mostrar una sola etiqueta de rol
+ * en la UI cuando la cuenta tiene más de un rol activo.
+ */
+function primaryRoleName(array $roleNames): ?string
+{
+    static $orden = ['administrador_completo', 'administrador', 'cliente', 'jefatura', 'trabajador'];
+
+    foreach ($orden as $rol) {
+        if (in_array($rol, $roleNames, true)) {
+            return $rol;
+        }
+    }
+
+    return $roleNames[0] ?? null;
+}
+
+/**
+ * Normaliza a "Cada Palabra En Mayúscula Inicial" para mostrar en la UI.
+ * Datos como users.name/lastname se guardaron históricamente en
+ * minúsculas (ej. 'antonio') vía migraciones o carga directa por
+ * phpMyAdmin — esto es solo una normalización de presentación, no
+ * modifica lo guardado en la base de datos.
+ */
+function capitalizarNombre(string $texto): string
+{
+    $texto = trim($texto);
+    if ($texto === '') {
+        return $texto;
+    }
+
+    return mb_convert_case($texto, MB_CASE_TITLE, 'UTF-8');
+}

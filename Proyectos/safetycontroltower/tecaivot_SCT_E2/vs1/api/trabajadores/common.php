@@ -14,8 +14,11 @@ const TRABAJADORES_ROLES_LECTURA = ['administrador', 'administrador_completo', '
 
 function trabajadoresIsGlobalAdmin(PDO $pdo): bool
 {
+    // Solo 'administrador_completo' (super admin) ve/gestiona trabajadores
+    // de CUALQUIER empresa. 'administrador' es un rol acotado a su propia
+    // empresa; antes esta función lo trataba igual que al super admin.
     $roles = currentUserRoles($pdo);
-    return in_array('administrador', $roles, true) || in_array('administrador_completo', $roles, true);
+    return in_array('administrador_completo', $roles, true);
 }
 
 function trabajadoresRequireGestionApi(PDO $pdo): void
