@@ -74,11 +74,11 @@ try {
     auditTrailLogAction($pdo, (int)$targetUser['id_company'], 'usuarios', 'users', $idUsers, 'profile_photo_path',
         $anteriorPath, $nuevoPath, 'upload', trim((string)$targetUser['name'].' '.(string)$targetUser['lastname']));
 
-    if ($anteriorPath !== '' && str_starts_with($anteriorPath, 'uploads/usuarios/')) {
+    if ($anteriorPath !== '' && strpos($anteriorPath, 'uploads/usuarios/') === 0) {
         $anterior = __DIR__ . '/../../' . $anteriorPath;
         $realDir = realpath($directorio);
         $realAnterior = is_file($anterior) ? realpath($anterior) : false;
-        if ($realDir && $realAnterior && str_starts_with($realAnterior, $realDir . DIRECTORY_SEPARATOR)) {
+        if ($realDir && $realAnterior && strpos($realAnterior, $realDir . DIRECTORY_SEPARATOR) === 0) {
             @unlink($realAnterior);
         }
     }

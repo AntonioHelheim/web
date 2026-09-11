@@ -10,18 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".container[data-csrf-token]");
     if (!container) return;
 
-    const csrfToken = container.dataset.csrfToken;
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("myInductionI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
 
-    const i18nNode = document.getElementById("myInductionsI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
-    function fmt(template, values) {
-        let out = template || "";
-        Object.keys(values || {}).forEach(function (key) {
-            out = out.replaceAll("{" + key + "}", String(values[key]));
-        });
-        return out;
-    }
+    const csrfToken = container.dataset.csrfToken;
 
     const misAlert = document.getElementById("misAlert");
     const misStatus = document.getElementById("misStatus");
@@ -52,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         opciones = opciones || {};
         const r = await fetch(url, opciones);
         try { return await r.json(); }
-        catch (e) { return { success: false, message: tt("common_invalid_server_response", "Respuesta inválida del servidor.") }; }
+        catch (e) { return { success: false, message: S("my_induction_error_response", "Respuesta inválida del servidor.") }; }
     }
     function postJson(url, datos) {
         return llamarApi(url, {
@@ -67,20 +60,20 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cargarMisAsignaciones() {
         misStatus.classList.remove("d-none", "alert-danger");
         misStatus.classList.add("alert-info");
-        misStatus.textContent = tt("my_inductions_loading", "Cargando tus cursos asignados...");
+        misStatus.textContent = S("my_induction_loading", "Cargando tus cursos asignados...");
         misLista.classList.add("d-none");
 
         const r = await llamarApi("./mis-asignaciones.php");
         if (!r.success) {
             misStatus.classList.remove("alert-info");
             misStatus.classList.add("alert-danger");
-            misStatus.textContent = r.message || tt("my_inductions_error_load", "No se pudieron cargar tus cursos.");
+            misStatus.textContent = r.message || S("my_induction_load_error", "No se pudieron cargar tus cursos.");
             return;
         }
 
         const asignaciones = r.data || [];
         if (asignaciones.length === 0) {
-            misStatus.textContent = tt("my_inductions_empty", "No tienes cursos de inducción asignados por el momento.");
+            misStatus.textContent = S("my_induction_empty", "No tienes cursos de inducción asignados por el momento.");
             return;
         }
 
@@ -93,9 +86,9 @@ document.addEventListener("DOMContentLoaded", function () {
         misLista.innerHTML = "";
 
         const estados = {
-            1: [tt("my_inductions_status_pending", "Pendiente"), "text-warning"],
-            2: [tt("my_inductions_status_approved", "Aprobado"), "text-success"],
-            3: [tt("my_inductions_status_failed", "Reprobado"), "text-danger"],
+            1: [S("my_induction_status_pending", "Pendiente"), "text-warning"],
+            2: [S("my_induction_status_approved", "Aprobado"), "text-success"],
+            3: [S("my_induction_status_failed", "Reprobado"), "text-danger"],
         };
 
         asignaciones.forEach(function (a) {
@@ -106,12 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
             let accionesHtml = "";
             if (a.state === 1 || a.state === "1") {
                 if (a.intentos_usados >= a.attempts_allowed) {
-                    accionesHtml = '<span class="text-muted">' + escapeHtml(tt("my_inductions_no_attempts", "Sin intentos disponibles")) + '</span>';
+                    accionesHtml = '<span class="text-muted">' + escapeHtml(S("my_induction_no_attempts", "Sin intentos disponibles")) + '</span>';
                 } else {
-                    accionesHtml = '<button type="button" class="btn btn-primary-custom btn-sm" data-action="rendir">' + escapeHtml(tt("my_inductions_execute_btn", "Rendir curso")) + '</button>';
+                    accionesHtml = '<button type="button" class="btn btn-primary-custom btn-sm" data-action="rendir">' + escapeHtml(S("my_induction_take_course", "Rendir curso")) + '</button>';
                 }
             } else if ((a.state === 2 || a.state === "2") && a.certificado_disponible) {
-                accionesHtml = '<a class="btn btn-outline-custom btn-sm" href="./certificado-descargar.php?id_asignacion=' + encodeURIComponent(a.id_user_test_assigned) + '" target="_blank">' + escapeHtml(tt("my_inductions_download_certificate", "Descargar certificado")) + '</a>';
+                accionesHtml = '<a class="btn btn-outline-custom btn-sm" href="./certificado-descargar.php?id_asignacion=' + encodeURIComponent(a.id_user_test_assigned) + '" target="_blank">' + escapeHtml(S("my_induction_download_certificate", "Descargar certificado")) + '</a>';
             }
 
             card.innerHTML =
@@ -120,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         '<h3 class="h6 mb-1">' + escapeHtml(a.test_name) + '</h3>' +
                         '<p class="text-muted mb-1" style="font-size:0.9rem;">' + escapeHtml(a.test_description) + '</p>' +
                         '<span class="' + clase + '">' + escapeHtml(texto) + '</span>' +
-                        ' · <span class="text-muted" style="font-size:0.85rem;">' + escapeHtml(tt("my_inductions_due_prefix", "Vence")) + ' ' + escapeHtml((a.deadline || "").substring(0, 10)) + '</span>' +
-                        ' · <span class="text-muted" style="font-size:0.85rem;">' + escapeHtml(tt("my_inductions_attempts_used_prefix", "Intentos usados:")) + ' ' + escapeHtml(a.intentos_usados) + '</span>' +
+                        ' · <span class="text-muted" style="font-size:0.85rem;">' + escapeHtml(S("my_induction_due_prefix", "Vence")) + ' ' + escapeHtml((a.deadline || "").substring(0, 10)) + '</span>' +
+                        ' · <span class="text-muted" style="font-size:0.85rem;">' + escapeHtml(S("my_induction_attempts_used_prefix", "Intentos usados")) + ': ' + escapeHtml(a.intentos_usados) + '</span>' +
                     '</div>' +
                     '<div>' + accionesHtml + '</div>' +
                 '</div>';
@@ -140,13 +133,13 @@ document.addEventListener("DOMContentLoaded", function () {
     async function abrirRendir(idAsignacion) {
         currentAsignacionId = idAsignacion;
         ocultarAlerta(rendirAlert);
-        rendirPreguntas.innerHTML = '<p class="text-muted">' + escapeHtml(tt("common_loading", "Cargando...")) + '</p>';
+        rendirPreguntas.innerHTML = '<p class="text-muted">' + escapeHtml(S("my_induction_detail_loading", "Cargando...")) + '</p>';
         rendirPanel.classList.remove("d-none");
         rendirPanel.scrollIntoView({ behavior: "smooth" });
 
         const r = await llamarApi("./rendir-detalle.php?id_asignacion=" + encodeURIComponent(idAsignacion));
         if (!r.success) {
-            mostrarAlerta(rendirAlert, r.message || tt("my_inductions_error_load_course", "No se pudo cargar el curso."), "danger");
+            mostrarAlerta(rendirAlert, r.message || S("my_induction_detail_load_error", "No se pudo cargar el curso."), "danger");
             rendirPreguntas.innerHTML = "";
             return;
         }
@@ -192,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const idRel = bloque.dataset.idRel;
                 const seleccionado = bloque.querySelector('input[type="radio"]:checked');
                 if (!seleccionado) {
-                    mostrarAlerta(rendirAlert, tt("my_inductions_must_answer_all", "Debes responder todas las preguntas antes de enviar."), "warning");
+                    mostrarAlerta(rendirAlert, S("my_induction_answer_all_required", "Debes responder todas las preguntas antes de enviar."), "warning");
                     return;
                 }
                 respuestas.push({
@@ -210,17 +203,18 @@ document.addEventListener("DOMContentLoaded", function () {
             rendirEnviarBtn.disabled = false;
 
             if (!r.success) {
-                mostrarAlerta(rendirAlert, r.message || tt("my_inductions_error_submit", "No se pudo enviar tu respuesta."), "danger");
+                mostrarAlerta(rendirAlert, r.message || S("my_induction_submit_error", "No se pudo enviar tu respuesta."), "danger");
                 return;
             }
 
             if (r.data.aprobado) {
-                mostrarAlerta(rendirAlert, fmt(tt("my_inductions_completed_ok", "¡Aprobaste con {score}%! Ya puedes descargar tu certificado desde la lista."), { score: r.data.porcentaje }), "success");
+                const msgOk = S("my_induction_passed", "¡Aprobaste con {pct}%! Ya puedes descargar tu certificado desde la lista.").replace("{pct}", r.data.porcentaje);
+                mostrarAlerta(rendirAlert, msgOk, "success");
             } else {
                 const restantes = r.data.attempts_allowed - r.data.intentos_usados;
                 const mensaje = restantes > 0
-                    ? fmt(tt("my_inductions_failed_with_retries", "No alcanzaste el puntaje mínimo ({score}%). Te quedan {remaining} intento(s)."), { score: r.data.porcentaje, remaining: restantes })
-                    : fmt(tt("my_inductions_failed_no_retries", "No alcanzaste el puntaje mínimo ({score}%) y ya no te quedan intentos disponibles."), { score: r.data.porcentaje });
+                    ? S("my_induction_failed_with_attempts", "No alcanzaste el puntaje mínimo ({pct}%). Te quedan {n} intento(s).").replace("{pct}", r.data.porcentaje).replace("{n}", restantes)
+                    : S("my_induction_failed_no_attempts", "No alcanzaste el puntaje mínimo ({pct}%) y ya no te quedan intentos disponibles.").replace("{pct}", r.data.porcentaje);
                 mostrarAlerta(rendirAlert, mensaje, "warning");
             }
 

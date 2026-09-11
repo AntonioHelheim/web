@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("projectsI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
+
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
-
-    const i18nNode = document.getElementById("projectsI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
 
     /* ==========================================================
        ELEMENTOS
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             cuerpo = await respuesta.json();
         } catch (e) {
-            cuerpo = { success: false, message: tt("common_invalid_server_response", "Respuesta inválida del servidor.") };
+            cuerpo = { success: false, message: S("projects_error_response", "Respuesta inválida del servidor.") };
         }
         return cuerpo;
     }
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const resultado = await llamarApi("./empresas-disponibles.php");
         if (!resultado.success) {
-            mostrarAlerta(projectsActionAlert, resultado.message || tt("projects_error_load_companies", "No se pudieron cargar las empresas."), "danger");
+            mostrarAlerta(projectsActionAlert, resultado.message || S("projects_companies_error", "No se pudieron cargar las empresas."), "danger");
             return;
         }
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 projectsTableWrap.classList.add("d-none");
                 projectsStatus.classList.remove("d-none");
-                projectsStatus.textContent = tt("projects_select_company_first", "Selecciona una empresa para ver sus proyectos.");
+                projectsStatus.textContent = S("projects_select_to_view", "Selecciona una empresa para ver sus proyectos.");
             }
         });
 
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         projectsStatus.classList.remove("d-none");
         projectsStatus.classList.remove("alert-danger");
         projectsStatus.classList.add("alert-info");
-        projectsStatus.textContent = tt("projects_loading", "Cargando proyectos...");
+        projectsStatus.textContent = S("projects_loading", "Cargando proyectos...");
         projectsTableWrap.classList.add("d-none");
 
         const url = isGlobalAdmin && currentCompanyId
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!resultado.success) {
             projectsStatus.classList.remove("alert-info");
             projectsStatus.classList.add("alert-danger");
-            projectsStatus.textContent = resultado.message || tt("projects_error_load", "No se pudieron cargar los proyectos.");
+            projectsStatus.textContent = resultado.message || S("projects_load_error", "No se pudieron cargar los proyectos.");
             return;
         }
 
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (proyectos.length === 0) {
             projectsStatus.classList.remove("alert-danger");
             projectsStatus.classList.add("alert-info");
-            projectsStatus.textContent = tt("projects_empty", "Todavía no hay proyectos registrados.");
+            projectsStatus.textContent = S("projects_empty", "Todavía no hay proyectos registrados.");
             projectsTableWrap.classList.add("d-none");
             return;
         }
@@ -185,9 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
         proyectos.forEach(function (proyecto) {
             const fila = document.createElement("tr");
 
-            const estadoTexto = String(proyecto.state) === "1" ? tt("common_active", "Activo") : tt("common_inactive", "Inactivo");
+            const estadoTexto = String(proyecto.state) === "1" ? S("common_active", "Activo") : S("common_inactive", "Inactivo");
             const estadoClase = String(proyecto.state) === "1" ? "text-success" : "text-muted";
-            const botonEstadoTexto = String(proyecto.state) === "1" ? tt("common_deactivate", "Dar de baja") : tt("common_reactivate", "Reactivar");
+            const botonEstadoTexto = String(proyecto.state) === "1" ? S("projects_deactivate", "Dar de baja") : S("projects_reactivate", "Reactivar");
 
             fila.innerHTML =
                 '<td>' + escapeHtml(proyecto.id_project) + '</td>' +
@@ -195,8 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<td>' + escapeHtml(proyecto.description || '-') + '</td>' +
                 '<td class="' + estadoClase + '">' + escapeHtml(estadoTexto) + '</td>' +
                 '<td class="form-actions">' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="workers">' + escapeHtml(tt("projects_workers_btn", "Trabajadores")) + '</button>' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(tt("common_edit", "Editar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="workers">' + escapeHtml(S("projects_workers_btn", "Trabajadores")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(S("common_edit", "Editar")) + '</button>' +
                     '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle-state">' + escapeHtml(botonEstadoTexto) + '</button>' +
                 '</td>';
 
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
         projectNameInput.value = proyecto.name;
         projectDescInput.value = proyecto.description || "";
 
-        projectSubmitBtn.textContent = tt("projects_save_changes", "Guardar cambios");
+        projectSubmitBtn.textContent = S("projects_save_changes", "Guardar cambios");
         if (projectCancelBtn) projectCancelBtn.classList.remove("d-none");
 
         projectForm.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
         projectForm.reset();
         projectFormMode.value = "create";
         projectFormTarget.value = "";
-        projectSubmitBtn.textContent = tt("projects_save", "Guardar proyecto");
+        projectSubmitBtn.textContent = S("projects_save", "Guardar proyecto");
         if (projectCancelBtn) projectCancelBtn.classList.add("d-none");
     }
 
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             if (!datos.name) {
-                mostrarAlerta(projectsActionAlert, tt("projects_required_name", "El nombre del proyecto es obligatorio."), "danger");
+                mostrarAlerta(projectsActionAlert, S("projects_required", "El nombre del proyecto es obligatorio."), "danger");
                 return;
             }
 
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 datos.id_project = projectFormTarget.value;
             } else if (isGlobalAdmin) {
                 if (!currentCompanyId) {
-                    mostrarAlerta(projectsActionAlert, tt("projects_select_company_before_create", "Selecciona una empresa antes de crear un proyecto."), "danger");
+                    mostrarAlerta(projectsActionAlert, S("projects_select_company_first", "Selecciona una empresa antes de crear un proyecto."), "danger");
                     return;
                 }
                 datos.id_company = currentCompanyId;
@@ -281,11 +281,11 @@ document.addEventListener("DOMContentLoaded", function () {
             projectSubmitBtn.disabled = false;
 
             if (!resultado.success) {
-                mostrarAlerta(projectsActionAlert, resultado.message || tt("projects_error_save", "No se pudo guardar el proyecto."), "danger");
+                mostrarAlerta(projectsActionAlert, resultado.message || S("projects_save_error", "No se pudo guardar el proyecto."), "danger");
                 return;
             }
 
-            mostrarAlerta(projectsActionAlert, resultado.message || tt("projects_saved", "Proyecto guardado correctamente."), "success");
+            mostrarAlerta(projectsActionAlert, resultado.message || S("projects_saved", "Proyecto guardado correctamente."), "success");
             cancelarEdicion();
             cargarProyectos();
         });
@@ -294,8 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cambiarEstadoProyecto(proyecto) {
         const nuevoEstado = String(proyecto.state) === "1" ? 0 : 1;
         const confirmacion = nuevoEstado === 1
-            ? tt("projects_confirm_reactivate", "¿Reactivar este proyecto?")
-            : tt("projects_confirm_deactivate", "¿Dar de baja este proyecto? Podrás reactivarlo más adelante.");
+            ? S("projects_confirm_reactivate", "¿Reactivar este proyecto?")
+            : S("projects_confirm_deactivate", "¿Dar de baja este proyecto? Podrás reactivarlo más adelante.");
 
         if (!window.confirm(confirmacion)) {
             return;
@@ -307,11 +307,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!resultado.success) {
-            mostrarAlerta(projectsActionAlert, resultado.message || tt("projects_error_state", "No se pudo cambiar el estado."), "danger");
+            mostrarAlerta(projectsActionAlert, resultado.message || S("projects_state_error", "No se pudo cambiar el estado."), "danger");
             return;
         }
 
-        mostrarAlerta(projectsActionAlert, resultado.message || tt("projects_state_updated", "Estado actualizado."), "success");
+        mostrarAlerta(projectsActionAlert, resultado.message || S("projects_state_updated", "Estado actualizado."), "success");
         cargarProyectos();
     }
 
@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function abrirModalTrabajadores(proyecto) {
         currentProjectIdForWorkers = proyecto.id_project;
-        workersModalTitle.textContent = tt("projects_workers_modal_title", "Trabajadores del proyecto");
+        workersModalTitle.textContent = S("projects_workers_modal_title", "Trabajadores del proyecto");
         workersModalSubtitle.textContent = proyecto.name;
         ocultarAlerta(workersAlert);
 
@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function cargarTrabajadoresAsociados() {
-        workersList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("common_loading", "Cargando...")) + '</p>';
+        workersList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("projects_workers_loading", "Cargando...")) + '</p>';
 
         const resultado = await llamarApi(
             "./trabajadores-listar.php?id_project=" + encodeURIComponent(currentProjectIdForWorkers)
@@ -344,14 +344,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!resultado.success) {
             workersList.innerHTML = "";
-            mostrarAlerta(workersAlert, resultado.message || tt("projects_workers_error_load", "No se pudieron cargar los trabajadores."), "danger");
+            mostrarAlerta(workersAlert, resultado.message || S("projects_workers_load_error", "No se pudieron cargar los trabajadores."), "danger");
             return;
         }
 
         const trabajadores = resultado.data || [];
 
         if (trabajadores.length === 0) {
-            workersList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("projects_workers_empty", "Todavía no hay trabajadores asociados a este proyecto.")) + '</p>';
+            workersList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("projects_workers_empty", "Todavía no hay trabajadores asociados a este proyecto.")) + '</p>';
             return;
         }
 
@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
             chip.innerHTML =
                 '<span>' + escapeHtml(trabajador.name) + ' ' + escapeHtml(trabajador.lastname) +
                 ' <small class="text-muted">(' + escapeHtml(trabajador.rut) + ')</small></span>' +
-                '<button type="button" title="' + escapeHtml(tt("projects_worker_remove_title", "Quitar del proyecto")) + '">&times;</button>';
+                '<button type="button" title="' + escapeHtml(S("projects_workers_remove_title", "Quitar del proyecto")) + '">&times;</button>';
 
             chip.querySelector("button").addEventListener("click", function () {
                 desasociarTrabajador(trabajador.id_worker);
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function desasociarTrabajador(idWorker) {
-        if (!window.confirm(tt("projects_worker_remove_confirm", "¿Quitar a este trabajador del proyecto?"))) {
+        if (!window.confirm(S("projects_workers_remove_confirm", "¿Quitar a este trabajador del proyecto?"))) {
             return;
         }
 
@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!resultado.success) {
-            mostrarAlerta(workersAlert, resultado.message || tt("projects_worker_remove_error", "No se pudo quitar al trabajador."), "danger");
+            mostrarAlerta(workersAlert, resultado.message || S("projects_workers_remove_error", "No se pudo quitar al trabajador."), "danger");
             return;
         }
 
@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
             workerSearchResults.innerHTML = "";
 
             if (termino.length < 2) {
-                mostrarAlerta(workersAlert, tt("projects_worker_search_min_length", "Ingresa al menos 2 caracteres para buscar."), "warning");
+                mostrarAlerta(workersAlert, S("projects_workers_search_min_chars", "Ingresa al menos 2 caracteres para buscar."), "warning");
                 return;
             }
 
@@ -412,14 +412,14 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             if (!resultado.success) {
-                mostrarAlerta(workersAlert, resultado.message || tt("projects_worker_search_error", "No se pudo realizar la búsqueda."), "danger");
+                mostrarAlerta(workersAlert, resultado.message || S("projects_workers_search_error", "No se pudo realizar la búsqueda."), "danger");
                 return;
             }
 
             const encontrados = resultado.data || [];
 
             if (encontrados.length === 0) {
-                workerSearchResults.innerHTML = '<p class="text-muted mb-0 mt-2">' + escapeHtml(tt("projects_worker_search_no_results", "Sin resultados. Verifica que el trabajador ya esté registrado en el módulo de Trabajadores.")) + '</p>';
+                workerSearchResults.innerHTML = '<p class="text-muted mb-0 mt-2">' + escapeHtml(S("projects_workers_search_empty", "Sin resultados. Verifica que el trabajador ya esté registrado en el módulo de Trabajadores.")) + '</p>';
                 return;
             }
 
@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
 
                     if (!resultadoAsociar.success) {
-                        mostrarAlerta(workersAlert, resultadoAsociar.message || tt("projects_worker_associate_error", "No se pudo asociar al trabajador."), "danger");
+                        mostrarAlerta(workersAlert, resultadoAsociar.message || S("projects_workers_associate_error", "No se pudo asociar al trabajador."), "danger");
                         return;
                     }
 

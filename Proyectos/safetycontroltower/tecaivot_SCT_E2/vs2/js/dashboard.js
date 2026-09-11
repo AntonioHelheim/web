@@ -13,14 +13,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const periodFilter = $('periodFilter');
     const projectFilter = $('projectFilter');
     const centerFilter = $('centerFilter');
+    const projectFilterWrap = $('projectFilterWrap');
+    const centerFilterWrap = $('centerFilterWrap');
     const resetFilters = $('resetFilters');
     const dashAlert = $('dashAlert');
     const dashStatus = $('dashStatus');
     const dashContent = $('dashContent');
     const language = $('pageLanguageSelect');
+    const filterScopeNote = $('filterScopeNote');
+    const rankingSection = $('rankingSection');
+    const perModuleSections = document.querySelectorAll('.dash-section.per-module');
 
     let currentCompanyId = null;
     let requestSerial = 0;
+
+    function isConsolidated() {
+        return currentCompanyId === '__all__';
+    }
+
+    function toggleConsolidatedUi(consolidated) {
+        perModuleSections.forEach(function (el) { el.classList.toggle('d-none', consolidated); });
+        if (rankingSection) rankingSection.classList.toggle('d-none', !consolidated);
+        if (projectFilterWrap) projectFilterWrap.classList.toggle('d-none', consolidated);
+        if (centerFilterWrap) centerFilterWrap.classList.toggle('d-none', consolidated);
+        if (filterScopeNote) {
+            const key = consolidated ? 'consolidated' : 'default';
+            filterScopeNote.textContent = filterScopeNote.dataset[key] || filterScopeNote.textContent;
+        }
+    }
 
     function escapeHtml(value) {
         const div = document.createElement('div');
@@ -47,8 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja
+    // js/lang-switcher.js, incluido en la página junto a este script.
+
     function companyQuery() {
-        return isGlobalAdmin && currentCompanyId ? '?id_company=' + encodeURIComponent(currentCompanyId) : '';
+        return isGlobalAdmin && currentCompanyId && !isConsolidated() ? '?id_company=' + encodeURIComponent(currentCompanyId) : '';
     }
 
     async function loadCompanies() {
@@ -68,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadScopeCatalogs() {
         if (isGlobalAdmin && !currentCompanyId) return;
+        if (isConsolidated()) {
+            projectFilter.innerHTML = '<option value="">' + escapeHtml(S('all_projects','Todos los proyectos')) + '</option>';
+            centerFilter.innerHTML = '<option value="">' + escapeHtml(S('all_centers','Todos los centros')) + '</option>';
+            return;
+        }
         projectFilter.innerHTML = '<option value="">' + escapeHtml(S('all_projects','Todos los proyectos')) + '</option>';
         centerFilter.innerHTML = '<option value="">' + escapeHtml(S('all_centers','Todos los centros')) + '</option>';
         const q = companyQuery();
@@ -95,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function buildParams() {
         const params = new URLSearchParams();
-        if (isGlobalAdmin && currentCompanyId) params.set('id_company', String(currentCompanyId));
+        if (isGlobalAdmin && currentCompanyId && !isConsolidated()) params.set('id_company', String(currentCompanyId));
         if (projectFilter.value) params.set('id_project', projectFilter.value);
         if (centerFilter.value) params.set('id_center', centerFilter.value);
         params.set('period', periodFilter.value || '90');
@@ -111,7 +139,14 @@ document.addEventListener('DOMContentLoaded', function () {
         dashStatus.textContent = S('loading','Cargando indicadores...');
         dashContent.classList.add('d-none');
 
-        const response = await api('./indicadores.php?' + buildParams().toString());
+        const consolidated = isConsolidated();
+        toggleConsolidatedUi(consolidated);
+
+        const url = consolidated
+            ? './indicadores-consolidados.php?period=' + encodeURIComponent(periodFilter.value || '90')
+            : './indicadores.php?' + buildParams().toString();
+
+        const response = await api(url);
         if (serial !== requestSerial) return;
         if (!response.success) {
             dashStatus.classList.remove('alert-info');
@@ -122,15 +157,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         dashStatus.classList.add('d-none');
         dashContent.classList.remove('d-none');
-        renderAll(response.data || {});
+        if (consolidated) {
+            renderConsolidated(response.data || {});
+        } else {
+            renderAll(response.data || {});
+        }
     }
 
     if (companySelect) {
         companySelect.addEventListener('change', async function () {
-            currentCompanyId = companySelect.value ? parseInt(companySelect.value, 10) : null;
+            const raw = companySelect.value;
+            currentCompanyId = raw === '__all__' ? '__all__' : (raw ? parseInt(raw, 10) : null);
             projectFilter.value = '';
             centerFilter.value = '';
             if (!currentCompanyId) {
+                toggleConsolidatedUi(false);
                 dashContent.classList.add('d-none');
                 dashStatus.classList.remove('d-none');
                 dashStatus.textContent = S('select_company','Selecciona una empresa para ver sus indicadores.');
@@ -155,6 +196,35 @@ document.addEventListener('DOMContentLoaded', function () {
             centerFilter.value = '';
             loadDashboard();
         });
+    }
+
+    function renderConsolidated(data) {
+        renderMetrics(data);
+        renderTrend(data.tendencia || []);
+        renderRanking(data.ranking_empresas || []);
+    }
+
+    function renderRanking(rows) {
+        const body = $('rankingBody');
+        if (!body) return;
+        if (!rows.length) {
+            body.innerHTML = '<tr><td colspan="5" class="text-muted small text-center">' + escapeHtml(S('ranking_empty','No hay empresas activas para comparar.')) + '</td></tr>';
+            return;
+        }
+        body.innerHTML = rows.map(function (row) {
+            const critical = Number(row.eventos_criticos_abiertos || 0);
+            const overdue = Number(row.protocolos_vencidos || 0);
+            const review = Number(row.protocolos_pendientes_revision || 0);
+            const rate = row.tasa_aprobacion_induccion;
+            const rateText = rate == null ? '—' : (rate + '%');
+            return '<tr>'
+                + '<td>' + escapeHtml(row.razon_social) + '</td>'
+                + '<td class="text-end' + (critical > 0 ? ' ranking-cell-bad' : '') + '">' + critical + '</td>'
+                + '<td class="text-end' + (overdue > 0 ? ' ranking-cell-bad' : '') + '">' + overdue + '</td>'
+                + '<td class="text-end' + (review > 0 ? ' ranking-cell-warn' : '') + '">' + review + '</td>'
+                + '<td class="text-end">' + escapeHtml(rateText) + '</td>'
+                + '</tr>';
+        }).join('');
     }
 
     function renderAll(data) {

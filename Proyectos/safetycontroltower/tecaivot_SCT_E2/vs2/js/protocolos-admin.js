@@ -522,6 +522,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- Eventos de UI ---------------------------------------------------
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
+
     if (els.company) els.company.addEventListener('change', () => {
         updateScopeFromSelector();
         loadProtocols();

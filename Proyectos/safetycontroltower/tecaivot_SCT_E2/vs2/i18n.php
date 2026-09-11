@@ -61,31 +61,34 @@ function idiomasDisponiblesConNombre(): array
 }
 
 /**
- * Normaliza cualquier valor guardado en users.language (incluye el legado
- * 'ESP' cargado antes de que existiera esta whitelist) al código de 2 letras
- * soportado por el sistema. Nunca lanza error: ante un valor desconocido o
- * vacío devuelve IDIOMA_POR_DEFECTO, para que un dato sucio en BD jamás
- * rompa una página ni el login.
+ * Normaliza cualquier valor recibido (perfil de usuario, request, dato
+ * legado en BD) a uno de los 5 códigos de IDIOMAS_DISPONIBLES.
  *
- * Único punto de verdad para esta normalización — usado por login.php
- * (detección post-login), api/usuarios/idioma.php (cambio manual) y los
- * formularios de alta/edición de usuarios (api/usuarios/crear.php y
- * actualizar.php).
+ * Tolera:
+ *  - mayúsculas/minúsculas y espacios ('ES', ' es ')
+ *  - el valor legado 'ESP' (cargado antes de existir la whitelist de 5
+ *    idiomas), mapeándolo a 'es'
+ *  - cualquier valor no reconocido, degradando a IDIOMA_POR_DEFECTO
+ *
+ * Nunca lanza excepción: siempre devuelve un código válido de la whitelist.
  */
 function normalizarIdiomaUsuario(?string $valor): string
 {
     $codigo = strtolower(trim((string) $valor));
+
     if ($codigo === 'esp') {
         $codigo = 'es';
     }
+
     return in_array($codigo, IDIOMAS_DISPONIBLES, true) ? $codigo : IDIOMA_POR_DEFECTO;
 }
 
 /**
- * Nombre legible del idioma activo (ej. "Español"), para mensajes de
- * confirmación como "¿Cambiar el idioma a {language}?".
+ * Variante "escapada" de t(): equivalente a
+ * htmlspecialchars(t($key), ENT_QUOTES, 'UTF-8'), para usar directamente en
+ * atributos/texto HTML sin repetir el wrapper en cada vista.
  */
-function nombreIdioma(string $codigo): string
+function tt(string $key): string
 {
-    return $GLOBALS['__idiomas_nombres'][$codigo] ?? strtoupper($codigo);
+    return htmlspecialchars(t($key), ENT_QUOTES, 'UTF-8');
 }

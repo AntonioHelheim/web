@@ -38,18 +38,13 @@ $dashKeys = [
     'eval_approved','eval_pending','eval_failed','rate_label','rate_empty','overdue_pending',
     'protocol_active','protocol_suspended','protocol_closed','protocol_cancelled','protocol_pending_review','protocol_conforme','protocol_observado','protocol_no_conforme','protocol_no_aplica',
     'recent_event','recent_form','recent_protocol','recent_audit','recent_empty',
-    'trend_events','trend_forms','trend_protocols','trend_evaluations'
+    'trend_events','trend_forms','trend_protocols','trend_evaluations',
+    'scope_all_companies','scope_note_consolidated','ranking_title','ranking_intro','ranking_company',
+    'ranking_critical_events','ranking_overdue_protocols','ranking_pending_review','ranking_approval_rate','ranking_empty'
 ];
 $dashStrings = [];
 foreach ($dashKeys as $key) $dashStrings[$key] = t('dashboard_' . $key);
 $assetVersionEscaped = htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8');
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8') ?>">
@@ -75,6 +70,7 @@ $langSwitcherStrings = [
         .trend-wrap{overflow-x:auto}.trend-svg{width:100%;min-width:620px;height:260px;display:block}.trend-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--text-secondary)}.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.trend-empty{padding:48px 12px;text-align:center;color:var(--text-secondary);font-size:12px}
         .recent-list{display:grid;gap:8px}.recent-item{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:12px;background:var(--background-soft)}.recent-icon{width:34px;height:34px;border-radius:10px;background:rgba(0,163,244,.10);color:var(--primary-dark);display:flex;align-items:center;justify-content:center}.recent-title{font-size:12px;font-weight:750;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.recent-detail{font-size:10.5px;color:var(--text-secondary);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.recent-date{font-size:10.5px;color:var(--text-secondary);white-space:nowrap}
         .summary-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}.summary-mini{padding:10px;border-radius:12px;background:var(--background-soft);border:1px solid var(--border)}.summary-mini strong{display:block;font-size:18px;color:var(--primary-darkest)}.summary-mini span{font-size:10.5px;color:var(--text-secondary)}
+        .ranking-table{font-size:12.5px}.ranking-table th{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--text-secondary);border-bottom-width:1px}.ranking-table td,.ranking-table th{white-space:nowrap}.ranking-table td:first-child,.ranking-table th:first-child{white-space:normal}.ranking-cell-bad{color:#dc2626;font-weight:800}.ranking-cell-warn{color:#b45309;font-weight:800}
         @media(max-width:1199.98px){.metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr)) auto}.panel-grid-3{grid-template-columns:1fr 1fr}.panel-grid-3>.panel-card:last-child{grid-column:1/-1}}
         @media(max-width:767.98px){.dashboard-shell{padding:0 13px 40px}.dash-topbar{padding:11px 0}.dash-identity{display:none}.language-select{display:none}.dash-avatar,.dash-icon-btn{width:36px;height:36px}.dash-brand-symbol{width:38px;height:38px}.dash-brand-symbol img{width:25px;height:25px}.dash-hero{grid-template-columns:1fr;padding:24px 0 14px;gap:12px}.dash-hero h1{font-size:31px}.context-pill{width:100%;max-width:none;border-radius:14px}.filter-grid{grid-template-columns:1fr 1fr}.filter-actions{grid-column:1/-1;display:flex}.filter-actions .btn{flex:1}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric-card{padding:13px}.metric-value{font-size:23px}.panel-grid-2,.panel-grid-3{grid-template-columns:1fr}.panel-grid-3>.panel-card:last-child{grid-column:auto}.bar-row{grid-template-columns:100px minmax(70px,1fr) 34px}.recent-item{grid-template-columns:32px minmax(0,1fr)}.recent-date{grid-column:2}.summary-strip{grid-template-columns:1fr 1fr 1fr}}
         @media(max-width:390px){.filter-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:1fr 1fr}.dash-brand>div:last-child{display:none}.summary-strip{grid-template-columns:1fr}}
@@ -114,14 +110,14 @@ $langSwitcherStrings = [
     <section class="filter-card" aria-label="<?= htmlspecialchars(t('dashboard_filters'),ENT_QUOTES,'UTF-8') ?>">
         <div class="filter-grid">
             <?php if ($isGlobalAdmin): ?>
-            <div><label for="companySelect" class="form-label small"><?= htmlspecialchars(t('dashboard_company'),ENT_QUOTES,'UTF-8') ?></label><select id="companySelect" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_select_company'),ENT_QUOTES,'UTF-8') ?></option></select></div>
+            <div><label for="companySelect" class="form-label small"><?= htmlspecialchars(t('dashboard_company'),ENT_QUOTES,'UTF-8') ?></label><select id="companySelect" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_select_company'),ENT_QUOTES,'UTF-8') ?></option><option value="__all__"><?= htmlspecialchars(t('dashboard_scope_all_companies'),ENT_QUOTES,'UTF-8') ?></option></select></div>
             <?php endif; ?>
             <div><label for="periodFilter" class="form-label small"><?= htmlspecialchars(t('dashboard_period'),ENT_QUOTES,'UTF-8') ?></label><select id="periodFilter" class="form-select"><option value="30"><?= htmlspecialchars(t('dashboard_period_30'),ENT_QUOTES,'UTF-8') ?></option><option value="90" selected><?= htmlspecialchars(t('dashboard_period_90'),ENT_QUOTES,'UTF-8') ?></option><option value="180"><?= htmlspecialchars(t('dashboard_period_180'),ENT_QUOTES,'UTF-8') ?></option><option value="365"><?= htmlspecialchars(t('dashboard_period_365'),ENT_QUOTES,'UTF-8') ?></option><option value="all"><?= htmlspecialchars(t('dashboard_period_all'),ENT_QUOTES,'UTF-8') ?></option></select></div>
-            <div><label for="projectFilter" class="form-label small"><?= htmlspecialchars(t('dashboard_project'),ENT_QUOTES,'UTF-8') ?></label><select id="projectFilter" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_all_projects'),ENT_QUOTES,'UTF-8') ?></option></select></div>
-            <div><label for="centerFilter" class="form-label small"><?= htmlspecialchars(t('dashboard_center'),ENT_QUOTES,'UTF-8') ?></label><select id="centerFilter" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_all_centers'),ENT_QUOTES,'UTF-8') ?></option></select></div>
+            <div id="projectFilterWrap"><label for="projectFilter" class="form-label small"><?= htmlspecialchars(t('dashboard_project'),ENT_QUOTES,'UTF-8') ?></label><select id="projectFilter" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_all_projects'),ENT_QUOTES,'UTF-8') ?></option></select></div>
+            <div id="centerFilterWrap"><label for="centerFilter" class="form-label small"><?= htmlspecialchars(t('dashboard_center'),ENT_QUOTES,'UTF-8') ?></label><select id="centerFilter" class="form-select"><option value=""><?= htmlspecialchars(t('dashboard_all_centers'),ENT_QUOTES,'UTF-8') ?></option></select></div>
             <div class="filter-actions"><button type="button" id="resetFilters" class="btn btn-outline-custom"><i class="bi bi-arrow-counterclockwise"></i> <?= htmlspecialchars(t('dashboard_reset'),ENT_QUOTES,'UTF-8') ?></button></div>
         </div>
-        <p class="filter-note" id="filterScopeNote"><?= htmlspecialchars(t('dashboard_scope_note'),ENT_QUOTES,'UTF-8') ?></p>
+        <p class="filter-note" id="filterScopeNote" data-default="<?= htmlspecialchars(t('dashboard_scope_note'),ENT_QUOTES,'UTF-8') ?>" data-consolidated="<?= htmlspecialchars(t('dashboard_scope_note_consolidated'),ENT_QUOTES,'UTF-8') ?>"><?= htmlspecialchars(t('dashboard_scope_note'),ENT_QUOTES,'UTF-8') ?></p>
     </section>
 
     <div id="dashAlert" class="alert d-none" role="alert" aria-live="polite"></div>
@@ -130,12 +126,32 @@ $langSwitcherStrings = [
     <main id="dashContent" class="d-none">
         <section><div id="metricGrid" class="metric-grid"></div></section>
 
+        <section class="dash-section d-none" id="rankingSection">
+            <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_ranking_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_ranking_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
+            <div class="panel-card">
+                <div class="table-responsive">
+                    <table class="table ranking-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th><?= htmlspecialchars(t('dashboard_ranking_company'),ENT_QUOTES,'UTF-8') ?></th>
+                                <th class="text-end"><?= htmlspecialchars(t('dashboard_ranking_critical_events'),ENT_QUOTES,'UTF-8') ?></th>
+                                <th class="text-end"><?= htmlspecialchars(t('dashboard_ranking_overdue_protocols'),ENT_QUOTES,'UTF-8') ?></th>
+                                <th class="text-end"><?= htmlspecialchars(t('dashboard_ranking_pending_review'),ENT_QUOTES,'UTF-8') ?></th>
+                                <th class="text-end"><?= htmlspecialchars(t('dashboard_ranking_approval_rate'),ENT_QUOTES,'UTF-8') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <section class="dash-section">
             <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_activity_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_activity_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
             <div class="panel-card"><div class="trend-wrap" id="trendChart"></div><div class="trend-legend" id="trendLegend"></div></div>
         </section>
 
-        <section class="dash-section">
+        <section class="dash-section per-module">
             <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_events_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_events_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
             <div class="panel-grid-3">
                 <div class="panel-card"><h3><?= htmlspecialchars(t('dashboard_events_state'),ENT_QUOTES,'UTF-8') ?></h3><div id="eventsState"></div></div>
@@ -144,7 +160,7 @@ $langSwitcherStrings = [
             </div>
         </section>
 
-        <section class="dash-section">
+        <section class="dash-section per-module">
             <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_evaluations_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_evaluations_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
             <div class="panel-grid-3">
                 <div class="panel-card"><h3><?= htmlspecialchars(t('dashboard_induction'),ENT_QUOTES,'UTF-8') ?></h3><div id="evalInduction"></div><div id="rateInduction" class="rate-line"></div></div>
@@ -153,7 +169,7 @@ $langSwitcherStrings = [
             </div>
         </section>
 
-        <section class="dash-section">
+        <section class="dash-section per-module">
             <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_protocols_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_protocols_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
             <div class="panel-grid-2">
                 <div class="panel-card"><div class="summary-strip"><div class="summary-mini"><strong id="protocolVisible">0</strong><span><?= htmlspecialchars(t('dashboard_protocols_visible'),ENT_QUOTES,'UTF-8') ?></span></div><div class="summary-mini"><strong id="protocolOverdue">0</strong><span><?= htmlspecialchars(t('dashboard_protocols_overdue'),ENT_QUOTES,'UTF-8') ?></span></div><div class="summary-mini"><strong id="trackingOverdue">0</strong><span><?= htmlspecialchars(t('dashboard_tracking_overdue'),ENT_QUOTES,'UTF-8') ?></span></div></div><h3><?= htmlspecialchars(t('dashboard_protocol_assignments'),ENT_QUOTES,'UTF-8') ?></h3><div id="protocolAssignments"></div></div>
@@ -161,7 +177,7 @@ $langSwitcherStrings = [
             </div>
         </section>
 
-        <section class="dash-section">
+        <section class="dash-section per-module">
             <div class="panel-grid-2">
                 <div>
                     <div class="section-head"><div><h2><?= htmlspecialchars(t('dashboard_forms_title'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('dashboard_forms_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
@@ -177,8 +193,7 @@ $langSwitcherStrings = [
 </div>
 <script id="dashboardI18n" type="application/json"><?= json_encode($dashStrings, JSON_UNESCAPED_UNICODE|JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
 <script src="../../js/dashboard.js?v=<?= $assetVersionEscaped ?>"></script>
+<script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
 </body>
 </html>

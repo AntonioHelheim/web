@@ -44,8 +44,8 @@ $rolPrincipal = (string) $accessContext['primary_role'];
 $rolEtiqueta = roleDisplayLabel($rolPrincipal);
 $esSoloAutogestion = ((int) $accessContext['actor_level'] === 5);
 $usuariosDescripcion = $esSoloAutogestion
-    ? t('mgmt_users_desc_self')
-    : t('mgmt_users_desc_admin');
+    ? 'Revisa y actualiza los datos de tu propia cuenta.'
+    : 'Administra cuentas de acceso, estado de usuarios y asignación de roles.';
 
 $empresaNombre = null;
 if (!$isGlobalAdmin && !empty($perfil['id_company'])) {
@@ -55,21 +55,13 @@ if (!$isGlobalAdmin && !empty($perfil['id_company'])) {
 
 aplicarCabecerasSeguridad();
 $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8');
-
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(t('mgmt_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
+    <title>Gestiones - Safety Control Tower</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -178,12 +170,6 @@ $langSwitcherStrings = [
         .app-avatar,
         .app-icon-btn {
             width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-        }
-
-        .language-select {
-            min-width: 110px;
             height: 40px;
             flex-shrink: 0;
         }
@@ -765,15 +751,16 @@ $langSwitcherStrings = [
                 <?php endif; ?>
             </div>
 
-            <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?php echo htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8'); ?>">
+            <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8') ?>">
                 <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?>
-                    <option value="<?php echo htmlspecialchars($code, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $code === idiomaActual() ? 'selected' : ''; ?>><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></option>
+                    <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option>
                 <?php endforeach; ?>
             </select>
-            <a href="../../bienvenida.php" class="app-icon-btn" title="<?php echo htmlspecialchars(t('mgmt_back_icon'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(t('mgmt_back_icon'), ENT_QUOTES, 'UTF-8'); ?>">
+
+            <a href="../../bienvenida.php" class="app-icon-btn" title="Volver" aria-label="Volver">
                 <i class="bi bi-arrow-left"></i>
             </a>
-            <a href="../../logout.php" class="app-icon-btn" title="<?php echo htmlspecialchars(t('common_logout'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(t('common_logout'), ENT_QUOTES, 'UTF-8'); ?>">
+            <a href="../../logout.php" class="app-icon-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
@@ -783,11 +770,12 @@ $langSwitcherStrings = [
         <div>
             <div class="hero-kicker">
                 <i class="bi bi-grid-1x2-fill"></i>
-                <?php echo htmlspecialchars(t('mgmt_hero_kicker'), ENT_QUOTES, 'UTF-8'); ?>
+                Centro de módulos
             </div>
-            <h1><?php echo htmlspecialchars(t('mgmt_hero_title'), ENT_QUOTES, 'UTF-8'); ?></h1>
+            <h1>Gestiones</h1>
             <p class="hero-copy">
-                <?php echo htmlspecialchars(t('mgmt_hero_copy'), ENT_QUOTES, 'UTF-8'); ?>
+                Accede a las herramientas disponibles para tu perfil. Las opciones se organizan por operación,
+                formación y administración para facilitar el acceso desde escritorio y móvil.
             </p>
         </div>
 
@@ -799,7 +787,7 @@ $langSwitcherStrings = [
                 <span class="pill-text">
                     <strong><?php echo htmlspecialchars($rolEtiqueta, ENT_QUOTES, 'UTF-8'); ?></strong>
                     <?php if ($isGlobalAdmin): ?>
-                        — <?php echo htmlspecialchars(t('mgmt_pill_all_companies'), ENT_QUOTES, 'UTF-8'); ?>
+                        — acceso a todas las empresas
                     <?php elseif ($empresaNombre): ?>
                         — <?php echo htmlspecialchars($empresaNombre, ENT_QUOTES, 'UTF-8'); ?>
                     <?php endif; ?>
@@ -816,8 +804,8 @@ $langSwitcherStrings = [
             <div class="module-section-title-wrap">
                 <span class="section-symbol"><i class="bi bi-briefcase"></i></span>
                 <div>
-                    <h2 id="section-operacion"><?php echo htmlspecialchars(t('mgmt_section_operational_title'), ENT_QUOTES, 'UTF-8'); ?></h2>
-                    <p><?php echo htmlspecialchars(t('mgmt_section_operational_text'), ENT_QUOTES, 'UTF-8'); ?></p>
+                    <h2 id="section-operacion">Operación</h2>
+                    <p>Empresa, personas, proyectos y seguridad operacional.</p>
                 </div>
             </div>
         </div>
@@ -831,7 +819,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_workers_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_workers_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -845,7 +833,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_projects_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_projects_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -859,7 +847,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_centers_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_centers_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -873,7 +861,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-graph-up-arrow"></i> <?php echo htmlspecialchars(t('mgmt_tag_stage3'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-graph-up-arrow"></i> Etapa 3</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_programs_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_programs_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -886,7 +874,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-shield-check"></i> <?php echo htmlspecialchars(t('mgmt_tag_security'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-shield-check"></i> Seguridad</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_events_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_events_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -903,8 +891,8 @@ $langSwitcherStrings = [
             <div class="module-section-title-wrap">
                 <span class="section-symbol"><i class="bi bi-clipboard2-data"></i></span>
                 <div>
-                    <h2 id="section-formacion"><?php echo htmlspecialchars(t('mgmt_section_learning_title'), ENT_QUOTES, 'UTF-8'); ?></h2>
-                    <p><?php echo htmlspecialchars(t('mgmt_section_learning_text'), ENT_QUOTES, 'UTF-8'); ?></p>
+                    <h2 id="section-formacion">Formación y control</h2>
+                    <p>Inducciones, auditorías, autoevaluaciones y formularios.</p>
                 </div>
             </div>
         </div>
@@ -918,7 +906,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_induction_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_induction_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -931,7 +919,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-person"></i> <?php echo htmlspecialchars(t('mgmt_tag_my_space'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-person"></i> Mi espacio</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_my_induction_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_my_induction_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -944,7 +932,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_audits_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_audits_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -957,7 +945,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-person"></i> <?php echo htmlspecialchars(t('mgmt_tag_my_space'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-person"></i> Mi espacio</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_my_audits_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_my_audits_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -970,7 +958,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_self_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_self_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -983,7 +971,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-person"></i> <?php echo htmlspecialchars(t('mgmt_tag_my_space'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-person"></i> Mi espacio</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_my_self_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_my_self_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -996,7 +984,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_forms_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_forms_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -1009,7 +997,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-person"></i> <?php echo htmlspecialchars(t('mgmt_tag_my_space'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-person"></i> Mi espacio</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_my_forms_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_my_forms_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -1022,7 +1010,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-gear"></i> <?php echo htmlspecialchars(t('mgmt_tag_management'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-gear"></i> Gestión</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_protocols_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_protocols_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -1035,7 +1023,7 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-person"></i> <?php echo htmlspecialchars(t('mgmt_tag_my_space'), ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="module-tag"><i class="bi bi-person"></i> Mi espacio</span>
                     <h3><?php echo htmlspecialchars(t('mgmt_my_protocols_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars(t('mgmt_my_protocols_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
@@ -1052,8 +1040,8 @@ $langSwitcherStrings = [
             <div class="module-section-title-wrap">
                 <span class="section-symbol"><i class="bi bi-sliders"></i></span>
                 <div>
-                    <h2 id="section-admin"><?php echo htmlspecialchars(t('mgmt_section_admin_title'), ENT_QUOTES, 'UTF-8'); ?></h2>
-                    <p><?php echo htmlspecialchars($isGlobalAdmin ? t('mgmt_section_admin_text_global') : t('mgmt_section_admin_text'), ENT_QUOTES, 'UTF-8'); ?></p>
+                    <h2 id="section-admin">Administración</h2>
+                    <p>Cuentas de acceso<?php echo $isGlobalAdmin ? ' y configuración de empresas' : ''; ?>.</p>
                 </div>
             </div>
         </div>
@@ -1065,8 +1053,8 @@ $langSwitcherStrings = [
                     <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                 </div>
                 <div class="module-card-body">
-                    <span class="module-tag"><i class="bi bi-shield-lock"></i> <?php echo htmlspecialchars(t('mgmt_tag_access'), ENT_QUOTES, 'UTF-8'); ?></span>
-                    <h3><?php echo htmlspecialchars(t('mgmt_users_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
+                    <span class="module-tag"><i class="bi bi-shield-lock"></i> Acceso</span>
+                    <h3>Usuarios</h3>
                     <p><?php echo htmlspecialchars($usuariosDescripcion, ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
             </a>
@@ -1078,7 +1066,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-key"></i> <?php echo htmlspecialchars(t('mgmt_tag_rbac'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-key"></i> RBAC</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_permissions_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_permissions_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -1092,7 +1080,7 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-journal-check"></i> <?php echo htmlspecialchars(t('mgmt_tag_audit_trail'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="module-tag"><i class="bi bi-journal-check"></i> Audit trail</span>
                         <h3><?php echo htmlspecialchars(t('mgmt_history_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(t('mgmt_history_text'), ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
@@ -1106,9 +1094,9 @@ $langSwitcherStrings = [
                         <span class="module-arrow"><i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="module-card-body">
-                        <span class="module-tag"><i class="bi bi-stars"></i> <?php echo htmlspecialchars(t('mgmt_tag_platform'), ENT_QUOTES, 'UTF-8'); ?></span>
-                        <h3><?php echo htmlspecialchars(t('mgmt_companies_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
-                        <p><?php echo htmlspecialchars(t('mgmt_companies_text'), ENT_QUOTES, 'UTF-8'); ?></p>
+                        <span class="module-tag"><i class="bi bi-stars"></i> Plataforma</span>
+                        <h3>Empresas</h3>
+                        <p>Registra nuevas empresas y consulta las empresas activas del sistema.</p>
                     </div>
                 </a>
             <?php endif; ?>
@@ -1117,7 +1105,6 @@ $langSwitcherStrings = [
 
 </div>
 
-<script>window.SCT_LANG_SWITCHER_I18N = <?php echo json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;</script>
 <script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 </html>

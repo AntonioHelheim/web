@@ -23,6 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadExecutionDetail(id,box){if(!box.classList.contains('d-none')){box.classList.add('d-none');return;}box.classList.remove('d-none');box.innerHTML='<span class="text-muted small">...</span>';const r=await api('./ejecucion-detalle.php?id_protocol_execution='+encodeURIComponent(id));if(!r.success){box.innerHTML='<div class="alert alert-danger mb-0">'+esc(r.message)+'</div>';return;}let html='';(r.data.submissions||[]).forEach(s=>{html+='<div class="mt-2"><strong>'+esc(s.form_name)+'</strong>';const answers=s.detalle&&s.detalle.respuestas?s.detalle.respuestas:[];answers.forEach(a=>{let value=a.display_value;if(Array.isArray(value))value=value.join(', ');if(a.file_path)value='<a href="../formularios/archivo-descargar.php?id_answer='+encodeURIComponent(a.id_answer)+'"><i class="bi bi-download"></i> '+esc(a.original_name||'Archivo')+'</a>';else value=esc(value==null||value===''?'—':value);html+='<div class="small border-bottom py-1"><b>'+esc(a.label)+':</b> '+value+'</div>';});html+='</div>';});if(r.data.review_notes)html+='<div class="small mt-2"><b>Obs.:</b> '+esc(r.data.review_notes)+'</div>';box.innerHTML=html||'—';}
 
-
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
     load();
 });

@@ -48,7 +48,6 @@ require __DIR__ . '/session_bootstrap.php';
 require __DIR__ . '/lib/response.php';
 require __DIR__ . '/lib/db.php';
 require __DIR__ . '/lib/passwords.php';
-require __DIR__ . '/i18n.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     responderJSON(false, null, 'Método no permitido.', 405);
@@ -578,7 +577,7 @@ try {
         }
 
         $stmt = $pdo->prepare(
-            'SELECT id_users, language
+            'SELECT id_users
              FROM users
              WHERE id_users = :email
                AND state = 1
@@ -675,12 +674,6 @@ try {
         $_SESSION['logged_in'] = true;
         $_SESSION['last_activity'] = time();
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-        // Requisito: al iniciar sesión, el sistema debe adoptar el idioma
-        // configurado en el perfil del usuario (users.language), sin importar
-        // qué idioma tenía elegido la sesión mientras no había iniciado sesión
-        // (por ejemplo, el selector de la pantalla de login).
-        $_SESSION['site_lang'] = normalizarIdiomaUsuario($user['language'] ?? null);
 
         responderJSON(
             true,

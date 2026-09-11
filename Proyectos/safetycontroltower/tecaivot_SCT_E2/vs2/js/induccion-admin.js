@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".container[data-csrf-token]");
     if (!container) return;
 
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("inductionI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
+
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
     const puedeBanco = container.dataset.puedeBanco === "1";
-
-    const i18nNode = document.getElementById("inductionAdminI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
 
     const companySelect = document.getElementById("companySelect");
 
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         opciones = opciones || {};
         const r = await fetch(url, opciones);
         try { return await r.json(); }
-        catch (e) { return { success: false, message: tt("common_invalid_server_response", "Respuesta inválida del servidor.") }; }
+        catch (e) { return { success: false, message: S("induction_error_response", "Respuesta inválida del servidor.") }; }
     }
     function postJson(url, datos) {
         return llamarApi(url, {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 coursesTableWrapper.classList.add("d-none");
                 coursesStatus.classList.remove("d-none");
-                coursesStatus.textContent = tt("induction_select_company_first", "Selecciona una empresa para ver sus cursos.");
+                coursesStatus.textContent = S("induction_select_to_view", "Selecciona una empresa para ver sus cursos.");
             }
         });
         cargarEmpresasDisponibles();
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cargarCursos() {
         coursesStatus.classList.remove("d-none", "alert-danger");
         coursesStatus.classList.add("alert-info");
-        coursesStatus.textContent = tt("induction_loading_courses", "Cargando cursos...");
+        coursesStatus.textContent = S("induction_loading", "Cargando cursos...");
         coursesTableWrapper.classList.add("d-none");
 
         const url = isGlobalAdmin && currentCompanyId
@@ -147,14 +147,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!r.success) {
             coursesStatus.classList.remove("alert-info");
             coursesStatus.classList.add("alert-danger");
-            coursesStatus.textContent = r.message || tt("induction_error_load_courses", "No se pudieron cargar los cursos.");
+            coursesStatus.textContent = r.message || S("induction_load_error", "No se pudieron cargar los cursos.");
             return;
         }
         const cursos = r.data || [];
         if (cursos.length === 0) {
             coursesStatus.classList.remove("alert-danger");
             coursesStatus.classList.add("alert-info");
-            coursesStatus.textContent = tt("induction_empty_courses", "Todavía no hay cursos registrados.");
+            coursesStatus.textContent = S("induction_empty", "Todavía no hay cursos registrados.");
             coursesTableWrapper.classList.add("d-none");
             return;
         }
@@ -173,11 +173,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<td>' + escapeHtml(curso.approval_percentage) + '%</td>' +
                 '<td>' + escapeHtml(curso.attempts_allowed) + '</td>' +
                 '<td>' + (curso.preguntas_count != null ? escapeHtml(curso.preguntas_count) : '-') + '</td>' +
-                '<td class="' + (activo ? 'text-success' : 'text-muted') + '">' + escapeHtml(activo ? tt("common_active", "Activo") : tt("common_inactive", "Inactivo")) + '</td>' +
+                '<td class="' + (activo ? 'text-success' : 'text-muted') + '">' + escapeHtml(activo ? S("common_active", "Activo") : S("common_inactive", "Inactivo")) + '</td>' +
                 '<td class="form-actions">' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="detail">' + escapeHtml(tt("induction_manage_btn", "Gestionar")) + '</button>' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(tt("common_edit", "Editar")) + '</button>' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle">' + escapeHtml(activo ? tt("common_deactivate", "Dar de baja") : tt("common_reactivate", "Reactivar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="detail">' + escapeHtml(S("induction_manage_btn", "Gestionar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(S("common_edit", "Editar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle">' + escapeHtml(activo ? S("induction_deactivate", "Dar de baja") : S("induction_reactivate", "Reactivar")) + '</button>' +
                 '</td>';
 
             fila.querySelector('[data-action="detail"]').addEventListener("click", function () { abrirDetalle(curso); });
@@ -198,8 +198,8 @@ document.addEventListener("DOMContentLoaded", function () {
         courseApproval.value = curso.approval_percentage;
         courseFrom.value = (curso.effective_date_from || "").substring(0, 10);
         courseUntil.value = (curso.effective_date_until || "").substring(0, 10);
-        courseFormTitle.textContent = tt("induction_course_form_edit", "Editar curso");
-        courseSubmitBtn.textContent = tt("induction_save_changes", "Guardar cambios");
+        courseFormTitle.textContent = S("induction_edit_course_title", "Editar curso");
+        courseSubmitBtn.textContent = S("induction_save_changes", "Guardar cambios");
         courseCancelEditBtn.classList.remove("d-none");
         courseForm.scrollIntoView({ behavior: "smooth" });
     }
@@ -209,8 +209,8 @@ document.addEventListener("DOMContentLoaded", function () {
         courseForm.reset();
         courseFormMode.value = "create";
         courseFormTarget.value = "";
-        courseFormTitle.textContent = tt("induction_course_form_new", "Nuevo curso de inducción");
-        courseSubmitBtn.textContent = tt("induction_save_course", "Guardar curso");
+        courseFormTitle.textContent = S("induction_new_course_title", "Nuevo curso de inducción");
+        courseSubmitBtn.textContent = S("induction_save_course", "Guardar curso");
         courseCancelEditBtn.classList.add("d-none");
     }
     if (courseCancelEditBtn) courseCancelEditBtn.addEventListener("click", cancelarEdicionCurso);
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 datos.id_test = courseFormTarget.value;
             } else if (isGlobalAdmin) {
                 if (!currentCompanyId) {
-                    mostrarAlerta(courseActionAlert, tt("induction_select_company_before_create", "Selecciona una empresa antes de crear un curso."), "danger");
+                    mostrarAlerta(courseActionAlert, S("induction_select_company_first", "Selecciona una empresa antes de crear un curso."), "danger");
                     return;
                 }
                 datos.id_company = currentCompanyId;
@@ -246,8 +246,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const r = await postJson(url, datos);
             courseSubmitBtn.disabled = false;
 
-            if (!r.success) { mostrarAlerta(courseActionAlert, r.message || tt("induction_error_save_course", "No se pudo guardar el curso."), "danger"); return; }
-            mostrarAlerta(courseActionAlert, r.message || tt("induction_course_saved", "Curso guardado."), "success");
+            if (!r.success) { mostrarAlerta(courseActionAlert, r.message || S("induction_save_error", "No se pudo guardar el curso."), "danger"); return; }
+            mostrarAlerta(courseActionAlert, r.message || S("induction_saved", "Curso guardado."), "success");
             cancelarEdicionCurso();
             cargarCursos();
         });
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function cambiarEstadoCurso(curso) {
         const nuevoEstado = String(curso.state) === "1" ? 0 : 1;
-        if (!window.confirm(nuevoEstado === 1 ? tt("induction_confirm_reactivate_course", "¿Reactivar este curso?") : tt("induction_confirm_deactivate_course", "¿Dar de baja este curso?"))) return;
+        if (!window.confirm(nuevoEstado === 1 ? S("induction_confirm_reactivate", "¿Reactivar este curso?") : S("induction_confirm_deactivate", "¿Dar de baja este curso?"))) return;
         const r = await postJson("./cursos-cambiar-estado.php", { id_test: curso.id_test, state: nuevoEstado });
         if (!r.success) { mostrarAlerta(courseActionAlert, r.message, "danger"); return; }
         mostrarAlerta(courseActionAlert, r.message, "success");
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function cargarDetalleCurso() {
         const r = await llamarApi("./cursos-detalle.php?id=" + encodeURIComponent(currentCourseId));
-        if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("induction_error_load_course", "No se pudo cargar el curso."), "danger"); return; }
+        if (!r.success) { mostrarAlerta(detailAlert, r.message || S("induction_detail_load_error", "No se pudo cargar el curso."), "danger"); return; }
 
         currentCourseData = r.data;
         renderizarPreguntasCurso(r.data.preguntas || [], r.data.puntaje_maximo || 0);
@@ -296,11 +296,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderizarPreguntasCurso(preguntas, puntajeMaximo) {
-        courseDetailScore.textContent = tt("induction_max_score_prefix", "(puntaje máximo:") + " " + puntajeMaximo + ")";
+        courseDetailScore.textContent = "(" + S("induction_max_score_prefix", "puntaje máximo") + ": " + puntajeMaximo + ")";
         courseQuestionsList.innerHTML = "";
 
         if (preguntas.length === 0) {
-            courseQuestionsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("induction_no_questions_yet", "Este curso todavía no tiene preguntas.")) + '</p>';
+            courseQuestionsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("induction_no_questions", "Este curso todavía no tiene preguntas.")) + '</p>';
             return;
         }
 
@@ -308,15 +308,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const chip = document.createElement("div");
             chip.className = "chip-pregunta";
             chip.innerHTML =
-                '<span>' + escapeHtml(p.question) + ' <strong>(' + escapeHtml(p.assigned_score) + ' pts)</strong></span>' +
-                '<button type="button" title="' + escapeHtml(tt("induction_remove_from_course_title", "Quitar del curso")) + '">&times;</button>';
+                '<span>' + escapeHtml(p.question) + ' <strong>(' + escapeHtml(p.assigned_score) + ' ' + escapeHtml(S("induction_pts_suffix", "pts")) + ')</strong></span>' +
+                '<button type="button" title="' + escapeHtml(S("induction_remove_from_course_title", "Quitar del curso")) + '">&times;</button>';
             chip.querySelector("button").addEventListener("click", function () { quitarPreguntaCurso(p.id_rel); });
             courseQuestionsList.appendChild(chip);
         });
     }
 
     async function quitarPreguntaCurso(idRel) {
-        if (!window.confirm(tt("induction_question_removed_confirm", "¿Quitar esta pregunta del curso?"))) return;
+        if (!window.confirm(S("induction_confirm_remove_question", "¿Quitar esta pregunta del curso?"))) return;
         const r = await postJson("./curso-preguntas-quitar.php", { id_rel: idRel });
         if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
         cargarDetalleCurso();
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (encontradas.length === 0) {
-                questionSearchResults.innerHTML = '<p class="text-muted mb-0 mt-2">' + escapeHtml(tt("induction_search_no_new_results", "Sin resultados nuevos.")) + '</p>';
+                questionSearchResults.innerHTML = '<p class="text-muted mb-0 mt-2">' + escapeHtml(S("induction_no_new_results", "Sin resultados nuevos.")) + '</p>';
                 return;
             }
 
@@ -343,13 +343,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.className = "d-flex align-items-center gap-2 mb-2";
                 row.innerHTML =
                     '<span class="flex-grow-1">' + escapeHtml(p.question) + '</span>' +
-                    '<input type="number" class="form-control form-control-sm" style="width:90px" placeholder="' + escapeHtml(tt("induction_points_label", "Puntaje")) + '" value="' + escapeHtml(p.points) + '">' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm">' + escapeHtml(tt("induction_add_btn", "Agregar")) + '</button>';
+                    '<input type="number" class="form-control form-control-sm" style="width:90px" placeholder="Puntaje" value="' + escapeHtml(p.points) + '">' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm">' + escapeHtml(S("induction_add_btn", "Agregar")) + '</button>';
 
                 const input = row.querySelector("input");
                 row.querySelector("button").addEventListener("click", async function () {
                     const puntaje = parseInt(input.value, 10);
-                    if (!puntaje || puntaje < 1) { mostrarAlerta(detailAlert, tt("induction_score_required", "Ingresa un puntaje válido."), "warning"); return; }
+                    if (!puntaje || puntaje < 1) { mostrarAlerta(detailAlert, S("induction_valid_score_required", "Ingresa un puntaje válido."), "warning"); return; }
                     const rr = await postJson("./curso-preguntas-agregar.php", {
                         id_test: currentCourseId, id_question: p.id_questions, assigned_score: puntaje,
                     });
@@ -369,8 +369,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("div");
             row.className = "row g-2 mb-2 option-row";
             row.innerHTML =
-                '<div class="col-8"><input type="text" class="form-control option-text" placeholder="' + escapeHtml(tt("induction_option_placeholder", "Alternativa")) + ' ' + (count + 1) + '"></div>' +
-                '<div class="col-4 form-check mt-2"><input type="radio" name="correctOption" class="form-check-input option-correct" value="' + count + '"> <label class="form-check-label">' + escapeHtml(tt("induction_option_correct_label", "Correcta")) + '</label></div>';
+                '<div class="col-8"><input type="text" class="form-control option-text" placeholder="' + escapeHtml(S("induction_option_placeholder", "Alternativa")) + ' ' + (count + 1) + '"></div>' +
+                '<div class="col-4 form-check mt-2"><input type="radio" name="correctOption" class="form-check-input option-correct" value="' + count + '"> <label class="form-check-label">' + escapeHtml(S("induction_option_correct", "Correcta")) + '</label></div>';
             newQuestionOptions.appendChild(row);
         });
     }
@@ -389,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (opciones.some(function (o) { return !o.text_option; })) {
-                mostrarAlerta(detailAlert, tt("induction_option_all_text_required", "Todas las alternativas deben tener texto."), "danger");
+                mostrarAlerta(detailAlert, S("induction_options_required", "Todas las alternativas deben tener texto."), "danger");
                 return;
             }
 
@@ -400,9 +400,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 opciones: opciones,
             });
 
-            if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("induction_error_create_question", "No se pudo crear la pregunta."), "danger"); return; }
+            if (!r.success) { mostrarAlerta(detailAlert, r.message || S("induction_create_question_error", "No se pudo crear la pregunta."), "danger"); return; }
 
-            mostrarAlerta(detailAlert, tt("induction_question_created", "Pregunta creada. Búscala arriba para agregarla al curso."), "success");
+            mostrarAlerta(detailAlert, S("induction_question_created", "Pregunta creada. Búscala arriba para agregarla al curso."), "success");
             newQuestionForm.reset();
         });
     }
@@ -412,7 +412,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderizarMateriales(materiales) {
         courseMaterialsList.innerHTML = "";
         if (materiales.length === 0) {
-            courseMaterialsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("induction_no_materials_yet", "Sin materiales todavía.")) + '</p>';
+            courseMaterialsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("induction_no_materials", "Sin materiales todavía.")) + '</p>';
             return;
         }
         materiales.forEach(function (m) {
@@ -421,9 +421,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const detalle = m.material_type === "texto" ? m.content_text : m.file_path;
             row.innerHTML =
                 '<span><strong>' + escapeHtml(m.title) + '</strong> (' + escapeHtml(m.material_type) + ') — ' + escapeHtml((detalle || "").substring(0, 60)) + '</span>' +
-                '<button type="button" title="' + escapeHtml(tt("common_delete", "Eliminar")) + '">&times;</button>';
+                '<button type="button" title="' + escapeHtml(S("induction_delete", "Eliminar")) + '">&times;</button>';
             row.querySelector("button").addEventListener("click", async function () {
-                if (!window.confirm(tt("induction_confirm_delete_material", "¿Eliminar este material?"))) return;
+                if (!window.confirm(S("induction_confirm_delete_material", "¿Eliminar este material?"))) return;
                 const r = await postJson("./materiales-eliminar.php", { id_material: m.id_material });
                 if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
                 cargarDetalleCurso();
@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const r = await postJson("./materiales-crear.php", datos);
-            if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("induction_error_add_material", "No se pudo agregar el material."), "danger"); return; }
+            if (!r.success) { mostrarAlerta(detailAlert, r.message || S("induction_add_material_error", "No se pudo agregar el material."), "danger"); return; }
             materialForm.reset();
             cargarDetalleCurso();
         });
@@ -457,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ========================= ASIGNACIONES ========================= */
 
     async function cargarUsuariosDisponibles(idCompany) {
-        assignUserSelect.innerHTML = '<option value="">' + escapeHtml(tt("induction_select_user_placeholder", "Selecciona un usuario...")) + '</option>';
+        assignUserSelect.innerHTML = '<option value="">' + escapeHtml(S("induction_select_user", "Selecciona un usuario...")) + '</option>';
         const url = isGlobalAdmin ? "./usuarios-disponibles.php?id_company=" + encodeURIComponent(idCompany) : "./usuarios-disponibles.php";
         const r = await llamarApi(url);
         if (!r.success) return;
@@ -476,21 +476,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const asignaciones = r.data || [];
         if (asignaciones.length === 0) {
-            courseAssignmentsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("induction_no_assignments_yet", "Sin asignaciones todavía.")) + '</p>';
+            courseAssignmentsList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("induction_no_assignments", "Sin asignaciones todavía.")) + '</p>';
             return;
         }
 
-        const estados = {
-            1: [tt("induction_status_pending", "Pendiente"), "badge-estado-1"],
-            2: [tt("induction_status_approved", "Aprobado"), "badge-estado-2"],
-            3: [tt("induction_status_failed", "Reprobado"), "badge-estado-3"],
-        };
+        const estados = { 1: [S("induction_status_pending", "Pendiente"), "badge-estado-1"], 2: [S("induction_status_approved", "Aprobado"), "badge-estado-2"], 3: [S("induction_status_failed", "Reprobado"), "badge-estado-3"] };
         asignaciones.forEach(function (a) {
             const [texto, clase] = estados[a.state] || ["-", ""];
             const row = document.createElement("div");
             row.className = "chip-pregunta";
             row.innerHTML =
-                '<span>' + escapeHtml(a.name) + ' ' + escapeHtml(a.lastname) + ' — ' + escapeHtml(tt("induction_assignment_due_prefix", "vence")) + ' ' + escapeHtml((a.deadline || "").substring(0, 10)) + '</span>' +
+                '<span>' + escapeHtml(a.name) + ' ' + escapeHtml(a.lastname) + ' — ' + escapeHtml(S("induction_due_prefix", "vence")) + ' ' + escapeHtml((a.deadline || "").substring(0, 10)) + '</span>' +
                 '<span class="' + clase + '">' + escapeHtml(texto) + '</span>';
             courseAssignmentsList.appendChild(row);
         });
@@ -501,7 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             ocultarAlerta(detailAlert);
 
-            if (!assignUserSelect.value) { mostrarAlerta(detailAlert, tt("induction_select_user_required", "Selecciona un usuario."), "warning"); return; }
+            if (!assignUserSelect.value) { mostrarAlerta(detailAlert, S("induction_select_user_warning", "Selecciona un usuario."), "warning"); return; }
 
             const r = await postJson("./asignaciones-crear.php", {
                 id_test: currentCourseId,
@@ -509,8 +505,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 deadline: assignDeadline.value,
             });
 
-            if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("induction_error_assign", "No se pudo asignar el curso."), "danger"); return; }
-            mostrarAlerta(detailAlert, tt("induction_assigned_success", "Curso asignado correctamente."), "success");
+            if (!r.success) { mostrarAlerta(detailAlert, r.message || S("induction_assign_error", "No se pudo asignar el curso."), "danger"); return; }
+            mostrarAlerta(detailAlert, S("induction_assigned_ok", "Curso asignado correctamente."), "success");
             assignForm.reset();
             cargarAsignaciones();
         });

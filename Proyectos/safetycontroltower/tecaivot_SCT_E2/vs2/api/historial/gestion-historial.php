@@ -15,13 +15,6 @@ $keys = [
     'history_migration_required'
 ];
 $strings=[]; foreach($keys as $key) $strings[$key]=t($key);
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!doctype html>
 <html lang="<?= htmlspecialchars(idiomaActual(),ENT_QUOTES,'UTF-8') ?>">
@@ -64,7 +57,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(0,163,244,.07),transparent
 <div class="modal fade" id="historyDetailModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5"><?= htmlspecialchars(t('history_details'),ENT_QUOTES,'UTF-8') ?></h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="historyDetailBody"></div></div></div></div>
 <script id="historyI18n" type="application/json"><?= json_encode($strings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
 <script src="../../js/historial.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
+<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
 </body></html>

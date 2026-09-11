@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         empty($_SESSION['csrf_token']) ||
         !hash_equals($_SESSION['csrf_token'], $csrfToken)
     ) {
-        $error = t('password_session_expired');
+        $error = 'Tu sesión expiró. Abre nuevamente el enlace recibido por correo.';
     } elseif (!$tokenRow) {
         $error = t('password_invalid_text');
     } elseif (!hash_equals($newPassword, $confirmPassword)) {
-        $error = t('password_mismatch');
+        $error = 'Las contraseñas no coinciden.';
     } else {
         $policyError = passwordsValidateNewPassword($newPassword, (string) $tokenRow['id_users'], (string) ($tokenRow['rut'] ?? ''));
         if ($policyError !== null) {
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             } catch (Throwable $e) {
                 error_log('restablecer-password.php: ' . $e->getMessage());
-                $error = t('password_error_generic');
+                $error = 'No fue posible actualizar la contraseña. Intenta nuevamente.';
             }
         }
     }
@@ -90,13 +90,11 @@ $pageTitle = $wasActivation ? t('password_page_activation_title') : t('password_
     <link rel="stylesheet" href="css/login.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>">
 </head>
 <body class="sct-login-page">
-
     <div class="login-language">
-        <label class="sr-only" for="passwordLanguage"><?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?></label>
-        <select id="passwordLanguage" aria-label="<?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?>">
+        <label class="sr-only" for="resetLanguage"><?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?></label>
+        <select id="resetLanguage" aria-label="<?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?>" onchange="if (/^(es|en|pt|fr|zh)$/.test(this.value)) { var u = new URLSearchParams(window.location.search); u.set('lang', this.value); window.location.href = '?' + u.toString(); }">
             <?php foreach (IDIOMAS_DISPONIBLES as $codigoIdioma): ?>
-                <option value="<?= htmlspecialchars($codigoIdioma, ENT_QUOTES, 'UTF-8') ?>"
-                    <?= $codigoIdioma === $langActual ? 'selected' : '' ?>>
+                <option value="<?= htmlspecialchars($codigoIdioma, ENT_QUOTES, 'UTF-8') ?>" <?= $codigoIdioma === $langActual ? 'selected' : '' ?>>
                     <?= htmlspecialchars(strtoupper($codigoIdioma), ENT_QUOTES, 'UTF-8') ?>
                 </option>
             <?php endforeach; ?>
@@ -166,7 +164,7 @@ $pageTitle = $wasActivation ? t('password_page_activation_title') : t('password_
                                 autocomplete="new-password"
                                 placeholder="<?= htmlspecialchars(t('password_new_placeholder'), ENT_QUOTES, 'UTF-8') ?>"
                                 required>
-                            <button type="button" class="password-toggle" data-toggle-password="newPassword" aria-label="<?= htmlspecialchars(t('password_toggle_show_hide'), ENT_QUOTES, 'UTF-8') ?>">VER</button>
+                            <button type="button" class="password-toggle" data-toggle-password="newPassword" aria-label="Mostrar u ocultar contraseña">VER</button>
                         </div>
                     </div>
 
@@ -182,7 +180,7 @@ $pageTitle = $wasActivation ? t('password_page_activation_title') : t('password_
                                 autocomplete="new-password"
                                 placeholder="<?= htmlspecialchars(t('password_confirm_placeholder'), ENT_QUOTES, 'UTF-8') ?>"
                                 required>
-                            <button type="button" class="password-toggle" data-toggle-password="confirmPassword" aria-label="<?= htmlspecialchars(t('password_toggle_show_hide'), ENT_QUOTES, 'UTF-8') ?>">VER</button>
+                            <button type="button" class="password-toggle" data-toggle-password="confirmPassword" aria-label="Mostrar u ocultar contraseña">VER</button>
                         </div>
                     </div>
 
@@ -206,20 +204,6 @@ $pageTitle = $wasActivation ? t('password_page_activation_title') : t('password_
                 input.type = input.type === 'password' ? 'text' : 'password';
             });
         });
-
-        (function () {
-            var select = document.getElementById("passwordLanguage");
-            if (!select) return;
-            select.addEventListener("change", function () {
-                var lang = select.value;
-                if (!/^(es|en|pt|fr|zh)$/.test(lang)) return;
-                // Preserva el resto de los parámetros de la URL (en particular
-                // "token"), ya que este enlace es de un solo uso.
-                var url = new URL(window.location.href);
-                url.searchParams.set("lang", lang);
-                window.location.href = url.toString();
-            });
-        })();
     </script>
 </body>
 </html>

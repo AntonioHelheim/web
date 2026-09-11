@@ -33,12 +33,12 @@ try {
     auditTrailLogAction($pdo, (int)$targetUser['id_company'], 'usuarios', 'users', $idUsers, 'profile_photo_path',
         $path, null, 'remove', trim((string)$targetUser['name'].' '.(string)$targetUser['lastname']));
 
-    if ($path !== '' && str_starts_with($path, 'uploads/usuarios/')) {
+    if ($path !== '' && strpos($path, 'uploads/usuarios/') === 0) {
         $directorio = __DIR__ . '/../../uploads/usuarios';
         $archivo = __DIR__ . '/../../' . $path;
         $realDir = realpath($directorio);
         $realFile = is_file($archivo) ? realpath($archivo) : false;
-        if ($realDir && $realFile && str_starts_with($realFile, $realDir . DIRECTORY_SEPARATOR)) {
+        if ($realDir && $realFile && strpos($realFile, $realDir . DIRECTORY_SEPARATOR) === 0) {
             @unlink($realFile);
         }
     }

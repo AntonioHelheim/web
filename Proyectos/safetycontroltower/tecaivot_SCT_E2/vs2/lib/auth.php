@@ -587,19 +587,11 @@ function currentUserDatabaseCapabilities(PDO $pdo): array
 
 function currentUserHasCapability(PDO $pdo, string $capability): bool
 {
-    if (authPermissionsDatabaseEnabled($pdo)) {
-        $codes = currentUserDatabaseCapabilities($pdo);
-        if (in_array($capability, $codes, true)) {
-            return true;
-        }
-        foreach (SCT_LEGACY_CAPABILITY_EXPANSIONS[$capability] ?? [] as $granular) {
-            if (in_array($granular, $codes, true)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // Simplificado a política estática por rol (igual criterio que la base
+    // que ya funcionaba en producción). El sistema de permisos granulares
+    // por base de datos (Etapa 3) queda desactivado por ahora para
+    // priorizar estabilidad; las tablas permissions/role_permissions no se
+    // consultan desde este flujo.
     foreach (currentUserRoles($pdo) as $role) {
         if (authRoleHasCapability($role, $capability)) {
             return true;

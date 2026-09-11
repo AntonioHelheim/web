@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ? `../../${String(path).replace(/^\/+/, "")}?v=${Date.now()}`
         : "";
 
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
+
     const form = document.getElementById("companyForm");
     const mode = document.getElementById("companyFormMode");
     const idInput = document.getElementById("companyId");

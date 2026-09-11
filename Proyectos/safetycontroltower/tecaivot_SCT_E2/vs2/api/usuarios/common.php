@@ -135,10 +135,12 @@ function usuariosListVisibleCompanies(PDO $pdo, array $context): array
         $rows = $stmt->fetchAll();
     }
 
-    return array_map(static fn(array $row): array => [
-        'id_company' => (int) $row['id_company'],
-        'razon_social' => (string) $row['razon_social'],
-    ], $rows);
+    return array_map(static function (array $row): array {
+        return [
+            'id_company' => (int) $row['id_company'],
+            'razon_social' => (string) $row['razon_social'],
+        ];
+    }, $rows);
 }
 
 function usuariosFindAssignableRoles(PDO $pdo, array $context, ?int $companyId = null): array

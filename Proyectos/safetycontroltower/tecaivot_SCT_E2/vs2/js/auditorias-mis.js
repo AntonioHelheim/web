@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function postJson(url, data) { return api(url, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(Object.assign({csrf_token:csrfToken}, data || {})) }); }
     function fmt(template, values) { let out = template || ""; Object.keys(values || {}).forEach(key => { out = out.replaceAll("{" + key + "}", String(values[key])); }); return out; }
 
-
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
 
     async function loadAssignments() {
         myAuditsStatus.classList.remove("d-none", "alert-danger");

@@ -514,3 +514,241 @@ function dashboardActividadReciente(PDO $pdo, int $idCompany, ?int $idProject, ?
         ];
     }, $rows), 0, max(1, min($limit, 25)));
 }
+
+/**
+ * Safety Control Tower - KPIs agregados y consolidación de indicadores (Etapa 3)
+ *
+ * Vista de solo lectura para administradores globales: agrega los mismos
+ * indicadores del dashboard por empresa, pero sumados sobre TODAS las
+ * empresas activas, más un ranking comparativo por empresa. No introduce
+ * tablas nuevas: reutiliza las mismas fuentes de verdad que el dashboard
+ * por empresa, simplemente sin el filtro id_company (o agrupando por él
+ * para el ranking).
+ *
+ * Las claves de 'totales', 'eventos', 'formularios' y 'protocolos' devueltas
+ * aquí usan intencionalmente los mismos nombres de campo que las funciones
+ * por-empresa (dashboardTotalEmpresas, dashboardIndicadoresEventos, etc.)
+ * para que el frontend pueda reutilizar exactamente el mismo renderMetrics()
+ * y renderTrend() ya construidos para la vista por empresa.
+ */
+
+function dashboardConsolidadoTotales(PDO $pdo): array
+{
+    return [
+        'empresas' => dashboardTotalEmpresas($pdo),
+        'proyectos' => (int) $pdo->query('SELECT COUNT(*) FROM projects WHERE state = 1')->fetchColumn(),
+        'centros' => (int) $pdo->query('SELECT COUNT(*) FROM company_center WHERE state = 1')->fetchColumn(),
+        'trabajadores' => (int) $pdo->query('SELECT COUNT(*) FROM workers WHERE state = 1')->fetchColumn(),
+    ];
+}
+
+function dashboardConsolidadoEventos(PDO $pdo, ?string $desde, ?string $hasta): array
+{
+    $params = [];
+    $where = ' WHERE module = \'seguridad\'';
+    $where .= dashboardSqlPeriodo('event_date', $desde, $hasta, $params, 'cevt');
+
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM security_events' . $where);
+    $stmt->execute($params);
+    $total = (int) $stmt->fetchColumn();
+
+    $paramsCrit = $params;
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*) FROM security_events' . $where . ' AND state <> 3 AND criticality IN (\'alta\',\'critica\')'
+    );
+    $stmt->execute($paramsCrit);
+    $abiertosCriticos = (int) $stmt->fetchColumn();
+
+    return ['total' => $total, 'abiertos_criticos' => $abiertosCriticos];
+}
+
+function dashboardConsolidadoFormularios(PDO $pdo, ?string $desde, ?string $hasta): array
+{
+    $params = [];
+    $where = ' WHERE status = \'submitted\'';
+    $where .= dashboardSqlPeriodo('submitted_at', $desde, $hasta, $params, 'cfrm');
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM dynamic_form_submissions' . $where);
+    $stmt->execute($params);
+    return ['envios' => (int) $stmt->fetchColumn()];
+}
+
+function dashboardConsolidadoProtocolos(PDO $pdo): array
+{
+    $vencidas = (int) $pdo->query(
+        'SELECT COUNT(*) FROM protocol_assignments WHERE state = \'activa\' AND next_due_at < NOW()'
+    )->fetchColumn();
+
+    $pendientesRevision = (int) $pdo->query(
+        'SELECT COUNT(*) FROM protocol_executions WHERE result = \'pendiente_revision\''
+    )->fetchColumn();
+
+    return [
+        'asignaciones_vencidas' => $vencidas,
+        'pendientes_revision' => $pendientesRevision,
+    ];
+}
+
+/**
+ * Igual a dashboardTendenciaMensual() pero sumando todas las empresas
+ * activas (sin filtro id_company/proyecto/centro, que no tienen sentido
+ * en una vista consolidada multiempresa).
+ */
+function dashboardConsolidadoTendenciaMensual(PDO $pdo, ?string $desde, ?string $hasta): array
+{
+    $hastaDt = $hasta !== null ? new DateTimeImmutable($hasta) : new DateTimeImmutable('now');
+    $desdeDt = $desde !== null ? new DateTimeImmutable($desde) : $hastaDt->modify('-11 months')->modify('first day of this month')->setTime(0, 0);
+    $minDesde = $hastaDt->modify('-11 months')->modify('first day of this month')->setTime(0, 0);
+    if ($desdeDt < $minDesde) $desdeDt = $minDesde;
+    $desdeMes = $desdeDt->modify('first day of this month')->setTime(0, 0);
+    $hastaMes = $hastaDt->modify('first day of this month')->setTime(0, 0);
+
+    $buckets = [];
+    for ($cursor = $desdeMes; $cursor <= $hastaMes; $cursor = $cursor->modify('+1 month')) {
+        $key = $cursor->format('Y-m');
+        $buckets[$key] = [
+            'periodo' => $key,
+            'eventos' => 0,
+            'formularios' => 0,
+            'protocolos' => 0,
+            'evaluaciones' => 0,
+        ];
+    }
+
+    $rango = ['from' => $desdeDt->format('Y-m-d H:i:s'), 'to' => $hastaDt->format('Y-m-d H:i:s')];
+
+    $stmt = $pdo->prepare(
+        'SELECT DATE_FORMAT(event_date, \'%Y-%m\') AS periodo, COUNT(*) AS cantidad
+         FROM security_events
+         WHERE module = \'seguridad\' AND event_date BETWEEN :from AND :to
+         GROUP BY periodo'
+    );
+    $stmt->execute($rango);
+    foreach ($stmt->fetchAll() as $row) {
+        if (isset($buckets[$row['periodo']])) $buckets[$row['periodo']]['eventos'] = (int) $row['cantidad'];
+    }
+
+    $stmt = $pdo->prepare(
+        'SELECT DATE_FORMAT(submitted_at, \'%Y-%m\') AS periodo, COUNT(*) AS cantidad
+         FROM dynamic_form_submissions
+         WHERE status = \'submitted\' AND submitted_at BETWEEN :from AND :to
+         GROUP BY periodo'
+    );
+    $stmt->execute($rango);
+    foreach ($stmt->fetchAll() as $row) {
+        if (isset($buckets[$row['periodo']])) $buckets[$row['periodo']]['formularios'] = (int) $row['cantidad'];
+    }
+
+    $stmt = $pdo->prepare(
+        'SELECT DATE_FORMAT(pe.submitted_at, \'%Y-%m\') AS periodo, COUNT(*) AS cantidad
+         FROM protocol_executions pe
+         WHERE pe.submitted_at BETWEEN :from AND :to
+         GROUP BY periodo'
+    );
+    $stmt->execute($rango);
+    foreach ($stmt->fetchAll() as $row) {
+        if (isset($buckets[$row['periodo']])) $buckets[$row['periodo']]['protocolos'] = (int) $row['cantidad'];
+    }
+
+    $stmt = $pdo->prepare(
+        'SELECT DATE_FORMAT(a.last_update, \'%Y-%m\') AS periodo, COUNT(*) AS cantidad
+         FROM users_test_assigned a
+         INNER JOIN company_test t ON t.id_test = a.id_test
+         WHERE t.type IN (\'induccion\',\'auditoria\',\'autoevaluacion\')
+           AND a.state IN (2,3)
+           AND a.last_update BETWEEN :from AND :to
+         GROUP BY periodo'
+    );
+    $stmt->execute($rango);
+    foreach ($stmt->fetchAll() as $row) {
+        if (isset($buckets[$row['periodo']])) $buckets[$row['periodo']]['evaluaciones'] = (int) $row['cantidad'];
+    }
+
+    return array_values($buckets);
+}
+
+/**
+ * Ranking comparativo por empresa: una fila por empresa activa, con los
+ * indicadores que más señalan necesidad de atención (eventos críticos
+ * abiertos y protocolos vencidos primero). Usa consultas agrupadas por
+ * id_company (no un loop N+1 por empresa) para que el costo sea constante
+ * sin importar cuántas empresas existan.
+ */
+function dashboardRankingEmpresas(PDO $pdo, ?string $desde, ?string $hasta): array
+{
+    $companies = $pdo->query(
+        'SELECT id_company, razon_social FROM company WHERE state = 1 ORDER BY razon_social ASC'
+    )->fetchAll();
+    if (!$companies) {
+        return [];
+    }
+
+    $paramsEvt = [];
+    $whereEvt = ' WHERE module = \'seguridad\' AND state <> 3 AND criticality IN (\'alta\',\'critica\')';
+    $whereEvt .= dashboardSqlPeriodo('event_date', $desde, $hasta, $paramsEvt, 'rk_evt');
+    $stmt = $pdo->prepare('SELECT id_company, COUNT(*) AS cantidad FROM security_events' . $whereEvt . ' GROUP BY id_company');
+    $stmt->execute($paramsEvt);
+    $eventosCriticos = array_column($stmt->fetchAll(), 'cantidad', 'id_company');
+
+    $stmt = $pdo->query(
+        'SELECT id_company, COUNT(*) AS cantidad
+         FROM protocol_assignments
+         WHERE state = \'activa\' AND next_due_at < NOW()
+         GROUP BY id_company'
+    );
+    $protocolosVencidos = array_column($stmt->fetchAll(), 'cantidad', 'id_company');
+
+    $stmt = $pdo->query(
+        'SELECT pa.id_company, COUNT(*) AS cantidad
+         FROM protocol_executions pe
+         INNER JOIN protocol_assignments pa ON pa.id_protocol_assignment = pe.id_protocol_assignment
+         WHERE pe.result = \'pendiente_revision\'
+         GROUP BY pa.id_company'
+    );
+    $protocolosPorRevisar = array_column($stmt->fetchAll(), 'cantidad', 'id_company');
+
+    $paramsInd = ['tipo' => 'induccion'];
+    $whereInd = ' WHERE t.type = :tipo AND a.state IN (2,3)';
+    $whereInd .= dashboardSqlPeriodo('a.last_update', $desde, $hasta, $paramsInd, 'rk_ind');
+    $stmt = $pdo->prepare(
+        'SELECT a.id_company, a.state, COUNT(*) AS cantidad
+         FROM users_test_assigned a
+         INNER JOIN company_test t ON t.id_test = a.id_test' . $whereInd . '
+         GROUP BY a.id_company, a.state'
+    );
+    $stmt->execute($paramsInd);
+    $induccionPorEmpresa = [];
+    foreach ($stmt->fetchAll() as $row) {
+        $idCompany = (int) $row['id_company'];
+        $state = (int) $row['state'];
+        if (!isset($induccionPorEmpresa[$idCompany])) {
+            $induccionPorEmpresa[$idCompany] = ['aprobados' => 0, 'reprobados' => 0];
+        }
+        if ($state === 2) $induccionPorEmpresa[$idCompany]['aprobados'] = (int) $row['cantidad'];
+        if ($state === 3) $induccionPorEmpresa[$idCompany]['reprobados'] = (int) $row['cantidad'];
+    }
+
+    $out = [];
+    foreach ($companies as $company) {
+        $idCompany = (int) $company['id_company'];
+        $aprobados = $induccionPorEmpresa[$idCompany]['aprobados'] ?? 0;
+        $reprobados = $induccionPorEmpresa[$idCompany]['reprobados'] ?? 0;
+        $finalizadas = $aprobados + $reprobados;
+
+        $out[] = [
+            'id_company' => $idCompany,
+            'razon_social' => (string) $company['razon_social'],
+            'eventos_criticos_abiertos' => (int) ($eventosCriticos[$idCompany] ?? 0),
+            'protocolos_vencidos' => (int) ($protocolosVencidos[$idCompany] ?? 0),
+            'protocolos_pendientes_revision' => (int) ($protocolosPorRevisar[$idCompany] ?? 0),
+            'tasa_aprobacion_induccion' => $finalizadas > 0 ? round(($aprobados / $finalizadas) * 100, 1) : null,
+        ];
+    }
+
+    usort($out, static function (array $a, array $b): int {
+        return $b['eventos_criticos_abiertos'] <=> $a['eventos_criticos_abiertos']
+            ?: $b['protocolos_vencidos'] <=> $a['protocolos_vencidos']
+            ?: strcmp($a['razon_social'], $b['razon_social']);
+    });
+
+    return $out;
+}

@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const photoUrl = path => path ? `../../${String(path).replace(/^\/+/, "")}?v=${Date.now()}` : "";
     const roleLabel = role => role ? (strings[`role_${role}`] || role.replaceAll("_", " ")) : tr("role_none");
 
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
+
     const createBtn = document.getElementById("usersCreateBtn");
     const searchInput = document.getElementById("usersSearch");
     const companyFilter = document.getElementById("usersCompanyFilter");

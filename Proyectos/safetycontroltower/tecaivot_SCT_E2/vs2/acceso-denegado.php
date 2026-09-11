@@ -12,7 +12,7 @@ $langActual = idiomaActual();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(t('denied_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
+    <title><?= tt('denied_title') ?> - Safety Control Tower</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -37,11 +37,14 @@ $langActual = idiomaActual();
         }
         .denied-language {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 20px;
+            right: 20px;
         }
         .denied-language select {
-            min-width: 90px;
+            font-size: 13px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
         }
     </style>
 </head>
@@ -50,11 +53,10 @@ $langActual = idiomaActual();
     <div class="denied-wrapper">
 
         <div class="denied-language">
-            <label class="sr-only" for="deniedLanguage"><?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?></label>
-            <select id="deniedLanguage" class="form-select form-select-sm" aria-label="<?= htmlspecialchars(t('login_language_label'), ENT_QUOTES, 'UTF-8') ?>">
+            <label class="sr-only" for="deniedLanguage"><?= tt('login_language_label') ?></label>
+            <select id="deniedLanguage" aria-label="<?= tt('login_language_label') ?>" onchange="if (/^(es|en|pt|fr|zh)$/.test(this.value)) window.location.href='?lang='+encodeURIComponent(this.value)">
                 <?php foreach (IDIOMAS_DISPONIBLES as $codigoIdioma): ?>
-                    <option value="<?= htmlspecialchars($codigoIdioma, ENT_QUOTES, 'UTF-8') ?>"
-                        <?= $codigoIdioma === $langActual ? 'selected' : '' ?>>
+                    <option value="<?= htmlspecialchars($codigoIdioma, ENT_QUOTES, 'UTF-8') ?>" <?= $codigoIdioma === $langActual ? 'selected' : '' ?>>
                         <?= htmlspecialchars(strtoupper($codigoIdioma), ENT_QUOTES, 'UTF-8') ?>
                     </option>
                 <?php endforeach; ?>
@@ -67,20 +69,18 @@ $langActual = idiomaActual();
                 <i class="bi bi-x-circle-fill"></i>
             </div>
 
-            <h1><?= htmlspecialchars(t('denied_title'), ENT_QUOTES, 'UTF-8') ?></h1>
+            <h1><?= tt('denied_title') ?></h1>
 
             <p class="lead">
-                <?php echo $sesionExpirada
-                    ? htmlspecialchars(t('denied_session_expired'), ENT_QUOTES, 'UTF-8')
-                    : htmlspecialchars(t('denied_no_session'), ENT_QUOTES, 'UTF-8'); ?>
+                <?= $sesionExpirada ? tt('denied_session_expired') : tt('denied_no_access') ?>
             </p>
 
             <p class="text-muted">
-                <?= htmlspecialchars(t('denied_login_prompt'), ENT_QUOTES, 'UTF-8') ?>
+                <?= tt('denied_login_prompt') ?>
             </p>
 
             <a href="index.php" class="btn btn-primary-custom mt-3">
-                <?= htmlspecialchars(t('denied_retry_btn'), ENT_QUOTES, 'UTF-8') ?>
+                <?= tt('denied_retry_button') ?>
                 <i class="bi bi-arrow-right"></i>
             </a>
 
@@ -88,17 +88,5 @@ $langActual = idiomaActual();
 
     </div>
 
-    <script>
-        (function () {
-            var select = document.getElementById("deniedLanguage");
-            if (!select) return;
-            select.addEventListener("change", function () {
-                var lang = select.value;
-                if (/^(es|en|pt|fr|zh)$/.test(lang)) {
-                    window.location.href = "?lang=" + encodeURIComponent(lang);
-                }
-            });
-        })();
-    </script>
 </body>
 </html>

@@ -100,6 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
         auditCancelEditBtn.classList.add("d-none");
     }
 
+    // El cambio de idioma (confirmación + guardado en perfil) lo maneja
+    // js/lang-switcher.js, incluido en la página junto a este script.
+
     async function loadCompanies() {
         if (!companySelect) return;
         const r = await api("./empresas-disponibles.php");

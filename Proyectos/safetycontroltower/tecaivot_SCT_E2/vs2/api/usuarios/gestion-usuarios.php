@@ -34,13 +34,6 @@ $jsStrings = [];
 foreach ($jsKeys as $key) {
     $jsStrings[$key] = t($key);
 }
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8') ?>">
@@ -111,7 +104,6 @@ $langSwitcherStrings = [
 
 <div class="modal fade" id="userViewModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content login-modal"><div class="modal-body">
     <div class="d-flex justify-content-between align-items-start mb-3"><h2 class="mb-0"><?= htmlspecialchars(t('users_detail_title'), ENT_QUOTES, 'UTF-8') ?></h2><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="text-center mb-4"><div id="viewUserPhotoPlaceholder" class="user-photo placeholder mx-auto"><i class="bi bi-person"></i></div><img id="viewUserPhoto" class="user-photo mx-auto d-none" alt="<?= htmlspecialchars(t('users_photo'), ENT_QUOTES, 'UTF-8') ?>"></div>
     <dl class="users-detail-grid">
         <div><dt><?= htmlspecialchars(t('users_email'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserEmail">-</dd></div><div><dt><?= htmlspecialchars(t('users_firstname'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserName">-</dd></div><div><dt><?= htmlspecialchars(t('users_lastname'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserLastname">-</dd></div><div><dt><?= htmlspecialchars(t('users_rut'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserRut">-</dd></div><div><dt><?= htmlspecialchars(t('users_company'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserCompany">-</dd></div><div><dt><?= htmlspecialchars(t('users_roles'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserRoles">-</dd></div><div><dt><?= htmlspecialchars(t('users_access_level'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserAccess">-</dd></div><div><dt><?= htmlspecialchars(t('common_state'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserState">-</dd></div><div><dt><?= htmlspecialchars(t('users_col_login'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserPasswordStatus">-</dd></div><div><dt><?= htmlspecialchars(t('users_language'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserLanguage">-</dd></div><div><dt><?= htmlspecialchars(t('users_col_last_access'), ENT_QUOTES, 'UTF-8') ?></dt><dd id="viewUserLastAccess">-</dd></div>
     </dl>
@@ -130,7 +122,6 @@ $langSwitcherStrings = [
             <div class="col-12 col-md-6"><label for="userRut" class="form-label"><?= htmlspecialchars(t('users_rut'), ENT_QUOTES, 'UTF-8') ?></label><input type="text" id="userRut" class="form-control" maxlength="12" required></div>
             <div class="col-12 col-md-6"><label for="userLanguage" class="form-label"><?= htmlspecialchars(t('users_language'), ENT_QUOTES, 'UTF-8') ?></label><select id="userLanguage" class="form-select" required><?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?><option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option><?php endforeach; ?></select></div>
         </div>
-        <div id="userPhotoEditor" class="photo-editor mt-4 d-none"><div><div id="editUserPhotoPlaceholder" class="user-photo placeholder"><i class="bi bi-person"></i></div><img id="editUserPhoto" class="user-photo d-none" alt="<?= htmlspecialchars(t('users_photo'), ENT_QUOTES, 'UTF-8') ?>"></div><div class="photo-editor-controls"><label for="userPhotoFile" class="form-label mb-1"><?= htmlspecialchars(t('users_photo'), ENT_QUOTES, 'UTF-8') ?></label><input type="file" id="userPhotoFile" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp"><div class="form-text"><?= htmlspecialchars(t('users_photo_help'), ENT_QUOTES, 'UTF-8') ?></div><div class="users-actions mt-2"><button type="button" id="userPhotoUploadBtn" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('users_photo_upload'), ENT_QUOTES, 'UTF-8') ?></button><button type="button" id="userPhotoRemoveBtn" class="btn btn-outline-danger btn-sm"><?= htmlspecialchars(t('users_photo_remove'), ENT_QUOTES, 'UTF-8') ?></button></div></div></div>
         <div class="users-actions mt-4"><button type="submit" id="userFormSubmit" class="btn btn-primary-custom btn-sm"><?= htmlspecialchars(t('common_save'), ENT_QUOTES, 'UTF-8') ?></button><button type="button" class="btn btn-outline-custom btn-sm" data-bs-dismiss="modal"><?= htmlspecialchars(t('common_cancel'), ENT_QUOTES, 'UTF-8') ?></button></div>
     </form>
 </div></div></div></div>
@@ -139,8 +130,7 @@ $langSwitcherStrings = [
 
 <script id="usersI18n" type="application/json"><?= json_encode($jsStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 <script src="../../js/usuarios.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
+<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 </html>

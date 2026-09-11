@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".container[data-csrf-token]");
     if (!container) return;
 
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("eventsI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
+
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
     const puedeGestionar = container.dataset.puedeGestionar === "1";
-
-    const i18nNode = document.getElementById("eventosI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
 
     const companySelect = document.getElementById("companySelect");
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         opciones = opciones || {};
         const r = await fetch(url, opciones);
         try { return await r.json(); }
-        catch (e) { return { success: false, message: tt("common_invalid_server_response", "Respuesta inválida del servidor.") }; }
+        catch (e) { return { success: false, message: S("events_error_response", "Respuesta inválida del servidor.") }; }
     }
     function postJson(url, datos) {
         return llamarApi(url, {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
             llamarApi("./trabajadores-disponibles.php" + params),
         ]);
 
-        eventType.innerHTML = '<option value="">' + escapeHtml(tt("common_select_placeholder", "Selecciona...")) + '</option>';
+        eventType.innerHTML = '<option value="">' + escapeHtml(S("events_select_placeholder", "Selecciona...")) + '</option>';
         (tipos.data || []).forEach(function (t) {
             const opt = document.createElement("option");
             opt.value = t.id_event_type;
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
             eventType.appendChild(opt);
         });
 
-        eventCenter.innerHTML = '<option value="">' + escapeHtml(tt("common_select_placeholder", "Selecciona...")) + '</option>';
+        eventCenter.innerHTML = '<option value="">' + escapeHtml(S("events_select_placeholder", "Selecciona...")) + '</option>';
         (centros.data || []).forEach(function (c) {
             const opt = document.createElement("option");
             opt.value = c.id_company_center;
@@ -128,10 +128,10 @@ document.addEventListener("DOMContentLoaded", function () {
             eventCenter.appendChild(opt);
         });
         if ((centros.data || []).length === 0) {
-            mostrarAlerta(eventActionAlert, tt("events_no_centers_warning", "Esta empresa todavía no tiene centros/sedes activos. Crea uno en Gestión de Centros/Sedes antes de reportar un evento."), "warning");
+            mostrarAlerta(eventActionAlert, S("events_no_centers_warning", "Esta empresa todavía no tiene centros/sedes activos. Crea uno en Gestión de Centros/Sedes antes de reportar un evento."), "warning");
         }
 
-        eventProject.innerHTML = '<option value="">' + escapeHtml(tt("events_project_none", "Sin proyecto asociado")) + '</option>';
+        eventProject.innerHTML = '<option value="">' + escapeHtml(S("events_no_project", "Sin proyecto asociado")) + '</option>';
         (proyectos.data || []).forEach(function (p) {
             const opt = document.createElement("option");
             opt.value = p.id_project;
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
             eventProject.appendChild(opt);
         });
 
-        eventWorker.innerHTML = '<option value="">' + escapeHtml(tt("events_worker_none", "Sin trabajador asociado")) + '</option>';
+        eventWorker.innerHTML = '<option value="">' + escapeHtml(S("events_no_worker", "Sin trabajador asociado")) + '</option>';
         (trabajadores.data || []).forEach(function (w) {
             const opt = document.createElement("option");
             opt.value = w.id_worker;
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 eventsTableWrapper.classList.add("d-none");
                 eventsStatus.classList.remove("d-none");
-                eventsStatus.textContent = tt("events_select_company_first", "Selecciona una empresa para ver sus eventos.");
+                eventsStatus.textContent = S("events_select_to_view", "Selecciona una empresa para ver sus eventos.");
             }
         });
         cargarEmpresasDisponibles();
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         eventsStatus.classList.remove("d-none", "alert-danger");
         eventsStatus.classList.add("alert-info");
-        eventsStatus.textContent = tt("events_loading", "Cargando eventos...");
+        eventsStatus.textContent = S("events_loading", "Cargando eventos...");
         eventsTableWrapper.classList.add("d-none");
 
         const query = construirQuery();
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!r.success) {
             eventsStatus.classList.remove("alert-info");
             eventsStatus.classList.add("alert-danger");
-            eventsStatus.textContent = r.message || tt("events_error_load", "No se pudieron cargar los eventos.");
+            eventsStatus.textContent = r.message || S("events_load_error", "No se pudieron cargar los eventos.");
             return;
         }
 
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (eventos.length === 0) {
             eventsStatus.classList.remove("alert-danger");
             eventsStatus.classList.add("alert-info");
-            eventsStatus.textContent = tt("events_empty", "No hay eventos que coincidan con la búsqueda.");
+            eventsStatus.textContent = S("events_no_match", "No hay eventos que coincidan con la búsqueda.");
             eventsTableWrapper.classList.add("d-none");
             return;
         }
@@ -218,11 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
         searchDebounce = setTimeout(cargarEventos, 350);
     });
 
-    const etiquetasEstado = {
-        1: [tt("events_state_open", "Abierto"), "estado-1"],
-        2: [tt("events_state_in_progress", "En proceso"), "estado-2"],
-        3: [tt("events_state_closed", "Cerrado"), "estado-3"],
-    };
+    const etiquetasEstado = { 1: [S("events_state_open", "Abierto"), "estado-1"], 2: [S("events_state_in_progress", "En proceso"), "estado-2"], 3: [S("events_state_closed", "Cerrado"), "estado-3"] };
 
     function renderizarEventos(eventos) {
         eventsTableBody.innerHTML = "";
@@ -234,8 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<td>' + escapeHtml(ev.event_type_name) + '</td>' +
                 '<td>' + escapeHtml(ev.center_name) + '</td>' +
                 '<td class="crit-' + escapeHtml(ev.criticality) + '">' + escapeHtml(ev.criticality) + '</td>' +
-                '<td class="' + estadoClase + '">' + estadoTexto + '</td>' +
-                '<td class="form-actions"><button type="button" class="btn btn-outline-custom btn-sm" data-action="detail">' + tt("events_action_view_detail", "Ver detalle") + '</button></td>';
+                '<td class="' + estadoClase + '">' + escapeHtml(estadoTexto) + '</td>' +
+                '<td class="form-actions"><button type="button" class="btn btn-outline-custom btn-sm" data-action="detail">' + escapeHtml(S("events_view_detail", "Ver detalle")) + '</button></td>';
 
             fila.querySelector('[data-action="detail"]').addEventListener("click", function () { abrirDetalle(ev.id_security_events); });
             eventsTableBody.appendChild(fila);
@@ -261,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             if (!datos.id_company_center || !datos.id_event || !datos.event_date || !datos.description) {
-                mostrarAlerta(eventActionAlert, tt("common_required_fields", "Completa todos los campos obligatorios."), "danger");
+                mostrarAlerta(eventActionAlert, S("events_required_fields", "Completa todos los campos obligatorios."), "danger");
                 return;
             }
 
@@ -270,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 url = "./eventos-editar.php";
                 datos.id_security_events = eventFormTarget.value;
             } else if (isGlobalAdmin) {
-                if (!currentCompanyId) { mostrarAlerta(eventActionAlert, tt("common_select_company_first", "Selecciona una empresa primero."), "danger"); return; }
+                if (!currentCompanyId) { mostrarAlerta(eventActionAlert, S("events_select_company_first", "Selecciona una empresa primero."), "danger"); return; }
                 datos.id_company = currentCompanyId;
             }
 
@@ -278,8 +274,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const r = await postJson(url, datos);
             eventSubmitBtn.disabled = false;
 
-            if (!r.success) { mostrarAlerta(eventActionAlert, r.message || tt("events_error_save", "No se pudo guardar el evento."), "danger"); return; }
-            mostrarAlerta(eventActionAlert, r.message || tt("events_saved", "Evento guardado."), "success");
+            if (!r.success) { mostrarAlerta(eventActionAlert, r.message || S("events_save_error", "No se pudo guardar el evento."), "danger"); return; }
+            mostrarAlerta(eventActionAlert, r.message || S("events_saved", "Evento guardado."), "success");
             cancelarEdicionEvento();
             cargarEventos();
         });
@@ -289,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
         eventForm.reset();
         eventFormMode.value = "create";
         eventFormTarget.value = "";
-        eventSubmitBtn.textContent = tt("events_submit", "Reportar evento");
+        eventSubmitBtn.textContent = S("events_submit", "Reportar evento");
         eventCancelEditBtn.classList.add("d-none");
     }
     if (eventCancelEditBtn) eventCancelEditBtn.addEventListener("click", cancelarEdicionEvento);
@@ -306,11 +302,11 @@ document.addEventListener("DOMContentLoaded", function () {
         currentEventId = idEvento;
         ocultarAlerta(detailAlert);
         eventDetail.classList.add("activo");
-        eventDetailBody.innerHTML = '<p class="text-muted">' + escapeHtml(tt("common_loading", "Cargando...")) + '</p>';
+        eventDetailBody.innerHTML = '<p class="text-muted">' + escapeHtml(S("events_detail_loading", "Cargando...")) + '</p>';
         eventDetail.scrollIntoView({ behavior: "smooth" });
 
         const r = await llamarApi("./eventos-detalle.php?id=" + encodeURIComponent(idEvento));
-        if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("events_error_detail_load", "No se pudo cargar el evento."), "danger"); return; }
+        if (!r.success) { mostrarAlerta(detailAlert, r.message || S("events_detail_load_error", "No se pudo cargar el evento."), "danger"); return; }
 
         renderizarDetalle(r.data);
         renderizarTracking(r.data.seguimiento || []);
@@ -321,9 +317,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const [estadoTexto] = etiquetasEstado[ev.state] || ["-"];
         eventDetailBody.innerHTML =
             '<p><strong>' + escapeHtml(ev.event_type_name) + '</strong> — ' + escapeHtml(ev.center_name) +
-            (ev.project_name ? ' · ' + escapeHtml(tt("events_project_label", "Proyecto")) + ': ' + escapeHtml(ev.project_name) : '') +
-            (ev.id_worker_name ? ' · ' + escapeHtml(tt("events_worker_label", "Trabajador")) + ': ' + escapeHtml(ev.id_worker_name) : '') + '</p>' +
-            '<p class="crit-' + escapeHtml(ev.criticality) + '">' + escapeHtml(tt("events_criticality", "Criticidad")) + ': ' + escapeHtml(ev.criticality) + ' · ' + escapeHtml(tt("common_state", "Estado")) + ': ' + estadoTexto + '</p>' +
+            (ev.project_name ? ' · ' + escapeHtml(S("events_detail_project_label", "Proyecto")) + ': ' + escapeHtml(ev.project_name) : '') +
+            (ev.id_worker_name ? ' · ' + escapeHtml(S("events_detail_worker_label", "Trabajador")) + ': ' + escapeHtml(ev.id_worker_name) : '') + '</p>' +
+            '<p class="crit-' + escapeHtml(ev.criticality) + '">' + escapeHtml(S("events_detail_criticality_label", "Criticidad")) + ': ' + escapeHtml(ev.criticality) + ' · ' + escapeHtml(S("common_state", "Estado")) + ': ' + estadoTexto + '</p>' +
             '<p>' + escapeHtml(ev.description) + '</p>';
 
         if (puedeGestionar) {
@@ -342,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderizarTracking(items) {
         trackingList.innerHTML = "";
         if (items.length === 0) {
-            trackingList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("events_tracking_empty", "Sin seguimiento todavía.")) + '</p>';
+            trackingList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("events_tracking_empty", "Sin seguimiento todavía.")) + '</p>';
             return;
         }
         items.forEach(function (t) {
@@ -350,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
             row.className = "chip-row";
             row.innerHTML =
                 '<span>' + escapeHtml(t.tracking_description) + ' — <strong>' + escapeHtml(t.person_charge) + '</strong>' +
-                ' (' + escapeHtml(tt("events_tracking_deadline", "Plazo")) + ': ' + escapeHtml((t.deadline || "").substring(0, 10)) + ')</span>';
+                ' (' + escapeHtml(S("events_tracking_deadline_prefix", "plazo")) + ': ' + escapeHtml((t.deadline || "").substring(0, 10)) + ')</span>';
             trackingList.appendChild(row);
         });
     }
@@ -368,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 deadline: trackingDeadline.value,
             });
 
-            if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("events_error_tracking_add", "No se pudo agregar el seguimiento."), "danger"); return; }
+            if (!r.success) { mostrarAlerta(detailAlert, r.message || S("events_tracking_add_error", "No se pudo agregar el seguimiento."), "danger"); return; }
             trackingForm.reset();
             abrirDetalle(currentEventId);
         });
@@ -377,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderizarEvidencias(items) {
         evidenceList.innerHTML = "";
         if (items.length === 0) {
-            evidenceList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(tt("events_evidence_empty", "Sin evidencias todavía.")) + '</p>';
+            evidenceList.innerHTML = '<p class="text-muted mb-0">' + escapeHtml(S("events_evidence_empty", "Sin evidencias todavía.")) + '</p>';
             return;
         }
         items.forEach(function (ev) {
@@ -386,12 +382,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const link = './evidencia-descargar.php?id_evidence=' + encodeURIComponent(ev.id_evidence);
             row.innerHTML =
                 '<a href="' + link + '" target="_blank">' + (ev.file_type === 'imagen' ? '🖼️' : '📄') + ' ' + escapeHtml(ev.original_name) + '</a>' +
-                (puedeGestionar ? '<button type="button" title="' + escapeHtml(tt("common_delete", "Eliminar")) + '">&times;</button>' : '<span></span>');
+                (puedeGestionar ? '<button type="button" title="' + escapeHtml(S("events_evidence_remove_title", "Eliminar")) + '">&times;</button>' : '<span></span>');
 
             const btn = row.querySelector("button");
             if (btn) {
                 btn.addEventListener("click", async function () {
-                    if (!window.confirm(tt("events_confirm_delete_evidence", "¿Eliminar esta evidencia?"))) return;
+                    if (!window.confirm(S("events_evidence_remove_confirm", "¿Eliminar esta evidencia?"))) return;
                     const r = await postJson("./evidencia-eliminar.php", { id_evidence: ev.id_evidence });
                     if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
                     abrirDetalle(currentEventId);
@@ -407,7 +403,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ocultarAlerta(detailAlert);
 
             const archivo = evidenceFile.files[0];
-            if (!archivo) { mostrarAlerta(detailAlert, tt("common_select_file", "Selecciona un archivo."), "warning"); return; }
+            if (!archivo) { mostrarAlerta(detailAlert, S("events_evidence_select_file", "Selecciona un archivo."), "warning"); return; }
 
             const formData = new FormData();
             formData.append("csrf_token", csrfToken);
@@ -415,7 +411,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("archivo", archivo);
 
             const r = await llamarApi("./evidencia-subir.php", { method: "POST", body: formData });
-            if (!r.success) { mostrarAlerta(detailAlert, r.message || tt("events_error_evidence_upload", "No se pudo subir la evidencia."), "danger"); return; }
+            if (!r.success) { mostrarAlerta(detailAlert, r.message || S("events_evidence_upload_error", "No se pudo subir la evidencia."), "danger"); return; }
 
             evidenceForm.reset();
             abrirDetalle(currentEventId);

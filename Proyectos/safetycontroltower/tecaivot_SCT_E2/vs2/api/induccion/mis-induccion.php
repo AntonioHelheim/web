@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/common.php';
-require_once __DIR__ . '/../../i18n.php';
 
 requireCapabilityPage($pdo, 'induction.view', '../../acceso-denegado.php');
 
@@ -15,33 +14,22 @@ $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8'
 $assetVersionEscaped = htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8');
 
 $jsKeys = [
-    'common_invalid_server_response', 'common_close', 'common_loading',
-    'my_inductions_loading', 'my_inductions_error_load', 'my_inductions_empty',
-    'my_inductions_status_pending', 'my_inductions_status_approved', 'my_inductions_status_failed',
-    'my_inductions_no_attempts', 'my_inductions_execute_btn', 'my_inductions_download_certificate',
-    'my_inductions_due_prefix', 'my_inductions_attempts_used_prefix', 'my_inductions_error_load_course',
-    'my_inductions_must_answer_all', 'my_inductions_error_submit', 'my_inductions_completed_ok',
-    'my_inductions_failed_with_retries', 'my_inductions_failed_no_retries',
+    'my_induction_error_response','my_induction_loading','my_induction_load_error','my_induction_empty',
+    'my_induction_status_pending','my_induction_status_approved','my_induction_status_failed',
+    'my_induction_no_attempts','my_induction_take_course','my_induction_download_certificate',
+    'my_induction_due_prefix','my_induction_attempts_used_prefix','my_induction_detail_loading',
+    'my_induction_detail_load_error','my_induction_answer_all_required','my_induction_submit_error',
+    'my_induction_passed','my_induction_failed_with_attempts','my_induction_failed_no_attempts',
 ];
 $jsStrings = [];
-foreach ($jsKeys as $key) {
-    $jsStrings[$key] = t($key);
-}
-
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
+foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8') ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(t('my_inductions_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
+    <title><?= tt('my_induction_page_title') ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -53,12 +41,10 @@ $langSwitcherStrings = [
         .welcome-hero { padding: 4rem 0 2rem; }
         .welcome-topbar {
             display: flex; justify-content: space-between; align-items: center;
-            gap: 1rem; flex-wrap: wrap;
             padding: 1.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.08);
         }
         .welcome-topbar .brand-symbol img { height: 32px; }
-        .topbar-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
-        .language-select { min-width: 120px; }
+        .topbar-actions { display: flex; gap: 0.5rem; align-items: center; }
         .welcome-greeting-icon { font-size: 2.5rem; color: #16a34a; margin-bottom: 0.75rem; }
         .quick-links { margin-top: 2rem; margin-bottom: 3rem; }
         .curso-card { border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem; }
@@ -77,23 +63,22 @@ $langSwitcherStrings = [
                 </div>
             </div>
             <div class="topbar-actions">
-                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8') ?>">
+                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= tt('common_language') ?>">
                     <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?>
                         <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option>
                     <?php endforeach; ?>
                 </select>
-                <a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('mgmt_back'), ENT_QUOTES, 'UTF-8') ?> <i class="bi bi-arrow-left"></i></a>
-                <a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('common_logout'), ENT_QUOTES, 'UTF-8') ?> <i class="bi bi-box-arrow-right"></i></a>
+                <a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm"><?= tt('mgmt_back') ?> <i class="bi bi-arrow-left"></i></a>
+                <a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?= tt('common_logout') ?> <i class="bi bi-box-arrow-right"></i></a>
             </div>
         </div>
 
         <section class="welcome-hero text-center">
             <div class="welcome-greeting-icon"><i class="bi bi-mortarboard"></i></div>
             <span class="section-label">SAFETY CONTROL TOWER</span>
-            <h1 class="section-title"><?= htmlspecialchars(t('my_inductions_title'), ENT_QUOTES, 'UTF-8') ?></h1>
+            <h1 class="section-title"><?= tt('my_induction_title') ?></h1>
             <p class="section-description intro-description-centered">
-                <?= htmlspecialchars(t('my_inductions_intro'), ENT_QUOTES, 'UTF-8') ?>
-                <?= htmlspecialchars(t('companies_session_as'), ENT_QUOTES, 'UTF-8') ?> <strong><?php echo $userEmail; ?></strong>.
+                <?= tt('my_induction_intro') ?> <?= tt('users_session_as') ?> <strong><?php echo $userEmail; ?></strong>.
             </p>
         </section>
 
@@ -101,7 +86,7 @@ $langSwitcherStrings = [
 
             <div id="misAlert" class="alert d-none mb-3" role="alert" aria-live="polite"></div>
 
-            <div id="misStatus" class="alert alert-info" role="status"><?= htmlspecialchars(t('my_inductions_loading'), ENT_QUOTES, 'UTF-8') ?></div>
+            <div id="misStatus" class="alert alert-info" role="status"><?= tt('my_induction_loading') ?></div>
 
             <div id="misLista" class="d-none"></div>
 
@@ -109,21 +94,20 @@ $langSwitcherStrings = [
             <div id="rendirPanel" class="feature-card mt-4 d-none">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <h2 class="h5 mb-0" id="rendirTitulo">-</h2>
-                    <button type="button" id="rendirCerrarBtn" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('common_close'), ENT_QUOTES, 'UTF-8') ?></button>
+                    <button type="button" id="rendirCerrarBtn" class="btn btn-outline-custom btn-sm"><?= tt('my_induction_close') ?></button>
                 </div>
                 <div id="rendirAlert" class="alert d-none" role="alert" aria-live="polite"></div>
                 <div id="rendirPreguntas"></div>
-                <button type="button" id="rendirEnviarBtn" class="btn btn-primary-custom mt-2"><?= htmlspecialchars(t('my_inductions_submit'), ENT_QUOTES, 'UTF-8') ?></button>
+                <button type="button" id="rendirEnviarBtn" class="btn btn-primary-custom mt-2"><?= tt('my_induction_send_answers') ?></button>
             </div>
 
         </section>
 
     </div>
 
-    <script id="myInductionsI18n" type="application/json"><?= json_encode($jsStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
-    <script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
+    <script id="myInductionI18n" type="application/json"><?= json_encode($jsStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
     <script src="../../js/induccion-mis.js?v=<?= $assetVersionEscaped ?>"></script>
+    <script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
 </body>
 </html>

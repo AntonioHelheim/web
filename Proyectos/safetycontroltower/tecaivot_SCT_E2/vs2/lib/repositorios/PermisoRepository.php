@@ -99,7 +99,9 @@ function permisoListarIdsRol(PDO $pdo, int $idRoleGroup): array
 
 function permisoIdsValidos(PDO $pdo, array $ids): array
 {
-    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), static fn(int $id): bool => $id > 0)));
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), static function (int $id): bool {
+        return $id > 0;
+    })));
     if (!$ids) return [];
 
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
@@ -118,7 +120,9 @@ function permisoIdsValidos(PDO $pdo, array $ids): array
 
 function permisoCodigosPorIds(PDO $pdo, array $ids): array
 {
-    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), static fn(int $id): bool => $id > 0)));
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), static function (int $id): bool {
+        return $id > 0;
+    })));
     if (!$ids) return [];
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $stmt = $pdo->prepare('SELECT id_permission, code FROM permissions WHERE id_permission IN (' . $placeholders . ')');

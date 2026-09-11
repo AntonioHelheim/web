@@ -28,5 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   groups.addEventListener('change',updateCount);
   all.addEventListener('click',()=>{groups.querySelectorAll('input[type=checkbox]:not(:disabled)').forEach(x=>x.checked=true);updateCount()});
   clear.addEventListener('click',()=>{groups.querySelectorAll('input[type=checkbox]:not(:disabled)').forEach(x=>x.checked=false);updateCount()});
-  save.addEventListener('click',async()=>{hideAlert();save.disabled=true;const ids=[...groups.querySelectorAll('input[type=checkbox]:checked')].map(x=>Number(x.value));try{await api('guardar-matriz.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({csrf_token:csrf,id_role_group:Number(role.value),permission_ids:ids})});showAlert(i18n.permissions_saved||'Permisos guardados.','success');role.dispatchEvent(new Event('change'))}catch(e){showAlert(e.message)}finally{save.disabled=false}});  loadCompanies();
+  save.addEventListener('click',async()=>{hideAlert();save.disabled=true;const ids=[...groups.querySelectorAll('input[type=checkbox]:checked')].map(x=>Number(x.value));try{await api('guardar-matriz.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({csrf_token:csrf,id_role_group:Number(role.value),permission_ids:ids})});showAlert(i18n.permissions_saved||'Permisos guardados.','success');role.dispatchEvent(new Event('change'))}catch(e){showAlert(e.message)}finally{save.disabled=false}});
+  // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
+  loadCompanies();
 });

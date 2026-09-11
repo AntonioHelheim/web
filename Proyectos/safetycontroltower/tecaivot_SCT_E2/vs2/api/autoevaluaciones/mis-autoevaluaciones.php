@@ -8,13 +8,6 @@ $csrf=htmlspecialchars((string)$_SESSION['csrf_token'],ENT_QUOTES,'UTF-8');
 $userEmail=htmlspecialchars((string)($_SESSION['user_email']??''),ENT_QUOTES,'UTF-8');
 $jsKeys=['self_error_response','self_result','self_attempts_used','my_self_loading','my_self_empty','my_self_execute','my_self_no_attempts','my_self_due','my_self_approved','my_self_failed','my_self_pending','my_self_in_progress','my_self_must_answer','my_self_completed_ok','my_self_completed_fail','my_self_retry'];
 $jsStrings=[];foreach($jsKeys as $key)$jsStrings[$key]=t($key);
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!DOCTYPE html><html lang="<?= htmlspecialchars(idiomaActual(),ENT_QUOTES,'UTF-8') ?>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title><?= htmlspecialchars(t('my_self_page_title'),ENT_QUOTES,'UTF-8') ?></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"><link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>">
@@ -23,7 +16,4 @@ $langSwitcherStrings = [
 <section class="welcome-hero text-center"><div class="welcome-greeting-icon"><i class="bi bi-person-check"></i></div><span class="section-label">SAFETY CONTROL TOWER</span><h1 class="section-title"><?= htmlspecialchars(t('my_self_title'),ENT_QUOTES,'UTF-8') ?></h1><p class="section-description intro-description-centered"><?= htmlspecialchars(t('my_self_intro'),ENT_QUOTES,'UTF-8') ?> <?= htmlspecialchars(t('self_session_as'),ENT_QUOTES,'UTF-8') ?> <strong><?= $userEmail ?></strong>.</p></section>
 <section class="quick-links"><div id="mySelfAlert" class="alert d-none mb-3" role="alert" aria-live="polite"></div><div id="mySelfStatus" class="alert alert-info" role="status"><?= htmlspecialchars(t('my_self_loading'),ENT_QUOTES,'UTF-8') ?></div><div id="mySelfList" class="d-none"></div>
 <div id="executePanel" class="feature-card mt-4 d-none"><div class="d-flex justify-content-between align-items-start gap-3 mb-3"><div><span class="section-label"><?= htmlspecialchars(t('my_self_execute_title'),ENT_QUOTES,'UTF-8') ?></span><h2 id="executeTitle" class="h5 mb-0">-</h2></div><button type="button" id="executeCloseBtn" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('self_close'),ENT_QUOTES,'UTF-8') ?></button></div><div id="executeAlert" class="alert d-none" role="alert" aria-live="polite"></div><p id="executeDescription" class="text-muted"></p><div id="executeQuestions"></div><button type="button" id="executeSubmitBtn" class="btn btn-primary-custom mt-3"><?= htmlspecialchars(t('my_self_submit'),ENT_QUOTES,'UTF-8') ?></button></div></section></div>
-<script id="mySelfI18n" type="application/json"><?= json_encode($jsStrings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
-<script src="../../js/autoevaluaciones-mis.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script></body></html>
+<script id="mySelfI18n" type="application/json"><?= json_encode($jsStrings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script><script src="../../js/autoevaluaciones-mis.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script><script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script></body></html>

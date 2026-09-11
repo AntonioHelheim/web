@@ -11,7 +11,6 @@ $jsKeys=[
 'forms_loading','forms_empty','forms_select_company','forms_scope_global','forms_scope_company','forms_global_badge','forms_company_badge','forms_locked','forms_edit','forms_manage','forms_deactivate','forms_reactivate','forms_confirm_deactivate','forms_confirm_reactivate','forms_error_response','forms_error_load','forms_error_detail','forms_error_submissions','forms_form_new','forms_form_edit','forms_save','forms_update','forms_cancel_edit','forms_fields_empty','forms_field_new','forms_field_edit','forms_field_saved','forms_field_deleted','forms_confirm_field_delete','forms_options_help','forms_required_yes','forms_required_no','forms_submissions_empty','forms_submission_view','forms_submission_from','forms_submission_date','forms_submission_answers','forms_file_download','forms_readonly_global','forms_migration_required','common_active','common_inactive'
 ];
 $jsStrings=[];foreach($jsKeys as $k)$jsStrings[$k]=t($k);
-$langSwitcherStrings=['title'=>t('common_confirm_language_title'),'text'=>t('common_confirm_language_text'),'confirm'=>t('common_confirm'),'cancel'=>t('common_cancel'),'updated'=>t('common_language_updated')];
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars(idiomaActual(),ENT_QUOTES,'UTF-8') ?>">
@@ -41,8 +40,5 @@ $langSwitcherStrings=['title'=>t('common_confirm_language_title'),'text'=>t('com
 </div>
 </section></div>
 <script id="formsI18n" type="application/json"><?= json_encode($jsStrings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
-<script src="../../js/formularios-admin.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script><script src="../../js/formularios-admin.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script><script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
 </body></html>

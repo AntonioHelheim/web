@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("centersI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
+
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
-
-    const i18nNode = document.getElementById("centersI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
 
     const companySelect     = document.getElementById("companySelect");
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             return await respuesta.json();
         } catch (e) {
-            return { success: false, message: "Respuesta inválida del servidor." };
+            return { success: false, message: S("centers_error_response", "Respuesta inválida del servidor.") };
         }
     }
 
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const resultado = await llamarApi("./empresas-disponibles.php");
         if (!resultado.success) {
-            mostrarAlerta(centersActionAlert, resultado.message || tt("centers_error_load_companies", "No se pudieron cargar las empresas."), "danger");
+            mostrarAlerta(centersActionAlert, resultado.message || S("centers_companies_error", "No se pudieron cargar las empresas."), "danger");
             return;
         }
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 centersTableWrap.classList.add("d-none");
                 centersStatus.classList.remove("d-none");
-                centersStatus.textContent = tt("centers_select_company_first", "Selecciona una empresa para ver sus centros/sedes.");
+                centersStatus.textContent = S("centers_select_to_view", "Selecciona una empresa para ver sus centros/sedes.");
             }
         });
 
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cargarCentros() {
         centersStatus.classList.remove("d-none", "alert-danger");
         centersStatus.classList.add("alert-info");
-        centersStatus.textContent = tt("centers_loading", "Cargando centros/sedes...");
+        centersStatus.textContent = S("centers_loading", "Cargando centros/sedes...");
         centersTableWrap.classList.add("d-none");
 
         const url = isGlobalAdmin && currentCompanyId
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!resultado.success) {
             centersStatus.classList.remove("alert-info");
             centersStatus.classList.add("alert-danger");
-            centersStatus.textContent = resultado.message || tt("centers_error_load", "No se pudieron cargar los centros/sedes.");
+            centersStatus.textContent = resultado.message || S("centers_load_error", "No se pudieron cargar los centros/sedes.");
             return;
         }
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (centros.length === 0) {
             centersStatus.classList.remove("alert-danger");
             centersStatus.classList.add("alert-info");
-            centersStatus.textContent = tt("centers_empty", "Todavía no hay centros/sedes registrados.");
+            centersStatus.textContent = S("centers_empty", "Todavía no hay centros/sedes registrados.");
             centersTableWrap.classList.add("d-none");
             return;
         }
@@ -145,18 +145,18 @@ document.addEventListener("DOMContentLoaded", function () {
         centros.forEach(function (centro) {
             const fila = document.createElement("tr");
 
-            const estadoTexto = String(centro.state) === "1" ? tt("common_active", "Activo") : tt("common_inactive", "Inactivo");
+            const estadoTexto = String(centro.state) === "1" ? S("common_active", "Activo") : S("common_inactive", "Inactivo");
             const estadoClase = String(centro.state) === "1" ? "text-success" : "text-muted";
-            const botonEstadoTexto = String(centro.state) === "1" ? tt("common_deactivate", "Dar de baja") : tt("common_reactivate", "Reactivar");
+            const botonEstadoTexto = String(centro.state) === "1" ? S("centers_deactivate", "Dar de baja") : S("centers_reactivate", "Reactivar");
 
             fila.innerHTML =
                 '<td>' + escapeHtml(centro.id_company_center) + '</td>' +
                 '<td>' + escapeHtml(centro.name) + '</td>' +
                 '<td>' + escapeHtml(centro.description) + '</td>' +
-                '<td class="' + estadoClase + '">' + estadoTexto + '</td>' +
+                '<td class="' + estadoClase + '">' + escapeHtml(estadoTexto) + '</td>' +
                 '<td class="form-actions">' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + tt("common_edit", "Editar") + '</button>' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle-state">' + botonEstadoTexto + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(S("common_edit", "Editar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle-state">' + escapeHtml(botonEstadoTexto) + '</button>' +
                 '</td>';
 
             fila.querySelector('[data-action="edit"]').addEventListener("click", function () {
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         centerNameInput.value = centro.name;
         centerDescInput.value = centro.description;
 
-        centerSubmitBtn.textContent = tt("centers_save_changes", "Guardar cambios");
+        centerSubmitBtn.textContent = S("centers_save_changes", "Guardar cambios");
         if (centerCancelBtn) centerCancelBtn.classList.remove("d-none");
 
         centerForm.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
         centerForm.reset();
         centerFormMode.value = "create";
         centerFormTarget.value = "";
-        centerSubmitBtn.textContent = tt("centers_save", "Guardar centro/sede");
+        centerSubmitBtn.textContent = S("centers_save", "Guardar centro/sede");
         if (centerCancelBtn) centerCancelBtn.classList.add("d-none");
     }
 
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             if (!datos.name || !datos.description) {
-                mostrarAlerta(centersActionAlert, tt("centers_required_fields", "Nombre y descripción son obligatorios."), "danger");
+                mostrarAlerta(centersActionAlert, S("centers_required", "Nombre y descripción son obligatorios."), "danger");
                 return;
             }
 
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 datos.id_company_center = centerFormTarget.value;
             } else if (isGlobalAdmin) {
                 if (!currentCompanyId) {
-                    mostrarAlerta(centersActionAlert, tt("centers_select_company_before_create", "Selecciona una empresa antes de crear un centro/sede."), "danger");
+                    mostrarAlerta(centersActionAlert, S("centers_select_company_first", "Selecciona una empresa antes de crear un centro/sede."), "danger");
                     return;
                 }
                 datos.id_company = currentCompanyId;
@@ -231,11 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
             centerSubmitBtn.disabled = false;
 
             if (!resultado.success) {
-                mostrarAlerta(centersActionAlert, resultado.message || tt("centers_error_save", "No se pudo guardar el centro/sede."), "danger");
+                mostrarAlerta(centersActionAlert, resultado.message || S("centers_save_error", "No se pudo guardar el centro/sede."), "danger");
                 return;
             }
 
-            mostrarAlerta(centersActionAlert, resultado.message || tt("centers_saved", "Centro/sede guardado correctamente."), "success");
+            mostrarAlerta(centersActionAlert, resultado.message || S("centers_saved", "Centro/sede guardado correctamente."), "success");
             cancelarEdicion();
             cargarCentros();
         });
@@ -244,8 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cambiarEstadoCentro(centro) {
         const nuevoEstado = String(centro.state) === "1" ? 0 : 1;
         const confirmacion = nuevoEstado === 1
-            ? tt("centers_confirm_reactivate", "¿Reactivar este centro/sede?")
-            : tt("centers_confirm_deactivate", "¿Dar de baja este centro/sede? Podrás reactivarlo más adelante.");
+            ? S("centers_confirm_reactivate", "¿Reactivar este centro/sede?")
+            : S("centers_confirm_deactivate", "¿Dar de baja este centro/sede? Podrás reactivarlo más adelante.");
 
         if (!window.confirm(confirmacion)) {
             return;
@@ -257,11 +257,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!resultado.success) {
-            mostrarAlerta(centersActionAlert, resultado.message || tt("centers_error_state", "No se pudo cambiar el estado."), "danger");
+            mostrarAlerta(centersActionAlert, resultado.message || S("centers_state_error", "No se pudo cambiar el estado."), "danger");
             return;
         }
 
-        mostrarAlerta(centersActionAlert, resultado.message || tt("centers_state_updated", "Estado actualizado."), "success");
+        mostrarAlerta(centersActionAlert, resultado.message || S("centers_state_updated", "Estado actualizado."), "success");
         cargarCentros();
     }
 

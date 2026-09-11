@@ -79,7 +79,7 @@ function passwordsValidateNewPassword(string $password, string $email = '', stri
 
     if ($email !== '') {
         $localPart = passwordsLower((string) strstr($email, '@', true));
-        if (passwordsStringLength($localPart) >= 4 && str_contains($normalized, $localPart)) {
+        if (passwordsStringLength($localPart) >= 4 && strpos($normalized, $localPart) !== false) {
             return 'La contraseña no debe contener tu correo o nombre de usuario.';
         }
     }
@@ -94,7 +94,7 @@ function passwordsValidateNewPassword(string $password, string $email = '', stri
         if (
             passwordsStringLength($normalizedRut) >= 6
             && $normalizedRut !== ''
-            && str_contains($passwordComparable, $normalizedRut)
+            && strpos($passwordComparable, $normalizedRut) !== false
         ) {
             return 'La contraseña no debe contener ni derivarse de tu RUT.';
         }

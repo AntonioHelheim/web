@@ -12,12 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    let I18N = {};
+    try { I18N = JSON.parse((document.getElementById("workersI18n") || {}).textContent || "{}"); } catch (_) {}
+    const S = (key, fallback) => I18N[key] || fallback || key;
+
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
-
-    const i18nNode = document.getElementById("workersI18n");
-    const I18N = i18nNode ? JSON.parse(i18nNode.textContent) : {};
-    const tt = function (key, fallback) { return I18N[key] || fallback; };
 
     const companySelect = document.getElementById("companySelect");
 
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             return await respuesta.json();
         } catch (e) {
-            return { success: false, message: tt("common_invalid_server_response", "Respuesta inválida del servidor.") };
+            return { success: false, message: S("workers_error_response", "Respuesta inválida del servidor.") };
         }
     }
 
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const resultado = await llamarApi("./empresas-disponibles.php");
         if (!resultado.success) {
-            mostrarAlerta(workersActionAlert, resultado.message || tt("workers_error_load_companies", "No se pudieron cargar las empresas."), "danger");
+            mostrarAlerta(workersActionAlert, resultado.message || S("workers_companies_error", "No se pudieron cargar las empresas."), "danger");
             return;
         }
 
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 workersTableWrap.classList.add("d-none");
                 workersStatus.classList.remove("d-none");
-                workersStatus.textContent = tt("workers_select_company_first", "Selecciona una empresa para ver sus trabajadores.");
+                workersStatus.textContent = S("workers_select_to_view", "Selecciona una empresa para ver sus trabajadores.");
             }
         });
 
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         workersStatus.classList.remove("d-none", "alert-danger");
         workersStatus.classList.add("alert-info");
-        workersStatus.textContent = tt("workers_loading", "Cargando trabajadores...");
+        workersStatus.textContent = S("workers_loading", "Cargando trabajadores...");
         workersTableWrap.classList.add("d-none");
 
         const query = construirQuery(currentCompanyId);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!resultado.success) {
             workersStatus.classList.remove("alert-info");
             workersStatus.classList.add("alert-danger");
-            workersStatus.textContent = resultado.message || tt("workers_error_load", "No se pudieron cargar los trabajadores.");
+            workersStatus.textContent = resultado.message || S("workers_load_error", "No se pudieron cargar los trabajadores.");
             return;
         }
 
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (trabajadores.length === 0) {
             workersStatus.classList.remove("alert-danger");
             workersStatus.classList.add("alert-info");
-            workersStatus.textContent = tt("workers_empty_search", "No hay trabajadores que coincidan con la búsqueda.");
+            workersStatus.textContent = S("workers_no_match", "No hay trabajadores que coincidan con la búsqueda.");
             workersTableWrap.classList.add("d-none");
             return;
         }
@@ -196,9 +196,9 @@ document.addEventListener("DOMContentLoaded", function () {
         trabajadores.forEach(function (trabajador) {
             const fila = document.createElement("tr");
 
-            const estadoTexto = String(trabajador.state) === "1" ? tt("common_active", "Activo") : tt("common_inactive", "Inactivo");
+            const estadoTexto = String(trabajador.state) === "1" ? S("common_active", "Activo") : S("common_inactive", "Inactivo");
             const estadoClase = String(trabajador.state) === "1" ? "text-success" : "text-muted";
-            const botonEstadoTexto = String(trabajador.state) === "1" ? tt("common_deactivate", "Dar de baja") : tt("common_reactivate", "Reactivar");
+            const botonEstadoTexto = String(trabajador.state) === "1" ? S("workers_deactivate", "Dar de baja") : S("workers_reactivate", "Reactivar");
 
             const fotoHtml = trabajador.photo_path
                 ? '<img class="worker-photo-thumb" src="../../' + escapeHtml(trabajador.photo_path) + '" alt="">'
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<td>' + escapeHtml(contacto) + '</td>' +
                 '<td class="' + estadoClase + '">' + escapeHtml(estadoTexto) + '</td>' +
                 '<td class="form-actions">' +
-                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(tt("common_edit", "Editar")) + '</button>' +
+                    '<button type="button" class="btn btn-outline-custom btn-sm" data-action="edit">' + escapeHtml(S("common_edit", "Editar")) + '</button>' +
                     '<button type="button" class="btn btn-outline-custom btn-sm" data-action="toggle-state">' + escapeHtml(botonEstadoTexto) + '</button>' +
                 '</td>';
 
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         workerRutInput.value = trabajador.rut;
         workerRutInput.disabled = true;
-        workerRutHelp.textContent = tt("workers_rut_help_edit", "El RUT no se puede editar; si está mal, da de baja este registro y crea uno nuevo.");
+        workerRutHelp.textContent = S("workers_edit_rut_help", "El RUT no se puede editar; si está mal, da de baja este registro y crea uno nuevo.");
 
         workerNameInput.value = trabajador.name;
         workerLastnameInput.value = trabajador.lastname;
@@ -250,8 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
         workerPhoneInput.value = trabajador.phone || "";
         workerPositionInput.value = trabajador.position || "";
 
-        if (workerFormTitle) workerFormTitle.textContent = tt("workers_form_edit", "Editar trabajador");
-        workerSubmitBtn.textContent = tt("workers_save_changes", "Guardar cambios");
+        if (workerFormTitle) workerFormTitle.textContent = S("workers_edit_title", "Editar trabajador");
+        workerSubmitBtn.textContent = S("workers_save_changes", "Guardar cambios");
         if (workerCancelBtn) workerCancelBtn.classList.remove("d-none");
 
         if (workerPhotoSection) {
@@ -272,10 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
         workerFormMode.value = "create";
         workerFormTarget.value = "";
         workerRutInput.disabled = false;
-        workerRutHelp.textContent = tt("workers_rut_help_create", "No se puede editar después de creado.");
+        workerRutHelp.textContent = S("workers_rut_help_default", "No se puede editar después de creado.");
 
-        if (workerFormTitle) workerFormTitle.textContent = tt("workers_form_new", "Nuevo trabajador");
-        workerSubmitBtn.textContent = tt("workers_save", "Guardar trabajador");
+        if (workerFormTitle) workerFormTitle.textContent = S("workers_new_title", "Nuevo trabajador");
+        workerSubmitBtn.textContent = S("workers_save", "Guardar trabajador");
         if (workerCancelBtn) workerCancelBtn.classList.add("d-none");
         if (workerPhotoSection) workerPhotoSection.classList.add("d-none");
     }
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             if (!datos.name || !datos.lastname) {
-                mostrarAlerta(workersActionAlert, tt("workers_required_name_lastname", "Nombre y apellido son obligatorios."), "danger");
+                mostrarAlerta(workersActionAlert, S("workers_required", "Nombre y apellido son obligatorios."), "danger");
                 return;
             }
 
@@ -309,14 +309,14 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 const rut = workerRutInput.value.trim();
                 if (!rut) {
-                    mostrarAlerta(workersActionAlert, tt("workers_required_rut", "El RUT es obligatorio."), "danger");
+                    mostrarAlerta(workersActionAlert, S("workers_rut_required", "El RUT es obligatorio."), "danger");
                     return;
                 }
                 datos.rut = rut;
 
                 if (isGlobalAdmin) {
                     if (!currentCompanyId) {
-                        mostrarAlerta(workersActionAlert, tt("workers_select_company_before_create", "Selecciona una empresa antes de crear un trabajador."), "danger");
+                        mostrarAlerta(workersActionAlert, S("workers_select_company_first", "Selecciona una empresa antes de crear un trabajador."), "danger");
                         return;
                     }
                     datos.id_company = currentCompanyId;
@@ -328,11 +328,11 @@ document.addEventListener("DOMContentLoaded", function () {
             workerSubmitBtn.disabled = false;
 
             if (!resultado.success) {
-                mostrarAlerta(workersActionAlert, resultado.message || tt("workers_error_save", "No se pudo guardar el trabajador."), "danger");
+                mostrarAlerta(workersActionAlert, resultado.message || S("workers_save_error", "No se pudo guardar el trabajador."), "danger");
                 return;
             }
 
-            mostrarAlerta(workersActionAlert, resultado.message || tt("workers_saved", "Trabajador guardado correctamente."), "success");
+            mostrarAlerta(workersActionAlert, resultado.message || S("workers_saved", "Trabajador guardado correctamente."), "success");
 
             if (modo === "create" && resultado.data && resultado.data.id_worker) {
                 // Deja el formulario en modo edición sobre el trabajador
@@ -359,8 +359,8 @@ document.addEventListener("DOMContentLoaded", function () {
     async function cambiarEstado(trabajador) {
         const nuevoEstado = String(trabajador.state) === "1" ? 0 : 1;
         const confirmacion = nuevoEstado === 1
-            ? tt("workers_confirm_reactivate", "¿Reactivar a este trabajador?")
-            : tt("workers_confirm_deactivate", "¿Dar de baja a este trabajador? Podrás reactivarlo más adelante.");
+            ? S("workers_confirm_reactivate", "¿Reactivar a este trabajador?")
+            : S("workers_confirm_deactivate", "¿Dar de baja a este trabajador? Podrás reactivarlo más adelante.");
 
         if (!window.confirm(confirmacion)) {
             return;
@@ -372,11 +372,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!resultado.success) {
-            mostrarAlerta(workersActionAlert, resultado.message || tt("workers_error_state", "No se pudo cambiar el estado."), "danger");
+            mostrarAlerta(workersActionAlert, resultado.message || S("workers_state_error", "No se pudo cambiar el estado."), "danger");
             return;
         }
 
-        mostrarAlerta(workersActionAlert, resultado.message || tt("workers_state_updated", "Estado actualizado."), "success");
+        mostrarAlerta(workersActionAlert, resultado.message || S("workers_state_updated", "Estado actualizado."), "success");
         cargarTrabajadores();
     }
 
@@ -390,12 +390,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const archivo = workerPhotoInput.files[0];
 
             if (!idWorker) {
-                mostrarAlerta(workersActionAlert, tt("workers_photo_save_first", "Guarda el trabajador antes de subir una foto."), "warning");
+                mostrarAlerta(workersActionAlert, S("workers_photo_save_first", "Guarda el trabajador antes de subir una foto."), "warning");
                 return;
             }
 
             if (!archivo) {
-                mostrarAlerta(workersActionAlert, tt("workers_photo_select_first", "Selecciona una imagen primero."), "warning");
+                mostrarAlerta(workersActionAlert, S("workers_photo_select_first", "Selecciona una imagen primero."), "warning");
                 return;
             }
 
@@ -412,11 +412,11 @@ document.addEventListener("DOMContentLoaded", function () {
             workerPhotoUploadBtn.disabled = false;
 
             if (!resultado.success) {
-                mostrarAlerta(workersActionAlert, resultado.message || tt("workers_error_photo_upload", "No se pudo subir la foto."), "danger");
+                mostrarAlerta(workersActionAlert, resultado.message || S("workers_photo_error", "No se pudo subir la foto."), "danger");
                 return;
             }
 
-            mostrarAlerta(workersActionAlert, resultado.message || tt("workers_photo_updated", "Foto actualizada."), "success");
+            mostrarAlerta(workersActionAlert, resultado.message || S("workers_photo_updated", "Foto actualizada."), "success");
             workerPhotoPreview.src = "../../" + resultado.data.photo_path;
             workerPhotoPreview.style.display = "";
             workerPhotoInput.value = "";

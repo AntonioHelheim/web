@@ -66,14 +66,6 @@ if ($hour < 12) {
 } else {
     $greeting = t('welcome_greeting_evening');
 }
-
-$langSwitcherStrings = [
-    'title' => t('common_confirm_language_title'),
-    'text' => t('common_confirm_language_text'),
-    'confirm' => t('common_confirm'),
-    'cancel' => t('common_cancel'),
-    'updated' => t('common_language_updated'),
-];
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8'); ?>">
@@ -121,7 +113,6 @@ $langSwitcherStrings = [
             transition: var(--transition-smooth); flex-shrink: 0;
         }
         .app-icon-btn:hover { background: var(--background-soft); color: var(--primary-dark); border-color: var(--primary); }
-        .language-select { min-width: 110px; height: 40px; flex-shrink: 0; }
 
         /* ---------- Hero / contexto ---------- */
         .app-hero { padding: 40px 0 8px; }
@@ -214,9 +205,9 @@ $langSwitcherStrings = [
                     <?php endif; ?>
                 </div>
                 <div class="app-avatar" title="<?php echo $userEmail; ?>"><?php if ($profilePhoto !== ''): ?><img src="<?php echo htmlspecialchars($profilePhoto, ENT_QUOTES, 'UTF-8'); ?>" alt=""><?php else: ?><?php echo $iniciales; ?><?php endif; ?></div>
-                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?php echo htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8'); ?>">
+                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8') ?>">
                     <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?>
-                        <option value="<?php echo htmlspecialchars($code, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $code === idiomaActual() ? 'selected' : ''; ?>><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></option>
+                        <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option>
                     <?php endforeach; ?>
                 </select>
                 <a href="logout.php" class="app-icon-btn" title="<?php echo htmlspecialchars(t('welcome_logout'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(t('welcome_logout'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -234,7 +225,7 @@ $langSwitcherStrings = [
                 <span class="pill-text">
                     <strong><?php echo htmlspecialchars($rolEtiqueta, ENT_QUOTES, 'UTF-8'); ?></strong>
                     <?php if ($esSuperAdmin): ?>
-                        — <?php echo htmlspecialchars(t('welcome_pill_all_companies'), ENT_QUOTES, 'UTF-8'); ?>
+                        — acceso a todas las empresas
                     <?php elseif ($empresaNombre): ?>
                         — <?php echo htmlspecialchars($empresaNombre, ENT_QUOTES, 'UTF-8'); ?>
                     <?php endif; ?>
@@ -244,7 +235,7 @@ $langSwitcherStrings = [
         </section>
 
         <section class="app-actions">
-            <a href="./api/dashboard/dashboard.php" class="action-primary" aria-label="<?php echo htmlspecialchars(t('welcome_aria_panel'), ENT_QUOTES, 'UTF-8'); ?>">
+            <a href="./api/dashboard/dashboard.php" class="action-primary" aria-label="Ir al Panel General">
                 <div class="txt">
                     <h2><?php echo htmlspecialchars(t('welcome_card_panel_title'), ENT_QUOTES, 'UTF-8'); ?></h2>
                     <p><?php echo htmlspecialchars(t('welcome_card_panel_text'), ENT_QUOTES, 'UTF-8'); ?></p>
@@ -253,7 +244,7 @@ $langSwitcherStrings = [
             </a>
 
             <div class="action-secondary-row">
-                <a href="./api/usuarios/gestiones.php" class="action-secondary" aria-label="<?php echo htmlspecialchars(t('welcome_aria_gestiones'), ENT_QUOTES, 'UTF-8'); ?>">
+                <a href="./api/usuarios/gestiones.php" class="action-secondary" aria-label="Ir a Gestiones">
                     <span class="ic"><i class="bi bi-clipboard-check"></i></span>
                     <div>
                         <h3><?php echo htmlspecialchars(t('welcome_card_gestiones_title'), ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -278,7 +269,6 @@ $langSwitcherStrings = [
 
     </div>
 
-    <script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-    <script src="js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
+    <script src="./js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 </html>

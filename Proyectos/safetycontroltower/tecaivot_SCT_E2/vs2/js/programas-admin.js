@@ -49,5 +49,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   [statusFilter,stateFilter,projectFilter].forEach(x=>x?.addEventListener('change',loadPrograms));
   let timer=null;searchFilter?.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(loadPrograms,300)});
   company?.addEventListener('change',async()=>{resetProgramForm();detail.classList.remove('active');try{await loadCatalogs();await loadPrograms()}catch(e){showAlert(e.message)}});
+  // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
+
   (async()=>{try{await loadCompanies();if(!isGlobal)await loadCatalogs();await loadPrograms()}catch(e){showAlert(e.message)}})();
 });

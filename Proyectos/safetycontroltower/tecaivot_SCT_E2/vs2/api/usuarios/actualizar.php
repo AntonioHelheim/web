@@ -12,7 +12,11 @@ $idUsers = strtolower(trim((string) ($input['id_users'] ?? '')));
 $name = trim((string) ($input['name'] ?? ''));
 $lastname = trim((string) ($input['lastname'] ?? ''));
 $rawRut = (string) ($input['rut'] ?? '');
-$language = normalizarIdiomaUsuario((string) ($input['language'] ?? IDIOMA_POR_DEFECTO));
+$rawLang = strtolower(trim((string) ($input['language'] ?? IDIOMA_POR_DEFECTO)));
+if ($rawLang === 'esp') {
+    $rawLang = 'es';
+}
+$language = in_array($rawLang, IDIOMAS_DISPONIBLES, true) ? $rawLang : IDIOMA_POR_DEFECTO;
 $roleGroupId = (int) ($input['id_role_group'] ?? 0);
 $requestedCompanyId = (int) ($input['id_company'] ?? 0);
 

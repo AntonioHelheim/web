@@ -18,6 +18,7 @@ require_once __DIR__ . '/../../session_bootstrap.php';
 require_once __DIR__ . '/../../lib/db.php';
 require_once __DIR__ . '/../../lib/auth.php';
 require_once __DIR__ . '/../../lib/audit.php';
+require_once __DIR__ . '/../../i18n.php';
 
 const PROYECTOS_ROLES_GESTION = ['administrador', 'administrador_completo', 'cliente', 'jefatura'];
 const PROYECTOS_ROLES_LECTURA = ['administrador', 'administrador_completo', 'cliente', 'jefatura', 'trabajador'];

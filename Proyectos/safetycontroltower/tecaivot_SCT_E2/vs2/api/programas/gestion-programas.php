@@ -18,7 +18,6 @@ $jsKeys=[
 'programs_status_planificado','programs_status_en_curso','programs_status_completado','programs_status_suspendido','programs_status_cancelado'
 ];
 $jsStrings=[]; foreach($jsKeys as $k)$jsStrings[$k]=t($k);
-$langSwitcherStrings=['title'=>t('common_confirm_language_title'),'text'=>t('common_confirm_language_text'),'confirm'=>t('common_confirm'),'cancel'=>t('common_cancel'),'updated'=>t('common_language_updated')];
 ?>
 <!DOCTYPE html>
 <html lang="<?=htmlspecialchars(idiomaActual(),ENT_QUOTES,'UTF-8')?>">
@@ -60,7 +59,6 @@ $langSwitcherStrings=['title'=>t('common_confirm_language_title'),'text'=>t('com
 <h3 class="h6 mb-3"><?=htmlspecialchars(t('programs_tracking_history'),ENT_QUOTES,'UTF-8')?></h3><div class="table-responsive"><table class="table tracking-table"><thead><tr><th><?=htmlspecialchars(t('programs_period'),ENT_QUOTES,'UTF-8')?></th><th><?=htmlspecialchars(t('programs_target'),ENT_QUOTES,'UTF-8')?></th><th><?=htmlspecialchars(t('programs_progress'),ENT_QUOTES,'UTF-8')?></th><th><?=htmlspecialchars(t('programs_variance'),ENT_QUOTES,'UTF-8')?></th><th><?=htmlspecialchars(t('programs_comments'),ENT_QUOTES,'UTF-8')?></th><th><?=htmlspecialchars(t('programs_reported_by'),ENT_QUOTES,'UTF-8')?></th><?php if($canTracking):?><th><?=htmlspecialchars(t('common_actions'),ENT_QUOTES,'UTF-8')?></th><?php endif;?></tr></thead><tbody id="trackingBody"></tbody></table></div></section>
 </div>
 <script id="programsI18n" type="application/json"><?=json_encode($jsStrings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)?></script>
-<script>window.SCT_LANG_SWITCHER_I18N = <?= json_encode($langSwitcherStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;</script>
-<script src="../../js/lang-switcher.js?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>"></script>
 <script src="../../js/programas-admin.js?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>"></script>
+<script src="../../js/lang-switcher.js?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>"></script>
 </body></html>

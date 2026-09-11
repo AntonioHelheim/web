@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
  function hide(el){if(el)el.classList.add('d-none');}
  async function api(url,opt){try{const r=await fetch(url,opt||{});return await r.json();}catch(_){return{success:false,message:S('forms_error_response','Respuesta inválida del servidor.')}}}
  function post(url,data){return api(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({csrf_token:csrf},data||{}))});}
-
+ // El cambio de idioma (confirmación + guardado en perfil) lo maneja js/lang-switcher.js.
  async function loadCompanies(){if(!isGlobal||!companySelect)return;const r=await api('./empresas-disponibles.php');if(!r.success){alert(formsAlert,r.message,'danger');return;}companySelect.innerHTML='<option value="global">'+esc(S('forms_scope_global','Plantillas globales'))+'</option>';(r.data||[]).forEach(c=>{const o=document.createElement('option');o.value=c.id_company;o.textContent=c.razon_social+(String(c.state)==='1'?'':' · '+S('common_inactive','Inactivo'));companySelect.appendChild(o);});companySelect.value='global';currentScope='global';}
  function resetForm(){formMode.value='create';formTarget.value='';formName.value='';formDescription.value='';formEditorTitle.textContent=S('forms_form_new','Nuevo formulario');formSubmitBtn.textContent=S('forms_save','Guardar formulario');formCancelEditBtn.classList.add('d-none');}
  function resetField(){fieldMode.value='create';fieldTarget.value='';fieldLabel.value='';fieldType.value='text';fieldOrder.value='0';fieldRequired.checked=false;fieldOptions.value='';fieldSubmitBtn.textContent=S('forms_field_new','Agregar campo');fieldCancelEdit.classList.add('d-none');}
