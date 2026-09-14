@@ -1,0 +1,8 @@
+<?php
+require __DIR__.'/common.php';
+requireCapability($pdo, 'dynamic_forms.fields');
+if($_SERVER['REQUEST_METHOD']!=='POST')responderJSON(false,null,'Método no permitido.',405);
+$input=json_decode(file_get_contents('php://input'),true);if(!is_array($input))responderJSON(false,null,'Solicitud inválida.',400);requireCsrfToken($input);
+$idField=filter_var($input['id_field']??null,FILTER_VALIDATE_INT);if(!$idField)responderJSON(false,null,'Campo no válido.',400);$f=formularioValidateFieldPayload($input);
+try{$field=formularioCampoObtener($pdo,$idField);if(!$field)responderJSON(false,null,'Campo no encontrado.',404);$form=formularioObtener($pdo,(int)$field['id_form']);if(!$form)responderJSON(false,null,'Formulario no encontrado.',404);formularioAssertEditable($pdo,$form);formularioCampoEditar($pdo,$idField,$f['label'],$f['fieldType'],$f['options'],$f['required'],$f['sortOrder']);auditTrailLogChanges($pdo,$form['id_company']!==null?(int)$form['id_company']:null,'formularios','dynamic_form_fields',$idField,$field,array_merge($field,['label'=>$f['label'],'field_type'=>$f['fieldType'],'options'=>$f['options'],'is_required'=>$f['required'],'sort_order'=>$f['sortOrder']]),'update',(string)$form['name'].' · '.$f['label'],['label','field_type','options','is_required','sort_order']);responderJSON(true,null,'Campo actualizado correctamente.');}
+catch(Throwable $e){if(formularioMigrationMessage($e))responderJSON(false,null,'Debes aplicar la migración del Motor de Formularios Dinámicos.',503);error_log('formularios/campos-editar: '.$e->getMessage());responderJSON(false,null,'No se pudo actualizar el campo.',500);}

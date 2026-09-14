@@ -1,0 +1,16 @@
+Options -Indexes
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|php\d?|phtml|pht|phar)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|php\d?|phtml|pht|phar)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
