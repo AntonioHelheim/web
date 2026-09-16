@@ -1,8 +1,14 @@
 Helheim.cl vs1.03
 
 Baseline: tema oscuro.
-Nuevas capacidades de cierre:
+
+Capacidades consolidadas:
 - Tema oscuro / claro con persistencia local.
+- Corrección de contraste del control superior del navbar en tema oscuro.
 - Tema claro: acento principal rojo vino tinto y acentos sociales rojos convertidos a verde.
-- Idiomas: Español (ES), English (EN), Português (PT).
+- Carrusel responsive sin deformar ni recortar banners, con perfiles para teléfono, tablet y escritorio.
+- Idiomas: Español, English, Português, Deutsch, Italiano, 日本語, Dansk, Euskara, Íslenska, Français, 中文 y Русский.
+- Selector de idioma con bandera y persistencia local.
 - Arquitectura extensible de idiomas en /lang mediante JavaScript.
+
+Build: 1.03.0-20260916.8

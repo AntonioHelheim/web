@@ -2,8 +2,9 @@ window.HelheimLocales = window.HelheimLocales || {};
 window.HelheimLocales.pt = {
   "code": "pt",
   "label": "Português",
+  "flag": "🇧🇷",
   "meta": {
-    "htmlLang": "pt",
+    "htmlLang": "pt-BR",
     "title": "Helheim.cl",
     "description": "Consultoria de TI, Design Industrial, Gravação a Laser e Desenho Técnico."
   },
@@ -270,7 +271,9 @@ window.HelheimLocales.pt = {
     "Preferencias de apariencia e idioma": "Preferências de aparência e idioma",
     "Helheim Tierra del Fuego — Consultoría TI, Diseño Industrial, Grabado Láser y Dibujo Técnico": "Helheim Tierra del Fuego — Consultoria de TI, Design Industrial, Gravação a Laser e Desenho Técnico",
     "Imagen ampliada de Diseño Industrial": "Imagem ampliada de Design Industrial",
-    "Helheim Tierra del Fuego — Logo": "Helheim Tierra del Fuego — Logo"
+    "Helheim Tierra del Fuego — Logo": "Helheim Tierra del Fuego — Logo",
+    "(Antonio - CTO - Cofundador)": "(Antonio - CTO - Cofundador)",
+    "(Maite - Encargada de diseño - Cofundadora)": "(Maite - Responsável de Design - Cofundadora)",
   },
   "whatsappMessage": "Olá, gostaria de saber mais sobre a Helheim e seus serviços"
 };

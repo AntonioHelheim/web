@@ -1,0 +1,78 @@
+/* ============================================================
+   HELHEIM — CARRUSEL RESPONSIVE vs1.03
+   Mantiene las imágenes completas, sin deformación ni recortes.
+
+   Perfiles contemplados:
+   - teléfonos desde iPhone 12: composición móvil 1000x1200;
+   - tablets desde iPad mini 4: móvil en vertical, desktop en horizontal;
+   - escritorio 19–27": composición desktop 1350x650.
+============================================================ */
+
+.helheim-carousel-desktop,
+.helheim-carousel-mobile {
+  width: 100%;
+  background: #050705;
+  overflow: hidden;
+}
+
+/* Por defecto se sirve la composición móvil. */
+.helheim-carousel-desktop { display: none !important; }
+.helheim-carousel-mobile { display: block !important; }
+
+.helheim-carousel-desktop .carousel-inner,
+.helheim-carousel-desktop .carousel-item,
+.helheim-carousel-mobile .carousel-inner,
+.helheim-carousel-mobile .carousel-item {
+  width: 100%;
+}
+
+.helheim-carousel-desktop .carousel-item img,
+.helheim-carousel-mobile .carousel-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/*
+ * Tablet horizontal (iPad mini 4 y superiores) y escritorios:
+ * usa la composición apaisada. La condición de altura evita que un
+ * iPhone en horizontal sea confundido con una tablet.
+ */
+@media (min-width: 768px) and (min-height: 600px) and (orientation: landscape),
+       (min-width: 1025px) {
+  .helheim-carousel-desktop { display: block !important; }
+  .helheim-carousel-mobile { display: none !important; }
+}
+
+/* Tablet vertical: conserva la pieza móvil completa. */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .helheim-carousel-mobile {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+}
+
+/* Escritorio grande/QHD/4K: preservar relación 1350:650. */
+@media (min-width: 1440px) {
+  .helheim-carousel-desktop .carousel-item img {
+    aspect-ratio: 1350 / 650;
+  }
+}
+
+/* Teléfonos: preservar relación 1000:1200 y evitar CLS. */
+@media (max-width: 767.98px),
+       (max-height: 599px) and (orientation: landscape) {
+  .helheim-carousel-mobile .carousel-item img {
+    aspect-ratio: 5 / 6;
+  }
+}
+
+/* Los controles deben seguir siendo visibles sobre banners claros u oscuros. */
+.helheim-carousel-desktop .carousel-control-prev-icon,
+.helheim-carousel-desktop .carousel-control-next-icon,
+.helheim-carousel-mobile .carousel-control-prev-icon,
+.helheim-carousel-mobile .carousel-control-next-icon {
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,.65));
+}

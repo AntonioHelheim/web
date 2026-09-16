@@ -152,6 +152,142 @@
     }
   });
 
+  /* NAVBAR GLOBAL: preferencias flotantes sin Popper/scroll interno. */
+  const PREF_MARGIN = 8;
+
+  function preferencePanels() {
+    return Array.from(document.querySelectorAll("[data-pref-panel]"));
+  }
+
+  function preferenceToggles() {
+    return Array.from(document.querySelectorAll("[data-pref-toggle]"));
+  }
+
+  function closePreferencePanels(exceptName = null) {
+    preferencePanels().forEach((panel) => {
+      const name = panel.dataset.prefPanel || "";
+      if (exceptName && name === exceptName) return;
+      panel.hidden = true;
+      panel.style.removeProperty("left");
+      panel.style.removeProperty("top");
+      panel.style.removeProperty("visibility");
+    });
+
+    preferenceToggles().forEach((toggle) => {
+      const name = toggle.dataset.prefToggle || "";
+      if (exceptName && name === exceptName) return;
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function positionPreferencePanel(toggle, panel) {
+    /* Sacamos el panel del navbar: backdrop-filter puede crear un containing block
+       para position:fixed en algunos navegadores. En body queda realmente flotante. */
+    if (panel.parentElement !== document.body) {
+      document.body.appendChild(panel);
+    }
+
+    panel.hidden = false;
+    panel.style.visibility = "hidden";
+    panel.style.left = "0px";
+    panel.style.top = "0px";
+
+    const toggleRect = toggle.getBoundingClientRect();
+    const panelRect = panel.getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+
+    let left = toggleRect.right - panelRect.width;
+    left = Math.max(PREF_MARGIN, Math.min(left, viewportWidth - panelRect.width - PREF_MARGIN));
+
+    let top = toggleRect.bottom + PREF_MARGIN;
+    if (top + panelRect.height > viewportHeight - PREF_MARGIN) {
+      const above = toggleRect.top - panelRect.height - PREF_MARGIN;
+      top = above >= PREF_MARGIN ? above : Math.max(PREF_MARGIN, viewportHeight - panelRect.height - PREF_MARGIN);
+    }
+
+    panel.style.left = `${Math.round(left)}px`;
+    panel.style.top = `${Math.round(top)}px`;
+    panel.style.visibility = "visible";
+  }
+
+  function openPreferencePanel(toggle) {
+    const name = toggle.dataset.prefToggle || "";
+    const panel = document.querySelector(`[data-pref-panel="${name}"]`);
+    if (!name || !panel) return;
+
+    const isOpen = !panel.hidden;
+    closePreferencePanels();
+    hideNavbarMenu();
+
+    if (isOpen) return;
+
+    positionPreferencePanel(toggle, panel);
+    toggle.setAttribute("aria-expanded", "true");
+  }
+
+  function hideNavbarMenu() {
+    if (!window.bootstrap || !window.bootstrap.Collapse) return;
+    const menu = document.getElementById("helheimNavbarNav");
+    if (!menu || !menu.classList.contains("show")) return;
+    window.bootstrap.Collapse.getOrCreateInstance(menu, { toggle: false }).hide();
+  }
+
+  document.addEventListener("click", (event) => {
+    const prefToggle = event.target.closest("[data-pref-toggle]");
+    if (prefToggle) {
+      event.preventDefault();
+      event.stopPropagation();
+      openPreferencePanel(prefToggle);
+      return;
+    }
+
+    const prefOption = event.target.closest("[data-theme-select], [data-language-select]");
+    if (prefOption) {
+      const ownerPanel = prefOption.closest("[data-pref-panel]");
+      const ownerName = ownerPanel?.dataset.prefPanel || "";
+      const ownerToggle = ownerName
+        ? document.querySelector(`[data-pref-toggle="${ownerName}"]`)
+        : null;
+      closePreferencePanels();
+      if (ownerToggle instanceof HTMLElement) ownerToggle.focus({ preventScroll: true });
+      return;
+    }
+
+    if (!event.target.closest("[data-pref-panel]")) {
+      closePreferencePanels();
+    }
+
+    const navLink = event.target.closest("#helheimNavbarNav .nav-link");
+    if (navLink) hideNavbarMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    closePreferencePanels();
+    hideNavbarMenu();
+  });
+
+  document.addEventListener("show.bs.collapse", (event) => {
+    if (!(event.target instanceof Element) || event.target.id !== "helheimNavbarNav") return;
+    closePreferencePanels();
+  });
+
+  document.addEventListener("shown.bs.collapse", (event) => {
+    if (!(event.target instanceof Element) || event.target.id !== "helheimNavbarNav") return;
+    const toggle = document.querySelector(".helheim-menu-toggle");
+    if (toggle) toggle.setAttribute("aria-label", window.HelheimI18n ? window.HelheimI18n.t("Cerrar") : "Cerrar");
+  });
+
+  document.addEventListener("hidden.bs.collapse", (event) => {
+    if (!(event.target instanceof Element) || event.target.id !== "helheimNavbarNav") return;
+    const toggle = document.querySelector(".helheim-menu-toggle");
+    if (toggle) toggle.setAttribute("aria-label", window.HelheimI18n ? window.HelheimI18n.t("Abrir navegación") : "Abrir navegación");
+  });
+
+  window.addEventListener("resize", () => closePreferencePanels(), { passive: true });
+  window.addEventListener("scroll", () => closePreferencePanels(), { passive: true });
+
   function initBackToTop() {
     const button = document.getElementById("backToTop");
     if (!button) return;

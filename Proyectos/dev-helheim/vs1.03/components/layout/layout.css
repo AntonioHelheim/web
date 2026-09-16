@@ -237,3 +237,181 @@
         width: auto;
     }
 }
+
+/* vs1.03 — corrección de contraste del control superior del navbar. */
+html:not([data-theme="light"]) .helheim-navbar .navbar-toggler-icon,
+html[data-theme="dark"] .helheim-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%234ade80' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.4' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+html:not([data-theme="light"]) .helheim-navbar .navbar-toggler,
+html[data-theme="dark"] .helheim-navbar .navbar-toggler {
+  border-color: rgba(74,222,128,.42) !important;
+  box-shadow: 0 0 0 1px rgba(74,222,128,.08);
+}
+
+html:not([data-theme="light"]) .helheim-navbar .navbar-brand,
+html[data-theme="dark"] .helheim-navbar .navbar-brand {
+  color: #f8fff9 !important;
+  text-shadow: 0 0 14px rgba(34,197,94,.24);
+}
+
+
+.helheim-language-flag {
+  width: 1.55rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.helheim-language-code {
+  min-width: 1.75rem;
+  text-align: center;
+}
+
+html:not([data-theme="light"]) .helheim-settings [data-current-theme-icon],
+html:not([data-theme="light"]) .helheim-settings .bi-translate,
+html[data-theme="dark"] .helheim-settings [data-current-theme-icon],
+html[data-theme="dark"] .helheim-settings .bi-translate {
+  color: var(--clr-accent-lt) !important;
+  filter: drop-shadow(0 0 4px rgba(74,222,128,.22));
+}
+
+/* ============================================================
+   VS1.03 NAVBAR STABILITY FIX
+   La fila superior y el panel colapsable son bloques independientes.
+   ============================================================ */
+.helheim-navbar-shell {
+    display: block !important;
+    width: 100%;
+}
+
+.helheim-navbar-topbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+}
+
+.helheim-navbar-topbar .navbar-brand {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-right: .75rem;
+}
+
+.helheim-navbar-topbar .helheim-toolbar {
+    margin-left: auto;
+}
+
+.helheim-navbar-menu {
+    width: 100%;
+    flex-basis: 100%;
+    flex-grow: 0;
+    border-top: 1px solid transparent;
+}
+
+.helheim-navbar-menu.show,
+.helheim-navbar-menu.collapsing {
+    border-top-color: var(--clr-border);
+    margin-top: .65rem;
+}
+
+.helheim-navbar-menu .navbar-nav {
+    width: 100%;
+    align-items: flex-end;
+    padding-top: .55rem !important;
+    padding-bottom: .55rem !important;
+}
+
+.helheim-navbar-menu .nav-item {
+    width: min(100%, 22rem);
+}
+
+.helheim-navbar-menu .nav-link {
+    width: 100%;
+    text-align: right;
+}
+
+@media (max-width: 575.98px) {
+    .helheim-navbar-topbar .navbar-brand {
+        margin-right: .35rem;
+    }
+
+    .helheim-navbar-menu .nav-item {
+        width: 100%;
+    }
+}
+
+
+/* ============================================================
+   VS1.03 Build .8 — footer responsive + perfiles de fundadores
+   ============================================================ */
+.footer-helheim .footer-brand {
+    font-size: clamp(1.76rem, 1.55rem + .45vw, 2.15rem);
+}
+
+.footer-helheim .footer-text {
+    /* +10% mínimo sobre la base anterior; escala suavemente con viewport. */
+    font-size: clamp(.88rem, .82rem + .18vw, 1.02rem);
+    line-height: 1.75;
+}
+
+.footer-about {
+    margin: 1.15rem auto 1.25rem;
+}
+
+.footer-about-title {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, .94rem + .20vw, 1.18rem);
+    font-weight: 700;
+    letter-spacing: .07em;
+    color: var(--clr-text);
+    margin-bottom: .7rem;
+}
+
+.footer-founder-link {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .3rem;
+    font-family: var(--font-cond);
+    font-size: clamp(.88rem, .82rem + .18vw, 1.02rem);
+    line-height: 1.45;
+    color: var(--clr-text);
+    text-decoration: none;
+    transition: color var(--transition), transform var(--transition);
+}
+
+.footer-founder-name {
+    font-weight: 700;
+    color: var(--clr-accent);
+}
+
+.footer-founder-role {
+    color: var(--clr-muted);
+}
+
+.footer-founder-link:hover,
+.footer-founder-link:focus-visible {
+    color: var(--clr-accent-lt);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.footer-founder-link:hover .footer-founder-role,
+.footer-founder-link:focus-visible .footer-founder-role {
+    color: inherit;
+}
+
+@media (max-width: 575.98px) {
+    .footer-helheim {
+        padding: 2rem 0 !important;
+        margin-top: 3.5rem !important;
+    }
+
+    .footer-founder-link {
+        max-width: 24rem;
+    }
+}

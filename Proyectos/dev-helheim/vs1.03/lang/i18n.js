@@ -2,7 +2,7 @@
   "use strict";
 
   const STORAGE_KEY = "helheim-language";
-  const SUPPORTED = ["es", "en", "pt"];
+  const SUPPORTED = ["es", "en", "pt", "de", "it", "ja", "da", "eu", "is", "fr", "zh", "ru"];
   const textSources = new WeakMap();
   const attrSources = new WeakMap();
 
@@ -15,14 +15,24 @@
     return locales[code] || locales.es || { strings: {}, meta: {} };
   }
 
+  function storageGet() {
+    try { return window.localStorage.getItem(STORAGE_KEY); }
+    catch (error) { return null; }
+  }
+
+  function storageSet(value) {
+    try { window.localStorage.setItem(STORAGE_KEY, value); }
+    catch (error) { /* El idioma funciona aunque el navegador bloquee persistencia. */ }
+  }
+
   function savedLanguage() {
-    const fromStorage = localStorage.getItem(STORAGE_KEY);
+    const fromStorage = storageGet();
     if (SUPPORTED.includes(fromStorage)) return fromStorage;
 
-    const declared = (document.documentElement.lang || "es").slice(0, 2).toLowerCase();
+    const declared = (document.documentElement.lang || "es").split("-")[0].toLowerCase();
     if (SUPPORTED.includes(declared)) return declared;
 
-    const browser = (navigator.language || "es").slice(0, 2).toLowerCase();
+    const browser = (navigator.language || "es").split("-")[0].toLowerCase();
     return SUPPORTED.includes(browser) ? browser : "es";
   }
 
@@ -103,7 +113,10 @@
     nodes.forEach((node) => translateTextNode(node, lang));
 
     const elements = root instanceof Element ? [root, ...root.querySelectorAll("*")] : [...root.querySelectorAll("*")];
-    elements.forEach((element) => translateAttributes(element, lang));
+    elements.forEach((element) => {
+      if (element.matches && element.matches("[data-i18n-ignore], [data-i18n-ignore] *")) return;
+      translateAttributes(element, lang);
+    });
   }
 
   function updateMetadata(lang) {
@@ -147,15 +160,21 @@
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
 
+    const locale = localeFor(lang);
+
     document.querySelectorAll("[data-current-language]").forEach((element) => {
       element.textContent = lang.toUpperCase();
+    });
+
+    document.querySelectorAll("[data-current-language-flag]").forEach((element) => {
+      element.textContent = locale.flag || "🌐";
     });
   }
 
   function applyLanguage(lang, options = {}) {
     const next = SUPPORTED.includes(lang) ? lang : "es";
     currentLanguage = next;
-    if (options.persist !== false) localStorage.setItem(STORAGE_KEY, next);
+    if (options.persist !== false) storageSet(next);
 
     translateScope(document, next);
     updateMetadata(next);

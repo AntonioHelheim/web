@@ -4,8 +4,18 @@
   const STORAGE_KEY = "helheim-theme";
   const SUPPORTED = ["dark", "light"];
 
+  function storageGet() {
+    try { return window.localStorage.getItem(STORAGE_KEY); }
+    catch (error) { return null; }
+  }
+
+  function storageSet(value) {
+    try { window.localStorage.setItem(STORAGE_KEY, value); }
+    catch (error) { /* Preferencia no persistente: el tema sigue funcionando. */ }
+  }
+
   function savedTheme() {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = storageGet();
     return SUPPORTED.includes(saved) ? saved : "dark";
   }
 
@@ -32,12 +42,12 @@
     document.documentElement.style.colorScheme = next;
 
     if (options.persist !== false) {
-      localStorage.setItem(STORAGE_KEY, next);
+      storageSet(next);
     }
 
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
-      themeColor.setAttribute("content", next === "light" ? "#f4efe9" : "#080a08");
+      themeColor.setAttribute("content", next === "light" ? "#f7f3f5" : "#080a08");
     }
 
     updateControls(next);

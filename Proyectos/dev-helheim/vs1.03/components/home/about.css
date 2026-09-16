@@ -29,7 +29,7 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.8);
+  background: var(--about-steam, rgba(255,255,255,0.8));
   filter: blur(1px);
   opacity: 0;
 }
@@ -90,7 +90,9 @@ section.container.my-5.py-5 {
   height: 150px;
   width: 250px;
   border-radius: 0 0 150px 150px;
-  background-color: #fff;
+  background: var(--about-cup-body, #fff);
+  border: var(--about-cup-border, 0);
+  box-shadow: var(--about-cup-shadow, none);
   margin: 0;
   display: inline-block;
   overflow: hidden;
@@ -101,7 +103,7 @@ section.container.my-5.py-5 {
   position: relative;
   height: 250px;
   width: 200px;
-  background-color: #f3f3f3;
+  background-color: var(--about-cup-shade, #f3f3f3);
   display: inline-block;
   margin-left: 42%;
   margin-top: -3px;
@@ -116,7 +118,7 @@ section.container.my-5.py-5 {
   height: 75px;
   width: 80px;
   border-radius: 0 150px 150px 0;
-  border: 15px solid #f3f3f3;
+  border: 15px solid var(--about-cup-handle, #f3f3f3);
   display: inline-block;
   z-index: 0;
 }
@@ -128,7 +130,8 @@ section.container.my-5.py-5 {
   height: 20px;
   width: 250px;
   border-radius: 0 0 100px 100px;
-  background-color: #f9f9f9;
+  background-color: var(--about-saucer, #f9f9f9);
+  border: var(--about-saucer-border, 0);
   z-index: 2;
 }
 
@@ -139,7 +142,7 @@ section.container.my-5.py-5 {
   height: 10px;
   width: 250px;
   border-radius: 50%;
-  background-color: #7bb8d4;
+  background-color: var(--about-shadow, #7bb8d4);
 }
 
 /* Animaciones (ya las tenías, las dejo completas) */

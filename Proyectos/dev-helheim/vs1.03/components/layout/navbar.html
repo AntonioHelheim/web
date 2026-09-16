@@ -1,15 +1,73 @@
 <header class="helheim-header">
     <nav class="navbar navbar-dark fixed-top helheim-navbar" aria-label="Navegación principal">
-        <div class="container-fluid px-3 px-md-4">
-            <a class="navbar-brand" href="./" data-site-href="index.html">Helheim.cl</a>
+        <div class="container-fluid px-3 px-md-4 helheim-navbar-shell">
+            <!-- Fila superior estable: Marca → Tema → Idioma → Menú -->
+            <div class="helheim-navbar-topbar">
+                <a class="navbar-brand" href="./" data-site-href="index.html">Helheim.cl</a>
 
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#helheimNavbarNav"
-                    aria-controls="helheimNavbarNav" aria-expanded="false" aria-label="Abrir navegación">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <div class="helheim-settings helheim-toolbar ms-auto" aria-label="Preferencias y navegación">
+                    <div class="helheim-pref-control helheim-theme-control">
+                        <button class="helheim-setting-button d-flex align-items-center" type="button"
+                                data-pref-toggle="theme" aria-expanded="false"
+                                aria-controls="helheimThemePanel" aria-label="Tema">
+                            <i class="bi bi-moon-stars-fill me-1" data-current-theme-icon aria-hidden="true"></i>
+                            <span class="helheim-control-label" data-i18n-source="Tema">Tema</span>
+                        </button>
 
-            <div class="collapse navbar-collapse" id="helheimNavbarNav">
+                        <div class="helheim-pref-panel helheim-theme-panel"
+                             id="helheimThemePanel" data-pref-panel="theme" role="menu" hidden>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button"
+                                    data-theme-select="dark" aria-pressed="true" role="menuitemradio">
+                                <span class="setting-check" aria-hidden="true">✓</span>
+                                <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+                                <span data-i18n-source="Oscuro">Oscuro</span>
+                            </button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button"
+                                    data-theme-select="light" aria-pressed="false" role="menuitemradio">
+                                <span class="setting-check" aria-hidden="true">✓</span>
+                                <i class="bi bi-sun-fill" aria-hidden="true"></i>
+                                <span data-i18n-source="Claro">Claro</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="helheim-pref-control helheim-language-control">
+                        <button class="helheim-setting-button d-flex align-items-center" type="button"
+                                data-pref-toggle="language" aria-expanded="false"
+                                aria-controls="helheimLanguagePanel" aria-label="Idioma">
+                            <i class="bi bi-translate me-1" aria-hidden="true"></i>
+                            <span class="helheim-control-label" data-i18n-source="Idioma">Idioma</span>
+                            <span class="helheim-language-flag ms-1" data-current-language-flag aria-hidden="true" data-i18n-ignore>🇨🇱</span>
+                            <span class="helheim-language-code" data-current-language data-i18n-ignore>ES</span>
+                        </button>
+
+                        <!-- Los nombres de idiomas se mantienen como autónimos. -->
+                        <div class="helheim-pref-panel helheim-language-menu"
+                             id="helheimLanguagePanel" data-pref-panel="language" role="menu" data-i18n-ignore hidden>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="es" aria-pressed="true" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇨🇱</span><span>Español</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="en" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇺🇸</span><span>English</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="pt" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇧🇷</span><span>Português</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="de" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="it" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="ja" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇯🇵</span><span>日本語</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="da" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇩🇰</span><span>Dansk</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="eu" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇪🇸</span><span>Euskara</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="is" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇮🇸</span><span>Íslenska</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="fr" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇫🇷</span><span>Français</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="zh" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇨🇳</span><span>中文</span></button>
+                            <button class="helheim-pref-option d-flex align-items-center gap-2" type="button" data-language-select="ru" aria-pressed="false" role="menuitemradio"><span class="setting-check" aria-hidden="true">✓</span><span class="helheim-language-flag" aria-hidden="true">🇷🇺</span><span>Русский</span></button>
+                        </div>
+                    </div>
+
+                    <button class="navbar-toggler helheim-menu-toggle" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#helheimNavbarNav"
+                            aria-controls="helheimNavbarNav" aria-expanded="false" aria-label="Abrir navegación">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse helheim-navbar-menu" id="helheimNavbarNav">
                 <!--
                     ============================================================
                     MENÚ LEGACY — CONSERVADO PARA TRAZABILIDAD — CONSERVADO TEMPORALMENTE
@@ -97,38 +155,6 @@
                         <a href="index.html#formcontacto" data-site-href="index.html#formcontacto" data-nav-key="contacto" class="nav-link">
                             <i class="bi bi-envelope me-1" aria-hidden="true"></i> Contacto
                         </a>
-                    </li>
-                    <li class="nav-item helheim-settings" aria-label="Preferencias de apariencia e idioma">
-                        <div class="dropdown">
-                            <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-moon-stars-fill me-1" data-current-theme-icon aria-hidden="true"></i>
-                                <span>Tema</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button class="dropdown-item d-flex align-items-center gap-2" type="button" data-theme-select="dark" aria-pressed="true">
-                                        <span class="setting-check" aria-hidden="true">✓</span><i class="bi bi-moon-stars-fill" aria-hidden="true"></i><span>Oscuro</span>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="dropdown-item d-flex align-items-center gap-2" type="button" data-theme-select="light" aria-pressed="false">
-                                        <span class="setting-check" aria-hidden="true">✓</span><i class="bi bi-sun-fill" aria-hidden="true"></i><span>Claro</span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="dropdown">
-                            <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-translate me-1" aria-hidden="true"></i>
-                                <span>Idioma</span> <span class="helheim-language-code" data-current-language>ES</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><button class="dropdown-item d-flex align-items-center gap-2" type="button" data-language-select="es" aria-pressed="true"><span class="setting-check" aria-hidden="true">✓</span><span>Español</span></button></li>
-                                <li><button class="dropdown-item d-flex align-items-center gap-2" type="button" data-language-select="en" aria-pressed="false"><span class="setting-check" aria-hidden="true">✓</span><span>English</span></button></li>
-                                <li><button class="dropdown-item d-flex align-items-center gap-2" type="button" data-language-select="pt" aria-pressed="false"><span class="setting-check" aria-hidden="true">✓</span><span>Português</span></button></li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link helheim-login-trigger"

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "1.03.0-20260915.1";
+  const VERSION = "1.03.0-20260916.8";
   const loaderScript = document.currentScript;
 
   if (!loaderScript || !loaderScript.src) {
@@ -55,9 +55,10 @@
     ensureStylesheet("css/theme.css", "theme-css");
 
     window.HelheimLocales = window.HelheimLocales || {};
-    if (!window.HelheimLocales.es) await loadScript("lang/es.js", "lang-es");
-    if (!window.HelheimLocales.en) await loadScript("lang/en.js", "lang-en");
-    if (!window.HelheimLocales.pt) await loadScript("lang/pt.js", "lang-pt");
+    const localeCodes = ["es", "en", "pt", "de", "it", "ja", "da", "eu", "is", "fr", "zh", "ru"];
+    for (const code of localeCodes) {
+      if (!window.HelheimLocales[code]) await loadScript(`lang/${code}.js`, `lang-${code}`);
+    }
     if (!window.HelheimI18n) await loadScript("lang/i18n.js", "i18n");
     if (!window.HelheimTheme) await loadScript("js/theme.js", "theme-js");
   }
