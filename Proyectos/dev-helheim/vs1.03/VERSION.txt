@@ -1,0 +1,8 @@
+Helheim.cl vs1.03
+
+Baseline: tema oscuro.
+Nuevas capacidades de cierre:
+- Tema oscuro / claro con persistencia local.
+- Tema claro: acento principal rojo vino tinto y acentos sociales rojos convertidos a verde.
+- Idiomas: Español (ES), English (EN), Português (PT).
+- Arquitectura extensible de idiomas en /lang mediante JavaScript.

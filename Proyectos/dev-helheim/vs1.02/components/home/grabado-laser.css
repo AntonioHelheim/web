@@ -1,0 +1,306 @@
+/* ============================================================
+   GRABADO LÁSER — componente home
+   Prefijo laser- para evitar colisiones.
+============================================================ */
+
+.grabado-laser-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 6rem) 0;
+  scroll-margin-top: 82px;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  background:
+    radial-gradient(circle at 18% 14%, rgba(239, 68, 68, .055), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(34, 197, 94, .06), transparent 30%),
+    linear-gradient(180deg, rgba(8, 10, 8, .95), rgba(12, 14, 12, .96));
+}
+
+.grabado-laser-section > .container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.laser-header {
+  max-width: 900px;
+  margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+}
+
+.laser-eyebrow,
+.laser-kicker {
+  display: inline-block;
+  color: var(--clr-accent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.laser-title {
+  margin: .55rem 0 .85rem;
+  color: var(--clr-text);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  letter-spacing: .07em;
+  line-height: .95;
+}
+
+.laser-title span { color: var(--clr-accent); }
+
+.laser-lead,
+.laser-copy {
+  color: rgba(226, 232, 226, .68);
+  line-height: 1.72;
+}
+
+.laser-lead { max-width: 780px; font-size: clamp(.98rem, 2vw, 1.08rem); }
+.laser-copy { max-width: 820px; margin-bottom: 1.25rem; }
+.laser-copy-centered { text-align: center; }
+
+.laser-equipment,
+.laser-materials {
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .018);
+}
+
+.laser-equipment { padding: clamp(1.25rem, 3vw, 2rem); }
+.laser-materials { padding: 1.25rem; }
+
+.laser-section-heading {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1rem;
+}
+
+.laser-section-heading-centered {
+  justify-content: center;
+  text-align: left;
+}
+
+.laser-section-heading h3,
+.laser-cta h3 {
+  margin: .15rem 0 0;
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 700;
+}
+
+.laser-icon-badge,
+.laser-product-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-accent);
+  border: 1px solid rgba(34, 197, 94, .22);
+  background: rgba(34, 197, 94, .065);
+}
+
+.laser-icon-badge {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+}
+
+.laser-stat-card,
+.laser-product-card,
+.laser-process-item {
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .018);
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.laser-stat-card:hover,
+.laser-product-card:hover,
+.laser-process-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34, 197, 94, .26);
+  background: rgba(34, 197, 94, .03);
+}
+
+.laser-stat-card {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: .35rem;
+  padding: 1.1rem;
+}
+
+.laser-stat-card i { color: var(--clr-accent); font-size: 1.25rem; }
+.laser-stat-card strong { color: #fff; font-family: var(--font-cond); font-size: 1.15rem; }
+.laser-stat-card span { color: rgba(226, 232, 226, .56); font-size: .82rem; line-height: 1.45; }
+
+.laser-divider {
+  margin: clamp(3rem, 7vw, 5rem) 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  opacity: 1;
+}
+
+.laser-product-card {
+  padding: 1.35rem;
+}
+
+.laser-product-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: .9rem;
+  border-radius: 11px;
+  font-size: 1.2rem;
+}
+
+.laser-product-card h4,
+.laser-process-item h4 {
+  color: #fff;
+  font-family: var(--font-cond);
+  font-weight: 700;
+}
+
+.laser-product-card h4 { margin-bottom: .55rem; font-size: 1.08rem; }
+.laser-product-card p,
+.laser-process-item p {
+  margin: 0;
+  color: rgba(226, 232, 226, .6);
+  font-size: .87rem;
+  line-height: 1.62;
+}
+
+.laser-materials-title {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .9rem;
+  color: #fff;
+  font-family: var(--font-cond);
+  font-weight: 700;
+}
+
+.laser-materials-title i { color: var(--clr-accent); }
+
+.laser-materials-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-bottom: 1rem;
+}
+
+.laser-materials-list span {
+  padding: .34rem .66rem;
+  border: 1px solid rgba(255, 255, 255, .11);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, .72);
+  background: rgba(255, 255, 255, .03);
+  font-size: .78rem;
+}
+
+.laser-note {
+  color: rgba(226, 232, 226, .5);
+  font-size: .8rem;
+  line-height: 1.55;
+}
+
+.laser-process-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.laser-process-item {
+  position: relative;
+  min-height: 190px;
+  padding: 1.2rem 1rem 1rem;
+  overflow: hidden;
+}
+
+.laser-process-item > i {
+  display: block;
+  margin-bottom: .8rem;
+  color: var(--clr-accent);
+  font-size: 1.35rem;
+}
+
+.laser-process-number {
+  position: absolute;
+  top: .8rem;
+  right: .9rem;
+  color: rgba(255, 255, 255, .08);
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.laser-process-item h4 { margin-bottom: .45rem; font-size: 1rem; }
+
+.laser-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding: clamp(1.5rem, 4vw, 2.3rem);
+  border: 1px solid rgba(34, 197, 94, .22);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, .075), rgba(14, 18, 16, .9));
+}
+
+.laser-cta h3 { margin: .35rem 0 .45rem; }
+.laser-cta p { max-width: 720px; margin: 0; color: rgba(226, 232, 226, .62); }
+
+.laser-cta-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.laser-btn {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--transition), color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.laser-btn:hover { transform: translateY(-1px); }
+.laser-btn-primary { border-color: var(--clr-accent); background: var(--clr-accent); color: #061008; }
+.laser-btn-primary:hover { background: var(--clr-accent-lt); color: #061008; }
+.laser-btn-secondary { border-color: rgba(255, 255, 255, .16); background: transparent; color: rgba(255, 255, 255, .82); }
+.laser-btn-secondary:hover { border-color: rgba(255, 255, 255, .35); color: #fff; }
+
+@media (max-width: 991.98px) {
+  .laser-process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .laser-cta { align-items: stretch; flex-direction: column; }
+  .laser-cta-actions { width: 100%; }
+}
+
+@media (max-width: 575.98px) {
+  .grabado-laser-section { scroll-margin-top: 72px; }
+  .laser-section-heading-centered { justify-content: flex-start; }
+  .laser-copy-centered { text-align: left; }
+  .laser-process-list { grid-template-columns: 1fr; }
+  .laser-btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laser-stat-card,
+  .laser-product-card,
+  .laser-process-item,
+  .laser-btn { transition: none; }
+}

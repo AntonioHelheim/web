@@ -1,0 +1,12 @@
+{
+  "name": "helheim/contact-form",
+  "description": "Dependencias de servidor para el formulario de contacto de Helheim.cl",
+  "type": "project",
+  "require": {
+    "php": ">=7.3",
+    "phpmailer/phpmailer": "^6.9"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

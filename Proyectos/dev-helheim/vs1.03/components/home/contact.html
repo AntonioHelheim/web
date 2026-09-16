@@ -1,0 +1,108 @@
+<div class="container mt-2">
+  <p class="text-success fs-5 text-center mb-2">
+    Escríbenos a nuestro WhatsApp o Redes Sociales
+  </p>
+
+  <div class="social-icons d-flex justify-content-center align-items-center gap-3 gap-sm-4 gap-lg-5">
+    <a href="https://wa.me/56935444514?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20Helheim%20y%20sus%20servicios"
+       target="_blank"
+       class="nav__link text-danger fs-3 p-0" rel="noopener noreferrer" aria-label="WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+    <a href="https://www.instagram.com/helheim_tierra_del_fuego/"
+       target="_blank"
+       class="nav__link text-danger fs-3 p-0" rel="noopener noreferrer" aria-label="Instagram">
+      <i class="bi bi-instagram"></i>
+    </a>
+    <a href="https://www.linkedin.com/company/103153651/"
+       target="_blank"
+       class="nav__link text-danger fs-3 p-0" rel="noopener noreferrer" aria-label="LinkedIn">
+      <i class="bi bi-linkedin"></i>
+    </a>
+    <a href="https://web.facebook.com/HelheimTierradelfuego/"
+       target="_blank"
+       class="nav__link text-danger fs-3 p-0" rel="noopener noreferrer" aria-label="Facebook">
+      <i class="bi bi-facebook"></i>
+    </a>
+  </div>
+</div>
+
+<!--==================== CONTACTO ====================-->
+<section id="formcontacto" class="container my-4">
+  <div class="contact-box rounded p-4 p-md-5">
+    <div class="row align-items-center justify-content-center g-4 g-lg-5">
+
+      <!-- Logo + mensaje (izquierda en desktop, arriba en mobile) -->
+      <div class="col-12 col-lg-5">
+        <div class="contact-logo text-center text-lg-start">
+          <img src="./images/logo/Logo_Helheim-BB.png"
+               data-site-src="images/logo/Logo_Helheim-BB.png"
+               class="img-fluid"
+               alt="Helheim Tierra del Fuego — Logo"
+               loading="lazy">
+          <p class="text-white mt-3 mb-0">
+            ¿Tienes dudas o quieres cotizar algún servicio?
+            <strong>Contáctanos</strong> y te responderemos a la brevedad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Formulario (derecha en desktop, abajo en mobile) -->
+      <div class="col-12 col-lg-6">
+        <h4 class="mb-3 text-center text-white">Formulario de contacto</h4>
+
+        <div id="helheimContactStatus" class="contact-status" role="status" aria-live="polite"></div>
+
+        <form id="helheimContactForm"
+              action="php/contact.php"
+              data-site-action="php/contact.php"
+              method="POST"
+              class="needs-validation"
+              novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label text-white">Tu nombre:</label>
+            <input type="text" class="form-control" id="name" name="name"
+                   placeholder="Tu nombre" maxlength="100" autocomplete="name" required>
+            <div class="invalid-feedback text-white bg-danger bg-opacity-25 rounded px-2">
+              Por favor ingresa tu nombre.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label text-white">Tu correo electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   placeholder="nombre@correo.com" maxlength="254" autocomplete="email" required>
+            <div class="invalid-feedback text-white bg-danger bg-opacity-25 rounded px-2">
+              Por favor ingresa un correo válido.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label text-white">Tu mensaje:</label>
+            <textarea class="form-control" id="message" name="message" rows="5"
+                      placeholder="Cuéntanos sobre tu proyecto..." minlength="5" maxlength="5000" required></textarea>
+            <div class="invalid-feedback text-white bg-danger bg-opacity-25 rounded px-2">
+              Por favor escribe un mensaje de al menos 5 caracteres.
+            </div>
+          </div>
+
+          <!-- Campo honeypot: debe permanecer vacío. Ayuda a filtrar bots simples. -->
+          <div class="helheim-honeypot" aria-hidden="true">
+            <label for="website">Sitio web</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button id="helheimContactSubmit" type="submit" class="btn btn-outline-light">
+              <span class="contact-submit-label">Enviar</span>
+              <span class="contact-submit-loading d-none" aria-hidden="true">
+                <span class="spinner-border spinner-border-sm me-2" role="presentation"></span>Enviando...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>

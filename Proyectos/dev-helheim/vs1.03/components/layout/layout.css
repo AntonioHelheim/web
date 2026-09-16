@@ -1,0 +1,239 @@
+/* ============================================================
+   HELHEIM — LAYOUT COMPARTIDO vs1.03
+   Navbar y footer reutilizables en cualquier página del sitio.
+============================================================ */
+:root {
+    --clr-bg:        #080a08;
+    --clr-surface:   #0e1210;
+    --clr-border:    #1f2b1f;
+    --clr-accent:    #22c55e;
+    --clr-accent-dk: #15803d;
+    --clr-accent-lt: #4ade80;
+    --clr-danger:    #ef4444;
+    --clr-text:      #e2e8e2;
+    --clr-muted:     #6b7c6b;
+    --font-display:  'Bebas Neue', sans-serif;
+    --font-body:     'Barlow', sans-serif;
+    --font-cond:     'Barlow Condensed', sans-serif;
+    --radius:        4px;
+    --transition:    .25s cubic-bezier(.4,0,.2,1);
+}
+
+/* NAVBAR COMPARTIDO */
+.helheim-navbar.navbar {
+    background-color: rgba(8,10,8,.92) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--clr-border);
+    padding: .75rem 1.25rem;
+}
+
+.helheim-navbar .navbar-brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem !important;
+    letter-spacing: .1em;
+    color: var(--clr-accent) !important;
+    text-transform: uppercase;
+    transition: color var(--transition), letter-spacing var(--transition);
+}
+.helheim-navbar .navbar-brand:hover {
+    color: var(--clr-accent-lt) !important;
+    letter-spacing: .16em;
+}
+
+.helheim-navbar .navbar-nav .nav-link {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: .85rem !important;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clr-muted) !important;
+    padding: .4rem .75rem !important;
+    border-radius: var(--radius);
+    transition: color var(--transition), background var(--transition);
+    position: relative;
+}
+.helheim-navbar .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: .75rem;
+    right: .75rem;
+    height: 1px;
+    background: var(--clr-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+.helheim-navbar .navbar-nav .nav-link:hover {
+    color: var(--clr-accent-lt) !important;
+    background: rgba(var(--clr-accent-rgb),.06);
+}
+.helheim-navbar .navbar-nav .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.helheim-navbar .nav-social-row a {
+    color: var(--clr-muted);
+    font-size: 1.3rem;
+    transition: color var(--transition), transform var(--transition);
+    display: inline-block;
+}
+.helheim-navbar .nav-social-row a:hover {
+    color: var(--clr-danger);
+    transform: scale(1.2);
+}
+
+.helheim-navbar .navbar-toggler {
+    border-color: var(--clr-border) !important;
+}
+.helheim-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(var(--clr-accent-rgb),0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+.helheim-navbar .nav-section-label {
+    font-family: var(--font-cond);
+    font-size: .7rem;
+    letter-spacing: .15em;
+    color: var(--clr-accent) !important;
+    text-transform: uppercase;
+    opacity: .6;
+    padding: 1.2rem .75rem .3rem;
+}
+
+/* FOOTER COMPARTIDO */
+.footer-helheim {
+    background: var(--clr-surface) !important;
+    color: var(--clr-text);
+    border-top: 1px solid var(--clr-border);
+    padding: 2.5rem 0 !important;
+    margin-top: 5rem !important;
+}
+.footer-helheim .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: .1em;
+    color: var(--clr-accent);
+}
+.footer-helheim .footer-rule {
+    border-color: var(--clr-border) !important;
+    margin: 1.25rem 0;
+}
+.footer-helheim .footer-text {
+    font-family: var(--font-cond);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    color: var(--clr-muted);
+    line-height: 1.8;
+}
+.footer-helheim .footer-text a {
+    color: var(--clr-accent);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+.footer-helheim .footer-text a:hover {
+    color: var(--clr-accent-lt);
+}
+.footer-helheim .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    color: var(--clr-muted);
+    font-size: 1rem;
+    transition: color var(--transition), border-color var(--transition), transform var(--transition);
+    text-decoration: none;
+}
+.footer-helheim .footer-social a:hover {
+    color: var(--clr-danger);
+    border-color: var(--clr-danger);
+    transform: translateY(-2px);
+}
+
+/* LOGIN — interfaz frontend preparada para futura autenticación */
+.helheim-login-trigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+
+.helheim-login-modal .modal-content {
+    background: var(--clr-surface);
+    color: var(--clr-text);
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    box-shadow: 0 1.25rem 3rem rgba(0,0,0,.45);
+}
+
+.helheim-login-modal .modal-header,
+.helheim-login-modal .modal-footer {
+    border-color: var(--clr-border);
+}
+
+.helheim-login-modal .modal-title {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #fff;
+}
+
+.helheim-login-eyebrow {
+    font-family: var(--font-cond);
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+}
+
+.helheim-login-modal .form-label {
+    font-family: var(--font-cond);
+    letter-spacing: .04em;
+    color: var(--clr-text);
+}
+
+.helheim-login-modal .form-control {
+    color: #fff;
+    background: var(--clr-bg);
+    border-color: var(--clr-border);
+}
+
+.helheim-login-modal .form-control::placeholder {
+    color: var(--clr-muted);
+}
+
+.helheim-login-modal .form-control:focus {
+    color: #fff;
+    background: var(--clr-bg);
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 0 .2rem rgba(var(--clr-accent-rgb),.12);
+}
+
+.helheim-login-note {
+    font-size: .82rem;
+    color: var(--clr-muted);
+}
+
+.helheim-login-submit {
+    color: #071108;
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    font-family: var(--font-cond);
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.helheim-login-submit:disabled {
+    color: #071108;
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    opacity: .45;
+}
+
+@media (min-width: 992px) {
+    .helheim-login-trigger {
+        width: auto;
+    }
+}

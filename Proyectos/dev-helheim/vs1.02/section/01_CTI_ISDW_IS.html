@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Juan Antonio Concha L. & Maite Lazcano"/>
+  <meta name="copyright" content="Helheim Tierra del Fuego"/>
+  <meta name="robots" content="index"/>
+
+  <link rel="shortcut icon" href="https://www.helheim.cl/images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.helheim.cl/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.helheim.cl/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.helheim.cl/images/favicon-16x16.png">
+
+  <title>Consultoría TI | Helheim Tierra del Fuego</title>
+  <meta name="title" content="Helheim Tierra del Fuego"/>
+  <meta name="description" content="Consultoría TI, Desarrollo Web, Diseño Industrial y Diseño Gráfico"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.helheim.cl"/>
+  <meta property="og:title" content="Helheim Tierra del Fuego"/>
+  <meta property="og:description" content="Consultoría TI, Desarrollo Web, Diseño Industrial y Diseño Gráfico"/>
+  <meta property="og:image" content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png"/>
+
+  <!-- Bootstrap 5.3 CSS + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bs-body-bg: #0a0a0a;
+      --accent: #22c55e;
+      --accent-dim: #16a34a;
+      --accent-glow: rgba(34,197,94,0.15);
+      --border-color: rgba(255,255,255,0.08);
+      --card-bg: #111;
+      --danger-soft: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--bs-body-bg);
+      color: #e2e8f0;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background-color: rgba(10,10,10,0.95) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+    .navbar-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      color: #fff !important;
+    }
+    .navbar-brand span { color: var(--accent); }
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7) !important;
+      padding: 0.5rem 0.75rem !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+    .nav-divider {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      padding: 0.75rem 0.75rem 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-links a:hover {
+      border-color: var(--danger-soft);
+      color: var(--danger-soft);
+      background: rgba(239,68,68,0.1);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0d1117 0%, #0a0a0a 60%, #0d1a0f 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 5rem 0 3rem;
+    }
+    .page-hero .badge-label {
+      display: inline-block;
+      background: var(--accent-glow);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      color: #fff;
+    }
+    .page-hero p.lead {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 680px;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-title .icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(34,197,94,0.25);
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── CARDS ── */
+    .hh-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      height: 100%;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .hh-card:hover {
+      border-color: rgba(34,197,94,0.3);
+      transform: translateY(-2px);
+    }
+    .hh-card .card-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .hh-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── TECH BADGES ── */
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .tech-badge:hover {
+      border-color: var(--danger-soft);
+      color: var(--danger-soft);
+      background: rgba(239,68,68,0.08);
+    }
+
+    /* ── PROJECT LINKS ── */
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--accent) !important;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .project-link:last-child { border-bottom: none; }
+    .project-link:hover { gap: 0.75rem; color: #86efac !important; }
+
+    .project-link.project-link-disabled {
+      color: rgba(255,255,255,.45) !important;
+      cursor: default;
+      pointer-events: none;
+    }
+    .project-link.project-link-disabled:hover {
+      gap: 0.5rem;
+      color: rgba(255,255,255,.45) !important;
+    }
+    .project-link i.arrow { font-size: 0.75rem; opacity: 0.6; }
+
+    /* ── METHODOLOGY ITEMS ── */
+    .method-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .method-item .icon {
+      display: inline-flex;
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+    .method-item strong a { color: var(--danger-soft) !important; text-decoration: none; }
+    .method-item strong a:hover { color: #fca5a5 !important; }
+
+    /* ── DIVIDER ── */
+    .hh-divider {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 2.5rem 0;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, #0d1a0f, #0a0a0a);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .cta-section p { color: rgba(255,255,255,0.65); }
+    .btn-whatsapp {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-whatsapp:hover {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-email {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-email:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border-color);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── BACK TO TOP ── */
+    #backToTop {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      width: 42px; height: 42px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 1rem;
+    }
+    #backToTop.visible { opacity: 1; pointer-events: auto; }
+    #backToTop:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── RESPONSIVE TWEAKS ── */
+    @media (max-width: 575.98px) {
+      .page-hero { padding: 4.5rem 0 2rem; }
+      .hh-card { padding: 1.1rem 1.1rem; }
+      .cta-section { padding: 1.75rem 1.25rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="../components/layout/layout.css?v=1.2.0-20260915.4">
+</head>
+<body data-nav-active="consultoria">
+
+<div data-component="layout/navbar.html"></div>
+
+
+<!-- ==================== HERO ==================== -->
+<section class="page-hero">
+  <div class="container">
+    <!--<span class="badge-label">Servicios</span>-->
+    <h1 class="mb-3">CONSULTORÍA TI</h1>
+    <p class="lead mb-0">
+      En Helheim ofrecemos soluciones integrales en Tecnologías de la Información: desarrollo web Full‑Stack,
+      gestión de proyectos con metodologías ágiles, integración de drones DJI e hidrógeno verde.
+    </p>
+  </div>
+</section>
+<!-- ==================== END HERO ==================== -->
+
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main class="container py-5">
+
+  <!-- ── FULL-STACK DEVELOPMENT ── -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <h2 class="section-title mb-0">
+      <span class="icon-badge"><i class="bi bi-code-slash"></i></span>
+      Full‑Stack Development
+    </h2>
+  </div>
+
+  <p class="mb-4" style="color:rgba(255,255,255,.7); max-width:780px;">
+    El desarrollo Full‑Stack combina Front‑End y Back‑End, permitiendo construir sistemas completos que integran
+    experiencia de usuario, lógica de negocio, bases de datos y APIs desde una misma visión integral.
+  </p>
+
+  <!-- Tech Stack row -->
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <div class="card-label"><i class="bi bi-display me-1"></i>Front‑End</div>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="https://es.wikipedia.org/wiki/HTML5" target="_blank" class="tech-badge" rel="noopener noreferrer">HTML5</a>
+          <a href="https://es.wikipedia.org/wiki/CSS" target="_blank" class="tech-badge" rel="noopener noreferrer">CSS3</a>
+          <a href="https://es.wikipedia.org/wiki/JavaScript" target="_blank" class="tech-badge" rel="noopener noreferrer">JavaScript</a>
+          <a href="https://es.wikipedia.org/wiki/Bootstrap_(framework)" target="_blank" class="tech-badge" rel="noopener noreferrer">Bootstrap</a>
+          <a href="https://es.wikipedia.org/wiki/React" target="_blank" class="tech-badge" rel="noopener noreferrer">React</a>
+          <a href="https://es.wikipedia.org/wiki/AngularJS" target="_blank" class="tech-badge" rel="noopener noreferrer">Angular</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <div class="card-label"><i class="bi bi-server me-1"></i>Back‑End</div>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="https://es.wikipedia.org/wiki/PHP" target="_blank" class="tech-badge" rel="noopener noreferrer">PHP</a>
+          <a href="https://es.wikipedia.org/wiki/Laravel" target="_blank" class="tech-badge" rel="noopener noreferrer">Laravel</a>
+          <a href="https://es.wikipedia.org/wiki/Python" target="_blank" class="tech-badge" rel="noopener noreferrer">Python</a>
+          <a href="https://www.djangoproject.com/" target="_blank" class="tech-badge" rel="noopener noreferrer">Django</a>
+          <a href="https://flask.palletsprojects.com/" target="_blank" class="tech-badge" rel="noopener noreferrer">Flask</a>
+          <a href="https://es.wikipedia.org/wiki/Node.js" target="_blank" class="tech-badge" rel="noopener noreferrer">Node.js</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <div class="card-label"><i class="bi bi-database me-1"></i>Bases de Datos</div>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="https://es.wikipedia.org/wiki/MySQL" target="_blank" class="tech-badge" rel="noopener noreferrer">MySQL</a>
+          <a href="https://es.wikipedia.org/wiki/PostgreSQL" target="_blank" class="tech-badge" rel="noopener noreferrer">PostgreSQL</a>
+          <a href="https://es.wikipedia.org/wiki/MongoDB" target="_blank" class="tech-badge" rel="noopener noreferrer">MongoDB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="mb-4" style="color:rgba(255,255,255,.6);">
+    <strong style="color:rgba(255,255,255,.85);">Beneficios:</strong>
+    permite construir MVPs eficientes, unificar criterios técnicos entre equipos y desarrollar soluciones web completas desde una misma base de conocimiento.
+  </p>
+
+  <!-- Projects row -->
+  <div class="row g-3 mb-2">
+    <div class="col-12 col-lg-4">
+      <div class="hh-card">
+        <div class="card-label">Full‑Stack</div>
+        <h3>Proyectos destacados</h3>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Sistema de Gestión CFT de Magallanes <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <a href="https://www.helheim.cl/Proyectos/tournaments/index.html" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-chevron-right arrow"></i> Sistema Gestión de Torneos <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </a>
+        <a href="https://helheim.cl/ruko/index.php?module=users/login" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-chevron-right arrow"></i> Sistema de Gestión Helheim <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </a>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="hh-card">
+        <div class="card-label">Front‑End</div>
+        <h3>Proyectos destacados</h3>
+        <a href="https://www.helheim.cl/Proyectos/kudochile/index.html" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-chevron-right arrow"></i> Kudo Chile Oficial <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </a>
+        <a href="https://www.helheim.cl/Proyectos/RelojesaTiempo/index.html" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-chevron-right arrow"></i> Relojes a Tiempo <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </a>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informes CFT de Magallanes <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="hh-card">
+        <div class="card-label">Informes & Reportes</div>
+        <h3>Proyectos destacados</h3>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe Directivo de Proyectos <i class="bi bi-file-earmark-pdf ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe Gráficos Pendientes <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe de Actividades Realizadas <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hh-divider">
+
+  <!-- ── METODOLOGÍAS ── -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <h2 class="section-title mb-0">
+      <span class="icon-badge"><i class="bi bi-diagram-3"></i></span>
+      Metodologías de Desarrollo y Gestión
+    </h2>
+  </div>
+
+  <p class="mb-4" style="color:rgba(255,255,255,.7); max-width:780px;">
+    Adoptamos prácticas ágiles y tradicionales de acuerdo a las necesidades de cada proyecto, garantizando eficiencia y calidad en la entrega.
+  </p>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="method-item">
+        <span class="icon"><i class="bi bi-kanban"></i></span>
+        <div>
+          <strong><a href="https://es.wikipedia.org/wiki/Scrum_(desarrollo_de_software)" target="_blank" rel="noopener noreferrer">Scrum</a></strong> <span style="color:rgba(255,255,255,.4);font-size:.8rem;">(Ágil)</span>
+          <p class="mb-0 mt-1" style="font-size:.85rem;color:rgba(255,255,255,.55);">Colaboración continua, entregas incrementales y adaptación rápida.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="method-item">
+        <span class="icon"><i class="bi bi-arrow-down-left"></i></span>
+        <div>
+          <strong><a href="https://es.wikipedia.org/wiki/Modelo_en_cascada" target="_blank" rel="noopener noreferrer">Modelo en Cascada</a></strong>
+          <p class="mb-0 mt-1" style="font-size:.85rem;color:rgba(255,255,255,.55);">Fases fijas; ideal para requisitos bien definidos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="method-item">
+        <span class="icon"><i class="bi bi-lightning-fill"></i></span>
+        <div>
+          <strong><a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_extrema" target="_blank" rel="noopener noreferrer">XP (Programación Extrema)</a></strong>
+          <p class="mb-0 mt-1" style="font-size:.85rem;color:rgba(255,255,255,.55);">Iteraciones cortas y pruebas automáticas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="method-item">
+        <span class="icon"><i class="bi bi-diagram-2"></i></span>
+        <div>
+          <strong><a href="https://dsc.itmorelia.edu.mx/~jcolivares/documents/omt" target="_blank" rel="noopener noreferrer">OMT++</a></strong>
+          <p class="mb-0 mt-1" style="font-size:.85rem;color:rgba(255,255,255,.55);">Modelado orientado a objetos para sistemas estructurados.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="method-item">
+        <span class="icon"><i class="bi bi-building"></i></span>
+        <div>
+          <strong><a href="https://es.wikipedia.org/wiki/Proceso_Unificado_de_Rational" target="_blank" rel="noopener noreferrer">RUP</a></strong>
+          <p class="mb-0 mt-1" style="font-size:.85rem;color:rgba(255,255,255,.55);">Marco iterativo con foco en arquitectura robusta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proyectos metodologías -->
+  <div class="row g-3 mb-2">
+    <div class="col-12 col-lg-6">
+      <div class="hh-card">
+        <div class="card-label"><i class="bi bi-diagram-3-fill me-1"></i>Gestión de Proyectos</div>
+        <h3>Proyectos destacados</h3>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informes de Transparencia CFT de Magallanes <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe Directivo de Proyectos (PDF) <i class="bi bi-file-earmark-pdf ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe Gráficos Pendientes <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+        <span class="project-link project-link-disabled" aria-disabled="true">
+          <i class="bi bi-chevron-right arrow"></i> Informe de Actividades Realizadas <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:.75rem;opacity:.5;"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hh-divider">
+
+  <!-- ── DRONES DJI ── -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <h2 class="section-title mb-0">
+      <span class="icon-badge"><i class="bi bi-airplane"></i></span>
+      Desarrollo con Drones DJI
+    </h2>
+  </div>
+
+  <p class="mb-4" style="color:rgba(255,255,255,.7); max-width:780px;">
+    Incorporamos drones de <a href="https://www.dji.com/" target="_blank" style="color:#ef4444;text-decoration:none;" rel="noopener noreferrer">DJI</a> en soluciones tecnológicas para diversos sectores,
+    aprovechando su versatilidad para agilizar operaciones y recolectar datos de alta calidad.
+  </p>
+
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-tools d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Inspecciones industriales</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-map d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Levantamientos topográficos</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-camera d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Monitoreo visual de obras</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-wrench d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Pruebas de prototipos</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-send d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Entregas internas</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="hh-card text-center py-3">
+        <i class="bi bi-camera-video d-block mb-2" style="font-size:1.4rem;color:rgba(255,255,255,.4);"></i>
+        <p class="mb-0" style="font-size:.82rem;color:rgba(255,255,255,.65);">Marketing & documentación</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-2">
+    <div class="col-12 col-md-6">
+      <div class="hh-card">
+        <div class="card-label"><i class="bi bi-trophy me-1"></i>Proyectos destacados</div>
+        <a href="https://www.instagram.com/helheim_tierra_del_fuego/" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-speedometer2 arrow"></i> Cobertura en rally — ver en Instagram <i class="bi bi-instagram ms-auto" style="font-size:.75rem;color:#ef4444;"></i>
+        </a>
+        <a href="https://www.instagram.com/stories/highlights/17959824872384594/" target="_blank" class="project-link" rel="noopener noreferrer">
+          <i class="bi bi-pin-map-fill arrow"></i> Monitoreo de aerogeneradores — Beca Cavendish <i class="bi bi-instagram ms-auto" style="font-size:.75rem;color:#ef4444;"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hh-divider">
+
+  <!-- ── HIDRÓGENO VERDE ── -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <h2 class="section-title mb-0">
+      <span class="icon-badge"><i class="bi bi-lightning-charge"></i></span>
+      Integración de Soluciones en Hidrógeno Verde
+    </h2>
+  </div>
+
+  <p class="mb-3" style="color:rgba(255,255,255,.7); max-width:780px;">
+    Helheim está a la vanguardia de las tecnologías sustentables, ofreciendo asesoría en proyectos de
+    <a href="https://es.wikipedia.org/wiki/Hidrógeno_verde" target="_blank" style="color:#ef4444;text-decoration:none;" rel="noopener noreferrer">hidrógeno verde</a>,
+    combustible limpio generado con energías renovables.
+  </p>
+  <p class="mb-3" style="color:rgba(255,255,255,.7); max-width:780px;">
+    Impulsamos soluciones TI a lo largo de la cadena de valor: monitoreo y control, análisis de datos, trazabilidad;
+    complementado con diseño industrial y prototipado.
+  </p>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <i class="bi bi-cpu mb-2 d-block" style="font-size:1.3rem;color:rgba(255,255,255,.35);"></i>
+        <p class="mb-0" style="font-size:.88rem;color:rgba(255,255,255,.65);">Sistemas en tiempo real para control de electrolizadores y optimización energética.</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <i class="bi bi-box mb-2 d-block" style="font-size:1.3rem;color:rgba(255,255,255,.35);"></i>
+        <p class="mb-0" style="font-size:.88rem;color:rgba(255,255,255,.65);">Prototipado de unidades de almacenamiento con simulaciones 3D.</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="hh-card">
+        <i class="bi bi-graph-up mb-2 d-block" style="font-size:1.3rem;color:rgba(255,255,255,.35);"></i>
+        <p class="mb-0" style="font-size:.88rem;color:rgba(255,255,255,.65);">Dashboards de visualización operativa para decisiones informadas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert d-flex align-items-start gap-3 mb-5" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:10px;color:rgba(255,255,255,.75);">
+    <i class="bi bi-award-fill mt-1" style="color:#22c55e;font-size:1.1rem;flex-shrink:0;"></i>
+    <div>
+      <strong style="color:#fff;">Beca Profesor Cavendish Magallanes</strong>
+      <p class="mb-0 mt-1" style="font-size:.88rem;">Participamos en este programa de octubre 2023 a marzo 2024, con clases presenciales y visitas a terreno.
+      Gracias a nuestra formación y redes activas en la industria, apoyamos proyectos de hidrógeno verde a nivel nacional y regional.</p>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-section">
+    <h2 class="mb-2" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.6rem;color:#fff;">
+      ¿Quieres impulsar tus proyectos con tecnología de vanguardia?
+    </h2>
+    <p class="mb-4">Contáctanos por WhatsApp o correo electrónico y cuéntanos tu proyecto.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="https://wa.me/56935444514" target="_blank" class="btn-whatsapp" rel="noopener noreferrer">
+        <i class="bi bi-whatsapp"></i> WhatsApp +56 9 3544 4514
+      </a>
+      <a href="/cdn-cgi/l/email-protection#b1d2dedfc5d0d2c5def1d9d4ddd9d4d8dc9fd2dd" class="btn-email">
+        <i class="bi bi-envelope"></i> Escríbenos por correo
+      </a>
+    </div>
+  </div>
+
+</main>
+<!-- ==================== END MAIN ==================== -->
+
+
+<div data-component="layout/footer.html"></div>
+
+
+<!-- Back to top -->
+<button id="backToTop" aria-label="Volver al inicio" title="Volver al inicio">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="../js/component-loader.js?v=1.2.0-20260915.4"></script>
+<script>
+  // Back to top
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>

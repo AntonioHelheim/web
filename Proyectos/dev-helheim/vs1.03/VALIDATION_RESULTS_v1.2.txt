@@ -1,0 +1,29 @@
+Helheim.cl vs1.2 — Validación Grabado Láser + Dibujo Técnico
+============================================================
+Orden de componentes ........................ OK
+Servicios -> Consultoría TI -> Diseño Industrial -> Grabado Láser -> Dibujo Técnico -> Contacto OK
+Ancla #grabado-laser ........................ OK
+Ancla #dibujo-tecnico ....................... OK
+Navbar -> #grabado-laser .................... OK
+Tarjeta servicio -> #grabado-laser .......... OK
+Navbar -> #dibujo-tecnico ................... OK
+Tarjeta servicio -> #dibujo-tecnico ......... OK
+Relación Navbar / Servicios 1:1 .............. 4/4 OK
+Productos Grabado Láser ..................... 6 categorías
+Proceso Grabado Láser ....................... 6 etapas
+Creality Falcon 10W ......................... documentado
+AutoCAD ..................................... documentado
+Blender ..................................... documentado
+Canon PIXMA iX6810 A3 / hasta 33x48 cm ...... documentado
+Brother HL-1202 B/N hasta A4/Legal .......... documentado
+CTA WhatsApp 56935444514 .................... OK
+CTA formulario #formcontacto ................ OK
+IDs duplicados DOM compuesto ................ 0
+Anclas hash rotas ........................... 0
+Links target=_blank sin protección .......... 0
+Rutas locales de componentes/CSS ............ 0 rotas
+component-loader.js ......................... sintaxis OK
+helheim.js .................................. sintaxis OK
+contact.php ................................. sintaxis OK
+HTTP index/componentes nuevos ............... 200 OK
+Cache-busting ............................... 1.2.0-20260915.9

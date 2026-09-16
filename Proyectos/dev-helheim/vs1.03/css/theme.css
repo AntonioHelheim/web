@@ -1,0 +1,324 @@
+/* ============================================================
+   HELHEIM VS1.03 — THEMES
+   Dark is the baseline/original theme. Light swaps the primary
+   green accent for wine red and red social accents for green.
+   ============================================================ */
+
+:root,
+html[data-theme="dark"] {
+  --clr-bg: #080a08;
+  --clr-surface: #0e1210;
+  --clr-surface-2: #111611;
+  --clr-border: #1f2b1f;
+  --clr-accent: #22c55e;
+  --clr-accent-rgb: 34, 197, 94;
+  --matrix-accent-rgb: 42, 255, 168;
+  --clr-accent-dk: #15803d;
+  --clr-accent-lt: #4ade80;
+  --clr-danger: #ef4444;
+  --clr-danger-rgb: 239, 68, 68;
+  --clr-text: #e2e8e2;
+  --clr-muted: #6b7c6b;
+  --theme-navbar: rgba(8, 10, 8, .92);
+  --theme-card: rgba(14, 18, 16, .92);
+  --theme-card-soft: rgba(255, 255, 255, .018);
+  --theme-copy: rgba(226, 232, 226, .68);
+  --theme-heading: #fff;
+  --theme-control-bg: #101510;
+  --theme-control-hover: rgba(34, 197, 94, .08);
+  --theme-shadow: rgba(0, 0, 0, .28);
+}
+
+html[data-theme="light"] {
+  --clr-bg: #f4efe9;
+  --clr-surface: #fffaf7;
+  --clr-surface-2: #f9f2ee;
+  --clr-border: #d9cbc4;
+  --clr-accent: #7a1732;
+  --clr-accent-rgb: 122, 23, 50;
+  --matrix-accent-rgb: 122, 23, 50;
+  --clr-accent-dk: #5d1026;
+  --clr-accent-lt: #a12a4a;
+  --clr-danger: #198754;
+  --clr-danger-rgb: 25, 135, 84;
+  --clr-text: #2e2427;
+  --clr-muted: #6f6266;
+  --theme-navbar: rgba(255, 250, 247, .96);
+  --theme-card: rgba(255, 250, 247, .98);
+  --theme-card-soft: rgba(122, 23, 50, .025);
+  --theme-copy: rgba(46, 36, 39, .72);
+  --theme-heading: #251d20;
+  --theme-control-bg: #fff;
+  --theme-control-hover: rgba(122, 23, 50, .08);
+  --theme-shadow: rgba(80, 49, 57, .12);
+}
+
+html { transition: background-color .2s ease, color .2s ease; }
+body { background: var(--clr-bg); color: var(--clr-text); }
+
+/* Shared navigation controls */
+.helheim-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  padding: .35rem .5rem .75rem;
+}
+
+.helheim-settings .dropdown-toggle,
+.helheim-settings .helheim-setting-button {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  min-height: 38px;
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+  padding: .4rem .65rem !important;
+  color: var(--clr-muted) !important;
+  background: transparent;
+  font: inherit;
+}
+
+.helheim-settings .dropdown-toggle:hover,
+.helheim-settings .dropdown-toggle:focus,
+.helheim-settings .helheim-setting-button:hover,
+.helheim-settings .helheim-setting-button:focus {
+  color: var(--clr-accent) !important;
+  border-color: var(--clr-accent);
+  background: var(--theme-control-hover);
+}
+
+.helheim-settings .dropdown-menu {
+  min-width: 11rem;
+  background: var(--theme-control-bg);
+  border: 1px solid var(--clr-border);
+  box-shadow: 0 .75rem 2rem var(--theme-shadow);
+}
+
+.helheim-settings .dropdown-item {
+  color: var(--clr-text);
+  font-size: .9rem;
+}
+
+.helheim-settings .dropdown-item:hover,
+.helheim-settings .dropdown-item:focus,
+.helheim-settings .dropdown-item.active {
+  color: var(--clr-accent);
+  background: var(--theme-control-hover);
+}
+
+.helheim-settings .setting-check {
+  width: 1rem;
+  opacity: 0;
+}
+
+.helheim-settings .dropdown-item.active .setting-check { opacity: 1; }
+
+/* Light theme — shared layout */
+html[data-theme="light"] .helheim-navbar {
+  background: var(--theme-navbar) !important;
+  border-color: var(--clr-border) !important;
+  --bs-navbar-color: var(--clr-muted);
+  --bs-navbar-hover-color: var(--clr-accent);
+  --bs-navbar-active-color: var(--clr-accent);
+}
+
+html[data-theme="light"] .helheim-navbar .navbar-brand,
+html[data-theme="light"] .helheim-navbar .nav-link,
+html[data-theme="light"] .helheim-login-trigger {
+  color: var(--clr-muted) !important;
+}
+
+html[data-theme="light"] .helheim-navbar .navbar-brand,
+html[data-theme="light"] .helheim-navbar .nav-link:hover,
+html[data-theme="light"] .helheim-navbar .nav-link[aria-current="page"],
+html[data-theme="light"] .helheim-login-trigger:hover {
+  color: var(--clr-accent) !important;
+}
+
+html[data-theme="light"] .helheim-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(122,23,50,0.92)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+html[data-theme="light"] .footer-helheim,
+html[data-theme="light"] .helheim-login-modal .modal-content {
+  background: var(--clr-surface) !important;
+  color: var(--clr-text);
+  border-color: var(--clr-border);
+}
+
+html[data-theme="light"] .footer-text,
+html[data-theme="light"] .footer-text a,
+html[data-theme="light"] .helheim-login-note { color: var(--clr-muted) !important; }
+
+html[data-theme="light"] .footer-brand,
+html[data-theme="light"] .helheim-login-modal .modal-title { color: var(--clr-text) !important; }
+
+html[data-theme="light"] .footer-social a { color: var(--clr-muted); border-color: var(--clr-border); }
+html[data-theme="light"] .footer-social a:hover { color: var(--clr-danger); border-color: var(--clr-danger); }
+
+html[data-theme="light"] .helheim-login-modal .form-control {
+  background: #fff;
+  color: var(--clr-text);
+  border-color: var(--clr-border);
+}
+
+html[data-theme="light"] .helheim-login-modal .btn-close { filter: none; }
+
+/* Bootstrap helpers inside the home need to follow the selected palette. */
+html[data-theme="light"] .home-page .text-white,
+html[data-theme="light"] .home-page .text-light { color: var(--clr-text) !important; }
+html[data-theme="light"] .home-page .text-success { color: var(--clr-accent) !important; }
+html[data-theme="light"] .home-page .social-icons .text-danger { color: var(--clr-danger) !important; }
+html[data-theme="light"] .home-page .invalid-feedback.text-white { color: #fff !important; }
+
+/* About */
+html[data-theme="light"] .about-title { color: var(--clr-text); border-color: var(--clr-accent); }
+html[data-theme="light"] .quote-fancy { color: var(--clr-text); }
+html[data-theme="light"] .quote-author { color: var(--clr-muted); }
+
+/* Services */
+html[data-theme="light"] .service-bg { background: #f5f0ec !important; }
+html[data-theme="light"] .service-bg::after {
+  background-image:
+    radial-gradient(circle at center, rgba(122,23,50,.48) 1.5px, transparent 2px),
+    radial-gradient(circle at center, rgba(122,23,50,.28) 1px, transparent 2px) !important;
+}
+html[data-theme="light"] .service-bg::before {
+  background-image:
+    radial-gradient(circle at center, rgba(122,23,50,.40) 1.2px, transparent 2px),
+    radial-gradient(circle at center, rgba(122,23,50,.22) .8px, transparent 1.8px) !important;
+}
+html[data-theme="light"] .service-card-front,
+html[data-theme="light"] .service-card-back {
+  background: var(--clr-surface) !important;
+  border-color: var(--clr-border) !important;
+  box-shadow: 0 8px 24px var(--theme-shadow);
+}
+
+/* Common light treatment for the four service-detail sections. */
+html[data-theme="light"] :is(.consultoria-ti-section,.diseno-industrial-section,.grabado-laser-section,.dibujo-tecnico-section) {
+  background: linear-gradient(180deg, #f7f2ee 0%, #f4efe9 100%) !important;
+  border-color: var(--clr-border) !important;
+}
+
+html[data-theme="light"] :is(.cti-title,.din-title,.laser-title,.dt-title),
+html[data-theme="light"] :is(.cti-section-heading,.din-section-heading,.laser-section-heading,.dt-section-heading) h3,
+html[data-theme="light"] :is(.cti-card,.din-card,.laser-product-card,.laser-process-item,.dt-tool-card,.dt-deliverable-card,.dt-printer-card,.dt-process-item) h4,
+html[data-theme="light"] :is(.cti-method-item,.laser-stat-card) strong,
+html[data-theme="light"] :is(.cti-cta,.din-cta,.laser-cta,.dt-cta) h3 {
+  color: var(--theme-heading) !important;
+}
+
+html[data-theme="light"] :is(.cti-copy,.cti-benefits,.din-copy,.din-lead,.laser-copy,.laser-lead,.dt-copy,.dt-lead),
+html[data-theme="light"] :is(.cti-method-item,.cti-feature-card,.din-area-card,.din-process-item,.laser-product-card,.laser-process-item,.dt-tool-card,.dt-deliverable-card,.dt-printer-card,.dt-process-item) p,
+html[data-theme="light"] :is(.cti-cta,.din-cta,.laser-cta,.dt-cta) p,
+html[data-theme="light"] .laser-note,
+html[data-theme="light"] .laser-stat-card span {
+  color: var(--clr-muted) !important;
+}
+
+html[data-theme="light"] :is(.cti-card,.cti-method-item,.din-origin,.din-card,.din-process-item,.laser-equipment,.laser-materials,.laser-product-card,.laser-process-item,.laser-stat-card,.dt-tool-card,.dt-deliverable-card,.dt-print-block,.dt-printer-card,.dt-process-item) {
+  background: var(--clr-surface) !important;
+  border-color: var(--clr-border) !important;
+  box-shadow: 0 10px 28px var(--theme-shadow);
+}
+
+html[data-theme="light"] :is(.cti-tech-badge,.laser-materials-list span) {
+  background: #fff !important;
+  border-color: var(--clr-border) !important;
+  color: var(--clr-text) !important;
+}
+
+html[data-theme="light"] :is(.cti-divider,.din-divider,.laser-divider,.dt-divider) {
+  border-color: var(--clr-border) !important;
+}
+
+html[data-theme="light"] :is(.cti-highlight,.cti-cta,.din-cta,.laser-cta,.dt-cta) {
+  background: linear-gradient(135deg, rgba(122,23,50,.075), rgba(255,250,247,.96)) !important;
+  border-color: rgba(122,23,50,.22) !important;
+}
+
+html[data-theme="light"] .din-gallery { background: #eee4df !important; border-color: var(--clr-border) !important; }
+html[data-theme="light"] .din-lightbox-modal .modal-content { background: #fff !important; color: var(--clr-text) !important; border-color: var(--clr-border); }
+
+/* Contact */
+html[data-theme="light"] .contact-box {
+  background: var(--clr-surface) !important;
+  border-color: var(--clr-border) !important;
+  color: var(--clr-text);
+}
+html[data-theme="light"] .contact-box .form-control {
+  background: #fff !important;
+  color: var(--clr-text) !important;
+  border-color: var(--clr-border) !important;
+}
+html[data-theme="light"] .contact-box .btn-outline-light {
+  color: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+html[data-theme="light"] .contact-box .btn-outline-light:hover {
+  background: var(--clr-accent);
+  color: #fff;
+}
+
+/* Floating controls */
+html[data-theme="light"] .back-to-top,
+html[data-theme="light"] .whatsapp-float {
+  background: var(--clr-surface);
+  border-color: var(--clr-border);
+  color: var(--clr-accent);
+  box-shadow: 0 8px 24px var(--theme-shadow);
+}
+html[data-theme="light"] .whatsapp-float { color: var(--clr-danger); }
+html[data-theme="light"] .back-to-top:hover { background: var(--clr-accent); color: #fff; }
+html[data-theme="light"] .whatsapp-float:hover { background: var(--clr-danger); border-color: var(--clr-danger); color: #fff; }
+
+@media (max-width: 575.98px) {
+  .helheim-settings { padding-inline: 0; }
+}
+
+/* Accent consistency in light mode: all former green emphasis becomes wine red. */
+html[data-theme="light"] .helheim-navbar .navbar-nav .nav-link:hover {
+  background: rgba(122, 23, 50, .06) !important;
+}
+html[data-theme="light"] .helheim-login-modal .form-control:focus,
+html[data-theme="light"] .contact-box .form-control:focus {
+  box-shadow: 0 0 0 .2rem rgba(122, 23, 50, .14) !important;
+}
+html[data-theme="light"] :is(
+  .cti-icon-badge,
+  .din-icon-badge,
+  .din-area-icon,
+  .laser-icon-badge,
+  .laser-product-icon,
+  .dt-icon-badge,
+  .dt-printer-icon
+) {
+  background: rgba(122, 23, 50, .07) !important;
+  border-color: rgba(122, 23, 50, .24) !important;
+  color: var(--clr-accent) !important;
+}
+html[data-theme="light"] :is(.cti-highlight,.cti-card:hover,.din-card:hover,.laser-process-item:hover,.dt-process-item:hover) {
+  border-color: rgba(122, 23, 50, .28) !important;
+}
+html[data-theme="light"] :is(
+  .cti-btn-primary,
+  .din-btn-primary,
+  .laser-btn-primary,
+  .dt-btn-primary,
+  .service-card-link:hover,
+  .helheim-login-submit,
+  .contact-box .btn-outline-light:hover
+) {
+  color: #fff !important;
+}
+html[data-theme="light"] .nav__link {
+  color: var(--clr-danger) !important;
+}
+html[data-theme="light"] .nav__link:hover {
+  background: var(--clr-danger) !important;
+  border-color: var(--clr-danger) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(25, 135, 84, .22) !important;
+}

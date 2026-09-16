@@ -1,0 +1,298 @@
+/* ============================================================
+   DIBUJO TÉCNICO — componente home
+   Prefijo dt- para evitar colisiones.
+============================================================ */
+
+.dibujo-tecnico-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 6rem) 0;
+  scroll-margin-top: 82px;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  background:
+    linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px),
+    radial-gradient(circle at 76% 12%, rgba(var(--clr-accent-rgb), .06), transparent 28%),
+    linear-gradient(180deg, rgba(12, 14, 12, .96), rgba(8, 10, 8, .96));
+  background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.dibujo-tecnico-section > .container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.dt-header {
+  max-width: 900px;
+  margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+}
+
+.dt-eyebrow,
+.dt-kicker,
+.dt-tool-label {
+  display: inline-block;
+  color: var(--clr-accent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.dt-title {
+  margin: .55rem 0 .85rem;
+  color: var(--clr-text);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  letter-spacing: .07em;
+  line-height: .95;
+}
+
+.dt-title span { color: var(--clr-accent); }
+
+.dt-lead,
+.dt-copy {
+  color: rgba(226, 232, 226, .68);
+  line-height: 1.72;
+}
+
+.dt-lead { max-width: 790px; font-size: clamp(.98rem, 2vw, 1.08rem); }
+.dt-copy { max-width: 820px; margin-bottom: 1.25rem; }
+
+.dt-section-heading {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1rem;
+}
+
+.dt-section-heading-centered {
+  justify-content: center;
+  text-align: left;
+}
+
+.dt-section-heading h3,
+.dt-cta h3 {
+  margin: .15rem 0 0;
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 700;
+}
+
+.dt-icon-badge,
+.dt-tool-icon,
+.dt-printer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-accent);
+  border: 1px solid rgba(var(--clr-accent-rgb), .22);
+  background: rgba(var(--clr-accent-rgb), .065);
+}
+
+.dt-icon-badge {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+}
+
+.dt-tool-card,
+.dt-deliverable-card,
+.dt-printer-card,
+.dt-process-item,
+.dt-print-block {
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .018);
+}
+
+.dt-tool-card,
+.dt-deliverable-card,
+.dt-printer-card,
+.dt-process-item {
+  height: 100%;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.dt-tool-card:hover,
+.dt-deliverable-card:hover,
+.dt-printer-card:hover,
+.dt-process-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--clr-accent-rgb), .26);
+  background: rgba(var(--clr-accent-rgb), .03);
+}
+
+.dt-tool-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.35rem;
+}
+
+.dt-tool-icon,
+.dt-printer-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 11px;
+  font-size: 1.2rem;
+}
+
+.dt-tool-card h4,
+.dt-deliverable-card h4,
+.dt-printer-card h4,
+.dt-process-item h4 {
+  color: #fff;
+  font-family: var(--font-cond);
+  font-weight: 700;
+}
+
+.dt-tool-card h4,
+.dt-printer-card h4 { margin: .18rem 0 .55rem; font-size: 1.16rem; }
+.dt-tool-card p,
+.dt-deliverable-card p,
+.dt-printer-card p,
+.dt-process-item p {
+  margin: 0;
+  color: rgba(226, 232, 226, .6);
+  font-size: .87rem;
+  line-height: 1.62;
+}
+
+.dt-divider {
+  margin: clamp(3rem, 7vw, 5rem) 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  opacity: 1;
+}
+
+.dt-deliverable-card {
+  padding: 1.25rem;
+}
+
+.dt-deliverable-card > i {
+  display: block;
+  margin-bottom: .8rem;
+  color: var(--clr-accent);
+  font-size: 1.3rem;
+}
+
+.dt-deliverable-card h4 { margin-bottom: .45rem; font-size: 1.05rem; }
+
+.dt-print-block {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.dt-printer-card { padding: 1.25rem; }
+
+.dt-printer-topline {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-bottom: .9rem;
+}
+
+.dt-process-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dt-process-item {
+  position: relative;
+  min-height: 190px;
+  padding: 1.2rem 1rem 1rem;
+  overflow: hidden;
+}
+
+.dt-process-item > i {
+  display: block;
+  margin-bottom: .8rem;
+  color: var(--clr-accent);
+  font-size: 1.35rem;
+}
+
+.dt-process-number {
+  position: absolute;
+  top: .8rem;
+  right: .9rem;
+  color: rgba(255, 255, 255, .08);
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.dt-process-item h4 { margin-bottom: .45rem; font-size: 1rem; }
+
+.dt-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding: clamp(1.5rem, 4vw, 2.3rem);
+  border: 1px solid rgba(var(--clr-accent-rgb), .22);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(var(--clr-accent-rgb), .075), rgba(14, 18, 16, .9));
+}
+
+.dt-cta h3 { margin: .35rem 0 .45rem; }
+.dt-cta p { max-width: 720px; margin: 0; color: rgba(226, 232, 226, .62); }
+
+.dt-cta-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.dt-btn {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--transition), color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.dt-btn:hover { transform: translateY(-1px); }
+.dt-btn-primary { border-color: var(--clr-accent); background: var(--clr-accent); color: #061008; }
+.dt-btn-primary:hover { background: var(--clr-accent-lt); color: #061008; }
+.dt-btn-secondary { border-color: rgba(255, 255, 255, .16); background: transparent; color: rgba(255, 255, 255, .82); }
+.dt-btn-secondary:hover { border-color: rgba(255, 255, 255, .35); color: #fff; }
+
+@media (max-width: 991.98px) {
+  .dt-process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dt-process-item:last-child { grid-column: span 2; }
+  .dt-cta { align-items: stretch; flex-direction: column; }
+  .dt-cta-actions { width: 100%; }
+}
+
+@media (max-width: 575.98px) {
+  .dibujo-tecnico-section { scroll-margin-top: 72px; }
+  .dt-section-heading-centered { justify-content: flex-start; }
+  .dt-tool-card { flex-direction: column; }
+  .dt-process-list { grid-template-columns: 1fr; }
+  .dt-process-item:last-child { grid-column: auto; }
+  .dt-btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dt-tool-card,
+  .dt-deliverable-card,
+  .dt-printer-card,
+  .dt-process-item,
+  .dt-btn { transition: none; }
+}

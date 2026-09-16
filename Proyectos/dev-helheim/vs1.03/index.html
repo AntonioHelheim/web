@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="JACL &amp; MCLG">
+    <meta name="copyright" content="Helheim Tierra del Fuego">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#080a08">
+
+    <!-- Evita parpadeos: aplica preferencias persistidas antes de renderizar CSS. -->
+    <script>
+      (() => {
+        try {
+          const theme = localStorage.getItem("helheim-theme");
+          document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+          const lang = localStorage.getItem("helheim-language");
+          if (["es", "en", "pt"].includes(lang)) document.documentElement.lang = lang;
+        } catch (error) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
+
+    <link rel="canonical" href="https://www.helheim.cl/">
+
+    <!-- Favicon / PWA: rutas relativas para funcionar también en staging/subcarpetas -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+
+    <!-- SEO / OG / Twitter -->
+    <title>Helheim.cl</title>
+    <meta name="title" content="Helheim.cl">
+    <meta name="description" content="Consultoría TI, Diseño Industrial, Grabado Láser y Dibujo Técnico.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.helheim.cl/">
+    <meta property="og:title" content="Helheim.cl">
+    <meta property="og:description" content="Consultoría TI, Diseño Industrial, Grabado Láser y Dibujo Técnico.">
+    <meta property="og:image" content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Helheim.cl">
+    <meta name="twitter:description" content="Consultoría TI, Diseño Industrial, Grabado Láser y Dibujo Técnico.">
+    <meta name="twitter:image" content="https://www.helheim.cl/images/Logo_Helheim-Metadata_1200x640.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/helheim.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/layout/layout.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/about.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/services.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/consultoria-ti.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/diseno-industrial.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/grabado-laser.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/dibujo-tecnico.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="components/home/contact.css?v=1.03.0-20260915.1">
+    <link rel="stylesheet" href="css/theme.css?v=1.03.0-20260915.1" data-helheim-resource="theme-css">
+</head>
+<body class="home-page" data-nav-active="home">
+
+    <div data-component="layout/navbar.html"></div>
+
+    <!-- Se mantienen los dos carruseles operativos de v1.1. -->
+    <div data-component="home/carousel-desktop.html"></div>
+    <div data-component="home/carousel-mobile.html"></div>
+
+    <main class="main-section">
+        <h1 class="visually-hidden">Helheim Tierra del Fuego — Consultoría TI, Diseño Industrial, Grabado Láser y Dibujo Técnico</h1>
+
+        <div class="container">
+            <div id="tazadecafe-container" data-component="home/about.html"></div>
+            <div id="servicios-container" data-component="home/services.html"></div>
+            <div id="consultoria-ti-container" data-component="home/consultoria-ti.html"></div>
+            <div id="diseno-industrial-container" data-component="home/diseno-industrial.html"></div>
+            <div id="grabado-laser-container" data-component="home/grabado-laser.html"></div>
+            <div id="dibujo-tecnico-container" data-component="home/dibujo-tecnico.html"></div>
+            <div id="contacto-container" data-component="home/contact.html"></div>
+        </div>
+    </main>
+
+    <div data-component="layout/footer.html"></div>
+
+    <!-- Botón de Volver Arriba -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba" type="button">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/56935444514"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+            crossorigin="anonymous"></script>
+
+    <!-- Idiomas: cada locale vive en /lang para facilitar extensiones futuras. -->
+    <script src="lang/es.js?v=1.03.0-20260915.1"></script>
+    <script src="lang/en.js?v=1.03.0-20260915.1"></script>
+    <script src="lang/pt.js?v=1.03.0-20260915.1"></script>
+    <script src="lang/i18n.js?v=1.03.0-20260915.1"></script>
+
+    <!-- Preferencias visuales y JavaScript propio. -->
+    <script src="js/theme.js?v=1.03.0-20260915.1"></script>
+    <script src="js/component-loader.js?v=1.03.0-20260915.1"></script>
+    <script src="js/helheim.js?v=1.03.0-20260915.1"></script>
+</body>
+</html>
