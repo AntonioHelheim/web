@@ -3,13 +3,13 @@ Procedimiento seguro y rápido para:
 Subir tus cambios locales a GitHub, y Traer la última versión del remoto para  quedar sincronizado.
 
 Remoto: git@github.com:AntonioHelheim/web.git (rama main)
-Carpeta de trabajo: /opt/lampp/htdocs/www.helheim.cl
+Carpeta de trabajo: /opt/lampp/htdocs/web
 
 
 En GitBash o Terminal:
 
 # 1) Abrimos la carpeta de trabajo o ruta sincronizada, en este caso:
-cd /opt/lampp/htdocs/www.helheim.cl/
+cd /opt/lampp/htdocs/web
 
 # 2) Ver estado actual de la carpeta y sus elementos
 git status
@@ -27,7 +27,7 @@ git stash pop
 
 # 6) Preparar y registrar tus cambios 
 git add -A
-git commit -m "Actualizacion de Codigo "
+git commit -m "Actualizacion de codigo desde Linux Arch "
 
 # 7) Subir a GitHub
 git push origin main 
