@@ -1,0 +1,12 @@
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<FilesMatch "\.(php|php\d?|phtml|pht)$">
+    Require all denied
+</FilesMatch>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|php\d?|phtml|pht)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>

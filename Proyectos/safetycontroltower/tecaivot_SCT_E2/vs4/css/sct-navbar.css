@@ -1,0 +1,3443 @@
+/* ==========================================================
+   SAFETY CONTROL TOWER — NAVBAR INTERNA ESTÁNDAR (P3)
+   vs3
+
+   Basada en la identidad visual del navbar público, pero adaptada a las
+   pantallas autenticadas: usuario, cargo/rol, avatar, idioma, volver y salir.
+
+   Objetivos:
+   - una sola estructura reutilizable en todos los módulos;
+   - evitar que nombres o cargos largos deformen el header;
+   - comportamiento estable en desktop 16:9, iPad Mini e iPhone 12+;
+   - en móvil, utilizar una barra inferior tipo dock, inspirada en la
+     referencia entregada por el cliente.
+   ========================================================== */
+
+.sct-app-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    width: 100%;
+    padding: 0.75rem 0;
+    background: rgba(246, 248, 249, 0.94);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(204, 212, 218, 0.92);
+}
+
+.sct-app-navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.sct-app-navbar__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-width: 0;
+    flex: 0 0 auto;
+    color: inherit;
+    text-decoration: none;
+}
+
+.sct-app-navbar__brand:hover,
+.sct-app-navbar__brand:focus-visible {
+    color: inherit;
+}
+
+.sct-app-navbar__brand-symbol {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.sct-app-navbar__brand-symbol img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.sct-app-navbar__brand-copy {
+    display: block;
+    min-width: 0;
+}
+
+.sct-app-navbar__brand-copy strong,
+.sct-app-navbar__brand-copy small {
+    display: block;
+}
+
+.sct-app-navbar__brand-copy strong {
+    color: var(--primary-darkest);
+    font-size: 0.93rem;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sct-app-navbar__brand-copy small {
+    margin-top: 0.22rem;
+    color: var(--primary);
+    font-size: 0.62rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.16rem;
+}
+
+.sct-app-navbar__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sct-app-navbar__identity {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.625rem;
+    min-width: 0;
+    flex: 0 1 auto;
+}
+
+.sct-app-navbar__identity-copy {
+    display: block;
+    min-width: 0;
+    max-width: 220px;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.sct-app-navbar__name,
+.sct-app-navbar__role {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sct-app-navbar__name {
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 750;
+}
+
+.sct-app-navbar__role {
+    margin-top: 0.16rem;
+    color: var(--text-secondary);
+    font-size: 0.71rem;
+    font-weight: 500;
+}
+
+.sct-app-navbar__avatar {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-darker));
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 1px rgba(24, 38, 99, 0.08);
+}
+
+.sct-app-navbar__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sct-app-navbar__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    min-width: 0;
+    flex: 0 0 auto;
+}
+
+.sct-app-navbar__language {
+    width: auto;
+    min-width: 7.75rem;
+    max-width: 9.5rem;
+    height: 40px;
+    border-color: var(--border);
+    background-color: var(--white);
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.sct-app-navbar__action {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.72rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.sct-app-navbar__action:hover,
+.sct-app-navbar__action:focus-visible {
+    border-color: var(--primary);
+    background: var(--background-soft);
+    color: var(--primary-dark);
+}
+
+.sct-app-navbar__action-label {
+    display: none;
+}
+
+
+/* ==========================================================
+   SELECTOR DE IDIOMA CON BANDERAS — P3 v10
+   El estado cerrado muestra únicamente la bandera actual.
+   Al abrir, cada opción muestra bandera + nombre del idioma.
+   ========================================================== */
+.sct-language-picker {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.sct-language-picker > summary {
+    list-style: none;
+}
+
+.sct-language-picker > summary::-webkit-details-marker {
+    display: none;
+}
+
+.sct-language-picker__trigger {
+    width: 46px;
+    height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sct-language-picker__trigger:hover,
+.sct-language-picker__trigger:focus-visible,
+.sct-language-picker[open] > .sct-language-picker__trigger {
+    border-color: rgba(0, 123, 197, 0.45);
+    background: rgba(0, 123, 197, 0.07);
+    box-shadow: 0 0 0 3px rgba(0, 123, 197, 0.08);
+}
+
+.sct-language-flag {
+    width: 28px;
+    height: 18px;
+    flex: 0 0 auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid rgba(35, 45, 53, 0.12);
+    box-shadow: 0 1px 2px rgba(35, 45, 53, 0.08);
+}
+
+.sct-language-flag--large {
+    width: 32px;
+    height: 21px;
+    border-radius: 6px;
+}
+
+.sct-language-picker__menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 2147483647;
+    width: max-content;
+    min-width: 12.5rem;
+    max-width: min(18rem, calc(100vw - 1rem));
+    padding: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 0.9rem;
+    background: var(--white);
+    box-shadow: 0 16px 36px rgba(35, 45, 53, 0.18);
+}
+
+.sct-language-picker__option {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.58rem 0.7rem;
+    border-radius: 0.68rem;
+    color: var(--text);
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.sct-language-picker__option > span {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sct-language-picker__option > i {
+    flex: 0 0 auto;
+    color: var(--primary-dark);
+    font-size: 1rem;
+}
+
+.sct-language-picker__option:hover,
+.sct-language-picker__option:focus-visible,
+.sct-language-picker__option.active {
+    background: rgba(0, 123, 197, 0.09);
+    color: var(--primary-darkest);
+}
+
+/* ==========================================================
+   MOBILE SCT — TOP INFO BAR + BOTTOM SHORTCUT BAR
+   Sólo se muestra bajo 768px. Desktop/tablet mantienen el navbar superior.
+   ========================================================== */
+
+
+/* ==========================================================
+   MOBILE APP NAV — P3
+   - Teléfonos en vertical: hasta 767.98px CSS.
+   - Teléfonos modernos en horizontal: hasta 1024x600 CSS.
+   - Mantiene iPad Mini 768x1024 en modo tablet/desktop.
+   ========================================================== */
+
+.sct-app-mobile-topbar,
+.sct-app-mobile-bottomnav {
+    display: none;
+}
+
+.sct-app-mobile-topbar {
+    position: fixed;
+    top: calc(0.65rem + env(safe-area-inset-top, 0px));
+    left: 0;
+    right: 0;
+    z-index: 2147483000;
+    padding-inline: clamp(0.5rem, 2.4vw, 0.85rem);
+    pointer-events: none;
+}
+
+.sct-app-mobile-topbar__shell {
+    width: min(100%, 34rem);
+    min-height: 64px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.42rem, 1.7vw, 0.7rem);
+    padding: 0.55rem 0.65rem;
+    border: 1px solid rgba(204, 212, 218, 0.96);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 12px 32px rgba(35, 45, 53, 0.14);
+    pointer-events: auto;
+}
+
+.sct-app-mobile-topbar__brand {
+    flex: 0 0 auto;
+    margin-right: clamp(0.2rem, 1.2vw, 0.55rem);
+    color: inherit;
+    text-decoration: none;
+}
+
+.sct-app-mobile-topbar__logo {
+    width: clamp(34px, 9vw, 40px);
+    height: clamp(34px, 9vw, 40px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.sct-app-mobile-topbar__logo img {
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+}
+
+.sct-app-mobile-topbar__profile {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(0.45rem, 1.7vw, 0.65rem);
+}
+
+.sct-app-mobile-topbar__identity {
+    min-width: 0;
+    flex: 1 1 auto;
+    display: block;
+    text-align: right;
+    line-height: 1.15;
+}
+
+.sct-app-mobile-topbar__identity strong,
+.sct-app-mobile-topbar__identity small {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sct-app-mobile-topbar__identity strong {
+    color: var(--text);
+    font-size: clamp(0.72rem, 2.4vw, 0.84rem);
+    font-weight: 800;
+}
+
+.sct-app-mobile-topbar__identity small {
+    margin-top: 0.16rem;
+    color: var(--text-secondary);
+    font-size: clamp(0.58rem, 2vw, 0.69rem);
+    font-weight: 500;
+}
+
+.sct-app-mobile-topbar__avatar {
+    width: clamp(34px, 9vw, 40px);
+    height: clamp(34px, 9vw, 40px);
+    flex: 0 0 clamp(34px, 9vw, 40px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-darker));
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 2px rgba(0, 123, 197, 0.1);
+}
+
+.sct-app-mobile-topbar__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sct-app-mobile-settings {
+    position: relative;
+    flex: 0 0 auto;
+    margin-left: clamp(0.05rem, 0.7vw, 0.25rem);
+}
+
+.sct-app-mobile-settings > summary {
+    list-style: none;
+}
+
+.sct-app-mobile-settings > summary::-webkit-details-marker {
+    display: none;
+}
+
+.sct-app-mobile-settings__button {
+    width: clamp(38px, 9.5vw, 42px);
+    height: clamp(38px, 9.5vw, 42px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--background);
+    color: var(--primary-darkest);
+    font-size: 1.02rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sct-app-mobile-settings__button:hover,
+.sct-app-mobile-settings__button:focus-visible,
+.sct-app-mobile-settings[open] .sct-app-mobile-settings__button {
+    border-color: rgba(0, 123, 197, 0.35);
+    background: rgba(0, 123, 197, 0.1);
+    color: var(--primary-dark);
+}
+
+.sct-app-mobile-settings__menu {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    right: 0;
+    width: min(17rem, calc(100vw - 1.2rem));
+    padding: 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: var(--white);
+    box-shadow: 0 18px 38px rgba(35, 45, 53, 0.18);
+}
+
+.sct-app-mobile-settings__row {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.62rem 0.7rem;
+    border-radius: 0.75rem;
+    color: var(--text);
+}
+
+.sct-app-mobile-settings__row-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.7rem;
+    background: rgba(0, 123, 197, 0.1);
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+}
+
+.sct-app-mobile-settings__row-copy {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sct-app-mobile-settings__row-copy label,
+.sct-app-mobile-settings__row-copy strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.sct-app-mobile-settings__language-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.sct-language-picker--settings {
+    width: 100%;
+}
+
+.sct-language-picker--settings > .sct-language-picker__trigger {
+    width: 54px;
+    height: 44px;
+    border-radius: 0.72rem;
+}
+
+.sct-language-picker--settings > .sct-language-picker__menu {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-top: 0.45rem;
+    box-shadow: 0 10px 24px rgba(35, 45, 53, 0.12);
+}
+
+.sct-app-mobile-settings__row--link {
+    text-decoration: none;
+}
+
+.sct-app-mobile-settings__row--link:hover,
+.sct-app-mobile-settings__row--link:focus-visible {
+    background: var(--background-soft);
+    color: var(--primary-darkest);
+}
+
+.sct-app-mobile-settings__chevron {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.sct-app-mobile-bottomnav {
+    position: fixed !important;
+    top: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: calc(0.65rem + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 2147482999 !important;
+    width: min(calc(100vw - 1rem), 34rem);
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translate3d(-50%, 0, 0) !important;
+    pointer-events: none;
+    isolation: isolate;
+}
+
+.sct-app-mobile-bottomnav__shell {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: clamp(0.15rem, 1vw, 0.32rem);
+    padding: clamp(0.34rem, 1.2vw, 0.46rem);
+    border: 1px solid rgba(204, 212, 218, 0.96);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 16px 36px rgba(35, 45, 53, 0.18);
+    pointer-events: auto;
+}
+
+.sct-app-mobile-bottomnav__item {
+    min-width: 0;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.18rem;
+    padding: clamp(0.38rem, 1.4vw, 0.5rem) clamp(0.16rem, 1vw, 0.32rem);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: clamp(0.56rem, 2vw, 0.66rem);
+    font-weight: 700;
+    line-height: 1.05;
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.sct-app-mobile-bottomnav__item > span:last-child {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sct-app-mobile-bottomnav__icon {
+    width: clamp(28px, 8vw, 34px);
+    height: clamp(28px, 8vw, 34px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 123, 197, 0.08);
+    color: var(--primary-dark);
+    font-size: clamp(0.88rem, 3vw, 1rem);
+}
+
+.sct-app-mobile-bottomnav__item:hover,
+.sct-app-mobile-bottomnav__item:focus-visible,
+.sct-app-mobile-bottomnav__item.active {
+    color: var(--primary-darkest);
+    background: rgba(0, 123, 197, 0.1);
+}
+
+.sct-app-mobile-bottomnav__item.active .sct-app-mobile-bottomnav__icon {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+}
+
+/* Tablet vertical / iPad Mini mantiene el navbar superior de escritorio. */
+@media (max-width: 1024px) and (min-width: 768px) and (min-height: 601px) {
+    .sct-app-navbar__inner {
+        gap: 0.75rem;
+    }
+
+    .sct-app-navbar__right {
+        gap: 0.55rem;
+    }
+
+    .sct-app-navbar__identity-copy {
+        max-width: 170px;
+    }
+
+    .sct-app-navbar__language {
+        min-width: 7rem;
+        max-width: 8rem;
+    }
+}
+
+/*
+ * Modo app móvil:
+ * - cualquier teléfono vertical hasta 767.98px;
+ * - teléfonos modernos en horizontal, incluso si su ancho CSS supera 900px.
+ */
+@media (max-width: 767.98px),
+       (max-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
+    .sct-app-navbar {
+        display: none !important;
+    }
+
+    .sct-app-mobile-topbar,
+    .sct-app-mobile-bottomnav {
+        display: block !important;
+    }
+
+    html.sct-app-shell-active,
+    html.sct-app-shell-active body {
+        min-height: 100%;
+        height: auto !important;
+    }
+
+    html.sct-app-shell-active {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    html.sct-app-shell-active body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        min-height: 100vh;
+        padding-top: calc(5.75rem + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(6.6rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    @supports (min-height: 100dvh) {
+        html.sct-app-shell-active body {
+            min-height: 100dvh;
+        }
+    }
+
+    html.sct-app-shell-active .app-shell,
+    html.sct-app-shell-active main {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Smartphones grandes/modernos: optimiza espacio sin achicar controles. */
+@media (min-width: 431px) and (max-width: 600px) {
+    .sct-app-mobile-topbar__shell {
+        padding-inline: 0.75rem;
+    }
+
+    .sct-app-mobile-topbar__identity {
+        max-width: min(52vw, 16rem);
+    }
+
+    .sct-app-mobile-bottomnav {
+        width: min(calc(100vw - 1.4rem), 34rem);
+    }
+}
+
+/* Smartphones compactos. */
+@media (max-width: 430px) {
+    .sct-app-mobile-topbar {
+        padding-inline: 0.5rem;
+    }
+
+    .sct-app-mobile-topbar__shell {
+        min-height: 60px;
+        gap: 0.36rem;
+        padding: 0.45rem 0.5rem;
+    }
+
+    .sct-app-mobile-topbar__brand {
+        margin-right: 0.16rem;
+    }
+
+    .sct-app-mobile-topbar__profile {
+        gap: 0.38rem;
+    }
+
+    .sct-app-mobile-topbar__identity {
+        max-width: min(48vw, 12rem);
+    }
+
+    .sct-app-mobile-settings__menu {
+        width: min(16rem, calc(100vw - 1rem));
+    }
+
+    .sct-app-mobile-bottomnav {
+        width: calc(100vw - 1rem);
+        bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* Teléfonos muy pequeños: conserva información, prioriza truncado. */
+@media (max-width: 360px) {
+    .sct-app-mobile-topbar__shell {
+        padding-inline: 0.42rem;
+    }
+
+    .sct-app-mobile-topbar__identity {
+        max-width: 42vw;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: 0.68rem;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        font-size: 0.55rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        font-size: 0.54rem;
+        padding-inline: 0.12rem;
+    }
+}
+
+/* Teléfonos modernos en horizontal: barra compacta sin perder modo app. */
+@media (max-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
+    .sct-app-mobile-topbar {
+        top: calc(0.35rem + env(safe-area-inset-top, 0px));
+    }
+
+    .sct-app-mobile-topbar__shell {
+        width: min(calc(100vw - 1rem), 48rem);
+        min-height: 50px;
+        padding: 0.35rem 0.55rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+    }
+
+    .sct-app-mobile-settings__button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .sct-app-mobile-bottomnav {
+        width: min(calc(100vw - 1rem), 48rem);
+        bottom: calc(0.35rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    .sct-app-mobile-bottomnav__shell {
+        padding: 0.3rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        flex-direction: row;
+        gap: 0.35rem;
+        padding: 0.34rem 0.45rem;
+        font-size: 0.62rem;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+    }
+
+    html.sct-app-shell-active body {
+        padding-top: calc(4.45rem + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(4.7rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* Navbar público: wrapping consistente en tablet/móvil. */
+@media (max-width: 991.98px) {
+    .navbar-sct .navbar-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: stretch !important;
+    }
+
+    .navbar-sct .lang-switcher,
+    .navbar-sct .btn-login {
+        flex: 1 1 auto;
+    }
+
+    .navbar-sct .btn-lang,
+    .navbar-sct .btn-login {
+        min-height: 44px;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================
+   P3 MOBILE HARDENING V7
+   Activa el modo app por clase JS además de media queries.
+   Esto evita que teléfonos Pro Max / Ultra queden fuera por
+   diferencias entre layout viewport, visual viewport y screen size.
+   ========================================================== */
+
+html.sct-mobile-app-nav-active .sct-app-navbar {
+    display: none !important;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-topbar,
+html.sct-mobile-app-nav-active .sct-app-mobile-bottomnav {
+    display: block !important;
+}
+
+html.sct-mobile-app-nav-active,
+html.sct-mobile-app-nav-active body {
+    min-height: 100%;
+    height: auto !important;
+}
+
+html.sct-mobile-app-nav-active {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+html.sct-mobile-app-nav-active body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    min-height: 100vh;
+    padding-top: calc(5.75rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: calc(6.75rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html.sct-mobile-app-nav-active .app-shell,
+html.sct-mobile-app-nav-active main {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-topbar {
+    top: 0.65rem !important;
+    top: calc(0.65rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-bottomnav {
+    position: fixed !important;
+    top: auto !important;
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    bottom: 0.65rem !important;
+    bottom: calc(0.65rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    max-width: 34rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+@supports (min-height: 100dvh) {
+    html.sct-mobile-app-nav-active body {
+        min-height: 100dvh;
+    }
+}
+
+@media (max-width: 1200px) and (max-height: 650px) and (orientation: landscape) {
+    html.sct-mobile-app-nav-active body {
+        padding-top: calc(4.5rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(4.9rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    html.sct-mobile-app-nav-active .sct-app-mobile-topbar {
+        top: 0.35rem !important;
+        top: calc(0.35rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+    }
+
+    html.sct-mobile-app-nav-active .sct-app-mobile-bottomnav {
+        bottom: 0.35rem !important;
+        bottom: calc(0.35rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+        max-width: 48rem !important;
+    }
+}
+
+/* ==========================================================
+   P3 APP SHELL TABLET + ACCESIBILIDAD V9
+   - Extiende el shell tipo app al rango intermedio tablet.
+   - Mantiene desktop a partir de 1181px salvo tablets táctiles grandes.
+   - Aumenta tipografía, iconos y áreas táctiles en phone/tablet.
+   ========================================================== */
+
+/* El rango intermedio entre teléfono y escritorio utiliza las mismas
+   dos cápsulas del mobile: identidad/configuración arriba y atajos abajo. */
+@media (max-width: 1180px) {
+    .sct-app-navbar {
+        display: none !important;
+    }
+
+    .sct-app-mobile-topbar,
+    .sct-app-mobile-bottomnav {
+        display: block !important;
+    }
+
+    html.sct-app-shell-active body {
+        padding-top: calc(6.85rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(7.8rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* Tablets táctiles grandes, incluido iPad Pro / Android tablets en landscape. */
+@media (max-width: 1366px) and (max-height: 1100px) and (pointer: coarse) {
+    .sct-app-navbar {
+        display: none !important;
+    }
+
+    .sct-app-mobile-topbar,
+    .sct-app-mobile-bottomnav {
+        display: block !important;
+    }
+
+    html.sct-app-shell-active body {
+        padding-top: calc(7rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(8rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* PHONE: un poco más grande que v8 para lectura y toque más cómodo. */
+@media (max-width: 767.98px) {
+    .sct-app-mobile-topbar {
+        padding-inline: 0.65rem;
+    }
+
+    .sct-app-mobile-topbar__shell {
+        width: min(calc(100vw - 0.8rem), 36rem);
+        min-height: 72px;
+        gap: 0.58rem;
+        padding: 0.65rem 0.72rem;
+        border-radius: 1.35rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: clamp(0.84rem, 3.4vw, 0.94rem);
+        line-height: 1.15;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        font-size: clamp(0.68rem, 2.7vw, 0.76rem);
+        line-height: 1.18;
+    }
+
+    .sct-app-mobile-settings__button {
+        width: 46px;
+        height: 46px;
+        font-size: 1.12rem;
+    }
+
+    .sct-app-mobile-settings__menu {
+        width: min(19rem, calc(100vw - 1.2rem));
+    }
+
+    .sct-app-mobile-settings__row {
+        min-height: 54px;
+        padding: 0.7rem 0.75rem;
+    }
+
+    .sct-app-mobile-settings__row-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        font-size: 1rem;
+    }
+
+    .sct-app-mobile-settings__row-copy label,
+    .sct-app-mobile-settings__row-copy strong,
+    .sct-app-mobile-settings__language-label {
+        font-size: 0.9rem;
+    }
+
+    .sct-app-mobile-bottomnav {
+        max-width: 36rem !important;
+    }
+
+    .sct-app-mobile-bottomnav__shell {
+        min-height: 72px;
+        padding: 0.46rem;
+        gap: 0.26rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        min-height: 60px;
+        padding: 0.46rem 0.28rem;
+        gap: 0.24rem;
+        font-size: clamp(0.68rem, 2.75vw, 0.76rem);
+        line-height: 1.12;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        font-size: 1.08rem;
+    }
+}
+
+/* TABLET / iPAD: mismo lenguaje visual del mobile pero con escala mayor. */
+@media (min-width: 768px) and (max-width: 1180px) {
+    .sct-app-mobile-topbar {
+        padding-inline: 1.1rem;
+    }
+
+    .sct-app-mobile-topbar__shell {
+        width: min(calc(100vw - 2rem), 56rem);
+        min-height: 82px;
+        gap: 0.85rem;
+        padding: 0.78rem 0.95rem;
+        border-radius: 1.55rem;
+    }
+
+    .sct-app-mobile-topbar__brand {
+        margin-right: 0.7rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+    }
+
+    .sct-app-mobile-topbar__profile {
+        gap: 0.8rem;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: 1rem;
+        line-height: 1.18;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        margin-top: 0.2rem;
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+
+    .sct-app-mobile-settings__button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .sct-app-mobile-settings__menu {
+        width: 21rem;
+        padding: 0.58rem;
+        border-radius: 1.1rem;
+    }
+
+    .sct-app-mobile-settings__row {
+        min-height: 58px;
+        gap: 0.8rem;
+        padding: 0.78rem 0.85rem;
+    }
+
+    .sct-app-mobile-settings__row-icon {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+        font-size: 1.08rem;
+    }
+
+    .sct-app-mobile-settings__row-copy label,
+    .sct-app-mobile-settings__row-copy strong,
+    .sct-app-mobile-settings__language-label {
+        font-size: 0.95rem;
+    }
+
+    .sct-app-mobile-bottomnav {
+        max-width: 56rem !important;
+    }
+
+    .sct-app-mobile-bottomnav__shell {
+        min-height: 84px;
+        gap: 0.4rem;
+        padding: 0.58rem 0.65rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        min-height: 68px;
+        gap: 0.3rem;
+        padding: 0.55rem 0.5rem;
+        font-size: 0.84rem;
+        line-height: 1.15;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        font-size: 1.18rem;
+    }
+}
+
+/* Tablets grandes táctiles (p.ej. iPad Pro landscape 1366x1024). */
+@media (min-width: 1181px) and (max-width: 1366px) and (max-height: 1100px) and (pointer: coarse) {
+    .sct-app-mobile-topbar__shell {
+        width: min(calc(100vw - 2.5rem), 60rem);
+        min-height: 84px;
+        padding: 0.8rem 1rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar,
+    .sct-app-mobile-settings__button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: 1rem;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        font-size: 0.8rem;
+    }
+
+    .sct-app-mobile-bottomnav {
+        max-width: 60rem !important;
+    }
+
+    .sct-app-mobile-bottomnav__shell {
+        min-height: 84px;
+        padding: 0.6rem 0.7rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        min-height: 68px;
+        font-size: 0.84rem;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        font-size: 1.18rem;
+    }
+}
+
+/* Teléfonos muy pequeños: mantener legibilidad sin desbordar. */
+@media (max-width: 360px) {
+    .sct-app-mobile-topbar__shell {
+        min-height: 68px;
+        padding: 0.56rem 0.58rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .sct-app-mobile-settings__button {
+        width: 42px;
+        height: 42px;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: 0.8rem;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        font-size: 0.66rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        min-height: 56px;
+        font-size: 0.66rem;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+}
+
+/* Landscape de baja altura: conserva accesibilidad sin ocupar demasiado alto. */
+@media (max-width: 1400px) and (max-height: 650px) and (orientation: landscape) {
+    .sct-app-mobile-topbar {
+        top: calc(0.4rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+    }
+
+    .sct-app-mobile-topbar__shell {
+        min-height: 64px;
+        padding: 0.5rem 0.72rem;
+    }
+
+    .sct-app-mobile-topbar__logo,
+    .sct-app-mobile-topbar__avatar {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .sct-app-mobile-topbar__identity strong {
+        font-size: 0.88rem;
+    }
+
+    .sct-app-mobile-topbar__identity small {
+        font-size: 0.7rem;
+    }
+
+    .sct-app-mobile-settings__button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .sct-app-mobile-bottomnav__shell {
+        min-height: 66px;
+        padding: 0.4rem 0.5rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        min-height: 54px;
+        flex-direction: row;
+        gap: 0.4rem;
+        padding: 0.4rem 0.48rem;
+        font-size: 0.74rem;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        font-size: 1rem;
+    }
+
+    html.sct-mobile-app-nav-active body {
+        padding-top: calc(5.3rem + var(--sct-mobile-vv-top, 0px) + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(5.6rem + var(--sct-mobile-vv-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* P3 v10 — Escalado accesible del selector de idioma en shell app. */
+html.sct-mobile-app-nav-active .sct-language-picker--settings > .sct-language-picker__trigger {
+    width: 58px;
+    height: 48px;
+}
+
+html.sct-mobile-app-nav-active .sct-language-picker--settings .sct-language-flag {
+    width: 34px;
+    height: 22px;
+    border-radius: 6px;
+}
+
+html.sct-mobile-app-nav-active .sct-language-picker__option {
+    min-height: 48px;
+    font-size: 0.92rem;
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+    html.sct-mobile-app-nav-active .sct-language-picker--settings > .sct-language-picker__trigger {
+        width: 64px;
+        height: 52px;
+    }
+
+    html.sct-mobile-app-nav-active .sct-language-picker--settings .sct-language-flag {
+        width: 38px;
+        height: 25px;
+        border-radius: 7px;
+    }
+
+    html.sct-mobile-app-nav-active .sct-language-picker__option {
+        min-height: 52px;
+        font-size: 0.98rem;
+    }
+}
+
+
+/* ==========================================================
+   P3 DESKTOP SIDEBAR — V17
+   Sólo escritorio. Tablet y mobile conservan el shell app superior/inferior.
+   Inspiración: navegación lateral compacta tipo aplicación, adaptada a SCT.
+   ========================================================== */
+@media (min-width: 1181px) {
+    html.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-left: 304px !important;
+    }
+
+    .sct-app-sidebar {
+        position: fixed;
+        top: 16px;
+        bottom: 16px;
+        left: 16px;
+        z-index: 1040;
+        width: 272px;
+        height: auto;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 26px;
+        background:
+            radial-gradient(circle at 10% 0%, rgba(0, 123, 197, 0.18), transparent 16rem),
+            linear-gradient(180deg, #182663 0%, #171D21 100%);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: 0 22px 55px rgba(24, 38, 99, 0.18);
+        overflow: visible;
+    }
+
+    .sct-app-sidebar__inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 18px 14px 14px;
+    }
+
+    .sct-app-sidebar__brand {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.25rem 0.35rem 1rem;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .sct-app-sidebar__brand:hover,
+    .sct-app-sidebar__brand:focus-visible {
+        color: #fff;
+    }
+
+    .sct-app-sidebar__brand:focus-visible,
+    .sct-app-sidebar__nav-item:focus-visible,
+    .sct-app-sidebar__bottom-item:focus-visible {
+        outline: 3px solid rgba(149, 223, 221, 0.72);
+        outline-offset: 2px;
+    }
+
+    .sct-app-sidebar__brand-symbol {
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 13px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+
+    .sct-app-sidebar__brand-symbol img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+    }
+
+    .sct-app-sidebar__brand-copy {
+        min-width: 0;
+        display: block;
+        line-height: 1.06;
+    }
+
+    .sct-app-sidebar__brand-copy strong,
+    .sct-app-sidebar__brand-copy small {
+        display: block;
+    }
+
+    .sct-app-sidebar__brand-copy strong {
+        color: #fff;
+        font-size: 0.98rem;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .sct-app-sidebar__brand-copy small {
+        margin-top: 0.24rem;
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.16rem;
+    }
+
+    .sct-app-sidebar__identity {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin: 0 0 1rem;
+        padding: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 17px;
+        background: rgba(255, 255, 255, 0.055);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .sct-app-sidebar__avatar {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--primary-darker));
+        color: #fff;
+        font-size: 0.76rem;
+        font-weight: 800;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+    }
+
+    .sct-app-sidebar__avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .sct-app-sidebar__identity-copy {
+        min-width: 0;
+        flex: 1 1 auto;
+        display: block;
+        line-height: 1.18;
+    }
+
+    .sct-app-sidebar__identity-copy strong,
+    .sct-app-sidebar__identity-copy small {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sct-app-sidebar__identity-copy strong {
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 800;
+    }
+
+    .sct-app-sidebar__identity-copy small {
+        margin-top: 0.22rem;
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 0.72rem;
+        font-weight: 500;
+    }
+
+    .sct-app-sidebar__nav {
+        display: grid;
+        gap: 0.34rem;
+        min-width: 0;
+    }
+
+    .sct-app-sidebar__nav-item,
+    .sct-app-sidebar__bottom-item {
+        min-width: 0;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        gap: 0.78rem;
+        padding: 0.68rem 0.78rem;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-decoration: none;
+        transition:
+            background-color 160ms ease,
+            border-color 160ms ease,
+            color 160ms ease,
+            transform 160ms ease;
+    }
+
+    .sct-app-sidebar__nav-item:hover,
+    .sct-app-sidebar__bottom-item:hover {
+        border-color: rgba(255, 255, 255, 0.07);
+        background: rgba(255, 255, 255, 0.065);
+        color: #fff;
+    }
+
+    .sct-app-sidebar__nav-item.active {
+        border-color: rgba(0, 123, 197, 0.16);
+        background: rgba(0, 123, 197, 0.16);
+        color: #fff;
+        box-shadow: inset 3px 0 0 var(--primary);
+    }
+
+    .sct-app-sidebar__nav-icon,
+    .sct-app-sidebar__bottom-icon {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.055);
+        color: #00AAFF;
+        font-size: 1rem;
+    }
+
+    .sct-app-sidebar__nav-item.active .sct-app-sidebar__nav-icon {
+        background: rgba(0, 123, 197, 0.24);
+        color: #fff;
+    }
+
+    .sct-app-sidebar__bottom {
+        display: grid;
+        gap: 0.32rem;
+        margin-top: auto;
+        padding-top: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .sct-language-picker--sidebar {
+        width: 100%;
+    }
+
+    .sct-language-picker--sidebar > .sct-app-sidebar__bottom-item {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .sct-language-flag--sidebar {
+        width: 32px;
+        height: 21px;
+        flex: 0 0 32px;
+        border-radius: 6px;
+        border-color: rgba(255, 255, 255, 0.18);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+    }
+
+    .sct-app-sidebar__bottom-item > span:not(.sct-app-sidebar__bottom-icon) {
+        min-width: 0;
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sct-app-sidebar__bottom-chevron {
+        margin-left: auto;
+        color: rgba(255, 255, 255, 0.42);
+        font-size: 0.78rem;
+        transition: transform 160ms ease;
+    }
+
+    .sct-language-picker--sidebar[open] .sct-app-sidebar__bottom-chevron {
+        transform: rotate(180deg);
+    }
+
+    .sct-language-picker--sidebar[open] > .sct-app-sidebar__bottom-item {
+        border-color: rgba(0, 123, 197, 0.2);
+        background: rgba(0, 123, 197, 0.14);
+        color: #fff;
+    }
+
+    .sct-language-picker__menu--sidebar {
+        top: auto;
+        right: auto;
+        bottom: 0;
+        left: calc(100% + 0.85rem);
+        min-width: 13.5rem;
+        max-width: min(18rem, calc(100vw - 330px));
+        padding: 0.45rem;
+        border-radius: 1rem;
+        box-shadow: 0 20px 46px rgba(24, 38, 99, 0.24);
+    }
+
+    .sct-language-picker__menu--sidebar .sct-language-picker__option {
+        min-height: 48px;
+        font-size: 0.92rem;
+    }
+
+    .sct-app-sidebar__logout {
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .sct-app-sidebar__logout .sct-app-sidebar__bottom-icon {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.07);
+    }
+}
+
+@media (min-width: 1181px) and (max-height: 720px) {
+    .sct-app-sidebar {
+        top: 10px;
+        bottom: 10px;
+        left: 10px;
+        width: 260px;
+        border-radius: 22px;
+    }
+
+    html.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-left: 286px !important;
+    }
+
+    .sct-app-sidebar__inner {
+        padding: 12px 12px 10px;
+    }
+
+    .sct-app-sidebar__brand {
+        padding-bottom: 0.7rem;
+    }
+
+    .sct-app-sidebar__brand-symbol {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .sct-app-sidebar__identity {
+        margin-bottom: 0.7rem;
+        padding: 0.65rem;
+    }
+
+    .sct-app-sidebar__nav {
+        gap: 0.2rem;
+    }
+
+    .sct-app-sidebar__nav-item,
+    .sct-app-sidebar__bottom-item {
+        min-height: 44px;
+        padding-block: 0.5rem;
+    }
+
+    .sct-app-sidebar__nav-icon,
+    .sct-app-sidebar__bottom-icon {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
+    .sct-app-sidebar__bottom {
+        padding-top: 0.6rem;
+    }
+}
+
+/* ==========================================================
+   P3 — AJUSTE V18
+   Unificación visual de iconos + sidebar desktop claro.
+   La superficie del sidebar usa el mismo blanco translúcido de las
+   barras mobile/tablet. El botón Volver queda al pie, separado del
+   contenido principal cuando corresponde.
+   ========================================================== */
+:root {
+    --sct-nav-surface: rgba(255, 255, 255, 0.97);
+    --sct-nav-border: rgba(204, 212, 218, 0.96);
+    --sct-nav-icon-bg: rgba(0, 123, 197, 0.10);
+    --sct-nav-icon-color: var(--primary-dark);
+    --sct-nav-icon-size: 38px;
+    --sct-nav-icon-radius: 11px;
+}
+
+/* Iconos coherentes en las variantes mobile/tablet. */
+.sct-app-mobile-topbar__logo,
+.sct-app-mobile-topbar__avatar,
+.sct-app-mobile-settings__button,
+.sct-app-mobile-settings__row-icon,
+.sct-app-mobile-bottomnav__icon {
+    width: var(--sct-nav-icon-size);
+    height: var(--sct-nav-icon-size);
+    flex-basis: var(--sct-nav-icon-size);
+}
+
+.sct-app-mobile-settings__button,
+.sct-app-mobile-settings__row-icon,
+.sct-app-mobile-bottomnav__icon {
+    border-radius: var(--sct-nav-icon-radius);
+    background: var(--sct-nav-icon-bg);
+    color: var(--sct-nav-icon-color);
+}
+
+.sct-app-mobile-settings__button {
+    border-color: rgba(0, 123, 197, 0.14);
+}
+
+.sct-app-mobile-bottomnav__item.active .sct-app-mobile-bottomnav__icon {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+}
+
+@media (min-width: 1181px) {
+    .sct-app-sidebar {
+        border-color: var(--sct-nav-border);
+        background: var(--sct-nav-surface);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 22px 55px rgba(35, 45, 53, 0.13);
+    }
+
+    .sct-app-sidebar__brand,
+    .sct-app-sidebar__brand:hover,
+    .sct-app-sidebar__brand:focus-visible {
+        color: var(--primary-darkest);
+    }
+
+    .sct-app-sidebar__brand-copy strong {
+        color: var(--primary-darkest);
+    }
+
+    .sct-app-sidebar__brand-copy small {
+        color: var(--primary-dark);
+    }
+
+    .sct-app-sidebar__identity {
+        border-color: var(--sct-nav-border);
+        background: rgba(246, 248, 249, 0.92);
+        box-shadow: none;
+    }
+
+    .sct-app-sidebar__identity-copy strong {
+        color: var(--text);
+    }
+
+    .sct-app-sidebar__identity-copy small {
+        color: var(--text-secondary);
+    }
+
+    .sct-app-sidebar__nav-item,
+    .sct-app-sidebar__bottom-item {
+        min-height: 52px;
+        color: var(--text-secondary);
+    }
+
+    .sct-app-sidebar__nav-item:hover,
+    .sct-app-sidebar__bottom-item:hover {
+        border-color: rgba(0, 123, 197, 0.12);
+        background: rgba(0, 123, 197, 0.07);
+        color: var(--primary-darkest);
+    }
+
+    .sct-app-sidebar__nav-item.active {
+        border-color: rgba(0, 123, 197, 0.16);
+        background: rgba(0, 123, 197, 0.10);
+        color: var(--primary-darkest);
+        box-shadow: inset 3px 0 0 var(--primary);
+    }
+
+    .sct-app-sidebar__nav-icon,
+    .sct-app-sidebar__bottom-icon {
+        width: var(--sct-nav-icon-size);
+        height: var(--sct-nav-icon-size);
+        flex: 0 0 var(--sct-nav-icon-size);
+        border-radius: var(--sct-nav-icon-radius);
+        background: var(--sct-nav-icon-bg);
+        color: var(--sct-nav-icon-color);
+        font-size: 1rem;
+    }
+
+    .sct-app-sidebar__nav-item.active .sct-app-sidebar__nav-icon {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+    }
+
+    .sct-app-sidebar__bottom {
+        gap: 0.34rem;
+        margin-top: auto;
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .sct-app-sidebar__back-zone {
+        margin-bottom: 0.45rem;
+        padding-top: 0.85rem;
+        padding-bottom: 0.45rem;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .sct-app-sidebar__back-item {
+        color: var(--primary-darkest);
+    }
+
+    .sct-app-sidebar__back-item .sct-app-sidebar__bottom-icon {
+        background: rgba(0, 123, 197, 0.10);
+        color: var(--primary-dark);
+    }
+
+    .sct-language-picker--sidebar[open] > .sct-app-sidebar__bottom-item {
+        border-color: rgba(0, 123, 197, 0.18);
+        background: rgba(0, 123, 197, 0.08);
+        color: var(--primary-darkest);
+    }
+
+    .sct-app-sidebar__bottom-chevron {
+        color: var(--text-secondary);
+    }
+
+    .sct-app-sidebar__logout {
+        color: var(--text-secondary);
+    }
+
+    .sct-app-sidebar__logout .sct-app-sidebar__bottom-icon {
+        color: var(--primary-dark);
+        background: var(--sct-nav-icon-bg);
+    }
+
+    .sct-app-sidebar__brand:focus-visible,
+    .sct-app-sidebar__nav-item:focus-visible,
+    .sct-app-sidebar__bottom-item:focus-visible {
+        outline-color: rgba(0, 123, 197, 0.48);
+    }
+}
+
+/* ==========================================================
+   P3 — SIDEBAR DESKTOP COLAPSABLE V19
+   Sólo escritorio: el control del borde permite contraer el sidebar
+   conservando logo, avatar, iconos de secciones, volver y cerrar sesión.
+   ========================================================== */
+.sct-app-sidebar__toggle {
+    display: none;
+}
+
+@media (min-width: 1181px) {
+    .sct-app-sidebar {
+        transition: width 180ms ease, box-shadow 180ms ease;
+    }
+
+    html.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        transition: padding-left 180ms ease;
+    }
+
+    .sct-app-sidebar__toggle {
+        position: absolute;
+        top: 50%;
+        right: -15px;
+        z-index: 3;
+        width: 30px;
+        height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transform: translateY(-50%);
+        border: 1px solid var(--sct-nav-border);
+        border-radius: 999px;
+        background: var(--sct-nav-surface);
+        color: var(--primary-dark);
+        box-shadow: 0 8px 20px rgba(35, 45, 53, 0.14);
+        cursor: pointer;
+        transition:
+            color 160ms ease,
+            background-color 160ms ease,
+            border-color 160ms ease,
+            box-shadow 160ms ease;
+    }
+
+    .sct-app-sidebar__toggle:hover,
+    .sct-app-sidebar__toggle:focus-visible {
+        border-color: rgba(0, 123, 197, 0.34);
+        background: #fff;
+        color: var(--primary-darkest);
+        box-shadow: 0 10px 24px rgba(24, 38, 99, 0.18);
+    }
+
+    .sct-app-sidebar__toggle:focus-visible {
+        outline: 3px solid rgba(0, 123, 197, 0.28);
+        outline-offset: 2px;
+    }
+
+    .sct-app-sidebar__toggle i {
+        font-size: 0.88rem;
+        line-height: 1;
+        transition: transform 180ms ease;
+    }
+
+    html.sct-desktop-sidebar-collapsed.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-left: 114px !important;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar {
+        width: 82px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__inner {
+        padding-inline: 10px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__toggle i {
+        transform: rotate(180deg);
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__brand {
+        justify-content: center;
+        gap: 0;
+        padding-inline: 0;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__brand-copy,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__identity-copy,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav-item > span:not(.sct-app-sidebar__nav-icon),
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__back-item > span:not(.sct-app-sidebar__bottom-icon),
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__logout > span:not(.sct-app-sidebar__bottom-icon) {
+        display: none !important;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__identity {
+        width: 54px;
+        min-height: 54px;
+        justify-content: center;
+        gap: 0;
+        margin-inline: auto;
+        padding: 6px;
+        border-color: transparent;
+        background: transparent;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__avatar {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav {
+        justify-items: center;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav-item,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__back-item,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__logout {
+        width: 52px;
+        min-width: 52px;
+        min-height: 52px;
+        justify-content: center;
+        gap: 0;
+        margin-inline: auto;
+        padding: 6px;
+        border-radius: 14px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav-item.active {
+        box-shadow: none;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav-item.active .sct-app-sidebar__nav-icon {
+        box-shadow: 0 5px 14px rgba(0, 92, 154, 0.2);
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__bottom {
+        justify-items: center;
+        width: 100%;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__back-zone {
+        width: 100%;
+        margin-bottom: 0.45rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.45rem;
+    }
+
+    /* El idioma se mantiene disponible al expandir el sidebar; colapsado se
+       priorizan exclusivamente los elementos solicitados por el usuario. */
+    html.sct-desktop-sidebar-collapsed .sct-language-picker--sidebar {
+        display: none !important;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__logout {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1181px) and (max-height: 720px) {
+    html.sct-desktop-sidebar-collapsed.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-left: 106px !important;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar {
+        width: 78px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__nav-item,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__back-item,
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__logout {
+        width: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sct-app-sidebar,
+    .sct-app-sidebar__toggle i,
+    html.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        transition: none !important;
+    }
+}
+
+/* ==========================================================
+   P3 V23 — CENTRO DE NOTIFICACIONES / RECORDATORIOS
+   ========================================================== */
+.sct-app-notifications,
+.sct-app-mobile-notifications {
+    min-width: 0;
+    position: relative;
+}
+
+.sct-app-notifications > summary,
+.sct-app-mobile-notifications > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.sct-app-notifications > summary::-webkit-details-marker,
+.sct-app-mobile-notifications > summary::-webkit-details-marker {
+    display: none;
+}
+
+.sct-app-notifications__bell {
+    position: relative;
+}
+
+.sct-app-notifications__badge {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--primary-darkest);
+    font-size: 0.62rem;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 2px 7px rgba(24, 38, 99, 0.18);
+}
+
+.sct-notification-panel {
+    z-index: 2147483600;
+    overflow: hidden;
+    border: 1px solid rgba(204, 212, 218, 0.98);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.99);
+    box-shadow: 0 22px 52px rgba(35, 45, 53, 0.18);
+    color: var(--text);
+}
+
+.sct-notification-panel__head {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(204, 212, 218, 0.95);
+}
+
+.sct-notification-panel__head strong {
+    color: var(--primary-darkest);
+    font-size: 0.98rem;
+    font-weight: 850;
+}
+
+.sct-notification-panel__head > span {
+    min-width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.45rem;
+    border-radius: 999px;
+    background: rgba(255, 204, 89, 0.2);
+    color: #AB8327;
+    font-size: 0.75rem;
+    font-weight: 850;
+}
+
+.sct-notification-panel__list {
+    display: grid;
+    padding: 0.45rem;
+}
+
+.sct-notification-panel__item {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 14px;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.sct-notification-panel__item:hover,
+.sct-notification-panel__item:focus-visible {
+    background: rgba(0, 123, 197, 0.08);
+    color: var(--text);
+}
+
+.sct-notification-panel__item:focus-visible,
+.sct-notification-panel__footer:focus-visible {
+    outline: 3px solid rgba(0, 123, 197, 0.3);
+    outline-offset: -2px;
+}
+
+.sct-notification-panel__icon {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(0, 123, 197, 0.1);
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+}
+
+.sct-notification-panel__copy {
+    min-width: 0;
+    display: block;
+}
+
+.sct-notification-panel__copy strong,
+.sct-notification-panel__copy small {
+    display: block;
+    min-width: 0;
+}
+
+.sct-notification-panel__copy strong {
+    color: var(--primary-darkest);
+    font-size: 0.88rem;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.sct-notification-panel__copy small {
+    margin-top: 0.2rem;
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    line-height: 1.35;
+}
+
+.sct-notification-panel__item > .bi-chevron-right {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.sct-notification-panel__empty {
+    margin: 0;
+    padding: 1.2rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.sct-notification-panel__footer {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(204, 212, 218, 0.95);
+    background: rgba(246, 248, 249, 0.92);
+    color: var(--primary-dark);
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.sct-notification-panel__footer:hover {
+    color: var(--primary-darker);
+    background: rgba(0, 123, 197, 0.07);
+}
+
+@media (min-width: 1181px) {
+    .sct-app-notifications--sidebar {
+        width: 100%;
+    }
+
+    .sct-app-notifications--sidebar > summary {
+        width: 100%;
+    }
+
+    .sct-notification-panel--sidebar {
+        position: absolute;
+        top: 0;
+        left: calc(100% + 0.8rem);
+        width: min(340px, calc(100vw - 320px));
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-notifications--sidebar {
+        width: 52px;
+        margin-inline: auto;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__notification-item {
+        width: 52px;
+        min-width: 52px;
+        min-height: 52px;
+        justify-content: center;
+        gap: 0;
+        margin-inline: auto;
+        padding: 6px;
+        border-radius: 14px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-sidebar__notification-item > span:not(.sct-app-sidebar__nav-icon) {
+        display: none !important;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-notification-panel--sidebar {
+        left: calc(100% + 1rem);
+        width: min(340px, calc(100vw - 130px));
+    }
+}
+
+.sct-app-mobile-notifications {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.sct-app-mobile-notifications > .sct-app-mobile-bottomnav__item {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.sct-notification-panel--mobile {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 0.7rem);
+    width: min(340px, calc(100vw - 28px));
+}
+
+.sct-app-mobile-notifications[open] > .sct-app-mobile-bottomnav__item {
+    color: var(--primary-darkest);
+    background: rgba(0, 123, 197, 0.1);
+}
+
+@media (max-width: 430px) {
+    .sct-app-mobile-bottomnav__shell {
+        gap: 0.08rem;
+    }
+
+    .sct-app-mobile-bottomnav__item {
+        padding-inline: 0.08rem;
+        font-size: 0.56rem;
+    }
+
+    .sct-app-mobile-bottomnav__icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .sct-app-notifications__badge {
+        top: -4px;
+        right: -7px;
+    }
+}
+
+/* ==========================================================
+   P3 / V24 — NOTIFICACIONES ARRIBA · AJUSTES ABAJO
+   Mobile/tablet: la campana vive en la cápsula superior y el
+   acceso de configuración ocupa el espacio inferior del dock.
+   Desktop mantiene notificaciones en la navegación superior y
+   idioma/cierre de sesión en el bloque inferior.
+   ========================================================== */
+.sct-app-mobile-notifications--topbar {
+    position: relative;
+    flex: 0 0 auto;
+    min-width: auto;
+    margin-left: clamp(0.05rem, 0.7vw, 0.25rem);
+}
+
+.sct-app-mobile-notifications--topbar > summary {
+    list-style: none;
+}
+
+.sct-app-mobile-notifications--topbar > summary::-webkit-details-marker {
+    display: none;
+}
+
+.sct-app-mobile-topbar__notification-button {
+    width: clamp(42px, 10vw, 48px);
+    height: clamp(42px, 10vw, 48px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--background);
+    color: var(--primary-darkest);
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sct-app-mobile-topbar__notification-button:hover,
+.sct-app-mobile-topbar__notification-button:focus-visible,
+.sct-app-mobile-notifications--topbar[open] .sct-app-mobile-topbar__notification-button {
+    border-color: rgba(0, 123, 197, 0.35);
+    background: rgba(0, 123, 197, 0.10);
+    color: var(--primary-dark);
+}
+
+.sct-notification-panel--topbar {
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    right: 0;
+    width: min(340px, calc(100vw - 24px));
+}
+
+.sct-app-mobile-settings--bottomnav {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+}
+
+.sct-app-mobile-settings--bottomnav > .sct-app-mobile-bottomnav__item {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.sct-app-mobile-settings--bottomnav[open] > .sct-app-mobile-bottomnav__item {
+    color: var(--primary-darkest);
+    background: rgba(0, 123, 197, 0.10);
+}
+
+.sct-app-mobile-settings__menu--bottomnav {
+    top: auto;
+    right: 0;
+    bottom: calc(100% + 0.7rem);
+    width: min(18rem, calc(100vw - 1.2rem));
+    z-index: 2147483600;
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+    .sct-app-mobile-topbar__notification-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.12rem;
+    }
+
+    .sct-notification-panel--topbar {
+        width: min(370px, calc(100vw - 40px));
+    }
+
+    .sct-app-mobile-settings__menu--bottomnav {
+        width: min(20rem, calc(100vw - 2rem));
+    }
+}
+
+@media (max-width: 430px) {
+    .sct-app-mobile-topbar__notification-button {
+        width: 42px;
+        height: 42px;
+    }
+
+    .sct-notification-panel--topbar {
+        right: -0.15rem;
+        width: min(330px, calc(100vw - 16px));
+    }
+
+    .sct-app-mobile-settings__menu--bottomnav {
+        right: auto;
+        left: 0;
+        width: min(17rem, calc(100vw - 16px));
+    }
+}
+
+/* ==========================================================
+   P7 — COHERENCIA VISUAL DE PARTIAL INTERNO
+   Solo superficie/estados; no altera breakpoints ni lógica de navegación.
+   ========================================================== */
+.sct-partial-app-nav.sct-app-sidebar {
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(244,250,252,.98));
+    border-right-color: rgba(158,173,184,.20);
+}
+
+.sct-partial-app-nav .sct-app-sidebar__brand-symbol,
+.sct-partial-app-nav .sct-app-mobile-topbar__logo {
+    box-shadow: 0 8px 20px rgba(68,84,155,.15);
+}
+
+.sct-partial-app-nav .sct-app-sidebar__nav-item,
+.sct-partial-app-nav .sct-app-sidebar__bottom-item {
+    border-radius: 14px;
+}
+
+.sct-partial-app-nav .sct-app-sidebar__nav-item:hover,
+.sct-partial-app-nav .sct-app-sidebar__nav-item:focus-visible,
+.sct-partial-app-nav .sct-app-sidebar__bottom-item:hover,
+.sct-partial-app-nav .sct-app-sidebar__bottom-item:focus-visible {
+    background: rgba(0,123,197,.08);
+}
+
+.sct-partial-app-nav .sct-app-sidebar__nav-item.active,
+.sct-partial-app-nav .sct-app-sidebar__nav-item[aria-current="page"] {
+    background: linear-gradient(135deg, rgba(0,123,197,.14), rgba(149,223,221,.10));
+    box-shadow: inset 0 0 0 1px rgba(0,123,197,.10);
+}
+
+.sct-partial-app-nav.sct-app-mobile-topbar {
+    background: rgba(255,255,255,.94);
+    border-bottom-color: rgba(158,173,184,.18);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+.sct-partial-app-nav.sct-app-mobile-bottomnav .sct-app-mobile-bottomnav__shell {
+    border-color: rgba(158,173,184,.18);
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 16px 42px rgba(24,38,99,.14);
+}
+
+
+/* ==========================================================
+   P10 / V36 — NAVBAR ENGIE Fluid
+   ========================================================== */
+.sct-app-navbar__brand-symbol,
+.sct-app-mobile-topbar__logo,
+.sct-app-sidebar__brand-symbol {
+    background: linear-gradient(135deg, var(--engie-gradient-start), var(--engie-gradient-end));
+}
+:root {
+    --sct-nav-surface: rgba(255,255,255,.98);
+    --sct-nav-border: rgba(204,212,218,.96);
+    --sct-nav-icon-bg: rgba(191,212,245,.46);
+    --sct-nav-icon-color: var(--engie-data-blue-dark);
+}
+@media (min-width:1181px) {
+    .sct-app-sidebar__identity { background: var(--engie-grey-100); }
+    .sct-app-sidebar__nav-item:hover,
+    .sct-app-sidebar__bottom-item:hover { background: rgba(191,212,245,.38); }
+    .sct-app-sidebar__nav-item.active {
+        border-color: rgba(0,123,197,.34);
+        background: rgba(191,212,245,.56);
+        box-shadow: inset 3px 0 0 var(--engie-blue-bolt);
+    }
+    .sct-app-sidebar__nav-item.active .sct-app-sidebar__nav-icon {
+        background: var(--engie-blue-bolt);
+        color: var(--engie-white);
+    }
+}
+.sct-app-mobile-bottomnav__item.active .sct-app-mobile-bottomnav__icon {
+    background: var(--engie-blue-bolt);
+    color: var(--engie-white);
+}
+
+/* ==========================================================
+   P12 / V38 — CONFIGURACIÓN MOBILE SIEMPRE DENTRO DEL VIEWPORT
+   ========================================================== */
+.sct-mobile-language-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .38rem;
+    width: 100%;
+}
+
+.sct-mobile-language-list__item {
+    min-width: 0;
+    min-height: 46px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: .12rem;
+    padding: .3rem .2rem;
+    border: 1px solid var(--engie-grey-300, #ccd4da);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--engie-grey-700, #435c6e);
+    font-size: .62rem;
+    font-weight: 850;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.sct-mobile-language-list__item .sct-language-flag {
+    width: 23px;
+    height: 17px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.sct-mobile-language-list__item.active {
+    border-color: rgba(0,123,197,.42);
+    background: var(--engie-data-blue-light, #bfd4f5);
+    color: var(--engie-data-blue-dark, #005c9a);
+}
+
+.sct-mobile-language-list__item i { font-size: .64rem; }
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings__menu--bottomnav {
+    position: fixed !important;
+    left: max(10px, env(safe-area-inset-left, 0px)) !important;
+    right: max(10px, env(safe-area-inset-right, 0px)) !important;
+    top: auto;
+    bottom: auto;
+    width: auto !important;
+    max-width: 360px !important;
+    max-height: min(66dvh, 430px);
+    margin-inline: auto !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: 2147483647 !important;
+    box-sizing: border-box;
+    pointer-events: auto !important;
+    visibility: visible;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings__row--language {
+    align-items: flex-start;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings__row-copy {
+    overflow: visible;
+}
+
+@media (max-width: 380px) {
+    .sct-mobile-language-list { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    html.sct-mobile-app-nav-active .sct-app-mobile-settings__menu--bottomnav {
+        left: 8px !important;
+        right: 8px !important;
+        bottom: auto;
+    }
+}
+
+
+/* ==========================================================
+   P29 — CONFIGURACIÓN MOBILE / TABLET ROBUSTA
+   El estado open se controla explícitamente desde app-navbar.php.
+   ========================================================== */
+html.sct-mobile-app-nav-active .sct-app-mobile-settings--bottomnav {
+    overflow: visible !important;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings--bottomnav > summary {
+    position: relative;
+    z-index: 2;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings--bottomnav[open] .sct-app-mobile-settings__menu--bottomnav {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings__menu--bottomnav {
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+}
+
+@media (max-width: 599.98px) {
+    html.sct-mobile-app-nav-active .sct-app-mobile-bottomnav__item {
+        font-size: clamp(.60rem, 2.45vw, .68rem) !important;
+        line-height: 1.05 !important;
+    }
+
+    html.sct-mobile-app-nav-active .sct-app-mobile-bottomnav__item > span:last-child {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+
+/* ==========================================================
+   P30 — CONFIGURACIÓN MOBILE/TABLET SIN <details>
+   Panel portal montado en <body>; evita regresiones de apertura en
+   Chrome mobile emulado, iOS/Android y tablets con VisualViewport.
+   ========================================================== */
+.sct-app-mobile-settings--bottomnav.is-open > .sct-app-mobile-bottomnav__item,
+.sct-app-mobile-settings--bottomnav .sct-app-mobile-bottomnav__item[aria-expanded="true"] {
+    color: var(--primary-darkest);
+    background: rgba(0, 123, 197, 0.10);
+}
+
+.sct-app-mobile-settings__menu--bottomnav[hidden] {
+    display: none !important;
+}
+
+.sct-app-mobile-settings__menu--bottomnav.is-open {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+html.sct-mobile-app-nav-active body > .sct-app-mobile-settings__menu--bottomnav {
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--white, #fff);
+    border: 1px solid var(--border, #ccd4da);
+    border-radius: 1rem;
+    box-shadow: 0 18px 38px rgba(35, 45, 53, 0.22);
+}
+
+html.sct-mobile-app-nav-active .sct-app-mobile-settings--bottomnav > .sct-app-mobile-bottomnav__item {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+}
+
+/* ==========================================================
+   P52 — DESKTOP TOPBAR
+   Escritorio adopta una cabecera horizontal tipo app:
+   identidad + búsqueda + apariencia + notificaciones + avatar.
+   Tablet/mobile conservan exactamente el shell responsive previo.
+   ========================================================== */
+.sct-app-desktop-topbar {
+    display: none;
+}
+
+@media (min-width: 1181px) {
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-top: 92px !important;
+    }
+
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) .sct-app-sidebar__identity,
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) .sct-app-notifications--sidebar {
+        display: none !important;
+    }
+
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) .sct-app-sidebar__brand {
+        padding-bottom: 1.15rem;
+    }
+
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) .sct-app-sidebar__nav {
+        margin-top: .08rem;
+    }
+
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) .sct-app-desktop-topbar {
+        display: block;
+    }
+
+    .sct-app-desktop-topbar {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        left: 304px;
+        z-index: 1050;
+        min-width: 0;
+        height: 64px;
+        pointer-events: none;
+        transition: left 180ms ease;
+    }
+
+    .sct-app-desktop-topbar__shell {
+        width: min(1440px, 100%);
+        height: 64px;
+        margin-inline: auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 8px 10px 8px 18px;
+        border: 1px solid rgba(204, 212, 218, .9);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, .96);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 12px 34px rgba(35, 45, 53, .10);
+        pointer-events: auto;
+    }
+
+    .sct-app-desktop-topbar__identity {
+        min-width: 165px;
+        max-width: 245px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: .18rem;
+        padding-right: .8rem;
+        border-right: 1px solid rgba(204, 212, 218, .78);
+        line-height: 1.14;
+    }
+
+    .sct-app-desktop-topbar__identity strong,
+    .sct-app-desktop-topbar__identity small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sct-app-desktop-topbar__identity strong {
+        color: var(--primary-darkest, #182663);
+        font-size: .89rem;
+        font-weight: 820;
+    }
+
+    .sct-app-desktop-topbar__identity small {
+        color: var(--text-secondary, #60798b);
+        font-size: .7rem;
+        font-weight: 650;
+    }
+
+    .sct-app-desktop-search {
+        position: relative;
+        min-width: 220px;
+        max-width: 510px;
+        flex: 1 1 420px;
+    }
+
+    .sct-app-desktop-search__icon {
+        position: absolute;
+        top: 50%;
+        left: .84rem;
+        z-index: 2;
+        transform: translateY(-50%);
+        color: var(--text-secondary, #60798b);
+        font-size: .9rem;
+        pointer-events: none;
+    }
+
+    .sct-app-desktop-search input {
+        width: 100%;
+        height: 42px;
+        padding: 0 2.6rem 0 2.35rem;
+        border: 1px solid rgba(204, 212, 218, .92);
+        border-radius: 12px;
+        outline: 0;
+        background: rgba(246, 248, 249, .96);
+        color: var(--text, #232d35);
+        font-size: .78rem;
+        font-weight: 550;
+        transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    }
+
+    .sct-app-desktop-search input::placeholder {
+        color: #8395a3;
+        opacity: 1;
+    }
+
+    .sct-app-desktop-search input:focus {
+        border-color: rgba(0, 123, 197, .42);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 197, .10);
+    }
+
+    .sct-app-desktop-search__clear {
+        position: absolute;
+        top: 50%;
+        right: .55rem;
+        z-index: 3;
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-50%);
+        border: 0;
+        border-radius: 9px;
+        background: transparent;
+        color: var(--text-secondary, #60798b);
+        cursor: pointer;
+    }
+
+    .sct-app-desktop-search__clear:hover,
+    .sct-app-desktop-search__clear:focus-visible {
+        background: rgba(0, 123, 197, .08);
+        color: var(--primary-dark, #005c9a);
+    }
+
+    .sct-app-desktop-search__results {
+        position: absolute;
+        top: calc(100% + .55rem);
+        right: 0;
+        left: 0;
+        z-index: 2147483600;
+        max-height: min(360px, calc(100vh - 120px));
+        overflow: auto;
+        padding: .38rem;
+        border: 1px solid rgba(204, 212, 218, .96);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .995);
+        box-shadow: 0 20px 46px rgba(35, 45, 53, .16);
+    }
+
+    .sct-app-desktop-search__result {
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        gap: .65rem;
+        padding: .58rem .7rem;
+        border-radius: 10px;
+        color: var(--text, #232d35);
+        font-size: .78rem;
+        font-weight: 650;
+        text-decoration: none;
+    }
+
+    .sct-app-desktop-search__result:hover,
+    .sct-app-desktop-search__result:focus-visible,
+    .sct-app-desktop-search__result.is-active {
+        background: rgba(0, 123, 197, .08);
+        color: var(--primary-darkest, #182663);
+        outline: 0;
+    }
+
+    .sct-app-desktop-search__result-icon {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: rgba(0, 123, 197, .08);
+        color: var(--primary-dark, #005c9a);
+    }
+
+    .sct-app-desktop-search__empty {
+        padding: .75rem .8rem;
+        color: var(--text-secondary, #60798b);
+        font-size: .76rem;
+        text-align: center;
+    }
+
+    .sct-app-desktop-topbar__actions {
+        min-width: 0;
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .48rem;
+    }
+
+    .sct-app-desktop-topbar__action,
+    .sct-app-desktop-topbar__avatar {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(204, 212, 218, .92);
+        border-radius: 50%;
+        background: #fff;
+        color: var(--primary-darkest, #182663);
+        box-shadow: none;
+    }
+
+    button.sct-app-desktop-topbar__action,
+    summary.sct-app-desktop-topbar__action {
+        padding: 0;
+        cursor: pointer;
+        list-style: none;
+        transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, transform 150ms ease;
+    }
+
+    summary.sct-app-desktop-topbar__action::-webkit-details-marker {
+        display: none;
+    }
+
+    button.sct-app-desktop-topbar__action:hover,
+    button.sct-app-desktop-topbar__action:focus-visible,
+    summary.sct-app-desktop-topbar__action:hover,
+    summary.sct-app-desktop-topbar__action:focus-visible,
+    .sct-app-notifications--desktop-topbar[open] > summary {
+        border-color: rgba(0, 123, 197, .35);
+        background: rgba(0, 123, 197, .08);
+        color: var(--primary-dark, #005c9a);
+        transform: translateY(-1px);
+    }
+
+    button.sct-app-desktop-topbar__action:focus-visible,
+    summary.sct-app-desktop-topbar__action:focus-visible {
+        outline: 3px solid rgba(0, 123, 197, .16);
+        outline-offset: 2px;
+    }
+
+    .sct-app-desktop-topbar__avatar {
+        overflow: hidden;
+        border-color: rgba(0, 123, 197, .18);
+        background: linear-gradient(135deg, var(--primary, #007bc5), var(--primary-darker, #44549b));
+        color: #fff;
+        font-size: .72rem;
+        font-weight: 850;
+        box-shadow: 0 0 0 2px rgba(0, 123, 197, .06);
+    }
+
+    .sct-app-desktop-topbar__avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .sct-app-notifications--desktop-topbar {
+        flex: 0 0 auto;
+    }
+
+    .sct-notification-panel--desktop-topbar {
+        position: absolute;
+        top: calc(100% + .7rem);
+        right: 0;
+        width: min(360px, calc(100vw - 340px));
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-desktop-topbar {
+        left: 114px;
+    }
+
+}
+
+@media (min-width: 1181px) and (max-width: 1320px) {
+    .sct-app-desktop-topbar__shell {
+        gap: .7rem;
+        padding-left: 14px;
+    }
+
+    .sct-app-desktop-topbar__identity {
+        min-width: 145px;
+        max-width: 185px;
+    }
+
+    .sct-app-desktop-search {
+        min-width: 180px;
+    }
+}
+
+@media (min-width: 1181px) and (max-height: 720px) {
+    html.sct-nav-ready.sct-app-shell-active:not(.sct-mobile-app-nav-active) body {
+        padding-top: 80px !important;
+    }
+
+    .sct-app-desktop-topbar {
+        top: 10px;
+        right: 10px;
+        left: 286px;
+        height: 58px;
+    }
+
+    .sct-app-desktop-topbar__shell {
+        height: 58px;
+        border-radius: 16px;
+    }
+
+    .sct-app-desktop-topbar__action,
+    .sct-app-desktop-topbar__avatar {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .sct-app-desktop-search input {
+        height: 38px;
+    }
+
+    html.sct-desktop-sidebar-collapsed .sct-app-desktop-topbar {
+        left: 106px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sct-app-desktop-topbar,
+    .sct-app-desktop-topbar__action,
+    .sct-app-desktop-search input {
+        transition: none !important;
+    }
+}
+
+/* ==========================================================
+   P53 — TEMA OSCURO SCT + NOTIFICACIONES ADAPTABLES
+   ========================================================== */
+
+.sct-app-mobile-settings__row--theme {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+.sct-app-mobile-settings__row--theme:hover,
+.sct-app-mobile-settings__row--theme:focus-visible {
+    background: var(--background-soft);
+    color: var(--primary-darkest);
+    outline: 0;
+}
+.sct-app-mobile-settings__row--theme .sct-app-mobile-settings__row-copy strong {
+    margin-bottom: 0;
+}
+
+/* El panel nunca debe crecer fuera del viewport: cabecera y pie fijos,
+   lista central con scroll propio. */
+.sct-notification-panel {
+    display: flex;
+    flex-direction: column;
+    max-height: min(620px, calc(100dvh - 32px));
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+.sct-notification-panel__head,
+.sct-notification-panel__footer,
+.sct-notification-panel__empty {
+    flex: 0 0 auto;
+}
+.sct-notification-panel__list {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+.sct-notification-panel__item {
+    overflow-wrap: anywhere;
+}
+.sct-notification-panel__copy strong,
+.sct-notification-panel__copy small {
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 1181px) {
+    .sct-notification-panel--desktop-topbar {
+        width: min(390px, calc(100vw - 340px));
+        max-height: min(620px, calc(100dvh - 104px));
+    }
+}
+
+@media (max-width: 1180px) {
+    .sct-notification-panel--topbar {
+        position: fixed;
+        top: calc(env(safe-area-inset-top, 0px) + 72px);
+        right: 12px;
+        bottom: auto;
+        left: 12px;
+        width: auto;
+        max-width: none;
+        max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 166px);
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 430px) {
+    .sct-notification-panel--topbar {
+        top: calc(env(safe-area-inset-top, 0px) + 66px);
+        right: 8px;
+        bottom: auto;
+        left: 8px;
+        width: auto;
+        max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 150px);
+    }
+    .sct-notification-panel__head { min-height: 50px; padding: .75rem .85rem; }
+    .sct-notification-panel__item { gap: .62rem; padding: .68rem; }
+    .sct-notification-panel__icon { width: 36px; height: 36px; }
+}
+
+/* ----------------------- DARK THEME ----------------------- */
+html.sct-theme-dark .sct-app-sidebar,
+html.sct-theme-dark .sct-app-mobile-topbar__shell,
+html.sct-theme-dark .sct-app-mobile-bottomnav__shell,
+html.sct-theme-dark .sct-app-mobile-settings__menu,
+html.sct-theme-dark .sct-language-picker__menu {
+    background: rgba(11, 32, 47, .98) !important;
+    border-color: #2a5066 !important;
+    box-shadow: 0 18px 48px rgba(0,0,0,.34) !important;
+}
+
+html.sct-theme-dark .sct-app-sidebar {
+    color: #dceaf1;
+}
+html.sct-theme-dark .sct-app-sidebar__brand-copy strong,
+html.sct-theme-dark .sct-app-sidebar__brand-copy small,
+html.sct-theme-dark .sct-app-sidebar__identity-copy strong,
+html.sct-theme-dark .sct-app-sidebar__identity-copy small {
+    color: #eaf4f8 !important;
+}
+html.sct-theme-dark .sct-app-sidebar__nav-item,
+html.sct-theme-dark .sct-app-sidebar__footer-action,
+html.sct-theme-dark .sct-language-picker__trigger {
+    color: #b8cdd8 !important;
+}
+html.sct-theme-dark .sct-app-sidebar__nav-icon,
+html.sct-theme-dark .sct-app-sidebar__footer-icon,
+html.sct-theme-dark .sct-app-mobile-bottomnav__icon,
+html.sct-theme-dark .sct-app-mobile-settings__row-icon {
+    background: rgba(105,200,255,.10) !important;
+    color: #78ceff !important;
+}
+html.sct-theme-dark .sct-app-sidebar__nav-item:hover,
+html.sct-theme-dark .sct-app-sidebar__nav-item:focus-visible,
+html.sct-theme-dark .sct-app-sidebar__nav-item.active,
+html.sct-theme-dark .sct-app-mobile-bottomnav__item.active,
+html.sct-theme-dark .sct-app-mobile-bottomnav__item:hover,
+html.sct-theme-dark .sct-app-mobile-settings__row:hover {
+    background: rgba(105,200,255,.10) !important;
+    color: #f1f8fb !important;
+}
+html.sct-theme-dark .sct-app-sidebar__nav-item.active .sct-app-sidebar__nav-icon,
+html.sct-theme-dark .sct-app-mobile-bottomnav__item.active .sct-app-mobile-bottomnav__icon {
+    background: rgba(105,200,255,.18) !important;
+    color: #9bdcff !important;
+}
+
+html.sct-theme-dark .sct-app-desktop-topbar__shell {
+    background: rgba(11, 32, 47, .95) !important;
+    border-color: #2a5066 !important;
+    box-shadow: 0 14px 38px rgba(0,0,0,.28) !important;
+}
+html.sct-theme-dark .sct-app-desktop-topbar__identity {
+    border-color: #2a5066 !important;
+}
+html.sct-theme-dark .sct-app-desktop-topbar__identity strong { color: #eef6fa !important; }
+html.sct-theme-dark .sct-app-desktop-topbar__identity small { color: #9fb7c5 !important; }
+
+html.sct-theme-dark .sct-app-desktop-search input {
+    background: #0d2534 !important;
+    border-color: #31566d !important;
+    color: #e7f0f4 !important;
+}
+html.sct-theme-dark .sct-app-desktop-search input::placeholder { color: #7f9bab !important; }
+html.sct-theme-dark .sct-app-desktop-search input:focus {
+    background: #102c3d !important;
+    border-color: #58bff8 !important;
+    box-shadow: 0 0 0 3px rgba(105,200,255,.12) !important;
+}
+html.sct-theme-dark .sct-app-desktop-search__results {
+    background: #102837 !important;
+    border-color: #31566d !important;
+    box-shadow: 0 22px 48px rgba(0,0,0,.36) !important;
+}
+html.sct-theme-dark .sct-app-desktop-search__result { color: #dce8ee !important; }
+html.sct-theme-dark .sct-app-desktop-search__result:hover,
+html.sct-theme-dark .sct-app-desktop-search__result:focus-visible,
+html.sct-theme-dark .sct-app-desktop-search__result.is-active {
+    background: rgba(105,200,255,.10) !important;
+    color: #f1f8fb !important;
+}
+html.sct-theme-dark .sct-app-desktop-search__result-icon {
+    background: rgba(105,200,255,.12) !important;
+    color: #78ceff !important;
+}
+
+html.sct-theme-dark .sct-app-desktop-topbar__action {
+    background: #102837 !important;
+    border-color: #31566d !important;
+    color: #dbeaf1 !important;
+}
+html.sct-theme-dark button.sct-app-desktop-topbar__action:hover,
+html.sct-theme-dark button.sct-app-desktop-topbar__action:focus-visible,
+html.sct-theme-dark summary.sct-app-desktop-topbar__action:hover,
+html.sct-theme-dark summary.sct-app-desktop-topbar__action:focus-visible,
+html.sct-theme-dark .sct-app-notifications--desktop-topbar[open] > summary {
+    background: #18394b !important;
+    border-color: #58bff8 !important;
+    color: #8ad6ff !important;
+}
+
+html.sct-theme-dark .sct-app-mobile-topbar__notification-button {
+    background: #102837 !important;
+    border-color: #31566d !important;
+    color: #dbeaf1 !important;
+}
+
+html.sct-theme-dark .sct-notification-panel {
+    background: #102837 !important;
+    border-color: #31566d !important;
+    color: #dce8ee !important;
+    box-shadow: 0 24px 58px rgba(0,0,0,.42) !important;
+}
+html.sct-theme-dark .sct-notification-panel__head,
+html.sct-theme-dark .sct-notification-panel__footer {
+    border-color: #2a5066 !important;
+}
+html.sct-theme-dark .sct-notification-panel__head strong,
+html.sct-theme-dark .sct-notification-panel__copy strong {
+    color: #edf6fa !important;
+}
+html.sct-theme-dark .sct-notification-panel__copy small,
+html.sct-theme-dark .sct-notification-panel__empty,
+html.sct-theme-dark .sct-notification-panel__item > .bi-chevron-right {
+    color: #9fb7c5 !important;
+}
+html.sct-theme-dark .sct-notification-panel__item { color: #dce8ee !important; }
+html.sct-theme-dark .sct-notification-panel__item:hover,
+html.sct-theme-dark .sct-notification-panel__item:focus-visible {
+    background: rgba(105,200,255,.09) !important;
+}
+html.sct-theme-dark .sct-notification-panel__icon {
+    background: rgba(105,200,255,.12) !important;
+    color: #78ceff !important;
+}
+html.sct-theme-dark .sct-notification-panel__footer {
+    background: #0d2231 !important;
+    color: #78ceff !important;
+}
+html.sct-theme-dark .sct-notification-panel__head > span {
+    background: rgba(245,201,95,.13) !important;
+    color: #f5d77e !important;
+}
+
+html.sct-theme-dark .sct-mobile-language-list__item,
+html.sct-theme-dark .sct-language-picker__item,
+html.sct-theme-dark .sct-app-mobile-settings__row {
+    color: #dbe8ee !important;
+}
+html.sct-theme-dark .sct-mobile-language-list__item.active,
+html.sct-theme-dark .sct-language-picker__item.active {
+    background: rgba(105,200,255,.10) !important;
+    color: #eef8ff !important;
+}
+
+html.sct-theme-dark .sct-app-sidebar__toggle {
+    background: #102837 !important;
+    border-color: #31566d !important;
+    color: #78ceff !important;
+}
+
+/* ==========================================================
+   P54 — selector explícito Claro/Oscuro en Configuración móvil/tablet
+   ========================================================== */
+.sct-app-mobile-settings__row-copy--theme {
+    gap: .55rem;
+}
+
+.sct-mobile-theme-choices {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .45rem;
+    width: 100%;
+}
+
+.sct-mobile-theme-choice {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .42rem;
+    padding: .48rem .65rem;
+    border-radius: 11px;
+    border: 1px solid rgba(24, 38, 99, .12);
+    background: #f7f9fc;
+    color: #38506a;
+    font: inherit;
+    font-size: .76rem;
+    font-weight: 750;
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+
+.sct-mobile-theme-choice:hover,
+.sct-mobile-theme-choice:focus-visible {
+    border-color: rgba(0, 123, 197, .35);
+    background: #eef8ff;
+    color: #0b6ca8;
+}
+
+.sct-mobile-theme-choice:focus-visible {
+    outline: 3px solid rgba(0, 123, 197, .16);
+    outline-offset: 1px;
+}
+
+.sct-mobile-theme-choice.is-active {
+    border-color: #007bc5;
+    background: rgba(0, 123, 197, .10);
+    color: #075e98;
+    box-shadow: inset 0 0 0 1px rgba(0, 123, 197, .08);
+}
+
+html.sct-theme-dark .sct-mobile-theme-choice {
+    background: #0c2534;
+    border-color: #31566d;
+    color: #bdd1dc;
+}
+
+html.sct-theme-dark .sct-mobile-theme-choice:hover,
+html.sct-theme-dark .sct-mobile-theme-choice:focus-visible {
+    background: #17384a;
+    border-color: #58bff8;
+    color: #edf8ff;
+}
+
+html.sct-theme-dark .sct-mobile-theme-choice.is-active {
+    background: rgba(105, 200, 255, .14);
+    border-color: #69c8ff;
+    color: #f2fbff;
+}
+
+@media (min-width: 1181px) and (pointer: fine) {
+    .sct-mobile-theme-choices { display: none; }
+}
+
+/* P56 — avatar como acceso real a Mis datos. */
+a.sct-app-desktop-topbar__avatar,
+a.sct-app-mobile-topbar__avatar {
+    text-decoration: none;
+    color: inherit;
+}
+a.sct-app-desktop-topbar__avatar:focus-visible,
+a.sct-app-mobile-topbar__avatar:focus-visible {
+    outline: 3px solid rgba(0,123,197,.28);
+    outline-offset: 3px;
+}
+
+/* P57 — selector de tema móvil/tablet más legible y táctil */
+@media (max-width: 1180.98px), (pointer: coarse) {
+    .sct-app-mobile-settings__row--theme {
+        align-items: stretch;
+        padding-block: .78rem;
+    }
+    .sct-app-mobile-settings__row-copy--theme { width:100%; }
+    .sct-mobile-theme-choices {
+        gap: .25rem;
+        padding: .25rem;
+        border: 1px solid rgba(24,38,99,.10);
+        border-radius: 14px;
+        background: rgba(24,38,99,.045);
+    }
+    .sct-mobile-theme-choice {
+        min-height: 44px;
+        border-color: transparent;
+        border-radius: 11px;
+        background: transparent;
+        box-shadow: none;
+    }
+    .sct-mobile-theme-choice.is-active {
+        background: #fff;
+        border-color: rgba(0,123,197,.20);
+        box-shadow: 0 5px 14px rgba(9,30,66,.08);
+    }
+    html.sct-theme-dark .sct-mobile-theme-choices {
+        background:#071a2c;
+        border-color:#214866;
+    }
+    html.sct-theme-dark .sct-mobile-theme-choice { background:transparent; }
+    html.sct-theme-dark .sct-mobile-theme-choice.is-active {
+        background:#123655;
+        border-color:#4db7ed;
+        box-shadow:0 5px 16px rgba(0,0,0,.22);
+    }
+}

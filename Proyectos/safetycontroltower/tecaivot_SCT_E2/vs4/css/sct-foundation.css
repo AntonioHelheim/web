@@ -1,0 +1,529 @@
+/* ==========================================================
+   SAFETY CONTROL TOWER — FOUNDATION CROSS-BROWSER
+   Base técnica compartida para toda la interfaz de vs3.
+
+   Objetivo:
+   - complementar Bootstrap/Reboot sin reemplazarlo;
+   - reducir diferencias entre Chromium, Firefox y Safari;
+   - mantener una base consistente también en las pantallas
+     que no cargan Bootstrap (login y recuperación de acceso);
+   - no introducir decisiones de rediseño visual.
+   ========================================================== */
+
+:root {
+    --sct-foundation-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --sct-foundation-focus: #007BC5;
+    --sct-foundation-focus-ring: rgba(0, 123, 197, 0.28);
+    --sct-foundation-control-height: 2.375rem;
+}
+
+/* ==========================================================
+   DOCUMENTO / MODELO DE CAJA
+   ========================================================== */
+
+html {
+    box-sizing: border-box;
+    font-family: var(--sct-foundation-font);
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 123, 197, 0.16);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: var(--sct-foundation-font);
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ==========================================================
+   TIPOGRAFÍA / CONTENIDO EMBEBIDO
+   ========================================================== */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+img,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+img,
+svg {
+    vertical-align: middle;
+}
+
+svg {
+    max-width: 100%;
+}
+
+/* Los iconos no deben capturar el puntero cuando forman parte de un control. */
+button > svg,
+button > .bi,
+a > svg,
+a > .bi,
+[role="button"] > svg,
+[role="button"] > .bi {
+    pointer-events: none;
+}
+
+/* ==========================================================
+   FORMULARIOS / CONTROLES NATIVOS
+   ========================================================== */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+select:not(:disabled),
+summary,
+a[href],
+[role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"],
+select,
+summary,
+a[href],
+[role="button"] {
+    touch-action: manipulation;
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+select {
+    word-wrap: normal;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+    font: inherit;
+    -webkit-appearance: button;
+}
+
+::file-selector-button {
+    font: inherit;
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+select {
+    min-height: var(--sct-foundation-control-height);
+}
+
+/* Safari puede calcular alturas distintas para el valor interno de fecha/hora. */
+input[type="date"]::-webkit-date-and-time-value,
+input[type="datetime-local"]::-webkit-date-and-time-value,
+input[type="month"]::-webkit-date-and-time-value,
+input[type="time"]::-webkit-date-and-time-value {
+    min-height: 1.5em;
+    text-align: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+    opacity: 1;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.65;
+}
+
+a[aria-disabled="true"] {
+    pointer-events: none;
+}
+
+/* Evita el zoom automático de Safari/iOS cuando un control usa texto < 16px. */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+    select,
+    textarea {
+        font-size: max(1em, 16px);
+    }
+}
+
+/* ==========================================================
+   FOCO DE TECLADO
+   ========================================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--sct-foundation-focus);
+    outline-offset: 2px;
+}
+
+/* Fallback para motores que aún no implementan :focus-visible. */
+@supports not selector(:focus-visible) {
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    summary:focus,
+    [role="button"]:focus,
+    [tabindex]:focus {
+        outline: 2px solid var(--sct-foundation-focus);
+        outline-offset: 2px;
+    }
+}
+
+/* Bootstrap usa box-shadow en varios controles; se asegura una tonalidad
+   consistente sin alterar las dimensiones ni el layout del componente. */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: var(--sct-foundation-focus);
+    box-shadow: 0 0 0 0.2rem var(--sct-foundation-focus-ring);
+}
+
+/* ==========================================================
+   TABLAS / CONTENEDORES CON SCROLL
+   ========================================================== */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th {
+    text-align: inherit;
+}
+
+.table-responsive,
+.sct-scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================
+   MOVIMIENTO REDUCIDO
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================
+   P11 / V37 — normalización para tabs, dialog y nuevas capas UX
+   ========================================================== */
+dialog {
+    color: inherit;
+    font: inherit;
+}
+dialog:not([open]) { display: none; }
+dialog::backdrop { background-color: rgba(23,29,33,.52); }
+
+[role="tablist"] {
+    max-width: 100%;
+}
+[role="tab"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] { display: none !important; }
+
+button,
+a,
+summary,
+input,
+select,
+textarea {
+    min-width: 0;
+}
+
+/* Evita que textos largos de UI fuerzen el ancho de grids/flex. */
+.sct-page-tab,
+.sct-personal-activity-nav__pill,
+.welcome-activity-filter__pill {
+    max-width: 100%;
+}
+
+@supports (height: 100dvh) {
+    dialog { max-height: calc(100dvh - 1.5rem); }
+}
+
+/* ==========================================================
+   P13 / V39 — AYUDA CONTEXTUAL SEGURA EN VIEWPORT
+   ========================================================== */
+.sct-title-with-help {
+    display: inline-flex;
+    align-items: center;
+    gap: .42rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.sct-title-with-help > :is(h1,h2,h3,h4,h5,h6),
+:is(h1,h2,h3,h4,h5,h6).sct-title-with-help { min-width: 0; }
+
+.sct-info-tip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.sct-info-tip::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+}
+
+.sct-info-tip__button {
+    width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(0,123,197,.3);
+    border-radius: 50%;
+    background: var(--engie-data-blue-light, #bfd4f5);
+    color: var(--engie-data-blue-dark, #005c9a);
+    font-size: .78rem;
+    font-weight: 900;
+    line-height: 1;
+    cursor: help;
+    box-shadow: 0 4px 12px rgba(0,92,154,.08);
+}
+
+.sct-info-tip__button:hover,
+.sct-info-tip__button:focus-visible,
+.sct-info-tip.is-open .sct-info-tip__button {
+    border-color: var(--primary, #007bc5);
+    background: var(--primary, #007bc5);
+    color: #fff;
+    outline: none;
+}
+
+.sct-info-tip__button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(0,123,197,.18), 0 4px 12px rgba(0,92,154,.08);
+}
+
+.sct-info-tip__bubble {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    z-index: 2147483647;
+    width: min(290px, calc(100vw - 28px));
+    padding: .72rem .78rem;
+    border: 1px solid var(--engie-grey-300, #ccd4da);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--engie-grey-800, #334551);
+    font-size: .76rem;
+    font-weight: 550;
+    line-height: 1.45;
+    text-align: left;
+    box-shadow: 0 14px 34px rgba(23,29,33,.18);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity .14s ease, transform .14s ease, visibility .14s ease;
+}
+
+.sct-info-tip__bubble::after {
+    content: '';
+    position: absolute;
+    left: var(--sct-tip-arrow-left, 50%);
+    top: 100%;
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid var(--engie-grey-300, #ccd4da);
+    border-bottom: 1px solid var(--engie-grey-300, #ccd4da);
+    background: #fff;
+    transform: translate(-50%, -5px) rotate(45deg);
+}
+
+.sct-info-tip__bubble.is-smart-positioned {
+    position: fixed !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+.sct-info-tip__bubble.is-smart-positioned.is-below::after {
+    top: auto;
+    bottom: 100%;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 1px solid var(--engie-grey-300, #ccd4da);
+    border-top: 1px solid var(--engie-grey-300, #ccd4da);
+    transform: translate(-50%, 5px) rotate(45deg);
+}
+
+.sct-info-tip:hover .sct-info-tip__bubble,
+.sct-info-tip:focus-within .sct-info-tip__bubble,
+.sct-info-tip.is-open .sct-info-tip__bubble {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+}
+
+.sct-info-tip:hover .sct-info-tip__bubble.is-smart-positioned,
+.sct-info-tip:focus-within .sct-info-tip__bubble.is-smart-positioned,
+.sct-info-tip.is-open .sct-info-tip__bubble.is-smart-positioned { transform: none !important; }
+
+/* Evita que flex/grid secundarios empujen textos o controles fuera del viewport. */
+.sct-module-page :is(.container,.row,.feature-card,.card,.table-responsive,main,section,article,aside,header,footer,form) { min-width: 0; }
+
+.sct-module-page :is(h1,h2,h3,h4,h5,h6,p,small,strong,span,label,a,button) { overflow-wrap: anywhere; }
+
+@media (max-width: 575.98px) {
+    .sct-title-with-help { gap: .32rem; align-items: flex-start; }
+    .sct-info-tip { width: 30px; height: 30px; }
+    .sct-info-tip__button { width: 28px; height: 28px; font-size: .72rem; }
+    .sct-info-tip__bubble { font-size: .74rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sct-info-tip__bubble { transition: none; }
+}
+
+
+/* ==========================================================
+   P20 / V44 — TOOLTIPS DENTRO DEL VIEWPORT
+   Matriz de referencia:
+   - Mobile: 360–599px (iPhone 12 / Galaxy S8+ y equivalentes)
+   - Tablet: 600–1279px (iPad mini 3 / Galaxy Tab S6 y equivalentes)
+   - Desktop: >=1280px, optimizado para 1920x1080 y superiores
+   ========================================================== */
+.sct-info-tip__bubble {
+    max-width: calc(100vw - 24px);
+    max-height: min(340px, calc(100dvh - 24px));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+
+/* Un tooltip interactivo no debe abrirse por hover/focus antes de que JS
+   calcule una posición segura. Sólo .is-open lo vuelve visible. */
+.sct-info-tip:not(.is-open):hover .sct-info-tip__bubble,
+.sct-info-tip:not(.is-open):focus-within .sct-info-tip__bubble {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translate(-50%, 4px) !important;
+}
+
+.sct-info-tip.is-open .sct-info-tip__bubble {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+@media (max-width: 599.98px) {
+    .sct-info-tip {
+        width: 32px;
+        height: 32px;
+    }
+    .sct-info-tip__button {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+    }
+    .sct-info-tip__bubble {
+        width: min(320px, calc(100vw - 20px));
+        max-width: calc(100vw - 20px);
+        max-height: calc(100dvh - 20px);
+        padding: .72rem 2.2rem .72rem .78rem;
+        border-radius: 14px;
+        font-size: .76rem;
+        line-height: 1.42;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+    .sct-info-tip__bubble {
+        width: min(320px, calc(100vw - 28px));
+        max-height: calc(100dvh - 28px);
+    }
+}

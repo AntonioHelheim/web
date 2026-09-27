@@ -1,0 +1,688 @@
+/* ==========================================================
+   SAFETY CONTROL TOWER — RESPONSIVE BASE (P2)
+   vs3
+
+   Objetivo:
+   - mejorar usabilidad entre escritorio 16:9, iPad Mini y iPhone 12+;
+   - evitar overflow horizontal y compresión de controles;
+   - mejorar áreas táctiles y lectura en pantallas pequeñas;
+   - mantener el diseño actual: no estandariza navbar/footer ni rediseña módulos.
+
+   Breakpoints de referencia:
+   - Desktop: 1366x768 / 1920x1080
+   - Tablet: 768x1024 / 1024x768
+   - Móvil: 390x844 y orientación horizontal
+   ========================================================== */
+
+/* ==========================================================
+   RESILIENCIA DE LAYOUT
+   ========================================================== */
+
+/* Evita que textos largos fuercen un grid/flex más allá del viewport. */
+.row > *,
+[class*="-grid"] > *,
+[class*="-row"] > *,
+.feature-card,
+.panel-card,
+.module-card {
+    min-width: 0;
+}
+
+.section-title,
+.section-description,
+.feature-card,
+.panel-card,
+.alert,
+.modal-content,
+.form-label,
+.btn,
+.badge,
+.context-pill,
+.meta-box,
+.assignment-card,
+.protocol-card,
+.program-card,
+.history-mobile-card {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+/* Strings técnicas (correo, códigos, nombres de archivo) sí pueden necesitar
+   corte forzado para no crear scroll horizontal accidental. */
+.answer-value,
+.code-box,
+.history-value,
+.text-break,
+[data-breakable="true"] {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.table-responsive,
+.sct-scroll-x {
+    width: 100%;
+    max-width: 100%;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive > .table {
+    margin-bottom: 0;
+}
+
+/* Mantiene acciones visibles cuando un texto traducido crece. */
+.form-actions,
+.company-actions,
+.users-actions,
+.program-actions,
+.filter-actions,
+.history-actions,
+.topbar-actions {
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+/* Los diálogos nunca deben superar el alto útil del dispositivo. */
+.modal-dialog {
+    max-width: calc(100% - 2rem);
+}
+
+.modal-content {
+    max-height: calc(100vh - 2rem);
+}
+
+.modal-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@supports (height: 100dvh) {
+    .modal-content {
+        max-height: calc(100dvh - 2rem);
+    }
+}
+
+/* ==========================================================
+   TABLET / iPAD MINI (<= 1024px)
+   ========================================================== */
+
+@media (max-width: 1024px) {
+    body .welcome-hero {
+        padding-top: 2.75rem;
+        padding-bottom: 1.5rem;
+    }
+
+    body .quick-links {
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    body .welcome-topbar {
+        gap: 0.75rem;
+    }
+
+    body .welcome-topbar .topbar-actions {
+        justify-content: flex-end;
+    }
+
+    .section-description {
+        max-width: 42rem;
+    }
+
+    /* Elementos internos que en desktop funcionan en línea, pero necesitan
+       poder bajar de fila en tablet sin comprimir el contenido. */
+    .question-chip,
+    .chip-pregunta,
+    .chip-row,
+    .field-row,
+    .program-card-top,
+    .users-toolbar,
+    .photo-editor {
+        min-width: 0;
+    }
+}
+
+/* Áreas táctiles: se aplica sólo a dispositivos de puntero grueso para no
+   agrandar innecesariamente la interfaz de escritorio. */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+    .btn:not(.btn-close),
+    button:not(.btn-close):not(.password-toggle),
+    .form-control,
+    .form-select,
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="time"] {
+        min-height: 44px;
+    }
+
+    .app-icon-btn,
+    .dash-icon-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .form-check-input {
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+    }
+}
+
+/* ==========================================================
+   MÓVIL / iPHONE (<= 767.98px)
+   ========================================================== */
+
+@media (max-width: 767.98px) {
+    body .welcome-hero {
+        padding-top: 2rem;
+        padding-bottom: 1.15rem;
+    }
+
+    body .quick-links {
+        margin-top: 1.15rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-label {
+        margin-bottom: 0.65rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+    }
+
+    .section-title {
+        font-size: clamp(1.75rem, 8vw, 2.25rem);
+        line-height: 1.12;
+        letter-spacing: -0.04em;
+    }
+
+    .section-description {
+        margin-top: 0.85rem;
+        line-height: 1.55;
+        font-size: 0.94rem;
+    }
+
+    /* La cabecera actual aún no se estandariza (eso corresponde a P3),
+       pero sí se evita que sus controles se salgan de la pantalla. */
+    body .welcome-topbar {
+        align-items: flex-start;
+    }
+
+    body .welcome-topbar .topbar-actions {
+        max-width: none;
+        min-width: 0;
+        flex: 1 1 auto;
+        justify-content: flex-end;
+    }
+
+    body .welcome-topbar .topbar-actions .language-select {
+        width: auto;
+        min-width: 7rem;
+        max-width: 9.5rem;
+        flex: 1 1 7rem;
+    }
+
+    /* Acciones de formularios: en móvil pueden bajar de línea sin perder
+       legibilidad ni generar botones extremadamente angostos. */
+    .form-actions > .btn,
+    .company-actions > .btn,
+    .users-actions > .btn,
+    .program-actions > .btn,
+    .filter-actions > .btn {
+        flex: 0 1 auto;
+        max-width: 100%;
+    }
+
+    /* Filas de contenido/acciones que eran rígidas en varios módulos. */
+    .question-chip,
+    .chip-pregunta,
+    .chip-row,
+    .field-row {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+    }
+
+    .question-chip > :last-child,
+    .chip-pregunta > :last-child,
+    .chip-row > :last-child,
+    .field-row > :last-child {
+        margin-left: auto;
+    }
+
+    .users-toolbar,
+    .program-card-top {
+        align-items: flex-start;
+    }
+
+    .feature-card {
+        padding: 1.25rem;
+        border-radius: var(--radius-md);
+    }
+
+    .table-responsive {
+        font-size: 0.88rem;
+    }
+
+    /* Bootstrap ya permite scroll de tablas; este detalle hace visible que
+       existe contenido horizontal en navegadores táctiles sin cortar celdas. */
+    .table-responsive > .table > :not(caption) > * > * {
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+    }
+
+    .modal-dialog {
+        width: auto;
+        margin: 0.75rem;
+        max-width: none;
+    }
+
+    .modal-content {
+        max-height: calc(100vh - 1.5rem);
+    }
+
+    @supports (height: 100dvh) {
+        .modal-content {
+            max-height: calc(100dvh - 1.5rem);
+        }
+    }
+
+    /* Dashboard: la versión previa ocultaba el selector de idioma en móvil.
+       P2 lo mantiene accesible; P3 decidirá su ubicación definitiva. */
+    body .dash-topbar .language-select {
+        display: block;
+        width: auto;
+        min-width: 6.5rem;
+        max-width: 8rem;
+    }
+
+    body .dash-topbar {
+        gap: 0.5rem;
+    }
+
+    body .dash-actions {
+        min-width: 0;
+        gap: 0.375rem;
+    }
+}
+
+/* ==========================================================
+   iPHONE VERTICAL / ANCHOS COMPACTOS (<= 430px)
+   ========================================================== */
+
+@media (max-width: 430px) {
+    /* Los módulos con topbar heredada necesitan una segunda fila para las
+       acciones. Esto evita solapamientos con idiomas de texto largo. */
+    body .welcome-topbar {
+        flex-wrap: wrap;
+    }
+
+    body .welcome-topbar .topbar-actions {
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    body .welcome-topbar .topbar-actions .language-select {
+        flex: 1 1 8rem;
+        max-width: none;
+    }
+
+    body .welcome-topbar .topbar-actions .btn {
+        flex: 1 1 auto;
+    }
+
+    /* Dashboard compacto: conservar idioma sin forzar overflow. */
+    body .dash-brand > div:last-child {
+        display: none;
+    }
+
+    body .dash-topbar .language-select {
+        min-width: 5.75rem;
+        max-width: 6.75rem;
+    }
+
+    body .dash-avatar,
+    body .dash-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .feature-card {
+        padding: 1rem;
+    }
+
+    .form-actions,
+    .company-actions,
+    .users-actions {
+        gap: 0.5rem;
+    }
+
+    .form-actions > .btn,
+    .company-actions > .btn,
+    .users-actions > .btn {
+        flex: 1 1 9rem;
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+
+    .modal-content {
+        max-height: calc(100vh - 1rem);
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ==========================================================
+   TELÉFONO EN HORIZONTAL
+   Teléfonos modernos: hasta 1024x600 CSS aprox.
+   ========================================================== */
+
+@media (max-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
+    body .welcome-hero {
+        padding-top: 1.25rem;
+        padding-bottom: 0.75rem;
+    }
+
+    body .quick-links {
+        margin-top: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .welcome-greeting-icon {
+        margin-bottom: 0.4rem !important;
+        font-size: 1.75rem !important;
+    }
+
+    .section-label {
+        margin-bottom: 0.4rem;
+    }
+
+    .section-description {
+        margin-top: 0.55rem;
+    }
+
+    .modal-dialog {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ==========================================================
+   LOGIN / RECUPERACIÓN EN MÓVIL
+   ========================================================== */
+
+@media (max-width: 575.98px) {
+    .login-stage {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .login-panel,
+    .login-form,
+    .password-reset-panel {
+        max-width: 100%;
+    }
+
+    .login-secondary-actions {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+    }
+
+    .login-link-button {
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
+    .login-stage {
+        min-height: 100vh;
+        padding-top: 52px;
+        padding-bottom: 36px;
+    }
+
+    .login-brand {
+        margin-bottom: 18px;
+    }
+
+    .login-brand img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .login-language {
+        top: 10px;
+        right: 12px;
+    }
+
+    .login-build {
+        position: static;
+        margin-top: 18px;
+        text-align: center;
+    }
+}
+
+
+/* ==========================================================
+   CONTEXT PILL — NORMALIZACIÓN RESPONSIVE TRANSVERSAL (P3/V8)
+   Se aplica en Bienvenida, Dashboard y Gestiones, incluso cuando
+   cada módulo conserva estilos inline heredados.
+   ========================================================== */
+body .context-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0.5rem 0.875rem 0.5rem 0.5rem !important;
+    border-radius: 999px !important;
+    line-height: 1.35 !important;
+}
+
+body .context-pill .dot {
+    flex: 0 0 1.75rem !important;
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+}
+
+body .context-pill .pill-text {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+}
+
+@media (max-width: 767.98px) {
+    body .context-pill {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-items: flex-start !important;
+        border-radius: 1rem !important;
+        padding: 0.55rem 0.75rem 0.55rem 0.55rem !important;
+        gap: 0.55rem !important;
+        font-size: 0.79rem !important;
+    }
+
+    body .context-pill .dot {
+        flex-basis: 1.6rem !important;
+        width: 1.6rem !important;
+        height: 1.6rem !important;
+        margin-top: 0.05rem !important;
+    }
+
+    body .context-pill .pill-text {
+        flex: 1 1 auto !important;
+    }
+}
+
+@media (max-width: 430px) {
+    body .context-pill {
+        font-size: 0.76rem !important;
+        padding-right: 0.65rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    body .context-pill {
+        font-size: 0.72rem !important;
+        gap: 0.45rem !important;
+    }
+}
+
+/* ==========================================================
+   P11 / V37 — resiliencia transversal para navegación por pestañas
+   y layouts con resumen lateral.
+   ========================================================== */
+.sct-page-tabs,
+.sct-page-tabs__track,
+.sct-personal-activity-nav__track {
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 1024px) {
+    .sct-page-tabs__track,
+    .sct-personal-activity-nav__track {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-inline: contain;
+    }
+}
+
+@media (max-width: 767.98px) {
+    dialog {
+        width: calc(100vw - 1rem);
+        max-width: calc(100vw - 1rem);
+        max-height: calc(100vh - 1rem);
+    }
+    @supports (height: 100dvh) {
+        dialog { max-height: calc(100dvh - 1rem); }
+    }
+
+    body.sct-module-page .sct-personal-activity-nav,
+    body.sct-module-page .sct-personal-activity-nav__track {
+        min-width: 0;
+    }
+}
+
+/* P11 / V37 — partials y shells nunca deben provocar scroll horizontal */
+.sct-app-navbar,
+.sct-app-footer,
+.sct-partial-navbar,
+.sct-partial-app-footer,
+.management-work-layout,
+.dashboard-work-layout {
+    max-width: 100%;
+}
+
+@media (max-width: 575.98px) {
+    .sct-app-footer__inner,
+    .sct-app-footer__support,
+    .management-workspace,
+    .dashboard-workspace {
+        min-width: 0;
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================
+   P12 / V38 — NUEVOS PATRONES RESPONSIVE
+   Hub personal, ayudas contextuales y paneles laterales.
+   ========================================================== */
+@media (max-width: 991.98px) {
+    .sct-personal-activity-nav__track,
+    .sct-page-tabs__track,
+    .management-page-tabs__track {
+        scroll-padding-inline: .5rem;
+        overscroll-behavior-inline: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sct-module-context {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .sct-module-context__steps {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sct-module-page .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: max(.8rem, env(safe-area-inset-left, 0px));
+        padding-right: max(.8rem, env(safe-area-inset-right, 0px));
+    }
+
+    .sct-personal-activity-nav {
+        margin-inline: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .sct-personal-activity-nav__track {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .sct-personal-activity-nav__track::-webkit-scrollbar { display:none; }
+
+    .sct-personal-activity-nav__pill {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .sct-title-with-help {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 430px) {
+    .sct-module-page .feature-card,
+    .sct-module-context,
+    .sct-personal-activity-card {
+        max-width: 100%;
+    }
+
+    .sct-personal-card-facts,
+    .sct-personal-activity-card__facts {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   P13 / V39 — CONTENCIÓN TRANSVERSAL DE CONTROLES NUEVOS
+   ========================================================== */
+.sct-personal-status-filter,
+.sct-personal-view-tabs,
+.dashboard-role-sidebar,
+.management-role-sidebar {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (max-width: 1180px) {
+    .dashboard-work-layout,
+    .management-work-layout { row-gap: .75rem; }
+}
+
+@media (max-width: 575.98px) {
+    .sct-title-with-help > :is(h1,h2,h3,h4,h5,h6) { min-width: 0; }
+    .sct-personal-status-filter { scroll-padding-inline: .35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sct-personal-filter-pill,
+    .sct-submit-overdue { transition: none !important; }
+}

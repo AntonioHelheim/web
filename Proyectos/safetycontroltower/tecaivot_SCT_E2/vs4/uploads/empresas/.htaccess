@@ -1,0 +1,6 @@
+# Safety Control Tower - uploads de empresas
+# Impedir ejecución de scripts en el directorio de archivos cargados.
+<FilesMatch "\.(php|phtml|phar|cgi|pl|py|sh|shtml)$">
+    Require all denied
+</FilesMatch>
+Options -Indexes
