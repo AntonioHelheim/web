@@ -39,17 +39,6 @@ function programasRequirePage(PDO $pdo, string $redirect='../../acceso-denegado.
     requireCapabilityPage($pdo,'programs.view',$redirect);
 }
 
-function programasCurrentRole(PDO $pdo): string
-{
-    $context = resolveCurrentUserAccessContext($pdo);
-    return $context !== null ? (string) ($context['primary_role'] ?? 'trabajador') : 'trabajador';
-}
-
-function programasIsWorkerScope(PDO $pdo): bool
-{
-    return programasCurrentRole($pdo) === 'trabajador';
-}
-
 function programasSchemaReady(PDO $pdo): bool
 {
     static $ready=null;
@@ -110,7 +99,7 @@ function programasMonth($value): string
     if (preg_match('/^\d{4}-\d{2}$/',$value)) $value.='-01';
     $d=DateTime::createFromFormat('Y-m-d',$value);
     if (!$d || $d->format('Y-m-d')!==$value || substr($value,8,2)!=='01') {
-        responderJSON(false,null,'El período debe corresponder a un mes válido.',400);
+        responderJSON(false,null,'El periodo debe corresponder a un mes válido.',400);
     }
     return $value;
 }
@@ -171,9 +160,6 @@ function programasAssertVisible(PDO $pdo, array $program): void
 {
     if (programasIsGlobalAdmin($pdo)) return;
     if ((int)$program['id_company']!==programasCurrentCompany($pdo)) responderJSON(false,null,'El programa pertenece a otra empresa.',403);
-    if (programasIsWorkerScope($pdo) && (string) ($program['responsible_user'] ?? '') !== (string) (currentUserId() ?? '')) {
-        responderJSON(false,null,'No tienes permisos para ver este programa.',403);
-    }
 }
 
 function programasAssertStatusTransition(string $from, string $to): void

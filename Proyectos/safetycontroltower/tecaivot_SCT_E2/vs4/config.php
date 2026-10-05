@@ -79,14 +79,8 @@ if ($isLocal) {
     // Servidor de desarrollo / producción (cPanel).
     //
     // SEPARACIÓN TECAIVOT / SCT — paso 1 (2026-09): host, base y ahora
-    // también usuario/password ya apuntan al servidor nuevo
-    // (201.148.104.98, base "safetyco_SCT", usuario "safetyco"). Esto
-    // reemplaza el estado anterior de esta sección, donde a propósito
-    // no se dejaba usuario/password como fallback — el equipo decidió
-    // volver a dejarlos acá igual que estaban para el servidor viejo,
-    // así que si en algún momento este archivo termina en un
-    // repositorio compartido o público, hay que sacar estas credenciales
-    // de acá y dejarlas solo por variable de entorno (DB_USER/DB_PASS).
+    // Las credenciales de producción se leen exclusivamente desde
+    // variables de entorno DB_USER / DB_PASS y no se almacenan en código.
     //
     // Nota sobre el puerto: dejar '' como fallback (en vez de '3306')
     // hace que $port termine en 0 — no es un error: el cliente de MySQL
@@ -98,8 +92,8 @@ if ($isLocal) {
     $host     = getenv('DB_HOST') ?: 'localhost';
     $port     = (int) (getenv('DB_PORT') ?: '');
     $dbname   = getenv('DB_NAME') ?: 'safetyco_SCT';
-    $username = getenv('DB_USER') ?: 'safetyco';
-    $password = getenv('DB_PASS') ?: 'cBz1t89lJ6*Y+B';
+    $username = getenv('DB_USER') ?: '';
+    $password = getenv('DB_PASS');
 }
 
 

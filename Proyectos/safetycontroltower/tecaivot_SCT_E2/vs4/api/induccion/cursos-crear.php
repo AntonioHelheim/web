@@ -49,8 +49,8 @@ if ($attemptsAllowed === false || $attemptsAllowed < 1 || $attemptsAllowed > 20)
 }
 
 $approvalPercentage = filter_var($input['approval_percentage'], FILTER_VALIDATE_INT);
-if ($approvalPercentage === false || $approvalPercentage < 0 || $approvalPercentage > 100) {
-    responderJSON(false, null, 'El porcentaje de aprobación debe ser un número entre 0 y 100.', 400);
+if ($approvalPercentage === false || $approvalPercentage < 1 || $approvalPercentage > 100) {
+    responderJSON(false, null, 'El porcentaje de aprobación debe ser un número entre 1 y 100.', 400);
 }
 
 $fechaDesde = DateTime::createFromFormat('Y-m-d', (string) $input['effective_date_from']);

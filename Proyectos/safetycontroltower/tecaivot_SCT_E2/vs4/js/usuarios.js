@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const csrfToken = root.dataset.csrfToken || "";
     const actorLevel = Number(root.dataset.actorLevel || 0);
     const currentLang = root.dataset.currentLang || "es";
-    const selfProfile = root.dataset.selfProfile === "1";
     const i18nEl = document.getElementById("usersI18n");
     let strings = {};
     try { strings = JSON.parse(i18nEl?.textContent || "{}"); } catch (_) { strings = {}; }
@@ -148,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         roleOptions = payload.role_options || [];
         populateCompanies();
         populateRoleFilter();
-        createBtn.classList.toggle("d-none", selfProfile || !context.can_create_user);
+        createBtn.classList.toggle("d-none", !context.can_create_user);
     }
 
     function renderUsers(users) {
@@ -189,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
             setStatus(tr("users_loading"), "info");
             tableWrapper.classList.add("d-none");
             const params = new URLSearchParams();
-            if (selfProfile) params.set("self", "1");
             if (searchInput.value.trim()) params.set("q", searchInput.value.trim());
             if (stateFilter.value !== "all") params.set("state", stateFilter.value);
             if (companyFilter.value !== "all") params.set("id_company", companyFilter.value);
@@ -282,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     async function sendAccessLink(idUsers, credentialStatus) {
         const question = credentialStatus === "pending_activation" ? tr("users_confirm_access_activation", { user: idUsers }) : tr("users_confirm_access_reset", { user: idUsers });
-        if (!await window.sctConfirmAction(question)) return;
+        if (!window.confirm(question)) return;
         try { const { response, data } = await postJson("enviar-acceso.php", { id_users: idUsers }); if (!response.ok || !data.success) throw new Error(data.message || tr("users_error_access")); showActionAlert(data.message || tr("users_access_sent"), "success"); await loadUsers(); }
         catch (error) { showActionAlert(error.message || tr("users_error_access"), "danger"); }
     }

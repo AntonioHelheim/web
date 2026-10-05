@@ -4,7 +4,6 @@ programasRequirePage($pdo,'../../acceso-denegado.php');
 aplicarCabecerasSeguridad();
 if (empty($_SESSION['csrf_token'])) $_SESSION['csrf_token']=bin2hex(random_bytes(32));
 $isGlobalAdmin=programasIsGlobalAdmin($pdo);
-$isWorkerScope=programasIsWorkerScope($pdo);
 $canCreate=currentUserHasCapability($pdo,'programs.create');
 $canEdit=currentUserHasCapability($pdo,'programs.edit');
 $canState=currentUserHasCapability($pdo,'programs.state');
@@ -27,23 +26,25 @@ $jsStrings=[]; foreach($jsKeys as $k)$jsStrings[$k]=t($k);
 <title><?=htmlspecialchars(t('programs_page_title'),ENT_QUOTES,'UTF-8')?></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="../../css/style.css?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>-p51">
-<link rel="stylesheet" href="../../css/sct-main-sections.css?v=20260923-p79">
+<link rel="stylesheet" href="../../css/style.css?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>">
 <style>
 .program-shell{padding-bottom:4rem}.welcome-hero{padding:3rem 0 1.5rem}.welcome-topbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;border-bottom:1px solid rgba(0,0,0,.08)}.welcome-topbar .brand-symbol img{height:32px}.topbar-actions{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}.language-select{min-width:120px}.program-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}.program-kpi{border:1px solid var(--border);border-radius:14px;padding:1rem;background:var(--background-soft)}.program-kpi strong{display:block;font-size:1.55rem;color:var(--primary-darkest)}.program-list{display:grid;gap:.8rem}.program-card{border:1px solid var(--border);border-radius:14px;padding:1rem;background:#fff}.program-card.inactive{opacity:.68}.program-card-top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.program-meta{display:flex;gap:.45rem;flex-wrap:wrap;font-size:.8rem}.program-actions{display:flex;gap:.4rem;flex-wrap:wrap}.progress{height:9px}.detail-panel{display:none}.detail-panel.active{display:block}.tracking-table td,.tracking-table th{vertical-align:middle}.variance.pos{font-weight:700}.variance.neg{font-weight:700}.form-actions{display:flex;gap:.5rem;flex-wrap:wrap}.small-muted{font-size:.82rem;color:var(--text-secondary)}
 @media(max-width:991.98px){.program-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:767.98px){.welcome-topbar{align-items:flex-start}.topbar-actions{justify-content:flex-end}.program-card-top{flex-direction:column}.program-kpis{grid-template-columns:1fr 1fr}.tracking-table thead{display:none}.tracking-table,.tracking-table tbody,.tracking-table tr,.tracking-table td{display:block;width:100%}.tracking-table tr{border:1px solid var(--border);border-radius:12px;margin-bottom:.75rem;padding:.45rem}.tracking-table td{border:0;padding:.35rem .5rem}.tracking-table td::before{content:attr(data-label);display:block;font-size:.72rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase}}
 </style>
-</head>
-<body class="sct-module-page sct-management-module-page">
-<div class="container sct-main-shell sct-management-shell program-shell" data-csrf-token="<?=$csrf?>" data-is-global-admin="<?=$isGlobalAdmin?'1':'0'?>" data-can-create="<?=$canCreate?'1':'0'?>" data-can-edit="<?=$canEdit?'1':'0'?>" data-can-state="<?=$canState?'1':'0'?>" data-can-tracking="<?=$canTracking?'1':'0'?>">
-<?php
-        $sctNavbarBasePath = '../../';
-        $sctNavbarBackHref = '../usuarios/gestiones.php';
-        require __DIR__ . '/../../partials/app-navbar.php';
-        ?>
 
-        <section class="welcome-hero text-center sct-main-hero"><div class="welcome-greeting-icon"><i class="bi bi-calendar3-range"></i></div><span class="section-label sct-main-pill">SAFETY CONTROL TOWER</span><h1 class="section-title sct-main-title"><?=htmlspecialchars(t($isWorkerScope?'programs_my_title':'programs_title'),ENT_QUOTES,'UTF-8')?></h1><p class="section-description intro-description-centered sct-main-intro"><?=htmlspecialchars(t($isWorkerScope?'programs_my_intro':'programs_intro'),ENT_QUOTES,'UTF-8')?> <strong><?=$userEmail?></strong>.</p></section>
-<?php $sctModuleMode = $isWorkerScope ? 'personal' : 'manage'; require __DIR__ . '/../../partials/module-context.php'; ?>
+    <!-- Compatibilidad visual vs4 sobre base funcional vs3 -->
+    <script>document.documentElement.classList.add('sct-vs4-frontend');try{if(localStorage.getItem('sct-theme')==='dark')document.documentElement.classList.add('sct-theme-dark');}catch(e){}</script>
+    <link rel="stylesheet" href="../../css/sct-v3-frontend.css?v=20261002-vs4-ui">
+</head>
+<body>
+<?php
+$sctNavbarBasePath = '../../';
+require __DIR__ . '/../../partials/app-navbar.php';
+?>
+
+<div class="container program-shell" data-csrf-token="<?=$csrf?>" data-is-global-admin="<?=$isGlobalAdmin?'1':'0'?>" data-can-create="<?=$canCreate?'1':'0'?>" data-can-edit="<?=$canEdit?'1':'0'?>" data-can-state="<?=$canState?'1':'0'?>" data-can-tracking="<?=$canTracking?'1':'0'?>">
+<div class="welcome-topbar"><div class="brand-wrapper"><div class="brand-symbol"><img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower"></div></div><div class="topbar-actions"><select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?=htmlspecialchars(t('common_language'),ENT_QUOTES,'UTF-8')?>"><?php foreach(idiomasDisponiblesConNombre() as $code=>$name):?><option value="<?=htmlspecialchars($code,ENT_QUOTES,'UTF-8')?>" <?=$code===idiomaActual()?'selected':''?>><?=htmlspecialchars($name,ENT_QUOTES,'UTF-8')?></option><?php endforeach;?></select><a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm"><?=htmlspecialchars(t('mgmt_back'),ENT_QUOTES,'UTF-8')?> <i class="bi bi-arrow-left"></i></a><a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?=htmlspecialchars(t('common_logout'),ENT_QUOTES,'UTF-8')?> <i class="bi bi-box-arrow-right"></i></a></div></div>
+<section class="welcome-hero text-center"><div class="welcome-greeting-icon"><i class="bi bi-calendar3-range"></i></div><span class="section-label">SAFETY CONTROL TOWER</span><h1 class="section-title"><?=htmlspecialchars(t('programs_title'),ENT_QUOTES,'UTF-8')?></h1><p class="section-description intro-description-centered"><?=htmlspecialchars(t('programs_intro'),ENT_QUOTES,'UTF-8')?> <strong><?=$userEmail?></strong>.</p></section>
 <?php if(!$schemaReady):?><div class="alert alert-warning"><?=htmlspecialchars(t('programs_migration_required'),ENT_QUOTES,'UTF-8')?></div><?php endif;?>
 <div id="programsAlert" class="alert d-none" role="alert" aria-live="polite"></div>
 
@@ -52,7 +53,7 @@ $jsStrings=[]; foreach($jsKeys as $k)$jsStrings[$k]=t($k);
 <?php if($isGlobalAdmin):?><div class="col-12 col-lg-4"><label class="form-label" for="companySelect"><?=htmlspecialchars(t('programs_company'),ENT_QUOTES,'UTF-8')?></label><select id="companySelect" class="form-select"><option value=""><?=htmlspecialchars(t('programs_select_company'),ENT_QUOTES,'UTF-8')?></option></select></div><?php endif;?>
 <div class="col-6 col-lg-2"><label class="form-label" for="statusFilter"><?=htmlspecialchars(t('programs_status'),ENT_QUOTES,'UTF-8')?></label><select id="statusFilter" class="form-select"><option value=""><?=htmlspecialchars(t('programs_all_status'),ENT_QUOTES,'UTF-8')?></option><?php foreach(PROGRAM_STATUS as $st):?><option value="<?=$st?>"><?=htmlspecialchars(t('programs_status_'.$st),ENT_QUOTES,'UTF-8')?></option><?php endforeach;?></select></div>
 <div class="col-6 col-lg-2"><label class="form-label" for="stateFilter"><?=htmlspecialchars(t('programs_record_state'),ENT_QUOTES,'UTF-8')?></label><select id="stateFilter" class="form-select"><option value=""><?=htmlspecialchars(t('programs_all_state'),ENT_QUOTES,'UTF-8')?></option><option value="1"><?=htmlspecialchars(t('programs_active'),ENT_QUOTES,'UTF-8')?></option><option value="0"><?=htmlspecialchars(t('programs_inactive'),ENT_QUOTES,'UTF-8')?></option></select></div>
-<div class="col-12 col-lg-2<?= $isWorkerScope ? ' d-none' : '' ?>"><label class="form-label" for="projectFilter"><?=htmlspecialchars(t('programs_project'),ENT_QUOTES,'UTF-8')?></label><select id="projectFilter" class="form-select"><option value=""><?=htmlspecialchars(t('programs_all_projects'),ENT_QUOTES,'UTF-8')?></option></select></div>
+<div class="col-12 col-lg-2"><label class="form-label" for="projectFilter"><?=htmlspecialchars(t('programs_project'),ENT_QUOTES,'UTF-8')?></label><select id="projectFilter" class="form-select"><option value=""><?=htmlspecialchars(t('programs_all_projects'),ENT_QUOTES,'UTF-8')?></option></select></div>
 <div class="col-12 col-lg-2"><label class="form-label" for="searchFilter"><?=htmlspecialchars(t('programs_search'),ENT_QUOTES,'UTF-8')?></label><input id="searchFilter" class="form-control" maxlength="100" placeholder="<?=htmlspecialchars(t('programs_search_placeholder'),ENT_QUOTES,'UTF-8')?>"></div>
 </div></section>
 
@@ -69,8 +70,4 @@ $jsStrings=[]; foreach($jsKeys as $k)$jsStrings[$k]=t($k);
 <script id="programsI18n" type="application/json"><?=json_encode($jsStrings,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)?></script>
 <script src="../../js/programas-admin.js?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>"></script>
 <script src="../../js/lang-switcher.js?v=<?=htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8')?>"></script>
-
-    <?php require __DIR__ . '/../../partials/app-footer.php'; ?>
-
-<script src="../../js/sct-module-ui.js?v=20260920-p43"></script>
 </body></html>

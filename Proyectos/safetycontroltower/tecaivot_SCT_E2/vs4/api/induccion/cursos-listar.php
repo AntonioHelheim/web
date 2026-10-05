@@ -6,7 +6,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/InduccionRepository.php';
 
-requireCapability($pdo, 'induction.manage');
+requireCapability($pdo, 'induction.view');
 
 $idCompanySolicitado = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT) ?: null;
 $idCompany = induccionResolveCompanyId($pdo, $idCompanySolicitado);

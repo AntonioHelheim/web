@@ -16,6 +16,7 @@
  */
 
 require_once __DIR__ . '/response.php';
+require_once __DIR__ . '/health_gate.php';
 
 /** Runtime helpers with safe fallbacks for hosting environments where mbstring
  * is not enabled. SCT still prefers mbstring when available. */
@@ -241,6 +242,7 @@ const SCT_GRANULAR_PERMISSION_DEFAULTS = [
     'permissions.manage' => ['administrador_completo'],
     'change_history.view' => ['administrador_completo', 'administrador', 'cliente', 'jefatura'],
     'change_history.global' => ['administrador_completo'],
+    'health_profile.view_emergency' => ['administrador_completo'],
     'programs.view' => ['administrador_completo', 'administrador', 'cliente', 'jefatura', 'trabajador'],
     'programs.create' => ['administrador_completo', 'administrador', 'cliente', 'jefatura'],
     'programs.edit' => ['administrador_completo', 'administrador', 'cliente', 'jefatura'],
@@ -268,12 +270,21 @@ function requireLogin(): void
     if (empty($_SESSION['logged_in'])) {
         responderJSON(false, null, 'Debes iniciar sesión para continuar.', 401);
     }
+    global $pdo;
+    if ($pdo instanceof PDO && !healthGateIsExemptRequest() && healthGateBlocked($pdo)) {
+        responderJSON(false, ['redirect' => healthGateWelcomeUrl()], healthGateMessage(), 423);
+    }
 }
 
 function requireLoginPage(string $redirectTo = 'acceso-denegado.php'): void
 {
     if (empty($_SESSION['logged_in'])) {
         header('Location: ' . $redirectTo);
+        exit;
+    }
+    global $pdo;
+    if ($pdo instanceof PDO && !healthGateIsExemptRequest() && healthGateBlocked($pdo)) {
+        header('Location: ' . healthGateWelcomeUrl());
         exit;
     }
 }
@@ -439,9 +450,12 @@ function currentUserProfile(PDO $pdo): ?array
     $photoSelect = authColumnExists($pdo, 'users', 'profile_photo_path')
         ? 'profile_photo_path'
         : 'NULL AS profile_photo_path';
+    $mutualSelect = authColumnExists($pdo, 'users', 'mutual_code')
+        ? 'mutual_code'
+        : 'NULL AS mutual_code';
 
     $stmt = $pdo->prepare(
-        'SELECT id_users, id_company, name, lastname, language, ' . $photoSelect . ', state
+        'SELECT id_users, id_company, id_worker, name, lastname, language, ' . $photoSelect . ', ' . $mutualSelect . ', state
 '
         . 'FROM users
 '
@@ -587,17 +601,32 @@ function currentUserDatabaseCapabilities(PDO $pdo): array
 
 function currentUserHasCapability(PDO $pdo, string $capability): bool
 {
-    // Simplificado a política estática por rol (igual criterio que la base
-    // que ya funcionaba en producción). El sistema de permisos granulares
-    // por base de datos (Etapa 3) queda desactivado por ahora para
-    // priorizar estabilidad; las tablas permissions/role_permissions no se
-    // consultan desde este flujo.
+    // La política general se mantiene estática por rol para no alterar el
+    // comportamiento estable de vs4. El permiso sensible de salud es la única
+    // excepción: además de su fallback mínimo, puede concederse explícitamente
+    // mediante permissions/role_permissions sin activar el resto de la matriz.
+    $allowedByRole = false;
     foreach (currentUserRoles($pdo) as $role) {
         if (authRoleHasCapability($role, $capability)) {
-            return true;
+            $allowedByRole = true;
+            break;
         }
     }
-    return false;
+
+    if ($capability !== 'health_profile.view_emergency') {
+        return $allowedByRole;
+    }
+
+    if ($allowedByRole) {
+        return true;
+    }
+
+    try {
+        return in_array($capability, currentUserDatabaseCapabilities($pdo), true);
+    } catch (Throwable $e) {
+        error_log('lib/auth.php health permission lookup: ' . $e->getMessage());
+        return false;
+    }
 }
 
 function currentUserHasAnyCapability(PDO $pdo, array $capabilities): bool

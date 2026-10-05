@@ -9,7 +9,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/TrabajadorRepository.php';
 
-requireCapability($pdo, 'workers.manage');
+requireCapability($pdo, 'workers.view');
 
 $idCompanySolicitado = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT) ?: null;
 $idCompany = trabajadoresResolveCompanyId($pdo, $idCompanySolicitado);

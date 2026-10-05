@@ -78,7 +78,7 @@ try {
         responderJSON(false, null, 'Evento no encontrado.', 404);
     }
 
-    if (!eventosCanViewEvent($pdo, $evento)) {
+    if (!eventosIsGlobalAdmin($pdo) && (int) $evento['id_company'] !== currentUserCompanyId($pdo)) {
         responderJSON(false, null, 'No tienes permisos para modificar este evento.', 403);
     }
 

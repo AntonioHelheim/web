@@ -1,6 +1,6 @@
 /**
  * Safety Control Tower - Protocolos MINSAL / Gestión
- * P75 — gestión/edición unificada
+ * Etapa 2
  */
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('.container[data-csrf-token]');
@@ -18,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const els = {
         language: $('pageLanguageSelect'), company: $('companySelect'),
-        alert: $('protocolAlert'), status: $('protocolStatus'), tableWrap: $('protocolTableWrap'), tableBody: $('protocolTableBody'), mobileCards: $('protocolMobileCards'),
-        createBtn: $('protocolCreateBtn'), stateFilter: $('protocolStateFilter'), wizardEl: $('protocolWizardModal'), wizardPrev: $('protocolWizardPrev'), saveDraft: $('protocolSaveDraft'), publish: $('protocolPublish'),
-        materialDrop: $('protocolMaterialDropZone'), materialFiles: $('protocolMaterialFiles'), materialChoose: $('protocolMaterialChoose'), materialPending: $('protocolMaterialPending'), materialUpload: $('protocolMaterialUpload'), materialsList: $('protocolMaterialsList'),
+        alert: $('protocolAlert'), status: $('protocolStatus'), tableWrap: $('protocolTableWrap'), tableBody: $('protocolTableBody'),
         form: $('protocolForm'), mode: $('protocolMode'), target: $('protocolTarget'), formTitle: $('protocolFormTitle'),
         code: $('protocolCode'), name: $('protocolName'), version: $('protocolVersion'), authority: $('protocolAuthority'),
         reference: $('protocolReference'), source: $('protocolSource'), from: $('protocolFrom'), until: $('protocolUntil'),
@@ -30,14 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
         detailVersion: $('detailVersion'), detailSource: $('detailSource'), detailParameters: $('detailParameters'),
         formsList: $('protocolFormsList'), linkForm: $('protocolFormLink'), linkSelect: $('linkFormSelect'), linkOrder: $('linkOrder'), linkRequired: $('linkRequired'),
         assignmentSection: $('assignmentSection'), assignmentForm: $('assignmentForm'), assignCenter: $('assignCenter'), assignProject: $('assignProject'),
-        assignWorker: $('assignWorker'), protocolGroups: $('protocolGroupsList'), assignResponsible: $('assignResponsible'), assignStart: $('assignStart'), assignDue: $('assignDue'),
+        assignWorker: $('assignWorker'), assignResponsible: $('assignResponsible'), assignStart: $('assignStart'), assignDue: $('assignDue'),
         assignRecurrence: $('assignRecurrence'), assignInterval: $('assignInterval'), assignOverrides: $('assignOverrides'), assignNotes: $('assignNotes'),
         assignmentsList: $('assignmentsList'), assignmentDetail: $('assignmentDetail'), assignmentDetailClose: $('assignmentDetailClose'),
         assignmentDetailTitle: $('assignmentDetailTitle'), executionsList: $('executionsList'), executionReview: $('executionReview'),
         executionAnswers: $('executionAnswers'), reviewForm: $('reviewForm'), reviewExecutionId: $('reviewExecutionId'), reviewResult: $('reviewResult'), reviewNotes: $('reviewNotes'),
         trackingList: $('trackingList'), trackingForm: $('trackingForm'), trackingExecutionId: $('trackingExecutionId'), trackingDescription: $('trackingDescription'),
-        trackingResponsible: $('trackingResponsible'), trackingCommitment: $('trackingCommitment'), trackingDeadline: $('trackingDeadline'),
-        manageModalEl: $('protocolManageModal'), manageTitle: $('protocolManageTitle'), manageAlert: $('protocolManageAlert'), manageBasic: $('protocolManageBasic'), manageMaterials: $('protocolManageMaterials'), manageForms: $('protocolManageForms'), manageAssignments: $('protocolManageAssignments'), manageStats: $('protocolManageStats'), manageEdit: $('protocolManageEdit')
+        trackingResponsible: $('trackingResponsible'), trackingCommitment: $('trackingCommitment'), trackingDeadline: $('trackingDeadline')
     };
 
     let scopeCompany = null;
@@ -45,72 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentAssignment = null;
     let assignmentRows = new Map();
     let companyCatalogs = null;
-    let wizardStep = 1;
-    let pendingMaterialFiles = [];
-    let protocolCatalogRows = [];
-    const wizard = els.wizardEl && window.bootstrap ? window.bootstrap.Modal.getOrCreateInstance(els.wizardEl, {backdrop:'static', keyboard:false}) : null;
-    const manageModal = els.manageModalEl && window.bootstrap ? window.bootstrap.Modal.getOrCreateInstance(els.manageModalEl) : null;
-    let managedProtocol = null;
 
-
-    function updateWizardFooter() {
-        if (els.wizardPrev) els.wizardPrev.classList.toggle('d-none', wizardStep === 1);
-        if (els.saveDraft) els.saveDraft.classList.toggle('d-none', !currentProtocol);
-        if (els.publish) els.publish.classList.toggle('d-none', wizardStep !== 4 || !currentProtocol);
-    }
-
-    async function showWizardStep(step) {
-        wizardStep = Math.max(1, Math.min(4, parseInt(step || 1, 10)));
-        document.querySelectorAll('[data-protocol-step]').forEach(el => el.classList.toggle('d-none', parseInt(el.dataset.protocolStep,10) !== wizardStep));
-        document.querySelectorAll('[data-protocol-step-go]').forEach(btn => {
-            const n = parseInt(btn.dataset.protocolStepGo,10);
-            btn.classList.toggle('is-active', n === wizardStep);
-            btn.classList.toggle('is-complete', n < wizardStep);
-            btn.disabled = n > 1 && !currentProtocol;
-        });
-        updateWizardFooter();
-        if (!currentProtocol) return;
-        if (wizardStep === 2) await loadProtocolMaterials();
-        if (wizardStep === 3 || wizardStep === 4) await refreshCurrentProtocol(false);
-    }
-
-    function openProtocolCreate() {
-        currentProtocol = null; currentAssignment = null; pendingMaterialFiles = [];
-        resetDefinitionForm(); renderPendingMaterials(); showWizardStep(1);
-        if (wizard) wizard.show();
-        setTimeout(() => els.code && els.code.focus(), 180);
-    }
-
-    function renderPendingMaterials() {
-        if (!els.materialPending) return;
-        els.materialPending.innerHTML = '';
-        els.materialPending.classList.toggle('d-none', !pendingMaterialFiles.length);
-        if (els.materialUpload) els.materialUpload.classList.toggle('d-none', !pendingMaterialFiles.length);
-        pendingMaterialFiles.forEach((file, index) => {
-            const row=document.createElement('div'); row.className='sct-builder-file-row';
-            row.innerHTML='<div><i class="bi bi-file-earmark"></i><strong>'+escapeHtml(file.name)+'</strong><span>'+escapeHtml(Math.max(1,Math.round(file.size/1024)))+' KB</span></div><button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-x-lg"></i></button>';
-            row.querySelector('button').addEventListener('click',()=>{pendingMaterialFiles.splice(index,1);renderPendingMaterials();});
-            els.materialPending.appendChild(row);
-        });
-    }
-    function addPendingMaterials(files) {
-        Array.from(files||[]).forEach(f=>{if(!pendingMaterialFiles.some(x=>x.name===f.name&&x.size===f.size))pendingMaterialFiles.push(f);});
-        renderPendingMaterials();
-    }
-    async function loadProtocolMaterials() {
-        if (!currentProtocol || !els.materialsList) return;
-        els.materialsList.innerHTML='<p class="text-muted small">'+escapeHtml(S('loading','Cargando...'))+'</p>';
-        const r=await api('../actividades/support-materials.php?entity=protocol&id='+encodeURIComponent(currentProtocol.id_protocol));
-        if(!r.success){els.materialsList.innerHTML='<div class="alert alert-warning">'+escapeHtml(r.message)+'</div>';return;}
-        els.materialsList.innerHTML='';
-        if(!(r.data||[]).length)els.materialsList.innerHTML='<p class="text-muted small">'+escapeHtml(S('no_materials','Aún no hay material cargado.'))+'</p>';
-        (r.data||[]).forEach(m=>{const row=document.createElement('div');row.className='sct-builder-file-row';row.innerHTML='<div><i class="bi bi-paperclip"></i><strong>'+escapeHtml(m.original_name||m.title)+'</strong><span>'+escapeHtml(m.mime_type||'')+'</span></div><button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>';row.querySelector('button').addEventListener('click',async()=>{if(!await window.sctConfirmAction(S('confirm_delete_material','¿Eliminar este archivo?')))return;const fd=new FormData();fd.append('entity','protocol');fd.append('id',currentProtocol.id_protocol);fd.append('action','delete');fd.append('id_material',m.id_activity_material);fd.append('csrf_token',csrfToken);const d=await api('../actividades/support-materials.php',{method:'POST',body:fd});if(!d.success)return showAlert(els.alert,d.message,'danger');loadProtocolMaterials();});els.materialsList.appendChild(row);});
-    }
-    async function uploadProtocolMaterials() {
-        if(!currentProtocol||!pendingMaterialFiles.length)return;
-        const fd=new FormData();fd.append('entity','protocol');fd.append('id',currentProtocol.id_protocol);fd.append('action','upload');fd.append('csrf_token',csrfToken);pendingMaterialFiles.forEach(f=>fd.append('files[]',f));
-        els.materialUpload.disabled=true;const r=await api('../actividades/support-materials.php',{method:'POST',body:fd});els.materialUpload.disabled=false;if(!r.success)return showAlert(els.alert,r.message,'danger');pendingMaterialFiles=[];renderPendingMaterials();await loadProtocolMaterials();
-    }
     function escapeHtml(value) {
         const div = document.createElement('div');
         div.textContent = value == null ? '' : String(value);
@@ -118,9 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showAlert(el, message, variant) {
-        if (el === els.detailAlert && els.wizardEl && !els.wizardEl.classList.contains('show') && els.alert) {
-            el = els.alert;
-        }
         if (!el) return;
         el.textContent = message || '';
         el.classList.remove('d-none', 'alert-success', 'alert-danger', 'alert-info', 'alert-warning');
@@ -247,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function () {
         els.status.classList.add('alert-info');
         els.status.textContent = S('loading', 'Cargando protocolos...');
         els.tableWrap.classList.add('d-none');
-        if (els.mobileCards) els.mobileCards.innerHTML='';
         closeDetail();
         resetDefinitionForm();
 
@@ -260,26 +188,18 @@ document.addEventListener('DOMContentLoaded', function () {
             els.status.textContent = r.message || S('error_response');
             return;
         }
-        const rows = r.data || []; protocolCatalogRows = rows;
+        const rows = r.data || [];
         if (!rows.length) {
             els.status.textContent = S('empty', 'No hay protocolos configurados en este alcance.');
             return;
         }
         els.status.classList.add('d-none');
         els.tableWrap.classList.remove('d-none');
-        renderProtocolsFiltered();
-    }
-
-    function renderProtocolsFiltered(){
-        const filter=els.stateFilter?els.stateFilter.value:'active';
-        const rows=protocolCatalogRows.filter(p=>filter==='all'||(filter==='active'?parseInt(p.state,10)===1:parseInt(p.state,10)!==1));
-        if(!rows.length){els.tableWrap.classList.add('d-none');if(els.mobileCards)els.mobileCards.innerHTML='<p class="text-muted mb-0">'+escapeHtml(S('empty','No hay protocolos para este filtro.'))+'</p>';return;}
-        els.tableWrap.classList.remove('d-none');renderProtocols(rows);
+        renderProtocols(rows);
     }
 
     function renderProtocols(rows) {
         els.tableBody.innerHTML = '';
-        if (els.mobileCards) els.mobileCards.innerHTML = '';
         rows.forEach(protocol => {
             const canEditDefinition = isGlobalAdmin || protocol.id_company != null;
             const tr = document.createElement('tr');
@@ -300,20 +220,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<td><span class="status-pill ' + (state ? 'ok' : 'danger') + '">' + escapeHtml(state ? S('active', 'Activo') : S('inactive', 'Inactivo')) + '</span></td>' +
                 '<td><div class="d-flex gap-1 flex-wrap">' + actions.join('') + '</div></td>';
 
-            tr.querySelector('[data-action="manage"]').addEventListener('click', () => openManageReadonly(protocol));
+            tr.querySelector('[data-action="manage"]').addEventListener('click', () => openDetail(protocol.id_protocol));
             const edit = tr.querySelector('[data-action="edit"]');
             if (edit) edit.addEventListener('click', () => editProtocol(protocol));
             const toggle = tr.querySelector('[data-action="toggle"]');
             if (toggle) toggle.addEventListener('click', () => toggleProtocol(protocol.id_protocol, parseInt(toggle.dataset.state, 10)));
             els.tableBody.appendChild(tr);
-            if (els.mobileCards) {
-                const card=document.createElement('article');card.className='sct-builder-mobile-card';
-                card.innerHTML='<div class="sct-builder-mobile-card__head"><strong>'+escapeHtml(protocol.name)+'</strong><span class="status-pill '+(state?'ok':'danger')+'">'+escapeHtml(state?S('active','Activo'):S('inactive','Inactivo'))+'</span></div><p><code>'+escapeHtml(protocol.code)+'</code> · v'+escapeHtml(protocol.version||1)+'</p><div class="sct-builder-mobile-card__meta"><span>'+escapeHtml(S('forms','Formularios'))+': '+escapeHtml(protocol.form_count||0)+'</span><span>'+escapeHtml(S('assignments','Asignaciones'))+': '+escapeHtml(protocol.assignment_count||0)+'</span></div><div class="sct-builder-mobile-card__actions">'+actions.join('')+'</div>';
-                card.querySelector('[data-action="manage"]').addEventListener('click',()=>openManageReadonly(protocol));
-                const ce=card.querySelector('[data-action="edit"]');if(ce)ce.addEventListener('click',()=>editProtocol(protocol));
-                const ct=card.querySelector('[data-action="toggle"]');if(ct)ct.addEventListener('click',()=>toggleProtocol(protocol.id_protocol,parseInt(ct.dataset.state,10)));
-                els.mobileCards.appendChild(card);
-            }
         });
     }
 
@@ -339,12 +251,11 @@ document.addEventListener('DOMContentLoaded', function () {
             els.parameters.value = protocol.parameters || '{}';
         }
         els.cancelEdit.classList.remove('d-none');
-        currentProtocol = protocol;
-        showWizardStep(1); if (wizard) wizard.show();
+        els.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function toggleProtocol(id, state) {
-        if (!await window.sctConfirmAction(S('confirm_state', '¿Confirmas este cambio de estado?'))) return;
+        if (!confirm(S('confirm_state', '¿Confirmas este cambio de estado?'))) return;
         const r = await postJson('./protocolos-cambiar-estado.php', { id_protocol: id, state: state });
         if (!r.success) {
             showAlert(els.alert, r.message, 'danger');
@@ -354,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadProtocols();
     }
 
-    async function refreshProtocol(id, showTrackingDetail) {
+    async function openDetail(id) {
         hideAlert(els.detailAlert);
         let url = './protocolos-detalle.php?id_protocol=' + encodeURIComponent(id);
         if (scopeCompany) url += '&id_company=' + encodeURIComponent(scopeCompany);
@@ -364,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         currentProtocol = r.data;
-        els.detail.classList.toggle('active', !!showTrackingDetail);
+        els.detail.classList.add('active');
         els.detailName.textContent = currentProtocol.name || '-';
         els.detailScope.innerHTML = protocolScopeBadge(currentProtocol);
         els.detailAuthority.textContent = currentProtocol.authority || '—';
@@ -386,8 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderAssignments(currentProtocol.asignaciones || []);
 
         const implementationCompany = parseInt(currentProtocol.implementation_company || 0, 10) || null;
-        els.assignmentSection.dataset.available = implementationCompany ? '1' : '0';
-        if (wizardStep === 4) els.assignmentSection.classList.toggle('d-none', !implementationCompany);
+        els.assignmentSection.classList.toggle('d-none', !implementationCompany);
         if (implementationCompany) {
             await loadCompanyCatalogs(implementationCompany);
         } else {
@@ -396,53 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
         await loadAvailableForms(implementationCompany);
         updateCompositionEditing(locked, implementationCompany);
         setDefaultDates();
-        updateWizardFooter();
-    }
-
-    async function refreshCurrentProtocol(showTrackingDetail) { if (currentProtocol) await refreshProtocol(currentProtocol.id_protocol, !!showTrackingDetail); }
-
-    function manageFact(label, value) {
-        return '<div class="sct-builder-readonly-fact"><small>' + escapeHtml(label) + '</small><strong>' + escapeHtml(value == null || value === '' ? '—' : value) + '</strong></div>';
-    }
-    function renderManageProtocol(protocol) {
-        if (!els.manageBasic) return;
-        const validity = (protocol.effective_date_from || protocol.effective_date_until)
-            ? String(protocol.effective_date_from || '—').slice(0,10) + ' — ' + String(protocol.effective_date_until || '—').slice(0,10)
-            : '—';
-        els.manageBasic.innerHTML = [
-            manageFact('Código', protocol.code), manageFact('Nombre', protocol.name), manageFact('Versión', 'v' + (protocol.version || 1)),
-            manageFact('Autoridad', protocol.authority), manageFact('Referencia normativa', protocol.normative_reference), manageFact('Vigencia', validity),
-            manageFact('Descripción', protocol.description), manageFact('Estado', String(protocol.state) === '1' ? S('active','Activo') : S('inactive','Inactivo'))
-        ].join('');
-        if (els.manageForms) {
-            const forms=protocol.formularios||[];
-            els.manageForms.innerHTML=forms.length?forms.map((f,i)=>'<div class="sct-builder-readonly-question"><span class="sct-builder-readonly-question__number">'+(i+1)+'</span><div><strong>'+escapeHtml(f.form_name||f.name||'Formulario')+'</strong><small>'+escapeHtml(parseInt(f.is_required,10)===1?S('required','Obligatorio'):S('optional','Opcional'))+' · '+escapeHtml(f.field_count||0)+' campos</small></div></div>').join(''):'<p class="sct-builder-empty">'+escapeHtml(S('no_forms','No hay formularios vinculados.'))+'</p>';
-        }
-        const assignments=protocol.asignaciones||[];
-        const executions=assignments.reduce((sum,a)=>sum+Number(a.execution_count||0),0);
-        const pending=assignments.filter(a=>String(a.state)==='activa' && !a.latest_result).length;
-        if(els.manageStats)els.manageStats.textContent=assignments.length+' asignaciones · '+executions+' ejecuciones · '+pending+' pendientes';
-        if(els.manageAssignments){
-            els.manageAssignments.innerHTML=assignments.length?assignments.map(a=>{
-                const person=((a.worker_name||a.name_worker||a.responsible_name||'')+' '+(a.worker_lastname||a.responsible_lastname||'')).trim() || a.responsible_user || 'Asignación';
-                const result=a.latest_result?String(a.latest_result).replaceAll('_',' '):S('pending_review','Pendiente');
-                const progress=a.execution_count>0?100:0;
-                return '<div class="sct-builder-readonly-assignment"><div class="sct-builder-readonly-assignment__main"><strong>'+escapeHtml(person)+'</strong><small>'+escapeHtml(a.project_name||a.center_name||a.responsible_user||'')+'</small></div><div class="sct-builder-readonly-assignment__progress"><span><b>'+escapeHtml(result)+'</b><small>'+escapeHtml(a.execution_count||0)+' ejecución(es) · '+escapeHtml(String(a.next_due_at||'').slice(0,16).replace('T',' '))+'</small></span><div class="sct-builder-mini-progress"><i style="width:'+progress+'%"></i></div></div></div>';
-            }).join(''):'<p class="sct-builder-empty">'+escapeHtml(S('no_assignments','No hay asignaciones.'))+'</p>';
-        }
-    }
-    async function openManageReadonly(protocolRow) {
-        managedProtocol=protocolRow;
-        if(els.manageTitle)els.manageTitle.textContent=protocolRow.name||S('manage','Gestionar');
-        if(els.manageMaterials)els.manageMaterials.innerHTML='<p class="sct-builder-empty">'+escapeHtml(S('loading','Cargando...'))+'</p>';
-        if(manageModal)manageModal.show();
-        let url='./protocolos-detalle.php?id_protocol='+encodeURIComponent(protocolRow.id_protocol);
-        if(scopeCompany)url+='&id_company='+encodeURIComponent(scopeCompany);
-        const [detail,materials]=await Promise.all([api(url),api('../actividades/support-materials.php?entity=protocol&id='+encodeURIComponent(protocolRow.id_protocol))]);
-        if(!detail.success){showAlert(els.manageAlert,detail.message||'No se pudo cargar el detalle.','danger');return;}
-        managedProtocol=detail.data; renderManageProtocol(managedProtocol);
-        if(els.manageMaterials){ const rows=materials.success?(materials.data||[]):[]; els.manageMaterials.innerHTML=rows.length?rows.map(m=>{const href=m.file_path?'../../'+String(m.file_path).replace(/^\/+/, ''):'';return '<div class="sct-builder-readonly-row"><div><i class="bi bi-paperclip"></i><strong>'+escapeHtml(m.original_name||m.title||'Material')+'</strong><small>'+escapeHtml(m.mime_type||'')+'</small></div>'+(href?'<a class="btn btn-outline-custom btn-sm" href="'+escapeHtml(href)+'" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i><span>'+escapeHtml(S('view','Ver'))+'</span></a>':'')+'</div>';}).join(''):'<p class="sct-builder-empty">Aún no hay material cargado.</p>'; }
-        if(els.manageEdit){ const readonly=!isGlobalAdmin&&managedProtocol.id_company==null; els.manageEdit.classList.toggle('d-none',readonly||!!managedProtocol.definition_locked); }
+        els.detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function updateCompositionEditing(locked, implementationCompany) {
@@ -499,11 +363,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function removeProtocolForm(idProtocolForm) {
-        if (!await window.sctConfirmAction(S('confirm_remove_form', '¿Deseas desvincular este formulario?'))) return;
+        if (!confirm(S('confirm_remove_form', '¿Deseas desvincular este formulario?'))) return;
         const r = await postJson('./protocolo-formularios-quitar.php', { id_protocol_form: idProtocolForm });
         if (!r.success) { showAlert(els.detailAlert, r.message, 'danger'); return; }
         showAlert(els.detailAlert, r.message || S('linked'), 'success');
-        await refreshProtocol(currentProtocol.id_protocol, false);
+        await openDetail(currentProtocol.id_protocol);
     }
 
     async function loadCompanyCatalogs(company) {
@@ -518,29 +382,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fillSelect(els.assignCenter, companyCatalogs.centers || [], true);
         fillSelect(els.assignProject, companyCatalogs.projects || [], true);
         fillSelect(els.assignWorker, companyCatalogs.workers || [], true, item => item.name + (item.rut ? ' · ' + item.rut : ''));
-        renderProtocolGroups(companyCatalogs.projects || []);
         fillSelect(els.assignResponsible, companyCatalogs.users || [], false, item => item.name + ' · ' + item.id);
         fillSelect(els.trackingResponsible, companyCatalogs.users || [], true, item => item.name + ' · ' + item.id);
-    }
-
-    function renderProtocolGroups(projects) {
-        if (!els.protocolGroups) return;
-        els.protocolGroups.innerHTML = '';
-        const available=(projects||[]).filter(p=>Array.isArray(p.workers)&&p.workers.length);
-        if(!available.length){els.protocolGroups.innerHTML='<p class="text-muted small mb-0">'+escapeHtml(S('no_groups','No hay grupos con trabajadores disponibles.'))+'</p>';return;}
-        available.forEach(project=>{
-            const row=document.createElement('label');row.className='sct-builder-group-option';
-            row.innerHTML='<input type="checkbox" class="form-check-input"><span><strong>'+escapeHtml(project.name)+'</strong><small>'+escapeHtml(project.count||project.workers.length)+' '+escapeHtml(S('workers','trabajadores'))+'</small></span>';
-            const cb=row.querySelector('input');
-            cb.addEventListener('change',()=>{
-                const values=new Set(Array.from(els.assignWorker.selectedOptions||[]).map(o=>String(o.value)));
-                (project.workers||[]).forEach(id=>cb.checked?values.add(String(id)):values.delete(String(id)));
-                Array.from(els.assignWorker.options||[]).forEach(o=>{if(o.value)o.selected=values.has(String(o.value));});
-                els.assignWorker.dispatchEvent(new Event('change',{bubbles:true}));
-                if(window.sctBulkAssignmentRefresh)window.sctBulkAssignmentRefresh('assignWorker');
-            });
-            els.protocolGroups.appendChild(row);
-        });
     }
 
     function fillSelect(select, items, blank, formatter) {
@@ -588,17 +431,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function changeAssignmentState(id, state) {
-        if (!await window.sctConfirmAction(S('confirm_state', '¿Confirmas este cambio de estado?'))) return;
+        if (!confirm(S('confirm_state', '¿Confirmas este cambio de estado?'))) return;
         const r = await postJson('./asignacion-cambiar-estado.php', { id_protocol_assignment: id, state: state });
         if (!r.success) { showAlert(els.detailAlert, r.message, 'danger'); return; }
         showAlert(els.detailAlert, r.message, 'success');
-        refreshProtocol(currentProtocol.id_protocol, false);
+        openDetail(currentProtocol.id_protocol);
     }
 
     async function openAssignment(assignment) {
         currentAssignment = assignment;
-        if (wizard) wizard.hide();
-        els.detail.classList.add('active');
         els.assignmentDetail.classList.add('active');
         els.executionReview.classList.remove('active');
         els.assignmentDetailTitle.textContent = assignment.responsible_name + ' ' + (assignment.responsible_lastname || '') + ' · ' + formatDateTime(assignment.next_due_at);
@@ -610,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function loadExecutions(idAssignment) {
         const r = await api('./ejecuciones-listar.php?id_protocol_assignment=' + encodeURIComponent(idAssignment));
         if (!r.success) { els.executionsList.innerHTML = '<div class="alert alert-danger">' + escapeHtml(r.message) + '</div>'; return; }
-        const rows = r.data || []; protocolCatalogRows = rows;
+        const rows = r.data || [];
         if (!rows.length) { els.executionsList.innerHTML = '<p class="text-muted small">' + escapeHtml(S('no_executions', 'Todavía no existen ejecuciones.')) + '</p>'; return; }
         els.executionsList.innerHTML = '';
         rows.forEach(e => {
@@ -658,7 +499,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function loadTracking(idAssignment) {
         const r = await api('./tracking-listar.php?id_protocol_assignment=' + encodeURIComponent(idAssignment));
         if (!r.success) { els.trackingList.innerHTML = '<div class="alert alert-danger">' + escapeHtml(r.message) + '</div>'; return; }
-        const rows = r.data || []; protocolCatalogRows = rows;
+        const rows = r.data || [];
         if (!rows.length) { els.trackingList.innerHTML = '<p class="text-muted small">' + escapeHtml(S('no_tracking', 'No hay acciones de seguimiento registradas.')) + '</p>'; return; }
         els.trackingList.innerHTML = '';
         rows.forEach(t => {
@@ -709,12 +550,8 @@ document.addEventListener('DOMContentLoaded', function () {
         els.submit.disabled = false;
         if (!r.success) { showAlert(els.alert, r.message, 'danger'); return; }
         showAlert(els.alert, r.message || S('created', 'Protocolo guardado correctamente.'), 'success');
-        const wasEdit = els.mode.value === 'edit';
-        const createdId = !wasEdit && r.data ? parseInt(r.data.id_protocol || '0', 10) : parseInt(els.target.value || '0', 10);
-        if (!wasEdit && createdId) await postJson('./protocolos-cambiar-estado.php', {id_protocol: createdId, state: 0});
-        await loadProtocols();
-        if (createdId) { await refreshProtocol(createdId, false); if (wizard) wizard.show(); await showWizardStep(2); }
         resetDefinitionForm();
+        loadProtocols();
     });
 
     els.cancelEdit.addEventListener('click', resetDefinitionForm);
@@ -734,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const r = await postJson('./protocolo-formularios-agregar.php', payload);
         if (!r.success) { showAlert(els.detailAlert, r.message, 'danger'); return; }
         showAlert(els.detailAlert, r.message || S('linked'), 'success');
-        await refreshProtocol(currentProtocol.id_protocol, false);
+        await openDetail(currentProtocol.id_protocol);
     });
 
     els.assignRecurrence.addEventListener('change', () => {
@@ -751,7 +588,7 @@ document.addEventListener('DOMContentLoaded', function () {
             id_company: implementationCompany,
             id_company_center: els.assignCenter.value || null,
             id_project: els.assignProject.value || null,
-            id_workers: window.sctBulkAssignmentValues ? window.sctBulkAssignmentValues('assignWorker') : Array.from(els.assignWorker.selectedOptions || []).map(o => o.value).filter(Boolean),
+            id_worker: els.assignWorker.value || null,
             responsible_user: els.assignResponsible.value,
             start_at: els.assignStart.value,
             next_due_at: els.assignDue.value,
@@ -763,8 +600,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const r = await postJson('./asignaciones-crear.php', payload);
         if (!r.success) { showAlert(els.detailAlert, r.message, 'danger'); return; }
         showAlert(els.detailAlert, r.message || S('assigned'), 'success');
-        els.assignmentForm.reset(); setDefaultDates(); els.assignInterval.disabled = true; if (window.sctBulkAssignmentRefresh) window.sctBulkAssignmentRefresh('assignWorker');
-        await refreshProtocol(currentProtocol.id_protocol, false);
+        els.assignmentForm.reset(); setDefaultDates(); els.assignInterval.disabled = true;
+        await openDetail(currentProtocol.id_protocol);
     });
 
     els.reviewForm.addEventListener('submit', async (event) => {
@@ -777,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentAssignment) {
             await Promise.all([loadExecutions(currentAssignment.id_protocol_assignment), loadTracking(currentAssignment.id_protocol_assignment)]);
         }
-        await refreshProtocol(currentProtocol.id_protocol, false);
+        await openDetail(currentProtocol.id_protocol);
     });
 
     els.trackingForm.addEventListener('submit', async (event) => {
@@ -804,24 +641,9 @@ document.addEventListener('DOMContentLoaded', function () {
         currentProtocol = null; currentAssignment = null; companyCatalogs = null;
     }
 
-    if (els.stateFilter) els.stateFilter.addEventListener('change',renderProtocolsFiltered);
-    if (els.createBtn) els.createBtn.addEventListener('click', openProtocolCreate);
-    if (els.manageEdit) els.manageEdit.addEventListener('click',()=>{ if(!managedProtocol)return; const p=managedProtocol; if(manageModal)manageModal.hide(); setTimeout(()=>editProtocol(p),180); });
-    document.querySelectorAll('[data-protocol-step-go]').forEach(btn=>btn.addEventListener('click',()=>{const n=parseInt(btn.dataset.protocolStepGo,10);if(n===1||currentProtocol)showWizardStep(n);}));
-    document.querySelectorAll('[data-protocol-next]').forEach(btn=>btn.addEventListener('click',()=>{if(currentProtocol)showWizardStep(wizardStep+1);}));
-    if (els.wizardPrev) els.wizardPrev.addEventListener('click',()=>showWizardStep(wizardStep-1));
-    if (els.saveDraft) els.saveDraft.addEventListener('click',async()=>{if(!currentProtocol)return;const id=currentProtocol.id_protocol;const r=await postJson('./protocolos-cambiar-estado.php',{id_protocol:id,state:0});if(!r.success)return showAlert(els.alert,r.message,'danger');showAlert(els.alert,S('draft_saved','Borrador guardado.'),'success');await refreshProtocol(id,false);});
-    if (els.publish) els.publish.addEventListener('click',async()=>{if(!currentProtocol)return;const r=await postJson('./protocolos-cambiar-estado.php',{id_protocol:currentProtocol.id_protocol,state:1});if(!r.success)return showAlert(els.alert,r.message,'danger');showAlert(els.alert,S('published','Protocolo publicado.'),'success');await loadProtocols();if(wizard)wizard.hide();});
-    if (els.materialChoose) els.materialChoose.addEventListener('click',()=>els.materialFiles.click());
-    if (els.materialFiles) els.materialFiles.addEventListener('change',()=>{addPendingMaterials(els.materialFiles.files);els.materialFiles.value='';});
-    if (els.materialDrop) { ['dragenter','dragover'].forEach(ev=>els.materialDrop.addEventListener(ev,e=>{e.preventDefault();els.materialDrop.classList.add('is-dragover');})); ['dragleave','drop'].forEach(ev=>els.materialDrop.addEventListener(ev,e=>{e.preventDefault();els.materialDrop.classList.remove('is-dragover');if(ev==='drop')addPendingMaterials(e.dataTransfer.files);})); }
-    if (els.materialUpload) els.materialUpload.addEventListener('click',uploadProtocolMaterials);
-    if (els.wizardEl) els.wizardEl.addEventListener('hidden.bs.modal',()=>{pendingMaterialFiles=[];renderPendingMaterials();});
-
     // Inicio
     els.formTitle.dataset.defaultTitle = els.formTitle.textContent;
     resetDefinitionForm();
-    showWizardStep(1);
     setDefaultDates();
     (async () => {
         await loadCompanies();

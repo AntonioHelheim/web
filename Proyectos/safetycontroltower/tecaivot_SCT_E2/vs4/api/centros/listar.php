@@ -7,7 +7,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/CentroRepository.php';
 
-requireCapability($pdo, 'centers.manage');
+requireCapability($pdo, 'centers.view');
 
 $idCompanySolicitado = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT) ?: null;
 $idCompany = centrosResolveCompanyId($pdo, $idCompanySolicitado);

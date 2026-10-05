@@ -6,7 +6,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/InduccionRepository.php';
 
-requireCapability($pdo, 'induction.manage');
+requireCapability($pdo, 'induction.view');
 
 $idTest = filter_input(INPUT_GET, 'id_test', FILTER_VALIDATE_INT);
 if (!$idTest) {

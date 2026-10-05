@@ -51,18 +51,14 @@ function dashboardResolveCompanyId(PDO $pdo, ?int $idCompanySolicitado): int
 function dashboardResolvePeriod(?string $period): array
 {
     $key = strtolower(trim((string) ($period ?? '90')));
-    $allowed = ['today' => 0, '7' => 7, '15' => 15, '30' => 30, '90' => 90, '180' => 180, '365' => 365, 'all' => null];
+    $allowed = ['30' => 30, '90' => 90, '180' => 180, '365' => 365, 'all' => null];
     if (!array_key_exists($key, $allowed)) {
         $key = '90';
     }
 
     $now = new DateTimeImmutable('now');
     $days = $allowed[$key];
-    if ($key === 'today') {
-        $from = $now->setTime(0, 0, 0)->format('Y-m-d H:i:s');
-    } else {
-        $from = $days === null ? null : $now->modify('-' . $days . ' days')->format('Y-m-d H:i:s');
-    }
+    $from = $days === null ? null : $now->modify('-' . $days . ' days')->format('Y-m-d H:i:s');
 
     return [
         'key' => $key,

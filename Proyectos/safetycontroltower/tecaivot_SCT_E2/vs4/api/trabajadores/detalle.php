@@ -6,7 +6,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/TrabajadorRepository.php';
 
-requireCapability($pdo, 'workers.manage');
+requireCapability($pdo, 'workers.view');
 
 $idWorker = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$idWorker) {

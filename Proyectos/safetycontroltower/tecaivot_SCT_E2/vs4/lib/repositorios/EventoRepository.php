@@ -45,7 +45,7 @@ function eventoListarPorEmpresa(PDO $pdo, int $idCompany, array $filtros = []): 
 {
     $sql = 'SELECT e.id_security_events, e.id_company, e.id_company_center, e.id_project, e.id_worker,
                    e.id_worker_name, e.id_event, e.event_date, e.description, e.criticality, e.state,
-                   e.date_create, e.last_update,
+                   e.created_by, e.date_create, e.last_update,
                    c.name AS center_name, p.name AS project_name, t.name AS event_type_name
             FROM security_events e
             INNER JOIN company_center c ON c.id_company_center = e.id_company_center
@@ -70,15 +70,9 @@ function eventoListarPorEmpresa(PDO $pdo, int $idCompany, array $filtros = []): 
         $sql .= ' AND e.description LIKE :busqueda';
         $params['busqueda'] = '%' . $filtros['busqueda'] . '%';
     }
-
-    if (!empty($filtros['visible_user_id'])) {
-        $sql .= ' AND (e.created_by = :visible_user_id';
-        $params['visible_user_id'] = (string) $filtros['visible_user_id'];
-        if (!empty($filtros['visible_worker_id'])) {
-            $sql .= ' OR e.id_worker = :visible_worker_id';
-            $params['visible_worker_id'] = (int) $filtros['visible_worker_id'];
-        }
-        $sql .= ')';
+    if (!empty($filtros['created_by'])) {
+        $sql .= ' AND e.created_by = :created_by';
+        $params['created_by'] = (string) $filtros['created_by'];
     }
 
     $sql .= ' ORDER BY e.event_date DESC';

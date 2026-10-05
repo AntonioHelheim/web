@@ -6,7 +6,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/CentroRepository.php';
 
-requireCapability($pdo, 'centers.manage');
+requireCapability($pdo, 'centers.view');
 
 $idCentro = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$idCentro) {

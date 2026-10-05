@@ -48,40 +48,6 @@ function formularioAssertVisible(PDO $pdo,array $form): void
     }
 }
 
-
-/**
- * P76: valida el acceso de ejecución cuando un formulario usa la asignación
- * individual incorporada en P73. Los formularios históricos sin registros de
- * asignación conservan su comportamiento abierto dentro de la empresa.
- */
-function formularioAssertExecutionAccess(PDO $pdo,array $form,int $idCompany,string $idUsers): ?array
-{
-    $idForm=(int)($form['id_form']??0);
-    if($idForm<=0 || !formularioAssignmentSchemaReady($pdo) || !formularioTieneAsignaciones($pdo,$idForm,$idCompany)) {
-        return null;
-    }
-
-    $assignment=formularioAsignacionUsuario($pdo,$idForm,$idCompany,$idUsers);
-    if(!$assignment) {
-        responderJSON(false,null,'Este formulario no está asignado a tu usuario.',403);
-    }
-
-    $status=(string)($assignment['status']??'');
-    if($status==='submitted') {
-        responderJSON(false,null,'Este formulario asignado ya fue completado.',409);
-    }
-    if($status!=='pending') {
-        responderJSON(false,null,'Esta asignación de formulario ya no está disponible.',403);
-    }
-
-    $accessStart=trim((string)($assignment['access_start']??''));
-    if($accessStart!=='' && strtotime($accessStart)!==false && strtotime($accessStart)>time()) {
-        responderJSON(false,null,'Este formulario todavía no está disponible para completar.',409);
-    }
-
-    return $assignment;
-}
-
 function formularioCanEdit(PDO $pdo,array $form): bool
 {
     if(!currentUserHasCapability($pdo,'dynamic_forms.manage')) return false;

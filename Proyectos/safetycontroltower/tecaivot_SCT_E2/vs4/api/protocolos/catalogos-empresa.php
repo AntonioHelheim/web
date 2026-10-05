@@ -18,21 +18,6 @@ try {
         . 'WHERE id_company=:id_company AND state=1 ORDER BY name ASC'
     );
     $projects->execute(['id_company' => $company]);
-    $projectRows = $projects->fetchAll(PDO::FETCH_ASSOC);
-    $projectWorkers = $pdo->prepare(
-        'SELECT wp.id_project,wp.id_worker FROM worker_projects wp '
-        . 'INNER JOIN workers w ON w.id_worker=wp.id_worker AND w.id_company=:id_company AND w.state=1 '
-        . 'INNER JOIN projects p ON p.id_project=wp.id_project AND p.id_company=:id_company AND p.state=1 '
-        . 'ORDER BY wp.id_project,wp.id_worker'
-    );
-    $projectWorkers->execute(['id_company' => $company]);
-    $map = [];
-    foreach ($projectWorkers->fetchAll(PDO::FETCH_ASSOC) as $link) $map[(int)$link['id_project']][] = (int)$link['id_worker'];
-    foreach ($projectRows as &$projectRow) {
-        $projectRow['workers'] = array_values(array_unique($map[(int)$projectRow['id']] ?? []));
-        $projectRow['count'] = count($projectRow['workers']);
-    }
-    unset($projectRow);
 
     $workers = $pdo->prepare(
         "SELECT id_worker AS id,CONCAT(name,' ',lastname) AS name,rut,position "
@@ -50,7 +35,7 @@ try {
 
     responderJSON(true, [
         'centers' => $center->fetchAll(),
-        'projects' => $projectRows,
+        'projects' => $projects->fetchAll(),
         'workers' => $workers->fetchAll(),
         'users' => $users->fetchAll(),
     ]);

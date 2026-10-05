@@ -14,8 +14,6 @@ if(formularioIsGlobalAdmin($pdo)){
 try{
     if($idCompany!==null){$st=$pdo->prepare('SELECT COUNT(*) FROM company WHERE id_company=:id AND state=1');$st->execute(['id'=>$idCompany]);if((int)$st->fetchColumn()===0)responderJSON(false,null,'La empresa seleccionada no está disponible.',400);}
     $id=formularioCrear($pdo,$idCompany,$name,$description!==''?$description:null,(string)currentUserId());
-    $newState=!empty($input['draft'])?0:1;
-    if($newState===0) formularioCambiarEstado($pdo,$id,0);
-    auditTrailLogChanges($pdo,$idCompany,'formularios','dynamic_forms',$id,[],['name'=>$name,'description'=>$description!==''?$description:null,'state'=>$newState],'create',$name);
+    auditTrailLogChanges($pdo,$idCompany,'formularios','dynamic_forms',$id,[],['name'=>$name,'description'=>$description!==''?$description:null,'state'=>1],'create',$name);
     responderJSON(true,['id_form'=>$id],'Formulario creado correctamente.',201);
 }catch(PDOException $e){error_log('formularios/formularios-crear: '.$e->getMessage());responderJSON(false,null,'No se pudo crear el formulario.',500);}

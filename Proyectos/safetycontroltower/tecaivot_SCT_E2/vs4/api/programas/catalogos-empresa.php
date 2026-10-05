@@ -4,10 +4,9 @@ requireCapability($pdo,'programs.view');
 programasRequireSchema($pdo);
 $requested=isset($_GET['id_company'])?(int)$_GET['id_company']:null;
 $idCompany=programasResolveCompany($pdo,$requested);
-$workerScope = programasIsWorkerScope($pdo);
 responderJSON(true,[
-    'projects'=>$workerScope ? [] : programaListarProyectosEmpresa($pdo,$idCompany),
-    'users'=>(!$workerScope && currentUserHasAnyCapability($pdo,['programs.create','programs.edit']))
+    'projects'=>programaListarProyectosEmpresa($pdo,$idCompany),
+    'users'=>currentUserHasAnyCapability($pdo,['programs.create','programs.edit'])
         ? programaListarUsuariosEmpresa($pdo,$idCompany)
         : [],
 ],'Catálogos disponibles.');

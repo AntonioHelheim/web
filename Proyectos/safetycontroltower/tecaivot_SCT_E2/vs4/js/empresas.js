@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const question = action === "deactivate"
             ? tr("companies_confirm_deactivate", { company: company.razon_social })
             : tr("companies_confirm_reactivate", { company: company.razon_social });
-        if (!await window.sctConfirmAction(question)) return;
+        if (!window.confirm(question)) return;
 
         try {
             const { response, data } = await postJson(action === "deactivate" ? "baja.php" : "reactivar.php", { id_company: Number(id) });

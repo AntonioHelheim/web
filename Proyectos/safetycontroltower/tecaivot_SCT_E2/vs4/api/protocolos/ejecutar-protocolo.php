@@ -4,11 +4,6 @@ require_once __DIR__ . '/../../i18n.php';
 
 requireCapabilityPage($pdo, 'protocols.execute', '../../acceso-denegado.php');
 aplicarCabecerasSeguridad();
-$embeddedActivityMode = isset($_GET['embedded']) && (string) $_GET['embedded'] === '1';
-if ($embeddedActivityMode) {
-    // El HUB Mi espacio sólo puede embeber actividades desde el mismo origen.
-    header('X-Frame-Options: SAMEORIGIN');
-}
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -34,9 +29,6 @@ try {
         throw new RuntimeException('Esta asignación no corresponde a tu cuenta.');
     }
     if ((string) $assignment['state'] !== 'activa' || (int) $assignment['protocol_state'] !== 1) {
-        throw new RuntimeException(t('protocols_execution_not_available'));
-    }
-    if (!protocoloAssignmentHasStarted($assignment)) {
         throw new RuntimeException(t('protocols_execution_not_available'));
     }
     if (!protocoloAssignmentProtocolIsEffective($assignment)) {
@@ -86,53 +78,25 @@ function protocolFieldOptions(array $field): array
 <title><?= htmlspecialchars(t('protocols_execution_title'), ENT_QUOTES, 'UTF-8') ?> - Safety Control Tower</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>&ux=20260920-p32-v51">
-<link rel="stylesheet" href="../../css/sct-main-sections.css?v=20260923-p79">
+<link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>">
 <style>
-.form-section{border:1px solid var(--border);border-radius:18px;background:#fff;padding:1.2rem;margin-bottom:1rem}.form-section.optional-off{opacity:.65}.question-field{padding:.85rem 0;border-bottom:1px solid var(--border)}.question-field:last-child{border-bottom:0}.required-mark{color:#AA2424}.submit-bar{position:sticky;bottom:0;z-index:15;background:rgba(248,250,252,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:1rem 0;margin-top:1rem}@media(max-width:599.98px){.form-section{padding:.9rem}}
+.welcome-topbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;border-bottom:1px solid rgba(0,0,0,.08)}.welcome-topbar .brand-symbol img{height:32px}.topbar-actions{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}.welcome-hero{padding:2.7rem 0 1.3rem}.welcome-greeting-icon{font-size:2.4rem;color:var(--primary);margin-bottom:.6rem}.form-section{border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;padding:1.2rem;margin-bottom:1rem}.form-section.optional-off{opacity:.65}.question-field{padding:.85rem 0;border-bottom:1px solid var(--border)}.question-field:last-child{border-bottom:0}.required-mark{color:#dc2626}.meta-strip{display:flex;gap:.55rem;flex-wrap:wrap;justify-content:center}.meta-pill{display:inline-flex;align-items:center;gap:.3rem;border-radius:999px;padding:.28rem .6rem;background:rgba(0,163,244,.1);color:var(--primary-dark);font-size:.76rem;font-weight:700}.meta-pill.danger{background:rgba(220,38,38,.1);color:#b91c1c}.submit-bar{position:sticky;bottom:0;z-index:15;background:rgba(248,250,252,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:1rem 0;margin-top:1rem}@media(max-width:767.98px){.welcome-topbar{align-items:flex-start}.topbar-actions{max-width:72%}.form-section{padding:1rem}}
 </style>
-</head>
-<body class="sct-module-page sct-activity-mode sct-protocol-execution-page<?= $embeddedActivityMode ? ' sct-embedded-activity' : '' ?>">
-<div class="container sct-main-shell sct-protocol-execution-shell" data-csrf-token="<?= $csrf ?>" data-assignment-id="<?= $assignment ? (int) $assignment['id_protocol_assignment'] : 0 ?>" data-activity-user="<?= htmlspecialchars(hash('sha256', (string) ($_SESSION['user_email'] ?? '')), ENT_QUOTES, 'UTF-8') ?>">
-<?php
-        $sctNavbarBasePath = '../../';
-        $sctNavbarBackHref = './mis-protocolos.php';
-        if (!$embeddedActivityMode) { require __DIR__ . '/../../partials/app-navbar.php'; }
-        ?>
 
-        <section class="sct-main-hero sct-protocol-execution-hero" aria-labelledby="protocol-execution-title">
-            <div class="sct-main-hero__copy">
-                <span class="section-label sct-main-pill"><i class="bi bi-clipboard2-pulse" aria-hidden="true"></i><?= htmlspecialchars(t('mgmt_filter_personal'), ENT_QUOTES, 'UTF-8') ?></span>
-                <h1 id="protocol-execution-title" class="section-title sct-main-title"><?= htmlspecialchars($assignment['protocol_name'] ?? t('protocols_execution_title'),ENT_QUOTES,'UTF-8') ?></h1>
-                <p class="section-description sct-main-intro"><?= htmlspecialchars(t('protocols_execution_intro'),ENT_QUOTES,'UTF-8') ?> <strong><?= $userEmail ?></strong>.</p>
-                <?php if ($assignment): ?>
-                    <?php
-                        $protocolDueRaw = (string) ($assignment['next_due_at'] ?? '');
-                        $protocolDueDisplay = $protocolDueRaw;
-                        if ($protocolDueRaw !== '') {
-                            $protocolDueTs = strtotime($protocolDueRaw);
-                            if ($protocolDueTs !== false) {
-                                $protocolDueDisplay = date('d/m/Y H:i:s', $protocolDueTs);
-                            }
-                        }
-                    ?>
-                    <div class="sct-protocol-execution-meta" aria-label="<?= htmlspecialchars(t('protocols_assignment_detail'), ENT_QUOTES, 'UTF-8') ?>">
-                        <span class="sct-protocol-meta-item">
-                            <i class="bi bi-building" aria-hidden="true"></i>
-                            <span class="sct-protocol-meta-item__copy"><small><?= htmlspecialchars(t('protocols_company'), ENT_QUOTES, 'UTF-8') ?></small><strong><?= htmlspecialchars((string)$assignment['company_name'],ENT_QUOTES,'UTF-8') ?></strong></span>
-                        </span>
-                        <span class="sct-protocol-meta-item">
-                            <i class="bi bi-calendar-event" aria-hidden="true"></i>
-                            <span class="sct-protocol-meta-item__copy"><small><?= htmlspecialchars(t('protocols_due'), ENT_QUOTES, 'UTF-8') ?></small><strong><?= htmlspecialchars($protocolDueDisplay, ENT_QUOTES, 'UTF-8') ?></strong></span>
-                        </span>
-                        <?php if ((int)$assignment['is_overdue']===1): ?>
-                            <span class="sct-protocol-meta-item is-danger"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><span class="sct-protocol-meta-item__copy"><small><?= htmlspecialchars(t('protocols_due'), ENT_QUOTES, 'UTF-8') ?></small><strong><?= htmlspecialchars(t('protocols_overdue'),ENT_QUOTES,'UTF-8') ?></strong></span></span>
-                        <?php endif; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
-<?php $sctModuleMode = 'execute'; require __DIR__ . '/../../partials/module-context.php'; ?>
+    <!-- Compatibilidad visual vs4 sobre base funcional vs3 -->
+    <script>document.documentElement.classList.add('sct-vs4-frontend');try{if(localStorage.getItem('sct-theme')==='dark')document.documentElement.classList.add('sct-theme-dark');}catch(e){}</script>
+    <link rel="stylesheet" href="../../css/sct-v3-frontend.css?v=20261002-vs4-ui">
+</head>
+<body>
+<?php
+$sctNavbarBasePath = '../../';
+require __DIR__ . '/../../partials/app-navbar.php';
+?>
+
+<div class="container" data-csrf-token="<?= $csrf ?>" data-assignment-id="<?= $assignment ? (int) $assignment['id_protocol_assignment'] : 0 ?>">
+<div class="welcome-topbar"><div class="brand-wrapper"><div class="brand-symbol"><img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower"></div></div><div class="topbar-actions"><select id="pageLanguageSelect" class="form-select form-select-sm" aria-label="<?= htmlspecialchars(t('common_language'),ENT_QUOTES,'UTF-8') ?>"><?php foreach(idiomasDisponiblesConNombre() as $code=>$name): ?><option value="<?= htmlspecialchars($code,ENT_QUOTES,'UTF-8') ?>" <?= $code===idiomaActual()?'selected':'' ?>><?= htmlspecialchars($name,ENT_QUOTES,'UTF-8') ?></option><?php endforeach; ?></select><a href="./mis-protocolos.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('mgmt_back'),ENT_QUOTES,'UTF-8') ?> <i class="bi bi-arrow-left"></i></a><a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('common_logout'),ENT_QUOTES,'UTF-8') ?> <i class="bi bi-box-arrow-right"></i></a></div></div>
+
+<section class="welcome-hero text-center"><div class="welcome-greeting-icon"><i class="bi bi-clipboard2-pulse"></i></div><span class="section-label">SAFETY CONTROL TOWER</span><h1 class="section-title"><?= htmlspecialchars($assignment['protocol_name'] ?? t('protocols_execution_title'),ENT_QUOTES,'UTF-8') ?></h1><p class="section-description intro-description-centered"><?= htmlspecialchars(t('protocols_execution_intro'),ENT_QUOTES,'UTF-8') ?> <strong><?= $userEmail ?></strong>.</p><?php if ($assignment): ?><div class="meta-strip"><span class="meta-pill"><i class="bi bi-building"></i><?= htmlspecialchars((string)$assignment['company_name'],ENT_QUOTES,'UTF-8') ?></span><span class="meta-pill"><i class="bi bi-calendar-event"></i><?= htmlspecialchars((string)$assignment['next_due_at'],ENT_QUOTES,'UTF-8') ?></span><?php if ((int)$assignment['is_overdue']===1): ?><span class="meta-pill danger"><?= htmlspecialchars(t('protocols_overdue'),ENT_QUOTES,'UTF-8') ?></span><?php endif; ?></div><?php endif; ?></section>
 
 <?php if ($error): ?>
 <div class="alert alert-danger"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
@@ -158,17 +122,12 @@ function protocolFieldOptions(array $field): array
 </div>
 </section>
 <?php endforeach; ?>
-<div class="submit-bar"><div class="sct-activity-actions"><?php if (!$embeddedActivityMode): ?><a href="./mis-protocolos.php" id="executionExit" class="btn btn-outline-custom"><i class="bi bi-box-arrow-left"></i> <?= htmlspecialchars(t('activity_exit'),ENT_QUOTES,'UTF-8') ?></a><?php endif; ?><button id="executionSave" type="button" class="btn btn-outline-custom"><i class="bi bi-save"></i> <?= htmlspecialchars(t('activity_save_draft'),ENT_QUOTES,'UTF-8') ?></button><button id="executionSubmit" type="submit" class="btn btn-primary-custom"><i class="bi bi-send"></i> <?= htmlspecialchars(t('protocols_submit_execution'),ENT_QUOTES,'UTF-8') ?></button></div></div>
+<div class="submit-bar"><div class="d-flex justify-content-end gap-2"><a href="./mis-protocolos.php" class="btn btn-outline-custom"><?= htmlspecialchars(t('my_forms_cancel'),ENT_QUOTES,'UTF-8') ?></a><button id="executionSubmit" type="submit" class="btn btn-primary-custom"><i class="bi bi-send"></i> <?= htmlspecialchars(t('protocols_submit_execution'),ENT_QUOTES,'UTF-8') ?></button></div></div>
 </form>
 <?php endif; ?>
 </div>
-<script id="protocolExecutionI18n" type="application/json"><?= json_encode(['success'=>t('protocols_execution_success'),'error'=>t('protocols_error_response'),'save'=>t('activity_draft_saved'),'restore'=>t('activity_draft_restored'),'required'=>t('activity_complete_before_submit'),'confirm'=>t('activity_confirm_submit'),'file'=>t('activity_file_not_saved')],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script>
+<script id="protocolExecutionI18n" type="application/json"><?= json_encode(['success'=>t('protocols_execution_success'),'error'=>t('protocols_error_response')],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../js/sct-activity-session.js?v=20260920-p32-v51"></script>
 <script src="../../js/protocolos-ejecutar.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 <script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
-
-    <?php if (!$embeddedActivityMode) { require __DIR__ . '/../../partials/app-footer.php'; } ?>
-
-<script src="../../js/sct-module-ui.js?v=20260920-p43"></script>
 </body></html>

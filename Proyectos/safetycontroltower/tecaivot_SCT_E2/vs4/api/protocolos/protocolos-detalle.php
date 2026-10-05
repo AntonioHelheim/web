@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/common.php';
-requireCapability($pdo, 'protocols.manage');
+requireCapability($pdo, 'protocols.view');
 
 $idProtocol = filter_input(INPUT_GET, 'id_protocol', FILTER_VALIDATE_INT);
 if (!$idProtocol) responderJSON(false, null, 'Protocolo no válido.', 400);

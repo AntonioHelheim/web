@@ -25,7 +25,7 @@ try {
     }
 
     $evento = eventoObtenerPorId($pdo, (int) $evidencia['id_security_events']);
-    if (!$evento || !eventosCanViewEvent($pdo, $evento)) {
+    if (!$evento || (!eventosIsGlobalAdmin($pdo) && (int) $evento['id_company'] !== currentUserCompanyId($pdo))) {
         responderJSON(false, null, 'No tienes permisos para ver esta evidencia.', 403);
     }
 

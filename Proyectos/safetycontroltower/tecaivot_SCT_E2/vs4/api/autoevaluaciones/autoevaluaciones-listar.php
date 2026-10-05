@@ -2,7 +2,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/InduccionRepository.php';
 
-requireCapability($pdo, 'self_assessments.manage');
+requireCapability($pdo, 'self_assessments.view');
 $idCompanySolicitado = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT) ?: null;
 $idCompany = autoevaluacionResolveCompanyId($pdo, $idCompanySolicitado);
 try {

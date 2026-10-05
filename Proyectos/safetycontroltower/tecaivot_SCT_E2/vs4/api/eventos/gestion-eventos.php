@@ -11,7 +11,6 @@ if (empty($_SESSION['csrf_token'])) {
 
 $puedeGestionar = currentUserHasCapability($pdo, 'events.manage');
 $isGlobalAdmin = eventosIsGlobalAdmin($pdo);
-$isWorkerReporter = eventosIsWorkerScope($pdo);
 
 $csrfTokenEscaped = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 $userEmail = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -25,7 +24,7 @@ $jsKeys = [
     'events_detail_loading','events_detail_load_error','events_tracking_empty','events_tracking_deadline_prefix',
     'events_tracking_add_error','events_evidence_empty','events_evidence_remove_title','events_evidence_remove_confirm',
     'events_evidence_select_file','events_evidence_upload_error','events_error_response',
-    'events_detail_project_label','events_detail_worker_label','events_detail_criticality_label','events_type_label','events_center_label','events_date_label','events_description_label','common_state',
+    'events_detail_project_label','events_detail_worker_label','events_detail_criticality_label','common_state',
 ];
 $jsStrings = [];
 foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
@@ -41,8 +40,7 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- build: <?= $assetVersionEscaped ?> -->
-    <link rel="stylesheet" href="../../css/style.css?v=<?= $assetVersionEscaped ?>-p51">
-    <link rel="stylesheet" href="../../css/sct-main-sections.css?v=20260923-p79">
+    <link rel="stylesheet" href="../../css/style.css?v=<?= $assetVersionEscaped ?>">
 
     <style>
         .welcome-hero { padding: 4rem 0 2rem; }
@@ -52,56 +50,68 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
         }
         .welcome-topbar .brand-symbol img { height: 32px; }
         .topbar-actions { display: flex; gap: 0.5rem; align-items: center; }
-        .welcome-greeting-icon { font-size: 2.5rem; color: #008836; margin-bottom: 0.75rem; }
+        .welcome-greeting-icon { font-size: 2.5rem; color: #16a34a; margin-bottom: 0.75rem; }
         .quick-links { margin-top: 2rem; margin-bottom: 3rem; }
         .form-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .evento-detalle { display: none; }
         .evento-detalle.activo { display: block; }
         .subseccion { border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 1.25rem; }
-        .crit-baja { color: #008836; }
-        .crit-media { color: #BC5921; }
-        .crit-alta { color: #FF8C47; }
-        .crit-critica { color: #AA2424; font-weight: 700; }
-        .estado-1 { color: #AA2424; }
-        .estado-2 { color: #BC5921; }
-        .estado-3 { color: #008836; }
+        .crit-baja { color: #16a34a; }
+        .crit-media { color: #d97706; }
+        .crit-alta { color: #ea580c; }
+        .crit-critica { color: #dc2626; font-weight: 700; }
+        .estado-1 { color: #dc2626; }
+        .estado-2 { color: #d97706; }
+        .estado-3 { color: #16a34a; }
         .chip-row {
             display: flex; justify-content: space-between; align-items: center;
             padding: 0.5rem 0.75rem; border-radius: 10px; background: rgba(0,0,0,0.03);
             margin-bottom: 0.5rem; font-size: 0.9rem;
         }
-        .chip-row button { border: none; background: none; color: #AA2424; }
+        .chip-row button { border: none; background: none; color: #dc2626; }
         .chip-row a { text-decoration: none; }
-        .event-detail-summary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; margin-top:.9rem; }
-        .event-detail-fact { padding:.8rem .9rem; border:1px solid var(--border); border-radius:14px; background:var(--background-soft); min-width:0; }
-        .event-detail-fact small { display:block; margin-bottom:.2rem; color:var(--text-secondary); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.035em; }
-        .event-detail-fact strong { display:block; color:var(--text); overflow-wrap:anywhere; }
-        .event-detail-description { grid-column:1/-1; padding:1rem; border-left:4px solid var(--primary); border-radius:0 14px 14px 0; background:#fff; box-shadow:inset 0 0 0 1px var(--border); }
-        .event-detail-description p { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
-        @media(max-width:575.98px){.event-detail-summary{grid-template-columns:1fr}.event-detail-description{grid-column:auto}}
     </style>
-</head>
-<body class="sct-module-page sct-management-module-page">
 
-    <div class="container sct-main-shell sct-management-shell" data-csrf-token="<?php echo $csrfTokenEscaped; ?>"
+    <!-- Compatibilidad visual vs4 sobre base funcional vs3 -->
+    <script>document.documentElement.classList.add('sct-vs4-frontend');try{if(localStorage.getItem('sct-theme')==='dark')document.documentElement.classList.add('sct-theme-dark');}catch(e){}</script>
+    <link rel="stylesheet" href="../../css/sct-v3-frontend.css?v=20261002-vs4-ui">
+</head>
+<body>
+<?php
+$sctNavbarBasePath = '../../';
+require __DIR__ . '/../../partials/app-navbar.php';
+?>
+
+
+    <div class="container" data-csrf-token="<?php echo $csrfTokenEscaped; ?>"
          data-is-global-admin="<?php echo $isGlobalAdmin ? '1' : '0'; ?>"
          data-puede-gestionar="<?php echo $puedeGestionar ? '1' : '0'; ?>">
 
-        <?php
-        $sctNavbarBasePath = '../../';
-        $sctNavbarBackHref = '../usuarios/gestiones.php';
-        require __DIR__ . '/../../partials/app-navbar.php';
-        ?>
+        <div class="welcome-topbar">
+            <div class="brand-wrapper">
+                <div class="brand-symbol">
+                    <img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= tt('common_language') ?>">
+                    <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?>
+                        <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm"><?= tt('mgmt_back') ?> <i class="bi bi-arrow-left"></i></a>
+                <a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?= tt('common_logout') ?> <i class="bi bi-box-arrow-right"></i></a>
+            </div>
+        </div>
 
-        <section class="welcome-hero text-center sct-main-hero">
+        <section class="welcome-hero text-center">
             <div class="welcome-greeting-icon"><i class="bi bi-exclamation-triangle"></i></div>
-            <span class="section-label sct-main-pill">SAFETY CONTROL TOWER</span>
-            <h1 class="section-title sct-main-title"><?= tt('events_title') ?></h1>
-            <p class="section-description intro-description-centered sct-main-intro">
+            <span class="section-label">SAFETY CONTROL TOWER</span>
+            <h1 class="section-title"><?= tt('events_title') ?></h1>
+            <p class="section-description intro-description-centered">
                 <?= tt('events_intro') ?> <?= tt('users_session_as') ?> <strong><?php echo $userEmail; ?></strong>.
             </p>
         </section>
-<?php $sctModuleMode = 'report'; require __DIR__ . '/../../partials/module-context.php'; ?>
 
         <section class="quick-links">
 
@@ -121,9 +131,8 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
 
             <div id="eventActionAlert" class="alert d-none mb-3" role="alert" aria-live="polite"></div>
 
-            <details class="feature-card sct-action-panel mb-4" open>
-                <summary><span class="h5 mb-0"><?= tt('events_report_title') ?></span></summary>
-                <div class="sct-action-panel__body">
+            <div class="feature-card mb-4">
+                <h2 class="h5 mb-3"><?= tt('events_report_title') ?></h2>
                 <form id="eventForm" novalidate>
                     <input type="hidden" id="eventFormMode" value="create">
                     <input type="hidden" id="eventFormTarget" value="">
@@ -155,16 +164,12 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
                                 <option value=""><?= tt('events_no_project') ?></option>
                             </select>
                         </div>
-                        <?php if (!$isWorkerReporter): ?>
                         <div class="col-12 col-md-4">
                             <label for="eventWorker" class="form-label"><?= tt('events_worker_label') ?></label>
                             <select id="eventWorker" class="form-select">
                                 <option value=""><?= tt('events_no_worker') ?></option>
                             </select>
                         </div>
-                        <?php else: ?>
-                        <select id="eventWorker" class="d-none" aria-hidden="true"><option value=""></option></select>
-                        <?php endif; ?>
                         <div class="col-12 col-md-4">
                             <label for="eventDate" class="form-label"><?= tt('events_date_label') ?></label>
                             <input type="datetime-local" id="eventDate" class="form-control" required>
@@ -179,11 +184,10 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
                         <button type="button" id="eventCancelEditBtn" class="btn btn-outline-custom btn-sm d-none"><?= tt('events_cancel_edit') ?></button>
                     </div>
                 </form>
-                </div>
-            </details>
+            </div>
 
             <div class="feature-card mt-4">
-                <h2 class="h5 mb-3"><?= tt($isWorkerReporter ? 'events_my_reports_title' : 'events_list_title') ?></h2>
+                <h2 class="h5 mb-3"><?= tt('events_list_title') ?></h2>
 
                 <div class="row g-2 mb-3">
                     <div class="col-6 col-md-3">
@@ -276,11 +280,7 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
 
     <script id="eventsI18n" type="application/json"><?= json_encode($jsStrings, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/eventos.js?v=<?= $assetVersionEscaped ?>-p79"></script>
+    <script src="../../js/eventos.js?v=<?= $assetVersionEscaped ?>"></script>
     <script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
-
-    <?php require __DIR__ . '/../../partials/app-footer.php'; ?>
-
-<script src="../../js/sct-module-ui.js?v=20260920-p43"></script>
 </body>
 </html>

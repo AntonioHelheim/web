@@ -12,7 +12,6 @@ try {
     $filterStateRaw = (string) ($_GET['state'] ?? 'all');
     $filterCompanyId = (int) ($_GET['id_company'] ?? 0);
     $filterAccessLevel = (int) ($_GET['access_level'] ?? 0);
-    $selfOnly = isset($_GET['self']) && (string) $_GET['self'] === '1';
 
     $params = [];
     $where = ['1=1'];
@@ -30,11 +29,6 @@ try {
     if ($filterStateRaw === '0' || $filterStateRaw === '1') {
         $where[] = 'u.state = :state';
         $params['state'] = (int) $filterStateRaw;
-    }
-
-    if ($selfOnly) {
-        $where[] = 'u.id_users = :self_user';
-        $params['self_user'] = (string) $context['session_user_id'];
     }
 
     if ($search !== '') {

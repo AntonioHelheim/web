@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? S("projects_confirm_reactivate", "¿Reactivar este proyecto?")
             : S("projects_confirm_deactivate", "¿Dar de baja este proyecto? Podrás reactivarlo más adelante.");
 
-        if (!await window.sctConfirmAction(confirmacion)) {
+        if (!window.confirm(confirmacion)) {
             return;
         }
 
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function desasociarTrabajador(idWorker) {
-        if (!await window.sctConfirmAction(S("projects_workers_remove_confirm", "¿Quitar a este trabajador del proyecto?"))) {
+        if (!window.confirm(S("projects_workers_remove_confirm", "¿Quitar a este trabajador del proyecto?"))) {
             return;
         }
 

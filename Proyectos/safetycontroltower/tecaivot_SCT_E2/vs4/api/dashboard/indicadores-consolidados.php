@@ -33,8 +33,6 @@ try {
         'eventos' => dashboardConsolidadoEventos($pdo, $period['desde'], $period['hasta']),
         'formularios' => dashboardConsolidadoFormularios($pdo, $period['desde'], $period['hasta']),
         'protocolos' => dashboardConsolidadoProtocolos($pdo),
-        'programas' => dashboardConsolidadoProgramas($pdo),
-        'role' => 'administrador_completo',
         'tendencia' => dashboardConsolidadoTendenciaMensual($pdo, $period['desde'], $period['hasta']),
         'ranking_empresas' => dashboardRankingEmpresas($pdo, $period['desde'], $period['hasta']),
     ];

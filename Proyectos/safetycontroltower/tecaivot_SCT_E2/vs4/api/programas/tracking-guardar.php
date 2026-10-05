@@ -13,8 +13,8 @@ $target=programasPercent($input['target_percentage']??null,'Meta mensual',true);
 $progress=(float)programasPercent($input['progress_percentage']??null,'Avance mensual',false);
 $comments=programasText($input['comments']??null,5000,'Comentarios');
 $monthKey=substr($period,0,7);
-if (!empty($program['start_date']) && $monthKey<substr((string)$program['start_date'],0,7)) responderJSON(false,null,'El período es anterior al inicio del programa.',400);
-if (!empty($program['end_date']) && $monthKey>substr((string)$program['end_date'],0,7)) responderJSON(false,null,'El período es posterior al término del programa.',400);
+if (!empty($program['start_date']) && $monthKey<substr((string)$program['start_date'],0,7)) responderJSON(false,null,'El periodo es anterior al inicio del programa.',400);
+if (!empty($program['end_date']) && $monthKey>substr((string)$program['end_date'],0,7)) responderJSON(false,null,'El periodo es posterior al término del programa.',400);
 $before=programaTrackingObtenerPeriodo($pdo,$id,$period);
 try {
     $pdo->beginTransaction();

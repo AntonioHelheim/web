@@ -8,7 +8,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/EmpresaRepository.php';
 
-requireCapability($pdo, 'centers.manage');
+requireCapability($pdo, 'centers.view');
 requireCapability($pdo, 'companies.view_all');
 
 try {

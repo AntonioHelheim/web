@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/common.php';
-requireCapability($pdo, 'protocols.manage');
+requireCapability($pdo, 'protocols.view');
 
 $requested = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT);
 $idCompany = protocoloIsGlobalAdmin($pdo)

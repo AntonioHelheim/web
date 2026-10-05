@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/common.php';
 
-requireCapabilityPage($pdo, 'centers.manage', '../../acceso-denegado.php');
+requireCapabilityPage($pdo, 'centers.view', '../../acceso-denegado.php');
 
 aplicarCabecerasSeguridad();
 
@@ -37,8 +37,7 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- build: <?= $assetVersionEscaped ?> -->
-    <link rel="stylesheet" href="../../css/style.css?v=<?= $assetVersionEscaped ?>-p51">
-    <link rel="stylesheet" href="../../css/sct-main-sections.css?v=20260923-p79">
+    <link rel="stylesheet" href="../../css/style.css?v=<?= $assetVersionEscaped ?>">
 
     <style>
         .welcome-hero { padding: 4rem 0 2rem; }
@@ -51,33 +50,59 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
         }
         .welcome-topbar .brand-symbol img { height: 32px; }
         .topbar-actions { display: flex; gap: 0.5rem; align-items: center; }
-        .welcome-greeting-icon { font-size: 2.5rem; color: #008836; margin-bottom: 0.75rem; }
+        .welcome-greeting-icon { font-size: 2.5rem; color: #16a34a; margin-bottom: 0.75rem; }
         .quick-links { margin-top: 2rem; margin-bottom: 3rem; }
         .form-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     </style>
+
+    <!-- Compatibilidad visual vs4 sobre base funcional vs3 -->
+    <script>document.documentElement.classList.add('sct-vs4-frontend');try{if(localStorage.getItem('sct-theme')==='dark')document.documentElement.classList.add('sct-theme-dark');}catch(e){}</script>
+    <link rel="stylesheet" href="../../css/sct-v3-frontend.css?v=20261002-vs4-ui">
 </head>
-<body class="sct-module-page sct-management-module-page">
+<body>
+<?php
+$sctNavbarBasePath = '../../';
+require __DIR__ . '/../../partials/app-navbar.php';
+?>
 
-    <div class="container sct-main-shell sct-management-shell" data-csrf-token="<?php echo $csrfTokenEscaped; ?>" data-is-global-admin="<?php echo $isGlobalAdmin ? '1' : '0'; ?>">
 
-        <?php
-        $sctNavbarBasePath = '../../';
-        $sctNavbarBackHref = '../usuarios/gestiones.php';
-        require __DIR__ . '/../../partials/app-navbar.php';
-        ?>
+    <div class="container" data-csrf-token="<?php echo $csrfTokenEscaped; ?>" data-is-global-admin="<?php echo $isGlobalAdmin ? '1' : '0'; ?>">
 
-        <section class="welcome-hero text-center sct-main-hero">
+        <div class="welcome-topbar">
+            <div class="brand-wrapper">
+                <div class="brand-symbol">
+                    <img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower">
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= tt('common_language') ?>">
+                    <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?>
+                        <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm">
+                    <?= tt('mgmt_back') ?>
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <a href="../../logout.php" class="btn btn-outline-custom btn-sm">
+                    <?= tt('common_logout') ?>
+                    <i class="bi bi-box-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <section class="welcome-hero text-center">
             <div class="welcome-greeting-icon">
                 <i class="bi bi-geo-alt"></i>
             </div>
-            <span class="section-label sct-main-pill">SAFETY CONTROL TOWER</span>
-            <h1 class="section-title sct-main-title"><?= tt('centers_title') ?></h1>
-            <p class="section-description intro-description-centered sct-main-intro">
+            <span class="section-label">SAFETY CONTROL TOWER</span>
+            <h1 class="section-title"><?= tt('centers_title') ?></h1>
+            <p class="section-description intro-description-centered">
                 <?= tt('centers_intro') ?>
                 <?= tt('users_session_as') ?> <strong><?php echo $userEmail; ?></strong>.
             </p>
         </section>
-<?php $sctModuleMode = 'manage'; require __DIR__ . '/../../partials/module-context.php'; ?>
 
         <section class="quick-links">
 
@@ -157,9 +182,5 @@ foreach ($jsKeys as $k) $jsStrings[$k] = t($k);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/centros.js?v=<?= $assetVersionEscaped ?>"></script>
     <script src="../../js/lang-switcher.js?v=<?= $assetVersionEscaped ?>"></script>
-
-    <?php require __DIR__ . '/../../partials/app-footer.php'; ?>
-
-<script src="../../js/sct-module-ui.js?v=20260920-p43"></script>
 </body>
 </html>

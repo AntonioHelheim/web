@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/common.php';
-requireCapability($pdo, 'dynamic_forms.manage');
+requireCapability($pdo, 'dynamic_forms.view');
 $idRequested=filter_input(INPUT_GET,'id_company',FILTER_VALIDATE_INT);
 $idCompany=formularioResolveManagementCompany($pdo,$idRequested?:null);
 try{

@@ -27,11 +27,9 @@ if (!empty($_GET['state'])) {
 if (!empty($_GET['q'])) {
     $filtros['busqueda'] = trim((string) $_GET['q']);
 }
-
-if (eventosIsWorkerScope($pdo)) {
-    $filtros['visible_user_id'] = (string) (currentUserId() ?? '');
-    $workerId = eventosCurrentWorkerId($pdo);
-    if ($workerId > 0) $filtros['visible_worker_id'] = $workerId;
+// El modo "mis reportes" nunca acepta un id de usuario del cliente: usa exclusivamente la sesión.
+if (isset($_GET['mine']) && (string) $_GET['mine'] === '1') {
+    $filtros['created_by'] = currentUserId();
 }
 
 try {

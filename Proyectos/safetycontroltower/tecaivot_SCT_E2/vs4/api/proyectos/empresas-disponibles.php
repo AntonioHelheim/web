@@ -17,7 +17,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/EmpresaRepository.php';
 
-requireCapability($pdo, 'projects.manage');
+requireCapability($pdo, 'projects.view');
 requireCapability($pdo, 'companies.view_all');
 
 try {

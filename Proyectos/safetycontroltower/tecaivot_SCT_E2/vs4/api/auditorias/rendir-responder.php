@@ -23,9 +23,7 @@ try {
     $asignacion = asignacionObtenerPorId($pdo, $idAsignacion);
     if (!$asignacion || (string) $asignacion['id_users'] !== (string) currentUserId()) responderJSON(false, null, 'Asignación no encontrada.', 404);
     if ((int) $asignacion['state'] !== ASIGNACION_PENDIENTE) responderJSON(false, null, 'Esta auditoría ya fue finalizada.', 400);
-    $inicioAsignacion = trim((string) ($asignacion['assignamente_date'] ?? ''));
-    if ($inicioAsignacion !== '' && strtotime($inicioAsignacion) !== false && strtotime($inicioAsignacion) > time()) responderJSON(false, null, 'Esta auditoría todavía no está disponible para ejecutar.', 409);
-    $fueraDePlazo = !empty($asignacion['deadline']) && strtotime((string) $asignacion['deadline']) < time();
+    if (!empty($asignacion['deadline']) && strtotime((string) $asignacion['deadline']) < time()) responderJSON(false, null, 'El plazo de esta auditoría ya venció.', 400);
 
     $test = cursoObtenerPorId($pdo, (int) $asignacion['id_test']);
     if (!$test || (int) $test['state'] !== 1) responderJSON(false, null, 'La auditoría ya no está disponible.', 400);
@@ -64,7 +62,7 @@ try {
     // Serializa envíos concurrentes de la misma asignación para impedir
     // duplicar un intento por doble clic o solicitudes simultáneas.
     $lock = $pdo->prepare(
-        'SELECT state, deadline, assignamente_date
+        'SELECT state, deadline
          FROM users_test_assigned
          WHERE id_user_test_assigned = :id_asignacion
          FOR UPDATE'
@@ -75,11 +73,10 @@ try {
         $pdo->rollBack();
         responderJSON(false, null, 'Esta auditoría ya fue finalizada.', 409);
     }
-    if (!empty($asignacionBloqueada['assignamente_date']) && strtotime((string)$asignacionBloqueada['assignamente_date']) > time()) {
+    if (!empty($asignacionBloqueada['deadline']) && strtotime((string) $asignacionBloqueada['deadline']) < time()) {
         $pdo->rollBack();
-        responderJSON(false, null, 'Esta auditoría todavía no está disponible para ejecutar.', 409);
+        responderJSON(false, null, 'El plazo de esta auditoría ya venció.', 400);
     }
-    $fueraDePlazo = $fueraDePlazo || (!empty($asignacionBloqueada['deadline']) && strtotime((string) $asignacionBloqueada['deadline']) < time());
 
     $intentosUsados = evaluacionIntentosUsadosPorAsignacion($pdo, $idAsignacion);
     if ($intentosUsados >= (int) $test['attempts_allowed']) {
@@ -121,8 +118,7 @@ try {
         'puntaje_maximo' => $resultado['puntaje_maximo'],
         'intentos_usados' => $intentosAhora,
         'attempts_allowed' => (int) $test['attempts_allowed'],
-        'fuera_de_plazo' => $fueraDePlazo,
-    ], $fueraDePlazo ? 'Auditoría recibida fuera de plazo y registrada.' : ($finalizada ? 'Auditoría finalizada y registrada.' : 'Intento registrado. La auditoría permanece pendiente.'));
+    ], $finalizada ? 'Auditoría finalizada y registrada.' : 'Intento registrado. La auditoría permanece pendiente.');
 } catch (Throwable $e) {
     if ($pdo->inTransaction()) $pdo->rollBack();
     if (auditoriaMigrationMessage($e)) responderJSON(false, null, 'El módulo requiere ejecutar la migración 20260908_stage2_audits.sql.', 503);

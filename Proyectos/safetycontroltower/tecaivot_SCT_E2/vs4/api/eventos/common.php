@@ -43,38 +43,6 @@ function eventosRequireGestionPage(PDO $pdo, string $redirectTo = '../../acceso-
     requireRolePage($pdo, EVENTOS_ROLES_REPORTAR, $redirectTo);
 }
 
-function eventosCurrentRole(PDO $pdo): string
-{
-    $context = resolveCurrentUserAccessContext($pdo);
-    return $context !== null ? (string) ($context['primary_role'] ?? 'trabajador') : 'trabajador';
-}
-
-function eventosIsWorkerScope(PDO $pdo): bool
-{
-    return eventosCurrentRole($pdo) === 'trabajador';
-}
-
-function eventosCurrentWorkerId(PDO $pdo): int
-{
-    $profile = currentUserProfile($pdo);
-    return $profile && !empty($profile['id_worker']) ? (int) $profile['id_worker'] : 0;
-}
-
-function eventosCanViewEvent(PDO $pdo, array $evento): bool
-{
-    if (eventosIsGlobalAdmin($pdo)) return true;
-
-    $companyId = currentUserCompanyId($pdo);
-    if (!$companyId || (int) ($evento['id_company'] ?? 0) !== $companyId) return false;
-
-    if (!eventosIsWorkerScope($pdo)) return true;
-
-    $userId = (string) (currentUserId() ?? '');
-    $workerId = eventosCurrentWorkerId($pdo);
-    if ($userId !== '' && (string) ($evento['created_by'] ?? '') === $userId) return true;
-    return $workerId > 0 && (int) ($evento['id_worker'] ?? 0) === $workerId;
-}
-
 function eventosResolveCompanyId(PDO $pdo, ?int $idCompanySolicitado): int
 {
     if (eventosIsGlobalAdmin($pdo)) {

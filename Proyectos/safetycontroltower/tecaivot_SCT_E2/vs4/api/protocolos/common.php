@@ -379,23 +379,6 @@ function protocoloAssignmentProtocolIsEffective(array $assignment, ?DateTime $wh
     return true;
 }
 
-function protocoloAssignmentHasStarted(array $assignment, ?DateTime $when=null): bool
-{
-    $startAt = trim((string) ($assignment['start_at'] ?? ''));
-    if ($startAt === '') {
-        return true;
-    }
-
-    try {
-        $start = new DateTime($startAt);
-    } catch (Throwable $e) {
-        return false;
-    }
-
-    $when = $when ?: new DateTime('now');
-    return $when >= $start;
-}
-
 function protocoloUserCanExecuteAssignment(PDO $pdo, array $assignment): bool
 {
     $userId = (string) currentUserId();

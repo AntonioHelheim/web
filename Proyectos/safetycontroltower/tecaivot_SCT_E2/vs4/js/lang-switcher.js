@@ -119,16 +119,16 @@
             dialogo.style.cssText =
                 "background:#fff;border-radius:14px;max-width:380px;width:100%;" +
                 "padding:22px 22px 18px;box-shadow:0 24px 60px rgba(15,23,42,.28);" +
-                "color:#232D35;";
+                "color:#1f2937;";
 
             var titulo = document.createElement("h2");
             titulo.id = "sctLangSwitcherTitle";
             titulo.textContent = tituloTexto;
-            titulo.style.cssText = "margin:0 0 10px;font-size:17px;font-weight:800;color:#182663;";
+            titulo.style.cssText = "margin:0 0 10px;font-size:17px;font-weight:800;color:#0b2149;";
 
             var texto = document.createElement("p");
             texto.textContent = mensaje;
-            texto.style.cssText = "margin:0 0 20px;font-size:13.5px;line-height:1.5;color:#334551;";
+            texto.style.cssText = "margin:0 0 20px;font-size:13.5px;line-height:1.5;color:#374151;";
 
             var acciones = document.createElement("div");
             acciones.style.cssText = "display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;";
@@ -137,14 +137,14 @@
             btnCancelar.type = "button";
             btnCancelar.textContent = textoCancelar;
             btnCancelar.style.cssText =
-                "border:1px solid #CCD4DA;background:#fff;color:#334551;border-radius:8px;" +
+                "border:1px solid #d1d5db;background:#fff;color:#374151;border-radius:8px;" +
                 "padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;";
 
             var btnConfirmar = document.createElement("button");
             btnConfirmar.type = "button";
             btnConfirmar.textContent = textoConfirmar;
             btnConfirmar.style.cssText =
-                "border:none;background:#007BC5;color:#fff;border-radius:8px;" +
+                "border:none;background:#0a3d91;color:#fff;border-radius:8px;" +
                 "padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;";
 
             function cerrar(resultado) {

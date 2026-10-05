@@ -2,7 +2,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/InduccionRepository.php';
 
-requireCapability($pdo, 'audits.manage');
+requireCapability($pdo, 'audits.view');
 
 $idTest = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$idTest) responderJSON(false, null, 'Parámetro inválido.', 400);

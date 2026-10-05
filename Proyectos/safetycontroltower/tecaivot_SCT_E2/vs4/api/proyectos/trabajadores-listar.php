@@ -8,7 +8,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/ProyectoRepository.php';
 
-requireCapability($pdo, 'projects.manage');
+requireCapability($pdo, 'projects.view');
 
 $idProject = filter_input(INPUT_GET, 'id_project', FILTER_VALIDATE_INT);
 if (!$idProject) {

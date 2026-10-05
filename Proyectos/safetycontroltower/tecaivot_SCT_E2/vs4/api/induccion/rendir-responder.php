@@ -57,11 +57,6 @@ try {
         responderJSON(false, null, 'Este curso ya no está pendiente de rendir.', 400);
     }
 
-    $inicioAsignacion = trim((string) ($asignacion['assignamente_date'] ?? ''));
-    if ($inicioAsignacion !== '' && strtotime($inicioAsignacion) !== false && strtotime($inicioAsignacion) > time()) {
-        responderJSON(false, null, 'Este curso todavía no está disponible para rendir.', 409);
-    }
-
     $curso = cursoObtenerPorId($pdo, (int) $asignacion['id_test']);
     if (!$curso || (int) $curso['state'] !== 1) {
         responderJSON(false, null, 'El curso ya no está disponible.', 400);
@@ -70,7 +65,7 @@ try {
     $idUsuario = currentUserId();
     $idTest = (int) $curso['id_test'];
 
-    $intentosUsados = induccionIntentosUsadosPorAsignacion($pdo, $idAsignacion);
+    $intentosUsados = intentosUsados($pdo, $idUsuario, $idTest);
     if ($intentosUsados >= (int) $curso['attempts_allowed']) {
         responderJSON(false, null, 'Ya usaste todos los intentos disponibles para este curso.', 400);
     }
@@ -128,35 +123,12 @@ try {
         responderJSON(false, null, 'Debes responder todas las preguntas del curso, sin repetir.', 400);
     }
 
+    $idIntento = siguienteIntento($pdo, $idUsuario, $idTest);
+
     $pdo->beginTransaction();
 
-    // P76: serializa la misma asignación para impedir que un doble clic o dos
-    // requests simultáneos consuman el mismo número de intento o dupliquen el
-    // resultado/certificado.
-    $lock = $pdo->prepare(
-        'SELECT state,assignamente_date,deadline FROM users_test_assigned '
-        . 'WHERE id_user_test_assigned=:id FOR UPDATE'
-    );
-    $lock->execute(['id'=>$idAsignacion]);
-    $lockedAssignment=$lock->fetch();
-    if(!$lockedAssignment || (int)$lockedAssignment['state']!==ASIGNACION_PENDIENTE) {
-        $pdo->rollBack();
-        responderJSON(false,null,'Este curso ya no está pendiente de rendir.',409);
-    }
-    if(!empty($lockedAssignment['assignamente_date']) && strtotime((string)$lockedAssignment['assignamente_date'])>time()) {
-        $pdo->rollBack();
-        responderJSON(false,null,'Este curso todavía no está disponible para rendir.',409);
-    }
-
-    $intentosUsados = induccionIntentosUsadosPorAsignacion($pdo, $idAsignacion);
-    if ($intentosUsados >= (int) $curso['attempts_allowed']) {
-        $pdo->rollBack();
-        responderJSON(false, null, 'Ya usaste todos los intentos disponibles para este curso.', 400);
-    }
-    $idIntento = induccionSiguienteIntentoPorAsignacion($pdo, $idAsignacion);
-
-    induccionRegistrarRespuestasPorAsignacion($pdo, $idAsignacion, $idUsuario, (int) $asignacion['id_company'], $idTest, $idIntento, $respuestasValidadas);
-    $resultado = induccionCalcularResultadoPorAsignacion($pdo, $idAsignacion, $idIntento);
+    registrarRespuestas($pdo, $idUsuario, (int) $asignacion['id_company'], $idTest, $idIntento, $respuestasValidadas);
+    $resultado = calcularResultadoIntento($pdo, $idUsuario, $idTest, $idIntento);
 
     $aprobado = $resultado['porcentaje'] >= (float) $curso['approval_percentage'];
     $intentosUsadosAhora = $intentosUsados + 1;

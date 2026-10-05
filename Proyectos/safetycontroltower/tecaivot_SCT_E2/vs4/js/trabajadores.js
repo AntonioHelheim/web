@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? S("workers_confirm_reactivate", "¿Reactivar a este trabajador?")
             : S("workers_confirm_deactivate", "¿Dar de baja a este trabajador? Podrás reactivarlo más adelante.");
 
-        if (!await window.sctConfirmAction(confirmacion)) {
+        if (!window.confirm(confirmacion)) {
             return;
         }
 

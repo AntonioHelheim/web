@@ -33,12 +33,6 @@ try {
     formularioAssertVisible($pdo, $form);
 
     $company = formularioCurrentCompany($pdo);
-    $assignment = formularioAssertExecutionAccess(
-        $pdo,
-        $form,
-        $company,
-        (string) currentUserId()
-    );
     $fields = formularioCampos($pdo, (int) $idForm);
     if (!$fields) {
         responderJSON(false, null, 'Este formulario no tiene campos configurados.', 400);
@@ -57,24 +51,6 @@ try {
         $validated,
         $createdFiles
     );
-
-    // P76: si el formulario usa asignación explícita, cerrar exactamente la
-    // asignación validada. Así la notificación, Mi espacio y el resultado usan
-    // el mismo registro y no se mezclan empresas/usuarios.
-    if ($assignment && !empty($assignment['id_form_assignment'])) {
-        $assignmentUpdate = $pdo->prepare(
-            "UPDATE dynamic_form_assignments SET status='submitted', last_update=NOW() "
-            . "WHERE id_form_assignment=:id AND id_company=:company AND id_users=:user AND status='pending'"
-        );
-        $assignmentUpdate->execute([
-            'id'=>(int)$assignment['id_form_assignment'],
-            'company'=>$company,
-            'user'=>(string)currentUserId(),
-        ]);
-        if ($assignmentUpdate->rowCount() !== 1) {
-            throw new RuntimeException('La asignación cambió de estado antes de completar el envío.');
-        }
-    }
 
     $pdo->commit();
 

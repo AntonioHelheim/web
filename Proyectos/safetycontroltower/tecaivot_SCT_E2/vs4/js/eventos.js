@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const csrfToken = container.dataset.csrfToken;
     const isGlobalAdmin = container.dataset.isGlobalAdmin === "1";
     const puedeGestionar = container.dataset.puedeGestionar === "1";
+    const pageParams = new URLSearchParams(window.location.search);
+    const mineMode = pageParams.get("mine") === "1";
+    const newMode = pageParams.get("new") === "1";
 
     const companySelect = document.getElementById("companySelect");
 
@@ -128,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
             eventCenter.appendChild(opt);
         });
         if ((centros.data || []).length === 0) {
-            mostrarAlerta(eventActionAlert, S("events_no_centers_warning", "Esta empresa todavía no tiene centros/sedes activos. Crea uno en Gestión de centros/sedes antes de reportar un evento."), "warning");
+            mostrarAlerta(eventActionAlert, S("events_no_centers_warning", "Esta empresa todavía no tiene centros/sedes activos. Crea uno en Gestión de Centros/Sedes antes de reportar un evento."), "warning");
         }
 
         eventProject.innerHTML = '<option value="">' + escapeHtml(S("events_no_project", "Sin proyecto asociado")) + '</option>';
@@ -175,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (filterCriticality.value) params.set("criticality", filterCriticality.value);
         if (filterState.value) params.set("state", filterState.value);
         if (filterSearch.value.trim()) params.set("q", filterSearch.value.trim());
+        if (mineMode) params.set("mine", "1");
         return params.toString();
     }
 
@@ -315,21 +319,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderizarDetalle(ev) {
         const [estadoTexto] = etiquetasEstado[ev.state] || ["-"];
-        const eventDate = ev.event_date ? String(ev.event_date).replace(" ", " · ").substring(0, 18) : "-";
-        const fact = function (label, value, extraClass) {
-            return '<div class="event-detail-fact ' + (extraClass || '') + '"><small>' + escapeHtml(label) + '</small><strong>' + escapeHtml(value || "-") + '</strong></div>';
-        };
         eventDetailBody.innerHTML =
-            '<div class="event-detail-summary">' +
-                fact(S("events_type_label", "Tipo de evento"), ev.event_type_name) +
-                fact(S("events_center_label", "Centro/sede"), ev.center_name) +
-                fact(S("events_detail_project_label", "Proyecto"), ev.project_name || S("events_no_project", "Sin proyecto")) +
-                fact(S("events_detail_worker_label", "Trabajador"), ev.id_worker_name || S("events_no_worker", "Sin trabajador")) +
-                fact(S("events_detail_criticality_label", "Criticidad"), ev.criticality, 'crit-' + escapeHtml(ev.criticality || '')) +
-                fact(S("common_state", "Estado"), estadoTexto, 'estado-' + escapeHtml(ev.state || '')) +
-                fact(S("events_date_label", "Fecha y hora"), eventDate) +
-                '<div class="event-detail-description"><small>' + escapeHtml(S("events_description_label", "Descripción")) + '</small><p>' + escapeHtml(ev.description || "-") + '</p></div>' +
-            '</div>';
+            '<p><strong>' + escapeHtml(ev.event_type_name) + '</strong> — ' + escapeHtml(ev.center_name) +
+            (ev.project_name ? ' · ' + escapeHtml(S("events_detail_project_label", "Proyecto")) + ': ' + escapeHtml(ev.project_name) : '') +
+            (ev.id_worker_name ? ' · ' + escapeHtml(S("events_detail_worker_label", "Trabajador")) + ': ' + escapeHtml(ev.id_worker_name) : '') + '</p>' +
+            '<p class="crit-' + escapeHtml(ev.criticality) + '">' + escapeHtml(S("events_detail_criticality_label", "Criticidad")) + ': ' + escapeHtml(ev.criticality) + ' · ' + escapeHtml(S("common_state", "Estado")) + ': ' + estadoTexto + '</p>' +
+            '<p>' + escapeHtml(ev.description) + '</p>';
 
         if (puedeGestionar) {
             document.querySelectorAll('#eventDetail [data-estado]').forEach(function (btn) {
@@ -396,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const btn = row.querySelector("button");
             if (btn) {
                 btn.addEventListener("click", async function () {
-                    if (!await window.sctConfirmAction(S("events_evidence_remove_confirm", "¿Eliminar esta evidencia?"))) return;
+                    if (!window.confirm(S("events_evidence_remove_confirm", "¿Eliminar esta evidencia?"))) return;
                     const r = await postJson("./evidencia-eliminar.php", { id_evidence: ev.id_evidence });
                     if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
                     abrirDetalle(currentEventId);
@@ -427,4 +422,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
+    if (newMode && eventForm) {
+        window.setTimeout(function () {
+            eventForm.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (eventType) eventType.focus();
+        }, 250);
+    }
 });

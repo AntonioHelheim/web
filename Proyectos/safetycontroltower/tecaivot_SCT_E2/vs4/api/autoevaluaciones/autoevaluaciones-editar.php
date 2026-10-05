@@ -18,7 +18,7 @@ $from = DateTime::createFromFormat('Y-m-d', (string)($input['effective_date_from
 $until = DateTime::createFromFormat('Y-m-d', (string)($input['effective_date_until'] ?? ''));
 if (!$idTest || $name==='' || $description==='') responderJSON(false,null,'Datos de autoevaluación incompletos.',400);
 if (sctTextLength($name)>50 || sctTextLength($description)>255) responderJSON(false,null,'Nombre o descripción exceden el largo permitido.',400);
-if ($attemptsAllowed===false || $attemptsAllowed<1 || $attemptsAllowed>20 || $approvalPercentage===false || $approvalPercentage<0 || $approvalPercentage>100) responderJSON(false,null,'Parámetros de evaluación no válidos.',400);
+if ($attemptsAllowed===false || $attemptsAllowed<1 || $attemptsAllowed>20 || $approvalPercentage===false || $approvalPercentage<1 || $approvalPercentage>100) responderJSON(false,null,'Parámetros de evaluación no válidos.',400);
 if (!$from || !$until || $until<$from) responderJSON(false,null,'El rango de vigencia no es válido.',400);
 
 try {

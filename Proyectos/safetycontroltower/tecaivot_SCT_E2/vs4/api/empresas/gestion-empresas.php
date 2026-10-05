@@ -30,28 +30,40 @@ foreach ($jsKeys as $key) {
     <title><?= htmlspecialchars(t('companies_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>-p51">
-    <link rel="stylesheet" href="../../css/sct-main-sections.css?v=20260923-p79">
+    <link rel="stylesheet" href="../../css/style.css?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>">
     <style>
         .welcome-hero{padding:3rem 0 1.5rem}.welcome-topbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;border-bottom:1px solid rgba(0,0,0,.08)}.welcome-topbar .brand-symbol img{height:32px}.topbar-actions{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}.welcome-greeting-icon{font-size:2.4rem;color:var(--primary);margin-bottom:.6rem}.quick-links{margin:1.5rem 0 3rem}.form-actions,.company-actions{display:flex;gap:.5rem;flex-wrap:wrap}.language-select{min-width:120px}.company-state-filter{max-width:180px}
         @media(max-width:767.98px){.welcome-topbar{align-items:flex-start}.topbar-actions{max-width:70%}}
     </style>
-</head>
-<body class="sct-module-page sct-management-module-page">
-<div class="container sct-main-shell sct-management-shell" data-csrf-token="<?= $csrfTokenEscaped ?>" data-current-lang="<?= htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8') ?>">
-    <?php
-        $sctNavbarBasePath = '../../';
-        $sctNavbarBackHref = '../usuarios/gestiones.php';
-        require __DIR__ . '/../../partials/app-navbar.php';
-        ?>
 
-        <section class="welcome-hero text-center sct-main-hero">
+    <!-- Compatibilidad visual vs4 sobre base funcional vs3 -->
+    <script>document.documentElement.classList.add('sct-vs4-frontend');try{if(localStorage.getItem('sct-theme')==='dark')document.documentElement.classList.add('sct-theme-dark');}catch(e){}</script>
+    <link rel="stylesheet" href="../../css/sct-v3-frontend.css?v=20261002-vs4-ui">
+</head>
+<body>
+<?php
+$sctNavbarBasePath = '../../';
+require __DIR__ . '/../../partials/app-navbar.php';
+?>
+
+<div class="container" data-csrf-token="<?= $csrfTokenEscaped ?>" data-current-lang="<?= htmlspecialchars(idiomaActual(), ENT_QUOTES, 'UTF-8') ?>">
+    <div class="welcome-topbar">
+        <div class="brand-wrapper"><div class="brand-symbol"><img src="../../images/logos/Logo-SCT-white.png" alt="Safety Control Tower"></div></div>
+        <div class="topbar-actions">
+            <select id="pageLanguageSelect" class="form-select form-select-sm language-select" aria-label="<?= htmlspecialchars(t('common_language'), ENT_QUOTES, 'UTF-8') ?>">
+                <?php foreach (idiomasDisponiblesConNombre() as $code => $name): ?><option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === idiomaActual() ? 'selected' : '' ?>><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></option><?php endforeach; ?>
+            </select>
+            <a href="../usuarios/gestiones.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('mgmt_back'), ENT_QUOTES, 'UTF-8') ?> <i class="bi bi-arrow-left"></i></a>
+            <a href="../../logout.php" class="btn btn-outline-custom btn-sm"><?= htmlspecialchars(t('common_logout'), ENT_QUOTES, 'UTF-8') ?> <i class="bi bi-box-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <section class="welcome-hero text-center">
         <div class="welcome-greeting-icon"><i class="bi bi-building"></i></div>
-        <span class="section-label sct-main-pill">SAFETY CONTROL TOWER</span>
-        <h1 class="section-title sct-main-title"><?= htmlspecialchars(t('companies_title'), ENT_QUOTES, 'UTF-8') ?></h1>
-        <p class="section-description intro-description-centered sct-main-intro"><?= htmlspecialchars(t('companies_intro'), ENT_QUOTES, 'UTF-8') ?> <?= htmlspecialchars(t('companies_session_as'), ENT_QUOTES, 'UTF-8') ?> <strong><?= $userEmail ?></strong>.</p>
+        <span class="section-label">SAFETY CONTROL TOWER</span>
+        <h1 class="section-title"><?= htmlspecialchars(t('companies_title'), ENT_QUOTES, 'UTF-8') ?></h1>
+        <p class="section-description intro-description-centered"><?= htmlspecialchars(t('companies_intro'), ENT_QUOTES, 'UTF-8') ?> <?= htmlspecialchars(t('companies_session_as'), ENT_QUOTES, 'UTF-8') ?> <strong><?= $userEmail ?></strong>.</p>
     </section>
-<?php $sctModuleMode = 'manage'; require __DIR__ . '/../../partials/module-context.php'; ?>
 
     <section class="quick-links">
         <div class="feature-card">
@@ -80,9 +92,5 @@ foreach ($jsKeys as $key) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../js/empresas.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
 <script src="../../js/lang-switcher.js?v=<?= htmlspecialchars($ASSET_VERSION, ENT_QUOTES, 'UTF-8') ?>"></script>
-
-    <?php require __DIR__ . '/../../partials/app-footer.php'; ?>
-
-<script src="../../js/sct-module-ui.js?v=20260920-p43"></script>
 </body>
 </html>

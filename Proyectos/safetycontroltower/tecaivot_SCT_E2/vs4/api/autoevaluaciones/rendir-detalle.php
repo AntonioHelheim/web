@@ -10,8 +10,7 @@ try{
     $asignacion=asignacionObtenerPorId($pdo,$idAsignacion);
     if(!$asignacion || (string)$asignacion['id_users']!==(string)currentUserId()) responderJSON(false,null,'Asignación no encontrada.',404);
     if((int)$asignacion['state']!==ASIGNACION_PENDIENTE) responderJSON(false,null,'Esta autoevaluación ya fue finalizada.',400);
-    $inicioAsignacion=trim((string)($asignacion['assignamente_date']??''));
-    if($inicioAsignacion!=='' && strtotime($inicioAsignacion)!==false && strtotime($inicioAsignacion)>time()) responderJSON(false,null,'Esta autoevaluación todavía no está disponible para ejecutar.',409);
+    if(!empty($asignacion['deadline']) && strtotime((string)$asignacion['deadline'])<time()) responderJSON(false,null,'El plazo de esta autoevaluación ya venció.',400);
     $test=cursoObtenerPorId($pdo,(int)$asignacion['id_test']);
     if(!$test || (int)$test['state']!==1) responderJSON(false,null,'La autoevaluación ya no está disponible.',400);
     autoevaluacionAssertTest($test);
@@ -20,12 +19,10 @@ try{
     if($intentos>=(int)$test['attempts_allowed']) responderJSON(false,null,'No quedan intentos disponibles.',400);
     $preguntasBase=cursoListarPreguntas($pdo,(int)$test['id_test']); if(!$preguntasBase) responderJSON(false,null,'La autoevaluación aún no tiene preguntas configuradas.',400);
     $preguntas=[];
-    $mediaStmt=null; try{$hasMedia=(int)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='question_media'")->fetchColumn()>0;if($hasMedia)$mediaStmt=$pdo->prepare("SELECT media_type,file_path,original_name,mime_type,sort_order FROM question_media WHERE id_question=:id_question ORDER BY sort_order,id_question_media");}catch(Throwable $ignore){$mediaStmt=null;}
     foreach($preguntasBase as $p){
         $detalle=preguntaObtenerPorId($pdo,(int)$p['id_question']); if(!$detalle) continue;
         $opciones=[]; foreach($detalle['opciones'] as $o){$opciones[]=['id_questions_options'=>(int)$o['id_questions_options'],'text_option'=>(string)$o['text_option']];}
-        $media=[];if($mediaStmt){$mediaStmt->execute(['id_question'=>(int)$p['id_question']]);$media=$mediaStmt->fetchAll(PDO::FETCH_ASSOC);}
-        $preguntas[]=['id_rel'=>(int)$p['id_rel'],'id_question'=>(int)$p['id_question'],'question'=>(string)$detalle['question'],'media'=>$media,'opciones'=>$opciones];
+        $preguntas[]=['id_rel'=>(int)$p['id_rel'],'id_question'=>(int)$p['id_question'],'question'=>(string)$detalle['question'],'opciones'=>$opciones];
     }
     responderJSON(true,[
         'id_test'=>(int)$test['id_test'],'name'=>(string)$test['name'],'description'=>(string)$test['description'],

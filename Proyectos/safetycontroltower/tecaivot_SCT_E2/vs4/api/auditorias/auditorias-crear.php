@@ -31,8 +31,8 @@ if (sctTextLength($name) > 50 || sctTextLength($description) > 255) {
 if ($attemptsAllowed === false || $attemptsAllowed < 1 || $attemptsAllowed > 20) {
     responderJSON(false, null, 'Los intentos permitidos deben estar entre 1 y 20.', 400);
 }
-if ($approvalPercentage === false || $approvalPercentage < 0 || $approvalPercentage > 100) {
-    responderJSON(false, null, 'El porcentaje mínimo debe estar entre 0 y 100.', 400);
+if ($approvalPercentage === false || $approvalPercentage < 1 || $approvalPercentage > 100) {
+    responderJSON(false, null, 'El porcentaje mínimo debe estar entre 1 y 100.', 400);
 }
 if (!$from || !$until || $until < $from) {
     responderJSON(false, null, 'El rango de vigencia no es válido.', 400);

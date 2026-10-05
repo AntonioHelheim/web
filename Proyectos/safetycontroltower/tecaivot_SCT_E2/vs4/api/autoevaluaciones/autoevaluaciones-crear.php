@@ -19,7 +19,7 @@ $until = DateTime::createFromFormat('Y-m-d', (string) ($input['effective_date_un
 if ($name === '' || $description === '') responderJSON(false, null, 'Nombre y descripción son obligatorios.', 400);
 if (sctTextLength($name) > 50 || sctTextLength($description) > 255) responderJSON(false, null, 'Nombre o descripción exceden el largo permitido.', 400);
 if ($attemptsAllowed === false || $attemptsAllowed < 1 || $attemptsAllowed > 20) responderJSON(false, null, 'Los intentos permitidos deben estar entre 1 y 20.', 400);
-if ($approvalPercentage === false || $approvalPercentage < 0 || $approvalPercentage > 100) responderJSON(false, null, 'El porcentaje mínimo debe estar entre 0 y 100.', 400);
+if ($approvalPercentage === false || $approvalPercentage < 1 || $approvalPercentage > 100) responderJSON(false, null, 'El porcentaje mínimo debe estar entre 1 y 100.', 400);
 if (!$from || !$until || $until < $from) responderJSON(false, null, 'El rango de vigencia no es válido.', 400);
 
 try {

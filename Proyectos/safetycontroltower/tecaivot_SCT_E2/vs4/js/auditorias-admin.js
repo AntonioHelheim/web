@@ -217,19 +217,13 @@ document.addEventListener("DOMContentLoaded", function () {
             auditSubmitBtn.disabled = false;
             if (!r.success) { showAlert(auditActionAlert, r.message || S("audit_error_load"), "danger"); return; }
             showAlert(auditActionAlert, r.message || (edit ? S("audit_updated") : S("audit_created")), "success");
-            const createdId = !edit && r.data ? parseInt(r.data.id_test || "0", 10) : 0;
-            const createdName = auditName.value.trim();
-            resetForm();
-            await loadAudits();
-            if (createdId) {
-                await openDetail({ id_test: createdId, name: createdName, id_company: currentCompanyId });
-            }
+            resetForm(); loadAudits();
         });
     }
 
     async function toggleAudit(audit) {
         const active = String(audit.state) === "1";
-        if (!await window.sctConfirmAction(active ? S("audit_confirm_deactivate") : S("audit_confirm_reactivate"))) return;
+        if (!window.confirm(active ? S("audit_confirm_deactivate") : S("audit_confirm_reactivate"))) return;
         const r = await postJson("./auditorias-cambiar-estado.php", { id_test: audit.id_test, state: active ? 0 : 1 });
         if (!r.success) { showAlert(auditActionAlert, r.message, "danger"); return; }
         showAlert(auditActionAlert, r.message, "success");
@@ -370,14 +364,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (assignForm) {
         assignForm.addEventListener("submit", async function (event) {
             event.preventDefault(); hideAlert(detailAlert);
-            const auditores = window.sctBulkAssignmentValues ? window.sctBulkAssignmentValues("assignAuditorSelect") : Array.from(assignAuditorSelect.selectedOptions || []).map(function (o) { return o.value; }).filter(Boolean);
-            if (!auditores.length || !assignDeadline.value) { showAlert(detailAlert, S("audit_auditor_placeholder", "Selecciona al menos un auditor y un plazo."), "warning"); return; }
-            const r = await postJson("./asignaciones-crear.php", { id_test: currentAuditId, id_users: auditores, deadline: assignDeadline.value });
+            const auditor = assignAuditorSelect.value;
+            if (!auditor || !assignDeadline.value) return;
+            const r = await postJson("./asignaciones-crear.php", { id_test: currentAuditId, id_users: auditor, deadline: assignDeadline.value });
             if (!r.success) { showAlert(detailAlert, r.message, "danger"); return; }
             showAlert(detailAlert, r.message || S("audit_assignment_success"), "success");
-            assignForm.reset();
-            if (window.sctBulkAssignmentRefresh) window.sctBulkAssignmentRefresh("assignAuditorSelect");
-            loadAssignments();
+            assignForm.reset(); loadAssignments();
         });
     }
 });

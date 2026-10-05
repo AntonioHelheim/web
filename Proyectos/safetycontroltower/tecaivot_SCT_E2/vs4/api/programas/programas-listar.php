@@ -13,7 +13,6 @@ if ($idProject) programasValidateProject($pdo,$idProject,$idCompany,false);
 $search=trim((string)($_GET['search']??''));
 if (sctTextLength($search)>100) responderJSON(false,null,'La búsqueda admite hasta 100 caracteres.',400);
 $filters=['status'=>$status,'state'=>$state,'id_project'=>$idProject,'search'=>$search];
-if (programasIsWorkerScope($pdo)) $filters['responsible_user'] = (string) (currentUserId() ?? '');
 responderJSON(true,[
     'programs'=>programaListar($pdo,$idCompany,$filters),
     'summary'=>programaResumen($pdo,$idCompany,$filters),

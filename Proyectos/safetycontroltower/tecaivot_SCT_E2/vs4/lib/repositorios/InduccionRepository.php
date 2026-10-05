@@ -341,35 +341,6 @@ function cursoPuntajeMaximo(PDO $pdo, int $idTest): int
     return (int) $stmt->fetchColumn();
 }
 
-
-/**
- * Valida que una evaluación pueda ejecutarse realmente antes de asignarla.
- * Evita crear actividades vacías o con preguntas sin alternativas válidas.
- */
-function cursoTieneContenidoEjecutable(PDO $pdo, int $idTest): bool
-{
-    if (cursoPuntajeMaximo($pdo, $idTest) <= 0) return false;
-
-    $preguntas = cursoListarPreguntas($pdo, $idTest);
-    if (empty($preguntas)) return false;
-
-    foreach ($preguntas as $preguntaRel) {
-        $detalle = preguntaObtenerPorId($pdo, (int) ($preguntaRel['id_question'] ?? 0));
-        if (!$detalle || (int) ($detalle['state'] ?? 0) !== 1) return false;
-        $opciones = $detalle['opciones'] ?? [];
-        if (count($opciones) < 2) return false;
-        $tieneCorrecta = false;
-        foreach ($opciones as $opcion) {
-            if ((int) ($opcion['is_it_co'] ?? 0) === 1) {
-                $tieneCorrecta = true;
-                break;
-            }
-        }
-        if (!$tieneCorrecta) return false;
-    }
-    return true;
-}
-
 /* =========================================================
    MATERIALES DE APOYO
    ========================================================= */
@@ -481,26 +452,15 @@ function asignacionListarPorCurso(PDO $pdo, int $idTest): array
          ORDER BY a.assignamente_date DESC'
     );
     $stmt->execute(['id_test' => $idTest]);
-    $rows = $stmt->fetchAll();
-    foreach ($rows as &$row) {
-        $idAsignacion = (int) $row['id_user_test_assigned'];
-        $row['intentos_usados'] = induccionIntentosUsadosPorAsignacion($pdo, $idAsignacion);
-        $lastTry = induccionUltimoIntentoPorAsignacion($pdo, $idAsignacion);
-        $row['porcentaje_ultimo'] = null;
-        if ($lastTry > 0) {
-            $result = induccionCalcularResultadoPorAsignacion($pdo, $idAsignacion, $lastTry);
-            $row['porcentaje_ultimo'] = $result['porcentaje'] ?? null;
-        }
-    }
-    unset($row);
-    return $rows;
+
+    return $stmt->fetchAll();
 }
 
 function asignacionListarPorUsuario(PDO $pdo, string $idUsuario): array
 {
     $stmt = $pdo->prepare(
         'SELECT a.id_user_test_assigned, a.id_test, a.deadline, a.state, a.assignamente_date,
-                t.name AS test_name, t.description AS test_description, t.approval_percentage, t.attempts_allowed
+                t.name AS test_name, t.description AS test_description, t.approval_percentage
          FROM users_test_assigned a
          INNER JOIN company_test t ON t.id_test = a.id_test
          WHERE a.id_users = :id_users
@@ -523,198 +483,89 @@ function asignacionActualizarEstado(PDO $pdo, int $idAsignacion, int $nuevoEstad
    INTENTOS Y RESPUESTAS (users_test_answers)
    ========================================================= */
 
-/**
- * P76 — intentos por ASIGNACIÓN.
- *
- * Desde Etapa 2 users_test_answers dispone de id_user_test_assigned. Las
- * respuestas históricas previas a esa columna permanecen con NULL; para no
- * perderlas se asocian únicamente a la ventana temporal de su asignación.
- * Esto evita que una nueva asignación del mismo curso herede intentos o notas
- * de una asignación anterior.
- */
-function induccionIntentosUsadosPorAsignacion(PDO $pdo, int $idAsignacion): int
-{
-    $stmt = $pdo->prepare(
-        'SELECT COUNT(DISTINCT ans.id_test_try)
-           FROM users_test_answers ans
-           INNER JOIN users_test_assigned a ON a.id_user_test_assigned=:id_asignacion
-          WHERE ans.id_user_test_assigned=a.id_user_test_assigned
-             OR (ans.id_user_test_assigned IS NULL
-                 AND ans.id_users=a.id_users
-                 AND ans.id_test=a.id_test
-                 AND ans.date_create>=a.assignamente_date
-                 AND NOT EXISTS (
-                     SELECT 1 FROM users_test_assigned nx
-                      WHERE nx.id_users=a.id_users
-                        AND nx.id_test=a.id_test
-                        AND nx.id_user_test_assigned>a.id_user_test_assigned
-                        AND nx.assignamente_date<=ans.date_create
-                 ))'
-    );
-    $stmt->execute(['id_asignacion'=>$idAsignacion]);
-    return (int)$stmt->fetchColumn();
-}
-
-function induccionUltimoIntentoPorAsignacion(PDO $pdo, int $idAsignacion): int
-{
-    $stmt = $pdo->prepare(
-        'SELECT COALESCE(MAX(ans.id_test_try),0)
-           FROM users_test_answers ans
-           INNER JOIN users_test_assigned a ON a.id_user_test_assigned=:id_asignacion
-          WHERE ans.id_user_test_assigned=a.id_user_test_assigned
-             OR (ans.id_user_test_assigned IS NULL
-                 AND ans.id_users=a.id_users
-                 AND ans.id_test=a.id_test
-                 AND ans.date_create>=a.assignamente_date
-                 AND NOT EXISTS (
-                     SELECT 1 FROM users_test_assigned nx
-                      WHERE nx.id_users=a.id_users
-                        AND nx.id_test=a.id_test
-                        AND nx.id_user_test_assigned>a.id_user_test_assigned
-                        AND nx.assignamente_date<=ans.date_create
-                 ))'
-    );
-    $stmt->execute(['id_asignacion'=>$idAsignacion]);
-    return (int)$stmt->fetchColumn();
-}
-
-function induccionSiguienteIntentoPorAsignacion(PDO $pdo, int $idAsignacion): int
-{
-    return induccionUltimoIntentoPorAsignacion($pdo,$idAsignacion)+1;
-}
-
-/**
- * $respuestas: array de ['id_rel'=>int,'id_question'=>int,'id_questions_options'=>int]
- */
-function induccionRegistrarRespuestasPorAsignacion(
-    PDO $pdo,
-    int $idAsignacion,
-    string $idUsuario,
-    int $idCompany,
-    int $idTest,
-    int $idTestTry,
-    array $respuestas
-): void {
-    $stmt = $pdo->prepare(
-        'INSERT INTO users_test_answers
-            (id_users,id_company,id_test,id_user_test_assigned,id_test_try,id_rel,id_question,id_questions_options,date_create,last_update)
-         VALUES
-            (:id_users,:id_company,:id_test,:id_user_test_assigned,:id_test_try,:id_rel,:id_question,:id_questions_options,NOW(),NOW())'
-    );
-    foreach($respuestas as $respuesta) {
-        $stmt->execute([
-            'id_users'=>$idUsuario,
-            'id_company'=>$idCompany,
-            'id_test'=>$idTest,
-            'id_user_test_assigned'=>$idAsignacion,
-            'id_test_try'=>$idTestTry,
-            'id_rel'=>$respuesta['id_rel'],
-            'id_question'=>$respuesta['id_question'],
-            'id_questions_options'=>$respuesta['id_questions_options'],
-        ]);
-    }
-}
-
-function induccionCalcularResultadoPorAsignacion(PDO $pdo, int $idAsignacion, int $idTestTry): array
-{
-    $asignacion=asignacionObtenerPorId($pdo,$idAsignacion);
-    if(!$asignacion) {
-        return ['puntaje_obtenido'=>0,'puntaje_maximo'=>0,'porcentaje'=>0.0,'cantidad_respuestas'=>0];
-    }
-    $idTest=(int)$asignacion['id_test'];
-    $stmt=$pdo->prepare(
-        'SELECT r.assigned_score,o.is_it_co
-           FROM users_test_answers ans
-           INNER JOIN company_test_rel_questions r ON r.id_rel=ans.id_rel
-           INNER JOIN questions_options o ON o.id_questions_options=ans.id_questions_options
-          WHERE ans.id_test_try=:id_test_try
-            AND (
-                ans.id_user_test_assigned=:id_asignacion
-                OR (ans.id_user_test_assigned IS NULL
-                    AND ans.id_users=:id_users
-                    AND ans.id_test=:id_test
-                    AND ans.date_create>=:assignment_start
-                    AND NOT EXISTS (
-                        SELECT 1 FROM users_test_assigned nx
-                         WHERE nx.id_users=:id_users_next
-                           AND nx.id_test=:id_test_next
-                           AND nx.id_user_test_assigned>:id_asignacion_next
-                           AND nx.assignamente_date<=ans.date_create
-                    ))
-            )'
-    );
-    $stmt->execute([
-        'id_test_try'=>$idTestTry,
-        'id_asignacion'=>$idAsignacion,
-        'id_users'=>(string)$asignacion['id_users'],
-        'id_test'=>$idTest,
-        'assignment_start'=>(string)$asignacion['assignamente_date'],
-        'id_users_next'=>(string)$asignacion['id_users'],
-        'id_test_next'=>$idTest,
-        'id_asignacion_next'=>$idAsignacion,
-    ]);
-    $respuestas=$stmt->fetchAll();
-    $puntajeObtenido=0;
-    foreach($respuestas as $respuesta) {
-        if((int)$respuesta['is_it_co']===1) $puntajeObtenido+=(int)$respuesta['assigned_score'];
-    }
-    $puntajeMaximo=cursoPuntajeMaximo($pdo,$idTest);
-    $porcentaje=$puntajeMaximo>0?round(($puntajeObtenido/$puntajeMaximo)*100,1):0.0;
-    return [
-        'puntaje_obtenido'=>$puntajeObtenido,
-        'puntaje_maximo'=>$puntajeMaximo,
-        'porcentaje'=>$porcentaje,
-        'cantidad_respuestas'=>count($respuestas),
-    ];
-}
-
-/* Compatibilidad interna con llamadas heredadas fuera del flujo P76. */
 function intentosUsados(PDO $pdo, string $idUsuario, int $idTest): int
 {
-    $stmt=$pdo->prepare('SELECT COUNT(DISTINCT id_test_try) FROM users_test_answers WHERE id_users=:id_users AND id_test=:id_test');
-    $stmt->execute(['id_users'=>$idUsuario,'id_test'=>$idTest]);
-    return (int)$stmt->fetchColumn();
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(DISTINCT id_test_try) FROM users_test_answers WHERE id_users = :id_users AND id_test = :id_test'
+    );
+    $stmt->execute(['id_users' => $idUsuario, 'id_test' => $idTest]);
+
+    return (int) $stmt->fetchColumn();
 }
 
 function siguienteIntento(PDO $pdo, string $idUsuario, int $idTest): int
 {
-    $stmt=$pdo->prepare('SELECT COALESCE(MAX(id_test_try),0) FROM users_test_answers WHERE id_users=:id_users AND id_test=:id_test');
-    $stmt->execute(['id_users'=>$idUsuario,'id_test'=>$idTest]);
-    return ((int)$stmt->fetchColumn())+1;
+    $stmt = $pdo->prepare(
+        'SELECT COALESCE(MAX(id_test_try), 0) FROM users_test_answers WHERE id_users = :id_users AND id_test = :id_test'
+    );
+    $stmt->execute(['id_users' => $idUsuario, 'id_test' => $idTest]);
+
+    return ((int) $stmt->fetchColumn()) + 1;
 }
 
+/**
+ * Registra todas las respuestas de un intento de una sola vez. No
+ * calcula el resultado acá a propósito — eso lo hace
+ * calcularResultadoIntento() por separado, para poder registrar primero
+ * y calcular después sin mezclar las dos responsabilidades.
+ *
+ * $respuestas: array de ['id_rel' => int, 'id_question' => int, 'id_questions_options' => int]
+ */
 function registrarRespuestas(PDO $pdo, string $idUsuario, int $idCompany, int $idTest, int $idTestTry, array $respuestas): void
 {
-    $stmt=$pdo->prepare(
-        'INSERT INTO users_test_answers (id_users,id_company,id_test,id_test_try,id_rel,id_question,id_questions_options,date_create,last_update) '
-        . 'VALUES (:id_users,:id_company,:id_test,:id_test_try,:id_rel,:id_question,:id_questions_options,NOW(),NOW())'
+    $stmt = $pdo->prepare(
+        'INSERT INTO users_test_answers
+            (id_users, id_company, id_test, id_test_try, id_rel, id_question, id_questions_options, date_create, last_update)
+         VALUES
+            (:id_users, :id_company, :id_test, :id_test_try, :id_rel, :id_question, :id_questions_options, NOW(), NOW())'
     );
-    foreach($respuestas as $respuesta) {
+
+    foreach ($respuestas as $respuesta) {
         $stmt->execute([
-            'id_users'=>$idUsuario,'id_company'=>$idCompany,'id_test'=>$idTest,'id_test_try'=>$idTestTry,
-            'id_rel'=>$respuesta['id_rel'],'id_question'=>$respuesta['id_question'],'id_questions_options'=>$respuesta['id_questions_options'],
+            'id_users'              => $idUsuario,
+            'id_company'            => $idCompany,
+            'id_test'               => $idTest,
+            'id_test_try'           => $idTestTry,
+            'id_rel'                => $respuesta['id_rel'],
+            'id_question'           => $respuesta['id_question'],
+            'id_questions_options'  => $respuesta['id_questions_options'],
         ]);
     }
 }
 
+/**
+ * Calcula el puntaje obtenido de un intento ya registrado, comparando
+ * cada respuesta contra questions_options.is_it_co. El cálculo se hace
+ * siempre server-side a partir de lo guardado en la BD — nunca se
+ * confía en un puntaje que venga calculado desde el navegador.
+ */
 function calcularResultadoIntento(PDO $pdo, string $idUsuario, int $idTest, int $idTestTry): array
 {
-    $stmt=$pdo->prepare(
-        'SELECT r.assigned_score,o.is_it_co FROM users_test_answers a '
-        . 'INNER JOIN company_test_rel_questions r ON r.id_rel=a.id_rel '
-        . 'INNER JOIN questions_options o ON o.id_questions_options=a.id_questions_options '
-        . 'WHERE a.id_users=:id_users AND a.id_test=:id_test AND a.id_test_try=:id_test_try'
+    $stmt = $pdo->prepare(
+        'SELECT a.id_rel, r.assigned_score, o.is_it_co
+         FROM users_test_answers a
+         INNER JOIN company_test_rel_questions r ON r.id_rel = a.id_rel
+         INNER JOIN questions_options o ON o.id_questions_options = a.id_questions_options
+         WHERE a.id_users = :id_users AND a.id_test = :id_test AND a.id_test_try = :id_test_try'
     );
-    $stmt->execute(['id_users'=>$idUsuario,'id_test'=>$idTest,'id_test_try'=>$idTestTry]);
-    $respuestas=$stmt->fetchAll();
-    $puntajeObtenido=0;
-    foreach($respuestas as $r) if((int)$r['is_it_co']===1) $puntajeObtenido+=(int)$r['assigned_score'];
-    $puntajeMaximo=cursoPuntajeMaximo($pdo,$idTest);
+    $stmt->execute(['id_users' => $idUsuario, 'id_test' => $idTest, 'id_test_try' => $idTestTry]);
+    $respuestas = $stmt->fetchAll();
+
+    $puntajeObtenido = 0;
+    foreach ($respuestas as $r) {
+        if ((int) $r['is_it_co'] === 1) {
+            $puntajeObtenido += (int) $r['assigned_score'];
+        }
+    }
+
+    $puntajeMaximo = cursoPuntajeMaximo($pdo, $idTest);
+    $porcentaje = $puntajeMaximo > 0 ? round(($puntajeObtenido / $puntajeMaximo) * 100, 1) : 0.0;
+
     return [
-        'puntaje_obtenido'=>$puntajeObtenido,
-        'puntaje_maximo'=>$puntajeMaximo,
-        'porcentaje'=>$puntajeMaximo>0?round(($puntajeObtenido/$puntajeMaximo)*100,1):0.0,
-        'cantidad_respuestas'=>count($respuestas),
+        'puntaje_obtenido' => $puntajeObtenido,
+        'puntaje_maximo'   => $puntajeMaximo,
+        'porcentaje'       => $porcentaje,
+        'cantidad_respuestas' => count($respuestas),
     ];
 }
 

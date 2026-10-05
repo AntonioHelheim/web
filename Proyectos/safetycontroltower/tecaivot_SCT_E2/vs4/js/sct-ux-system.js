@@ -1,21 +1,6 @@
 (function () {
     'use strict';
 
-    function ensureUxStylesheet() {
-        if (document.querySelector('link[data-sct-ux-runtime]')) return;
-        var script = document.currentScript;
-        if (!script || !script.src) return;
-        var href = script.src.replace(/\/js\/sct-ux-system\.js(?:\?.*)?$/i, '/css/sct-ux-system.css?v=20260921-p43-final');
-        if (href === script.src) return;
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = href;
-        link.setAttribute('data-sct-ux-runtime', '1');
-        (document.head || document.documentElement).appendChild(link);
-    }
-
-    ensureUxStylesheet();
-
     var nav = document.querySelector('.sct-app-navbar');
     var role = nav ? (nav.getAttribute('data-sct-role') || '') : '';
     if (role && document.body) {
@@ -25,8 +10,15 @@
     var labels = {
         confirmTitle: nav ? (nav.getAttribute('data-confirm-title') || 'Confirmar acción') : 'Confirmar acción',
         confirmAction: nav ? (nav.getAttribute('data-confirm-action') || 'Confirmar') : 'Confirmar',
-        cancel: nav ? (nav.getAttribute('data-cancel-label') || 'Cancelar') : 'Cancelar'
+        cancel: nav ? (nav.getAttribute('data-cancel-label') || 'Cancelar') : 'Cancelar',
+        close: nav ? (nav.getAttribute('data-close-label') || 'Cerrar') : 'Cerrar'
     };
+
+    function escapeHtml(value) {
+        var div = document.createElement('div');
+        div.textContent = value == null ? '' : String(value);
+        return div.innerHTML;
+    }
 
     function buildConfirmDialog() {
         var existing = document.getElementById('sctGlobalConfirmDialog');
@@ -124,6 +116,48 @@
         return Promise.resolve(window.confirm(String(message || '')));
     };
 
+    function ensureInfoTipDialog(tip) {
+        if (!tip || tip.dataset.sctA11yReady === '1') return;
+        var bubble = tip.querySelector('.sct-info-tip__bubble');
+        var trigger = tip.querySelector('[data-sct-info-tip-button]');
+        if (!bubble || !trigger) return;
+
+        tip.dataset.sctA11yReady = '1';
+        bubble.setAttribute('role', 'dialog');
+        bubble.setAttribute('aria-modal', 'false');
+        if (bubble.id) {
+            trigger.removeAttribute('aria-describedby');
+            trigger.setAttribute('aria-controls', bubble.id);
+        }
+
+        var close = bubble.querySelector('.sct-info-tip__close');
+        if (!close) {
+            close = document.createElement('button');
+            close.type = 'button';
+            close.className = 'sct-info-tip__close';
+            close.setAttribute('aria-label', labels.close);
+            close.innerHTML = '<i class="bi bi-x-lg" aria-hidden="true"></i>';
+            bubble.insertBefore(close, bubble.firstChild);
+        }
+
+        close.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            tip.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+            bubble.classList.remove('is-smart-positioned', 'is-below');
+            bubble.style.removeProperty('left');
+            bubble.style.removeProperty('top');
+            bubble.style.removeProperty('width');
+            bubble.style.removeProperty('--sct-tip-arrow-left');
+            trigger.focus();
+        });
+    }
+
+    function enhanceInfoTips(root) {
+        (root || document).querySelectorAll('[data-sct-info-tip]').forEach(ensureInfoTipDialog);
+    }
+
     function normalizeHeaderText(value) {
         return String(value || '').replace(/\s+/g, ' ').trim();
     }
@@ -170,13 +204,28 @@
         (root || document).querySelectorAll('.table-responsive > table.table').forEach(enhanceResponsiveTable);
     }
 
+    function arrangeRoleLayout() {
+        if (!document.body) return;
+        if (document.body.classList.contains('welcome-role-trabajador')) {
+            var calendar = document.querySelector('[data-welcome-calendar]');
+            var slot = document.querySelector('[data-worker-calendar-slot]');
+            if (calendar && slot && !slot.contains(calendar)) {
+                slot.appendChild(calendar);
+            }
+        }
+    }
+
     function init() {
+        arrangeRoleLayout();
+        enhanceInfoTips(document);
         enhanceTables(document);
 
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 Array.prototype.forEach.call(mutation.addedNodes || [], function (node) {
                     if (!node || node.nodeType !== 1) return;
+                    if (node.matches && node.matches('[data-sct-info-tip]')) ensureInfoTipDialog(node);
+                    enhanceInfoTips(node);
                     if (node.matches && node.matches('.table-responsive > table.table')) enhanceResponsiveTable(node);
                     enhanceTables(node);
                 });

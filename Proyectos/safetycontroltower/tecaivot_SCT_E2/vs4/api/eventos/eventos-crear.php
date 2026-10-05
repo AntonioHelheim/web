@@ -41,7 +41,7 @@ if ($faltantes) {
 $idCenter = filter_var($input['id_company_center'], FILTER_VALIDATE_INT);
 $centrosValidos = array_column(centrosActivosDeEmpresa($pdo, $idCompany), 'id_company_center');
 if (!$idCenter || !in_array($idCenter, $centrosValidos, true)) {
-    responderJSON(false, null, 'Debes seleccionar un centro/sede válido de la empresa. Si la empresa todavía no tiene ninguno, créalo primero en Gestión de centros/sedes.', 400);
+    responderJSON(false, null, 'Debes seleccionar un centro/sede válido de la empresa. Si la empresa todavía no tiene ninguno, créalo primero en Gestión de Centros/Sedes.', 400);
 }
 
 $idProject = null;
@@ -55,7 +55,7 @@ if (!empty($input['id_project'])) {
 
 $idWorker = null;
 $idWorkerName = null;
-if (!eventosIsWorkerScope($pdo) && !empty($input['id_worker'])) {
+if (!empty($input['id_worker'])) {
     $idWorker = filter_var($input['id_worker'], FILTER_VALIDATE_INT);
     $trabajadores = trabajadoresActivosDeEmpresa($pdo, $idCompany);
     $trabajadorEncontrado = null;

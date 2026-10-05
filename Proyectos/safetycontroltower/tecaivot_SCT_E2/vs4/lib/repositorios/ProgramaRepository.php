@@ -105,10 +105,6 @@ function programaBuildFilters(int $idCompany, array $filters): array
         $like='%'.(string)$filters['search'].'%';
         $params['q1']=$like;$params['q2']=$like;$params['q3']=$like;$params['q4']=$like;
     }
-    if (!empty($filters['responsible_user'])) {
-        $where[]='p.responsible_user=:responsible_user';
-        $params['responsible_user']=(string)$filters['responsible_user'];
-    }
     return ['where'=>implode(' AND ',$where),'params'=>$params];
 }
 

@@ -32,7 +32,7 @@ $langActual = idiomaActual();
         }
         .denied-icon {
             font-size: 3.5rem;
-            color: #AA2424;
+            color: #dc2626;
             margin-bottom: 1rem;
         }
         .denied-language {
@@ -44,7 +44,7 @@ $langActual = idiomaActual();
             font-size: 13px;
             padding: 4px 10px;
             border-radius: 6px;
-            border: 1px solid #CCD4DA;
+            border: 1px solid #d1d5db;
         }
     </style>
 </head>

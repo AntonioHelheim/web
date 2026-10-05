@@ -13,9 +13,7 @@ try{
     $asignacion=asignacionObtenerPorId($pdo,$idAsignacion);
     if(!$asignacion || (string)$asignacion['id_users']!==(string)currentUserId()) responderJSON(false,null,'Asignación no encontrada.',404);
     if((int)$asignacion['state']!==ASIGNACION_PENDIENTE) responderJSON(false,null,'Esta autoevaluación ya fue finalizada.',400);
-    $inicioAsignacion=trim((string)($asignacion['assignamente_date']??''));
-    if($inicioAsignacion!=='' && strtotime($inicioAsignacion)!==false && strtotime($inicioAsignacion)>time()) responderJSON(false,null,'Esta autoevaluación todavía no está disponible para ejecutar.',409);
-    $fueraDePlazo=!empty($asignacion['deadline']) && strtotime((string)$asignacion['deadline'])<time();
+    if(!empty($asignacion['deadline']) && strtotime((string)$asignacion['deadline'])<time()) responderJSON(false,null,'El plazo de esta autoevaluación ya venció.',400);
     $test=cursoObtenerPorId($pdo,(int)$asignacion['id_test']); if(!$test || (int)$test['state']!==1) responderJSON(false,null,'La autoevaluación ya no está disponible.',400);
     autoevaluacionAssertTest($test); if(!autoevaluacionTestVigente($test)) responderJSON(false,null,'La autoevaluación está fuera de su período de vigencia.',400);
     $preguntas=cursoListarPreguntas($pdo,(int)$test['id_test']); $relPorId=[]; foreach($preguntas as $p)$relPorId[(int)$p['id_rel']]=$p;
@@ -32,10 +30,9 @@ try{
     }
     $puntajeMaximo=cursoPuntajeMaximo($pdo,(int)$test['id_test']);
     $pdo->beginTransaction();
-    $lock=$pdo->prepare('SELECT state,deadline,assignamente_date FROM users_test_assigned WHERE id_user_test_assigned=:id_asignacion FOR UPDATE'); $lock->execute(['id_asignacion'=>$idAsignacion]); $locked=$lock->fetch();
+    $lock=$pdo->prepare('SELECT state,deadline FROM users_test_assigned WHERE id_user_test_assigned=:id_asignacion FOR UPDATE'); $lock->execute(['id_asignacion'=>$idAsignacion]); $locked=$lock->fetch();
     if(!$locked || (int)$locked['state']!==ASIGNACION_PENDIENTE){$pdo->rollBack(); responderJSON(false,null,'Esta autoevaluación ya fue finalizada.',409);}
-    if(!empty($locked['assignamente_date']) && strtotime((string)$locked['assignamente_date'])>time()){$pdo->rollBack(); responderJSON(false,null,'Esta autoevaluación todavía no está disponible para ejecutar.',409);}
-    $fueraDePlazo=$fueraDePlazo || (!empty($locked['deadline']) && strtotime((string)$locked['deadline'])<time());
+    if(!empty($locked['deadline']) && strtotime((string)$locked['deadline'])<time()){$pdo->rollBack(); responderJSON(false,null,'El plazo de esta autoevaluación ya venció.',400);}
     $intentosUsados=evaluacionIntentosUsadosPorAsignacion($pdo,$idAsignacion); if($intentosUsados>=(int)$test['attempts_allowed']){$pdo->rollBack(); responderJSON(false,null,'No quedan intentos disponibles.',400);}
     $intento=evaluacionSiguienteIntentoPorAsignacion($pdo,$idAsignacion);
     evaluacionRegistrarRespuestasPorAsignacion($pdo,$idAsignacion,(string)currentUserId(),(int)$asignacion['id_company'],(int)$test['id_test'],$intento,$validadas);
@@ -46,8 +43,8 @@ try{
     responderJSON(true,[
         'cumple'=>$cumple,'finalizada'=>$finalizada,'porcentaje'=>$resultado['porcentaje'],
         'puntaje_obtenido'=>$resultado['puntaje_obtenido'],'puntaje_maximo'=>$resultado['puntaje_maximo'],
-        'intentos_usados'=>$intentosAhora,'attempts_allowed'=>(int)$test['attempts_allowed'],'fuera_de_plazo'=>$fueraDePlazo,
-    ],$fueraDePlazo?'Autoevaluación recibida fuera de plazo y registrada.':($finalizada?'Autoevaluación finalizada y registrada.':'Intento registrado. La autoevaluación permanece pendiente.'));
+        'intentos_usados'=>$intentosAhora,'attempts_allowed'=>(int)$test['attempts_allowed'],
+    ],$finalizada?'Autoevaluación finalizada y registrada.':'Intento registrado. La autoevaluación permanece pendiente.');
 }catch(Throwable $e){
     if($pdo->inTransaction())$pdo->rollBack();
     if(autoevaluacionMigrationMessage($e)) responderJSON(false,null,'El módulo requiere que la migración de evaluaciones de Etapa 2 esté aplicada.',503);

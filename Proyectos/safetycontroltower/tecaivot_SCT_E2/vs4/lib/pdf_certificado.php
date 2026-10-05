@@ -49,10 +49,10 @@ function generarCertificadoPdf(array $datos): string
             body {
                 margin: 0;
                 font-family: DejaVu Sans, sans-serif;
-                color: #232D35;
+                color: #0F172A;
             }
             .marco {
-                border: 3px solid #182663;
+                border: 3px solid #002259;
                 margin: 30px;
                 padding: 60px 50px;
                 text-align: center;
@@ -60,26 +60,26 @@ function generarCertificadoPdf(array $datos): string
             .marca {
                 font-size: 13px;
                 letter-spacing: 3px;
-                color: #007BC5;
+                color: #00A3F4;
                 font-weight: bold;
                 margin-bottom: 40px;
             }
             h1 {
                 font-size: 26px;
-                color: #182663;
+                color: #002259;
                 margin: 0 0 10px;
             }
             .subtitulo {
                 font-size: 13px;
-                color: #60798B;
+                color: #64748B;
                 margin-bottom: 40px;
             }
             .nombre {
                 font-size: 30px;
                 font-weight: bold;
-                color: #182663;
+                color: #002259;
                 margin: 20px 0;
-                border-bottom: 1px solid #CCD4DA;
+                border-bottom: 1px solid #E2E8F0;
                 display: inline-block;
                 padding-bottom: 8px;
             }
@@ -89,18 +89,18 @@ function generarCertificadoPdf(array $datos): string
             }
             .empresa {
                 font-size: 13px;
-                color: #60798B;
+                color: #64748B;
                 margin-bottom: 30px;
             }
             .detalle {
                 font-size: 12px;
-                color: #60798B;
+                color: #64748B;
                 margin-top: 40px;
             }
             .codigo {
                 margin-top: 30px;
                 font-size: 11px;
-                color: #9EADB8;
+                color: #94a3b8;
             }
         </style>
     </head>

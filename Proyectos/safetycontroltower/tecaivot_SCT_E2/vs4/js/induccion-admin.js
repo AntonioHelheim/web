@@ -248,20 +248,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!r.success) { mostrarAlerta(courseActionAlert, r.message || S("induction_save_error", "No se pudo guardar el curso."), "danger"); return; }
             mostrarAlerta(courseActionAlert, r.message || S("induction_saved", "Curso guardado."), "success");
-            const createdId = modo === "create" && r.data ? parseInt(r.data.id_test || "0", 10) : 0;
-            const createdName = courseName.value.trim();
-            const createdCompany = currentCompanyId;
             cancelarEdicionCurso();
-            await cargarCursos();
-            if (createdId) {
-                await abrirDetalle({ id_test: createdId, name: createdName, id_company: createdCompany });
-            }
+            cargarCursos();
         });
     }
 
     async function cambiarEstadoCurso(curso) {
         const nuevoEstado = String(curso.state) === "1" ? 0 : 1;
-        if (!await window.sctConfirmAction(nuevoEstado === 1 ? S("induction_confirm_reactivate", "¿Reactivar este curso?") : S("induction_confirm_deactivate", "¿Dar de baja este curso?"))) return;
+        if (!window.confirm(nuevoEstado === 1 ? S("induction_confirm_reactivate", "¿Reactivar este curso?") : S("induction_confirm_deactivate", "¿Dar de baja este curso?"))) return;
         const r = await postJson("./cursos-cambiar-estado.php", { id_test: curso.id_test, state: nuevoEstado });
         if (!r.success) { mostrarAlerta(courseActionAlert, r.message, "danger"); return; }
         mostrarAlerta(courseActionAlert, r.message, "success");
@@ -286,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (questionSearchInput) questionSearchInput.value = "";
 
         await cargarDetalleCurso();
-        if (assignUserSelect) cargarUsuariosDisponibles((currentCourseData && currentCourseData.id_company) || curso.id_company || currentCompanyId);
+        if (assignUserSelect) cargarUsuariosDisponibles(curso.id_company || currentCompanyId);
 
         courseDetail.scrollIntoView({ behavior: "smooth" });
     }
@@ -322,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function quitarPreguntaCurso(idRel) {
-        if (!await window.sctConfirmAction(S("induction_confirm_remove_question", "¿Quitar esta pregunta del curso?"))) return;
+        if (!window.confirm(S("induction_confirm_remove_question", "¿Quitar esta pregunta del curso?"))) return;
         const r = await postJson("./curso-preguntas-quitar.php", { id_rel: idRel });
         if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
         cargarDetalleCurso();
@@ -429,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<span><strong>' + escapeHtml(m.title) + '</strong> (' + escapeHtml(m.material_type) + ') — ' + escapeHtml((detalle || "").substring(0, 60)) + '</span>' +
                 '<button type="button" title="' + escapeHtml(S("induction_delete", "Eliminar")) + '">&times;</button>';
             row.querySelector("button").addEventListener("click", async function () {
-                if (!await window.sctConfirmAction(S("induction_confirm_delete_material", "¿Eliminar este material?"))) return;
+                if (!window.confirm(S("induction_confirm_delete_material", "¿Eliminar este material?"))) return;
                 const r = await postJson("./materiales-eliminar.php", { id_material: m.id_material });
                 if (!r.success) { mostrarAlerta(detailAlert, r.message, "danger"); return; }
                 cargarDetalleCurso();
@@ -503,20 +497,17 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             ocultarAlerta(detailAlert);
 
-            const usuarios = window.sctBulkAssignmentValues ? window.sctBulkAssignmentValues("assignUserSelect") : Array.from(assignUserSelect.selectedOptions || []).map(function (o) { return o.value; }).filter(Boolean);
-            if (!usuarios.length) { mostrarAlerta(detailAlert, S("induction_select_user_warning", "Selecciona al menos un usuario."), "warning"); return; }
-            if (!assignDeadline.value) { mostrarAlerta(detailAlert, S("induction_assign_error", "Selecciona un plazo de vencimiento."), "warning"); return; }
+            if (!assignUserSelect.value) { mostrarAlerta(detailAlert, S("induction_select_user_warning", "Selecciona un usuario."), "warning"); return; }
 
             const r = await postJson("./asignaciones-crear.php", {
                 id_test: currentCourseId,
-                id_users: usuarios,
+                id_users: assignUserSelect.value,
                 deadline: assignDeadline.value,
             });
 
             if (!r.success) { mostrarAlerta(detailAlert, r.message || S("induction_assign_error", "No se pudo asignar el curso."), "danger"); return; }
-            mostrarAlerta(detailAlert, r.message || S("induction_assigned_ok", "Curso asignado correctamente."), "success");
+            mostrarAlerta(detailAlert, S("induction_assigned_ok", "Curso asignado correctamente."), "success");
             assignForm.reset();
-            if (window.sctBulkAssignmentRefresh) window.sctBulkAssignmentRefresh("assignUserSelect");
             cargarAsignaciones();
         });
     }

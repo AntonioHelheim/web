@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? S("centers_confirm_reactivate", "¿Reactivar este centro/sede?")
             : S("centers_confirm_deactivate", "¿Dar de baja este centro/sede? Podrás reactivarlo más adelante.");
 
-        if (!await window.sctConfirmAction(confirmacion)) {
+        if (!window.confirm(confirmacion)) {
             return;
         }
 

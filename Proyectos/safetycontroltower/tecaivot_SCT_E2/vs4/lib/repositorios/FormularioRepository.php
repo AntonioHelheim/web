@@ -27,60 +27,6 @@ function formularioRequireSchema(PDO $pdo): void
     }
 }
 
-
-/**
- * P76: la asignación individual de formularios existe desde P73. Esta
- * verificación mantiene compatibilidad con instalaciones donde esa migración
- * todavía no se haya aplicado, sin crear un segundo flujo paralelo.
- */
-function formularioAssignmentSchemaReady(PDO $pdo): bool
-{
-    static $ready = null;
-    if ($ready !== null) return $ready;
-    try {
-        $stmt = $pdo->query(
-            "SELECT COUNT(*) FROM information_schema.TABLES "
-            . "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'dynamic_form_assignments'"
-        );
-        return $ready = ((int) $stmt->fetchColumn() === 1);
-    } catch (Throwable $e) {
-        error_log('FormularioRepository formularioAssignmentSchemaReady: ' . $e->getMessage());
-        return $ready = false;
-    }
-}
-
-function formularioTieneAsignaciones(PDO $pdo, int $idForm, int $idCompany = 0): bool
-{
-    if (!formularioAssignmentSchemaReady($pdo)) return false;
-    $sql = 'SELECT 1 FROM dynamic_form_assignments WHERE id_form=:id_form';
-    $params = ['id_form' => $idForm];
-    if ($idCompany > 0) {
-        $sql .= ' AND id_company=:id_company';
-        $params['id_company'] = $idCompany;
-    }
-    $sql .= ' LIMIT 1';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    return (bool) $stmt->fetchColumn();
-}
-
-function formularioAsignacionUsuario(PDO $pdo, int $idForm, int $idCompany, string $idUsers): ?array
-{
-    if (!formularioAssignmentSchemaReady($pdo) || $idCompany <= 0 || trim($idUsers) === '') return null;
-    $stmt = $pdo->prepare(
-        'SELECT id_form_assignment,id_form,id_company,id_users,access_start,deadline,status,date_create,last_update '
-        . 'FROM dynamic_form_assignments '
-        . 'WHERE id_form=:id_form AND id_company=:id_company AND id_users=:id_users LIMIT 1'
-    );
-    $stmt->execute([
-        'id_form' => $idForm,
-        'id_company' => $idCompany,
-        'id_users' => $idUsers,
-    ]);
-    $row = $stmt->fetch();
-    return $row ?: null;
-}
-
 function formularioObtener(PDO $pdo, int $idForm): ?array
 {
     $stmt = $pdo->prepare(
@@ -228,46 +174,17 @@ function formularioCampoEliminar(PDO $pdo, int $idField): void
     $stmt->execute(['id_field'=>$idField]);
 }
 
-function formularioDisponiblesUsuario(PDO $pdo, int $idCompany, string $idUsers = ''): array
+function formularioDisponiblesUsuario(PDO $pdo, int $idCompany): array
 {
-    // Compatibilidad previa a P73: si la tabla de asignaciones no existe, se
-    // conserva exactamente el comportamiento histórico de formularios abiertos.
-    if (!formularioAssignmentSchemaReady($pdo) || trim($idUsers) === '') {
-        $stmt=$pdo->prepare(
-            'SELECT f.*, c.razon_social AS company_name, '
-            . '       (SELECT COUNT(*) FROM dynamic_form_fields ff WHERE ff.id_form=f.id_form) AS field_count, '
-            . '       NULL AS id_form_assignment,NULL AS access_start,NULL AS deadline,NULL AS assignment_status '
-            . 'FROM dynamic_forms f '
-            . 'LEFT JOIN company c ON c.id_company=f.id_company '
-            . 'WHERE f.state=1 AND (f.id_company=:id_company OR f.id_company IS NULL) '
-            . 'ORDER BY (f.id_company IS NULL) DESC,f.name ASC'
-        );
-        $stmt->execute(['id_company'=>$idCompany]);
-        return $stmt->fetchAll();
-    }
-
-    // P76: un formulario que ya utiliza asignaciones explícitas sólo aparece a
-    // quien fue asignado. Los formularios históricos sin ninguna asignación
-    // continúan disponibles para no romper datos/flujo existentes.
     $stmt=$pdo->prepare(
         'SELECT f.*, c.razon_social AS company_name, '
-        . '       (SELECT COUNT(*) FROM dynamic_form_fields ff WHERE ff.id_form=f.id_form) AS field_count, '
-        . '       a.id_form_assignment,a.access_start,a.deadline,a.status AS assignment_status '
+        . '       (SELECT COUNT(*) FROM dynamic_form_fields ff WHERE ff.id_form=f.id_form) AS field_count '
         . 'FROM dynamic_forms f '
         . 'LEFT JOIN company c ON c.id_company=f.id_company '
-        . 'LEFT JOIN dynamic_form_assignments a '
-        . '  ON a.id_form=f.id_form AND a.id_company=:assignment_company AND a.id_users=:id_users '
         . 'WHERE f.state=1 AND (f.id_company=:id_company OR f.id_company IS NULL) '
-        . "AND ((a.id_form_assignment IS NOT NULL AND a.status='pending' AND (a.access_start IS NULL OR a.access_start<=NOW())) "
-        . '     OR NOT EXISTS (SELECT 1 FROM dynamic_form_assignments ax WHERE ax.id_form=f.id_form AND ax.id_company=:legacy_company)) '
-        . 'ORDER BY CASE WHEN a.deadline IS NULL THEN 1 ELSE 0 END,a.deadline ASC,(f.id_company IS NULL) DESC,f.name ASC'
+        . 'ORDER BY (f.id_company IS NULL) DESC,f.name ASC'
     );
-    $stmt->execute([
-        'assignment_company'=>$idCompany,
-        'id_users'=>$idUsers,
-        'id_company'=>$idCompany,
-        'legacy_company'=>$idCompany,
-    ]);
+    $stmt->execute(['id_company'=>$idCompany]);
     return $stmt->fetchAll();
 }
 
@@ -276,7 +193,7 @@ function formularioHistorialUsuario(PDO $pdo, string $idUsers): array
     formularioRequireSchema($pdo);
     $stmt=$pdo->prepare(
         'SELECT s.id_submission,s.id_form,s.id_company,s.id_users,s.status,s.submitted_at, '
-        . '       f.name AS form_name,f.description AS form_description,f.id_company AS form_company_id, '
+        . '       f.name AS form_name,f.description AS form_description, '
         . '       c.razon_social AS company_name '
         . 'FROM dynamic_form_submissions s '
         . 'INNER JOIN dynamic_forms f ON f.id_form=s.id_form '

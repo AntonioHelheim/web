@@ -11,7 +11,7 @@
 require __DIR__ . '/common.php';
 require __DIR__ . '/../../lib/repositorios/ProyectoRepository.php';
 
-requireCapability($pdo, 'projects.manage');
+requireCapability($pdo, 'projects.view');
 
 $idCompanySolicitado = filter_input(INPUT_GET, 'id_company', FILTER_VALIDATE_INT) ?: null;
 $idCompany = proyectosResolveCompanyId($pdo, $idCompanySolicitado);

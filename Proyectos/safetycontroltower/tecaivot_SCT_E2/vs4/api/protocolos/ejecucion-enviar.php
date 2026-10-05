@@ -48,9 +48,6 @@ try {
     if ((int) $assignment['protocol_state'] !== 1) {
         responderJSON(false, null, 'El protocolo se encuentra inactivo.', 409);
     }
-    if (!protocoloAssignmentHasStarted($assignment)) {
-        responderJSON(false, null, 'La actividad todavía no se encuentra disponible.', 409);
-    }
     if (!protocoloAssignmentProtocolIsEffective($assignment)) {
         responderJSON(false, null, 'El protocolo se encuentra fuera de su período de vigencia.', 409);
     }
@@ -106,18 +103,12 @@ try {
 
     // Serializa ciclos sobre la misma asignación.
     $lock = $pdo->prepare(
-        'SELECT id_protocol_assignment,state,start_at FROM protocol_assignments '
+        'SELECT id_protocol_assignment FROM protocol_assignments '
         . 'WHERE id_protocol_assignment=:id_assignment FOR UPDATE'
     );
     $lock->execute(['id_assignment' => (int) $idAssignment]);
-    $lockedAssignment = $lock->fetch();
-    if (!$lockedAssignment) {
+    if (!$lock->fetchColumn()) {
         throw new RuntimeException('Asignación no disponible durante el registro.');
-    }
-    if ((string) ($lockedAssignment['state'] ?? '') !== 'activa'
-        || !protocoloAssignmentHasStarted($lockedAssignment)) {
-        $pdo->rollBack();
-        responderJSON(false, null, 'La asignación ya no se encuentra disponible.', 409);
     }
 
     if (protocoloAsignacionTieneRevisionPendiente($pdo, (int) $idAssignment)) {
