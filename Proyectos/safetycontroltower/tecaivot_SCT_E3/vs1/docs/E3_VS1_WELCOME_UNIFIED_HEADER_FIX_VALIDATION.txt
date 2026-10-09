@@ -1,0 +1,43 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1
+VALIDACIÓN FIX BIENVENIDA UNIFICADA
+
+PHP: 0 errores de sintaxis
+
+JavaScript:
+- onboarding.js: OK
+- health-form.js: OK
+- app-ui.js: OK
+- preguntas-onboarding-admin.js: OK
+
+Validaciones funcionales estáticas:
+- Cabecera común para todos los perfiles: OK
+- Eventos reportados visible arriba: OK
+- Mis evaluaciones visible arriba: OK
+- Datos de usuario visible arriba: OK
+- Última evaluación consultada para todos los perfiles: OK
+- Events.view respetado: OK
+- Perfil Usuario conserva editor unificado de salud: OK
+- Otros perfiles conservan mi-perfil.php: OK
+- my_data eliminado de accesos inferiores duplicados: OK
+- Módulos inferiores por perfil/capability: OK
+
+Idiomas:
+- es: OK
+- en: OK
+- pt: OK
+- fr: OK
+- zh: OK
+
+Responsive:
+Se reutiliza worker-module-grid--user-shortcuts ya validado:
+- escritorio: 3 columnas
+- tablet: 2 columnas
+- teléfono: 1 columna
+
+No se modifica:
+- onboarding
+- autenticación
+- permisos
+- base de datos
+- banco de preguntas
+- evaluación

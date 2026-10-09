@@ -1,0 +1,29 @@
+SAFETY CONTROL TOWER — E3-VS1
+REPORTE DE REFACTOR DE ENTREGA
+Fecha: 08-10-2026
+
+PHP propios validados: 313
+Errores de sintaxis PHP: 0
+SQL fuera de 'migracion sql': 0
+Carpetas SQL duplicadas presentes: 0
+Referencias obsoletas a ubicaciones SQL anteriores: 0
+Referencias activas al rol legacy trabajador: 0
+
+IDIOMAS
+-------
+es: OK
+en: OK
+pt: OK
+fr: OK
+zh: OK
+
+CAMBIOS DE ENTREGA
+------------------
+- Una sola carpeta de base de datos: migracion sql/
+- Se eliminaron database/ y sql/ de la entrega.
+- Se eliminaron hotfix y patch notes históricos de la raíz.
+- Onboarding integrado al sistema i18n de 5 idiomas.
+- Selector de idioma incorporado al onboarding.
+- Validación de idioma reutiliza IDIOMAS_DISPONIBLES.
+- Consentimiento registra idioma de aceptación.
+- No se distribuye dump completo de BD.

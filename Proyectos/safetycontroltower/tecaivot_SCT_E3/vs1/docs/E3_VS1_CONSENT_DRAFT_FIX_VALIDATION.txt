@@ -1,0 +1,39 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1
+VALIDACIÓN FIX CONSENTIMIENTO + BORRADOR
+Fecha: 08-10-2026
+
+PHP revisados: 319
+Errores PHP: 0
+
+JavaScript:
+- js/onboarding.js: OK
+- js/health-form.js: OK
+- js/app-ui.js: OK
+
+SQL fuera de migracion sql: 0
+Carpetas SQL duplicadas: 0
+health.key incluidos: 0
+config.php incluidos: 0
+
+Checks:
+- single_consent_checkbox: OK
+- no_health_acceptance: OK
+- consent_v21: OK
+- draft_table: OK
+- draft_fk_int: OK
+- draft_repo_read: OK
+- draft_repo_save: OK
+- draft_restore_response: OK
+- draft_api: OK
+- draft_autosave: OK
+- draft_back_flush: OK
+- draft_restore_checked: OK
+- draft_clear_on_complete: OK
+- reset_deletes_draft: OK
+
+Idiomas:
+- es: OK
+- en: OK
+- pt: OK
+- fr: OK
+- zh: OK

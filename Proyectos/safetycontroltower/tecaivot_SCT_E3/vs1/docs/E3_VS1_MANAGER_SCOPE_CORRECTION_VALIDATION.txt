@@ -1,0 +1,38 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1
+VALIDACIÓN FIX CORRECCIÓN ALCANCE GERENTE
+
+PHP revisados: 326
+Errores PHP: 0
+
+JavaScript:
+- js/usuarios.js: OK
+- js/onboarding.js: OK
+- js/health-form.js: OK
+- js/app-ui.js: OK
+- js/preguntas-onboarding-admin.js: OK
+
+Checks:
+- viewable_policy_present: OK
+- super_view_manage_all: OK
+- gerente_view_2_7: OK
+- gerente_manage_3_7: OK
+- gerente_assign_3_7: OK
+- admin_manage_2_7: OK
+- jefatura_view_manager: OK
+- paramedico_view_only: OK
+- contratista_view_only: OK
+- view_uses_viewable: OK
+- manage_uses_managed: OK
+- permissions_use_managed: OK
+- assigned_grid_still_explicit: OK
+- detail_server_enforced: OK
+
+Archivos modificados:
+- RELEASE_E3_VS1.md
+- docs/E3_VS1_MANAGER_SCOPE_CORRECTION.md
+- lib/auth.php
+- app/Auth/RolePolicy.php
+- app/Config/version.php
+
+Cambios inesperados: 0
+Ninguno

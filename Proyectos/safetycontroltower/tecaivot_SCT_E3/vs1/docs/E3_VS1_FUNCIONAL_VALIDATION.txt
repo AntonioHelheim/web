@@ -1,0 +1,35 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1 FUNCIONAL
+VALIDACIÓN FINAL
+Fecha: 08-10-2026
+
+PHP validados: 315
+Errores de sintaxis PHP: 0
+
+SQL fuera de 'migracion sql': 0
+Referencias onboarding a FONASA/ISAPRE/prefer_not: 0
+
+Catálogo mutualidad compartido:
+- partials/app-navbar.php: OK
+- api/usuarios/mutualidad.php: OK
+- app/Onboarding/OnboardingService.php: OK
+- onboarding.php: OK
+- app/Health/HealthRepository.php: OK
+
+Idiomas:
+- es: OK
+- en: OK
+- pt: OK
+- fr: OK
+- zh: OK
+
+Opciones canónicas:
+- ACHS
+- ISL
+- IST
+- Mutual de Seguridad
+
+Fuente canónica:
+users.mutual_code
+
+Release:
+E3-VS1 FUNCIONAL

@@ -1,0 +1,633 @@
+/* ==========================================================
+   SAFETY CONTROL TOWER — PARTIALS PÚBLICOS COHERENTES (P7)
+   Mantiene la lógica existente y unifica la capa visual con
+   Bienvenida, Dashboard y Gestiones.
+   ========================================================== */
+
+:root {
+    --sct-partial-navy: var(--primary-darkest, #182663);
+    --sct-partial-cyan: var(--primary, #007BC5);
+    --sct-partial-cyan-dark: var(--primary-dark, #005C9A);
+    --sct-partial-ice: #F6F8F9;
+    --sct-partial-aqua: #95DFDD;
+    --sct-partial-warm: #FFEEB4;
+    --sct-partial-surface: rgba(255, 255, 255, 0.96);
+    --sct-partial-border: rgba(158, 173, 184, 0.22);
+    --sct-partial-radius: clamp(22px, 2.5vw, 32px);
+    --sct-partial-shadow: 0 20px 55px rgba(24, 38, 99, 0.08);
+}
+
+/* ---------- NAVBAR PÚBLICO ---------- */
+.sct-public-navbar {
+    padding: 12px 0 0;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.sct-public-navbar .sct-public-navbar__shell {
+    min-height: 68px;
+    padding: 9px 12px 9px 14px;
+    border: 1px solid rgba(255,255,255,.74);
+    border-radius: 24px;
+    background: rgba(255,255,255,.90);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgba(24,38,99,.10);
+}
+
+.sct-public-navbar.scrolled .sct-public-navbar__shell {
+    min-height: 60px;
+    box-shadow: 0 10px 28px rgba(24,38,99,.12);
+}
+
+.sct-public-navbar .nav-link {
+    padding: 9px 13px !important;
+    border-radius: 12px;
+    font-weight: 650;
+}
+
+.sct-public-navbar .nav-link:hover,
+.sct-public-navbar .nav-link:focus-visible {
+    background: rgba(0,123,197,.08);
+    color: var(--sct-partial-navy) !important;
+}
+
+.sct-public-navbar .btn-lang,
+.sct-public-navbar .btn-login {
+    min-height: 42px;
+    border-radius: 13px;
+}
+
+.sct-public-navbar .btn-login {
+    padding-inline: 16px;
+    background: var(--sct-partial-navy);
+    color: #fff;
+}
+
+.sct-public-navbar .btn-login:hover,
+.sct-public-navbar .btn-login:focus-visible {
+    background: var(--primary-darker, #44549B);
+    color: #fff;
+}
+
+.sct-public-navbar__toggler {
+    width: 44px;
+    height: 44px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--sct-partial-ice);
+}
+
+/* ---------- HERO ---------- */
+.sct-public-hero {
+    min-height: min(720px, 92vh);
+    padding-top: 118px;
+    padding-bottom: 44px;
+    background:
+        radial-gradient(circle at 82% 12%, rgba(0,123,197,.12), transparent 30%),
+        radial-gradient(circle at 14% 78%, rgba(149,223,221,.10), transparent 28%),
+        linear-gradient(180deg, #F6F8F9 0%, #F6F8F9 56%, #FFFFFF 100%);
+}
+
+.sct-public-hero .hero-background {
+    opacity: .65;
+}
+
+.sct-public-hero__content {
+    position: relative;
+    max-width: 920px;
+    margin-inline: auto;
+    padding: clamp(1.4rem, 3vw, 2.35rem);
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: clamp(28px, 4vw, 42px);
+    background: rgba(255,255,255,.70);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 75px rgba(24,38,99,.07);
+}
+
+.sct-public-hero .eyebrow,
+.sct-public-section .section-label {
+    border: 1px solid rgba(0,123,197,.14);
+    background: rgba(0,123,197,.08);
+}
+
+.sct-public-hero .hero-content h1 {
+    max-width: 760px;
+    font-size: clamp(2.65rem, 6vw, 4.55rem);
+    letter-spacing: -0.055em;
+}
+
+.sct-public-hero .hero-text {
+    max-width: 660px;
+    font-size: clamp(.98rem, 1.7vw, 1.08rem);
+    line-height: 1.72;
+}
+
+.sct-public-hero .hero-buttons .btn {
+    min-height: 48px;
+    padding-inline: 1.2rem;
+    border-radius: 14px;
+}
+
+.sct-public-hero__trust {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(158,173,184,.18);
+}
+
+.sct-public-hero__trust .trust-item {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(241,248,252,.78);
+    color: #435C6E;
+}
+
+/* ---------- SECCIONES / CONTENEDORES ---------- */
+.sct-public-section {
+    padding: clamp(44px, 6vw, 76px) 0;
+    background: #fff;
+}
+
+.sct-public-section__surface,
+.sct-public-contact__surface {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.35rem, 3.2vw, 2.65rem);
+    border: 1px solid var(--sct-partial-border);
+    border-radius: var(--sct-partial-radius);
+    background: var(--sct-partial-surface);
+    box-shadow: var(--sct-partial-shadow);
+}
+
+.sct-public-section__surface::before,
+.sct-public-contact__surface::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 150px;
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--sct-partial-cyan), #95DFDD);
+}
+
+.sct-public-about {
+    background: linear-gradient(180deg, #fff 0%, #F6F8F9 100%);
+}
+
+.sct-public-about .section-title,
+.sct-public-products .section-title,
+.sct-public-contact .section-title {
+    letter-spacing: -0.035em;
+}
+
+.sct-public-info-card {
+    position: relative;
+    min-height: 100%;
+    padding: 24px;
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+.sct-public-info-card--cyan {
+    background: linear-gradient(145deg, rgba(0,123,197,.10), #fff 68%);
+    border-color: rgba(0,123,197,.15);
+}
+
+.sct-public-info-card--ice {
+    background: linear-gradient(145deg, #F6F8F9, #fff 72%);
+    border-color: rgba(68,84,155,.10);
+}
+
+.sct-public-info-card--aqua {
+    background: linear-gradient(145deg, rgba(149,223,221,.14), #fff 72%);
+    border-color: rgba(0,132,128,.14);
+}
+
+.sct-public-info-card .problem-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    box-shadow: inset 0 0 0 1px rgba(0,123,197,.08);
+}
+
+.sct-public-info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(24,38,99,.08);
+}
+
+/* ---------- PRODUCTO ---------- */
+.sct-public-products {
+    background: #F6F8F9;
+}
+
+.sct-public-section__surface--product {
+    background:
+        radial-gradient(circle at 88% 20%, rgba(0,123,197,.12), transparent 34%),
+        #fff;
+}
+
+.sct-public-product-card {
+    max-width: 980px;
+    gap: clamp(20px, 3vw, 34px);
+    margin-top: 6px;
+    padding: clamp(24px, 4vw, 38px);
+    border-color: rgba(24,38,99,.10);
+    border-radius: 26px;
+    background: linear-gradient(125deg, #F6F8F9 0%, #FFFFFF 48%, #95DFDD 100%);
+    box-shadow: 0 18px 45px rgba(24,38,99,.08);
+}
+
+.sct-public-product-card .product-feature-icon {
+    width: 82px;
+    height: 82px;
+    border-radius: 22px;
+    background: linear-gradient(145deg, var(--sct-partial-navy), var(--primary-darker, #44549B));
+    box-shadow: 0 12px 26px rgba(24,38,99,.18);
+}
+
+.sct-public-product-card .product-feature-icon img {
+    width: 56px;
+    height: 56px;
+}
+
+.sct-public-product-card .product-feature-tagline {
+    color: var(--sct-partial-cyan-dark);
+}
+
+.sct-public-product-card .btn-primary-custom {
+    min-height: 46px;
+    border-radius: 14px;
+    white-space: nowrap;
+}
+
+/* ---------- CONTACTO ---------- */
+.sct-public-contact {
+    background: linear-gradient(180deg, #fff 0%, #F6F8F9 100%);
+}
+
+.sct-public-contact__surface {
+    background:
+        radial-gradient(circle at 8% 10%, rgba(149,223,221,.11), transparent 30%),
+        #fff;
+}
+
+.sct-public-contact__info {
+    display: grid;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.sct-public-contact__info .contact-info-item {
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(158,173,184,.18);
+    border-radius: 16px;
+    background: rgba(247,251,253,.86);
+}
+
+.sct-public-contact__info .contact-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+}
+
+.sct-public-contact__info .contact-info-item small {
+    font-size: .68rem;
+    letter-spacing: .02em;
+}
+
+.sct-public-contact__info .contact-info-item strong {
+    font-size: .84rem;
+    overflow-wrap: anywhere;
+}
+
+.sct-public-contact__form-card {
+    padding: clamp(1.2rem, 3vw, 2rem);
+    border-radius: 24px;
+    border-color: rgba(0,123,197,.12);
+    background: #fff;
+    box-shadow: 0 18px 45px rgba(24,38,99,.08);
+}
+
+.sct-public-contact__form-card label,
+.sct-public-login-modal label {
+    font-size: .76rem;
+    font-weight: 700;
+    color: #334551;
+}
+
+.sct-public-contact__form-card input,
+.sct-public-contact__form-card textarea,
+.sct-public-login-modal input {
+    min-height: 46px;
+    padding: 11px 13px;
+    border-radius: 13px;
+    border-color: rgba(158,173,184,.34);
+    background: #FFFFFF;
+    font-size: .88rem;
+}
+
+.sct-public-contact__form-card textarea {
+    min-height: 116px;
+    resize: vertical;
+}
+
+/* ---------- LOGIN MODAL ---------- */
+.sct-public-login-modal {
+    overflow: hidden;
+    padding: clamp(1.2rem, 3vw, 1.7rem);
+    border: 1px solid rgba(255,255,255,.8) !important;
+    border-radius: 28px !important;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0,123,197,.10), transparent 30%),
+        #fff;
+    box-shadow: 0 28px 80px rgba(24,38,99,.18);
+}
+
+.sct-public-login-modal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--sct-partial-cyan), #95DFDD);
+    border-radius: 0 999px 999px 0;
+}
+
+.sct-public-login-modal__brand {
+    margin-bottom: 20px;
+    padding-right: 42px;
+}
+
+.sct-public-login-modal .modal-symbol {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(68,84,155,.18);
+}
+
+.sct-public-login-modal h2 {
+    color: var(--sct-partial-navy);
+    font-size: clamp(1.35rem, 4vw, 1.7rem);
+    letter-spacing: -.03em;
+}
+
+.sct-public-login-modal p {
+    font-size: .86rem;
+    line-height: 1.6;
+}
+
+.sct-public-login-modal .btn-primary-custom {
+    min-height: 48px;
+    border-radius: 14px;
+}
+
+/* ---------- FOOTER PÚBLICO ---------- */
+.sct-public-footer {
+    padding: 20px 0 24px;
+    background: #F6F8F9;
+    color: #CCD4DA;
+}
+
+.sct-public-footer__surface {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at 90% 0%, rgba(0,123,197,.20), transparent 34%),
+        linear-gradient(145deg, #182663, #182663 75%);
+    box-shadow: 0 22px 55px rgba(24,38,99,.16);
+}
+
+.sct-public-footer .footer-description {
+    color: #CCD4DA;
+    font-size: .8rem;
+}
+
+.sct-public-footer h6 {
+    margin-bottom: 14px;
+    font-size: .76rem;
+    letter-spacing: .04em;
+}
+
+.sct-public-footer li {
+    margin-bottom: 8px;
+}
+
+.sct-public-footer li a,
+.sct-public-footer p,
+.sct-public-footer .footer-bottom {
+    font-size: .76rem;
+}
+
+.sct-public-footer .btn-footer-login {
+    min-height: 42px;
+    padding-inline: 14px;
+    border-radius: 13px;
+}
+
+.sct-public-footer hr {
+    margin: 28px 0 18px;
+}
+
+.sct-public-footer .footer-bottom {
+    color: #9EADB8;
+    line-height: 1.5;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 991.98px) {
+    .sct-public-navbar {
+        padding: 8px 10px 0;
+    }
+
+    .sct-public-navbar .sct-public-navbar__shell {
+        padding: 8px 10px;
+        border-radius: 20px;
+    }
+
+    .sct-public-navbar .navbar-collapse {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid rgba(158,173,184,.18);
+        border-radius: 16px;
+        background: rgba(248,252,254,.98);
+    }
+
+    .sct-public-navbar .navbar-nav {
+        gap: 3px;
+    }
+
+    .sct-public-navbar .navbar-actions {
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(158,173,184,.18);
+    }
+
+    .sct-public-hero {
+        min-height: 0;
+        padding-top: 106px;
+    }
+
+    .sct-public-section__surface,
+    .sct-public-contact__surface {
+        border-radius: 26px;
+    }
+
+    .sct-public-contact__surface > .row {
+        --bs-gutter-y: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sct-public-hero {
+        padding-top: 96px;
+        padding-bottom: 28px;
+    }
+
+    .sct-public-hero__content {
+        padding: 1.2rem 1rem;
+        border-radius: 26px;
+    }
+
+    .sct-public-hero .hero-content h1 {
+        font-size: clamp(2.25rem, 11vw, 3.15rem);
+        letter-spacing: -.045em;
+    }
+
+    .sct-public-hero .hero-text {
+        margin-top: 18px;
+        line-height: 1.6;
+    }
+
+    .sct-public-hero .hero-buttons {
+        margin-top: 22px;
+        gap: 8px;
+    }
+
+    .sct-public-hero .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .sct-public-hero__trust {
+        gap: 7px;
+    }
+
+    .sct-public-hero__trust .trust-item {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sct-public-section {
+        padding: 28px 0;
+    }
+
+    .sct-public-section__surface,
+    .sct-public-contact__surface {
+        padding: 1.15rem;
+        border-radius: 22px;
+        box-shadow: 0 12px 30px rgba(24,38,99,.06);
+    }
+
+    .sct-public-info-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .sct-public-product-card {
+        padding: 20px 16px;
+        border-radius: 20px;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .sct-public-product-card .product-feature-icon {
+        width: 66px;
+        height: 66px;
+    }
+
+    .sct-public-product-card .product-feature-icon img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .sct-public-product-card .product-feature-cta,
+    .sct-public-product-card .product-feature-cta .btn {
+        width: 100%;
+    }
+
+    .sct-public-contact__form-card {
+        padding: 1rem;
+        border-radius: 20px;
+    }
+
+    .sct-public-footer {
+        padding-inline: 10px;
+    }
+
+    .sct-public-footer__surface {
+        padding: 1.35rem 1.1rem;
+        border-radius: 24px;
+    }
+
+    .sct-public-footer .footer-brand .brand-logo {
+        width: 126px;
+    }
+
+    .sct-public-footer .footer-bottom {
+        display: block;
+    }
+
+    .sct-public-login-modal {
+        margin-inline: .25rem;
+        padding: 1.15rem;
+        border-radius: 24px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .sct-public-navbar {
+        padding-inline: 6px;
+    }
+
+    .sct-public-navbar .sct-public-navbar__shell {
+        min-height: 58px;
+        border-radius: 18px;
+    }
+
+    .sct-public-navbar .brand-wrapper > div:last-child {
+        display: none;
+    }
+
+    .sct-public-hero {
+        padding-top: 88px;
+    }
+
+    .sct-public-section__surface,
+    .sct-public-contact__surface {
+        padding: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sct-public-navbar *,
+    .sct-public-hero *,
+    .sct-public-section *,
+    .sct-public-contact *,
+    .sct-public-footer * {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+
+
+/* P10 / V36 — PARTIALS ENGIE Fluid */
+.sct-public-hero,
+.hero-section { background-color: var(--engie-grey-100); }
+.brand-symbol,
+.sct-footer-brand__mark { background: linear-gradient(135deg, var(--engie-gradient-start), var(--engie-gradient-end)); }

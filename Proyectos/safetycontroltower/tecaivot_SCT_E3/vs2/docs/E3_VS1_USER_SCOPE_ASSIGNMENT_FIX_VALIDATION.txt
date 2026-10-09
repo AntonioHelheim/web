@@ -1,0 +1,49 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1
+VALIDACIÓN FIX ALCANCE DE USUARIOS
+
+PHP revisados: 326
+Errores PHP: 0
+
+JavaScript:
+- js/usuarios.js: OK
+- js/onboarding.js: OK
+- js/health-form.js: OK
+- js/app-ui.js: OK
+- js/preguntas-onboarding-admin.js: OK
+
+Checks:
+- super_global: OK
+- manager_company: OK
+- jefatura_assigned: OK
+- paramedico_assigned_view: OK
+- contratista_assigned_view: OK
+- assignment_table: OK
+- param_contractor_permission: OK
+- auth_assignment_check: OK
+- admin_manager_exclude_super: OK
+- jefatura_manage_gate: OK
+- assigned_grid_only: OK
+- supervisor_candidates: OK
+- replace_assignments: OK
+- create_saves_assignment: OK
+- update_saves_assignment: OK
+- unchanged_role_edit_allowed: OK
+- view_only_capabilities: OK
+- supervisor_endpoint: OK
+- supervisor_ui: OK
+- supervisor_js: OK
+- navigation_view_or_manage: OK
+- page_view_or_manage: OK
+- reset_assignments: OK
+
+Idiomas:
+- es: OK
+- en: OK
+- pt: OK
+- fr: OK
+- zh: OK
+
+SQL fuera de migracion sql: 0
+Carpetas SQL duplicadas: 0
+health.key incluidos: 0
+config.php incluidos: 0

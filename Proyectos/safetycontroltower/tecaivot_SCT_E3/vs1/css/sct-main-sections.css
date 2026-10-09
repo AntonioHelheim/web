@@ -1,0 +1,1162 @@
+/* ==========================================================
+   SAFETY CONTROL TOWER — MAIN SECTIONS / P31
+   Shared visual grammar for Bienvenida, Panel and Gestiones.
+   Keeps the three main sections aligned and visually continuous.
+   ========================================================== */
+
+.sct-main-shell {
+    width: min(1440px, 100%) !important;
+    max-width: 1440px !important;
+    margin-inline: auto !important;
+    padding-left: clamp(18px, 1.35vw, 26px) !important;
+    padding-right: clamp(18px, 1.35vw, 26px) !important;
+    padding-top: 0 !important;
+}
+
+.sct-main-hero {
+    display: block !important;
+    min-width: 0;
+    margin: 0 0 .72rem !important;
+    padding: 18px 0 10px !important;
+}
+
+.sct-main-hero__copy {
+    min-width: 0 !important;
+    max-width: 920px !important;
+}
+
+.sct-main-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .46rem !important;
+    width: fit-content !important;
+    min-height: 30px !important;
+    margin: 0 0 .62rem !important;
+    padding: .34rem .72rem !important;
+    border: 1px solid rgba(0,123,197,.18) !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.92) !important;
+    color: var(--primary-dark, #005c9a) !important;
+    box-shadow: none !important;
+    font-size: .72rem !important;
+    font-weight: 850 !important;
+    line-height: 1 !important;
+    letter-spacing: .075em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+}
+
+.sct-main-pill i {
+    font-size: .82rem;
+    line-height: 1;
+}
+
+.sct-main-title {
+    margin: 0 !important;
+    color: var(--primary-darkest, #182663) !important;
+    font-size: clamp(2.25rem, 3vw, 3rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.045em !important;
+}
+
+.sct-main-intro {
+    max-width: 820px !important;
+    margin: .62rem 0 0 !important;
+    color: var(--text-secondary, #60798b) !important;
+    font-size: .96rem !important;
+    line-height: 1.55 !important;
+}
+
+/* Welcome has no intro: keep the next functional title close to the greeting. */
+.welcome-page .sct-main-hero {
+    margin-bottom: 0 !important;
+    padding-bottom: 4px !important;
+}
+
+/* Remove the legacy divider between greeting and "Tus pendientes". */
+.welcome-page .welcome-section-head--activities {
+    border-top: 0 !important;
+    padding-top: .18rem !important;
+}
+
+@media (min-width: 1280px) {
+    .management-hub-page .management-shell.sct-main-shell,
+    .dashboard-page .dashboard-shell.sct-main-shell,
+    .welcome-page .welcome-shell.sct-main-shell {
+        width: min(1440px, 100%) !important;
+        max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+    .sct-main-shell {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .sct-main-hero {
+        padding-top: 14px !important;
+        padding-bottom: 8px !important;
+    }
+
+    .sct-main-title {
+        font-size: clamp(2rem, 5vw, 2.55rem) !important;
+    }
+}
+
+@media (max-width: 599.98px) {
+    .sct-main-shell {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    .sct-main-hero {
+        margin-bottom: .4rem !important;
+        padding: 12px 0 7px !important;
+    }
+
+    .sct-main-pill {
+        min-height: 28px !important;
+        margin-bottom: .5rem !important;
+        padding: .3rem .62rem !important;
+        font-size: .65rem !important;
+    }
+
+    .sct-main-title {
+        font-size: clamp(1.8rem, 9vw, 2.2rem) !important;
+        line-height: 1.08 !important;
+    }
+
+    .sct-main-intro {
+        margin-top: .46rem !important;
+        font-size: .86rem !important;
+        line-height: 1.45 !important;
+    }
+}
+
+
+/* Personal activity pages reuse exactly the same title geometry as the three main sections. */
+.sct-personal-module-shell.sct-main-shell,
+.sct-personal-hub.sct-main-shell {
+    min-width: 0;
+    padding-bottom: 2rem !important;
+}
+
+.sct-personal-section-hero.sct-main-hero {
+    max-width: none !important;
+}
+
+.sct-personal-section-hero .sct-main-hero__copy {
+    max-width: 920px !important;
+}
+
+.sct-personal-section-hero .sct-personal-page-header__identity {
+    margin: .48rem 0 0 !important;
+}
+
+@media (max-width: 599.98px) {
+    .sct-personal-module-shell.sct-main-shell,
+    .sct-personal-hub.sct-main-shell {
+        padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* =========================================================
+   P46 — Mi espacio como HUB único de actividades (Usuario Demo)
+   ========================================================= */
+body.sct-hub-activity-mode [data-activity-browse] {
+    display: none !important;
+}
+
+.sct-hub-activity-workspace {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: .8rem 0 1.5rem;
+}
+
+.sct-hub-activity-workspace__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: .9rem;
+    padding: .95rem 1rem;
+    border: 1px solid rgba(13, 56, 103, .10);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(9, 30, 66, .07);
+}
+
+.sct-hub-activity-back {
+    flex: 0 0 auto;
+    min-height: 40px;
+}
+
+.sct-hub-activity-workspace__heading {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sct-hub-activity-workspace__title {
+    margin: .28rem 0 .35rem;
+    color: #0f2942;
+    font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.sct-hub-activity-workspace__status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 27px;
+    padding: .3rem .62rem;
+    border-radius: 999px;
+    background: rgba(0, 123, 197, .10);
+    color: #075f92;
+    font-size: .76rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.sct-hub-activity-workspace__status[data-state="overdue"] {
+    background: rgba(191, 63, 69, .11);
+    color: #a62f36;
+}
+.sct-hub-activity-workspace__status[data-state="approved"],
+.sct-hub-activity-workspace__status[data-state="complete"] {
+    background: rgba(31, 157, 104, .11);
+    color: #17794f;
+}
+.sct-hub-activity-workspace__status[data-state="failed"] {
+    background: rgba(138, 77, 184, .11);
+    color: #6f3f98;
+}
+
+.sct-hub-activity-frame-shell {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    border: 1px solid rgba(13, 56, 103, .10);
+    border-radius: 20px;
+    background: #f6f8f9;
+    box-shadow: 0 18px 36px rgba(9, 30, 66, .08);
+}
+
+.sct-hub-activity-frame {
+    display: block;
+    width: 100%;
+    height: min(74dvh, 860px);
+    min-height: 560px;
+    border: 0;
+    background: #f6f8f9;
+}
+
+.sct-hub-activity-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
+    background: rgba(246, 248, 249, .94);
+    color: #4d627b;
+    font-weight: 700;
+}
+
+.sct-hub-activity-complete {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.2rem;
+    border: 1px solid rgba(31, 157, 104, .18);
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(31,157,104,.07), #fff 56%);
+    box-shadow: 0 16px 32px rgba(9, 30, 66, .07);
+}
+
+.sct-hub-activity-complete__icon {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: rgba(31, 157, 104, .12);
+    color: #17794f;
+    font-size: 1.35rem;
+}
+
+.sct-hub-activity-complete__copy {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sct-hub-activity-complete__copy h2 {
+    margin: 0 0 .8rem;
+    color: #0f2942;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.sct-hub-activity-complete__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .65rem;
+    margin: 0;
+}
+
+.sct-hub-activity-complete__facts div {
+    min-width: 0;
+    padding: .72rem .8rem;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid rgba(13, 56, 103, .08);
+}
+
+.sct-hub-activity-complete__facts dt {
+    margin-bottom: .18rem;
+    color: #657991;
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+.sct-hub-activity-complete__facts dd {
+    margin: 0;
+    color: #173956;
+    font-size: .86rem;
+    font-weight: 800;
+}
+
+.sct-activity-category-filters {
+    margin-bottom: .55rem;
+}
+
+.sct-hub-detail-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 34px;
+    margin: 0 0 .75rem;
+    padding: .38rem .5rem .38rem .68rem;
+    border-radius: 999px;
+    background: rgba(0, 123, 197, .08);
+    color: #075f92;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+.sct-hub-detail-filter__clear {
+    width: 27px;
+    height: 27px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(7, 95, 146, .10);
+    color: inherit;
+}
+
+/* Los motores siguen siendo los existentes, pero dentro del HUB se elimina
+   todo el chrome duplicado. SAMEORIGIN se habilita sólo con ?embedded=1. */
+body.sct-embedded-activity .sct-partial-app-nav,
+body.sct-embedded-activity .sct-partial-app-footer,
+body.sct-embedded-activity .sct-main-hero,
+body.sct-embedded-activity .sct-module-context,
+body.sct-embedded-activity .sct-personal-activity-nav {
+    display: none !important;
+}
+
+body.sct-embedded-activity,
+body.sct-embedded-activity.sct-app-shell-active {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #f6f8f9 !important;
+}
+
+body.sct-embedded-activity.sct-module-page > .container,
+body.sct-embedded-activity.sct-module-page.sct-activity-mode > .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: .55rem !important;
+}
+
+body.sct-embedded-activity .quick-links {
+    margin: 0 !important;
+}
+
+@media (max-width: 799.98px) {
+    .sct-hub-activity-workspace {
+        padding-top: .45rem;
+    }
+
+    .sct-hub-activity-workspace__header {
+        padding: .8rem;
+        border-radius: 16px;
+    }
+
+    .sct-hub-activity-frame {
+        height: 72dvh;
+        min-height: 500px;
+    }
+
+    .sct-hub-activity-complete__facts {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 599.98px) {
+    .sct-hub-activity-workspace__header {
+        flex-direction: column;
+        gap: .65rem;
+    }
+
+    .sct-hub-activity-back {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sct-hub-activity-frame-shell {
+        min-height: 440px;
+        border-radius: 16px;
+    }
+
+    .sct-hub-activity-frame {
+        height: 70dvh;
+        min-height: 440px;
+    }
+
+    .sct-hub-activity-complete {
+        flex-direction: column;
+        padding: .95rem;
+        border-radius: 16px;
+    }
+
+    .sct-hub-activity-complete__facts {
+        grid-template-columns: 1fr;
+    }
+
+    .sct-activity-category-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: thin;
+    }
+
+    .sct-activity-category-filters .sct-personal-filter-pill {
+        flex: 0 0 auto;
+    }
+}
+
+/* ==========================================================
+   P47 — ESTÁNDAR VISUAL PARA MÓDULOS DE GESTIÓN
+   - Mismo eje de 1440px de Inicio / Panel / Gestiones.
+   - Misma jerarquía de título y ritmo vertical.
+   - Botones consistentes en módulos autenticados y partials de trabajo.
+   ========================================================== */
+
+body.sct-management-module-page .sct-management-shell.sct-main-shell {
+    width: min(1440px, 100%) !important;
+    max-width: 1440px !important;
+    margin-inline: auto !important;
+    padding-left: clamp(18px, 1.35vw, 26px) !important;
+    padding-right: clamp(18px, 1.35vw, 26px) !important;
+    padding-bottom: 2.4rem !important;
+}
+
+body.sct-management-module-page .welcome-hero.sct-main-hero {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 0 .72rem !important;
+    padding: 18px 0 10px !important;
+}
+
+body.sct-management-module-page .welcome-hero .sct-main-title {
+    max-width: 920px !important;
+}
+
+body.sct-management-module-page .welcome-hero .sct-main-intro,
+body.sct-management-module-page .welcome-hero .section-description.sct-main-intro {
+    max-width: 820px !important;
+}
+
+body.sct-management-module-page .sct-module-context {
+    margin-top: .1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+body.sct-management-module-page .quick-links,
+body.sct-management-module-page .history-card,
+body.sct-management-module-page .perm-empty {
+    scroll-margin-top: 1rem;
+}
+
+body.sct-management-module-page .feature-card,
+body.sct-management-module-page .history-card {
+    border-radius: 18px !important;
+}
+
+body.sct-management-module-page .feature-card > h2:first-child,
+body.sct-management-module-page .feature-card > .d-flex:first-child h2,
+body.sct-management-module-page .history-card h2,
+body.sct-management-module-page .detail-panel h2 {
+    color: var(--primary-darkest, #182663);
+    font-weight: 800;
+    letter-spacing: -.015em;
+}
+
+body.sct-management-module-page .feature-card > h3:first-child,
+body.sct-management-module-page .feature-card .subsection > h3:first-child {
+    color: var(--primary-darkest, #182663);
+    font-weight: 780;
+}
+
+/* Sistema único de botones para vistas autenticadas. */
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page)
+.btn:not(.btn-close):not(.btn-link-plain) {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .42rem;
+    padding: .54rem .9rem;
+    border-width: 1px;
+    border-radius: 12px;
+    box-shadow: none;
+    font-size: .82rem;
+    font-weight: 760;
+    line-height: 1.15;
+    white-space: normal;
+    transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease, background-color .14s ease, color .14s ease;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page)
+.btn:not(.btn-close):not(.btn-link-plain):hover {
+    transform: translateY(-1px);
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page)
+.btn:not(.btn-close):not(.btn-link-plain):focus-visible {
+    outline: 3px solid rgba(0, 123, 197, .18);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .btn.btn-sm {
+    min-height: 36px;
+    padding: .42rem .72rem;
+    border-radius: 10px;
+    font-size: .76rem;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .btn.btn-lg {
+    min-height: 46px;
+    padding: .68rem 1.08rem;
+    border-radius: 13px;
+    font-size: .9rem;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page)
+:is(.btn-primary-custom, .btn-primary) {
+    border-color: var(--primary-dark, #005c9a);
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page)
+:is(.btn-outline-custom, .btn-outline-secondary, .btn-outline-danger) {
+    background: #fff;
+}
+
+body.sct-module-page .form-actions,
+body.sct-module-page .users-actions,
+body.sct-module-page .modal-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .55rem;
+}
+
+body.sct-module-page .form-actions > .btn,
+body.sct-module-page .users-actions > .btn,
+body.sct-module-page .modal-footer > .btn {
+    margin: 0 !important;
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+    body.sct-management-module-page .sct-management-shell.sct-main-shell {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    body.sct-management-module-page .welcome-hero.sct-main-hero {
+        padding: 14px 0 8px !important;
+    }
+}
+
+@media (max-width: 599.98px) {
+    body.sct-management-module-page .sct-management-shell.sct-main-shell {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+        padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    body.sct-management-module-page .welcome-hero.sct-main-hero {
+        margin-bottom: .45rem !important;
+        padding: 12px 0 7px !important;
+    }
+
+    body.sct-module-page .form-actions,
+    body.sct-module-page .users-actions,
+    body.sct-module-page .modal-footer {
+        align-items: stretch;
+    }
+
+    body.sct-module-page .form-actions > .btn,
+    body.sct-module-page .users-actions > .btn,
+    body.sct-module-page .modal-footer > .btn:not(.btn-close) {
+        flex: 1 1 132px;
+    }
+}
+
+/* P56 — reprobada finalizada: amarillo/ámbar en todo Mi espacio. */
+.sct-hub-activity-workspace__status[data-state="failed"] {
+    background: rgba(217,165,20,.14) !important;
+    color: #8a6200 !important;
+}
+
+/* P56 — cabecera única de actividad integrada: título + una sola salida. */
+.sct-hub-activity-workspace__header {
+    align-items: center;
+}
+.sct-hub-activity-back {
+    margin-left: auto;
+    white-space: nowrap;
+}
+@media (max-width: 599.98px) {
+    .sct-hub-activity-workspace__header {
+        align-items: stretch;
+    }
+    .sct-hub-activity-back {
+        margin-left: 0;
+    }
+}
+
+/* P74 — contenedores abatibles estandarizados en toda la plataforma.
+   Una sola flecha, sin caja visible, alineada con el título y dentro del
+   contenedor. El mismo motor se usa en Inicio, Panel, Gestiones y módulos. */
+.welcome-section-head,
+.dashboard-section-head,
+.dashboard-panel__head,
+.management-section-head,
+.sct-standard-section-head,
+[data-sct-collapse-head] {
+    position: relative;
+}
+
+.sct-collapsible-head {
+    min-width: 0;
+}
+
+.sct-collapse-toggle {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    flex: 0 0 30px;
+    display: inline-grid;
+    place-items: center;
+    align-self: flex-start;
+    margin-left: auto;
+    margin-right: .1rem;
+    padding: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--primary-dark, #005c9a);
+    box-shadow: none !important;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .16s ease, transform .16s ease;
+}
+
+.sct-collapse-toggle:hover {
+    color: var(--primary-darkest, #182663);
+    background: transparent !important;
+}
+
+.sct-collapse-toggle:focus-visible {
+    outline: 2px solid rgba(0,123,197,.34);
+    outline-offset: 2px;
+    border-radius: 7px !important;
+    background: transparent !important;
+}
+
+.sct-collapse-toggle i {
+    display: block;
+    font-size: .92rem;
+    line-height: 1;
+}
+
+.is-sct-collapsed > .welcome-section-head,
+.is-sct-collapsed > .dashboard-section-head,
+.is-sct-collapsed > .management-section-head,
+.is-sct-collapsed > .sct-standard-section-head,
+.is-sct-collapsed > [data-sct-collapse-head] {
+    margin-bottom: 0 !important;
+}
+
+html.sct-theme-dark .sct-collapse-toggle,
+html.sct-theme-dark .sct-collapse-toggle:hover,
+html.sct-theme-dark .sct-collapse-toggle:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #7fd2ff !important;
+}
+
+@media (max-width: 599.98px) {
+    .sct-collapse-toggle {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        flex-basis: 30px;
+    }
+}
+
+/* P61 — cierre robusto de secciones abatibles.
+   Algunas tarjetas del Dashboard declaran display con !important; esta clase
+   evita que esas reglas anulen el estado cerrado del componente compartido. */
+.dashboard-page .dashboard-section.is-sct-collapsible .sct-collapse-target-hidden,
+.welcome-page .welcome-unified-section.is-sct-collapsible .sct-collapse-target-hidden,
+.is-sct-collapsible .sct-collapse-target-hidden {
+    display: none !important;
+}
+
+/* ==========================================================
+   P76 — IDENTIDAD VISUAL TRANSVERSAL POR ROL
+   - Unifica títulos de página, títulos de contenedor y modales en todas las
+     superficies autenticadas sin alterar la lógica ni crear componentes nuevos.
+   - Mantiene el encabezado principal como superficie limpia, no como tarjeta.
+   - Respeta el motor único de colapso P74/P75 y el tooltip compartido.
+   ========================================================== */
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-hero {
+    min-height: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-hero::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.sct-module-page:not(.sct-activity-mode) .sct-main-hero > .welcome-greeting-icon {
+    display: none !important;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-title {
+    color: var(--primary-darkest, #182663) !important;
+    font-weight: 850 !important;
+    letter-spacing: -.04em !important;
+    text-wrap: balance;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-intro {
+    color: var(--text-secondary, #60798b) !important;
+    text-wrap: pretty;
+}
+
+/* Título + ayuda: el tooltip siempre pertenece al título, nunca a la descripción. */
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-title-with-help {
+    min-width: 0;
+    display: flex;
+    align-items: center !important;
+    gap: .44rem;
+}
+
+:is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-title-with-help > :is(h1,h2,h3,h4) {
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+/* Misma jerarquía de encabezados para tarjetas y secciones de todos los módulos. */
+body.sct-module-page :is(
+    .feature-card,
+    .history-card,
+    .form-section,
+    .audit-card,
+    .self-card,
+    .protocol-card,
+    .assignment-card,
+    .detail-panel,
+    .sct-builder-readonly-section,
+    .sct-builder-step,
+    .sct-activity-builder-step
+) > :is(h2,h3):first-child,
+body.sct-module-page :is(
+    .feature-card,
+    .history-card,
+    .form-section,
+    .audit-card,
+    .self-card,
+    .protocol-card,
+    .assignment-card,
+    .detail-panel,
+    .sct-builder-readonly-section,
+    .sct-builder-step,
+    .sct-activity-builder-step
+) > :is(.d-flex,.sct-standard-section-head,[data-sct-collapse-head]):first-child :is(h2,h3),
+body.sct-module-page .modal-title {
+    color: var(--primary-darkest, #182663) !important;
+    font-weight: 800 !important;
+    letter-spacing: -.015em !important;
+    line-height: 1.22;
+}
+
+body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel) > h2:first-child,
+body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel) > .d-flex:first-child h2,
+body.sct-module-page .modal-title {
+    font-size: clamp(1.02rem, 1.35vw, 1.22rem) !important;
+}
+
+body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel) h3,
+body.sct-module-page .sct-builder-readonly-section h3,
+body.sct-module-page .sct-builder-step__heading h3,
+body.sct-module-page :is(.sct-builder-readonly-section,.sct-builder-step,.sct-activity-builder-step) > h3:first-child {
+    color: var(--primary-darkest, #182663);
+    font-weight: 760;
+}
+
+/* Cabeceras de secciones abatibles: título, tooltip y flecha comparten un eje. */
+body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head) {
+    min-width: 0;
+    align-items: center !important;
+    gap: .65rem;
+}
+
+body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head) > :first-child {
+    min-width: 0;
+}
+
+body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head) .sct-collapse-toggle {
+    align-self: center;
+}
+
+/* Tablas operativas: una cabecera legible y consistente en todas las gestiones. */
+body.sct-module-page .table-responsive > .table {
+    margin-bottom: 0;
+}
+
+body.sct-module-page .table > thead > tr > th {
+    color: var(--primary-darkest, #182663);
+    font-size: .76rem;
+    font-weight: 800;
+    letter-spacing: .015em;
+    vertical-align: middle;
+}
+
+/* Semántica SCT: reprobado/no conforme es ámbar; rojo queda reservado a crítico/vencido. */
+body.sct-module-page :is(.audit-card.failed,.self-card.failed,.assignment-card.failed,.sct-personal-activity-card--status-failed) {
+    border-color: rgba(217,165,20,.42) !important;
+}
+
+body.sct-module-page :is(.badge-estado-3,.status-failed,.induction-pill--failed,.audit-status-failed,.self-status-failed) {
+    border-color: rgba(217,165,20,.28) !important;
+    background: rgba(217,165,20,.14) !important;
+    color: #8a6200 !important;
+}
+
+html.sct-theme-dark :is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-title,
+html.sct-theme-dark body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel,.modal-content) :is(h2,h3,.modal-title),
+html.sct-theme-dark body.sct-module-page .table > thead > tr > th {
+    color: #dcefff !important;
+}
+
+html.sct-theme-dark body.sct-module-page :is(.badge-estado-3,.status-failed,.induction-pill--failed,.audit-status-failed,.self-status-failed) {
+    border-color: rgba(255,204,89,.34) !important;
+    background: rgba(255,204,89,.16) !important;
+    color: #ffe39a !important;
+}
+
+@media (max-width: 599.98px) {
+    :is(.sct-module-page, .welcome-page, .dashboard-page, .management-hub-page) .sct-main-title {
+        overflow-wrap: anywhere;
+    }
+
+    body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel) > h2:first-child,
+    body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel) > .d-flex:first-child h2,
+    body.sct-module-page .modal-title {
+        font-size: 1rem !important;
+    }
+
+    body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head) {
+        gap: .5rem;
+    }
+}
+
+/* ==========================================================
+   P79 — Responsive transversal de superficies autenticadas /api
+   Mantiene la estructura actual y mejora lectura e interacción en tablet/mobile.
+   ========================================================== */
+
+body.sct-module-page :is(.container,.container-fluid,.row,[class*="col-"]) {
+    min-width: 0;
+}
+
+body.sct-module-page :is(.table-responsive,.sct-table-responsive) {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+body.sct-module-page :is(.form-control,.form-select,.input-group,.input-group-text,.btn) {
+    min-width: 0;
+}
+
+body.sct-module-page :is(.modal-header,.modal-body,.modal-footer) {
+    min-width: 0;
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+    body.sct-module-page :is(.container,.container-fluid) {
+        max-width: 100% !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel,.self-card,.audit-card,.protocol-card,.assignment-card) {
+        min-width: 0;
+        padding: clamp(.9rem, 1.8vw, 1.15rem) !important;
+        border-radius: 16px !important;
+    }
+
+    body.sct-module-page :is(h1,.sct-main-title) {
+        font-size: clamp(1.85rem, 4.5vw, 2.35rem) !important;
+        line-height: 1.08 !important;
+    }
+
+    body.sct-module-page :is(.form-control,.form-select,.input-group-text) {
+        min-height: 42px;
+        font-size: .94rem;
+    }
+
+    body.sct-module-page .btn:not(.btn-close):not(.sct-info-tip__button):not(.sct-collapse-toggle) {
+        min-height: 42px;
+    }
+
+    body.sct-module-page .modal:not(.sct-builder-modal) .modal-dialog {
+        width: calc(100vw - 32px);
+        max-width: 920px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body.sct-module-page .table {
+        font-size: .84rem;
+    }
+
+    body.sct-module-page .table > :not(caption) > * > * {
+        padding: .68rem .62rem;
+        vertical-align: middle;
+    }
+}
+
+@media (max-width: 599.98px) {
+    body.sct-module-page :is(.container,.container-fluid) {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    body.sct-module-page main,
+    body.sct-module-page .sct-main-shell {
+        min-width: 0;
+        overflow-x: clip;
+    }
+
+    body.sct-module-page :is(.feature-card,.history-card,.form-section,.detail-panel,.self-card,.audit-card,.protocol-card,.assignment-card) {
+        min-width: 0;
+        padding: .85rem !important;
+        border-radius: 15px !important;
+    }
+
+    body.sct-module-page :is(h1,.sct-main-title) {
+        font-size: clamp(1.62rem, 8vw, 2rem) !important;
+        line-height: 1.1 !important;
+    }
+
+    body.sct-module-page :is(h2,.modal-title) {
+        line-height: 1.2 !important;
+    }
+
+    body.sct-module-page :is(p,.form-text,.text-muted,small) {
+        line-height: 1.45;
+    }
+
+    body.sct-module-page .form-label {
+        margin-bottom: .38rem;
+        font-size: .86rem;
+        line-height: 1.3;
+    }
+
+    /* 16px evita zoom automático en navegadores móviles. */
+    body.sct-module-page :is(.form-control,.form-select) {
+        min-height: 44px;
+        font-size: 16px !important;
+        line-height: 1.25;
+    }
+
+    body.sct-module-page textarea.form-control {
+        min-height: 96px;
+        resize: vertical;
+    }
+
+    body.sct-module-page .input-group-text {
+        min-height: 44px;
+        padding-inline: .7rem;
+        font-size: .9rem;
+    }
+
+    body.sct-module-page .btn:not(.btn-close):not(.sct-info-tip__button):not(.sct-collapse-toggle) {
+        min-height: 44px;
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    body.sct-module-page .btn.btn-sm:not(.sct-info-tip__button):not(.sct-collapse-toggle) {
+        min-height: 40px;
+        padding: .45rem .65rem;
+    }
+
+    body.sct-module-page :is(.d-flex,.btn-group,.input-group) {
+        min-width: 0;
+    }
+
+    body.sct-module-page .modal:not(.sct-builder-modal) .modal-dialog {
+        width: calc(100vw - 16px);
+        max-width: none;
+        margin: 8px auto;
+    }
+
+    body.sct-module-page .modal-content {
+        max-width: 100%;
+        border-radius: 16px;
+    }
+
+    body.sct-module-page :is(.modal-header,.modal-body,.modal-footer) {
+        padding-left: .9rem;
+        padding-right: .9rem;
+    }
+
+    body.sct-module-page .modal-footer {
+        gap: .5rem;
+        flex-wrap: wrap;
+    }
+
+    body.sct-module-page .modal-footer > .btn {
+        flex: 1 1 140px;
+        margin: 0;
+    }
+
+    body.sct-module-page .table-responsive {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    body.sct-module-page .table {
+        width: max-content;
+        min-width: 100%;
+        margin-bottom: 0;
+        font-size: .8rem;
+    }
+
+    body.sct-module-page .table > :not(caption) > * > * {
+        max-width: 240px;
+        padding: .58rem .55rem;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        vertical-align: middle;
+    }
+
+    body.sct-module-page .table .btn {
+        min-width: 40px;
+    }
+
+    body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head,.sct-title-with-help) {
+        min-width: 0;
+        align-items: center !important;
+    }
+
+    body.sct-module-page :is(.sct-standard-section-head,[data-sct-collapse-head],.sct-collapsible-head) > :first-child,
+    body.sct-module-page .sct-title-with-help > :first-child {
+        min-width: 0;
+    }
+}
+
+
+/* P79 — Los dos hubs con CSS especializado (Panel y Gestiones) también
+   reciben límites táctiles/lectura sin sustituir sus layouts propios. */
+:is(body.dashboard-page, body.management-hub-page) :is(.dashboard-shell,.management-shell,.dashboard-section,.dashboard-panel,.management-module-section,.management-module-card) {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+    :is(body.dashboard-page, body.management-hub-page) :is(.form-control,.form-select,.input-group-text) {
+        min-height: 42px;
+        font-size: .94rem;
+    }
+
+    :is(body.dashboard-page, body.management-hub-page) .btn:not(.btn-close):not(.sct-info-tip__button):not(.sct-collapse-toggle) {
+        min-height: 42px;
+    }
+
+    body.dashboard-page :is(.dashboard-section,.dashboard-panel),
+    body.management-hub-page :is(.management-module-section,.management-module-card) {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 599.98px) {
+    :is(body.dashboard-page, body.management-hub-page) :is(.dashboard-shell,.management-shell) {
+        width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+    }
+
+    :is(body.dashboard-page, body.management-hub-page) :is(.form-control,.form-select) {
+        min-height: 44px;
+        font-size: 16px !important;
+    }
+
+    :is(body.dashboard-page, body.management-hub-page) .btn:not(.btn-close):not(.sct-info-tip__button):not(.sct-collapse-toggle) {
+        min-height: 44px;
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    body.dashboard-page :is(.dashboard-section,.dashboard-panel),
+    body.management-hub-page :is(.management-module-section,.management-module-card) {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+}

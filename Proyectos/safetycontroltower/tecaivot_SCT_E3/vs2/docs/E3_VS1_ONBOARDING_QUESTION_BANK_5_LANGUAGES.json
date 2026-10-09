@@ -1,0 +1,7712 @@
+{
+  "es": {
+    "SST001": {
+      "question": "¿Qué debes hacer si detectas una condición insegura en tu lugar de trabajo?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reportarla y aplicar los controles definidos",
+          "order": 1
+        },
+        {
+          "text": "Ignorarla mientras no ocurra un accidente",
+          "order": 2
+        },
+        {
+          "text": "Esperar al final de la semana",
+          "order": 3
+        },
+        {
+          "text": "Pedir a otro trabajador que asuma el riesgo",
+          "order": 4
+        }
+      ]
+    },
+    "SST002": {
+      "question": "¿Qué significa la sigla EPP?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Elemento de Protección Personal",
+          "order": 1
+        },
+        {
+          "text": "Equipo de Producción Preventiva",
+          "order": 2
+        },
+        {
+          "text": "Estándar de Protección Primaria",
+          "order": 3
+        },
+        {
+          "text": "Elemento de Prevención Pública",
+          "order": 4
+        }
+      ]
+    },
+    "SST003": {
+      "question": "¿Cuál es el objetivo principal del EPP?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reducir la exposición a riesgos residuales",
+          "order": 1
+        },
+        {
+          "text": "Eliminar todos los peligros del proceso",
+          "order": 2
+        },
+        {
+          "text": "Reemplazar los procedimientos seguros",
+          "order": 3
+        },
+        {
+          "text": "Evitar la necesidad de capacitación",
+          "order": 4
+        }
+      ]
+    },
+    "SST004": {
+      "question": "¿Qué debe hacerse con un EPP dañado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirarlo de uso y solicitar reemplazo",
+          "order": 1
+        },
+        {
+          "text": "Seguir utilizándolo hasta fin de turno",
+          "order": 2
+        },
+        {
+          "text": "Repararlo de manera improvisada",
+          "order": 3
+        },
+        {
+          "text": "Prestárselo a otro trabajador",
+          "order": 4
+        }
+      ]
+    },
+    "SST005": {
+      "question": "¿Qué es un casi accidente o near miss?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Un evento sin daño que pudo haber causado lesiones o pérdidas",
+          "order": 1
+        },
+        {
+          "text": "Un accidente con licencia médica",
+          "order": 2
+        },
+        {
+          "text": "Una situación normal del trabajo",
+          "order": 3
+        },
+        {
+          "text": "Una emergencia exclusivamente ambiental",
+          "order": 4
+        }
+      ]
+    },
+    "SST006": {
+      "question": "¿Qué corresponde hacer con un casi accidente?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reportarlo para analizarlo y prevenir recurrencias",
+          "order": 1
+        },
+        {
+          "text": "No reportarlo porque no hubo daño",
+          "order": 2
+        },
+        {
+          "text": "Comentarlo sólo entre compañeros",
+          "order": 3
+        },
+        {
+          "text": "Esperar a que ocurra nuevamente",
+          "order": 4
+        }
+      ]
+    },
+    "SST007": {
+      "question": "Antes de iniciar una tarea no rutinaria, ¿qué es recomendable?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Identificar peligros y verificar controles",
+          "order": 1
+        },
+        {
+          "text": "Comenzar rápido para ahorrar tiempo",
+          "order": 2
+        },
+        {
+          "text": "Usar cualquier herramienta disponible",
+          "order": 3
+        },
+        {
+          "text": "Evitar revisar el procedimiento",
+          "order": 4
+        }
+      ]
+    },
+    "SST008": {
+      "question": "Si existe un riesgo grave e inminente no controlado, ¿qué debe hacer el trabajador?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Detener la tarea y comunicar la situación",
+          "order": 1
+        },
+        {
+          "text": "Continuar hasta terminar",
+          "order": 2
+        },
+        {
+          "text": "Trabajar más rápido",
+          "order": 3
+        },
+        {
+          "text": "Delegar la tarea sin informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST009": {
+      "question": "¿Qué ayuda a prevenir caídas al mismo nivel?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Mantener pasillos limpios, secos y despejados",
+          "order": 1
+        },
+        {
+          "text": "Correr por las áreas de trabajo",
+          "order": 2
+        },
+        {
+          "text": "Dejar cables cruzando vías de tránsito",
+          "order": 3
+        },
+        {
+          "text": "Usar el teléfono mientras se camina",
+          "order": 4
+        }
+      ]
+    },
+    "SST010": {
+      "question": "Si se derrama líquido en una zona de tránsito, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Señalizar, controlar el área y gestionar la limpieza",
+          "order": 1
+        },
+        {
+          "text": "Dejarlo hasta el aseo programado",
+          "order": 2
+        },
+        {
+          "text": "Cubrirlo con papel y continuar",
+          "order": 3
+        },
+        {
+          "text": "Ignorarlo si es poca cantidad",
+          "order": 4
+        }
+      ]
+    },
+    "SST011": {
+      "question": "¿Qué debe mantenerse libre en todo momento?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Las rutas y salidas de emergencia",
+          "order": 1
+        },
+        {
+          "text": "Sólo la puerta principal",
+          "order": 2
+        },
+        {
+          "text": "Los estacionamientos de visitas",
+          "order": 3
+        },
+        {
+          "text": "Las oficinas administrativas",
+          "order": 4
+        }
+      ]
+    },
+    "SST012": {
+      "question": "Al escuchar una alarma de evacuación, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Seguir las instrucciones y dirigirse al punto de encuentro",
+          "order": 1
+        },
+        {
+          "text": "Volver por objetos personales",
+          "order": 2
+        },
+        {
+          "text": "Usar siempre el ascensor",
+          "order": 3
+        },
+        {
+          "text": "Esperar hasta ver humo",
+          "order": 4
+        }
+      ]
+    },
+    "SST013": {
+      "question": "¿Para qué sirve el punto de encuentro en una evacuación?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para verificar y contabilizar a las personas evacuadas",
+          "order": 1
+        },
+        {
+          "text": "Para guardar equipos",
+          "order": 2
+        },
+        {
+          "text": "Para recibir herramientas",
+          "order": 3
+        },
+        {
+          "text": "Para estacionar vehículos",
+          "order": 4
+        }
+      ]
+    },
+    "SST014": {
+      "question": "Si descubres un incendio incipiente, ¿qué debes hacer primero?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Dar la alarma y actuar sólo si estás capacitado y es seguro",
+          "order": 1
+        },
+        {
+          "text": "Ocultarlo para evitar alarma",
+          "order": 2
+        },
+        {
+          "text": "Intentar apagarlo siempre sin avisar",
+          "order": 3
+        },
+        {
+          "text": "Abrir todas las puertas y ventanas",
+          "order": 4
+        }
+      ]
+    },
+    "SST015": {
+      "question": "¿Cuándo es apropiado usar un extintor portátil?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Cuando el fuego es incipiente, existe salida segura y la persona está capacitada",
+          "order": 1
+        },
+        {
+          "text": "En cualquier incendio, aunque haya humo intenso",
+          "order": 2
+        },
+        {
+          "text": "Después de volver a entrar a un área evacuada",
+          "order": 3
+        },
+        {
+          "text": "Sin verificar el tipo de fuego",
+          "order": 4
+        }
+      ]
+    },
+    "SST016": {
+      "question": "Si una salida de emergencia está bloqueada, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reportar y gestionar su liberación de inmediato",
+          "order": 1
+        },
+        {
+          "text": "No hacer nada si existe otra salida",
+          "order": 2
+        },
+        {
+          "text": "Colocar más objetos cerca",
+          "order": 3
+        },
+        {
+          "text": "Esperar a la próxima inspección",
+          "order": 4
+        }
+      ]
+    },
+    "SST017": {
+      "question": "Ante una persona lesionada, ¿cuál es una acción inicial segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Verificar que la escena sea segura y pedir ayuda",
+          "order": 1
+        },
+        {
+          "text": "Moverla siempre de inmediato",
+          "order": 2
+        },
+        {
+          "text": "Darle medicamentos personales",
+          "order": 3
+        },
+        {
+          "text": "Dejarla sola",
+          "order": 4
+        }
+      ]
+    },
+    "SST018": {
+      "question": "¿Quién debe realizar primeros auxilios especializados?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Personal capacitado dentro de sus competencias",
+          "order": 1
+        },
+        {
+          "text": "Cualquier persona sin formación",
+          "order": 2
+        },
+        {
+          "text": "Sólo el jefe directo",
+          "order": 3
+        },
+        {
+          "text": "Cualquier visitante",
+          "order": 4
+        }
+      ]
+    },
+    "SST019": {
+      "question": "Para levantar manualmente una carga, ¿qué práctica es más segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Evaluar peso y ruta, acercar la carga al cuerpo y usar técnica adecuada",
+          "order": 1
+        },
+        {
+          "text": "Doblar la espalda con piernas rectas",
+          "order": 2
+        },
+        {
+          "text": "Girar el tronco mientras se levanta",
+          "order": 3
+        },
+        {
+          "text": "Levantar rápido para terminar antes",
+          "order": 4
+        }
+      ]
+    },
+    "SST020": {
+      "question": "Si una carga es demasiado pesada para una persona, ¿qué debe hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Solicitar ayuda o usar asistencia mecánica",
+          "order": 1
+        },
+        {
+          "text": "Levantarla igualmente",
+          "order": 2
+        },
+        {
+          "text": "Arrastrarla sin evaluar",
+          "order": 3
+        },
+        {
+          "text": "Lanzarla para moverla",
+          "order": 4
+        }
+      ]
+    },
+    "SST021": {
+      "question": "¿Qué ayuda a reducir molestias en trabajo de oficina?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Ajustar el puesto, variar postura y realizar pausas",
+          "order": 1
+        },
+        {
+          "text": "Mantener la misma postura toda la jornada",
+          "order": 2
+        },
+        {
+          "text": "Trabajar con la pantalla muy baja",
+          "order": 3
+        },
+        {
+          "text": "Sentarse lejos del escritorio",
+          "order": 4
+        }
+      ]
+    },
+    "SST022": {
+      "question": "¿Cómo debería ubicarse normalmente la pantalla del computador?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Frente al usuario, a una altura y distancia cómodas",
+          "order": 1
+        },
+        {
+          "text": "Detrás del usuario",
+          "order": 2
+        },
+        {
+          "text": "En el suelo",
+          "order": 3
+        },
+        {
+          "text": "De forma que obligue a girar el cuello",
+          "order": 4
+        }
+      ]
+    },
+    "SST023": {
+      "question": "Si un equipo eléctrico está defectuoso y no estás autorizado para repararlo, ¿qué debes hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirarlo de uso o desconectarlo si es seguro y reportarlo",
+          "order": 1
+        },
+        {
+          "text": "Abrirlo y repararlo",
+          "order": 2
+        },
+        {
+          "text": "Seguir usándolo hasta que falle",
+          "order": 3
+        },
+        {
+          "text": "Mojarlo para enfriarlo",
+          "order": 4
+        }
+      ]
+    },
+    "SST024": {
+      "question": "¿Por qué no deben usarse enchufes o extensiones dañadas?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque pueden causar choque eléctrico o incendio",
+          "order": 1
+        },
+        {
+          "text": "Porque consumen más internet",
+          "order": 2
+        },
+        {
+          "text": "Porque reducen la productividad",
+          "order": 3
+        },
+        {
+          "text": "Sólo porque se ven mal",
+          "order": 4
+        }
+      ]
+    },
+    "SST025": {
+      "question": "¿Para qué sirve el bloqueo y etiquetado de energías peligrosas (LOTO)?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Evitar liberación inesperada de energía durante una intervención",
+          "order": 1
+        },
+        {
+          "text": "Aumentar la velocidad del mantenimiento",
+          "order": 2
+        },
+        {
+          "text": "Identificar al trabajador más antiguo",
+          "order": 3
+        },
+        {
+          "text": "Reemplazar herramientas",
+          "order": 4
+        }
+      ]
+    },
+    "SST026": {
+      "question": "¿Quién puede retirar normalmente un bloqueo personal LOTO?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La persona autorizada que lo instaló o según procedimiento formal de excepción",
+          "order": 1
+        },
+        {
+          "text": "Cualquier compañero",
+          "order": 2
+        },
+        {
+          "text": "Cualquier supervisor sin registro",
+          "order": 3
+        },
+        {
+          "text": "Un visitante",
+          "order": 4
+        }
+      ]
+    },
+    "SST027": {
+      "question": "Antes de usar una escalera portátil, ¿qué debe revisarse?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Su estado, apoyo, estabilidad y adecuación a la tarea",
+          "order": 1
+        },
+        {
+          "text": "Sólo su color",
+          "order": 2
+        },
+        {
+          "text": "Que sea la más alta disponible",
+          "order": 3
+        },
+        {
+          "text": "Que no tenga etiquetas",
+          "order": 4
+        }
+      ]
+    },
+    "SST028": {
+      "question": "¿Qué práctica es insegura al utilizar una escalera?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar una escalera dañada o apoyada de forma inestable",
+          "order": 1
+        },
+        {
+          "text": "Revisarla antes de usar",
+          "order": 2
+        },
+        {
+          "text": "Apoyarla sobre superficie estable",
+          "order": 3
+        },
+        {
+          "text": "Mantener una posición controlada",
+          "order": 4
+        }
+      ]
+    },
+    "SST029": {
+      "question": "Antes de un trabajo con riesgo de caída de altura, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Evaluar el riesgo y aplicar los controles de protección contra caídas",
+          "order": 1
+        },
+        {
+          "text": "Elegir protección después de subir",
+          "order": 2
+        },
+        {
+          "text": "Trabajar sin protección si son pocos minutos",
+          "order": 3
+        },
+        {
+          "text": "Confiar sólo en la experiencia",
+          "order": 4
+        }
+      ]
+    },
+    "SST030": {
+      "question": "¿Qué debe hacerse con una herramienta manual defectuosa?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirarla de uso y reportarla",
+          "order": 1
+        },
+        {
+          "text": "Seguir usándola con cuidado",
+          "order": 2
+        },
+        {
+          "text": "Ocultar el daño",
+          "order": 3
+        },
+        {
+          "text": "Prestársela a otro turno",
+          "order": 4
+        }
+      ]
+    },
+    "SST031": {
+      "question": "¿Para qué sirven las guardas de una máquina?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para impedir o reducir el contacto con partes peligrosas",
+          "order": 1
+        },
+        {
+          "text": "Para decorar el equipo",
+          "order": 2
+        },
+        {
+          "text": "Para aumentar el ruido",
+          "order": 3
+        },
+        {
+          "text": "Para reemplazar la capacitación",
+          "order": 4
+        }
+      ]
+    },
+    "SST032": {
+      "question": "¿Es correcto retirar una guarda de máquina para trabajar más rápido?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No, salvo intervención autorizada y controlada",
+          "order": 1
+        },
+        {
+          "text": "Sí, si el operador tiene experiencia",
+          "order": 2
+        },
+        {
+          "text": "Sí, durante turnos nocturnos",
+          "order": 3
+        },
+        {
+          "text": "Sí, si nadie está mirando",
+          "order": 4
+        }
+      ]
+    },
+    "SST033": {
+      "question": "Antes de usar un producto químico desconocido, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Revisar etiqueta, ficha de datos de seguridad y controles requeridos",
+          "order": 1
+        },
+        {
+          "text": "Olerlo para identificarlo",
+          "order": 2
+        },
+        {
+          "text": "Mezclarlo con agua",
+          "order": 3
+        },
+        {
+          "text": "Probarlo con las manos",
+          "order": 4
+        }
+      ]
+    },
+    "SST034": {
+      "question": "¿Qué documento informa peligros, almacenamiento, primeros auxilios y derrames de un producto químico?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La ficha de datos de seguridad (SDS/HDS)",
+          "order": 1
+        },
+        {
+          "text": "La lista de asistencia",
+          "order": 2
+        },
+        {
+          "text": "La liquidación de sueldo",
+          "order": 3
+        },
+        {
+          "text": "El plano de estacionamientos",
+          "order": 4
+        }
+      ]
+    },
+    "SST035": {
+      "question": "Si un envase químico no tiene identificación legible, ¿qué debes hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No utilizarlo y reportarlo para identificación o disposición segura",
+          "order": 1
+        },
+        {
+          "text": "Usarlo igual",
+          "order": 2
+        },
+        {
+          "text": "Cambiarlo a una botella de bebida",
+          "order": 3
+        },
+        {
+          "text": "Probarlo en pequeña cantidad",
+          "order": 4
+        }
+      ]
+    },
+    "SST036": {
+      "question": "¿Por qué es importante la ventilación al trabajar con vapores, gases o polvo?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque ayuda a controlar contaminantes en el aire",
+          "order": 1
+        },
+        {
+          "text": "Sólo para mejorar la temperatura",
+          "order": 2
+        },
+        {
+          "text": "Para reducir el peso de herramientas",
+          "order": 3
+        },
+        {
+          "text": "Para evitar usar iluminación",
+          "order": 4
+        }
+      ]
+    },
+    "SST037": {
+      "question": "Si una tarea genera ruido elevado, ¿qué medida corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Aplicar controles y usar protección auditiva cuando corresponda",
+          "order": 1
+        },
+        {
+          "text": "Gritar para comunicarse",
+          "order": 2
+        },
+        {
+          "text": "Quitarse la protección para escuchar",
+          "order": 3
+        },
+        {
+          "text": "Aumentar el tiempo de exposición",
+          "order": 4
+        }
+      ]
+    },
+    "SST038": {
+      "question": "Antes de usar protectores auditivos, ¿qué debe verificarse?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Que estén en buen estado y se utilicen correctamente",
+          "order": 1
+        },
+        {
+          "text": "Que estén mojados",
+          "order": 2
+        },
+        {
+          "text": "Que puedan compartirse sin higiene",
+          "order": 3
+        },
+        {
+          "text": "Que hayan sido recortados",
+          "order": 4
+        }
+      ]
+    },
+    "SST039": {
+      "question": "¿Cuándo debe utilizarse protección respiratoria?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Cuando la evaluación de riesgos y el procedimiento lo exijan",
+          "order": 1
+        },
+        {
+          "text": "Siempre en oficinas",
+          "order": 2
+        },
+        {
+          "text": "Sólo después de sentir síntomas",
+          "order": 3
+        },
+        {
+          "text": "Cuando el trabajador la elija sin evaluación",
+          "order": 4
+        }
+      ]
+    },
+    "SST040": {
+      "question": "¿Puede cualquier mascarilla proteger frente a cualquier contaminante?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No, debe seleccionarse según el peligro y la exposición",
+          "order": 1
+        },
+        {
+          "text": "Sí, todas protegen igual",
+          "order": 2
+        },
+        {
+          "text": "Sí, si es de color oscuro",
+          "order": 3
+        },
+        {
+          "text": "Sí, si se usa menos de una hora",
+          "order": 4
+        }
+      ]
+    },
+    "SST041": {
+      "question": "Antes de realizar soldadura o corte, ¿qué debe verificarse?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Controles, autorización o permiso requerido y condiciones del área",
+          "order": 1
+        },
+        {
+          "text": "Sólo la hora de inicio",
+          "order": 2
+        },
+        {
+          "text": "Que haya material combustible cerca",
+          "order": 3
+        },
+        {
+          "text": "Que todas las puertas estén cerradas",
+          "order": 4
+        }
+      ]
+    },
+    "SST042": {
+      "question": "¿Qué caracteriza a un espacio confinado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Acceso limitado y posibles peligros que requieren controles específicos",
+          "order": 1
+        },
+        {
+          "text": "Cualquier oficina pequeña",
+          "order": 2
+        },
+        {
+          "text": "Todo lugar al aire libre",
+          "order": 3
+        },
+        {
+          "text": "Un comedor lleno",
+          "order": 4
+        }
+      ]
+    },
+    "SST043": {
+      "question": "¿Debe ingresarse a un espacio confinado sin autorización ni evaluación previa?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No",
+          "order": 1
+        },
+        {
+          "text": "Sí, si el trabajo dura poco",
+          "order": 2
+        },
+        {
+          "text": "Sí, si entran dos personas",
+          "order": 3
+        },
+        {
+          "text": "Sólo de noche",
+          "order": 4
+        }
+      ]
+    },
+    "SST044": {
+      "question": "Al conducir un vehículo de la empresa, ¿qué conducta es segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar cinturón, respetar límites y evitar distracciones",
+          "order": 1
+        },
+        {
+          "text": "Usar el teléfono mientras conduces",
+          "order": 2
+        },
+        {
+          "text": "Aumentar velocidad si hay atraso",
+          "order": 3
+        },
+        {
+          "text": "No reportar fallas",
+          "order": 4
+        }
+      ]
+    },
+    "SST045": {
+      "question": "Si un conductor siente somnolencia intensa, ¿qué debe hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Detenerse en un lugar seguro y aplicar el control de fatiga",
+          "order": 1
+        },
+        {
+          "text": "Abrir una ventana y continuar indefinidamente",
+          "order": 2
+        },
+        {
+          "text": "Aumentar la velocidad",
+          "order": 3
+        },
+        {
+          "text": "Usar el teléfono para mantenerse despierto",
+          "order": 4
+        }
+      ]
+    },
+    "SST046": {
+      "question": "En zonas con grúas horquilla, ¿qué debe hacer un peatón?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar rutas peatonales, mantener distancia y respetar señalización",
+          "order": 1
+        },
+        {
+          "text": "Caminar por cualquier zona",
+          "order": 2
+        },
+        {
+          "text": "Acercarse por detrás del equipo",
+          "order": 3
+        },
+        {
+          "text": "Pasar bajo cargas elevadas",
+          "order": 4
+        }
+      ]
+    },
+    "SST047": {
+      "question": "¿Es seguro pasar bajo una carga suspendida?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No",
+          "order": 1
+        },
+        {
+          "text": "Sí, si se hace rápido",
+          "order": 2
+        },
+        {
+          "text": "Sí, con casco",
+          "order": 3
+        },
+        {
+          "text": "Sí, si parece estable",
+          "order": 4
+        }
+      ]
+    },
+    "SST048": {
+      "question": "¿Qué beneficio tiene mantener orden y aseo?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reduce caídas, golpes, incendios y obstrucciones",
+          "order": 1
+        },
+        {
+          "text": "Sólo mejora la apariencia",
+          "order": 2
+        },
+        {
+          "text": "Elimina la necesidad de inspecciones",
+          "order": 3
+        },
+        {
+          "text": "Permite guardar materiales en salidas",
+          "order": 4
+        }
+      ]
+    },
+    "SST049": {
+      "question": "¿Dónde deben almacenarse los materiales?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "En lugares definidos y estables, sin bloquear accesos ni emergencias",
+          "order": 1
+        },
+        {
+          "text": "En cualquier pasillo",
+          "order": 2
+        },
+        {
+          "text": "Delante de extintores",
+          "order": 3
+        },
+        {
+          "text": "Sobre superficies inestables",
+          "order": 4
+        }
+      ]
+    },
+    "SST050": {
+      "question": "Antes de usar un arnés contra caídas, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Inspeccionarlo y verificar ajuste y compatibilidad",
+          "order": 1
+        },
+        {
+          "text": "Usarlo sin revisarlo",
+          "order": 2
+        },
+        {
+          "text": "Cortar correas incómodas",
+          "order": 3
+        },
+        {
+          "text": "Prestarlo sin inspección",
+          "order": 4
+        }
+      ]
+    },
+    "SST051": {
+      "question": "¿Cuál describe mejor la jerarquía de controles?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Priorizar eliminación, sustitución e ingeniería antes de depender sólo del EPP",
+          "order": 1
+        },
+        {
+          "text": "Usar primero EPP y después eliminar el peligro",
+          "order": 2
+        },
+        {
+          "text": "Usar sólo señalización",
+          "order": 3
+        },
+        {
+          "text": "Confiar en la experiencia",
+          "order": 4
+        }
+      ]
+    },
+    "SST052": {
+      "question": "Si es posible eliminar completamente un peligro, ¿qué tipo de control es?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Eliminación",
+          "order": 1
+        },
+        {
+          "text": "EPP",
+          "order": 2
+        },
+        {
+          "text": "Advertencia",
+          "order": 3
+        },
+        {
+          "text": "Capacitación",
+          "order": 4
+        }
+      ]
+    },
+    "SST053": {
+      "question": "¿Para qué sirve un procedimiento de trabajo seguro?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Definir cómo ejecutar una actividad con sus controles preventivos",
+          "order": 1
+        },
+        {
+          "text": "Aumentar trámites",
+          "order": 2
+        },
+        {
+          "text": "Reemplazar toda supervisión",
+          "order": 3
+        },
+        {
+          "text": "Permitir omitir capacitación",
+          "order": 4
+        }
+      ]
+    },
+    "SST054": {
+      "question": "Si no tienes capacitación o autorización para una tarea, ¿qué debes hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No ejecutarla hasta contar con competencia o autorización requerida",
+          "order": 1
+        },
+        {
+          "text": "Realizarla mirando a otros",
+          "order": 2
+        },
+        {
+          "text": "Improvisar",
+          "order": 3
+        },
+        {
+          "text": "Pedir otra herramienta",
+          "order": 4
+        }
+      ]
+    },
+    "SST055": {
+      "question": "Si un equipo tiene una falla que puede afectar la seguridad, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirarlo o detenerlo según procedimiento y reportar la falla",
+          "order": 1
+        },
+        {
+          "text": "Seguir utilizándolo",
+          "order": 2
+        },
+        {
+          "text": "Ocultar la falla",
+          "order": 3
+        },
+        {
+          "text": "Aumentar la carga para probarlo",
+          "order": 4
+        }
+      ]
+    },
+    "SST056": {
+      "question": "¿Para qué sirve una charla de seguridad antes de una tarea?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para comunicar riesgos, cambios, controles y responsabilidades",
+          "order": 1
+        },
+        {
+          "text": "Sólo para registrar asistencia",
+          "order": 2
+        },
+        {
+          "text": "Para reemplazar procedimientos",
+          "order": 3
+        },
+        {
+          "text": "Para asignar vacaciones",
+          "order": 4
+        }
+      ]
+    },
+    "SST057": {
+      "question": "Si cambian las condiciones de una tarea ya evaluada, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Detener y reevaluar riesgos y controles",
+          "order": 1
+        },
+        {
+          "text": "Continuar porque ya estaba autorizada",
+          "order": 2
+        },
+        {
+          "text": "Eliminar señalización",
+          "order": 3
+        },
+        {
+          "text": "Cambiar de trabajador sin informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST058": {
+      "question": "¿Para qué sirve una señal o barrera de seguridad?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para advertir, restringir o guiar frente a un peligro",
+          "order": 1
+        },
+        {
+          "text": "Para decorar el área",
+          "order": 2
+        },
+        {
+          "text": "Para reemplazar siempre una protección física",
+          "order": 3
+        },
+        {
+          "text": "Para permitir acceso general",
+          "order": 4
+        }
+      ]
+    },
+    "SST059": {
+      "question": "Si una zona está delimitada por riesgo y no estás autorizado, ¿qué debes hacer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Respetar la delimitación y solicitar autorización si corresponde",
+          "order": 1
+        },
+        {
+          "text": "Cruzar si no ves actividad",
+          "order": 2
+        },
+        {
+          "text": "Mover la barrera",
+          "order": 3
+        },
+        {
+          "text": "Entrar por otro lado",
+          "order": 4
+        }
+      ]
+    },
+    "SST060": {
+      "question": "¿Por qué el EPP se considera una última barrera de control?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque protege a la persona pero no elimina el peligro en su origen",
+          "order": 1
+        },
+        {
+          "text": "Porque es innecesario",
+          "order": 2
+        },
+        {
+          "text": "Porque siempre falla",
+          "order": 3
+        },
+        {
+          "text": "Porque sólo sirve fuera del trabajo",
+          "order": 4
+        }
+      ]
+    },
+    "SST061": {
+      "question": "En una jornada con altas temperaturas, ¿qué ayuda a prevenir estrés térmico?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Hidratación, pausas y controles de exposición",
+          "order": 1
+        },
+        {
+          "text": "Evitar beber agua",
+          "order": 2
+        },
+        {
+          "text": "Usar más ropa sin evaluación",
+          "order": 3
+        },
+        {
+          "text": "Trabajar sin descanso",
+          "order": 4
+        }
+      ]
+    },
+    "SST062": {
+      "question": "En labores con exposición solar, ¿qué medida es apropiada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar las medidas definidas como sombra, ropa adecuada y protector solar cuando corresponda",
+          "order": 1
+        },
+        {
+          "text": "Ignorar la radiación en días nublados",
+          "order": 2
+        },
+        {
+          "text": "Trabajar sin protección para acostumbrarse",
+          "order": 3
+        },
+        {
+          "text": "Mirar directamente al sol",
+          "order": 4
+        }
+      ]
+    },
+    "SST063": {
+      "question": "En ambientes fríos, ¿qué medida es adecuada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar vestimenta apropiada y controlar el tiempo de exposición",
+          "order": 1
+        },
+        {
+          "text": "Usar ropa húmeda",
+          "order": 2
+        },
+        {
+          "text": "No informar entumecimiento",
+          "order": 3
+        },
+        {
+          "text": "Permanecer inmóvil mucho tiempo",
+          "order": 4
+        }
+      ]
+    },
+    "SST064": {
+      "question": "¿Por qué la fatiga es un riesgo de seguridad?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Puede reducir atención, reacción y capacidad de decisión",
+          "order": 1
+        },
+        {
+          "text": "Sólo afecta el ánimo",
+          "order": 2
+        },
+        {
+          "text": "Mejora la concentración",
+          "order": 3
+        },
+        {
+          "text": "Sólo afecta a conductores",
+          "order": 4
+        }
+      ]
+    },
+    "SST065": {
+      "question": "Si aparecen síntomas que podrían estar relacionados con el trabajo, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Informarlos y seguir el canal de salud y seguridad definido",
+          "order": 1
+        },
+        {
+          "text": "Ocultarlos",
+          "order": 2
+        },
+        {
+          "text": "Esperar indefinidamente",
+          "order": 3
+        },
+        {
+          "text": "Automedicarse sin informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST066": {
+      "question": "¿Qué es una enfermedad profesional u ocupacional?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Una condición de salud asociada a exposiciones o factores del trabajo",
+          "order": 1
+        },
+        {
+          "text": "Cualquier enfermedad fuera del horario laboral",
+          "order": 2
+        },
+        {
+          "text": "Sólo una lesión traumática inmediata",
+          "order": 3
+        },
+        {
+          "text": "Una enfermedad que no debe reportarse",
+          "order": 4
+        }
+      ]
+    },
+    "SST067": {
+      "question": "¿Por qué es importante participar en vigilancia de salud ocupacional cuando corresponda?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para detectar tempranamente efectos relacionados con exposiciones laborales",
+          "order": 1
+        },
+        {
+          "text": "Para reemplazar medidas preventivas",
+          "order": 2
+        },
+        {
+          "text": "Para reducir vacaciones",
+          "order": 3
+        },
+        {
+          "text": "Sólo por estadística",
+          "order": 4
+        }
+      ]
+    },
+    "SST068": {
+      "question": "¿Qué medida básica ayuda a prevenir contagios de enfermedades transmisibles?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Higiene de manos y medidas sanitarias definidas",
+          "order": 1
+        },
+        {
+          "text": "Compartir elementos personales",
+          "order": 2
+        },
+        {
+          "text": "Ocultar síntomas",
+          "order": 3
+        },
+        {
+          "text": "Evitar limpiar superficies",
+          "order": 4
+        }
+      ]
+    },
+    "SST069": {
+      "question": "¿Qué debe hacerse con residuos peligrosos o especiales?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Gestionarlos en recipientes y circuitos definidos",
+          "order": 1
+        },
+        {
+          "text": "Mezclarlos con basura común",
+          "order": 2
+        },
+        {
+          "text": "Dejarlos en pasillos",
+          "order": 3
+        },
+        {
+          "text": "Arrojarlos al desagüe",
+          "order": 4
+        }
+      ]
+    },
+    "SST070": {
+      "question": "Ante un derrame químico que no estás capacitado para controlar, ¿qué corresponde?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Aislar, informar y activar el procedimiento de respuesta",
+          "order": 1
+        },
+        {
+          "text": "Limpiarlo con las manos",
+          "order": 2
+        },
+        {
+          "text": "Agregar otro producto sin información",
+          "order": 3
+        },
+        {
+          "text": "Ignorarlo",
+          "order": 4
+        }
+      ]
+    }
+  },
+  "en": {
+    "SST001": {
+      "question": "What should you do if you detect an unsafe condition in your workplace?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Report it and apply the defined controls",
+          "order": 1
+        },
+        {
+          "text": "Ignore it until an accident occurs",
+          "order": 2
+        },
+        {
+          "text": "Wait until the end of the week",
+          "order": 3
+        },
+        {
+          "text": "Ask another worker to take the risk",
+          "order": 4
+        }
+      ]
+    },
+    "SST002": {
+      "question": "What does the acronym PPE mean?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Personal Protective Equipment",
+          "order": 1
+        },
+        {
+          "text": "Preventive Production Equipment",
+          "order": 2
+        },
+        {
+          "text": "Primary Protection Standard",
+          "order": 3
+        },
+        {
+          "text": "Public Prevention Element",
+          "order": 4
+        }
+      ]
+    },
+    "SST003": {
+      "question": "What is the main purpose of PPE?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reduce exposure to residual risks",
+          "order": 1
+        },
+        {
+          "text": "Eliminate all process hazards",
+          "order": 2
+        },
+        {
+          "text": "Replace safe work procedures",
+          "order": 3
+        },
+        {
+          "text": "Avoid the need for training",
+          "order": 4
+        }
+      ]
+    },
+    "SST004": {
+      "question": "What should be done with damaged PPE?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Remove it from service and request a replacement",
+          "order": 1
+        },
+        {
+          "text": "Keep using it until the end of the shift",
+          "order": 2
+        },
+        {
+          "text": "Repair it in an improvised way",
+          "order": 3
+        },
+        {
+          "text": "Lend it to another worker",
+          "order": 4
+        }
+      ]
+    },
+    "SST005": {
+      "question": "What is a near miss?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "An event with no harm that could have caused injury or loss",
+          "order": 1
+        },
+        {
+          "text": "An accident resulting in medical leave",
+          "order": 2
+        },
+        {
+          "text": "A normal work situation",
+          "order": 3
+        },
+        {
+          "text": "An exclusively environmental emergency",
+          "order": 4
+        }
+      ]
+    },
+    "SST006": {
+      "question": "What should be done with a near miss?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Report it so it can be analyzed and recurrence prevented",
+          "order": 1
+        },
+        {
+          "text": "Do not report it because no harm occurred",
+          "order": 2
+        },
+        {
+          "text": "Discuss it only with coworkers",
+          "order": 3
+        },
+        {
+          "text": "Wait for it to happen again",
+          "order": 4
+        }
+      ]
+    },
+    "SST007": {
+      "question": "Before starting a non-routine task, what is recommended?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Identify hazards and verify controls",
+          "order": 1
+        },
+        {
+          "text": "Start quickly to save time",
+          "order": 2
+        },
+        {
+          "text": "Use any available tool",
+          "order": 3
+        },
+        {
+          "text": "Avoid reviewing the procedure",
+          "order": 4
+        }
+      ]
+    },
+    "SST008": {
+      "question": "If there is an uncontrolled serious and imminent risk, what should the worker do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Stop the task and communicate the situation",
+          "order": 1
+        },
+        {
+          "text": "Continue until the task is finished",
+          "order": 2
+        },
+        {
+          "text": "Work faster",
+          "order": 3
+        },
+        {
+          "text": "Delegate the task without reporting it",
+          "order": 4
+        }
+      ]
+    },
+    "SST009": {
+      "question": "What helps prevent same-level falls?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Keep walkways clean, dry and clear",
+          "order": 1
+        },
+        {
+          "text": "Run through work areas",
+          "order": 2
+        },
+        {
+          "text": "Leave cables across traffic routes",
+          "order": 3
+        },
+        {
+          "text": "Use the phone while walking",
+          "order": 4
+        }
+      ]
+    },
+    "SST010": {
+      "question": "If liquid is spilled in a traffic area, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Mark and control the area and arrange cleanup",
+          "order": 1
+        },
+        {
+          "text": "Leave it until scheduled cleaning",
+          "order": 2
+        },
+        {
+          "text": "Cover it with paper and continue",
+          "order": 3
+        },
+        {
+          "text": "Ignore it if the amount is small",
+          "order": 4
+        }
+      ]
+    },
+    "SST011": {
+      "question": "What must be kept clear at all times?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Emergency routes and exits",
+          "order": 1
+        },
+        {
+          "text": "Only the main entrance",
+          "order": 2
+        },
+        {
+          "text": "Visitor parking areas",
+          "order": 3
+        },
+        {
+          "text": "Administrative offices",
+          "order": 4
+        }
+      ]
+    },
+    "SST012": {
+      "question": "When you hear an evacuation alarm, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Follow instructions and go to the assembly point",
+          "order": 1
+        },
+        {
+          "text": "Go back for personal belongings",
+          "order": 2
+        },
+        {
+          "text": "Always use the elevator",
+          "order": 3
+        },
+        {
+          "text": "Wait until you see smoke",
+          "order": 4
+        }
+      ]
+    },
+    "SST013": {
+      "question": "What is the purpose of an assembly point during an evacuation?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "To verify and account for evacuated people",
+          "order": 1
+        },
+        {
+          "text": "To store equipment",
+          "order": 2
+        },
+        {
+          "text": "To receive tools",
+          "order": 3
+        },
+        {
+          "text": "To park vehicles",
+          "order": 4
+        }
+      ]
+    },
+    "SST014": {
+      "question": "If you discover an incipient fire, what should you do first?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Raise the alarm and act only if you are trained and it is safe",
+          "order": 1
+        },
+        {
+          "text": "Hide it to avoid causing alarm",
+          "order": 2
+        },
+        {
+          "text": "Always try to extinguish it without notifying anyone",
+          "order": 3
+        },
+        {
+          "text": "Open all doors and windows",
+          "order": 4
+        }
+      ]
+    },
+    "SST015": {
+      "question": "When is it appropriate to use a portable fire extinguisher?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "When the fire is incipient, there is a safe exit and the person is trained",
+          "order": 1
+        },
+        {
+          "text": "In any fire, even with heavy smoke",
+          "order": 2
+        },
+        {
+          "text": "After re-entering an evacuated area",
+          "order": 3
+        },
+        {
+          "text": "Without checking the type of fire",
+          "order": 4
+        }
+      ]
+    },
+    "SST016": {
+      "question": "If an emergency exit is blocked, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Report it and arrange for it to be cleared immediately",
+          "order": 1
+        },
+        {
+          "text": "Do nothing if another exit exists",
+          "order": 2
+        },
+        {
+          "text": "Place more objects nearby",
+          "order": 3
+        },
+        {
+          "text": "Wait until the next inspection",
+          "order": 4
+        }
+      ]
+    },
+    "SST017": {
+      "question": "When faced with an injured person, what is a safe initial action?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Check that the scene is safe and call for help",
+          "order": 1
+        },
+        {
+          "text": "Always move the person immediately",
+          "order": 2
+        },
+        {
+          "text": "Give the person your own medication",
+          "order": 3
+        },
+        {
+          "text": "Leave the person alone",
+          "order": 4
+        }
+      ]
+    },
+    "SST018": {
+      "question": "Who should provide specialized first aid?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Trained personnel acting within their competence",
+          "order": 1
+        },
+        {
+          "text": "Anyone without training",
+          "order": 2
+        },
+        {
+          "text": "Only the direct supervisor",
+          "order": 3
+        },
+        {
+          "text": "Any visitor",
+          "order": 4
+        }
+      ]
+    },
+    "SST019": {
+      "question": "When manually lifting a load, which practice is safer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Assess the weight and route, keep the load close to the body and use proper technique",
+          "order": 1
+        },
+        {
+          "text": "Bend the back with straight legs",
+          "order": 2
+        },
+        {
+          "text": "Twist the torso while lifting",
+          "order": 3
+        },
+        {
+          "text": "Lift quickly to finish sooner",
+          "order": 4
+        }
+      ]
+    },
+    "SST020": {
+      "question": "If a load is too heavy for one person, what should they do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Ask for help or use mechanical assistance",
+          "order": 1
+        },
+        {
+          "text": "Lift it anyway",
+          "order": 2
+        },
+        {
+          "text": "Drag it without assessing the risk",
+          "order": 3
+        },
+        {
+          "text": "Throw it to move it",
+          "order": 4
+        }
+      ]
+    },
+    "SST021": {
+      "question": "What helps reduce discomfort in office work?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Adjust the workstation, vary posture and take breaks",
+          "order": 1
+        },
+        {
+          "text": "Keep the same posture all day",
+          "order": 2
+        },
+        {
+          "text": "Work with the screen very low",
+          "order": 3
+        },
+        {
+          "text": "Sit far away from the desk",
+          "order": 4
+        }
+      ]
+    },
+    "SST022": {
+      "question": "How should a computer screen normally be positioned?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "In front of the user at a comfortable height and distance",
+          "order": 1
+        },
+        {
+          "text": "Behind the user",
+          "order": 2
+        },
+        {
+          "text": "On the floor",
+          "order": 3
+        },
+        {
+          "text": "In a position that forces the neck to turn",
+          "order": 4
+        }
+      ]
+    },
+    "SST023": {
+      "question": "If electrical equipment is defective and you are not authorized to repair it, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Remove it from service or disconnect it if safe and report it",
+          "order": 1
+        },
+        {
+          "text": "Open it and repair it",
+          "order": 2
+        },
+        {
+          "text": "Keep using it until it fails",
+          "order": 3
+        },
+        {
+          "text": "Wet it to cool it down",
+          "order": 4
+        }
+      ]
+    },
+    "SST024": {
+      "question": "Why should damaged plugs or extension cords not be used?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Because they can cause electric shock or fire",
+          "order": 1
+        },
+        {
+          "text": "Because they use more internet",
+          "order": 2
+        },
+        {
+          "text": "Because they reduce productivity",
+          "order": 3
+        },
+        {
+          "text": "Only because they look bad",
+          "order": 4
+        }
+      ]
+    },
+    "SST025": {
+      "question": "What is the purpose of lockout/tagout (LOTO) for hazardous energy?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Prevent unexpected release of energy during an intervention",
+          "order": 1
+        },
+        {
+          "text": "Increase maintenance speed",
+          "order": 2
+        },
+        {
+          "text": "Identify the most senior worker",
+          "order": 3
+        },
+        {
+          "text": "Replace tools",
+          "order": 4
+        }
+      ]
+    },
+    "SST026": {
+      "question": "Who can normally remove a personal LOTO lock?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "The authorized person who installed it, or as defined by a formal exception procedure",
+          "order": 1
+        },
+        {
+          "text": "Any coworker",
+          "order": 2
+        },
+        {
+          "text": "Any supervisor without a record",
+          "order": 3
+        },
+        {
+          "text": "A visitor",
+          "order": 4
+        }
+      ]
+    },
+    "SST027": {
+      "question": "Before using a portable ladder, what should be checked?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Its condition, support, stability and suitability for the task",
+          "order": 1
+        },
+        {
+          "text": "Only its color",
+          "order": 2
+        },
+        {
+          "text": "That it is the tallest one available",
+          "order": 3
+        },
+        {
+          "text": "That it has no labels",
+          "order": 4
+        }
+      ]
+    },
+    "SST028": {
+      "question": "Which practice is unsafe when using a ladder?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Using a damaged ladder or one positioned unstably",
+          "order": 1
+        },
+        {
+          "text": "Inspecting it before use",
+          "order": 2
+        },
+        {
+          "text": "Placing it on a stable surface",
+          "order": 3
+        },
+        {
+          "text": "Maintaining a controlled position",
+          "order": 4
+        }
+      ]
+    },
+    "SST029": {
+      "question": "Before work involving a risk of falling from height, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Assess the risk and apply fall-protection controls",
+          "order": 1
+        },
+        {
+          "text": "Choose protection after climbing up",
+          "order": 2
+        },
+        {
+          "text": "Work without protection if it will only take a few minutes",
+          "order": 3
+        },
+        {
+          "text": "Rely only on experience",
+          "order": 4
+        }
+      ]
+    },
+    "SST030": {
+      "question": "What should be done with a defective hand tool?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Remove it from service and report it",
+          "order": 1
+        },
+        {
+          "text": "Keep using it carefully",
+          "order": 2
+        },
+        {
+          "text": "Hide the damage",
+          "order": 3
+        },
+        {
+          "text": "Lend it to another shift",
+          "order": 4
+        }
+      ]
+    },
+    "SST031": {
+      "question": "What are machine guards for?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Prevent or reduce contact with hazardous parts",
+          "order": 1
+        },
+        {
+          "text": "Decorate the equipment",
+          "order": 2
+        },
+        {
+          "text": "Increase noise",
+          "order": 3
+        },
+        {
+          "text": "Replace training",
+          "order": 4
+        }
+      ]
+    },
+    "SST032": {
+      "question": "Is it correct to remove a machine guard to work faster?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No, except during an authorized and controlled intervention",
+          "order": 1
+        },
+        {
+          "text": "Yes, if the operator is experienced",
+          "order": 2
+        },
+        {
+          "text": "Yes, during night shifts",
+          "order": 3
+        },
+        {
+          "text": "Yes, if nobody is watching",
+          "order": 4
+        }
+      ]
+    },
+    "SST033": {
+      "question": "Before using an unfamiliar chemical product, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Review the label, safety data sheet and required controls",
+          "order": 1
+        },
+        {
+          "text": "Smell it to identify it",
+          "order": 2
+        },
+        {
+          "text": "Mix it with water",
+          "order": 3
+        },
+        {
+          "text": "Test it with your hands",
+          "order": 4
+        }
+      ]
+    },
+    "SST034": {
+      "question": "Which document provides information on hazards, storage, first aid and spills for a chemical product?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "The Safety Data Sheet (SDS)",
+          "order": 1
+        },
+        {
+          "text": "The attendance list",
+          "order": 2
+        },
+        {
+          "text": "The payslip",
+          "order": 3
+        },
+        {
+          "text": "The parking plan",
+          "order": 4
+        }
+      ]
+    },
+    "SST035": {
+      "question": "If a chemical container has no legible identification, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Do not use it and report it for identification or safe disposal",
+          "order": 1
+        },
+        {
+          "text": "Use it anyway",
+          "order": 2
+        },
+        {
+          "text": "Transfer it to a beverage bottle",
+          "order": 3
+        },
+        {
+          "text": "Test a small amount",
+          "order": 4
+        }
+      ]
+    },
+    "SST036": {
+      "question": "Why is ventilation important when working with vapors, gases or dust?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Because it helps control airborne contaminants",
+          "order": 1
+        },
+        {
+          "text": "Only to improve temperature",
+          "order": 2
+        },
+        {
+          "text": "To reduce the weight of tools",
+          "order": 3
+        },
+        {
+          "text": "To avoid using lighting",
+          "order": 4
+        }
+      ]
+    },
+    "SST037": {
+      "question": "If a task generates high noise levels, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Apply controls and use hearing protection when required",
+          "order": 1
+        },
+        {
+          "text": "Shout to communicate",
+          "order": 2
+        },
+        {
+          "text": "Remove hearing protection to hear better",
+          "order": 3
+        },
+        {
+          "text": "Increase exposure time",
+          "order": 4
+        }
+      ]
+    },
+    "SST038": {
+      "question": "Before using hearing protectors, what should be checked?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "That they are in good condition and used correctly",
+          "order": 1
+        },
+        {
+          "text": "That they are wet",
+          "order": 2
+        },
+        {
+          "text": "That they can be shared without hygiene measures",
+          "order": 3
+        },
+        {
+          "text": "That they have been trimmed",
+          "order": 4
+        }
+      ]
+    },
+    "SST039": {
+      "question": "When should respiratory protection be used?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "When required by the risk assessment and procedure",
+          "order": 1
+        },
+        {
+          "text": "Always in offices",
+          "order": 2
+        },
+        {
+          "text": "Only after symptoms appear",
+          "order": 3
+        },
+        {
+          "text": "Whenever the worker chooses it without an assessment",
+          "order": 4
+        }
+      ]
+    },
+    "SST040": {
+      "question": "Can any mask protect against any contaminant?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No, it must be selected according to the hazard and exposure",
+          "order": 1
+        },
+        {
+          "text": "Yes, they all provide the same protection",
+          "order": 2
+        },
+        {
+          "text": "Yes, if it is dark-colored",
+          "order": 3
+        },
+        {
+          "text": "Yes, if used for less than one hour",
+          "order": 4
+        }
+      ]
+    },
+    "SST041": {
+      "question": "Before welding or cutting, what should be checked?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Controls, required authorization or permit, and area conditions",
+          "order": 1
+        },
+        {
+          "text": "Only the start time",
+          "order": 2
+        },
+        {
+          "text": "That combustible material is nearby",
+          "order": 3
+        },
+        {
+          "text": "That all doors are closed",
+          "order": 4
+        }
+      ]
+    },
+    "SST042": {
+      "question": "What characterizes a confined space?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Limited access and potential hazards that require specific controls",
+          "order": 1
+        },
+        {
+          "text": "Any small office",
+          "order": 2
+        },
+        {
+          "text": "Any outdoor location",
+          "order": 3
+        },
+        {
+          "text": "A crowded dining room",
+          "order": 4
+        }
+      ]
+    },
+    "SST043": {
+      "question": "Should you enter a confined space without authorization or prior assessment?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No",
+          "order": 1
+        },
+        {
+          "text": "Yes, if the work will be brief",
+          "order": 2
+        },
+        {
+          "text": "Yes, if two people enter",
+          "order": 3
+        },
+        {
+          "text": "Only at night",
+          "order": 4
+        }
+      ]
+    },
+    "SST044": {
+      "question": "When driving a company vehicle, which behavior is safe?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Wear a seat belt, obey speed limits and avoid distractions",
+          "order": 1
+        },
+        {
+          "text": "Use the phone while driving",
+          "order": 2
+        },
+        {
+          "text": "Increase speed if you are late",
+          "order": 3
+        },
+        {
+          "text": "Do not report faults",
+          "order": 4
+        }
+      ]
+    },
+    "SST045": {
+      "question": "If a driver feels very drowsy, what should they do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Stop in a safe place and apply the fatigue-control procedure",
+          "order": 1
+        },
+        {
+          "text": "Open a window and continue indefinitely",
+          "order": 2
+        },
+        {
+          "text": "Increase speed",
+          "order": 3
+        },
+        {
+          "text": "Use the phone to stay awake",
+          "order": 4
+        }
+      ]
+    },
+    "SST046": {
+      "question": "In areas where forklifts operate, what should a pedestrian do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Use pedestrian routes, keep a safe distance and follow signage",
+          "order": 1
+        },
+        {
+          "text": "Walk through any area",
+          "order": 2
+        },
+        {
+          "text": "Approach the equipment from behind",
+          "order": 3
+        },
+        {
+          "text": "Walk under raised loads",
+          "order": 4
+        }
+      ]
+    },
+    "SST047": {
+      "question": "Is it safe to pass under a suspended load?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "No",
+          "order": 1
+        },
+        {
+          "text": "Yes, if you move quickly",
+          "order": 2
+        },
+        {
+          "text": "Yes, if wearing a hard hat",
+          "order": 3
+        },
+        {
+          "text": "Yes, if it looks stable",
+          "order": 4
+        }
+      ]
+    },
+    "SST048": {
+      "question": "What is a benefit of maintaining good housekeeping?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "It reduces falls, impacts, fires and obstructions",
+          "order": 1
+        },
+        {
+          "text": "It only improves appearance",
+          "order": 2
+        },
+        {
+          "text": "It eliminates the need for inspections",
+          "order": 3
+        },
+        {
+          "text": "It allows materials to be stored in exits",
+          "order": 4
+        }
+      ]
+    },
+    "SST049": {
+      "question": "Where should materials be stored?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "In designated, stable locations without blocking access or emergency equipment",
+          "order": 1
+        },
+        {
+          "text": "In any walkway",
+          "order": 2
+        },
+        {
+          "text": "In front of fire extinguishers",
+          "order": 3
+        },
+        {
+          "text": "On unstable surfaces",
+          "order": 4
+        }
+      ]
+    },
+    "SST050": {
+      "question": "Before using a fall-arrest harness, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Inspect it and verify fit and compatibility",
+          "order": 1
+        },
+        {
+          "text": "Use it without inspection",
+          "order": 2
+        },
+        {
+          "text": "Cut uncomfortable straps",
+          "order": 3
+        },
+        {
+          "text": "Lend it without inspection",
+          "order": 4
+        }
+      ]
+    },
+    "SST051": {
+      "question": "Which best describes the hierarchy of controls?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Prioritize elimination, substitution and engineering controls before relying only on PPE",
+          "order": 1
+        },
+        {
+          "text": "Use PPE first and eliminate the hazard later",
+          "order": 2
+        },
+        {
+          "text": "Use only signage",
+          "order": 3
+        },
+        {
+          "text": "Rely on experience",
+          "order": 4
+        }
+      ]
+    },
+    "SST052": {
+      "question": "If a hazard can be completely removed, what type of control is it?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Elimination",
+          "order": 1
+        },
+        {
+          "text": "PPE",
+          "order": 2
+        },
+        {
+          "text": "Warning",
+          "order": 3
+        },
+        {
+          "text": "Training",
+          "order": 4
+        }
+      ]
+    },
+    "SST053": {
+      "question": "What is the purpose of a safe work procedure?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Define how to perform an activity with its preventive controls",
+          "order": 1
+        },
+        {
+          "text": "Increase paperwork",
+          "order": 2
+        },
+        {
+          "text": "Replace all supervision",
+          "order": 3
+        },
+        {
+          "text": "Allow training to be omitted",
+          "order": 4
+        }
+      ]
+    },
+    "SST054": {
+      "question": "If you are not trained or authorized for a task, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Do not perform it until you have the required competence or authorization",
+          "order": 1
+        },
+        {
+          "text": "Perform it by watching others",
+          "order": 2
+        },
+        {
+          "text": "Improvise",
+          "order": 3
+        },
+        {
+          "text": "Ask for another tool",
+          "order": 4
+        }
+      ]
+    },
+    "SST055": {
+      "question": "If equipment has a fault that may affect safety, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Remove or stop it according to procedure and report the fault",
+          "order": 1
+        },
+        {
+          "text": "Keep using it",
+          "order": 2
+        },
+        {
+          "text": "Hide the fault",
+          "order": 3
+        },
+        {
+          "text": "Increase the load to test it",
+          "order": 4
+        }
+      ]
+    },
+    "SST056": {
+      "question": "What is the purpose of a safety briefing before a task?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Communicate risks, changes, controls and responsibilities",
+          "order": 1
+        },
+        {
+          "text": "Only record attendance",
+          "order": 2
+        },
+        {
+          "text": "Replace procedures",
+          "order": 3
+        },
+        {
+          "text": "Assign vacations",
+          "order": 4
+        }
+      ]
+    },
+    "SST057": {
+      "question": "If the conditions of an already assessed task change, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Stop and reassess risks and controls",
+          "order": 1
+        },
+        {
+          "text": "Continue because it was already authorized",
+          "order": 2
+        },
+        {
+          "text": "Remove signage",
+          "order": 3
+        },
+        {
+          "text": "Change the worker without reporting it",
+          "order": 4
+        }
+      ]
+    },
+    "SST058": {
+      "question": "What is a safety sign or barrier used for?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "To warn, restrict or guide people in relation to a hazard",
+          "order": 1
+        },
+        {
+          "text": "To decorate the area",
+          "order": 2
+        },
+        {
+          "text": "To always replace physical protection",
+          "order": 3
+        },
+        {
+          "text": "To allow general access",
+          "order": 4
+        }
+      ]
+    },
+    "SST059": {
+      "question": "If an area is restricted because of a hazard and you are not authorized, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Respect the restriction and request authorization if appropriate",
+          "order": 1
+        },
+        {
+          "text": "Cross it if you see no activity",
+          "order": 2
+        },
+        {
+          "text": "Move the barrier",
+          "order": 3
+        },
+        {
+          "text": "Enter from another side",
+          "order": 4
+        }
+      ]
+    },
+    "SST060": {
+      "question": "Why is PPE considered the last line of control?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Because it protects the person but does not eliminate the hazard at its source",
+          "order": 1
+        },
+        {
+          "text": "Because it is unnecessary",
+          "order": 2
+        },
+        {
+          "text": "Because it always fails",
+          "order": 3
+        },
+        {
+          "text": "Because it is only useful outside work",
+          "order": 4
+        }
+      ]
+    },
+    "SST061": {
+      "question": "During a workday with high temperatures, what helps prevent heat stress?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Hydration, breaks and exposure controls",
+          "order": 1
+        },
+        {
+          "text": "Avoid drinking water",
+          "order": 2
+        },
+        {
+          "text": "Wear more clothing without an assessment",
+          "order": 3
+        },
+        {
+          "text": "Work without breaks",
+          "order": 4
+        }
+      ]
+    },
+    "SST062": {
+      "question": "For work involving sun exposure, which measure is appropriate?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Use defined measures such as shade, appropriate clothing and sunscreen when required",
+          "order": 1
+        },
+        {
+          "text": "Ignore radiation on cloudy days",
+          "order": 2
+        },
+        {
+          "text": "Work without protection to get used to it",
+          "order": 3
+        },
+        {
+          "text": "Look directly at the sun",
+          "order": 4
+        }
+      ]
+    },
+    "SST063": {
+      "question": "In cold environments, which measure is appropriate?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Wear suitable clothing and control exposure time",
+          "order": 1
+        },
+        {
+          "text": "Wear wet clothing",
+          "order": 2
+        },
+        {
+          "text": "Do not report numbness",
+          "order": 3
+        },
+        {
+          "text": "Remain still for long periods",
+          "order": 4
+        }
+      ]
+    },
+    "SST064": {
+      "question": "Why is fatigue a safety risk?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "It can reduce attention, reaction time and decision-making ability",
+          "order": 1
+        },
+        {
+          "text": "It only affects mood",
+          "order": 2
+        },
+        {
+          "text": "It improves concentration",
+          "order": 3
+        },
+        {
+          "text": "It only affects drivers",
+          "order": 4
+        }
+      ]
+    },
+    "SST065": {
+      "question": "If symptoms appear that may be work-related, what should be done?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Report them and follow the defined health and safety channel",
+          "order": 1
+        },
+        {
+          "text": "Hide them",
+          "order": 2
+        },
+        {
+          "text": "Wait indefinitely",
+          "order": 3
+        },
+        {
+          "text": "Self-medicate without reporting it",
+          "order": 4
+        }
+      ]
+    },
+    "SST066": {
+      "question": "What is an occupational disease?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "A health condition associated with work exposures or work-related factors",
+          "order": 1
+        },
+        {
+          "text": "Any illness occurring outside working hours",
+          "order": 2
+        },
+        {
+          "text": "Only an immediate traumatic injury",
+          "order": 3
+        },
+        {
+          "text": "An illness that should not be reported",
+          "order": 4
+        }
+      ]
+    },
+    "SST067": {
+      "question": "Why is it important to participate in occupational health surveillance when required?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "To detect early effects related to workplace exposures",
+          "order": 1
+        },
+        {
+          "text": "To replace preventive measures",
+          "order": 2
+        },
+        {
+          "text": "To reduce vacation time",
+          "order": 3
+        },
+        {
+          "text": "Only for statistics",
+          "order": 4
+        }
+      ]
+    },
+    "SST068": {
+      "question": "Which basic measure helps prevent the spread of communicable diseases?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Hand hygiene and defined health measures",
+          "order": 1
+        },
+        {
+          "text": "Share personal items",
+          "order": 2
+        },
+        {
+          "text": "Hide symptoms",
+          "order": 3
+        },
+        {
+          "text": "Avoid cleaning surfaces",
+          "order": 4
+        }
+      ]
+    },
+    "SST069": {
+      "question": "What should be done with hazardous or special waste?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Manage it using designated containers and defined disposal routes",
+          "order": 1
+        },
+        {
+          "text": "Mix it with general waste",
+          "order": 2
+        },
+        {
+          "text": "Leave it in walkways",
+          "order": 3
+        },
+        {
+          "text": "Pour it down the drain",
+          "order": 4
+        }
+      ]
+    },
+    "SST070": {
+      "question": "If there is a chemical spill that you are not trained to control, what should you do?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Isolate the area, report it and activate the response procedure",
+          "order": 1
+        },
+        {
+          "text": "Clean it with your hands",
+          "order": 2
+        },
+        {
+          "text": "Add another product without information",
+          "order": 3
+        },
+        {
+          "text": "Ignore it",
+          "order": 4
+        }
+      ]
+    }
+  },
+  "pt": {
+    "SST001": {
+      "question": "O que você deve fazer ao identificar uma condição insegura no local de trabalho?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Relatá-la e aplicar os controles definidos",
+          "order": 1
+        },
+        {
+          "text": "Ignorá-la enquanto não ocorrer um acidente",
+          "order": 2
+        },
+        {
+          "text": "Esperar até o fim da semana",
+          "order": 3
+        },
+        {
+          "text": "Pedir a outro trabalhador que assuma o risco",
+          "order": 4
+        }
+      ]
+    },
+    "SST002": {
+      "question": "O que significa a sigla EPI?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Equipamento de Proteção Individual",
+          "order": 1
+        },
+        {
+          "text": "Equipamento de Produção Preventiva",
+          "order": 2
+        },
+        {
+          "text": "Padrão de Proteção Primária",
+          "order": 3
+        },
+        {
+          "text": "Elemento de Prevenção Pública",
+          "order": 4
+        }
+      ]
+    },
+    "SST003": {
+      "question": "Qual é o principal objetivo do EPI?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reduzir a exposição a riscos residuais",
+          "order": 1
+        },
+        {
+          "text": "Eliminar todos os perigos do processo",
+          "order": 2
+        },
+        {
+          "text": "Substituir os procedimentos seguros",
+          "order": 3
+        },
+        {
+          "text": "Evitar a necessidade de treinamento",
+          "order": 4
+        }
+      ]
+    },
+    "SST004": {
+      "question": "O que deve ser feito com um EPI danificado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirá-lo de uso e solicitar substituição",
+          "order": 1
+        },
+        {
+          "text": "Continuar usando até o fim do turno",
+          "order": 2
+        },
+        {
+          "text": "Repará-lo de forma improvisada",
+          "order": 3
+        },
+        {
+          "text": "Emprestá-lo a outro trabalhador",
+          "order": 4
+        }
+      ]
+    },
+    "SST005": {
+      "question": "O que é um quase acidente ou near miss?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Um evento sem dano que poderia ter causado lesões ou perdas",
+          "order": 1
+        },
+        {
+          "text": "Um acidente com afastamento médico",
+          "order": 2
+        },
+        {
+          "text": "Uma situação normal de trabalho",
+          "order": 3
+        },
+        {
+          "text": "Uma emergência exclusivamente ambiental",
+          "order": 4
+        }
+      ]
+    },
+    "SST006": {
+      "question": "O que deve ser feito com um quase acidente?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Relatá-lo para análise e prevenção de recorrências",
+          "order": 1
+        },
+        {
+          "text": "Não relatá-lo porque não houve dano",
+          "order": 2
+        },
+        {
+          "text": "Comentá-lo apenas entre colegas",
+          "order": 3
+        },
+        {
+          "text": "Esperar que aconteça novamente",
+          "order": 4
+        }
+      ]
+    },
+    "SST007": {
+      "question": "Antes de iniciar uma tarefa não rotineira, o que é recomendável?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Identificar perigos e verificar controles",
+          "order": 1
+        },
+        {
+          "text": "Começar rapidamente para economizar tempo",
+          "order": 2
+        },
+        {
+          "text": "Usar qualquer ferramenta disponível",
+          "order": 3
+        },
+        {
+          "text": "Evitar revisar o procedimento",
+          "order": 4
+        }
+      ]
+    },
+    "SST008": {
+      "question": "Se existir um risco grave e iminente não controlado, o que o trabalhador deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Interromper a tarefa e comunicar a situação",
+          "order": 1
+        },
+        {
+          "text": "Continuar até terminar",
+          "order": 2
+        },
+        {
+          "text": "Trabalhar mais rápido",
+          "order": 3
+        },
+        {
+          "text": "Delegar a tarefa sem informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST009": {
+      "question": "O que ajuda a prevenir quedas no mesmo nível?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Manter corredores limpos, secos e desobstruídos",
+          "order": 1
+        },
+        {
+          "text": "Correr pelas áreas de trabalho",
+          "order": 2
+        },
+        {
+          "text": "Deixar cabos atravessando vias de circulação",
+          "order": 3
+        },
+        {
+          "text": "Usar o telefone enquanto caminha",
+          "order": 4
+        }
+      ]
+    },
+    "SST010": {
+      "question": "Se houver derramamento de líquido em uma área de circulação, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Sinalizar, controlar a área e providenciar a limpeza",
+          "order": 1
+        },
+        {
+          "text": "Deixar até a limpeza programada",
+          "order": 2
+        },
+        {
+          "text": "Cobrir com papel e continuar",
+          "order": 3
+        },
+        {
+          "text": "Ignorar se for pouca quantidade",
+          "order": 4
+        }
+      ]
+    },
+    "SST011": {
+      "question": "O que deve permanecer livre em todo momento?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "As rotas e saídas de emergência",
+          "order": 1
+        },
+        {
+          "text": "Somente a porta principal",
+          "order": 2
+        },
+        {
+          "text": "Os estacionamentos de visitantes",
+          "order": 3
+        },
+        {
+          "text": "Os escritórios administrativos",
+          "order": 4
+        }
+      ]
+    },
+    "SST012": {
+      "question": "Ao ouvir um alarme de evacuação, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Seguir as instruções e dirigir-se ao ponto de encontro",
+          "order": 1
+        },
+        {
+          "text": "Voltar para buscar objetos pessoais",
+          "order": 2
+        },
+        {
+          "text": "Usar sempre o elevador",
+          "order": 3
+        },
+        {
+          "text": "Esperar até ver fumaça",
+          "order": 4
+        }
+      ]
+    },
+    "SST013": {
+      "question": "Para que serve o ponto de encontro em uma evacuação?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para verificar e contabilizar as pessoas evacuadas",
+          "order": 1
+        },
+        {
+          "text": "Para guardar equipamentos",
+          "order": 2
+        },
+        {
+          "text": "Para receber ferramentas",
+          "order": 3
+        },
+        {
+          "text": "Para estacionar veículos",
+          "order": 4
+        }
+      ]
+    },
+    "SST014": {
+      "question": "Se você detectar um princípio de incêndio, o que deve fazer primeiro?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Acionar o alarme e agir apenas se estiver treinado e for seguro",
+          "order": 1
+        },
+        {
+          "text": "Escondê-lo para evitar alarme",
+          "order": 2
+        },
+        {
+          "text": "Tentar apagá-lo sempre sem avisar",
+          "order": 3
+        },
+        {
+          "text": "Abrir todas as portas e janelas",
+          "order": 4
+        }
+      ]
+    },
+    "SST015": {
+      "question": "Quando é apropriado usar um extintor portátil?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Quando o fogo é inicial, há uma saída segura e a pessoa está treinada",
+          "order": 1
+        },
+        {
+          "text": "Em qualquer incêndio, mesmo com muita fumaça",
+          "order": 2
+        },
+        {
+          "text": "Depois de retornar a uma área evacuada",
+          "order": 3
+        },
+        {
+          "text": "Sem verificar o tipo de fogo",
+          "order": 4
+        }
+      ]
+    },
+    "SST016": {
+      "question": "Se uma saída de emergência estiver bloqueada, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Relatar e providenciar sua liberação imediatamente",
+          "order": 1
+        },
+        {
+          "text": "Não fazer nada se houver outra saída",
+          "order": 2
+        },
+        {
+          "text": "Colocar mais objetos próximos",
+          "order": 3
+        },
+        {
+          "text": "Esperar a próxima inspeção",
+          "order": 4
+        }
+      ]
+    },
+    "SST017": {
+      "question": "Diante de uma pessoa lesionada, qual é uma ação inicial segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Verificar se o local é seguro e pedir ajuda",
+          "order": 1
+        },
+        {
+          "text": "Sempre movê-la imediatamente",
+          "order": 2
+        },
+        {
+          "text": "Dar medicamentos pessoais",
+          "order": 3
+        },
+        {
+          "text": "Deixá-la sozinha",
+          "order": 4
+        }
+      ]
+    },
+    "SST018": {
+      "question": "Quem deve prestar primeiros socorros especializados?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Pessoal treinado dentro de suas competências",
+          "order": 1
+        },
+        {
+          "text": "Qualquer pessoa sem treinamento",
+          "order": 2
+        },
+        {
+          "text": "Somente o chefe direto",
+          "order": 3
+        },
+        {
+          "text": "Qualquer visitante",
+          "order": 4
+        }
+      ]
+    },
+    "SST019": {
+      "question": "Ao levantar manualmente uma carga, qual prática é mais segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Avaliar o peso e a rota, manter a carga próxima ao corpo e usar técnica adequada",
+          "order": 1
+        },
+        {
+          "text": "Dobrar as costas com as pernas retas",
+          "order": 2
+        },
+        {
+          "text": "Girar o tronco enquanto levanta",
+          "order": 3
+        },
+        {
+          "text": "Levantar rapidamente para terminar antes",
+          "order": 4
+        }
+      ]
+    },
+    "SST020": {
+      "question": "Se uma carga for pesada demais para uma pessoa, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Solicitar ajuda ou usar assistência mecânica",
+          "order": 1
+        },
+        {
+          "text": "Levantá-la mesmo assim",
+          "order": 2
+        },
+        {
+          "text": "Arrastá-la sem avaliar",
+          "order": 3
+        },
+        {
+          "text": "Lançá-la para movê-la",
+          "order": 4
+        }
+      ]
+    },
+    "SST021": {
+      "question": "O que ajuda a reduzir desconfortos no trabalho de escritório?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Ajustar o posto, variar a postura e fazer pausas",
+          "order": 1
+        },
+        {
+          "text": "Manter a mesma postura durante toda a jornada",
+          "order": 2
+        },
+        {
+          "text": "Trabalhar com a tela muito baixa",
+          "order": 3
+        },
+        {
+          "text": "Sentar longe da mesa",
+          "order": 4
+        }
+      ]
+    },
+    "SST022": {
+      "question": "Como a tela do computador deve ser posicionada normalmente?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À frente do usuário, em altura e distância confortáveis",
+          "order": 1
+        },
+        {
+          "text": "Atrás do usuário",
+          "order": 2
+        },
+        {
+          "text": "No chão",
+          "order": 3
+        },
+        {
+          "text": "De forma que obrigue a girar o pescoço",
+          "order": 4
+        }
+      ]
+    },
+    "SST023": {
+      "question": "Se um equipamento elétrico estiver defeituoso e você não estiver autorizado a repará-lo, o que deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirá-lo de uso ou desconectá-lo se for seguro e relatá-lo",
+          "order": 1
+        },
+        {
+          "text": "Abrir e reparar",
+          "order": 2
+        },
+        {
+          "text": "Continuar usando até falhar",
+          "order": 3
+        },
+        {
+          "text": "Molhá-lo para resfriar",
+          "order": 4
+        }
+      ]
+    },
+    "SST024": {
+      "question": "Por que tomadas ou extensões danificadas não devem ser usadas?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque podem causar choque elétrico ou incêndio",
+          "order": 1
+        },
+        {
+          "text": "Porque consomem mais internet",
+          "order": 2
+        },
+        {
+          "text": "Porque reduzem a produtividade",
+          "order": 3
+        },
+        {
+          "text": "Apenas porque têm aparência ruim",
+          "order": 4
+        }
+      ]
+    },
+    "SST025": {
+      "question": "Para que serve o bloqueio e etiquetagem de energias perigosas (LOTO)?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Evitar a liberação inesperada de energia durante uma intervenção",
+          "order": 1
+        },
+        {
+          "text": "Aumentar a velocidade da manutenção",
+          "order": 2
+        },
+        {
+          "text": "Identificar o trabalhador mais antigo",
+          "order": 3
+        },
+        {
+          "text": "Substituir ferramentas",
+          "order": 4
+        }
+      ]
+    },
+    "SST026": {
+      "question": "Quem pode normalmente retirar um bloqueio pessoal LOTO?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "A pessoa autorizada que o instalou ou conforme procedimento formal de exceção",
+          "order": 1
+        },
+        {
+          "text": "Qualquer colega",
+          "order": 2
+        },
+        {
+          "text": "Qualquer supervisor sem registro",
+          "order": 3
+        },
+        {
+          "text": "Um visitante",
+          "order": 4
+        }
+      ]
+    },
+    "SST027": {
+      "question": "Antes de usar uma escada portátil, o que deve ser verificado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Seu estado, apoio, estabilidade e adequação à tarefa",
+          "order": 1
+        },
+        {
+          "text": "Somente sua cor",
+          "order": 2
+        },
+        {
+          "text": "Que seja a mais alta disponível",
+          "order": 3
+        },
+        {
+          "text": "Que não tenha etiquetas",
+          "order": 4
+        }
+      ]
+    },
+    "SST028": {
+      "question": "Qual prática é insegura ao usar uma escada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar uma escada danificada ou apoiada de forma instável",
+          "order": 1
+        },
+        {
+          "text": "Inspecioná-la antes do uso",
+          "order": 2
+        },
+        {
+          "text": "Apoiá-la sobre uma superfície estável",
+          "order": 3
+        },
+        {
+          "text": "Manter uma posição controlada",
+          "order": 4
+        }
+      ]
+    },
+    "SST029": {
+      "question": "Antes de um trabalho com risco de queda de altura, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Avaliar o risco e aplicar controles de proteção contra quedas",
+          "order": 1
+        },
+        {
+          "text": "Escolher a proteção depois de subir",
+          "order": 2
+        },
+        {
+          "text": "Trabalhar sem proteção se durar poucos minutos",
+          "order": 3
+        },
+        {
+          "text": "Confiar apenas na experiência",
+          "order": 4
+        }
+      ]
+    },
+    "SST030": {
+      "question": "O que deve ser feito com uma ferramenta manual defeituosa?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirá-la de uso e relatá-la",
+          "order": 1
+        },
+        {
+          "text": "Continuar usando com cuidado",
+          "order": 2
+        },
+        {
+          "text": "Esconder o dano",
+          "order": 3
+        },
+        {
+          "text": "Emprestá-la a outro turno",
+          "order": 4
+        }
+      ]
+    },
+    "SST031": {
+      "question": "Para que servem as proteções de uma máquina?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Impedir ou reduzir o contato com partes perigosas",
+          "order": 1
+        },
+        {
+          "text": "Decorar o equipamento",
+          "order": 2
+        },
+        {
+          "text": "Aumentar o ruído",
+          "order": 3
+        },
+        {
+          "text": "Substituir o treinamento",
+          "order": 4
+        }
+      ]
+    },
+    "SST032": {
+      "question": "É correto retirar uma proteção da máquina para trabalhar mais rápido?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não, exceto em intervenção autorizada e controlada",
+          "order": 1
+        },
+        {
+          "text": "Sim, se o operador tiver experiência",
+          "order": 2
+        },
+        {
+          "text": "Sim, durante turnos noturnos",
+          "order": 3
+        },
+        {
+          "text": "Sim, se ninguém estiver olhando",
+          "order": 4
+        }
+      ]
+    },
+    "SST033": {
+      "question": "Antes de usar um produto químico desconhecido, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Revisar o rótulo, a ficha de dados de segurança e os controles exigidos",
+          "order": 1
+        },
+        {
+          "text": "Cheirá-lo para identificar",
+          "order": 2
+        },
+        {
+          "text": "Misturá-lo com água",
+          "order": 3
+        },
+        {
+          "text": "Testá-lo com as mãos",
+          "order": 4
+        }
+      ]
+    },
+    "SST034": {
+      "question": "Qual documento informa perigos, armazenamento, primeiros socorros e derramamentos de um produto químico?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "A Ficha de Dados de Segurança (FDS/SDS)",
+          "order": 1
+        },
+        {
+          "text": "A lista de presença",
+          "order": 2
+        },
+        {
+          "text": "O contracheque",
+          "order": 3
+        },
+        {
+          "text": "O plano de estacionamento",
+          "order": 4
+        }
+      ]
+    },
+    "SST035": {
+      "question": "Se uma embalagem de produto químico não tiver identificação legível, o que você deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não utilizá-la e relatá-la para identificação ou descarte seguro",
+          "order": 1
+        },
+        {
+          "text": "Usá-la mesmo assim",
+          "order": 2
+        },
+        {
+          "text": "Transferi-la para uma garrafa de bebida",
+          "order": 3
+        },
+        {
+          "text": "Testar uma pequena quantidade",
+          "order": 4
+        }
+      ]
+    },
+    "SST036": {
+      "question": "Por que a ventilação é importante ao trabalhar com vapores, gases ou poeira?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque ajuda a controlar contaminantes no ar",
+          "order": 1
+        },
+        {
+          "text": "Somente para melhorar a temperatura",
+          "order": 2
+        },
+        {
+          "text": "Para reduzir o peso das ferramentas",
+          "order": 3
+        },
+        {
+          "text": "Para evitar usar iluminação",
+          "order": 4
+        }
+      ]
+    },
+    "SST037": {
+      "question": "Se uma tarefa gerar ruído elevado, qual medida deve ser tomada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Aplicar controles e usar proteção auditiva quando necessário",
+          "order": 1
+        },
+        {
+          "text": "Gritar para se comunicar",
+          "order": 2
+        },
+        {
+          "text": "Retirar a proteção para ouvir",
+          "order": 3
+        },
+        {
+          "text": "Aumentar o tempo de exposição",
+          "order": 4
+        }
+      ]
+    },
+    "SST038": {
+      "question": "Antes de usar protetores auditivos, o que deve ser verificado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Que estejam em bom estado e sejam usados corretamente",
+          "order": 1
+        },
+        {
+          "text": "Que estejam molhados",
+          "order": 2
+        },
+        {
+          "text": "Que possam ser compartilhados sem higiene",
+          "order": 3
+        },
+        {
+          "text": "Que tenham sido recortados",
+          "order": 4
+        }
+      ]
+    },
+    "SST039": {
+      "question": "Quando deve ser usada proteção respiratória?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Quando a avaliação de riscos e o procedimento exigirem",
+          "order": 1
+        },
+        {
+          "text": "Sempre em escritórios",
+          "order": 2
+        },
+        {
+          "text": "Somente depois de sentir sintomas",
+          "order": 3
+        },
+        {
+          "text": "Quando o trabalhador escolher sem avaliação",
+          "order": 4
+        }
+      ]
+    },
+    "SST040": {
+      "question": "Qualquer máscara pode proteger contra qualquer contaminante?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não, deve ser selecionada de acordo com o perigo e a exposição",
+          "order": 1
+        },
+        {
+          "text": "Sim, todas protegem igual",
+          "order": 2
+        },
+        {
+          "text": "Sim, se for de cor escura",
+          "order": 3
+        },
+        {
+          "text": "Sim, se usada por menos de uma hora",
+          "order": 4
+        }
+      ]
+    },
+    "SST041": {
+      "question": "Antes de realizar soldagem ou corte, o que deve ser verificado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Controles, autorização ou permissão exigida e condições da área",
+          "order": 1
+        },
+        {
+          "text": "Somente o horário de início",
+          "order": 2
+        },
+        {
+          "text": "Que haja material combustível por perto",
+          "order": 3
+        },
+        {
+          "text": "Que todas as portas estejam fechadas",
+          "order": 4
+        }
+      ]
+    },
+    "SST042": {
+      "question": "O que caracteriza um espaço confinado?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Acesso limitado e possíveis perigos que exigem controles específicos",
+          "order": 1
+        },
+        {
+          "text": "Qualquer escritório pequeno",
+          "order": 2
+        },
+        {
+          "text": "Todo local ao ar livre",
+          "order": 3
+        },
+        {
+          "text": "Um refeitório cheio",
+          "order": 4
+        }
+      ]
+    },
+    "SST043": {
+      "question": "Deve-se entrar em um espaço confinado sem autorização nem avaliação prévia?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não",
+          "order": 1
+        },
+        {
+          "text": "Sim, se o trabalho durar pouco",
+          "order": 2
+        },
+        {
+          "text": "Sim, se entrarem duas pessoas",
+          "order": 3
+        },
+        {
+          "text": "Somente à noite",
+          "order": 4
+        }
+      ]
+    },
+    "SST044": {
+      "question": "Ao dirigir um veículo da empresa, qual conduta é segura?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar cinto, respeitar limites e evitar distrações",
+          "order": 1
+        },
+        {
+          "text": "Usar o telefone enquanto dirige",
+          "order": 2
+        },
+        {
+          "text": "Aumentar a velocidade se estiver atrasado",
+          "order": 3
+        },
+        {
+          "text": "Não relatar falhas",
+          "order": 4
+        }
+      ]
+    },
+    "SST045": {
+      "question": "Se um motorista sentir muita sonolência, o que deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Parar em local seguro e aplicar o controle de fadiga",
+          "order": 1
+        },
+        {
+          "text": "Abrir uma janela e continuar indefinidamente",
+          "order": 2
+        },
+        {
+          "text": "Aumentar a velocidade",
+          "order": 3
+        },
+        {
+          "text": "Usar o telefone para se manter acordado",
+          "order": 4
+        }
+      ]
+    },
+    "SST046": {
+      "question": "Em áreas com empilhadeiras, o que um pedestre deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar rotas de pedestres, manter distância e respeitar a sinalização",
+          "order": 1
+        },
+        {
+          "text": "Caminhar por qualquer área",
+          "order": 2
+        },
+        {
+          "text": "Aproximar-se por trás do equipamento",
+          "order": 3
+        },
+        {
+          "text": "Passar sob cargas elevadas",
+          "order": 4
+        }
+      ]
+    },
+    "SST047": {
+      "question": "É seguro passar sob uma carga suspensa?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não",
+          "order": 1
+        },
+        {
+          "text": "Sim, se passar rápido",
+          "order": 2
+        },
+        {
+          "text": "Sim, usando capacete",
+          "order": 3
+        },
+        {
+          "text": "Sim, se parecer estável",
+          "order": 4
+        }
+      ]
+    },
+    "SST048": {
+      "question": "Qual é um benefício de manter ordem e limpeza?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Reduz quedas, impactos, incêndios e obstruções",
+          "order": 1
+        },
+        {
+          "text": "Apenas melhora a aparência",
+          "order": 2
+        },
+        {
+          "text": "Elimina a necessidade de inspeções",
+          "order": 3
+        },
+        {
+          "text": "Permite guardar materiais nas saídas",
+          "order": 4
+        }
+      ]
+    },
+    "SST049": {
+      "question": "Onde os materiais devem ser armazenados?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Em locais definidos e estáveis, sem bloquear acessos nem emergências",
+          "order": 1
+        },
+        {
+          "text": "Em qualquer corredor",
+          "order": 2
+        },
+        {
+          "text": "Na frente de extintores",
+          "order": 3
+        },
+        {
+          "text": "Sobre superfícies instáveis",
+          "order": 4
+        }
+      ]
+    },
+    "SST050": {
+      "question": "Antes de usar um cinturão/arnês contra quedas, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Inspecioná-lo e verificar ajuste e compatibilidade",
+          "order": 1
+        },
+        {
+          "text": "Usá-lo sem revisão",
+          "order": 2
+        },
+        {
+          "text": "Cortar tiras desconfortáveis",
+          "order": 3
+        },
+        {
+          "text": "Emprestá-lo sem inspeção",
+          "order": 4
+        }
+      ]
+    },
+    "SST051": {
+      "question": "Qual opção descreve melhor a hierarquia de controles?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Priorizar eliminação, substituição e controles de engenharia antes de depender apenas do EPI",
+          "order": 1
+        },
+        {
+          "text": "Usar primeiro EPI e depois eliminar o perigo",
+          "order": 2
+        },
+        {
+          "text": "Usar apenas sinalização",
+          "order": 3
+        },
+        {
+          "text": "Confiar na experiência",
+          "order": 4
+        }
+      ]
+    },
+    "SST052": {
+      "question": "Se for possível eliminar completamente um perigo, que tipo de controle é esse?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Eliminação",
+          "order": 1
+        },
+        {
+          "text": "EPI",
+          "order": 2
+        },
+        {
+          "text": "Advertência",
+          "order": 3
+        },
+        {
+          "text": "Treinamento",
+          "order": 4
+        }
+      ]
+    },
+    "SST053": {
+      "question": "Para que serve um procedimento de trabalho seguro?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Definir como executar uma atividade com seus controles preventivos",
+          "order": 1
+        },
+        {
+          "text": "Aumentar a burocracia",
+          "order": 2
+        },
+        {
+          "text": "Substituir toda supervisão",
+          "order": 3
+        },
+        {
+          "text": "Permitir omitir treinamento",
+          "order": 4
+        }
+      ]
+    },
+    "SST054": {
+      "question": "Se você não tiver treinamento ou autorização para uma tarefa, o que deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Não executá-la até ter a competência ou autorização exigida",
+          "order": 1
+        },
+        {
+          "text": "Executá-la observando outras pessoas",
+          "order": 2
+        },
+        {
+          "text": "Improvisar",
+          "order": 3
+        },
+        {
+          "text": "Pedir outra ferramenta",
+          "order": 4
+        }
+      ]
+    },
+    "SST055": {
+      "question": "Se um equipamento tiver uma falha que pode afetar a segurança, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Retirá-lo ou pará-lo conforme o procedimento e relatar a falha",
+          "order": 1
+        },
+        {
+          "text": "Continuar utilizando",
+          "order": 2
+        },
+        {
+          "text": "Esconder a falha",
+          "order": 3
+        },
+        {
+          "text": "Aumentar a carga para testá-lo",
+          "order": 4
+        }
+      ]
+    },
+    "SST056": {
+      "question": "Para que serve uma conversa de segurança antes de uma tarefa?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Comunicar riscos, mudanças, controles e responsabilidades",
+          "order": 1
+        },
+        {
+          "text": "Apenas registrar presença",
+          "order": 2
+        },
+        {
+          "text": "Substituir procedimentos",
+          "order": 3
+        },
+        {
+          "text": "Definir férias",
+          "order": 4
+        }
+      ]
+    },
+    "SST057": {
+      "question": "Se as condições de uma tarefa já avaliada mudarem, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Parar e reavaliar riscos e controles",
+          "order": 1
+        },
+        {
+          "text": "Continuar porque já estava autorizada",
+          "order": 2
+        },
+        {
+          "text": "Retirar a sinalização",
+          "order": 3
+        },
+        {
+          "text": "Trocar de trabalhador sem informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST058": {
+      "question": "Para que serve uma placa ou barreira de segurança?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Advertir, restringir ou orientar diante de um perigo",
+          "order": 1
+        },
+        {
+          "text": "Decorar a área",
+          "order": 2
+        },
+        {
+          "text": "Substituir sempre uma proteção física",
+          "order": 3
+        },
+        {
+          "text": "Permitir acesso geral",
+          "order": 4
+        }
+      ]
+    },
+    "SST059": {
+      "question": "Se uma área estiver delimitada por risco e você não estiver autorizado, o que deve fazer?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Respeitar a delimitação e solicitar autorização quando aplicável",
+          "order": 1
+        },
+        {
+          "text": "Atravessar se não houver atividade visível",
+          "order": 2
+        },
+        {
+          "text": "Mover a barreira",
+          "order": 3
+        },
+        {
+          "text": "Entrar por outro lado",
+          "order": 4
+        }
+      ]
+    },
+    "SST060": {
+      "question": "Por que o EPI é considerado a última barreira de controle?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porque protege a pessoa, mas não elimina o perigo na origem",
+          "order": 1
+        },
+        {
+          "text": "Porque é desnecessário",
+          "order": 2
+        },
+        {
+          "text": "Porque sempre falha",
+          "order": 3
+        },
+        {
+          "text": "Porque só serve fora do trabalho",
+          "order": 4
+        }
+      ]
+    },
+    "SST061": {
+      "question": "Em uma jornada com altas temperaturas, o que ajuda a prevenir estresse térmico?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Hidratação, pausas e controles de exposição",
+          "order": 1
+        },
+        {
+          "text": "Evitar beber água",
+          "order": 2
+        },
+        {
+          "text": "Usar mais roupas sem avaliação",
+          "order": 3
+        },
+        {
+          "text": "Trabalhar sem descanso",
+          "order": 4
+        }
+      ]
+    },
+    "SST062": {
+      "question": "Em atividades com exposição solar, qual medida é apropriada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar as medidas definidas, como sombra, roupa adequada e protetor solar quando necessário",
+          "order": 1
+        },
+        {
+          "text": "Ignorar a radiação em dias nublados",
+          "order": 2
+        },
+        {
+          "text": "Trabalhar sem proteção para se acostumar",
+          "order": 3
+        },
+        {
+          "text": "Olhar diretamente para o sol",
+          "order": 4
+        }
+      ]
+    },
+    "SST063": {
+      "question": "Em ambientes frios, qual medida é adequada?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Usar vestimenta apropriada e controlar o tempo de exposição",
+          "order": 1
+        },
+        {
+          "text": "Usar roupas molhadas",
+          "order": 2
+        },
+        {
+          "text": "Não informar dormência",
+          "order": 3
+        },
+        {
+          "text": "Ficar imóvel por muito tempo",
+          "order": 4
+        }
+      ]
+    },
+    "SST064": {
+      "question": "Por que a fadiga é um risco de segurança?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Pode reduzir a atenção, a reação e a capacidade de decisão",
+          "order": 1
+        },
+        {
+          "text": "Só afeta o humor",
+          "order": 2
+        },
+        {
+          "text": "Melhora a concentração",
+          "order": 3
+        },
+        {
+          "text": "Só afeta motoristas",
+          "order": 4
+        }
+      ]
+    },
+    "SST065": {
+      "question": "Se surgirem sintomas que possam estar relacionados ao trabalho, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Informá-los e seguir o canal definido de saúde e segurança",
+          "order": 1
+        },
+        {
+          "text": "Escondê-los",
+          "order": 2
+        },
+        {
+          "text": "Esperar indefinidamente",
+          "order": 3
+        },
+        {
+          "text": "Automedicar-se sem informar",
+          "order": 4
+        }
+      ]
+    },
+    "SST066": {
+      "question": "O que é uma doença ocupacional ou profissional?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Uma condição de saúde associada a exposições ou fatores do trabalho",
+          "order": 1
+        },
+        {
+          "text": "Qualquer doença fora do horário de trabalho",
+          "order": 2
+        },
+        {
+          "text": "Somente uma lesão traumática imediata",
+          "order": 3
+        },
+        {
+          "text": "Uma doença que não deve ser relatada",
+          "order": 4
+        }
+      ]
+    },
+    "SST067": {
+      "question": "Por que é importante participar da vigilância de saúde ocupacional quando aplicável?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Para detectar precocemente efeitos relacionados a exposições no trabalho",
+          "order": 1
+        },
+        {
+          "text": "Para substituir medidas preventivas",
+          "order": 2
+        },
+        {
+          "text": "Para reduzir férias",
+          "order": 3
+        },
+        {
+          "text": "Somente para estatística",
+          "order": 4
+        }
+      ]
+    },
+    "SST068": {
+      "question": "Qual medida básica ajuda a prevenir o contágio de doenças transmissíveis?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Higiene das mãos e medidas sanitárias definidas",
+          "order": 1
+        },
+        {
+          "text": "Compartilhar itens pessoais",
+          "order": 2
+        },
+        {
+          "text": "Esconder sintomas",
+          "order": 3
+        },
+        {
+          "text": "Evitar limpar superfícies",
+          "order": 4
+        }
+      ]
+    },
+    "SST069": {
+      "question": "O que deve ser feito com resíduos perigosos ou especiais?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Gerenciá-los em recipientes e fluxos definidos",
+          "order": 1
+        },
+        {
+          "text": "Misturá-los ao lixo comum",
+          "order": 2
+        },
+        {
+          "text": "Deixá-los em corredores",
+          "order": 3
+        },
+        {
+          "text": "Despejá-los no ralo",
+          "order": 4
+        }
+      ]
+    },
+    "SST070": {
+      "question": "Diante de um derramamento químico que você não está treinado para controlar, o que deve ser feito?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Isolar, informar e acionar o procedimento de resposta",
+          "order": 1
+        },
+        {
+          "text": "Limpar com as mãos",
+          "order": 2
+        },
+        {
+          "text": "Adicionar outro produto sem informação",
+          "order": 3
+        },
+        {
+          "text": "Ignorar",
+          "order": 4
+        }
+      ]
+    }
+  },
+  "fr": {
+    "SST001": {
+      "question": "Que devez-vous faire si vous détectez une situation dangereuse sur votre lieu de travail ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La signaler et appliquer les mesures de contrôle définies",
+          "order": 1
+        },
+        {
+          "text": "L'ignorer tant qu'aucun accident ne se produit",
+          "order": 2
+        },
+        {
+          "text": "Attendre la fin de la semaine",
+          "order": 3
+        },
+        {
+          "text": "Demander à un autre travailleur d'assumer le risque",
+          "order": 4
+        }
+      ]
+    },
+    "SST002": {
+      "question": "Que signifie le sigle EPI ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Équipement de protection individuelle",
+          "order": 1
+        },
+        {
+          "text": "Équipement de production préventive",
+          "order": 2
+        },
+        {
+          "text": "Norme de protection primaire",
+          "order": 3
+        },
+        {
+          "text": "Élément de prévention publique",
+          "order": 4
+        }
+      ]
+    },
+    "SST003": {
+      "question": "Quel est l'objectif principal des EPI ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Réduire l'exposition aux risques résiduels",
+          "order": 1
+        },
+        {
+          "text": "Éliminer tous les dangers du processus",
+          "order": 2
+        },
+        {
+          "text": "Remplacer les procédures de travail sûres",
+          "order": 3
+        },
+        {
+          "text": "Éviter le besoin de formation",
+          "order": 4
+        }
+      ]
+    },
+    "SST004": {
+      "question": "Que faut-il faire avec un EPI endommagé ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Le retirer du service et demander son remplacement",
+          "order": 1
+        },
+        {
+          "text": "Continuer à l'utiliser jusqu'à la fin du poste",
+          "order": 2
+        },
+        {
+          "text": "Le réparer de manière improvisée",
+          "order": 3
+        },
+        {
+          "text": "Le prêter à un autre travailleur",
+          "order": 4
+        }
+      ]
+    },
+    "SST005": {
+      "question": "Qu'est-ce qu'un quasi-accident ou near miss ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Un événement sans dommage qui aurait pu causer des blessures ou des pertes",
+          "order": 1
+        },
+        {
+          "text": "Un accident entraînant un arrêt médical",
+          "order": 2
+        },
+        {
+          "text": "Une situation normale de travail",
+          "order": 3
+        },
+        {
+          "text": "Une urgence exclusivement environnementale",
+          "order": 4
+        }
+      ]
+    },
+    "SST006": {
+      "question": "Que faut-il faire après un quasi-accident ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Le signaler afin de l'analyser et de prévenir sa répétition",
+          "order": 1
+        },
+        {
+          "text": "Ne pas le signaler puisqu'il n'y a pas eu de dommage",
+          "order": 2
+        },
+        {
+          "text": "En parler uniquement entre collègues",
+          "order": 3
+        },
+        {
+          "text": "Attendre qu'il se reproduise",
+          "order": 4
+        }
+      ]
+    },
+    "SST007": {
+      "question": "Avant de commencer une tâche non routinière, que recommande-t-on ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Identifier les dangers et vérifier les mesures de contrôle",
+          "order": 1
+        },
+        {
+          "text": "Commencer rapidement pour gagner du temps",
+          "order": 2
+        },
+        {
+          "text": "Utiliser n'importe quel outil disponible",
+          "order": 3
+        },
+        {
+          "text": "Éviter de consulter la procédure",
+          "order": 4
+        }
+      ]
+    },
+    "SST008": {
+      "question": "S'il existe un risque grave et imminent non maîtrisé, que doit faire le travailleur ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Arrêter la tâche et signaler la situation",
+          "order": 1
+        },
+        {
+          "text": "Continuer jusqu'à la fin",
+          "order": 2
+        },
+        {
+          "text": "Travailler plus vite",
+          "order": 3
+        },
+        {
+          "text": "Déléguer la tâche sans informer",
+          "order": 4
+        }
+      ]
+    },
+    "SST009": {
+      "question": "Qu'est-ce qui aide à prévenir les chutes de plain-pied ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Maintenir les passages propres, secs et dégagés",
+          "order": 1
+        },
+        {
+          "text": "Courir dans les zones de travail",
+          "order": 2
+        },
+        {
+          "text": "Laisser des câbles traverser les voies de circulation",
+          "order": 3
+        },
+        {
+          "text": "Utiliser le téléphone en marchant",
+          "order": 4
+        }
+      ]
+    },
+    "SST010": {
+      "question": "Si un liquide est renversé dans une zone de circulation, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Signaler et sécuriser la zone puis organiser le nettoyage",
+          "order": 1
+        },
+        {
+          "text": "Le laisser jusqu'au nettoyage programmé",
+          "order": 2
+        },
+        {
+          "text": "Le couvrir de papier et continuer",
+          "order": 3
+        },
+        {
+          "text": "L'ignorer si la quantité est faible",
+          "order": 4
+        }
+      ]
+    },
+    "SST011": {
+      "question": "Qu'est-ce qui doit rester dégagé en permanence ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Les voies et sorties de secours",
+          "order": 1
+        },
+        {
+          "text": "Uniquement la porte principale",
+          "order": 2
+        },
+        {
+          "text": "Les places de stationnement visiteurs",
+          "order": 3
+        },
+        {
+          "text": "Les bureaux administratifs",
+          "order": 4
+        }
+      ]
+    },
+    "SST012": {
+      "question": "Lorsque vous entendez une alarme d'évacuation, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Suivre les instructions et rejoindre le point de rassemblement",
+          "order": 1
+        },
+        {
+          "text": "Retourner chercher des effets personnels",
+          "order": 2
+        },
+        {
+          "text": "Toujours utiliser l'ascenseur",
+          "order": 3
+        },
+        {
+          "text": "Attendre de voir de la fumée",
+          "order": 4
+        }
+      ]
+    },
+    "SST013": {
+      "question": "À quoi sert le point de rassemblement lors d'une évacuation ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À vérifier et comptabiliser les personnes évacuées",
+          "order": 1
+        },
+        {
+          "text": "À stocker du matériel",
+          "order": 2
+        },
+        {
+          "text": "À recevoir des outils",
+          "order": 3
+        },
+        {
+          "text": "À garer des véhicules",
+          "order": 4
+        }
+      ]
+    },
+    "SST014": {
+      "question": "Si vous découvrez un début d'incendie, que devez-vous faire en premier ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Donner l'alarme et n'intervenir que si vous êtes formé et que cela est sûr",
+          "order": 1
+        },
+        {
+          "text": "Le cacher pour éviter l'alarme",
+          "order": 2
+        },
+        {
+          "text": "Toujours essayer de l'éteindre sans prévenir",
+          "order": 3
+        },
+        {
+          "text": "Ouvrir toutes les portes et fenêtres",
+          "order": 4
+        }
+      ]
+    },
+    "SST015": {
+      "question": "Quand est-il approprié d'utiliser un extincteur portatif ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Lorsque le feu débute, qu'une sortie sûre est disponible et que la personne est formée",
+          "order": 1
+        },
+        {
+          "text": "Lors de tout incendie, même en présence de fumée dense",
+          "order": 2
+        },
+        {
+          "text": "Après être retourné dans une zone évacuée",
+          "order": 3
+        },
+        {
+          "text": "Sans vérifier le type de feu",
+          "order": 4
+        }
+      ]
+    },
+    "SST016": {
+      "question": "Si une sortie de secours est bloquée, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La signaler et faire en sorte qu'elle soit dégagée immédiatement",
+          "order": 1
+        },
+        {
+          "text": "Ne rien faire s'il existe une autre sortie",
+          "order": 2
+        },
+        {
+          "text": "Placer davantage d'objets à proximité",
+          "order": 3
+        },
+        {
+          "text": "Attendre la prochaine inspection",
+          "order": 4
+        }
+      ]
+    },
+    "SST017": {
+      "question": "Face à une personne blessée, quelle est une première action sûre ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Vérifier que la zone est sûre et demander de l'aide",
+          "order": 1
+        },
+        {
+          "text": "Toujours la déplacer immédiatement",
+          "order": 2
+        },
+        {
+          "text": "Lui donner vos propres médicaments",
+          "order": 3
+        },
+        {
+          "text": "La laisser seule",
+          "order": 4
+        }
+      ]
+    },
+    "SST018": {
+      "question": "Qui doit effectuer les premiers secours spécialisés ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Du personnel formé agissant dans le cadre de ses compétences",
+          "order": 1
+        },
+        {
+          "text": "Toute personne sans formation",
+          "order": 2
+        },
+        {
+          "text": "Uniquement le supérieur direct",
+          "order": 3
+        },
+        {
+          "text": "N'importe quel visiteur",
+          "order": 4
+        }
+      ]
+    },
+    "SST019": {
+      "question": "Pour soulever manuellement une charge, quelle pratique est la plus sûre ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Évaluer le poids et le trajet, garder la charge près du corps et utiliser une technique adaptée",
+          "order": 1
+        },
+        {
+          "text": "Plier le dos en gardant les jambes droites",
+          "order": 2
+        },
+        {
+          "text": "Tourner le tronc pendant le levage",
+          "order": 3
+        },
+        {
+          "text": "Soulever rapidement pour finir plus tôt",
+          "order": 4
+        }
+      ]
+    },
+    "SST020": {
+      "question": "Si une charge est trop lourde pour une seule personne, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Demander de l'aide ou utiliser une assistance mécanique",
+          "order": 1
+        },
+        {
+          "text": "La soulever quand même",
+          "order": 2
+        },
+        {
+          "text": "La traîner sans évaluation",
+          "order": 3
+        },
+        {
+          "text": "La lancer pour la déplacer",
+          "order": 4
+        }
+      ]
+    },
+    "SST021": {
+      "question": "Qu'est-ce qui aide à réduire l'inconfort lors du travail de bureau ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Régler le poste, varier la posture et faire des pauses",
+          "order": 1
+        },
+        {
+          "text": "Garder la même posture toute la journée",
+          "order": 2
+        },
+        {
+          "text": "Travailler avec l'écran très bas",
+          "order": 3
+        },
+        {
+          "text": "S'asseoir loin du bureau",
+          "order": 4
+        }
+      ]
+    },
+    "SST022": {
+      "question": "Comment l'écran d'ordinateur doit-il normalement être positionné ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Face à l'utilisateur, à une hauteur et une distance confortables",
+          "order": 1
+        },
+        {
+          "text": "Derrière l'utilisateur",
+          "order": 2
+        },
+        {
+          "text": "Au sol",
+          "order": 3
+        },
+        {
+          "text": "De façon à obliger à tourner le cou",
+          "order": 4
+        }
+      ]
+    },
+    "SST023": {
+      "question": "Si un équipement électrique est défectueux et que vous n'êtes pas autorisé à le réparer, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Le retirer du service ou le débrancher si cela est sûr, puis le signaler",
+          "order": 1
+        },
+        {
+          "text": "L'ouvrir et le réparer",
+          "order": 2
+        },
+        {
+          "text": "Continuer à l'utiliser jusqu'à la panne",
+          "order": 3
+        },
+        {
+          "text": "Le mouiller pour le refroidir",
+          "order": 4
+        }
+      ]
+    },
+    "SST024": {
+      "question": "Pourquoi ne faut-il pas utiliser des prises ou rallonges endommagées ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Parce qu'elles peuvent provoquer un choc électrique ou un incendie",
+          "order": 1
+        },
+        {
+          "text": "Parce qu'elles consomment davantage d'internet",
+          "order": 2
+        },
+        {
+          "text": "Parce qu'elles réduisent la productivité",
+          "order": 3
+        },
+        {
+          "text": "Uniquement parce qu'elles sont inesthétiques",
+          "order": 4
+        }
+      ]
+    },
+    "SST025": {
+      "question": "À quoi sert le verrouillage et l'étiquetage des énergies dangereuses (LOTO) ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À empêcher une libération imprévue d'énergie pendant une intervention",
+          "order": 1
+        },
+        {
+          "text": "À augmenter la vitesse de maintenance",
+          "order": 2
+        },
+        {
+          "text": "À identifier le travailleur le plus ancien",
+          "order": 3
+        },
+        {
+          "text": "À remplacer les outils",
+          "order": 4
+        }
+      ]
+    },
+    "SST026": {
+      "question": "Qui peut normalement retirer un verrou personnel LOTO ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La personne autorisée qui l'a posé, ou selon une procédure formelle d'exception",
+          "order": 1
+        },
+        {
+          "text": "N'importe quel collègue",
+          "order": 2
+        },
+        {
+          "text": "N'importe quel superviseur sans enregistrement",
+          "order": 3
+        },
+        {
+          "text": "Un visiteur",
+          "order": 4
+        }
+      ]
+    },
+    "SST027": {
+      "question": "Avant d'utiliser une échelle portative, que faut-il vérifier ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Son état, son appui, sa stabilité et son adéquation à la tâche",
+          "order": 1
+        },
+        {
+          "text": "Uniquement sa couleur",
+          "order": 2
+        },
+        {
+          "text": "Qu'elle soit la plus haute disponible",
+          "order": 3
+        },
+        {
+          "text": "Qu'elle ne porte aucune étiquette",
+          "order": 4
+        }
+      ]
+    },
+    "SST028": {
+      "question": "Quelle pratique est dangereuse lors de l'utilisation d'une échelle ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Utiliser une échelle endommagée ou installée de manière instable",
+          "order": 1
+        },
+        {
+          "text": "L'inspecter avant utilisation",
+          "order": 2
+        },
+        {
+          "text": "La placer sur une surface stable",
+          "order": 3
+        },
+        {
+          "text": "Maintenir une position contrôlée",
+          "order": 4
+        }
+      ]
+    },
+    "SST029": {
+      "question": "Avant un travail présentant un risque de chute de hauteur, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Évaluer le risque et appliquer les mesures de protection contre les chutes",
+          "order": 1
+        },
+        {
+          "text": "Choisir la protection après être monté",
+          "order": 2
+        },
+        {
+          "text": "Travailler sans protection si cela ne dure que quelques minutes",
+          "order": 3
+        },
+        {
+          "text": "Se fier uniquement à l'expérience",
+          "order": 4
+        }
+      ]
+    },
+    "SST030": {
+      "question": "Que faut-il faire avec un outil à main défectueux ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Le retirer du service et le signaler",
+          "order": 1
+        },
+        {
+          "text": "Continuer à l'utiliser prudemment",
+          "order": 2
+        },
+        {
+          "text": "Cacher le défaut",
+          "order": 3
+        },
+        {
+          "text": "Le prêter à une autre équipe",
+          "order": 4
+        }
+      ]
+    },
+    "SST031": {
+      "question": "À quoi servent les protecteurs d'une machine ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À empêcher ou réduire le contact avec les parties dangereuses",
+          "order": 1
+        },
+        {
+          "text": "À décorer l'équipement",
+          "order": 2
+        },
+        {
+          "text": "À augmenter le bruit",
+          "order": 3
+        },
+        {
+          "text": "À remplacer la formation",
+          "order": 4
+        }
+      ]
+    },
+    "SST032": {
+      "question": "Est-il correct de retirer un protecteur de machine pour travailler plus vite ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Non, sauf lors d'une intervention autorisée et maîtrisée",
+          "order": 1
+        },
+        {
+          "text": "Oui, si l'opérateur est expérimenté",
+          "order": 2
+        },
+        {
+          "text": "Oui, pendant les postes de nuit",
+          "order": 3
+        },
+        {
+          "text": "Oui, si personne ne regarde",
+          "order": 4
+        }
+      ]
+    },
+    "SST033": {
+      "question": "Avant d'utiliser un produit chimique inconnu, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Consulter l'étiquette, la fiche de données de sécurité et les mesures de contrôle requises",
+          "order": 1
+        },
+        {
+          "text": "Le sentir pour l'identifier",
+          "order": 2
+        },
+        {
+          "text": "Le mélanger avec de l'eau",
+          "order": 3
+        },
+        {
+          "text": "Le tester avec les mains",
+          "order": 4
+        }
+      ]
+    },
+    "SST034": {
+      "question": "Quel document indique les dangers, le stockage, les premiers secours et la conduite à tenir en cas de déversement d'un produit chimique ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "La fiche de données de sécurité (FDS/SDS)",
+          "order": 1
+        },
+        {
+          "text": "La feuille de présence",
+          "order": 2
+        },
+        {
+          "text": "Le bulletin de salaire",
+          "order": 3
+        },
+        {
+          "text": "Le plan de stationnement",
+          "order": 4
+        }
+      ]
+    },
+    "SST035": {
+      "question": "Si un contenant chimique n'a pas d'identification lisible, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Ne pas l'utiliser et le signaler pour identification ou élimination sûre",
+          "order": 1
+        },
+        {
+          "text": "L'utiliser quand même",
+          "order": 2
+        },
+        {
+          "text": "Le transvaser dans une bouteille de boisson",
+          "order": 3
+        },
+        {
+          "text": "En tester une petite quantité",
+          "order": 4
+        }
+      ]
+    },
+    "SST036": {
+      "question": "Pourquoi la ventilation est-elle importante lors d'un travail avec des vapeurs, gaz ou poussières ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Parce qu'elle aide à maîtriser les contaminants dans l'air",
+          "order": 1
+        },
+        {
+          "text": "Uniquement pour améliorer la température",
+          "order": 2
+        },
+        {
+          "text": "Pour réduire le poids des outils",
+          "order": 3
+        },
+        {
+          "text": "Pour éviter d'utiliser l'éclairage",
+          "order": 4
+        }
+      ]
+    },
+    "SST037": {
+      "question": "Si une tâche génère un niveau de bruit élevé, quelle mesure faut-il prendre ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Appliquer les mesures de contrôle et porter une protection auditive lorsque nécessaire",
+          "order": 1
+        },
+        {
+          "text": "Crier pour communiquer",
+          "order": 2
+        },
+        {
+          "text": "Retirer la protection pour mieux entendre",
+          "order": 3
+        },
+        {
+          "text": "Augmenter le temps d'exposition",
+          "order": 4
+        }
+      ]
+    },
+    "SST038": {
+      "question": "Avant d'utiliser des protections auditives, que faut-il vérifier ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Qu'elles sont en bon état et correctement utilisées",
+          "order": 1
+        },
+        {
+          "text": "Qu'elles sont mouillées",
+          "order": 2
+        },
+        {
+          "text": "Qu'elles peuvent être partagées sans hygiène",
+          "order": 3
+        },
+        {
+          "text": "Qu'elles ont été découpées",
+          "order": 4
+        }
+      ]
+    },
+    "SST039": {
+      "question": "Quand faut-il utiliser une protection respiratoire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Lorsque l'évaluation des risques et la procédure l'exigent",
+          "order": 1
+        },
+        {
+          "text": "Toujours dans les bureaux",
+          "order": 2
+        },
+        {
+          "text": "Seulement après l'apparition de symptômes",
+          "order": 3
+        },
+        {
+          "text": "Lorsque le travailleur la choisit sans évaluation",
+          "order": 4
+        }
+      ]
+    },
+    "SST040": {
+      "question": "N'importe quel masque peut-il protéger contre n'importe quel contaminant ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Non, il doit être choisi en fonction du danger et de l'exposition",
+          "order": 1
+        },
+        {
+          "text": "Oui, tous offrent la même protection",
+          "order": 2
+        },
+        {
+          "text": "Oui, s'il est de couleur foncée",
+          "order": 3
+        },
+        {
+          "text": "Oui, s'il est utilisé moins d'une heure",
+          "order": 4
+        }
+      ]
+    },
+    "SST041": {
+      "question": "Avant des travaux de soudage ou de découpe, que faut-il vérifier ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Les mesures de contrôle, l'autorisation ou le permis requis et les conditions de la zone",
+          "order": 1
+        },
+        {
+          "text": "Uniquement l'heure de début",
+          "order": 2
+        },
+        {
+          "text": "Qu'il y ait des matières combustibles à proximité",
+          "order": 3
+        },
+        {
+          "text": "Que toutes les portes soient fermées",
+          "order": 4
+        }
+      ]
+    },
+    "SST042": {
+      "question": "Qu'est-ce qui caractérise un espace confiné ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Un accès limité et des dangers possibles nécessitant des mesures spécifiques",
+          "order": 1
+        },
+        {
+          "text": "N'importe quel petit bureau",
+          "order": 2
+        },
+        {
+          "text": "Tout espace extérieur",
+          "order": 3
+        },
+        {
+          "text": "Une salle à manger pleine",
+          "order": 4
+        }
+      ]
+    },
+    "SST043": {
+      "question": "Faut-il entrer dans un espace confiné sans autorisation ni évaluation préalable ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Non",
+          "order": 1
+        },
+        {
+          "text": "Oui, si le travail est court",
+          "order": 2
+        },
+        {
+          "text": "Oui, si deux personnes entrent",
+          "order": 3
+        },
+        {
+          "text": "Uniquement la nuit",
+          "order": 4
+        }
+      ]
+    },
+    "SST044": {
+      "question": "Lors de la conduite d'un véhicule de l'entreprise, quel comportement est sûr ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porter la ceinture, respecter les limitations et éviter les distractions",
+          "order": 1
+        },
+        {
+          "text": "Utiliser le téléphone en conduisant",
+          "order": 2
+        },
+        {
+          "text": "Accélérer en cas de retard",
+          "order": 3
+        },
+        {
+          "text": "Ne pas signaler les défaillances",
+          "order": 4
+        }
+      ]
+    },
+    "SST045": {
+      "question": "Si un conducteur ressent une forte somnolence, que doit-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "S'arrêter dans un endroit sûr et appliquer les mesures de gestion de la fatigue",
+          "order": 1
+        },
+        {
+          "text": "Ouvrir une fenêtre et continuer indéfiniment",
+          "order": 2
+        },
+        {
+          "text": "Augmenter la vitesse",
+          "order": 3
+        },
+        {
+          "text": "Utiliser le téléphone pour rester éveillé",
+          "order": 4
+        }
+      ]
+    },
+    "SST046": {
+      "question": "Dans les zones où circulent des chariots élévateurs, que doit faire un piéton ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Utiliser les voies piétonnes, garder ses distances et respecter la signalisation",
+          "order": 1
+        },
+        {
+          "text": "Marcher dans n'importe quelle zone",
+          "order": 2
+        },
+        {
+          "text": "S'approcher par l'arrière de l'engin",
+          "order": 3
+        },
+        {
+          "text": "Passer sous des charges levées",
+          "order": 4
+        }
+      ]
+    },
+    "SST047": {
+      "question": "Est-il sûr de passer sous une charge suspendue ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Non",
+          "order": 1
+        },
+        {
+          "text": "Oui, si l'on passe rapidement",
+          "order": 2
+        },
+        {
+          "text": "Oui, avec un casque",
+          "order": 3
+        },
+        {
+          "text": "Oui, si elle semble stable",
+          "order": 4
+        }
+      ]
+    },
+    "SST048": {
+      "question": "Quel est l'un des avantages du maintien de l'ordre et de la propreté ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Réduire les chutes, les chocs, les incendies et les obstructions",
+          "order": 1
+        },
+        {
+          "text": "Seulement améliorer l'apparence",
+          "order": 2
+        },
+        {
+          "text": "Supprimer le besoin d'inspections",
+          "order": 3
+        },
+        {
+          "text": "Permettre de stocker du matériel dans les sorties",
+          "order": 4
+        }
+      ]
+    },
+    "SST049": {
+      "question": "Où les matériaux doivent-ils être stockés ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Dans des emplacements définis et stables, sans bloquer les accès ni les équipements d'urgence",
+          "order": 1
+        },
+        {
+          "text": "Dans n'importe quel passage",
+          "order": 2
+        },
+        {
+          "text": "Devant les extincteurs",
+          "order": 3
+        },
+        {
+          "text": "Sur des surfaces instables",
+          "order": 4
+        }
+      ]
+    },
+    "SST050": {
+      "question": "Avant d'utiliser un harnais antichute, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "L'inspecter et vérifier son réglage et sa compatibilité",
+          "order": 1
+        },
+        {
+          "text": "L'utiliser sans inspection",
+          "order": 2
+        },
+        {
+          "text": "Couper les sangles inconfortables",
+          "order": 3
+        },
+        {
+          "text": "Le prêter sans inspection",
+          "order": 4
+        }
+      ]
+    },
+    "SST051": {
+      "question": "Quelle proposition décrit le mieux la hiérarchie des mesures de prévention ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Prioriser l'élimination, la substitution et les mesures techniques avant de dépendre uniquement des EPI",
+          "order": 1
+        },
+        {
+          "text": "Utiliser d'abord les EPI puis éliminer le danger",
+          "order": 2
+        },
+        {
+          "text": "Utiliser uniquement la signalisation",
+          "order": 3
+        },
+        {
+          "text": "Se fier à l'expérience",
+          "order": 4
+        }
+      ]
+    },
+    "SST052": {
+      "question": "S'il est possible d'éliminer complètement un danger, de quel type de mesure s'agit-il ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Élimination",
+          "order": 1
+        },
+        {
+          "text": "EPI",
+          "order": 2
+        },
+        {
+          "text": "Avertissement",
+          "order": 3
+        },
+        {
+          "text": "Formation",
+          "order": 4
+        }
+      ]
+    },
+    "SST053": {
+      "question": "À quoi sert une procédure de travail sûr ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À définir comment réaliser une activité avec ses mesures de prévention",
+          "order": 1
+        },
+        {
+          "text": "À augmenter les formalités",
+          "order": 2
+        },
+        {
+          "text": "À remplacer toute supervision",
+          "order": 3
+        },
+        {
+          "text": "À permettre d'omettre la formation",
+          "order": 4
+        }
+      ]
+    },
+    "SST054": {
+      "question": "Si vous n'êtes ni formé ni autorisé pour une tâche, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Ne pas l'exécuter avant d'avoir la compétence ou l'autorisation requise",
+          "order": 1
+        },
+        {
+          "text": "L'exécuter en regardant les autres",
+          "order": 2
+        },
+        {
+          "text": "Improviser",
+          "order": 3
+        },
+        {
+          "text": "Demander un autre outil",
+          "order": 4
+        }
+      ]
+    },
+    "SST055": {
+      "question": "Si un équipement présente une défaillance pouvant affecter la sécurité, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Le retirer ou l'arrêter selon la procédure et signaler la défaillance",
+          "order": 1
+        },
+        {
+          "text": "Continuer à l'utiliser",
+          "order": 2
+        },
+        {
+          "text": "Cacher la défaillance",
+          "order": 3
+        },
+        {
+          "text": "Augmenter la charge pour le tester",
+          "order": 4
+        }
+      ]
+    },
+    "SST056": {
+      "question": "À quoi sert un briefing de sécurité avant une tâche ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À communiquer les risques, changements, mesures de contrôle et responsabilités",
+          "order": 1
+        },
+        {
+          "text": "Uniquement à enregistrer la présence",
+          "order": 2
+        },
+        {
+          "text": "À remplacer les procédures",
+          "order": 3
+        },
+        {
+          "text": "À attribuer les congés",
+          "order": 4
+        }
+      ]
+    },
+    "SST057": {
+      "question": "Si les conditions d'une tâche déjà évaluée changent, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Arrêter et réévaluer les risques et les mesures de contrôle",
+          "order": 1
+        },
+        {
+          "text": "Continuer parce qu'elle était déjà autorisée",
+          "order": 2
+        },
+        {
+          "text": "Retirer la signalisation",
+          "order": 3
+        },
+        {
+          "text": "Changer de travailleur sans informer",
+          "order": 4
+        }
+      ]
+    },
+    "SST058": {
+      "question": "À quoi sert un panneau ou une barrière de sécurité ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "À avertir, restreindre ou guider face à un danger",
+          "order": 1
+        },
+        {
+          "text": "À décorer la zone",
+          "order": 2
+        },
+        {
+          "text": "À toujours remplacer une protection physique",
+          "order": 3
+        },
+        {
+          "text": "À autoriser l'accès général",
+          "order": 4
+        }
+      ]
+    },
+    "SST059": {
+      "question": "Si une zone est délimitée en raison d'un risque et que vous n'êtes pas autorisé, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Respecter la délimitation et demander une autorisation si nécessaire",
+          "order": 1
+        },
+        {
+          "text": "La traverser si vous ne voyez aucune activité",
+          "order": 2
+        },
+        {
+          "text": "Déplacer la barrière",
+          "order": 3
+        },
+        {
+          "text": "Entrer par un autre côté",
+          "order": 4
+        }
+      ]
+    },
+    "SST060": {
+      "question": "Pourquoi les EPI sont-ils considérés comme la dernière barrière de contrôle ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Parce qu'ils protègent la personne mais n'éliminent pas le danger à la source",
+          "order": 1
+        },
+        {
+          "text": "Parce qu'ils sont inutiles",
+          "order": 2
+        },
+        {
+          "text": "Parce qu'ils échouent toujours",
+          "order": 3
+        },
+        {
+          "text": "Parce qu'ils ne servent qu'en dehors du travail",
+          "order": 4
+        }
+      ]
+    },
+    "SST061": {
+      "question": "Lors d'une journée de travail sous fortes températures, qu'est-ce qui aide à prévenir le stress thermique ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "L'hydratation, les pauses et les mesures de contrôle de l'exposition",
+          "order": 1
+        },
+        {
+          "text": "Éviter de boire de l'eau",
+          "order": 2
+        },
+        {
+          "text": "Porter davantage de vêtements sans évaluation",
+          "order": 3
+        },
+        {
+          "text": "Travailler sans pause",
+          "order": 4
+        }
+      ]
+    },
+    "SST062": {
+      "question": "Pour des travaux avec exposition au soleil, quelle mesure est appropriée ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Appliquer les mesures définies telles que l'ombre, des vêtements adaptés et une protection solaire lorsque nécessaire",
+          "order": 1
+        },
+        {
+          "text": "Ignorer le rayonnement les jours nuageux",
+          "order": 2
+        },
+        {
+          "text": "Travailler sans protection pour s'habituer",
+          "order": 3
+        },
+        {
+          "text": "Regarder directement le soleil",
+          "order": 4
+        }
+      ]
+    },
+    "SST063": {
+      "question": "Dans un environnement froid, quelle mesure est adaptée ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Porter des vêtements appropriés et contrôler le temps d'exposition",
+          "order": 1
+        },
+        {
+          "text": "Porter des vêtements mouillés",
+          "order": 2
+        },
+        {
+          "text": "Ne pas signaler les engourdissements",
+          "order": 3
+        },
+        {
+          "text": "Rester immobile très longtemps",
+          "order": 4
+        }
+      ]
+    },
+    "SST064": {
+      "question": "Pourquoi la fatigue constitue-t-elle un risque pour la sécurité ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Elle peut réduire l'attention, le temps de réaction et la capacité de décision",
+          "order": 1
+        },
+        {
+          "text": "Elle n'affecte que l'humeur",
+          "order": 2
+        },
+        {
+          "text": "Elle améliore la concentration",
+          "order": 3
+        },
+        {
+          "text": "Elle n'affecte que les conducteurs",
+          "order": 4
+        }
+      ]
+    },
+    "SST065": {
+      "question": "Si des symptômes pouvant être liés au travail apparaissent, que faut-il faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Les signaler et suivre le canal de santé et sécurité défini",
+          "order": 1
+        },
+        {
+          "text": "Les cacher",
+          "order": 2
+        },
+        {
+          "text": "Attendre indéfiniment",
+          "order": 3
+        },
+        {
+          "text": "S'automédiquer sans le signaler",
+          "order": 4
+        }
+      ]
+    },
+    "SST066": {
+      "question": "Qu'est-ce qu'une maladie professionnelle ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Un problème de santé associé à des expositions ou facteurs liés au travail",
+          "order": 1
+        },
+        {
+          "text": "Toute maladie survenant en dehors des heures de travail",
+          "order": 2
+        },
+        {
+          "text": "Uniquement une lésion traumatique immédiate",
+          "order": 3
+        },
+        {
+          "text": "Une maladie qui ne doit pas être signalée",
+          "order": 4
+        }
+      ]
+    },
+    "SST067": {
+      "question": "Pourquoi est-il important de participer à la surveillance de la santé au travail lorsqu'elle est requise ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Pour détecter précocement les effets liés aux expositions professionnelles",
+          "order": 1
+        },
+        {
+          "text": "Pour remplacer les mesures de prévention",
+          "order": 2
+        },
+        {
+          "text": "Pour réduire les congés",
+          "order": 3
+        },
+        {
+          "text": "Uniquement pour les statistiques",
+          "order": 4
+        }
+      ]
+    },
+    "SST068": {
+      "question": "Quelle mesure de base aide à prévenir la transmission des maladies transmissibles ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "L'hygiène des mains et les mesures sanitaires définies",
+          "order": 1
+        },
+        {
+          "text": "Partager des objets personnels",
+          "order": 2
+        },
+        {
+          "text": "Cacher les symptômes",
+          "order": 3
+        },
+        {
+          "text": "Éviter de nettoyer les surfaces",
+          "order": 4
+        }
+      ]
+    },
+    "SST069": {
+      "question": "Que faut-il faire avec les déchets dangereux ou spéciaux ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Les gérer dans les contenants et filières prévus",
+          "order": 1
+        },
+        {
+          "text": "Les mélanger aux déchets ordinaires",
+          "order": 2
+        },
+        {
+          "text": "Les laisser dans les passages",
+          "order": 3
+        },
+        {
+          "text": "Les jeter dans les canalisations",
+          "order": 4
+        }
+      ]
+    },
+    "SST070": {
+      "question": "Face à un déversement chimique que vous n'êtes pas formé à maîtriser, que devez-vous faire ?",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "Isoler la zone, informer et déclencher la procédure d'intervention",
+          "order": 1
+        },
+        {
+          "text": "Le nettoyer avec les mains",
+          "order": 2
+        },
+        {
+          "text": "Ajouter un autre produit sans information",
+          "order": 3
+        },
+        {
+          "text": "L'ignorer",
+          "order": 4
+        }
+      ]
+    }
+  },
+  "zh": {
+    "SST001": {
+      "question": "如果你在工作场所发现不安全状况，应当怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "立即报告并执行规定的控制措施",
+          "order": 1
+        },
+        {
+          "text": "只要尚未发生事故就忽略",
+          "order": 2
+        },
+        {
+          "text": "等到周末再处理",
+          "order": 3
+        },
+        {
+          "text": "让另一名员工承担该风险",
+          "order": 4
+        }
+      ]
+    },
+    "SST002": {
+      "question": "PPE（个人防护装备）是指什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "个人防护装备",
+          "order": 1
+        },
+        {
+          "text": "预防性生产设备",
+          "order": 2
+        },
+        {
+          "text": "一级防护标准",
+          "order": 3
+        },
+        {
+          "text": "公共预防用品",
+          "order": 4
+        }
+      ]
+    },
+    "SST003": {
+      "question": "PPE 的主要目的是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "降低对剩余风险的暴露",
+          "order": 1
+        },
+        {
+          "text": "消除流程中的所有危险",
+          "order": 2
+        },
+        {
+          "text": "替代安全作业程序",
+          "order": 3
+        },
+        {
+          "text": "避免进行培训",
+          "order": 4
+        }
+      ]
+    },
+    "SST004": {
+      "question": "损坏的 PPE 应如何处理？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "停止使用并申请更换",
+          "order": 1
+        },
+        {
+          "text": "继续使用到班次结束",
+          "order": 2
+        },
+        {
+          "text": "临时自行修理后继续使用",
+          "order": 3
+        },
+        {
+          "text": "借给其他员工使用",
+          "order": 4
+        }
+      ]
+    },
+    "SST005": {
+      "question": "什么是险情或未遂事故（near miss）？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "未造成伤害，但本可能导致受伤或损失的事件",
+          "order": 1
+        },
+        {
+          "text": "导致病假的事故",
+          "order": 2
+        },
+        {
+          "text": "正常的工作情况",
+          "order": 3
+        },
+        {
+          "text": "仅涉及环境的紧急事件",
+          "order": 4
+        }
+      ]
+    },
+    "SST006": {
+      "question": "发生未遂事故后应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "报告并分析，以防止再次发生",
+          "order": 1
+        },
+        {
+          "text": "因为没有造成伤害所以不用报告",
+          "order": 2
+        },
+        {
+          "text": "只在同事之间讨论",
+          "order": 3
+        },
+        {
+          "text": "等它再次发生",
+          "order": 4
+        }
+      ]
+    },
+    "SST007": {
+      "question": "开始非常规任务前，建议先做什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "识别危险并确认控制措施",
+          "order": 1
+        },
+        {
+          "text": "尽快开始以节省时间",
+          "order": 2
+        },
+        {
+          "text": "使用任何可用工具",
+          "order": 3
+        },
+        {
+          "text": "避免查看作业程序",
+          "order": 4
+        }
+      ]
+    },
+    "SST008": {
+      "question": "如果存在未受控制的严重且迫在眉睫的风险，员工应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "停止作业并报告情况",
+          "order": 1
+        },
+        {
+          "text": "继续工作直到完成",
+          "order": 2
+        },
+        {
+          "text": "加快工作速度",
+          "order": 3
+        },
+        {
+          "text": "不报告就把任务交给别人",
+          "order": 4
+        }
+      ]
+    },
+    "SST009": {
+      "question": "什么措施有助于防止同一平面跌倒？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "保持通道清洁、干燥且畅通",
+          "order": 1
+        },
+        {
+          "text": "在工作区域奔跑",
+          "order": 2
+        },
+        {
+          "text": "让电缆横穿通道",
+          "order": 3
+        },
+        {
+          "text": "边走边使用手机",
+          "order": 4
+        }
+      ]
+    },
+    "SST010": {
+      "question": "如果通行区域发生液体泄漏，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "设置警示、控制区域并安排清理",
+          "order": 1
+        },
+        {
+          "text": "留到计划清洁时再处理",
+          "order": 2
+        },
+        {
+          "text": "用纸盖住后继续工作",
+          "order": 3
+        },
+        {
+          "text": "如果量少就忽略",
+          "order": 4
+        }
+      ]
+    },
+    "SST011": {
+      "question": "什么区域必须始终保持畅通？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "紧急疏散路线和出口",
+          "order": 1
+        },
+        {
+          "text": "只有主入口",
+          "order": 2
+        },
+        {
+          "text": "访客停车位",
+          "order": 3
+        },
+        {
+          "text": "行政办公室",
+          "order": 4
+        }
+      ]
+    },
+    "SST012": {
+      "question": "听到疏散警报时，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "按照指示前往集合点",
+          "order": 1
+        },
+        {
+          "text": "返回去取个人物品",
+          "order": 2
+        },
+        {
+          "text": "始终使用电梯",
+          "order": 3
+        },
+        {
+          "text": "等看到烟雾再行动",
+          "order": 4
+        }
+      ]
+    },
+    "SST013": {
+      "question": "疏散时设置集合点的目的是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "核实并清点已疏散人员",
+          "order": 1
+        },
+        {
+          "text": "存放设备",
+          "order": 2
+        },
+        {
+          "text": "领取工具",
+          "order": 3
+        },
+        {
+          "text": "停放车辆",
+          "order": 4
+        }
+      ]
+    },
+    "SST014": {
+      "question": "如果发现初起火灾，首先应做什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "发出警报，并且只有在受过培训且安全时才进行处置",
+          "order": 1
+        },
+        {
+          "text": "隐藏火情以免引起恐慌",
+          "order": 2
+        },
+        {
+          "text": "无论如何都先灭火且不通知他人",
+          "order": 3
+        },
+        {
+          "text": "打开所有门窗",
+          "order": 4
+        }
+      ]
+    },
+    "SST015": {
+      "question": "什么时候适合使用便携式灭火器？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "火势处于初期、有安全退路且使用者受过培训时",
+          "order": 1
+        },
+        {
+          "text": "任何火灾都可以，即使烟雾很大",
+          "order": 2
+        },
+        {
+          "text": "重新进入已经疏散的区域后",
+          "order": 3
+        },
+        {
+          "text": "不确认火灾类型就使用",
+          "order": 4
+        }
+      ]
+    },
+    "SST016": {
+      "question": "如果紧急出口被堵塞，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "立即报告并安排清除障碍",
+          "order": 1
+        },
+        {
+          "text": "如果还有其他出口就不用处理",
+          "order": 2
+        },
+        {
+          "text": "在附近再放更多物品",
+          "order": 3
+        },
+        {
+          "text": "等下次检查再处理",
+          "order": 4
+        }
+      ]
+    },
+    "SST017": {
+      "question": "发现有人受伤时，哪一项是安全的初始措施？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "先确认现场安全并请求帮助",
+          "order": 1
+        },
+        {
+          "text": "总是立即移动伤者",
+          "order": 2
+        },
+        {
+          "text": "给伤者服用自己的药物",
+          "order": 3
+        },
+        {
+          "text": "把伤者单独留下",
+          "order": 4
+        }
+      ]
+    },
+    "SST018": {
+      "question": "谁应实施专业急救？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "在其能力范围内开展工作的受训人员",
+          "order": 1
+        },
+        {
+          "text": "任何未经培训的人",
+          "order": 2
+        },
+        {
+          "text": "只有直属主管",
+          "order": 3
+        },
+        {
+          "text": "任何访客",
+          "order": 4
+        }
+      ]
+    },
+    "SST019": {
+      "question": "人工搬运物体时，哪种做法更安全？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "评估重量和路线，将物体靠近身体并采用正确技术",
+          "order": 1
+        },
+        {
+          "text": "双腿伸直、弯腰搬起",
+          "order": 2
+        },
+        {
+          "text": "搬起时扭转躯干",
+          "order": 3
+        },
+        {
+          "text": "快速抬起以尽快结束",
+          "order": 4
+        }
+      ]
+    },
+    "SST020": {
+      "question": "如果物体对一个人来说太重，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "寻求帮助或使用机械辅助设备",
+          "order": 1
+        },
+        {
+          "text": "仍然独自搬起",
+          "order": 2
+        },
+        {
+          "text": "不评估就直接拖动",
+          "order": 3
+        },
+        {
+          "text": "通过抛掷来移动",
+          "order": 4
+        }
+      ]
+    },
+    "SST021": {
+      "question": "什么有助于减少办公室工作中的不适？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "调整工作站、变换姿势并适当休息",
+          "order": 1
+        },
+        {
+          "text": "整天保持同一姿势",
+          "order": 2
+        },
+        {
+          "text": "把屏幕放得很低",
+          "order": 3
+        },
+        {
+          "text": "坐得离桌子很远",
+          "order": 4
+        }
+      ]
+    },
+    "SST022": {
+      "question": "电脑屏幕通常应如何放置？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "位于使用者正前方，保持舒适的高度和距离",
+          "order": 1
+        },
+        {
+          "text": "放在使用者身后",
+          "order": 2
+        },
+        {
+          "text": "放在地面上",
+          "order": 3
+        },
+        {
+          "text": "放在迫使颈部扭转的位置",
+          "order": 4
+        }
+      ]
+    },
+    "SST023": {
+      "question": "如果电气设备存在故障，而你无权维修，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "停止使用，若安全则断开电源，并进行报告",
+          "order": 1
+        },
+        {
+          "text": "自行拆开维修",
+          "order": 2
+        },
+        {
+          "text": "继续使用直到完全损坏",
+          "order": 3
+        },
+        {
+          "text": "用水冷却设备",
+          "order": 4
+        }
+      ]
+    },
+    "SST024": {
+      "question": "为什么不能使用损坏的插头或延长线？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "因为可能造成触电或火灾",
+          "order": 1
+        },
+        {
+          "text": "因为会消耗更多网络流量",
+          "order": 2
+        },
+        {
+          "text": "因为会降低生产率",
+          "order": 3
+        },
+        {
+          "text": "只是因为外观不好",
+          "order": 4
+        }
+      ]
+    },
+    "SST025": {
+      "question": "危险能源上锁挂牌（LOTO）的作用是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "防止检修期间能源意外释放",
+          "order": 1
+        },
+        {
+          "text": "提高维修速度",
+          "order": 2
+        },
+        {
+          "text": "识别工龄最长的员工",
+          "order": 3
+        },
+        {
+          "text": "替代工具",
+          "order": 4
+        }
+      ]
+    },
+    "SST026": {
+      "question": "通常谁可以移除个人 LOTO 锁？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "安装该锁的授权人员，或按照正式例外程序处理",
+          "order": 1
+        },
+        {
+          "text": "任何同事",
+          "order": 2
+        },
+        {
+          "text": "没有记录的任何主管",
+          "order": 3
+        },
+        {
+          "text": "访客",
+          "order": 4
+        }
+      ]
+    },
+    "SST027": {
+      "question": "使用便携式梯子前，应检查什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "梯子的状况、支撑、稳定性以及是否适合该任务",
+          "order": 1
+        },
+        {
+          "text": "只检查颜色",
+          "order": 2
+        },
+        {
+          "text": "确认它是现有梯子中最高的",
+          "order": 3
+        },
+        {
+          "text": "确认没有任何标签",
+          "order": 4
+        }
+      ]
+    },
+    "SST028": {
+      "question": "使用梯子时，哪种做法是不安全的？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "使用损坏或支撑不稳的梯子",
+          "order": 1
+        },
+        {
+          "text": "使用前检查梯子",
+          "order": 2
+        },
+        {
+          "text": "将梯子放在稳定表面上",
+          "order": 3
+        },
+        {
+          "text": "保持受控姿势",
+          "order": 4
+        }
+      ]
+    },
+    "SST029": {
+      "question": "进行存在高处坠落风险的作业前，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "评估风险并采取防坠落控制措施",
+          "order": 1
+        },
+        {
+          "text": "上去之后再选择防护措施",
+          "order": 2
+        },
+        {
+          "text": "如果只工作几分钟就不使用防护",
+          "order": 3
+        },
+        {
+          "text": "只依靠经验",
+          "order": 4
+        }
+      ]
+    },
+    "SST030": {
+      "question": "有缺陷的手工具应如何处理？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "停止使用并报告",
+          "order": 1
+        },
+        {
+          "text": "小心使用即可",
+          "order": 2
+        },
+        {
+          "text": "隐藏损坏情况",
+          "order": 3
+        },
+        {
+          "text": "借给下一班使用",
+          "order": 4
+        }
+      ]
+    },
+    "SST031": {
+      "question": "机器防护装置的作用是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "防止或减少与危险部件接触",
+          "order": 1
+        },
+        {
+          "text": "装饰设备",
+          "order": 2
+        },
+        {
+          "text": "增加噪声",
+          "order": 3
+        },
+        {
+          "text": "替代培训",
+          "order": 4
+        }
+      ]
+    },
+    "SST032": {
+      "question": "为了提高速度，可以拆除机器防护装置吗？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "不可以，除非是经授权并受控的检修作业",
+          "order": 1
+        },
+        {
+          "text": "可以，只要操作员有经验",
+          "order": 2
+        },
+        {
+          "text": "可以，在夜班期间",
+          "order": 3
+        },
+        {
+          "text": "可以，只要没人看到",
+          "order": 4
+        }
+      ]
+    },
+    "SST033": {
+      "question": "使用不熟悉的化学品前，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "查看标签、安全数据表以及所需控制措施",
+          "order": 1
+        },
+        {
+          "text": "通过闻气味来识别",
+          "order": 2
+        },
+        {
+          "text": "与水混合",
+          "order": 3
+        },
+        {
+          "text": "用手试一下",
+          "order": 4
+        }
+      ]
+    },
+    "SST034": {
+      "question": "哪份文件包含化学品的危险、储存、急救和泄漏处置信息？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "安全数据表（SDS）",
+          "order": 1
+        },
+        {
+          "text": "考勤表",
+          "order": 2
+        },
+        {
+          "text": "工资单",
+          "order": 3
+        },
+        {
+          "text": "停车场平面图",
+          "order": 4
+        }
+      ]
+    },
+    "SST035": {
+      "question": "如果化学品容器上的标识无法辨认，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "不要使用，并报告以便确认身份或安全处置",
+          "order": 1
+        },
+        {
+          "text": "照常使用",
+          "order": 2
+        },
+        {
+          "text": "倒入饮料瓶中",
+          "order": 3
+        },
+        {
+          "text": "先试用少量",
+          "order": 4
+        }
+      ]
+    },
+    "SST036": {
+      "question": "在有蒸气、气体或粉尘的环境中作业时，为什么通风很重要？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "因为通风有助于控制空气中的污染物",
+          "order": 1
+        },
+        {
+          "text": "只是为了改善温度",
+          "order": 2
+        },
+        {
+          "text": "为了减轻工具重量",
+          "order": 3
+        },
+        {
+          "text": "为了避免使用照明",
+          "order": 4
+        }
+      ]
+    },
+    "SST037": {
+      "question": "如果某项作业产生较高噪声，应采取什么措施？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "采取控制措施，并在需要时使用听力防护用品",
+          "order": 1
+        },
+        {
+          "text": "通过大声喊叫来交流",
+          "order": 2
+        },
+        {
+          "text": "摘掉听力防护用品以便听清",
+          "order": 3
+        },
+        {
+          "text": "延长暴露时间",
+          "order": 4
+        }
+      ]
+    },
+    "SST038": {
+      "question": "使用听力防护用品前，应检查什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "确认其状态良好并正确佩戴",
+          "order": 1
+        },
+        {
+          "text": "确认它们是湿的",
+          "order": 2
+        },
+        {
+          "text": "确认可以不经清洁直接共用",
+          "order": 3
+        },
+        {
+          "text": "确认已经被剪裁",
+          "order": 4
+        }
+      ]
+    },
+    "SST039": {
+      "question": "什么时候应使用呼吸防护用品？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "风险评估和作业程序要求使用时",
+          "order": 1
+        },
+        {
+          "text": "在办公室始终使用",
+          "order": 2
+        },
+        {
+          "text": "只有出现症状以后才使用",
+          "order": 3
+        },
+        {
+          "text": "员工未经评估自行决定使用时",
+          "order": 4
+        }
+      ]
+    },
+    "SST040": {
+      "question": "任何口罩都能防护所有污染物吗？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "不能，必须根据危险和暴露情况选择合适的防护用品",
+          "order": 1
+        },
+        {
+          "text": "可以，所有口罩的防护效果都一样",
+          "order": 2
+        },
+        {
+          "text": "可以，只要颜色较深",
+          "order": 3
+        },
+        {
+          "text": "可以，只要使用时间少于一小时",
+          "order": 4
+        }
+      ]
+    },
+    "SST041": {
+      "question": "进行焊接或切割作业前，应检查什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "控制措施、所需授权或许可证以及作业区域条件",
+          "order": 1
+        },
+        {
+          "text": "只检查开始时间",
+          "order": 2
+        },
+        {
+          "text": "确认附近有可燃材料",
+          "order": 3
+        },
+        {
+          "text": "确认所有门都关闭",
+          "order": 4
+        }
+      ]
+    },
+    "SST042": {
+      "question": "密闭空间通常具有什么特征？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "进出受限，并可能存在需要专项控制的危险",
+          "order": 1
+        },
+        {
+          "text": "任何较小的办公室",
+          "order": 2
+        },
+        {
+          "text": "所有室外场所",
+          "order": 3
+        },
+        {
+          "text": "拥挤的餐厅",
+          "order": 4
+        }
+      ]
+    },
+    "SST043": {
+      "question": "可以在没有授权和事先评估的情况下进入密闭空间吗？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "不可以",
+          "order": 1
+        },
+        {
+          "text": "可以，只要作业时间短",
+          "order": 2
+        },
+        {
+          "text": "可以，只要两个人一起进入",
+          "order": 3
+        },
+        {
+          "text": "只有夜间可以",
+          "order": 4
+        }
+      ]
+    },
+    "SST044": {
+      "question": "驾驶公司车辆时，哪种行为是安全的？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "系好安全带、遵守限速并避免分心",
+          "order": 1
+        },
+        {
+          "text": "驾驶时使用手机",
+          "order": 2
+        },
+        {
+          "text": "如果迟到就提高车速",
+          "order": 3
+        },
+        {
+          "text": "不报告车辆故障",
+          "order": 4
+        }
+      ]
+    },
+    "SST045": {
+      "question": "如果驾驶员感到严重困倦，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "在安全地点停车并执行疲劳管理措施",
+          "order": 1
+        },
+        {
+          "text": "打开车窗后一直继续驾驶",
+          "order": 2
+        },
+        {
+          "text": "提高车速",
+          "order": 3
+        },
+        {
+          "text": "使用手机让自己保持清醒",
+          "order": 4
+        }
+      ]
+    },
+    "SST046": {
+      "question": "在叉车作业区域，行人应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "走人行通道、保持安全距离并遵守标识",
+          "order": 1
+        },
+        {
+          "text": "在任何区域随意行走",
+          "order": 2
+        },
+        {
+          "text": "从设备后方靠近",
+          "order": 3
+        },
+        {
+          "text": "从升起的载荷下方通过",
+          "order": 4
+        }
+      ]
+    },
+    "SST047": {
+      "question": "从悬吊载荷下方通过安全吗？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "不安全",
+          "order": 1
+        },
+        {
+          "text": "安全，只要快速通过",
+          "order": 2
+        },
+        {
+          "text": "安全，只要戴安全帽",
+          "order": 3
+        },
+        {
+          "text": "安全，只要看起来稳定",
+          "order": 4
+        }
+      ]
+    },
+    "SST048": {
+      "question": "保持良好整理整顿和清洁有什么好处？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "减少跌倒、撞击、火灾和通道堵塞",
+          "order": 1
+        },
+        {
+          "text": "只改善外观",
+          "order": 2
+        },
+        {
+          "text": "可以取消检查",
+          "order": 3
+        },
+        {
+          "text": "可以在出口处存放材料",
+          "order": 4
+        }
+      ]
+    },
+    "SST049": {
+      "question": "材料应存放在哪里？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "存放在指定且稳定的位置，不得堵塞通道或应急设施",
+          "order": 1
+        },
+        {
+          "text": "任何通道都可以",
+          "order": 2
+        },
+        {
+          "text": "灭火器前方",
+          "order": 3
+        },
+        {
+          "text": "不稳定的表面上",
+          "order": 4
+        }
+      ]
+    },
+    "SST050": {
+      "question": "使用防坠落安全带前，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "检查安全带并确认其调节和兼容性",
+          "order": 1
+        },
+        {
+          "text": "不检查直接使用",
+          "order": 2
+        },
+        {
+          "text": "剪掉不舒服的带子",
+          "order": 3
+        },
+        {
+          "text": "未经检查借给他人",
+          "order": 4
+        }
+      ]
+    },
+    "SST051": {
+      "question": "哪一项最能说明控制措施的层级？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "优先采用消除、替代和工程控制，再考虑仅依赖 PPE",
+          "order": 1
+        },
+        {
+          "text": "先使用 PPE，之后再消除危险",
+          "order": 2
+        },
+        {
+          "text": "只使用警示标识",
+          "order": 3
+        },
+        {
+          "text": "依靠经验",
+          "order": 4
+        }
+      ]
+    },
+    "SST052": {
+      "question": "如果能够彻底消除某项危险，这属于哪类控制措施？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "消除",
+          "order": 1
+        },
+        {
+          "text": "PPE",
+          "order": 2
+        },
+        {
+          "text": "警示",
+          "order": 3
+        },
+        {
+          "text": "培训",
+          "order": 4
+        }
+      ]
+    },
+    "SST053": {
+      "question": "安全作业程序的作用是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "规定如何在落实预防控制措施的情况下开展作业",
+          "order": 1
+        },
+        {
+          "text": "增加手续",
+          "order": 2
+        },
+        {
+          "text": "替代所有监督",
+          "order": 3
+        },
+        {
+          "text": "允许省略培训",
+          "order": 4
+        }
+      ]
+    },
+    "SST054": {
+      "question": "如果你未接受某项任务所需的培训或授权，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "在具备所需能力或取得授权前不要执行该任务",
+          "order": 1
+        },
+        {
+          "text": "观察别人后自行操作",
+          "order": 2
+        },
+        {
+          "text": "临时凑合操作",
+          "order": 3
+        },
+        {
+          "text": "要求换一件工具",
+          "order": 4
+        }
+      ]
+    },
+    "SST055": {
+      "question": "如果设备故障可能影响安全，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "按照程序停止或停用设备，并报告故障",
+          "order": 1
+        },
+        {
+          "text": "继续使用",
+          "order": 2
+        },
+        {
+          "text": "隐藏故障",
+          "order": 3
+        },
+        {
+          "text": "增加负荷进行测试",
+          "order": 4
+        }
+      ]
+    },
+    "SST056": {
+      "question": "作业前安全交底的目的是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "沟通风险、变化、控制措施和责任",
+          "order": 1
+        },
+        {
+          "text": "只用于记录出勤",
+          "order": 2
+        },
+        {
+          "text": "替代作业程序",
+          "order": 3
+        },
+        {
+          "text": "安排休假",
+          "order": 4
+        }
+      ]
+    },
+    "SST057": {
+      "question": "如果已经评估过的作业条件发生变化，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "停止作业并重新评估风险和控制措施",
+          "order": 1
+        },
+        {
+          "text": "因为之前已获授权所以继续作业",
+          "order": 2
+        },
+        {
+          "text": "撤除警示标识",
+          "order": 3
+        },
+        {
+          "text": "不报告就更换作业人员",
+          "order": 4
+        }
+      ]
+    },
+    "SST058": {
+      "question": "安全标志或隔离栏的作用是什么？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "针对危险进行警示、限制或引导",
+          "order": 1
+        },
+        {
+          "text": "装饰区域",
+          "order": 2
+        },
+        {
+          "text": "始终替代实体防护设施",
+          "order": 3
+        },
+        {
+          "text": "允许所有人进入",
+          "order": 4
+        }
+      ]
+    },
+    "SST059": {
+      "question": "如果某区域因危险而被隔离，而你未获授权，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "遵守隔离要求，并在需要时申请授权",
+          "order": 1
+        },
+        {
+          "text": "如果看不到作业活动就穿过",
+          "order": 2
+        },
+        {
+          "text": "移动隔离栏",
+          "order": 3
+        },
+        {
+          "text": "从另一侧进入",
+          "order": 4
+        }
+      ]
+    },
+    "SST060": {
+      "question": "为什么 PPE 被视为最后一道控制屏障？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "因为它保护个人，但并不能从源头消除危险",
+          "order": 1
+        },
+        {
+          "text": "因为 PPE 没有必要",
+          "order": 2
+        },
+        {
+          "text": "因为 PPE 总会失效",
+          "order": 3
+        },
+        {
+          "text": "因为 PPE 只在工作场所以外有用",
+          "order": 4
+        }
+      ]
+    },
+    "SST061": {
+      "question": "在高温环境下工作时，什么措施有助于预防热应激？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "补充水分、安排休息并控制暴露",
+          "order": 1
+        },
+        {
+          "text": "避免喝水",
+          "order": 2
+        },
+        {
+          "text": "未经评估就穿更多衣服",
+          "order": 3
+        },
+        {
+          "text": "不休息持续工作",
+          "order": 4
+        }
+      ]
+    },
+    "SST062": {
+      "question": "进行日晒暴露作业时，哪项措施合适？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "按照规定采取遮阳、合适衣物和必要时使用防晒用品等措施",
+          "order": 1
+        },
+        {
+          "text": "阴天时忽略紫外线辐射",
+          "order": 2
+        },
+        {
+          "text": "不使用防护，让身体逐渐适应",
+          "order": 3
+        },
+        {
+          "text": "直视太阳",
+          "order": 4
+        }
+      ]
+    },
+    "SST063": {
+      "question": "在寒冷环境中，哪项措施合适？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "穿着合适衣物并控制暴露时间",
+          "order": 1
+        },
+        {
+          "text": "穿湿衣服",
+          "order": 2
+        },
+        {
+          "text": "出现麻木也不报告",
+          "order": 3
+        },
+        {
+          "text": "长时间保持不动",
+          "order": 4
+        }
+      ]
+    },
+    "SST064": {
+      "question": "为什么疲劳是一项安全风险？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "它可能降低注意力、反应能力和决策能力",
+          "order": 1
+        },
+        {
+          "text": "只会影响情绪",
+          "order": 2
+        },
+        {
+          "text": "会提高注意力",
+          "order": 3
+        },
+        {
+          "text": "只会影响驾驶员",
+          "order": 4
+        }
+      ]
+    },
+    "SST065": {
+      "question": "如果出现可能与工作有关的症状，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "进行报告，并按照规定的健康与安全渠道处理",
+          "order": 1
+        },
+        {
+          "text": "隐藏症状",
+          "order": 2
+        },
+        {
+          "text": "无限期等待",
+          "order": 3
+        },
+        {
+          "text": "不报告并自行用药",
+          "order": 4
+        }
+      ]
+    },
+    "SST066": {
+      "question": "什么是职业病或职业性疾病？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "与工作暴露或工作因素相关的健康问题",
+          "order": 1
+        },
+        {
+          "text": "工作时间以外发生的任何疾病",
+          "order": 2
+        },
+        {
+          "text": "只有立即发生的创伤性损伤",
+          "order": 3
+        },
+        {
+          "text": "一种不需要报告的疾病",
+          "order": 4
+        }
+      ]
+    },
+    "SST067": {
+      "question": "为什么在需要时参加职业健康监护很重要？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "有助于及早发现与职业暴露相关的健康影响",
+          "order": 1
+        },
+        {
+          "text": "用来替代预防措施",
+          "order": 2
+        },
+        {
+          "text": "用来减少休假",
+          "order": 3
+        },
+        {
+          "text": "只是为了统计",
+          "order": 4
+        }
+      ]
+    },
+    "SST068": {
+      "question": "哪项基本措施有助于防止传染性疾病传播？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "保持手部卫生并执行规定的卫生措施",
+          "order": 1
+        },
+        {
+          "text": "共用个人用品",
+          "order": 2
+        },
+        {
+          "text": "隐瞒症状",
+          "order": 3
+        },
+        {
+          "text": "避免清洁表面",
+          "order": 4
+        }
+      ]
+    },
+    "SST069": {
+      "question": "危险废物或特殊废物应如何处理？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "使用规定的容器和处理流程进行管理",
+          "order": 1
+        },
+        {
+          "text": "与普通垃圾混合",
+          "order": 2
+        },
+        {
+          "text": "留在通道中",
+          "order": 3
+        },
+        {
+          "text": "倒入排水系统",
+          "order": 4
+        }
+      ]
+    },
+    "SST070": {
+      "question": "发生你未受训且无法控制的化学品泄漏时，应怎么做？",
+      "correct_order": 1,
+      "options": [
+        {
+          "text": "隔离区域、报告并启动应急响应程序",
+          "order": 1
+        },
+        {
+          "text": "徒手清理",
+          "order": 2
+        },
+        {
+          "text": "在不了解信息的情况下加入其他产品",
+          "order": 3
+        },
+        {
+          "text": "忽略不处理",
+          "order": 4
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,235 @@
+/* ==========================================================
+   SCT DESIGN SYSTEM — canonical front-end tokens/components
+   Front only. Loaded after page CSS from app-navbar.php.
+   ========================================================== */
+:root {
+  --sct-navy-950:#101b46;
+  --sct-navy-900:#182663;
+  --sct-navy-800:#223778;
+  --sct-sky-600:#007bc5;
+  --sct-sky-500:#00aaff;
+  --sct-sky-100:#e8f6fd;
+  --sct-gold-500:#d9a514;
+  --sct-gold-100:#fff5d4;
+  --sct-surface:#fff;
+  --sct-surface-soft:#f6f8f9;
+  --sct-text:#232d35;
+  --sct-text-muted:#60798b;
+  --sct-border:#ccd4da;
+  --sct-border-soft:rgba(96,121,139,.20);
+  --sct-font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --sct-space-1:.25rem;
+  --sct-space-2:.5rem;
+  --sct-space-3:.75rem;
+  --sct-space-4:1rem;
+  --sct-space-5:1.25rem;
+  --sct-space-6:1.5rem;
+  --sct-space-8:2rem;
+  --sct-radius-sm:.625rem;
+  --sct-radius-md:.875rem;
+  --sct-radius-lg:1.125rem;
+  --sct-radius-xl:1.5rem;
+  --sct-shadow-sm:0 6px 18px rgba(16,27,70,.06);
+  --sct-shadow-md:0 14px 38px rgba(16,27,70,.09);
+  --sct-control-height:44px;
+  --sct-form-max:920px;
+  --sct-modal-max:1040px;
+  --sct-focus:#007bc5;
+  --sct-focus-ring:rgba(0,123,197,.24);
+
+  /* Compatibility aliases: legacy CSS resolves to the canonical SCT tokens. */
+  --primary:var(--sct-sky-600);
+  --primary-dark:var(--sct-navy-800);
+  --primary-darkest:var(--sct-navy-900);
+  --accent:var(--sct-gold-500);
+  --background:var(--sct-surface);
+  --background-soft:var(--sct-surface-soft);
+  --text:var(--sct-text);
+  --text-secondary:var(--sct-text-muted);
+  --border:var(--sct-border);
+
+  /* One semantic status palette for the whole product. */
+  --sct-status-pending:#d9a514;
+  --sct-status-in-progress:#007bc5;
+  --sct-status-approved:#18794e;
+  --sct-status-failed:#a66b00;
+  --sct-status-overdue:#c93434;
+  --sct-status-review:#744299;
+  --sct-status-pending-text:#795b00;
+  --sct-status-in-progress-text:#005c9a;
+  --sct-status-approved-text:#12613f;
+  --sct-status-failed-text:#7a4f00;
+  --sct-status-overdue-text:#a32525;
+  --sct-status-review-text:#5a3378;
+  --sct-criticality-low:#4b8ed1;
+  --sct-criticality-medium:#d69a08;
+  --sct-criticality-high:#df654a;
+  --sct-criticality-critical:#b42318;
+}
+
+html.sct-theme-dark {
+  --sct-surface:#1d2a33;
+  --sct-surface-soft:#24343e;
+  --sct-text:#eef6fa;
+  --sct-text-muted:#a8bdc9;
+  --sct-border:#47606f;
+  --sct-border-soft:rgba(168,189,201,.22);
+  --sct-shadow-sm:0 6px 18px rgba(0,0,0,.22);
+  --sct-shadow-md:0 14px 38px rgba(0,0,0,.30);
+  --background:var(--sct-surface);
+  --background-soft:var(--sct-surface-soft);
+  --text:var(--sct-text);
+  --text-secondary:var(--sct-text-muted);
+  --border:var(--sct-border);
+}
+
+html,body,button,input,select,textarea { font-family:var(--sct-font); }
+
+/* Shared card / panel primitives. */
+.sct-card,.feature-card,.sct-panel,.sct-scroll-panel {
+  border:1px solid var(--sct-border-soft);
+  border-radius:var(--sct-radius-lg);
+  background:var(--sct-surface);
+  box-shadow:var(--sct-shadow-sm);
+}
+.sct-card,.sct-panel { padding:clamp(1rem,2vw,1.5rem); }
+.sct-scroll-panel { overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+.sct-color-card { border:0; border-radius:var(--sct-radius-lg); box-shadow:var(--sct-shadow-sm); }
+.sct-tabs { position:sticky; top:0; z-index:5; background:var(--sct-surface); }
+
+/* Form system. */
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) form { width:100%; max-width:100%; }
+:is(.modal-body,.sct-form-shell) > :is(form,.sct-form),.sct-form--content { width:100%; max-width:var(--sct-form-max); margin-inline:auto; }
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.form-control,.form-select,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),select,textarea) {
+  min-height:var(--sct-control-height);
+  border-radius:var(--sct-radius-sm);
+  line-height:1.45;
+}
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) textarea { min-height:7rem; }
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(label,.form-label) { display:block; margin-bottom:.38rem; color:var(--sct-text); font-weight:700; line-height:1.35; }
+:is(.form-text,.sct-field-help) { color:var(--sct-text-muted); font-size:.875rem; line-height:1.45; overflow-wrap:anywhere; }
+:is(.invalid-feedback,.sct-field-error) { display:block; color:var(--sct-status-overdue); font-size:.875rem; font-weight:650; line-height:1.4; overflow-wrap:anywhere; }
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.btn,button:not(.btn-close)) { min-height:44px; padding:.62rem .95rem; border-radius:var(--sct-radius-sm); line-height:1.2; }
+.sct-form-actions,.modal-footer { display:flex; align-items:center; justify-content:flex-end; gap:.625rem; flex-wrap:wrap; }
+.sct-form-actions > :first-child:not(:only-child),.modal-footer > :first-child:not(:only-child) { margin-right:auto; }
+
+/* Modals: predictable sizes + internal scrolling. */
+.modal-dialog { width:calc(100% - 2rem); max-width:min(var(--sct-modal-max),calc(100vw - 2rem)); margin-inline:auto; }
+.modal-content { max-height:calc(100dvh - 2rem); border-radius:var(--sct-radius-lg); overflow:hidden; }
+.modal-header,.modal-footer { flex:0 0 auto; }
+.modal-body { overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+
+/* Status point + text: color never carries meaning alone. */
+.sct-status-dot { inline-size:.625rem; block-size:.625rem; border-radius:50%; flex:0 0 .625rem; background:var(--sct-text-muted); }
+:is([data-status="pending"],[data-status="pendiente"],.status-pending,.is-pending) .sct-status-dot,.sct-status-dot--pending { background:var(--sct-status-pending); }
+:is([data-status="in_progress"],[data-status="en_curso"],.status-in-progress,.is-in-progress) .sct-status-dot,.sct-status-dot--in-progress { background:var(--sct-status-in-progress); }
+:is([data-status="approved"],[data-status="aprobada"],.status-approved,.is-approved) .sct-status-dot,.sct-status-dot--approved { background:var(--sct-status-approved); }
+:is([data-status="failed"],[data-status="reprobada"],.status-failed,.is-failed) .sct-status-dot,.sct-status-dot--failed { background:var(--sct-status-failed); }
+:is([data-status="overdue"],[data-status="vencida"],.status-overdue,.is-overdue) .sct-status-dot,.sct-status-dot--overdue { background:var(--sct-status-overdue); }
+:is([data-status="review"],[data-status="en_revision"],.status-review,.is-review) .sct-status-dot,.sct-status-dot--review { background:var(--sct-status-review); }
+
+:is([data-criticality="baja"],[data-criticality="low"],.is-criticality-low) .sct-status-dot { background:var(--sct-criticality-low); }
+:is([data-criticality="media"],[data-criticality="medium"],.is-criticality-medium) .sct-status-dot { background:var(--sct-criticality-medium); }
+:is([data-criticality="alta"],[data-criticality="high"],.is-criticality-high) .sct-status-dot { background:var(--sct-criticality-high); }
+:is([data-criticality="critica"],[data-criticality="critical"],.is-criticality-critical) .sct-status-dot { background:var(--sct-criticality-critical); }
+
+/* Generic badges inherit the canonical palette when semantic classes are present. */
+.sct-badge,.badge { max-width:100%; white-space:normal; overflow-wrap:anywhere; line-height:1.25; }
+:is(.badge-estado-1,.status-pending,.induction-pill--pending,.audit-status-pending,.self-status-pending){--sct-badge-color:var(--sct-status-pending-text)}
+:is(.status-in-progress,.audit-status-in_progress,.self-status-in_progress){--sct-badge-color:var(--sct-status-in-progress-text)}
+:is(.status-approved,.induction-pill--approved,.audit-status-approved,.self-status-approved){--sct-badge-color:var(--sct-status-approved-text)}
+:is(.badge-estado-3,.status-failed,.induction-pill--failed,.audit-status-failed,.self-status-failed){--sct-badge-color:var(--sct-status-failed-text)}
+:is(.status-overdue,.induction-pill--overdue,.audit-status-overdue,.self-status-overdue){--sct-badge-color:var(--sct-status-overdue-text)}
+:is(.status-review,.status-en_revision){--sct-badge-color:var(--sct-status-review-text)}
+:is(.status-pending,.status-in-progress,.status-approved,.status-failed,.status-overdue,.status-review,.status-en_revision) { color:var(--sct-badge-color,currentColor); }
+
+/* Shared states. */
+.sct-skeleton { border-radius:var(--sct-radius-sm); background:linear-gradient(90deg,#eef2f5 25%,#f8fafb 37%,#eef2f5 63%); background-size:400% 100%; animation:sctSkeleton 1.35s ease infinite; }
+.sct-empty,.sct-error { min-height:9rem; display:grid; place-items:center; text-align:center; padding:var(--sct-space-6); border:1px dashed var(--sct-border); border-radius:var(--sct-radius-lg); overflow-wrap:anywhere; }
+.sct-error { color:var(--sct-status-overdue); }
+@keyframes sctSkeleton { 0%{background-position:100% 50%}100%{background-position:0 50%} }
+@media (prefers-reduced-motion:reduce){.sct-skeleton{animation:none}}
+
+/* Long translations / CJK. */
+:is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(h1,h2,h3,h4,h5,h6,p,span,label,small,td,th,.btn,.badge,.nav-link) {
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+/* Tables stay inside their panels; mobile card conversion is handled by sct-ux-system.js. */
+.table-responsive,.sct-table-scroll { max-width:100%; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+
+/* Standard focus contrast. */
+:is(a,button,input,select,textarea,[tabindex]):focus-visible { outline:3px solid var(--sct-focus); outline-offset:2px; box-shadow:0 0 0 3px var(--sct-focus-ring); }
+
+@media (max-width:767.98px) {
+  .modal-dialog { width:100%; max-width:100%; margin:0; min-height:100dvh; }
+  .modal-content { min-height:100dvh; max-height:100dvh; border-radius:0; }
+  .sct-form-actions,.modal-footer { display:grid; grid-template-columns:1fr; }
+  .sct-form-actions > *, .modal-footer > * { width:100%; margin:0 !important; }
+  /* Secondary first, primary last/right in desktop becomes bottom on mobile. */
+  .sct-form-actions > .btn-primary,.modal-footer > .btn-primary { order:2; }
+  .sct-form-actions > :not(.btn-primary),.modal-footer > :not(.btn-primary) { order:1; }
+  :is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.row>[class*="col-"]) { min-width:0; }
+}
+
+/* Canonical status colors applied to legacy/current components. */
+:is(.welcome-status-guide__item--pending,.welcome-role-summary__item--pending,.sct-activity-status-filter--pending,.dashboard-worker-current-row--pending,.dashboard-worker-progress-activity--pending) { --sct-state-color:var(--sct-status-pending); }
+:is(.welcome-status-guide__item--in-progress,.welcome-status-guide__item--in_progress,.welcome-role-summary__item--progress,.sct-activity-status-filter--in_progress,.welcome-course-card--in-progress,.welcome-course-card--in_progress,.welcome-course-card--status-in_progress,.sct-personal-activity-card--status-in_progress,.dashboard-worker-current-row--in-progress) { --sct-state-color:var(--sct-status-in-progress); }
+:is(.welcome-status-guide__item--approved,.welcome-course-card--approved,.sct-personal-activity-card--status-approved,.sct-personal-activity-card--status-complete,.dashboard-worker-progress-activity--approved) { --sct-state-color:var(--sct-status-approved); }
+:is(.welcome-status-guide__item--failed,.welcome-course-card--failed,.sct-personal-activity-card--status-failed,.dashboard-worker-current-row--failed,.dashboard-worker-progress-activity--failed) { --sct-state-color:var(--sct-status-failed); }
+:is(.welcome-status-guide__item--overdue,.welcome-course-card--overdue,.welcome-course-card--status-overdue,.sct-personal-activity-card--status-overdue,.sct-activity-status-filter--overdue,.dashboard-worker-current-row--overdue,.dashboard-worker-progress-activity--overdue) { --sct-state-color:var(--sct-status-overdue); }
+:is(.pending-review,.sct-f9-review-state,.status-en_revision) { --sct-state-color:var(--sct-status-review); }
+
+:is(
+  .welcome-status-guide__item--pending,.welcome-status-guide__item--in-progress,.welcome-status-guide__item--in_progress,.welcome-status-guide__item--approved,.welcome-status-guide__item--failed,.welcome-status-guide__item--overdue,
+  .welcome-course-card--approved,.welcome-course-card--failed,.welcome-course-card--in-progress,.welcome-course-card--in_progress,.welcome-course-card--overdue,
+  .sct-personal-activity-card--status-approved,.sct-personal-activity-card--status-complete,.sct-personal-activity-card--status-failed,.sct-personal-activity-card--status-in_progress,.sct-personal-activity-card--status-overdue,
+  .dashboard-worker-current-row--pending,.dashboard-worker-current-row--in-progress,.dashboard-worker-current-row--failed,.dashboard-worker-current-row--overdue,
+  .dashboard-worker-progress-activity--approved,.dashboard-worker-progress-activity--failed,.dashboard-worker-progress-activity--overdue
+) {
+  border-color:color-mix(in srgb,var(--sct-state-color) 42%,var(--sct-border-soft));
+}
+
+:is(
+  .welcome-status-guide__item--pending,.welcome-status-guide__item--in-progress,.welcome-status-guide__item--in_progress,.welcome-status-guide__item--approved,.welcome-status-guide__item--failed,.welcome-status-guide__item--overdue
+) .welcome-status-guide__icon,
+:is(
+  .sct-personal-activity-card--status-approved,.sct-personal-activity-card--status-complete,.sct-personal-activity-card--status-failed,.sct-personal-activity-card--status-in_progress,.sct-personal-activity-card--status-overdue
+) .sct-personal-activity-card__icon {
+  color:var(--sct-state-color);
+  background:color-mix(in srgb,var(--sct-state-color) 11%,var(--sct-surface));
+}
+
+/* Criticality/priorities share exactly one palette. */
+:is(.is-priority-low,.is-criticality-low){--sct-criticality-color:var(--sct-criticality-low)}
+:is(.is-priority-medium,.is-criticality-medium){--sct-criticality-color:var(--sct-criticality-medium)}
+:is(.is-priority-high,.is-criticality-high){--sct-criticality-color:var(--sct-criticality-high)}
+:is(.is-priority-critical,.is-criticality-critical,.is-state-critical){--sct-criticality-color:var(--sct-criticality-critical)}
+:is(.dashboard-reminder-priority-preview,.dashboard-mini-calendar__tone)[class*="is-priority-"] { background:var(--sct-criticality-color); }
+
+/* Common stepper and tabs sizing. */
+:is(.sct-builder-progress,.sct-f9-progress,.activity-center-tabs,[role="tablist"]) { max-width:100%; }
+:is(.sct-builder-progress__step,.sct-f9-progress-cell,[role="tab"]) { min-height:44px; }
+
+/* Prevent horizontal breakage at every requested breakpoint. */
+@media (max-width:1024px) {
+  :is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.container,.container-fluid,.feature-card,.sct-card,.sct-panel,.modal-body) { min-width:0; max-width:100%; }
+  :is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.d-flex,.row) > * { min-width:0; }
+}
+@media (max-width:414px) {
+  :is(.sct-module-page,.welcome-page,.dashboard-page,.management-hub-page) :is(.btn,button:not(.btn-close)) { white-space:normal; text-align:center; }
+  .table-responsive { overflow:visible; }
+}
+
+/* Shared activity/list primitive for new and legacy surfaces. */
+.sct-activity-list { display:grid; gap:0; margin:0; padding:0; list-style:none; }
+.sct-activity-row { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:.75rem; align-items:center; min-height:52px; padding:.75rem .25rem; border-bottom:1px solid var(--sct-border-soft); }
+.sct-activity-row:last-child { border-bottom:0; }
+.sct-activity-row__copy { min-width:0; }
+.sct-activity-row__copy > * { max-width:100%; overflow-wrap:anywhere; }
+.sct-activity-row__meta { color:var(--sct-text-muted); font-size:.875rem; }
+@media(max-width:575.98px){
+  .sct-activity-row { grid-template-columns:auto minmax(0,1fr); align-items:start; border:1px solid var(--sct-border-soft); border-radius:var(--sct-radius-md); padding:.875rem; margin-bottom:.625rem; }
+  .sct-activity-row > :last-child { grid-column:2; justify-self:start; }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" role="img" aria-label="Chile">
+  <rect width="60" height="20" fill="#FFFFFF"/>
+  <rect y="20" width="60" height="20" fill="#D52B1E"/>
+  <rect width="20" height="20" fill="#0039A6"/>
+  <polygon fill="#FFFFFF" points="10,4.2 11.75,8.2 16.1,8.55 12.8,11.4 13.8,15.6 10,13.35 6.2,15.6 7.2,11.4 3.9,8.55 8.25,8.2"/>
+</svg>
