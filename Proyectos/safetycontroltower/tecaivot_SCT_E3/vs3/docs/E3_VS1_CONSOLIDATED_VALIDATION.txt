@@ -1,0 +1,70 @@
+SAFETY CONTROL TOWER — ETAPA 3 VS1
+VALIDACIÓN CONSOLIDADA
+Fecha: 08-10-2026
+
+PHP revisados: 318
+Errores PHP: 0
+
+JavaScript:
+- js/onboarding.js: OK
+- js/health-form.js: OK
+- js/app-ui.js: OK
+
+Páginas autenticadas detectadas usando app-navbar: 26
+SQL fuera de migracion sql: 0
+Carpetas SQL duplicadas: 0
+health.key incluidos: 0
+config.php incluidos: 0
+
+Checks:
+- single_onboarding_acceptance: OK
+- no_health_acceptance_checkbox: OK
+- consent_v2: OK
+- health_uses_unified_acceptance: OK
+- navbar_registry: OK
+- navbar_home: OK
+- user_nav_reports: OK
+- user_nav_evaluations: OK
+- user_nav_data: OK
+- user_nav_modules: OK
+- user_modules_anchor: OK
+- user_generic_direct_hidden: OK
+- user_management_hidden: OK
+- user_reports_card: OK
+- user_evaluation_card: OK
+- user_profile_health: OK
+
+Idiomas:
+- es: OK
+- en: OK
+- pt: OK
+- fr: OK
+- zh: OK
+
+Navbar pages:
+- api/actividades/health-safety.php
+- api/auditorias/gestion-auditorias.php
+- api/auditorias/mis-auditorias.php
+- api/autoevaluaciones/gestion-autoevaluaciones.php
+- api/autoevaluaciones/mis-autoevaluaciones.php
+- api/centros/gestion-centros.php
+- api/dashboard/dashboard.php
+- api/empresas/gestion-empresas.php
+- api/evaluaciones/mis-evaluaciones.php
+- api/eventos/gestion-eventos.php
+- api/formularios/gestion-formularios.php
+- api/formularios/mis-formularios.php
+- api/induccion/gestion-induccion.php
+- api/induccion/mis-certificados.php
+- api/induccion/mis-induccion.php
+- api/permisos/gestion-permisos.php
+- api/programas/gestion-programas.php
+- api/protocolos/ejecutar-protocolo.php
+- api/protocolos/gestion-protocolos.php
+- api/protocolos/mis-protocolos.php
+- api/proyectos/gestion-proyectos.php
+- api/trabajadores/gestion-trabajadores.php
+- api/usuarios/gestion-usuarios.php
+- api/usuarios/gestiones.php
+- api/usuarios/mi-perfil.php
+- bienvenida.php

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /bienvenida.php
+Disallow: /acceso-denegado.php
+
+Sitemap: https://www.safetycontroltower.cl/sitemap.xml

@@ -1,0 +1,1235 @@
+/* ==========================================================
+   SCT P53 — MODO OSCURO DE MARCA
+   Capa visual únicamente. No altera layout, roles, permisos ni rutas.
+   ========================================================== */
+
+html.sct-theme-dark {
+    color-scheme: dark;
+
+    --background: #050f1a;
+    --background-soft: #091b2d;
+    --text: #e7f0f4;
+    --text-secondary: #9fb7c5;
+    --border: #21496a;
+
+    --primary: #42b8ff;
+    --primary-dark: #73caff;
+    --primary-darker: #8fa1f2;
+    --primary-darkest: #eef2ff;
+    --accent: #f5c95f;
+    --accent-dark: #d8a93f;
+    --success: #46cf83;
+    --success-dark: #35b56f;
+    --error: #ff7774;
+    --danger: #ff7774;
+    --warning: #ffab73;
+    --info: #68c9ff;
+
+    --sct-dark-bg: #050f1a;
+    --sct-dark-bg-2: #071827;
+    --sct-dark-surface: #0a1f35;
+    --sct-dark-surface-2: #0d2943;
+    --sct-dark-surface-3: #12344f;
+    --sct-dark-border: #24506f;
+    --sct-dark-text: #e7f0f4;
+    --sct-dark-muted: #9fb7c5;
+    --sct-dark-muted-2: #7f9bab;
+    --sct-dark-shadow: 0 18px 44px rgba(0, 0, 0, .30);
+
+    --sct-chart-axis: #a8c0cc;
+    --sct-chart-grid: rgba(159, 183, 197, .18);
+    --sct-chart-blue: #69c8ff;
+    --sct-chart-green: #62d993;
+    --sct-chart-orange: #ffb070;
+    --sct-chart-purple: #a8a9ff;
+
+    --bs-body-bg: #050f1a;
+    --bs-body-color: #e7f0f4;
+    --bs-border-color: #24506f;
+    --bs-secondary-color: #9fb7c5;
+    --bs-tertiary-bg: #0a1f35;
+    --bs-emphasis-color: #f5f9fb;
+}
+
+html.sct-theme-dark body,
+html.sct-theme-dark body.sct-module-page,
+html.sct-theme-dark body.welcome-page {
+    background-color: var(--sct-dark-bg) !important;
+    background-image:
+        radial-gradient(circle at 86% 4%, rgba(35, 210, 181, .04), transparent 31rem),
+        radial-gradient(circle at 12% 0%, rgba(0, 123, 197, .14), transparent 28rem) !important;
+    color: var(--sct-dark-text) !important;
+}
+
+html.sct-theme-dark :is(h1,h2,h3,h4,h5,h6,.section-title,.sct-main-title,.modal-title,.offcanvas-title) {
+    color: #f2f7fa !important;
+}
+
+html.sct-theme-dark :is(p,.text-muted,.sct-main-intro,.section-subtitle,.welcome-section-title-block p,.dashboard-section-head p,.management-section-head p) {
+    color: var(--sct-dark-muted) !important;
+}
+
+/* Superficies principales y tarjetas compartidas */
+html.sct-theme-dark :is(
+    .card,
+    .feature-card,
+    .welcome-unified-section,
+    .welcome-context-card,
+    .welcome-role-summary__item,
+    .welcome-course-card,
+    .welcome-action-card,
+    .welcome-role-action-card,
+    .welcome-status-guide__item,
+    .dashboard-section,
+    .dashboard-card,
+    .dashboard-metric-card,
+    .dashboard-worker-category-card,
+    .dashboard-role-sidebar__sticky,
+    .management-stat-card,
+    .management-module-card,
+    .management-role-sidebar__sticky,
+    .sct-module-card,
+    .sct-personal-card,
+    .sct-personal-card-fact,
+    .sct-personal-empty,
+    .sct-hub-activity-workspace,
+    .sct-hub-activity-workspace__header,
+    .sct-hub-activity-complete__facts div,
+    .curso-card,
+    .induction-evaluation,
+    .induction-evaluation__progress,
+    .induction-admin-guide__item,
+    .induction-course-detail,
+    .sct-confirm-dialog,
+    .modal-content,
+    .dropdown-menu,
+    .popover,
+    .toast,
+    .accordion-item,
+    details.sct-detail-section
+) {
+    background-color: var(--sct-dark-surface) !important;
+    border-color: var(--sct-dark-border) !important;
+    color: var(--sct-dark-text) !important;
+    box-shadow: var(--sct-dark-shadow);
+}
+
+html.sct-theme-dark :is(.welcome-hero,.sct-main-hero,.dashboard-hero,.management-hero) {
+    border-color: rgba(105, 200, 255, .16) !important;
+}
+
+/* Formularios */
+html.sct-theme-dark :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    textarea,
+    select,
+    .form-control,
+    .form-select,
+    .input-group-text
+) {
+    background-color: #081b2e !important;
+    border-color: #28506f !important;
+    color: #e7f0f4 !important;
+}
+
+html.sct-theme-dark :is(input,textarea,.form-control)::placeholder {
+    color: #7f9bab !important;
+    opacity: 1;
+}
+
+html.sct-theme-dark :is(input,textarea,select,.form-control,.form-select):focus {
+    border-color: #58bff8 !important;
+    box-shadow: 0 0 0 .2rem rgba(66,184,255,.14) !important;
+}
+
+html.sct-theme-dark .form-check-input {
+    background-color: #081b2e;
+    border-color: #315a78;
+}
+
+html.sct-theme-dark .form-check-input:checked {
+    background-color: #42b8ff;
+    border-color: #42b8ff;
+}
+
+/* Tablas */
+html.sct-theme-dark :is(.table-responsive,.sct-table-shell) {
+    background: var(--sct-dark-surface) !important;
+    border-color: var(--sct-dark-border) !important;
+}
+
+html.sct-theme-dark table,
+html.sct-theme-dark .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #dfeaf0;
+    --bs-table-border-color: #284a5f;
+    --bs-table-striped-bg: rgba(255,255,255,.025);
+    --bs-table-hover-bg: rgba(105,200,255,.07);
+    --bs-table-hover-color: #f4f8fa;
+    color: #dfeaf0 !important;
+    border-color: #284a5f !important;
+}
+
+html.sct-theme-dark :is(table,.table) thead :is(th,td) {
+    background: #0f2d49 !important;
+    color: #dcecf5 !important;
+    border-color: #28506f !important;
+}
+
+html.sct-theme-dark :is(table,.table) tbody :is(th,td) {
+    background: #091f34 !important;
+    color: #dfeaf0 !important;
+    border-color: #1f4563 !important;
+}
+
+html.sct-theme-dark :is(table,.table) tbody tr:hover :is(th,td) {
+    background: #10304d !important;
+}
+
+/* Filtros, pestañas y chips */
+html.sct-theme-dark :is(
+    .sct-activity-type-filter,
+    .sct-activity-status-filter,
+    .sct-personal-filter-pill,
+    .management-filter-chip,
+    .welcome-activity-filter__pill,
+    .nav-tabs .nav-link
+) {
+    background-color: #0a1f35 !important;
+    border-color: #24506f !important;
+    color: #b8ccd7 !important;
+}
+
+html.sct-theme-dark :is(
+    .sct-activity-type-filter.is-active,
+    .sct-activity-status-filter.is-active,
+    .sct-personal-filter-pill.is-active,
+    .management-filter-chip.active,
+    .welcome-activity-filter__pill.is-active,
+    .nav-tabs .nav-link.active
+) {
+    background-color: #12334f !important;
+    border-color: #58bff8 !important;
+    color: #eef8ff !important;
+}
+
+/* Botones */
+html.sct-theme-dark :is(.btn-outline-custom,.btn-outline-secondary,.btn-light) {
+    background: #0a1f35 !important;
+    border-color: #2d5878 !important;
+    color: #d8e7ee !important;
+}
+
+html.sct-theme-dark :is(.btn-outline-custom,.btn-outline-secondary,.btn-light):hover {
+    background: #10304d !important;
+    border-color: #58bff8 !important;
+    color: #f4fbff !important;
+}
+
+html.sct-theme-dark :is(.btn-primary,.btn-primary-custom) {
+    color: #06141d !important;
+    background: linear-gradient(135deg, #69c8ff, #4cc7b7) !important;
+    border-color: transparent !important;
+}
+
+html.sct-theme-dark :is(.btn-primary,.btn-primary-custom):hover {
+    background: linear-gradient(135deg, #7dd1ff, #63d6c6) !important;
+}
+
+/* Alertas y estados */
+html.sct-theme-dark .alert-info {
+    background: rgba(105,200,255,.10) !important;
+    border-color: rgba(105,200,255,.28) !important;
+    color: #bfe7ff !important;
+}
+html.sct-theme-dark .alert-success {
+    background: rgba(98,217,147,.10) !important;
+    border-color: rgba(98,217,147,.30) !important;
+    color: #b9efd0 !important;
+}
+html.sct-theme-dark .alert-warning {
+    background: rgba(255,176,112,.10) !important;
+    border-color: rgba(255,176,112,.30) !important;
+    color: #ffd0ab !important;
+}
+html.sct-theme-dark .alert-danger {
+    background: rgba(255,119,116,.10) !important;
+    border-color: rgba(255,119,116,.30) !important;
+    color: #ffc0be !important;
+}
+
+/* Dialogs / offcanvas */
+html.sct-theme-dark :is(.modal-header,.modal-footer,.offcanvas-header) {
+    border-color: var(--sct-dark-border) !important;
+}
+html.sct-theme-dark .btn-close {
+    filter: invert(1) grayscale(1) brightness(1.8);
+}
+
+/* Tooltips y ayudas */
+html.sct-theme-dark :is(.sct-info-tip__popover,.sct-help-popover,.tooltip-inner) {
+    background: #10304d !important;
+    color: #e9f3f7 !important;
+    border-color: #315f80 !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.34) !important;
+}
+
+/* Scrollbars discretos */
+html.sct-theme-dark * {
+    scrollbar-color: #3a6077 #0c2130;
+}
+html.sct-theme-dark *::-webkit-scrollbar-track {
+    background: #0c2130;
+}
+html.sct-theme-dark *::-webkit-scrollbar-thumb {
+    background: #3a6077;
+    border-radius: 999px;
+    border: 2px solid #0c2130;
+}
+
+/* Footer */
+html.sct-theme-dark .sct-app-footer {
+    background: #071827 !important;
+    border-color: #24506f !important;
+    color: #cfe0e8 !important;
+}
+html.sct-theme-dark :is(.sct-app-footer__support,.sct-app-footer__support-link,.sct-app-footer__credits) {
+    background: #0a1f35 !important;
+    border-color: #24506f !important;
+    color: #cfe0e8 !important;
+}
+html.sct-theme-dark .sct-app-footer a { color: #77ccff !important; }
+
+/* Gráficos SVG del dashboard */
+html.sct-theme-dark .dashboard-worker-chart-grid { stroke: var(--sct-chart-grid) !important; }
+html.sct-theme-dark .dashboard-worker-chart-axis { fill: var(--sct-chart-axis) !important; }
+html.sct-theme-dark .dashboard-trend-legend,
+html.sct-theme-dark .dashboard-worker-chart-legend { color: var(--sct-dark-muted) !important; }
+
+/* Evitar destellos blancos en elementos que se abren/cierran */
+html.sct-theme-dark :is(dialog,.offcanvas,.accordion,.accordion-body,.collapse.show) {
+    color: var(--sct-dark-text);
+}
+
+/* Estados semánticos conservan su significado en modo oscuro */
+html.sct-theme-dark .welcome-role-trabajador .welcome-course-card--status-overdue,
+html.sct-theme-dark .sct-personal-activity-card.is-overdue,
+html.sct-theme-dark .sct-personal-activity-card--status-overdue {
+    background: linear-gradient(180deg, rgba(255,119,116,.13), #0a1f35 48%) !important;
+    border-color: rgba(255,119,116,.38) !important;
+    border-top-color: #ff7774 !important;
+}
+html.sct-theme-dark .welcome-role-trabajador .welcome-course-card--status-in_progress,
+html.sct-theme-dark .sct-personal-activity-card--status-in_progress {
+    background: linear-gradient(180deg, rgba(105,200,255,.12), #0a1f35 48%) !important;
+    border-color: rgba(105,200,255,.34) !important;
+    border-top-color: #69c8ff !important;
+}
+html.sct-theme-dark .sct-personal-activity-card--status-approved,
+html.sct-theme-dark .sct-personal-activity-card--status-complete {
+    background: linear-gradient(180deg, rgba(98,217,147,.11), #0a1f35 48%) !important;
+    border-color: rgba(98,217,147,.30) !important;
+    border-top-color: #62d993 !important;
+}
+html.sct-theme-dark .sct-personal-activity-card--status-failed {
+    background: linear-gradient(180deg, rgba(168,169,255,.11), #0a1f35 48%) !important;
+    border-color: rgba(168,169,255,.30) !important;
+    border-top-color: #a8a9ff !important;
+}
+
+html.sct-theme-dark .welcome-status-guide__item--overdue {
+    background: linear-gradient(180deg, rgba(255,119,116,.12), #0a1f35 60%) !important;
+    border-top-color: #ff7774 !important;
+}
+html.sct-theme-dark .welcome-status-guide__item--in_progress {
+    background: linear-gradient(180deg, rgba(105,200,255,.12), #0a1f35 60%) !important;
+    border-top-color: #69c8ff !important;
+}
+html.sct-theme-dark .welcome-status-guide__item--approved {
+    background: linear-gradient(180deg, rgba(98,217,147,.11), #0a1f35 60%) !important;
+    border-top-color: #62d993 !important;
+}
+html.sct-theme-dark .welcome-status-guide__item--failed {
+    background: linear-gradient(180deg, rgba(168,169,255,.11), #0a1f35 60%) !important;
+    border-top-color: #a8a9ff !important;
+}
+
+html.sct-theme-dark .sct-activity-status-filter--overdue { border-top-color:#ff7774 !important; }
+html.sct-theme-dark .sct-activity-status-filter--in_progress { border-top-color:#69c8ff !important; }
+html.sct-theme-dark .sct-activity-status-filter--completed { border-top-color:#62d993 !important; }
+html.sct-theme-dark .sct-activity-status-filter--failed { border-top-color:#a8a9ff !important; }
+html.sct-theme-dark .sct-activity-status-filter__copy strong { color:#eef6fa !important; }
+html.sct-theme-dark .sct-activity-status-filter__copy small { color:#9fb7c5 !important; }
+
+/* ==========================================================
+   P54 — contraste tipográfico reforzado en modo oscuro
+   ========================================================== */
+html.sct-theme-dark :is(
+    .welcome-role-summary__copy strong,
+    .welcome-course-card__body h3,
+    .welcome-action-card__body h3,
+    .welcome-status-guide__copy strong,
+    .dashboard-metric-card__value,
+    .dashboard-worker-category-card__body strong,
+    .dashboard-worker-category-card > b,
+    .dashboard-worker-progress-copy h2,
+    .dashboard-panel h2,
+    .dashboard-worker-current-total > strong,
+    .dashboard-worker-current-row__head strong,
+    .dashboard-worker-current-row__head span,
+    .dashboard-worker-current-due__copy strong,
+    .management-module-card__body h3,
+    .management-section-head h2,
+    .sct-personal-card h2,
+    .sct-personal-card h3,
+    .sct-personal-activity-card h3,
+    .sct-hub-activity-workspace h2,
+    .sct-hub-activity-workspace h3,
+    .induction-course-detail h2,
+    .induction-course-detail h3
+) {
+    color: #f1f7fa !important;
+}
+
+html.sct-theme-dark :is(
+    .welcome-role-summary__copy span,
+    .welcome-role-summary__copy small,
+    .welcome-course-card__description,
+    .welcome-course-card__deadline,
+    .welcome-action-card__body p,
+    .welcome-action-card__cta,
+    .welcome-status-guide__copy span,
+    .dashboard-metric-card__label,
+    .dashboard-metric-card__meta,
+    .dashboard-worker-category-card__body > span,
+    .dashboard-worker-progress-copy > p,
+    .dashboard-worker-current-total > span,
+    .dashboard-worker-current-total > small,
+    .dashboard-worker-current-row > small,
+    .dashboard-worker-current-due__copy small,
+    .dashboard-worker-current-due__copy em,
+    .management-module-card__body p,
+    .management-module-card__cta,
+    .management-section-head p,
+    .sct-personal-card p,
+    .sct-personal-card small,
+    .sct-personal-activity-card p,
+    .sct-personal-activity-card small,
+    .sct-hub-activity-workspace p,
+    .sct-hub-activity-workspace small
+) {
+    color: #b9ccd6 !important;
+}
+
+html.sct-theme-dark :is(
+    a:not(.btn):not(.badge):not(.sct-mobile-theme-choice),
+    .welcome-action-card__arrow,
+    .welcome-role-summary__arrow,
+    .dashboard-worker-section-link
+) {
+    text-decoration-color: rgba(119, 204, 255, .45);
+}
+
+html.sct-theme-dark .dashboard-worker-current-panel,
+html.sct-theme-dark .dashboard-worker-current-total,
+html.sct-theme-dark .dashboard-worker-current-due {
+    background: var(--sct-dark-surface) !important;
+    border-color: var(--sct-dark-border) !important;
+}
+
+html.sct-theme-dark .dashboard-worker-current-track {
+    background: rgba(255, 255, 255, .09) !important;
+}
+
+html.sct-theme-dark .dashboard-worker-current-due__icon {
+    background: rgba(105, 200, 255, .14) !important;
+    color: #82d4ff !important;
+}
+
+html.sct-theme-dark .welcome-action-card--space,
+html.sct-theme-dark .welcome-action-card--profile {
+    background: linear-gradient(145deg, #0a1f35, #0d2943) !important;
+}
+
+html.sct-theme-dark .welcome-action-card--space .welcome-action-card__icon,
+html.sct-theme-dark .welcome-action-card--profile .welcome-action-card__icon {
+    background: rgba(105, 200, 255, .14) !important;
+    color: #82d4ff !important;
+}
+
+
+/* ==========================================================
+   P55 — superficies oscuras más profundas y azules
+   Ajuste solicitado para reducir luminosidad de contenedores.
+   ========================================================== */
+html.sct-theme-dark {
+    --sct-dark-bg: #050f1a;
+    --sct-dark-bg-2: #071827;
+    --sct-dark-surface: #0a1f35;
+    --sct-dark-surface-2: #0d2943;
+    --sct-dark-surface-3: #12344f;
+    --sct-dark-border: #24506f;
+}
+
+html.sct-theme-dark :is(
+    .card,
+    .feature-card,
+    .welcome-unified-section,
+    .welcome-role-summary__item,
+    .welcome-course-card,
+    .welcome-action-card,
+    .welcome-role-action-card,
+    .welcome-status-guide__item,
+    .dashboard-section,
+    .dashboard-card,
+    .dashboard-metric-card,
+    .dashboard-worker-category-card,
+    .dashboard-worker-current-panel,
+    .dashboard-worker-current-total,
+    .dashboard-worker-current-due,
+    .management-stat-card,
+    .management-module-card,
+    .sct-module-card,
+    .sct-personal-card,
+    .sct-personal-card-fact,
+    .sct-personal-empty,
+    .sct-hub-activity-workspace,
+    .sct-hub-activity-workspace__header,
+    .curso-card,
+    .induction-evaluation,
+    .induction-course-detail,
+    .modal-content,
+    .dropdown-menu,
+    .accordion-item
+) {
+    background-color: #0a1f35 !important;
+    border-color: #24506f !important;
+}
+
+html.sct-theme-dark :is(
+    .welcome-unified-section,
+    .dashboard-section,
+    .management-section,
+    .sct-personal-card,
+    .sct-hub-activity-workspace
+) {
+    background-image: linear-gradient(180deg, rgba(18, 52, 79, .36), rgba(10, 31, 53, .18)) !important;
+}
+
+html.sct-theme-dark :is(
+    .welcome-role-summary__item,
+    .welcome-course-card,
+    .welcome-action-card,
+    .dashboard-card,
+    .dashboard-metric-card,
+    .dashboard-worker-category-card,
+    .management-stat-card,
+    .management-module-card,
+    .sct-personal-card-fact
+) {
+    background-image: linear-gradient(155deg, #0d2943, #0a1f35) !important;
+}
+
+html.sct-theme-dark :is(.modal-header,.modal-body,.modal-footer,.offcanvas-body,.accordion-body) {
+    background-color: #0a1f35 !important;
+}
+
+html.sct-theme-dark :is(.table-responsive,.sct-table-shell) {
+    background: #081b2e !important;
+}
+
+html.sct-theme-dark :is(.sct-app-footer__support,.sct-app-footer__support-link,.sct-app-footer__credits) {
+    background: #0a1f35 !important;
+}
+
+/* P56 — nuevos gráficos y estado reprobado en modo oscuro. */
+html.sct-theme-dark .welcome-activities-status .welcome-status-guide__item--failed,
+html.sct-theme-dark .sct-personal-activity-card--status-failed,
+html.sct-theme-dark .sct-activity-status-filter--failed.is-active {
+    background: linear-gradient(180deg, rgba(223,177,42,.18), rgba(11,33,58,.96)) !important;
+    border-color: rgba(223,177,42,.45) !important;
+}
+html.sct-theme-dark .welcome-activities-status .welcome-status-guide__item--failed .welcome-status-guide__icon,
+html.sct-theme-dark .sct-personal-activity-card--status-failed .sct-personal-activity-card__icon,
+html.sct-theme-dark .sct-activity-status-filter--failed .sct-activity-status-filter__icon {
+    background: rgba(223,177,42,.20) !important;
+    color: #f2c84b !important;
+}
+html.sct-theme-dark .dashboard-worker-state-donut > span {
+    background: #0d2947 !important;
+}
+html.sct-theme-dark .dashboard-worker-state-donut strong,
+html.sct-theme-dark .dashboard-worker-progress-list__head strong {
+    color: #f1f7ff !important;
+}
+html.sct-theme-dark .dashboard-worker-state-donut small,
+html.sct-theme-dark .dashboard-worker-progress-list__head {
+    color: #b9cbe0 !important;
+}
+html.sct-theme-dark .dashboard-worker-progress-list {
+    border-top-color: rgba(155,190,225,.18) !important;
+}
+html.sct-theme-dark .dashboard-worker-progress-list__track {
+    background: #173a5d !important;
+}
+html.sct-theme-dark .dashboard-worker-current-row--failed .dashboard-worker-current-row__head strong {
+    color: #f2c84b !important;
+}
+html.sct-theme-dark .dashboard-worker-current-track,
+html.sct-theme-dark .dashboard-worker-progress-track {
+    background: #173a5d !important;
+}
+
+/* ==========================================================
+   P57 — cobertura oscura transversal, azul SCT y nuevos componentes
+   ========================================================== */
+html.sct-theme-dark {
+    --sct-dark-bg:#040d18;
+    --sct-dark-bg-2:#061626;
+    --sct-dark-surface:#082039;
+    --sct-dark-surface-2:#0b2a48;
+    --sct-dark-surface-3:#103758;
+    --sct-dark-border:#245578;
+    --sct-dark-text:#eef7ff;
+    --sct-dark-muted:#aec6da;
+}
+html.sct-theme-dark body {
+    background:linear-gradient(180deg,#040d18 0%,#061827 42%,#071b2e 100%) !important;
+    color:var(--sct-dark-text) !important;
+}
+html.sct-theme-dark :is(.sct-main-shell,.welcome-shell,.dashboard-shell,.management-shell,.sct-personal-module-shell) {
+    color:var(--sct-dark-text);
+}
+html.sct-theme-dark :is(
+    .welcome-unified-section,.dashboard-section,.dashboard-panel,.management-section,.feature-card,.card,
+    .sct-personal-card,.sct-hub-activity-workspace,.induction-evaluation,.induction-course-materials,
+    .induction-course-material,.modal-content,.offcanvas,.dropdown-menu,.accordion-item,.sct-table-shell,
+    .table-responsive,.sct-app-mobile-settings
+) {
+    background-color:var(--sct-dark-surface) !important;
+    border-color:var(--sct-dark-border) !important;
+}
+html.sct-theme-dark :is(
+    .welcome-role-summary__item,.welcome-course-card,.welcome-action-card,.welcome-status-guide__item,
+    .dashboard-metric-card,.dashboard-worker-category-card,.dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity,.management-module-card,.management-stat-card,.sct-personal-card-fact,
+    .sct-personal-activity-card
+) {
+    background:linear-gradient(155deg,#0c2b49,#081e35) !important;
+    border-color:#245578 !important;
+}
+html.sct-theme-dark :is(
+    h1,h2,h3,h4,h5,h6,.sct-main-title,.section-title,.dashboard-heading-block h2,
+    .dashboard-worker-progress-history__head h3,.dashboard-worker-progress-group__toggle,
+    .dashboard-worker-progress-activity__head strong,.induction-course-materials__head h3,
+    .induction-course-material__copy strong
+) { color:#f0f8ff !important; }
+html.sct-theme-dark :is(
+    p,small,.text-muted,.sct-main-intro,.dashboard-section-head p,.dashboard-panel__head p,
+    .dashboard-worker-progress-history__head p,.dashboard-worker-progress-activity__head small,
+    .induction-course-materials__head p,.induction-course-materials__description,.induction-course-material__copy p
+) { color:#aec6da !important; }
+html.sct-theme-dark :is(input,select,textarea,.form-control,.form-select) {
+    background-color:#071b30 !important;
+    border-color:#2b5c7e !important;
+    color:#edf7ff !important;
+}
+html.sct-theme-dark :is(input,textarea)::placeholder { color:#7597b0 !important; opacity:1; }
+html.sct-theme-dark .form-select { color-scheme:dark; }
+html.sct-theme-dark :is(.table,table) { --bs-table-bg:transparent; --bs-table-color:#e8f4fd; color:#e8f4fd !important; }
+html.sct-theme-dark :is(.table th,table th) { color:#f1f8ff !important; background:#0d2b49 !important; border-color:#245578 !important; }
+html.sct-theme-dark :is(.table td,table td) { color:#c7dbea !important; background:#081f37 !important; border-color:#1f4867 !important; }
+html.sct-theme-dark :is(.table-striped>tbody>tr:nth-of-type(odd)>*,tbody tr:nth-child(odd) td) { background-color:#0a2540 !important; }
+html.sct-theme-dark :is(.modal-header,.modal-footer,.offcanvas-header) { border-color:#245578 !important; background:#0a2744 !important; }
+html.sct-theme-dark .btn-close { filter:invert(1) grayscale(1) brightness(1.7); }
+html.sct-theme-dark .sct-collapse-toggle {
+    background:#0c2b49 !important;
+    border-color:#2a5d80 !important;
+    color:#7fd2ff !important;
+}
+html.sct-theme-dark .sct-collapse-toggle:hover,
+html.sct-theme-dark .sct-collapse-toggle:focus-visible { background:#113858 !important; border-color:#53b8ea !important; }
+html.sct-theme-dark .dashboard-worker-progress-group__name small { background:#123a5d !important; color:#b9ddf2 !important; }
+html.sct-theme-dark .dashboard-worker-progress-group__value i { color:#a9c6da !important; }
+html.sct-theme-dark .dashboard-worker-progress-group__details { border-top-color:#285676 !important; }
+html.sct-theme-dark .dashboard-worker-progress-activity { background:#0a2743 !important; }
+html.sct-theme-dark :is(.dashboard-worker-progress-list__track,.dashboard-worker-progress-activity__track,.dashboard-worker-progress-track,.dashboard-worker-current-track) { background:#153a5c !important; }
+html.sct-theme-dark .dashboard-worker-progress-history { border-top-color:#285676 !important; }
+html.sct-theme-dark .dashboard-worker-line-chart {
+    background:linear-gradient(180deg,#071a2d,#0a2743) !important;
+    border-color:#275777 !important;
+}
+html.sct-theme-dark .dashboard-worker-chart-grid { stroke:rgba(166,200,224,.18) !important; }
+html.sct-theme-dark .dashboard-worker-chart-axis { fill:#b4ccdd !important; }
+html.sct-theme-dark .dashboard-worker-chart-point { stroke:#082039 !important; }
+html.sct-theme-dark .induction-course-materials {
+    background:linear-gradient(180deg,#0d2e4d,#082039) !important;
+}
+html.sct-theme-dark .induction-course-material { background:#0a2844 !important; }
+html.sct-theme-dark .induction-course-material__copy a { color:#72cbff !important; }
+html.sct-theme-dark :is(.alert-info,.alert-secondary) { background:#0c3152 !important; color:#d5efff !important; border-color:#2f6589 !important; }
+html.sct-theme-dark .alert-warning { background:#3a300e !important; color:#ffe68a !important; border-color:#78631d !important; }
+html.sct-theme-dark .alert-danger { background:#3a1820 !important; color:#ffd7dc !important; border-color:#78404b !important; }
+html.sct-theme-dark .alert-success { background:#0d3027 !important; color:#cff6e7 !important; border-color:#286755 !important; }
+
+/* ==========================================================
+   P59 — contraste oscuro: Dashboard, Tus accesos y Footer
+   ========================================================== */
+/* Dashboard: superficies internas profundas y texto legible. */
+html.sct-theme-dark .dashboard-page :is(
+    .dashboard-worker-current-panel,
+    .dashboard-worker-category-panel,
+    .dashboard-worker-trend-panel,
+    .dashboard-worker-progress-panel,
+    .dashboard-panel,
+    .dashboard-section
+) {
+    background: linear-gradient(155deg, #09233d 0%, #061a2f 100%) !important;
+    border-color: #245578 !important;
+    color: #eef7ff !important;
+}
+
+html.sct-theme-dark .dashboard-page :is(
+    .dashboard-worker-current-total,
+    .dashboard-worker-current-due,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity,
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-history,
+    .dashboard-worker-line-chart
+) {
+    background: #0a2946 !important;
+    border-color: #2b5d7e !important;
+    color: #edf7ff !important;
+}
+
+html.sct-theme-dark .dashboard-page :is(
+    .dashboard-worker-current-row__head span,
+    .dashboard-worker-current-due__copy small,
+    .dashboard-worker-current-due__copy em,
+    .dashboard-worker-category-card__body span,
+    .dashboard-worker-category-card__body small,
+    .dashboard-worker-progress-group__name small,
+    .dashboard-worker-progress-activity__head small,
+    .dashboard-worker-updated,
+    .dashboard-worker-line-legend
+) {
+    color: #b8d0e1 !important;
+}
+
+html.sct-theme-dark .dashboard-page :is(
+    .dashboard-worker-current-row__head strong,
+    .dashboard-worker-current-due__copy strong,
+    .dashboard-worker-category-card__body strong,
+    .dashboard-worker-progress-group__toggle,
+    .dashboard-worker-progress-activity__head strong,
+    .dashboard-donut__value
+) {
+    color: #f1f8ff !important;
+}
+
+html.sct-theme-dark .dashboard-page .dashboard-worker-history-tools {
+    background: #0a2946 !important;
+    border-color: #2b5d7e !important;
+    color: #dceefa !important;
+}
+
+html.sct-theme-dark .dashboard-page .dashboard-worker-state-donut > span {
+    background: #082039 !important;
+    border-color: #2b5d7e !important;
+}
+
+/* Gestiones trabajador — "Tus accesos". */
+html.sct-theme-dark .management-hub-page--worker .management-module-section--personal {
+    background: linear-gradient(155deg, #09233d 0%, #061a2f 100%) !important;
+    border: 1px solid #245578 !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .20) !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-section-head__icon {
+    background: #123a5d !important;
+    color: #75ccff !important;
+    border-color: #2b5d7e !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-grid--worker .management-module-card {
+    background: linear-gradient(155deg, #0c2d4c 0%, #081e35 100%) !important;
+    border-color: #285a7b !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-grid--worker .management-module-card::before {
+    opacity: .7;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-card__tag {
+    background: #123a5d !important;
+    color: #c3e7fb !important;
+    border-color: #2b5d7e !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-card__icon {
+    background: #103758 !important;
+    color: #7fd2ff !important;
+    border-color: #2c6285 !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-card__arrow,
+html.sct-theme-dark .management-hub-page--worker .management-module-card__cta {
+    color: #7fd2ff !important;
+}
+
+html.sct-theme-dark .management-hub-page--worker .management-module-card p,
+html.sct-theme-dark .management-hub-page--worker .management-section-head__copy p {
+    color: #aec8dc !important;
+}
+
+/* Footer autenticado: elimina superficies claras residuales. */
+html.sct-theme-dark .sct-app-footer {
+    background: transparent !important;
+    color: #b9d0e0 !important;
+}
+
+html.sct-theme-dark .sct-app-footer__inner {
+    background: linear-gradient(155deg, #08213a 0%, #06182b 100%) !important;
+    border-color: #245578 !important;
+    border-top-color: #3a8fc2 !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .24) !important;
+}
+
+html.sct-theme-dark .sct-app-footer__brand,
+html.sct-theme-dark .sct-app-footer__brand strong {
+    color: #eef7ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__mark {
+    background: #103758 !important;
+    border-color: #2b5d7e !important;
+    color: #7fd2ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support {
+    background: #0a2946 !important;
+    border-color: #285a7b !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support-icon {
+    background: #123a5d !important;
+    color: #8bd6ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support-copy strong {
+    color: #eef7ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support-copy small,
+html.sct-theme-dark .sct-app-footer__credit > span {
+    color: #aec8dc !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support-link {
+    background: #0d3151 !important;
+    border-color: #32698e !important;
+    color: #8fd9ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__support-link:hover,
+html.sct-theme-dark .sct-app-footer__support-link:focus-visible {
+    background: #123d60 !important;
+    border-color: #56bde9 !important;
+    color: #eef9ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__meta,
+html.sct-theme-dark .sct-app-footer__credits {
+    background: #071b30 !important;
+    border-color: #214b69 !important;
+    color: #b9d0e0 !important;
+}
+
+html.sct-theme-dark .sct-app-footer__credit a {
+    color: #80d3ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__credit a:hover,
+html.sct-theme-dark .sct-app-footer__credit a:focus-visible {
+    color: #dff5ff !important;
+}
+
+html.sct-theme-dark .sct-app-footer__separator {
+    color: #527b97 !important;
+}
+
+/* P60 — contenedores abatibles del Dashboard con superficie SCT oscura. */
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card,
+html.sct-theme-dark .dashboard-page .dashboard-section.sct-collapse-owner-section.is-sct-collapsed:not(.dashboard-section--collapsible-card) {
+    background: linear-gradient(155deg, #09233d 0%, #061a2f 100%) !important;
+    border-color: #245578 !important;
+    box-shadow: 0 16px 34px rgba(0,0,0,.2) !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card > .dashboard-panel {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+html.sct-theme-dark .dashboard-worker-state-donut > span,
+html.sct-theme-dark .dashboard-worker-progress-ring::before {
+    background: #081f37 !important;
+    border-color: #2b5d7e !important;
+}
+
+html.sct-theme-dark .dashboard-worker-state-donut > span strong,
+html.sct-theme-dark .dashboard-worker-progress-ring .dashboard-donut__value {
+    color: #f3f9ff !important;
+}
+
+html.sct-theme-dark .dashboard-worker-state-donut > span small,
+html.sct-theme-dark .dashboard-worker-progress-ring .dashboard-donut__label {
+    color: #b6cede !important;
+}
+
+/* ==========================================================
+   P61 — modo oscuro SCT con mayor variedad y luminosidad visual
+   Mantiene una base azul de marca, pero evita que todas las superficies
+   tengan el mismo navy casi negro.
+   ========================================================== */
+html.sct-theme-dark {
+    --sct-dark-bg: #081727;
+    --sct-dark-bg-2: #0c2034;
+    --sct-dark-surface: #102b45;
+    --sct-dark-surface-2: #153853;
+    --sct-dark-surface-3: #1a4663;
+    --sct-dark-border: #2f607d;
+    --sct-dark-text: #eef7fb;
+    --sct-dark-muted: #bdd0db;
+    --sct-dark-muted-2: #9db7c7;
+    --sct-dark-shadow: 0 16px 36px rgba(2, 12, 24, .24);
+
+    --background: #081727;
+    --background-soft: #0c2034;
+    --text: #eef7fb;
+    --text-secondary: #bdd0db;
+    --border: #2f607d;
+
+    --bs-body-bg: #081727;
+    --bs-body-color: #eef7fb;
+    --bs-border-color: #2f607d;
+    --bs-secondary-color: #bdd0db;
+    --bs-tertiary-bg: #102b45;
+    --bs-emphasis-color: #ffffff;
+}
+
+html.sct-theme-dark body,
+html.sct-theme-dark body.sct-module-page,
+html.sct-theme-dark body.welcome-page {
+    background-color: #081727 !important;
+    background-image:
+        radial-gradient(circle at 86% 4%, rgba(54, 180, 220, .10), transparent 32rem),
+        radial-gradient(circle at 12% 0%, rgba(38, 108, 190, .18), transparent 30rem) !important;
+}
+
+/* Superficie general: azul medio oscuro, no negro. */
+html.sct-theme-dark :is(
+    .card,
+    .feature-card,
+    .welcome-unified-section,
+    .dashboard-section,
+    .management-section,
+    .sct-module-card,
+    .sct-personal-card,
+    .sct-hub-activity-workspace,
+    .modal-content,
+    .dropdown-menu,
+    .popover,
+    .toast,
+    .accordion-item,
+    details.sct-detail-section
+) {
+    background-color: #102b45 !important;
+    border-color: #2d5c79 !important;
+    color: #eef7fb !important;
+    box-shadow: var(--sct-dark-shadow);
+}
+
+/* Variación de tarjetas de lectura para conservar jerarquía. */
+html.sct-theme-dark :is(
+    .welcome-role-summary__item,
+    .welcome-context-card,
+    .dashboard-card,
+    .dashboard-metric-card,
+    .dashboard-worker-category-card,
+    .management-stat-card,
+    .management-module-card,
+    .sct-personal-card-fact,
+    .sct-personal-empty,
+    .curso-card,
+    .induction-course-detail
+) {
+    background: #163953 !important;
+    border-color: #376b87 !important;
+}
+
+html.sct-theme-dark :is(
+    .welcome-action-card,
+    .welcome-role-action-card,
+    .dashboard-panel,
+    .dashboard-worker-current-panel,
+    .dashboard-worker-progress-panel,
+    .dashboard-worker-category-panel,
+    .dashboard-worker-trend-panel,
+    .management-role-sidebar__sticky,
+    .dashboard-role-sidebar__sticky
+) {
+    background: linear-gradient(145deg, #143651 0%, #183f5d 100%) !important;
+    border-color: #3a6e8c !important;
+}
+
+/* Tonos de apoyo conservan el significado visual original, adaptado al oscuro. */
+html.sct-theme-dark .dashboard-panel--tone-cyan,
+html.sct-theme-dark .welcome-action-card--primary {
+    background: linear-gradient(145deg, #123e5d, #164967) !important;
+}
+html.sct-theme-dark .dashboard-panel--tone-aqua {
+    background: linear-gradient(145deg, #123b4f, #174c5e) !important;
+}
+html.sct-theme-dark .dashboard-panel--tone-green {
+    background: linear-gradient(145deg, #123a43, #194d52) !important;
+}
+html.sct-theme-dark .dashboard-panel--tone-warm {
+    background: linear-gradient(145deg, #28394b, #39465a) !important;
+}
+html.sct-theme-dark .dashboard-panel--tone-ice,
+html.sct-theme-dark .welcome-action-card--secondary {
+    background: linear-gradient(145deg, #183a58, #204966) !important;
+}
+
+/* Inputs, tablas y filtros con un nivel visual ligeramente más claro. */
+html.sct-theme-dark :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    textarea,
+    select,
+    .form-control,
+    .form-select,
+    .input-group-text
+) {
+    background-color: #122f49 !important;
+    border-color: #3a6b86 !important;
+    color: #eef7fb !important;
+}
+
+html.sct-theme-dark :is(.table-responsive,.sct-table-shell) {
+    background: #112f49 !important;
+    border-color: #376781 !important;
+}
+html.sct-theme-dark :is(table,.table) thead :is(th,td) {
+    background: #1c4663 !important;
+    color: #f2f9fc !important;
+    border-color: #3c6f89 !important;
+}
+html.sct-theme-dark :is(table,.table) tbody :is(th,td) {
+    background: #13344f !important;
+    color: #e7f2f7 !important;
+    border-color: #315f7b !important;
+}
+html.sct-theme-dark :is(table,.table) tbody tr:nth-child(even) :is(th,td) {
+    background: #163a55 !important;
+}
+html.sct-theme-dark :is(table,.table) tbody tr:hover :is(th,td) {
+    background: #204b67 !important;
+}
+
+html.sct-theme-dark :is(
+    .sct-activity-type-filter,
+    .sct-activity-status-filter,
+    .sct-personal-filter-pill,
+    .management-filter-chip,
+    .welcome-activity-filter__pill,
+    .nav-tabs .nav-link
+) {
+    background-color: #143650 !important;
+    border-color: #376985 !important;
+    color: #c9dce6 !important;
+}
+html.sct-theme-dark :is(
+    .sct-activity-type-filter.is-active,
+    .sct-activity-status-filter.is-active,
+    .sct-personal-filter-pill.is-active,
+    .management-filter-chip.active,
+    .welcome-activity-filter__pill.is-active,
+    .nav-tabs .nav-link.active
+) {
+    background-color: #1e506d !important;
+    border-color: #6bc9fb !important;
+    color: #ffffff !important;
+}
+
+/* Encabezados de secciones contraídas: se distinguen sin convertirse en una barra negra. */
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card.is-sct-collapsed,
+html.sct-theme-dark .dashboard-page .dashboard-section.sct-collapse-owner-section.is-sct-collapsed,
+html.sct-theme-dark .welcome-page .welcome-unified-section.is-sct-collapsed {
+    background: linear-gradient(135deg, #153a56, #1b4561) !important;
+    border-color: #3c708d !important;
+}
+
+/* Texto: contraste suficiente sin abusar del blanco puro. */
+html.sct-theme-dark :is(
+    .welcome-role-summary__copy span,
+    .welcome-role-summary__copy small,
+    .dashboard-worker-progress-list__head span,
+    .dashboard-worker-progress-activity__head span,
+    .management-module-card p,
+    .management-module-card small,
+    .sct-personal-card p,
+    .sct-personal-card small,
+    .dashboard-panel p,
+    .dashboard-panel small
+) {
+    color: #c3d6e1 !important;
+}
+html.sct-theme-dark :is(
+    .welcome-role-summary__copy strong,
+    .dashboard-worker-progress-list__head strong,
+    .dashboard-worker-progress-activity__head strong,
+    .management-module-card h3,
+    .sct-personal-card h3,
+    .dashboard-panel h3
+) {
+    color: #f2f8fb !important;
+}
+
+
+/* ==========================================================
+   P62 — Dashboard oscuro: una superficie azul por contenedor
+   ========================================================== */
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card {
+    background: linear-gradient(155deg, #173f5d 0%, #12354f 100%) !important;
+    border-color: #4b7d99 !important;
+    color: #edf7ff !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card.is-sct-collapsed {
+    background: linear-gradient(155deg, #1b4867 0%, #153c59 100%) !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card > .dashboard-panel,
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-current-due,
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity,
+    .dashboard-worker-progress-history,
+    .dashboard-worker-line-chart
+) {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-current-due,
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity
+) {
+    border-color: rgba(129, 190, 225, .25) !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    h2,h3,strong,.dashboard-worker-current-row__head strong,
+    .dashboard-worker-current-due__copy strong,
+    .dashboard-worker-category-card__body strong,
+    .dashboard-worker-progress-activity__head strong
+) {
+    color: #f1f8fc !important;
+}
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    p,small,em,.dashboard-worker-current-row__head span,
+    .dashboard-worker-current-due__copy small,
+    .dashboard-worker-current-due__copy em,
+    .dashboard-worker-category-card__body span,
+    .dashboard-worker-progress-activity__head small
+) {
+    color: #c5d9e5 !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-progress-list__track,
+    .dashboard-worker-progress-activity__track,
+    .dashboard-worker-progress-track,
+    .dashboard-worker-current-track,
+    .dashboard-worker-category-card__track
+) {
+    background: rgba(8, 31, 51, .48) !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-section-head-actions .sct-collapse-toggle {
+    background: rgba(10, 43, 73, .72) !important;
+    border-color: #5b91af !important;
+    color: #8fd8ff !important;
+}
+
+/* P62.1 — sin superficies internas contrastantes en Panel trabajador. */
+html.sct-theme-dark .dashboard-page--worker .dashboard-worker-history-tools,
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity,
+    .dashboard-worker-current-due,
+    .dashboard-worker-progress-history,
+    .dashboard-worker-line-chart
+) {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+html.sct-theme-dark .dashboard-page--worker .dashboard-worker-history-tools {
+    border: 0 !important;
+}
+
+/* ==========================================================
+   P62 FINAL — superficies sobrias y controles mobile
+   ========================================================== */
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card {
+    background: #173f5d !important;
+    border-color: #4b7893 !important;
+}
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card.is-sct-collapsed {
+    background: #1a4663 !important;
+}
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card > [data-sct-collapse-target],
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-current-due,
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity,
+    .dashboard-worker-progress-history,
+    .dashboard-worker-line-chart
+) {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+html.sct-theme-dark .dashboard-page--worker .dashboard-section--collapsible-card :is(
+    .dashboard-worker-current-due,
+    .dashboard-worker-category-card,
+    .dashboard-worker-progress-group,
+    .dashboard-worker-progress-activity
+) {
+    border-color: rgba(151, 201, 229, .24) !important;
+}
+html.sct-theme-dark .dashboard-page--worker .dashboard-worker-state-donut > span,
+html.sct-theme-dark .dashboard-page--worker .dashboard-worker-progress-ring::before {
+    background: #173f5d !important;
+}
+html.sct-theme-dark .welcome-role-trabajador .welcome-activity-footer-link {
+    border-color: #4d7d98 !important;
+    background: rgba(87, 171, 219, .10) !important;
+    color: #dff3ff !important;
+}
+html.sct-theme-dark .welcome-role-trabajador .welcome-activity-footer-link:hover,
+html.sct-theme-dark .welcome-role-trabajador .welcome-activity-footer-link:focus-visible {
+    border-color: #79c9f2 !important;
+    background: rgba(87, 171, 219, .18) !important;
+    color: #ffffff !important;
+}

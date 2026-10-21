@@ -1,0 +1,90 @@
+SAFETY CONTROL TOWER — E3-VS1
+MATRIZ FINAL DE PERFILES Y ACCESOS
+Fecha: 07-10-2026
+
+PERFILES OFICIALES
+
+1. SUPERUSUARIO
+Alcance: global, todas las empresas y todo el sistema.
+- Administración global de empresas.
+- Gestión completa de usuarios, trabajadores, proyectos, centros, eventos, inducción, auditorías, autoevaluaciones, formularios, protocolos, programas e historial.
+- Gestión completa de matriz de permisos.
+- Puede crear/asignar perfiles de niveles 1 a 7.
+- La matriz de SuperUsuario no puede degradarse desde la UI.
+
+2. GERENTE
+Alcance: empresa propia.
+- Uso total de módulos dentro de su empresa.
+- Puede editar información de la empresa propia.
+- Gestión completa de usuarios y operación.
+- Puede gestionar la matriz de permisos de perfiles inferiores.
+- Puede crear/asignar Administrador Cliente, Usuario, Paramédico, Contratista y Trabajador.
+- No puede administrar otra empresa.
+
+3. ADMINISTRADOR CLIENTE
+Alcance: empresa propia.
+- Uso total operativo de módulos dentro de su empresa.
+- Puede editar información de empresa propia.
+- Puede crear, editar, activar/desactivar y validar usuarios de niveles inferiores.
+- Puede asignar Usuario, Paramédico, Contratista y Trabajador.
+- No puede crear/designar otro Administrador Cliente.
+- No puede administrar matriz de permisos.
+
+4. USUARIO
+Alcance: empresa propia / visualización transversal.
+- Puede visualizar empresa propia, trabajadores, proyectos, centros, eventos, auditorías, autoevaluaciones, formularios, protocolos, dashboard y programas.
+- Puede cargar/enviar documentos mediante formularios dinámicos y esperar validación.
+- Puede editar exclusivamente sus propios datos.
+- Puede realizar inducción.
+- No puede editar datos operacionales ni administrar usuarios.
+
+5. PARAMÉDICO
+Alcance: propio.
+- Puede editar exclusivamente sus propios datos.
+- Puede realizar inducción.
+- Sin acceso general a módulos operacionales.
+
+6. CONTRATISTA
+Alcance actual: propio / documental.
+- Puede acceder al motor documental/formularios.
+- Puede visualizar formularios/documentos habilitados para su perfil.
+- Puede cargar/enviar documentos y esperar validación.
+- Puede editar sus propios datos.
+- NO recibe acceso general a trabajadores, proyectos, eventos ni dashboard.
+- PENDIENTE DE MODELADO: filtro documental exclusivo de personal contratista/subcontratista. El modelo E2-VS4 no contiene una relación suficiente para garantizarlo sin ampliar privilegios.
+
+7. TRABAJADOR
+Alcance: propio.
+- Puede editar exclusivamente sus propios datos.
+- Puede realizar inducción.
+- Acceso deliberadamente más limitado que Usuario.
+
+JERARQUÍA DE GESTIÓN
+- SuperUsuario: puede administrar/asignar niveles 1–7.
+- Gerente: puede administrar/asignar niveles 3–7.
+- Administrador Cliente: puede administrar/asignar niveles 4–7.
+- Usuario / Paramédico / Contratista / Trabajador: no administran perfiles.
+
+CUENTAS DEMO E3-VS1
+- SuperUsuarioDemo@demoSCT.cl -> SuperUsuario
+- GerenteEmpresaDemo@demoSCT.cl -> Gerente
+- adminEmpresaDemo@demoSCT.cl -> Administrador Cliente
+- UsuarioEmpresaDemo@demoSCT.cl -> Usuario
+- ParamedicoEmpresaDemo@demoSCT.cl -> Paramédico
+- ContratistaEmpresaDemo@demoSCT.cl -> Contratista
+- TrabajadorEmpresaDemo@demoSCT.cl -> Trabajador
+- JefaturaEmpresaDemo@demoSCT.cl -> desactivada como perfil legacy.
+
+ALIASES DE MIGRACIÓN TRANSITORIOS
+- administrador_completo -> superusuario
+- cliente -> gerente
+- administrador -> administrador_cliente
+- jefatura -> usuario (mínimo privilegio, requiere reclasificación explícita si corresponde)
+
+VALIDACIONES DE REFACTOR E3-VS1
+- Login exige rol SCT reconocido antes de crear sesión operacional.
+- Navbar y Bienvenida comparten NavigationRegistry.
+- Matriz permissions/role_permissions es autoritativa después de registrar schema_migrations E3-VS1.
+- lib/repositorios/auth.php eliminado.
+- API sin SQL directo; acceso a datos delegado a repositories.
+- Frontend sin referencias ejecutables a VS3/VS4/VS5.
