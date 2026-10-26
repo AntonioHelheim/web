@@ -20,7 +20,10 @@ try {
     $stmt->execute(['id_company'=>$companyId]);
     $matrixAddress=(string)($stmt->fetchColumn() ?: '');
 
+    $workerId=(int)($context['profile']['id_worker'] ?? 0);
+
     responderJSON(true,[
+        'scope_editable'=>$workerId>0,
         'matrix'=>[
             'value'=>'matrix',
             'address'=>$matrixAddress,

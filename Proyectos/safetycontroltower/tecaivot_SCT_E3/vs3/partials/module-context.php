@@ -24,7 +24,7 @@ $helpTemplate = function_exists('t') ? t($helpKey) : '';
 $supportQuestion = function_exists('t') ? t('info_tip_more_doubts') : '¿Tienes más dudas?';
 $supportLink = function_exists('t') ? t('info_tip_contact_support') : 'Contacta a soporte';
 $infoLabel = function_exists('t') ? t('info_more_label') : 'Más información';
-$closeLabel = function_exists('t') ? t('common_close') : 'Cerrar';
+$closeLabel = function_exists('t') ? t('common_close_label') : 'Cerrar';
 ?>
 <div class="sct-module-context sct-module-context--metadata"
      hidden

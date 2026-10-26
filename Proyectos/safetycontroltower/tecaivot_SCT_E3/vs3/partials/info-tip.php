@@ -9,7 +9,7 @@ if (!function_exists('sctInfoTip')) {
         $textEsc = htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
         $labelEsc = htmlspecialchars((string) $label, ENT_QUOTES, 'UTF-8');
         $supportQuestion = function_exists('t') ? t('info_tip_more_doubts') : '¿Tienes más dudas?';
-        $closeLabel = function_exists('t') ? t('common_close') : 'Cerrar';
+        $closeLabel = function_exists('t') ? t('common_close_label') : 'Cerrar';
         $supportLink = function_exists('t') ? t('info_tip_contact_support') : 'Contacta a soporte';
         $supportQuestionEsc = htmlspecialchars((string) $supportQuestion, ENT_QUOTES, 'UTF-8');
         $closeLabelEsc = htmlspecialchars((string) $closeLabel, ENT_QUOTES, 'UTF-8');

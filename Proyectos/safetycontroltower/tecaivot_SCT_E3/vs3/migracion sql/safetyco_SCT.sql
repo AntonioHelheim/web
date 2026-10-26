@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-10-2026 a las 21:36:17
+-- Tiempo de generación: 26-10-2026 a las 19:00:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,32 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `safetyco_SCT`
 --
-
--- ============================================================================
--- SAFETY CONTROL TOWER
--- ETAPA 3 — VS3
--- BASELINE COMPLETA DE BASE DE DATOS
--- Generada desde la última exportación de desarrollo y depurada sin perder
--- información funcional.
---
--- Corrección de identidad DEMO aplicada:
---   Paramédico DEMO  -> RUT 90000000-6, worker 287
---   Contratista DEMO -> RUT 90000001-4, worker 288
---
--- Motivo: los RUT anteriores colisionaban con trabajadores DEMO distintos
--- (Diego Muñoz y Valentina Pérez). No se fusionaron personas diferentes.
--- ============================================================================
-
-
--- SafetyControlTower — Etapa 3 VS3
--- Baseline depurada de desarrollo generada 2026-10-19.
--- Conserva información funcional e histórica; elimina sólo estado transitorio
--- de autenticación y estructuras legacy vacías/no operacionales.
-
-CREATE DATABASE IF NOT EXISTS `safetyco_SCT`
-  DEFAULT CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-USE `safetyco_SCT`;
 
 -- --------------------------------------------------------
 
@@ -167,7 +141,10 @@ INSERT INTO `change_history` (`id_change`, `id_company`, `module`, `action`, `ta
 (21, NULL, 'legacy', 'update', 'projects', '29', NULL, 'state', '1', '0', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL),
 (22, NULL, 'legacy', 'update', 'projects', '29', NULL, 'gbu_deactivation', 'GBU DEMO', 'inactive', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL),
 (23, NULL, 'legacy', 'update', 'projects', '30', NULL, 'state', '1', '0', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL),
-(24, NULL, 'legacy', 'update', 'projects', '30', NULL, 'gbu_deactivation', 'GBU DEMO', 'inactive', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL);
+(24, NULL, 'legacy', 'update', 'projects', '30', NULL, 'gbu_deactivation', 'GBU DEMO', 'inactive', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL),
+(25, 4, 'usuarios', 'update', 'users', 'ParamedicoEmpresaDemo@demoSCT.cl', 'ParamedicoEmpresaDemo@demoSCT.cl', 'mutual_code', 'achs', 'ist', 'ParamedicoEmpresaDemo@demoSCT.cl', '2026-10-26 14:25:31', '4d4a9b7af8d19811d64d11bb5e9dd55e'),
+(26, 4, 'usuarios', 'update', 'users', 'GerenteEmpresaDemo@demoSCT.cl', 'GerenteEmpresaDemo@demoSCT.cl', 'mutual_code', 'achs', 'ist', 'GerenteEmpresaDemo@demoSCT.cl', '2026-10-26 14:41:29', '8f1f44c5bcddfecfa63e288ddf53099c'),
+(27, 4, 'usuarios', 'update', 'users', 'SuperUsuarioDemo@demoSCT.cl', 'SuperUsuarioDemo@demoSCT.cl', 'mutual_code', NULL, 'mutual', 'SuperUsuarioDemo@demoSCT.cl', '2026-10-26 14:58:13', '70c5f9f1134ab3be891d09a79099b3eb');
 
 -- --------------------------------------------------------
 
@@ -708,9 +685,18 @@ CREATE TABLE `login_attempts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Datos transitorios de `login_attempts` depurados para baseline E3 VS3.
--- La tabla se conserva operativa y vacía.
+-- Volcado de datos para la tabla `login_attempts`
 --
+
+INSERT INTO `login_attempts` (`id`, `identifier`, `ip_address`, `success`, `created_at`) VALUES
+(1, 'ParamedicoEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:23:02'),
+(2, 'ContratistaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:33:04'),
+(3, 'GerenteEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:41:21'),
+(4, 'GerenteEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:07'),
+(5, 'ContratistaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:25'),
+(6, 'JefaturaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:39'),
+(7, 'adminEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:54'),
+(8, 'SuperUsuarioDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:57:34');
 
 -- --------------------------------------------------------
 
@@ -730,9 +716,18 @@ CREATE TABLE `login_codes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Datos transitorios de `login_codes` depurados para baseline E3 VS3.
--- La tabla se conserva operativa y vacía.
+-- Volcado de datos para la tabla `login_codes`
 --
+
+INSERT INTO `login_codes` (`id_login_code`, `id_users`, `code_hash`, `expires_at`, `used_at`, `attempts`, `ip_address`, `created_at`) VALUES
+(1, 'ParamedicoEmpresaDemo@demoSCT.cl', '$2y$10$MCSSenYOpXzNDdorp8KDc.sbRBz.YNLWnJerzoBf0Fm/3eqUYZ7fe', '2026-10-26 14:32:57', '2026-10-26 14:23:01', 0, '::1', '2026-10-26 14:22:57'),
+(2, 'ContratistaEmpresaDemo@demoSCT.cl', '$2y$10$AuY7kHd7r6c5910f90Yy7uyMuDZILHtMOT5Tl2ev3XMEZaPS.IA/S', '2026-10-26 14:42:59', '2026-10-26 14:33:04', 0, '::1', '2026-10-26 14:32:59'),
+(3, 'GerenteEmpresaDemo@demoSCT.cl', '$2y$10$yNruPf4IZy3p4ZIc05PvgekXryEtqSeTMwYwKqONLZ9lMO1TFaB2a', '2026-10-26 14:51:16', '2026-10-26 14:41:21', 0, '::1', '2026-10-26 14:41:16'),
+(4, 'GerenteEmpresaDemo@demoSCT.cl', '$2y$10$7EtklMPmFtEZuH97Moaby.kGizCDJAfZLHKw9JA8mrJRqmw4nhmH.', '2026-10-26 15:01:02', '2026-10-26 14:51:07', 0, '::1', '2026-10-26 14:51:02'),
+(5, 'ContratistaEmpresaDemo@demoSCT.cl', '$2y$10$QFv0/gazVyJrYamWPSegVO7Zet4PxK7yHnpcIvRZP1uM4PzYt15t6', '2026-10-26 15:01:21', '2026-10-26 14:51:25', 0, '::1', '2026-10-26 14:51:21'),
+(6, 'JefaturaEmpresaDemo@demoSCT.cl', '$2y$10$j8wplcqeBR8silTitYrPoeywForjNYXZNHe3ifEzMovLAVaW845SG', '2026-10-26 15:01:36', '2026-10-26 14:51:39', 0, '::1', '2026-10-26 14:51:36'),
+(7, 'adminEmpresaDemo@demoSCT.cl', '$2y$10$6tusEtKq.Qa4YzdR8W2jD.1Y0JUmkT.uH4lEPzJiyVooa4pfu.25q', '2026-10-26 15:01:51', '2026-10-26 14:51:54', 0, '::1', '2026-10-26 14:51:51'),
+(8, 'SuperUsuarioDemo@demoSCT.cl', '$2y$10$j9yY5e2UPsr2tf18CmZU2exicoz9Z4dJePZOy.LFK00bXlhMLrFPS', '2026-10-26 15:07:31', '2026-10-26 14:57:34', 0, '::1', '2026-10-26 14:57:31');
 
 -- --------------------------------------------------------
 
@@ -813,7 +808,37 @@ INSERT INTO `onboarding_assessment_answers` (`id_answer`, `id_attempt`, `id_ques
 (177, 14, 3, 523, 1, '2026-10-09 00:35:48'),
 (178, 14, 68, 783, 1, '2026-10-09 00:35:48'),
 (179, 14, 61, 755, 1, '2026-10-09 00:35:48'),
-(180, 14, 7, 539, 1, '2026-10-09 00:35:48');
+(180, 14, 7, 539, 1, '2026-10-09 00:35:48'),
+(181, 15, 41, 673, 0, '2026-10-26 14:24:04'),
+(182, 15, 55, 729, 0, '2026-10-26 14:24:04'),
+(183, 15, 32, 636, 0, '2026-10-26 14:24:04'),
+(184, 15, 57, 736, 0, '2026-10-26 14:24:04'),
+(185, 15, 31, 635, 1, '2026-10-26 14:24:04'),
+(186, 15, 30, 628, 0, '2026-10-26 14:24:04'),
+(187, 15, 42, 676, 0, '2026-10-26 14:24:04'),
+(188, 15, 24, 606, 0, '2026-10-26 14:24:04'),
+(189, 15, 5, 531, 1, '2026-10-26 14:24:04'),
+(190, 15, 46, 694, 0, '2026-10-26 14:24:04'),
+(191, 15, 66, 775, 1, '2026-10-26 14:24:04'),
+(192, 15, 50, 710, 0, '2026-10-26 14:24:04'),
+(193, 15, 67, 779, 1, '2026-10-26 14:24:04'),
+(194, 15, 22, 599, 1, '2026-10-26 14:24:04'),
+(195, 15, 2, 518, 0, '2026-10-26 14:24:04'),
+(196, 16, 3, 520, 0, '2026-10-26 14:33:49'),
+(197, 16, 41, 674, 0, '2026-10-26 14:33:49'),
+(198, 16, 27, 616, 0, '2026-10-26 14:33:49'),
+(199, 16, 48, 700, 0, '2026-10-26 14:33:49'),
+(200, 16, 63, 763, 1, '2026-10-26 14:33:49'),
+(201, 16, 68, 783, 1, '2026-10-26 14:33:49'),
+(202, 16, 21, 593, 0, '2026-10-26 14:33:49'),
+(203, 16, 55, 728, 0, '2026-10-26 14:33:49'),
+(204, 16, 49, 706, 0, '2026-10-26 14:33:49'),
+(205, 16, 7, 537, 0, '2026-10-26 14:33:49'),
+(206, 16, 61, 752, 0, '2026-10-26 14:33:49'),
+(207, 16, 58, 743, 1, '2026-10-26 14:33:49'),
+(208, 16, 70, 788, 0, '2026-10-26 14:33:49'),
+(209, 16, 50, 711, 1, '2026-10-26 14:33:49'),
+(210, 16, 5, 528, 0, '2026-10-26 14:33:49');
 
 -- --------------------------------------------------------
 
@@ -838,7 +863,9 @@ INSERT INTO `onboarding_assessment_attempts` (`id_attempt`, `id_users`, `status`
 (10, 'adminEmpresaDemo@demoSCT.cl', 'completed', 46.67, '2026-10-08 19:45:29', '2026-10-08 19:54:04'),
 (11, 'JefaturaEmpresaDemo@demoSCT.cl', 'completed', 6.67, '2026-10-08 19:56:40', '2026-10-08 19:57:13'),
 (13, 'GerenteEmpresaDemo@demoSCT.cl', 'completed', 26.67, '2026-10-08 23:06:14', '2026-10-08 23:06:29'),
-(14, 'UsuarioEmpresaDemo@demoSCT.cl', 'completed', 100.00, '2026-10-09 00:34:03', '2026-10-09 00:35:48');
+(14, 'UsuarioEmpresaDemo@demoSCT.cl', 'completed', 100.00, '2026-10-09 00:34:03', '2026-10-09 00:35:48'),
+(15, 'ParamedicoEmpresaDemo@demoSCT.cl', 'completed', 33.33, '2026-10-26 14:23:44', '2026-10-26 14:24:04'),
+(16, 'ContratistaEmpresaDemo@demoSCT.cl', 'completed', 26.67, '2026-10-26 14:33:31', '2026-10-26 14:33:49');
 
 -- --------------------------------------------------------
 
@@ -917,7 +944,37 @@ INSERT INTO `onboarding_assessment_attempt_questions` (`id_attempt_question`, `i
 (207, 14, 3, 12),
 (208, 14, 68, 13),
 (209, 14, 61, 14),
-(210, 14, 7, 15);
+(210, 14, 7, 15),
+(211, 15, 41, 1),
+(212, 15, 55, 2),
+(213, 15, 32, 3),
+(214, 15, 57, 4),
+(215, 15, 31, 5),
+(216, 15, 30, 6),
+(217, 15, 42, 7),
+(218, 15, 24, 8),
+(219, 15, 5, 9),
+(220, 15, 46, 10),
+(221, 15, 66, 11),
+(222, 15, 50, 12),
+(223, 15, 67, 13),
+(224, 15, 22, 14),
+(225, 15, 2, 15),
+(226, 16, 3, 1),
+(227, 16, 41, 2),
+(228, 16, 27, 3),
+(229, 16, 48, 4),
+(230, 16, 63, 5),
+(231, 16, 68, 6),
+(232, 16, 21, 7),
+(233, 16, 55, 8),
+(234, 16, 49, 9),
+(235, 16, 7, 10),
+(236, 16, 61, 11),
+(237, 16, 58, 12),
+(238, 16, 70, 13),
+(239, 16, 50, 14),
+(240, 16, 5, 15);
 
 -- --------------------------------------------------------
 
@@ -3136,11 +3193,6 @@ CREATE TABLE `password_resets` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Datos transitorios de `password_resets` depurados para baseline E3 VS3.
--- La tabla se conserva operativa y vacía.
---
-
 -- --------------------------------------------------------
 
 --
@@ -4246,7 +4298,6 @@ INSERT INTO `role_permissions` (`id_role_group`, `id_permission`) VALUES
 (9, 96),
 (9, 97),
 (11, 4),
-(11, 11),
 (11, 17),
 (11, 23),
 (11, 29),
@@ -4311,7 +4362,6 @@ INSERT INTO `role_permissions` (`id_role_group`, `id_permission`) VALUES
 (11, 95),
 (11, 96),
 (12, 4),
-(12, 11),
 (12, 17),
 (12, 23),
 (12, 29),
@@ -4652,7 +4702,6 @@ INSERT INTO `role_permissions` (`id_role_group`, `id_permission`) VALUES
 (16, 96),
 (16, 97),
 (17, 4),
-(17, 11),
 (17, 17),
 (17, 23),
 (17, 29),
@@ -4993,7 +5042,6 @@ INSERT INTO `role_permissions` (`id_role_group`, `id_permission`) VALUES
 (21, 96),
 (21, 97),
 (22, 4),
-(22, 11),
 (22, 17),
 (22, 23),
 (22, 29),
@@ -5129,38 +5177,30 @@ INSERT INTO `role_permissions` (`id_role_group`, `id_permission`) VALUES
 (27, 86),
 (27, 89),
 (27, 92),
-(31, 11),
 (31, 42),
 (31, 49),
 (31, 89),
-(32, 11),
 (32, 42),
 (32, 49),
 (32, 89),
-(33, 11),
 (33, 42),
 (33, 49),
 (33, 89),
-(34, 11),
 (34, 42),
 (34, 49),
 (34, 89),
-(38, 11),
 (38, 67),
 (38, 73),
 (38, 74),
 (38, 89),
-(39, 11),
 (39, 67),
 (39, 73),
 (39, 74),
 (39, 89),
-(40, 11),
 (40, 67),
 (40, 73),
 (40, 74),
 (40, 89),
-(41, 11),
 (41, 67),
 (41, 73),
 (41, 74),
@@ -5197,7 +5237,8 @@ INSERT INTO `schema_migrations` (`version`, `name`, `checksum`, `executed_at`) V
 ('2026-10-15-e3-vs2-supervision-canonical', 'E3-VS2: supervisión canónica Jefatura -> trabajador', NULL, '2026-10-15 19:16:17'),
 ('2026-10-16-e3-vs2-user-management-hierarchy', 'E3-VS2: jerarquía Gerencia -> trabajador', NULL, '2026-10-16 00:00:00'),
 ('2026-10-16-e3-vs2-user-physical-scope', 'E3-VS2: alcance físico GBU/Sitio/Proyecto en perfil', NULL, '2026-10-16 00:00:00'),
-('2026-10-19-e3-vs3-db-baseline', 'E3-VS3: baseline depurada, catálogos/perfiles DEMO y jerarquías consistentes', NULL, '2026-10-19 19:00:00');
+('2026-10-19-e3-vs3-db-baseline', 'E3-VS3: baseline depurada, catálogos/perfiles DEMO y jerarquías consistentes', NULL, '2026-10-19 19:00:00'),
+('2026-10-26-e3-vs3-scope-alignment', 'E3-VS3: navegación por perfil y retiro de users.view en Jefatura/Paramédico/Contratista', NULL, '2026-10-26 15:00:00');
 
 -- --------------------------------------------------------
 
@@ -5398,11 +5439,11 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('admin.completo.test@test.tecaivot.cl', 2, NULL, 'Francisca', 'Muñoz', '18102347-3', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-08-04 09:30:00'),
 ('admin.test@test.engie.cl', 3, NULL, 'Marcela', 'Vega', '18102701-0', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 08:30:00', '2026-09-08 08:30:00'),
 ('admin.test@test.tecaivot.cl', 2, NULL, 'Andrés', 'Pizarro', '18102439-9', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-08-04 09:30:00'),
-('adminEmpresaDemo@demoSCT.cl', 4, 19, 'Administrador', 'DEMO', '44444444-4', 1, 'es', NULL, 'isl', '2026-10-16 16:35:29', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-15 18:38:27'),
+('adminEmpresaDemo@demoSCT.cl', 4, 19, 'Administrador', 'DEMO', '44444444-4', 1, 'es', NULL, 'isl', '2026-10-26 14:51:54', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-15 18:38:27'),
 ('barbara.contreras@test.helheim.cl', 1, 1, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-05 09:00:00', '2026-10-09 00:33:11'),
 ('camila.soto@test.tecaivot.cl', 2, 3, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-05 09:30:00', '2026-10-09 00:33:11'),
 ('cliente.test@test.helheim.cl', 1, NULL, 'Ignacio', 'Bravo', '18102287-6', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:00:00', '2026-08-04 09:00:00'),
-('ContratistaEmpresaDemo@demoSCT.cl', 4, 288, 'Contratista', 'DEMO', '90000001-4', 1, 'es', NULL, NULL, '2026-10-07 18:59:51', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-07 18:08:04'),
+('ContratistaEmpresaDemo@demoSCT.cl', 4, 288, 'Contratista', 'DEMO', '90000001-4', 1, 'es', NULL, 'ist', '2026-10-26 14:51:25', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:33:30'),
 ('cristobal.fuentes@test.engie.cl', 3, 6, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
 ('e3vs2.calama.01@demoSCT.cl', 4, 47, 'Martina', 'Molina', '72000020-2', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_e3_vs2_site20', '2026-10-15 18:23:32', '2026-10-15 18:23:32'),
 ('e3vs2.calama.02@demoSCT.cl', 4, 48, 'Benjamín', 'Riquelme', '72000021-0', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_e3_vs2_site20', '2026-10-15 18:23:32', '2026-10-15 18:23:32'),
@@ -5434,19 +5475,19 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('fco.fredes.g@gmail.com', 2, NULL, 'francisco', 'fredes', '1234', 1, 'es', NULL, NULL, '2026-09-08 14:44:10', 'phpmyadmin', '2026-08-15 11:58:40', '2026-08-15 11:58:40'),
 ('francisca.torres@test.engie.cl', 3, 9, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
 ('Francisco.fredes@engie.com', 3, NULL, '', '', '', 1, 'es', NULL, NULL, '2026-09-08 01:13:19', 'phpmyadmin', '2026-09-08 01:13:19', '2026-10-09 00:33:11'),
-('GerenteEmpresaDemo@demoSCT.cl', 4, 16, 'Gerente', 'DEMO', '11111111-1', 1, 'es', NULL, 'achs', '2026-10-09 00:07:00', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-08 23:06:13'),
+('GerenteEmpresaDemo@demoSCT.cl', 4, 16, 'Gerente', 'DEMO', '11111111-1', 1, 'es', NULL, 'ist', '2026-10-26 14:51:07', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-26 14:41:28'),
 ('javiera.reyes@test.engie.cl', 3, 11, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
 ('jefatura.test@test.helheim.cl', 1, NULL, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:00:00', '2026-10-09 00:33:11'),
 ('jefatura.test@test.tecaivot.cl', 2, NULL, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-10-09 00:33:11'),
-('JefaturaEmpresaDemo@demoSCT.cl', 4, 17, 'Jefatura', 'DEMO', '22222222-2', 1, 'es', NULL, 'ist', '2026-10-16 16:29:22', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-16 16:21:19'),
+('JefaturaEmpresaDemo@demoSCT.cl', 4, 17, 'Jefatura', 'DEMO', '22222222-2', 1, 'es', NULL, 'ist', '2026-10-26 14:51:39', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-16 16:21:19'),
 ('jonathan.vera@engie.com', 3, NULL, 'Jonathan', 'Vera', '18102935-8', 1, 'es', NULL, NULL, '2026-09-08 01:11:21', 'phpmyadmin', '2026-09-08 01:11:21', '2026-09-08 01:11:21'),
 ('juanantonioconchaloyola@gmail.com', 1, NULL, 'antonio', 'helheim', '16725278-8', 1, 'es', 'uploads/usuarios/user_f4bcfaca519e256591fc7ccfd7734a32066c00d3302d3371653a5112e5208874_514070f45bc8a5fd.png', NULL, '2026-09-10 01:01:13', 'phpmyadmin', '2026-08-14 20:46:30', '2026-09-08 16:47:54'),
 ('Laura.Lira@external.engie.com', 3, NULL, '', '', '', 1, 'es', NULL, NULL, '2026-09-08 01:12:37', 'phpmyadmin', '2026-09-08 01:12:37', '2026-10-09 00:33:11'),
 ('malazga99@gmail.com', 1, NULL, 'maite', 'lazcano', '20153481-k', 1, 'es', NULL, NULL, '2026-09-08 15:53:29', 'phpmyadmin', '2026-08-14 21:41:57', '2026-08-14 21:41:57'),
 ('pablotroncoso@gmail.com', 1, NULL, 'pablo', 'troncoso', '123456789', 1, 'es', NULL, NULL, '2026-09-08 14:48:40', 'phpmyadmin', '2026-08-14 21:43:14', '2026-08-14 21:43:14'),
-('ParamedicoEmpresaDemo@demoSCT.cl', 4, 287, 'Paramédico', 'DEMO', '90000000-6', 1, 'es', NULL, NULL, '2026-10-07 19:01:56', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-07 18:08:04'),
+('ParamedicoEmpresaDemo@demoSCT.cl', 4, 287, 'Paramédico', 'DEMO', '90000000-6', 1, 'es', NULL, 'ist', '2026-10-26 14:23:01', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:25:31'),
 ('patricio.gomez@test.engie.cl', 3, 7, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
-('SuperUsuarioDemo@demoSCT.cl', 4, NULL, 'SuperUsuario', 'DEMO', '55555555-5', 1, 'es', NULL, NULL, '2026-10-07 19:22:14', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-07 18:08:04'),
+('SuperUsuarioDemo@demoSCT.cl', 4, NULL, 'SuperUsuario', 'DEMO', '55555555-5', 1, 'es', NULL, 'mutual', '2026-10-26 14:57:34', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:58:13'),
 ('TrabajadorEmpresaDemo@demoSCT.cl', 4, NULL, 'Trabajador', 'DEMO', '88888888-8', 0, 'es', NULL, NULL, '2026-10-07 19:18:31', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-08 15:48:23'),
 ('usuarioedemo@demosct.cl', 4, 286, 'Usuario2', 'DEMO2', '5648945-5', 1, 'en', NULL, 'achs', '1970-01-01 00:00:00', 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:30:27', '2026-10-15 20:30:27'),
 ('UsuarioEmpresaDemo@demoSCT.cl', 4, 18, 'Usuario', 'DEMO', '1234578-5', 1, 'es', NULL, 'achs', '2026-10-16 16:36:04', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-09 00:34:03'),
@@ -5976,7 +6017,229 @@ INSERT INTO `user_data_consent` (`id_consent`, `id_users`, `policy_version`, `po
 (10, 'adminEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-08 19:45:29', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36'),
 (11, 'JefaturaEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-08 19:56:40', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36'),
 (13, 'GerenteEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-08 23:06:13', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36'),
-(14, 'UsuarioEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-09 00:34:03', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36');
+(14, 'UsuarioEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-09 00:34:03', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36'),
+(15, 'ParamedicoEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-26 14:23:43', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'),
+(16, 'ContratistaEmpresaDemo@demoSCT.cl', 'SCT-UNIFIED-CONSENT-v2.1', 'es', 'b7d8c1a0d477753a2c352c5236f9788fe44ace7febcbfb8e6cabf5f053be3faa', '2026-10-26 14:33:31', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_management_assignments`
+--
+
+CREATE TABLE `user_management_assignments` (
+  `id_assignment` bigint(20) UNSIGNED NOT NULL,
+  `id_company` int(11) NOT NULL,
+  `id_manager_users` varchar(50) NOT NULL,
+  `id_worker` int(11) NOT NULL,
+  `state` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` varchar(50) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `last_update` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `user_management_assignments`
+--
+
+INSERT INTO `user_management_assignments` (`id_assignment`, `id_company`, `id_manager_users`, `id_worker`, `state`, `created_by`, `date_create`, `last_update`) VALUES
+(1, 4, 'GerenteEmpresaDemo@demoSCT.cl', 16, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(2, 4, 'GerenteEmpresaDemo@demoSCT.cl', 17, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(3, 4, 'GerenteEmpresaDemo@demoSCT.cl', 18, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(4, 4, 'GerenteEmpresaDemo@demoSCT.cl', 19, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(5, 4, 'GerenteEmpresaDemo@demoSCT.cl', 20, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(6, 4, 'GerenteEmpresaDemo@demoSCT.cl', 21, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(7, 4, 'GerenteEmpresaDemo@demoSCT.cl', 22, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(8, 4, 'GerenteEmpresaDemo@demoSCT.cl', 23, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(9, 4, 'GerenteEmpresaDemo@demoSCT.cl', 24, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(10, 4, 'GerenteEmpresaDemo@demoSCT.cl', 26, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(11, 4, 'GerenteEmpresaDemo@demoSCT.cl', 27, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(12, 4, 'GerenteEmpresaDemo@demoSCT.cl', 28, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(13, 4, 'GerenteEmpresaDemo@demoSCT.cl', 29, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(14, 4, 'GerenteEmpresaDemo@demoSCT.cl', 30, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(15, 4, 'GerenteEmpresaDemo@demoSCT.cl', 31, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(16, 4, 'GerenteEmpresaDemo@demoSCT.cl', 32, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(17, 4, 'GerenteEmpresaDemo@demoSCT.cl', 33, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(18, 4, 'GerenteEmpresaDemo@demoSCT.cl', 34, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(19, 4, 'GerenteEmpresaDemo@demoSCT.cl', 35, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(20, 4, 'GerenteEmpresaDemo@demoSCT.cl', 36, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(21, 4, 'GerenteEmpresaDemo@demoSCT.cl', 37, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(22, 4, 'GerenteEmpresaDemo@demoSCT.cl', 38, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(23, 4, 'GerenteEmpresaDemo@demoSCT.cl', 39, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(24, 4, 'GerenteEmpresaDemo@demoSCT.cl', 40, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(25, 4, 'GerenteEmpresaDemo@demoSCT.cl', 41, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(26, 4, 'GerenteEmpresaDemo@demoSCT.cl', 42, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(27, 4, 'GerenteEmpresaDemo@demoSCT.cl', 43, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(28, 4, 'GerenteEmpresaDemo@demoSCT.cl', 44, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(29, 4, 'GerenteEmpresaDemo@demoSCT.cl', 45, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(30, 4, 'GerenteEmpresaDemo@demoSCT.cl', 46, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(31, 4, 'GerenteEmpresaDemo@demoSCT.cl', 47, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(32, 4, 'GerenteEmpresaDemo@demoSCT.cl', 48, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(33, 4, 'GerenteEmpresaDemo@demoSCT.cl', 49, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(34, 4, 'GerenteEmpresaDemo@demoSCT.cl', 50, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(35, 4, 'GerenteEmpresaDemo@demoSCT.cl', 51, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(36, 4, 'GerenteEmpresaDemo@demoSCT.cl', 52, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(37, 4, 'GerenteEmpresaDemo@demoSCT.cl', 53, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(38, 4, 'GerenteEmpresaDemo@demoSCT.cl', 54, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(39, 4, 'GerenteEmpresaDemo@demoSCT.cl', 55, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(40, 4, 'GerenteEmpresaDemo@demoSCT.cl', 56, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(41, 4, 'GerenteEmpresaDemo@demoSCT.cl', 57, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(42, 4, 'GerenteEmpresaDemo@demoSCT.cl', 58, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(43, 4, 'GerenteEmpresaDemo@demoSCT.cl', 59, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(44, 4, 'GerenteEmpresaDemo@demoSCT.cl', 60, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(45, 4, 'GerenteEmpresaDemo@demoSCT.cl', 61, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(46, 4, 'GerenteEmpresaDemo@demoSCT.cl', 62, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(47, 4, 'GerenteEmpresaDemo@demoSCT.cl', 63, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(48, 4, 'GerenteEmpresaDemo@demoSCT.cl', 64, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(49, 4, 'GerenteEmpresaDemo@demoSCT.cl', 65, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(50, 4, 'GerenteEmpresaDemo@demoSCT.cl', 66, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(51, 4, 'GerenteEmpresaDemo@demoSCT.cl', 67, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(52, 4, 'GerenteEmpresaDemo@demoSCT.cl', 68, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(53, 4, 'GerenteEmpresaDemo@demoSCT.cl', 69, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(54, 4, 'GerenteEmpresaDemo@demoSCT.cl', 70, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(55, 4, 'GerenteEmpresaDemo@demoSCT.cl', 71, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(56, 4, 'GerenteEmpresaDemo@demoSCT.cl', 72, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(57, 4, 'GerenteEmpresaDemo@demoSCT.cl', 73, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(58, 4, 'GerenteEmpresaDemo@demoSCT.cl', 74, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(59, 4, 'GerenteEmpresaDemo@demoSCT.cl', 75, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(60, 4, 'GerenteEmpresaDemo@demoSCT.cl', 76, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(61, 4, 'GerenteEmpresaDemo@demoSCT.cl', 77, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(62, 4, 'GerenteEmpresaDemo@demoSCT.cl', 78, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(63, 4, 'GerenteEmpresaDemo@demoSCT.cl', 79, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(64, 4, 'GerenteEmpresaDemo@demoSCT.cl', 80, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(65, 4, 'GerenteEmpresaDemo@demoSCT.cl', 81, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(66, 4, 'GerenteEmpresaDemo@demoSCT.cl', 82, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(67, 4, 'GerenteEmpresaDemo@demoSCT.cl', 83, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(68, 4, 'GerenteEmpresaDemo@demoSCT.cl', 84, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(69, 4, 'GerenteEmpresaDemo@demoSCT.cl', 85, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(70, 4, 'GerenteEmpresaDemo@demoSCT.cl', 86, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(71, 4, 'GerenteEmpresaDemo@demoSCT.cl', 87, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(72, 4, 'GerenteEmpresaDemo@demoSCT.cl', 88, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(73, 4, 'GerenteEmpresaDemo@demoSCT.cl', 89, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(74, 4, 'GerenteEmpresaDemo@demoSCT.cl', 90, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(75, 4, 'GerenteEmpresaDemo@demoSCT.cl', 91, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(76, 4, 'GerenteEmpresaDemo@demoSCT.cl', 92, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(77, 4, 'GerenteEmpresaDemo@demoSCT.cl', 93, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(78, 4, 'GerenteEmpresaDemo@demoSCT.cl', 94, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(79, 4, 'GerenteEmpresaDemo@demoSCT.cl', 95, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(80, 4, 'GerenteEmpresaDemo@demoSCT.cl', 96, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(81, 4, 'GerenteEmpresaDemo@demoSCT.cl', 97, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(82, 4, 'GerenteEmpresaDemo@demoSCT.cl', 98, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(83, 4, 'GerenteEmpresaDemo@demoSCT.cl', 99, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(84, 4, 'GerenteEmpresaDemo@demoSCT.cl', 100, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(85, 4, 'GerenteEmpresaDemo@demoSCT.cl', 101, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(86, 4, 'GerenteEmpresaDemo@demoSCT.cl', 102, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(87, 4, 'GerenteEmpresaDemo@demoSCT.cl', 103, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(88, 4, 'GerenteEmpresaDemo@demoSCT.cl', 104, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(89, 4, 'GerenteEmpresaDemo@demoSCT.cl', 105, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(90, 4, 'GerenteEmpresaDemo@demoSCT.cl', 106, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(91, 4, 'GerenteEmpresaDemo@demoSCT.cl', 107, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(92, 4, 'GerenteEmpresaDemo@demoSCT.cl', 108, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(93, 4, 'GerenteEmpresaDemo@demoSCT.cl', 109, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(94, 4, 'GerenteEmpresaDemo@demoSCT.cl', 110, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(95, 4, 'GerenteEmpresaDemo@demoSCT.cl', 111, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(96, 4, 'GerenteEmpresaDemo@demoSCT.cl', 112, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(97, 4, 'GerenteEmpresaDemo@demoSCT.cl', 113, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(98, 4, 'GerenteEmpresaDemo@demoSCT.cl', 114, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(99, 4, 'GerenteEmpresaDemo@demoSCT.cl', 115, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(100, 4, 'GerenteEmpresaDemo@demoSCT.cl', 116, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(101, 4, 'GerenteEmpresaDemo@demoSCT.cl', 117, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(102, 4, 'GerenteEmpresaDemo@demoSCT.cl', 118, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(103, 4, 'GerenteEmpresaDemo@demoSCT.cl', 119, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(104, 4, 'GerenteEmpresaDemo@demoSCT.cl', 120, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(105, 4, 'GerenteEmpresaDemo@demoSCT.cl', 121, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(106, 4, 'GerenteEmpresaDemo@demoSCT.cl', 122, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(107, 4, 'GerenteEmpresaDemo@demoSCT.cl', 123, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(108, 4, 'GerenteEmpresaDemo@demoSCT.cl', 124, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(109, 4, 'GerenteEmpresaDemo@demoSCT.cl', 125, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(110, 4, 'GerenteEmpresaDemo@demoSCT.cl', 126, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(111, 4, 'GerenteEmpresaDemo@demoSCT.cl', 127, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(112, 4, 'GerenteEmpresaDemo@demoSCT.cl', 128, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(113, 4, 'GerenteEmpresaDemo@demoSCT.cl', 129, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(114, 4, 'GerenteEmpresaDemo@demoSCT.cl', 130, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(115, 4, 'GerenteEmpresaDemo@demoSCT.cl', 131, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(116, 4, 'GerenteEmpresaDemo@demoSCT.cl', 132, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(117, 4, 'GerenteEmpresaDemo@demoSCT.cl', 133, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(118, 4, 'GerenteEmpresaDemo@demoSCT.cl', 134, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(119, 4, 'GerenteEmpresaDemo@demoSCT.cl', 135, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(120, 4, 'GerenteEmpresaDemo@demoSCT.cl', 136, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(121, 4, 'GerenteEmpresaDemo@demoSCT.cl', 137, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(122, 4, 'GerenteEmpresaDemo@demoSCT.cl', 138, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(123, 4, 'GerenteEmpresaDemo@demoSCT.cl', 139, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(124, 4, 'GerenteEmpresaDemo@demoSCT.cl', 140, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(125, 4, 'GerenteEmpresaDemo@demoSCT.cl', 141, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(126, 4, 'GerenteEmpresaDemo@demoSCT.cl', 142, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(127, 4, 'GerenteEmpresaDemo@demoSCT.cl', 143, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(128, 4, 'GerenteEmpresaDemo@demoSCT.cl', 144, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(129, 4, 'GerenteEmpresaDemo@demoSCT.cl', 145, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(130, 4, 'GerenteEmpresaDemo@demoSCT.cl', 146, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(131, 4, 'GerenteEmpresaDemo@demoSCT.cl', 147, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(132, 4, 'GerenteEmpresaDemo@demoSCT.cl', 148, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(133, 4, 'GerenteEmpresaDemo@demoSCT.cl', 149, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(134, 4, 'GerenteEmpresaDemo@demoSCT.cl', 150, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(135, 4, 'GerenteEmpresaDemo@demoSCT.cl', 151, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(136, 4, 'GerenteEmpresaDemo@demoSCT.cl', 152, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(137, 4, 'GerenteEmpresaDemo@demoSCT.cl', 153, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(138, 4, 'GerenteEmpresaDemo@demoSCT.cl', 154, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(139, 4, 'GerenteEmpresaDemo@demoSCT.cl', 155, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(140, 4, 'GerenteEmpresaDemo@demoSCT.cl', 156, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(141, 4, 'GerenteEmpresaDemo@demoSCT.cl', 157, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(142, 4, 'GerenteEmpresaDemo@demoSCT.cl', 158, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(143, 4, 'GerenteEmpresaDemo@demoSCT.cl', 159, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(144, 4, 'GerenteEmpresaDemo@demoSCT.cl', 160, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(145, 4, 'GerenteEmpresaDemo@demoSCT.cl', 161, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(146, 4, 'GerenteEmpresaDemo@demoSCT.cl', 162, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(147, 4, 'GerenteEmpresaDemo@demoSCT.cl', 163, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(148, 4, 'GerenteEmpresaDemo@demoSCT.cl', 164, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(149, 4, 'GerenteEmpresaDemo@demoSCT.cl', 165, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(150, 4, 'GerenteEmpresaDemo@demoSCT.cl', 166, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(151, 4, 'GerenteEmpresaDemo@demoSCT.cl', 167, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(152, 4, 'GerenteEmpresaDemo@demoSCT.cl', 168, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(153, 4, 'GerenteEmpresaDemo@demoSCT.cl', 169, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(154, 4, 'GerenteEmpresaDemo@demoSCT.cl', 170, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(155, 4, 'GerenteEmpresaDemo@demoSCT.cl', 171, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(156, 4, 'GerenteEmpresaDemo@demoSCT.cl', 172, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(157, 4, 'GerenteEmpresaDemo@demoSCT.cl', 173, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(158, 4, 'GerenteEmpresaDemo@demoSCT.cl', 174, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(159, 4, 'GerenteEmpresaDemo@demoSCT.cl', 175, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(160, 4, 'GerenteEmpresaDemo@demoSCT.cl', 176, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(161, 4, 'GerenteEmpresaDemo@demoSCT.cl', 177, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(162, 4, 'GerenteEmpresaDemo@demoSCT.cl', 178, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(163, 4, 'GerenteEmpresaDemo@demoSCT.cl', 179, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(164, 4, 'GerenteEmpresaDemo@demoSCT.cl', 180, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(165, 4, 'GerenteEmpresaDemo@demoSCT.cl', 181, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(166, 4, 'GerenteEmpresaDemo@demoSCT.cl', 182, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(167, 4, 'GerenteEmpresaDemo@demoSCT.cl', 183, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(168, 4, 'GerenteEmpresaDemo@demoSCT.cl', 184, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(169, 4, 'GerenteEmpresaDemo@demoSCT.cl', 185, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(170, 4, 'GerenteEmpresaDemo@demoSCT.cl', 186, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(171, 4, 'GerenteEmpresaDemo@demoSCT.cl', 187, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(172, 4, 'GerenteEmpresaDemo@demoSCT.cl', 188, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(173, 4, 'GerenteEmpresaDemo@demoSCT.cl', 189, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(174, 4, 'GerenteEmpresaDemo@demoSCT.cl', 190, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(175, 4, 'GerenteEmpresaDemo@demoSCT.cl', 191, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(176, 4, 'GerenteEmpresaDemo@demoSCT.cl', 192, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(177, 4, 'GerenteEmpresaDemo@demoSCT.cl', 193, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(178, 4, 'GerenteEmpresaDemo@demoSCT.cl', 194, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(179, 4, 'GerenteEmpresaDemo@demoSCT.cl', 195, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(180, 4, 'GerenteEmpresaDemo@demoSCT.cl', 196, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(181, 4, 'GerenteEmpresaDemo@demoSCT.cl', 197, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(182, 4, 'GerenteEmpresaDemo@demoSCT.cl', 198, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(183, 4, 'GerenteEmpresaDemo@demoSCT.cl', 199, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(184, 4, 'GerenteEmpresaDemo@demoSCT.cl', 200, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(185, 4, 'GerenteEmpresaDemo@demoSCT.cl', 201, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(186, 4, 'GerenteEmpresaDemo@demoSCT.cl', 202, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(187, 4, 'GerenteEmpresaDemo@demoSCT.cl', 203, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(188, 4, 'GerenteEmpresaDemo@demoSCT.cl', 204, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(189, 4, 'GerenteEmpresaDemo@demoSCT.cl', 205, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(190, 4, 'GerenteEmpresaDemo@demoSCT.cl', 206, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(191, 4, 'GerenteEmpresaDemo@demoSCT.cl', 282, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(192, 4, 'GerenteEmpresaDemo@demoSCT.cl', 283, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(193, 4, 'GerenteEmpresaDemo@demoSCT.cl', 284, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(194, 4, 'GerenteEmpresaDemo@demoSCT.cl', 285, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(195, 4, 'GerenteEmpresaDemo@demoSCT.cl', 286, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(196, 4, 'GerenteEmpresaDemo@demoSCT.cl', 287, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
+(197, 4, 'GerenteEmpresaDemo@demoSCT.cl', 288, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -6000,8 +6263,10 @@ CREATE TABLE `user_onboarding` (
 
 INSERT INTO `user_onboarding` (`id_users`, `profile_completed_at`, `assessment_completed_at`, `assessment_score`, `completed_at`, `date_create`, `last_update`) VALUES
 ('adminEmpresaDemo@demoSCT.cl', '2026-10-08 19:45:29', '2026-10-08 19:54:04', 46.67, '2026-10-08 19:54:04', '2026-10-08 19:45:01', '2026-10-08 19:54:04'),
+('ContratistaEmpresaDemo@demoSCT.cl', '2026-10-26 14:33:31', '2026-10-26 14:33:49', 26.67, '2026-10-26 14:33:49', '2026-10-26 14:33:04', '2026-10-26 14:33:49'),
 ('GerenteEmpresaDemo@demoSCT.cl', '2026-10-08 23:06:13', '2026-10-08 23:06:29', 26.67, '2026-10-08 23:06:29', '2026-10-08 23:05:38', '2026-10-08 23:06:29'),
 ('JefaturaEmpresaDemo@demoSCT.cl', '2026-10-08 19:56:40', '2026-10-08 19:57:13', 6.67, '2026-10-08 19:57:13', '2026-10-08 19:56:08', '2026-10-08 19:57:13'),
+('ParamedicoEmpresaDemo@demoSCT.cl', '2026-10-26 14:23:43', '2026-10-26 14:24:04', 33.33, '2026-10-26 14:24:04', '2026-10-26 14:23:02', '2026-10-26 14:24:04'),
 ('UsuarioEmpresaDemo@demoSCT.cl', '2026-10-09 00:34:03', '2026-10-09 00:35:48', 100.00, '2026-10-09 00:35:48', '2026-10-09 00:33:26', '2026-10-09 00:35:48'),
 ('UsuarioNuevoEmpresaDemo@demoSCT.cl', NULL, NULL, NULL, NULL, '2026-10-16 16:35:44', '2026-10-16 16:35:44');
 
@@ -6039,29 +6304,12 @@ CREATE TABLE `user_profile_details` (
 
 INSERT INTO `user_profile_details` (`id_users`, `id_company`, `id_worker`, `physical_location_type`, `id_company_center`, `gbu_code`, `site_name`, `confirmed_project_id`, `hired_by_contractor`, `id_contractor_company`, `contractor_name`, `years_experience_current_role`, `emergency_contact_name`, `emergency_contact_phone`, `emergency_contact_relation`, `confirmed_at`, `created_by`, `date_create`, `last_update`) VALUES
 ('adminEmpresaDemo@demoSCT.cl', 4, 19, NULL, NULL, NULL, NULL, 7, 0, NULL, NULL, 4, 'Contacto emergencia 1', '+56935444513', 'partner', '2026-10-15 18:38:27', 'adminEmpresaDemo@demoSCT.cl', '2026-10-08 19:45:29', '2026-10-15 18:38:27'),
+('ContratistaEmpresaDemo@demoSCT.cl', 4, 288, NULL, NULL, NULL, NULL, 26, 1, 2, NULL, 8, 'Contacto emergencia 1', '935444513', 'partner', '2026-10-26 14:33:30', 'ContratistaEmpresaDemo@demoSCT.cl', '2026-10-26 14:33:30', '2026-10-26 14:33:30'),
 ('GerenteEmpresaDemo@demoSCT.cl', 4, 16, NULL, NULL, NULL, NULL, 9, 0, NULL, NULL, 6, 'Contacto emergencia 1', '+56935444513', 'friend', '2026-10-08 23:06:13', 'GerenteEmpresaDemo@demoSCT.cl', '2026-10-08 23:06:13', '2026-10-08 23:06:13'),
 ('JefaturaEmpresaDemo@demoSCT.cl', 4, 17, 'center', 7, 'GBU DEMO', 'SITIO DEMO', 26, 0, NULL, NULL, 2, 'Contacto emergencia 1', '935444513', 'partner', '2026-10-08 19:56:40', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-08 19:56:40', '2026-10-16 16:21:19'),
+('ParamedicoEmpresaDemo@demoSCT.cl', 4, 287, NULL, NULL, NULL, NULL, 26, 1, 3, NULL, 4, 'Contacto emergencia 1', '935444513', 'partner', '2026-10-26 14:23:43', 'ParamedicoEmpresaDemo@demoSCT.cl', '2026-10-26 14:23:43', '2026-10-26 14:23:43'),
 ('usuarioedemo@demosct.cl', 4, 286, NULL, NULL, 'GBU DEMO', 'SITIO DEMO', 26, 0, NULL, NULL, 0, 'Contacto emergencia 1', '+56935444513', 'friend', '2026-10-15 20:30:27', 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:30:27', '2026-10-15 20:30:27'),
 ('UsuarioEmpresaDemo@demoSCT.cl', 4, 18, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 8, 'Contacto emergencia 1', '935444513', 'partner', '2026-10-09 00:34:03', 'UsuarioEmpresaDemo@demoSCT.cl', '2026-10-09 00:34:03', '2026-10-09 00:34:03');
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user_management_assignments`
--- E3 VS3: relación Gerencia -> trabajador.
---
-
-CREATE TABLE `user_management_assignments` (
-  `id_assignment` bigint(20) UNSIGNED NOT NULL,
-  `id_company` int(11) NOT NULL,
-  `id_manager_users` varchar(50) NOT NULL,
-  `id_worker` int(11) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT 1,
-  `created_by` varchar(50) NOT NULL,
-  `date_create` datetime NOT NULL,
-  `last_update` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -6282,7 +6530,6 @@ INSERT INTO `user_supervision_assignments` (`id_assignment`, `id_company`, `id_s
 (260, 4, 'JefaturaEmpresaDemo@demoSCT.cl', 286, 1, 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:30:27', '2026-10-15 20:30:27'),
 (261, 4, 'JefaturaEmpresaDemo@demoSCT.cl', 287, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
 (262, 4, 'JefaturaEmpresaDemo@demoSCT.cl', 288, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00');
-
 
 -- --------------------------------------------------------
 
@@ -6522,8 +6769,8 @@ INSERT INTO `workers` (`id_worker`, `id_company`, `rut`, `name`, `lastname`, `em
 (284, 4, '3234578-5', 'Usuariogbu', 'DEMO', NULL, '935444514', 'Administrador de Empresa', NULL, 1, 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:21:34', '2026-10-15 20:21:34'),
 (285, 4, '9876549-8', 'Usuario', 'DEMO2', NULL, '935444513', 'Usuario Operativo', NULL, 1, 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:29:05', '2026-10-15 20:29:05'),
 (286, 4, '5648945-5', 'Usuario2', 'DEMO2', 'usuarioedemo@demosct.cl', '935444513', 'Usuario Operativo', NULL, 1, 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:30:27', '2026-10-15 20:30:27'),
-(287, 4, '90000000-6', 'Paramédico', 'DEMO', 'ParamedicoEmpresaDemo@demoSCT.cl', NULL, 'Paramédico', NULL, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00'),
-(288, 4, '90000001-4', 'Contratista', 'DEMO', 'ContratistaEmpresaDemo@demoSCT.cl', NULL, 'Contratista', NULL, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-19 19:00:00');
+(287, 4, '90000000-6', 'Paramédico', 'DEMO', 'ParamedicoEmpresaDemo@demoSCT.cl', '935444514', 'Paramédico', NULL, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-26 14:23:43'),
+(288, 4, '90000001-4', 'Contratista', 'DEMO', 'ContratistaEmpresaDemo@demoSCT.cl', '+56935444514', 'Contratista', NULL, 1, 'baseline_e3_vs3', '2026-10-19 19:00:00', '2026-10-26 14:33:30');
 
 -- --------------------------------------------------------
 
@@ -7280,6 +7527,17 @@ ALTER TABLE `user_data_consent`
   ADD KEY `idx_consent_user_version` (`id_users`,`policy_version`);
 
 --
+-- Indices de la tabla `user_management_assignments`
+--
+ALTER TABLE `user_management_assignments`
+  ADD PRIMARY KEY (`id_assignment`),
+  ADD UNIQUE KEY `uq_user_management_pair` (`id_company`,`id_manager_users`,`id_worker`),
+  ADD KEY `idx_user_management_worker` (`id_company`,`id_worker`,`state`),
+  ADD KEY `idx_user_management_manager` (`id_company`,`id_manager_users`,`state`),
+  ADD KEY `fk_user_management_manager` (`id_manager_users`),
+  ADD KEY `fk_user_management_worker` (`id_worker`);
+
+--
 -- Indices de la tabla `user_onboarding`
 --
 ALTER TABLE `user_onboarding`
@@ -7295,16 +7553,6 @@ ALTER TABLE `user_profile_details`
   ADD KEY `idx_user_profile_details_project` (`confirmed_project_id`),
   ADD KEY `idx_user_profile_details_contractor` (`id_contractor_company`);
 
-
---
--- Indices de la tabla `user_management_assignments`
---
-ALTER TABLE `user_management_assignments`
-  ADD PRIMARY KEY (`id_assignment`),
-  ADD UNIQUE KEY `uq_user_management_pair` (`id_company`,`id_manager_users`,`id_worker`),
-  ADD KEY `idx_user_management_worker` (`id_company`,`id_worker`,`state`),
-  ADD KEY `idx_user_management_manager` (`id_company`,`id_manager_users`,`state`);
-
 --
 -- Indices de la tabla `user_supervision_assignments`
 --
@@ -7315,7 +7563,6 @@ ALTER TABLE `user_supervision_assignments`
   ADD KEY `idx_usa_e3vs2_supervisor` (`id_company`,`id_supervisor_users`,`state`),
   ADD KEY `fk_usa_e3vs2_supervisor` (`id_supervisor_users`),
   ADD KEY `fk_usa_e3vs2_worker` (`id_worker`);
-
 
 --
 -- Indices de la tabla `workers`
@@ -7370,7 +7617,7 @@ ALTER TABLE `certificates`
 -- AUTO_INCREMENT de la tabla `change_history`
 --
 ALTER TABLE `change_history`
-  MODIFY `id_change` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_change` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `company`
@@ -7442,31 +7689,31 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `login_codes`
 --
 ALTER TABLE `login_codes`
-  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `onboarding_assessment_answers`
 --
 ALTER TABLE `onboarding_assessment_answers`
-  MODIFY `id_answer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id_answer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT de la tabla `onboarding_assessment_attempts`
 --
 ALTER TABLE `onboarding_assessment_attempts`
-  MODIFY `id_attempt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_attempt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `onboarding_assessment_attempt_questions`
 --
 ALTER TABLE `onboarding_assessment_attempt_questions`
-  MODIFY `id_attempt_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `id_attempt_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT de la tabla `onboarding_questions`
@@ -7610,21 +7857,19 @@ ALTER TABLE `users_test_assigned`
 -- AUTO_INCREMENT de la tabla `user_data_consent`
 --
 ALTER TABLE `user_data_consent`
-  MODIFY `id_consent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
+  MODIFY `id_consent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `user_management_assignments`
 --
 ALTER TABLE `user_management_assignments`
-  MODIFY `id_assignment` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_assignment` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT de la tabla `user_supervision_assignments`
 --
 ALTER TABLE `user_supervision_assignments`
   MODIFY `id_assignment` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
-
 
 --
 -- AUTO_INCREMENT de la tabla `workers`
@@ -7941,6 +8186,14 @@ ALTER TABLE `user_data_consent`
   ADD CONSTRAINT `fk_consent_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `user_management_assignments`
+--
+ALTER TABLE `user_management_assignments`
+  ADD CONSTRAINT `fk_user_management_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_management_manager` FOREIGN KEY (`id_manager_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_management_worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id_worker`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `user_onboarding`
 --
 ALTER TABLE `user_onboarding`
@@ -7956,15 +8209,6 @@ ALTER TABLE `user_profile_details`
   ADD CONSTRAINT `fk_user_profile_details_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_profile_details_worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id_worker`) ON DELETE SET NULL ON UPDATE CASCADE;
 
-
---
--- Filtros para la tabla `user_management_assignments`
---
-ALTER TABLE `user_management_assignments`
-  ADD CONSTRAINT `fk_user_management_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_management_manager` FOREIGN KEY (`id_manager_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_management_worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id_worker`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 --
 -- Filtros para la tabla `user_supervision_assignments`
 --
@@ -7972,7 +8216,6 @@ ALTER TABLE `user_supervision_assignments`
   ADD CONSTRAINT `fk_usa_e3vs2_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_usa_e3vs2_supervisor` FOREIGN KEY (`id_supervisor_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_usa_e3vs2_worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id_worker`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 
 --
 -- Filtros para la tabla `workers`
@@ -8002,158 +8245,7 @@ ALTER TABLE `worker_health_profile`
 ALTER TABLE `worker_projects`
   ADD CONSTRAINT `fk_workerprojects_project` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id_project`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_workerprojects_worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id_worker`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
--- --------------------------------------------------------------------------
--- E3 VS3 — Semilla jerárquica DEMO Gerencia -> trabajadores activos.
--- --------------------------------------------------------------------------
-INSERT INTO `user_management_assignments` (
-  `id_company`, `id_manager_users`, `id_worker`, `state`,
-  `created_by`, `date_create`, `last_update`
-)
-SELECT
-  4,
-  'GerenteEmpresaDemo@demoSCT.cl',
-  w.`id_worker`,
-  1,
-  'baseline_e3_vs3',
-  '2026-10-19 19:00:00',
-  '2026-10-19 19:00:00'
-FROM `workers` w
-WHERE w.`id_company`=4
-  AND w.`state`=1
-ON DUPLICATE KEY UPDATE
-  `state`=VALUES(`state`),
-  `created_by`=VALUES(`created_by`),
-  `last_update`=VALUES(`last_update`);
-
--- ============================================================================
--- E3 VS3 — VERIFICACIONES FINALES NO DESTRUCTIVAS
--- ============================================================================
-
--- No debe devolver filas: RUT duplicado dentro de la misma empresa.
-SELECT
-    id_company,
-    rut,
-    COUNT(*) AS cantidad
-FROM workers
-GROUP BY id_company,rut
-HAVING COUNT(*) > 1;
-
--- No debe devolver filas: users.id_worker inexistente.
-SELECT
-    u.id_users,
-    u.id_company,
-    u.id_worker
-FROM users u
-LEFT JOIN workers w
-  ON w.id_worker=u.id_worker
-WHERE u.id_worker IS NOT NULL
-  AND w.id_worker IS NULL;
-
--- No debe devolver filas: user y worker pertenecen a empresas diferentes.
-SELECT
-    u.id_users,
-    u.id_company AS user_company,
-    w.id_company AS worker_company,
-    u.id_worker
-FROM users u
-INNER JOIN workers w
-  ON w.id_worker=u.id_worker
-WHERE u.id_company<>w.id_company;
-
--- No debe devolver filas: worker_projects inconsistente con la empresa.
-SELECT
-    wp.id_worker,
-    w.id_company AS worker_company,
-    wp.id_project,
-    p.id_company AS project_company
-FROM worker_projects wp
-INNER JOIN workers w
-  ON w.id_worker=wp.id_worker
-INNER JOIN projects p
-  ON p.id_project=wp.id_project
-WHERE w.id_company<>p.id_company;
-
--- Auditoría de los siete perfiles canónicos DEMO.
-SELECT
-    u.id_users,
-    u.id_worker,
-    u.rut,
-    u.state AS user_state,
-    rg.name AS role_name,
-    ur.state AS role_state,
-    uc.credential_status
-FROM users u
-LEFT JOIN users_role ur
-  ON ur.id_users=u.id_users
- AND ur.state=1
-LEFT JOIN users_role_group rg
-  ON rg.id_role_group=ur.id_role_group
-LEFT JOIN user_credentials uc
-  ON uc.id_users=u.id_users
-WHERE u.id_users IN (
-    'SuperUsuarioDemo@demoSCT.cl',
-    'GerenteEmpresaDemo@demoSCT.cl',
-    'adminEmpresaDemo@demoSCT.cl',
-    'JefaturaEmpresaDemo@demoSCT.cl',
-    'UsuarioEmpresaDemo@demoSCT.cl',
-    'ParamedicoEmpresaDemo@demoSCT.cl',
-    'ContratistaEmpresaDemo@demoSCT.cl'
-)
-ORDER BY u.id_users;
-
 COMMIT;
-
-
-
--- --------------------------------------------------------------------------
--- E3 VS3 — Validación no destructiva post-importación.
--- --------------------------------------------------------------------------
-SELECT 'E3_VS3_PROFILE_DEMO' AS check_name,
-       u.id_users,
-       rg.name AS role_name,
-       u.state AS user_state,
-       uc.credential_status,
-       u.id_worker
-FROM users u
-JOIN users_role ur ON ur.id_users=u.id_users AND ur.state=1
-JOIN users_role_group rg ON rg.id_role_group=ur.id_role_group AND rg.state=1
-LEFT JOIN user_credentials uc ON uc.id_users=u.id_users
-WHERE u.id_company=4
-  AND u.id_users IN (
-    'SuperUsuarioDemo@demoSCT.cl',
-    'GerenteEmpresaDemo@demoSCT.cl',
-    'adminEmpresaDemo@demoSCT.cl',
-    'JefaturaEmpresaDemo@demoSCT.cl',
-    'UsuarioEmpresaDemo@demoSCT.cl',
-    'ParamedicoEmpresaDemo@demoSCT.cl',
-    'ContratistaEmpresaDemo@demoSCT.cl'
-  )
-ORDER BY FIELD(rg.name,'superusuario','gerente','administrador_cliente','jefatura','usuario','paramedico','contratista');
-
-SELECT 'E3_VS3_ORPHAN_USERS_WORKER' AS check_name, COUNT(*) AS total
-FROM users u
-LEFT JOIN workers w ON w.id_worker=u.id_worker AND w.id_company=u.id_company
-WHERE u.id_worker IS NOT NULL AND w.id_worker IS NULL;
-
-SELECT 'E3_VS3_ORPHAN_WORKER_PROJECT' AS check_name, COUNT(*) AS total
-FROM worker_projects wp
-LEFT JOIN workers w ON w.id_worker=wp.id_worker
-LEFT JOIN projects p ON p.id_project=wp.id_project
-WHERE w.id_worker IS NULL OR p.id_project IS NULL OR w.id_company<>p.id_company;
-
-SELECT 'E3_VS3_JEFATURA_DEMO_SUPERVISION' AS check_name, COUNT(*) AS total
-FROM user_supervision_assignments
-WHERE id_company=4
-  AND id_supervisor_users='JefaturaEmpresaDemo@demoSCT.cl'
-  AND state=1;
-
-SELECT 'E3_VS3_GERENTE_DEMO_MANAGEMENT' AS check_name, COUNT(*) AS total
-FROM user_management_assignments
-WHERE id_company=4
-  AND id_manager_users='GerenteEmpresaDemo@demoSCT.cl'
-  AND state=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

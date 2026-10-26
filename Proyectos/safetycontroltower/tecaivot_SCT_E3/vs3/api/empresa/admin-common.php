@@ -20,7 +20,11 @@ function sctAdminCompanyContext(PDO $pdo): array
 
     if (
         !$context
-        || $role!=='administrador_cliente'
+        || !in_array(
+            $role,
+            ['administrador_cliente','gerente'],
+            true
+        )
     ) {
         responderJSON(false,null,t('common_forbidden'),403);
     }
@@ -35,8 +39,11 @@ function sctAdminCompanyContext(PDO $pdo): array
 function sctAdminCompanyRequireCompanyWrite(array $context): void
 {
     if (
-        (string)($context['company_management_role'] ?? '')
-        !== 'administrador_cliente'
+        !in_array(
+            (string)($context['company_management_role'] ?? ''),
+            ['administrador_cliente','gerente'],
+            true
+        )
     ) {
         responderJSON(false,null,t('common_forbidden'),403);
     }
@@ -46,7 +53,7 @@ function sctAdminCompanyRequireCenterWrite(array $context): void
 {
     $role=(string)($context['company_management_role'] ?? '');
 
-    if ($role!=='administrador_cliente') {
+    if (!in_array($role,['administrador_cliente','gerente'],true)) {
         responderJSON(
             false,
             null,
@@ -60,7 +67,7 @@ function sctAdminCompanyRequireScopeWrite(array $context): void
 {
     $role=(string)($context['company_management_role'] ?? '');
 
-    if ($role!=='administrador_cliente') {
+    if (!in_array($role,['administrador_cliente','gerente'],true)) {
         responderJSON(
             false,
             null,

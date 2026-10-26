@@ -1,6 +1,6 @@
 <?php
 /**
- * Canonical role catalogue for Safety Control Tower E3-VS1.
+ * Canonical role catalogue for Safety Control Tower E3-VS3.
  *
  * IMPORTANT DOMAIN RULE:
  * - "workers" is the personnel master-data entity.
@@ -140,10 +140,7 @@ final class SctRolePolicy
         ],
         'jefatura' => [
             'companies.view_own',
-            'users.manage','users.create','users.assign_roles','users.view','users.edit','users.state','users.access','users.photo',
-            'workers.manage','workers.view','workers.create','workers.edit','workers.state','workers.photo',
-            'projects.manage','projects.view','projects.create','projects.edit','projects.state','projects.assign_workers',
-            'centers.manage','centers.view','centers.create','centers.edit','centers.state',
+            'workers.view','projects.view','centers.view',
             'events.manage','events.view','events.create','events.edit','events.state','events.evidence_upload','events.evidence_manage','events.tracking',
             'induction.manage','induction.view','induction.create','induction.edit','induction.state','induction.assign','induction.materials','induction.questions','induction.execute',
             'audits.manage','audits.view','audits.create','audits.edit','audits.state','audits.assign','audits.questions','audits.execute',
@@ -158,8 +155,8 @@ final class SctRolePolicy
             'dynamic_forms.view','dynamic_forms.submit','dynamic_forms.files',
             'protocols.view','dashboard.view','programs.view',
         ],
-        'paramedico' => ['users.view','induction.view','induction.execute'],
-        'contratista' => ['users.view','dynamic_forms.view','dynamic_forms.submit','dynamic_forms.files'],
+        'paramedico' => ['induction.view','induction.execute'],
+        'contratista' => ['dynamic_forms.view','dynamic_forms.submit','dynamic_forms.files'],
     ];
 
     public static function canonical(string $role): string

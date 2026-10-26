@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     let dataset=null;
     let loaded=false;
     let bypass=false;
+    let scopeEditable=true;
 
     function escapeHtml(value){
         return String(value ?? "")
@@ -163,7 +164,15 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     function render(data){
         dataset=data;
+        scopeEditable=data?.scope_editable !== false;
 
+        if(!scopeEditable){
+            card.classList.add("d-none");
+            loaded=true;
+            return;
+        }
+
+        card.classList.remove("d-none");
         location.replaceChildren();
         option(
             location,
@@ -242,6 +251,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
     function valid(){
+        if(!scopeEditable) return true;
+
         let ok=true;
 
         [gbu,site].forEach(field=>{
@@ -276,6 +287,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     submit.addEventListener("click",async event=>{
         if(bypass) return;
+
+        /*
+         * Perfiles sin entidad worker (por ejemplo SuperUsuario) mantienen
+         * la autogestión personal, pero no deben intentar persistir una
+         * asignación organizacional inexistente.
+         */
+        if(!scopeEditable) return;
 
         if(!valid()){
             event.preventDefault();

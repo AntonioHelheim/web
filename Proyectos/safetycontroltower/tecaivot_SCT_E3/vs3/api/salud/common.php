@@ -23,36 +23,19 @@ function saludReadJsonInput(): array
 }
 
 /**
- * E3 VS2 — acceso al formulario personal.
+ * E3 VS3 — autogestión transversal del formulario personal.
  *
- * HEALTH_FORM_ROLES mantiene la política de usuarios a quienes el sistema
- * puede exigir el formulario mediante el health gate.
+ * Todos los grupos de perfil autenticados pueden consultar y actualizar
+ * exclusivamente SU propio formulario. Los endpoints que usan este helper
+ * resuelven siempre currentUserProfile() y no reciben un id_users objetivo.
  *
- * Administrador Cliente y Jefatura se agregan aquí sólo como acceso
- * voluntario a SU propio formulario. Los endpoints
- * formulario-obtener/formulario-guardar resuelven siempre
- * currentUserProfile() y no admiten un id_users objetivo, por lo que esta
- * excepción no habilita lectura/escritura de salud de terceros.
+ * Esta política NO concede lectura/escritura sobre formularios de terceros;
+ * esos alcances deben implementarse, si corresponden, mediante endpoints
+ * separados con autorización específica.
  */
 function saludCanUseOwnForm(PDO $pdo): bool
 {
-    foreach (currentUserRoles($pdo) as $role) {
-        $canonical = canonicalRoleName((string)$role);
-
-        if (in_array($canonical, HEALTH_FORM_ROLES, true)) {
-            return true;
-        }
-
-        if (
-            $canonical === 'administrador_cliente'
-            || $canonical === 'administrador'
-            || $canonical === 'jefatura'
-        ) {
-            return true;
-        }
-    }
-
-    return false;
+    return currentUserId() !== null;
 }
 
 function saludRequireWorker(PDO $pdo): array

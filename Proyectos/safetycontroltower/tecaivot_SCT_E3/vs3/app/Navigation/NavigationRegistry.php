@@ -15,7 +15,7 @@ final class SctNavigationRegistry
             'authenticated' => true,
         ];
 
-        if ($role === 'usuario') {
+        if (in_array($role, ['usuario','paramedico','contratista'], true)) {
             $items = [
                 $home,
                 [

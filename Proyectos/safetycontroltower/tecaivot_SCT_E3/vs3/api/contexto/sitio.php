@@ -9,7 +9,13 @@ require_once __DIR__ . '/../../app/Home/AdminSiteScopeService.php';
 requireLoginPage('../../acceso-denegado.php');
 
 $roles = currentUserRoles($pdo);
-if (primaryRoleName($roles) !== 'administrador_cliente') {
+$primaryRole = primaryRoleName($roles);
+
+if (!in_array(
+    $primaryRole,
+    ['administrador_cliente','jefatura','gerente'],
+    true
+)) {
     header('Location: ../../acceso-denegado.php');
     exit;
 }

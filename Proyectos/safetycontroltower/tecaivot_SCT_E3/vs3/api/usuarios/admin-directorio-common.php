@@ -24,7 +24,11 @@ function sctAdminDirectoryContext(PDO $pdo): array
 
     if (
         !$context
-        || $role!=='administrador_cliente'
+        || !in_array(
+            $role,
+            ['administrador_cliente','gerente'],
+            true
+        )
     ) {
         responderJSON(false,null,t('common_forbidden'),403);
     }

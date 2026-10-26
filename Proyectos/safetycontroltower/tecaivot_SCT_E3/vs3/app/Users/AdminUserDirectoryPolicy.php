@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Safety Control Tower — Etapa 3 VS2
+ * Safety Control Tower — Etapa 3 VS3
  *
- * Política específica del directorio Administrador Cliente.
- * El Administrador puede consultar/editar perfiles de su propia empresa
- * en niveles 2..7. Nivel 1 (SuperUsuario) queda excluido explícitamente.
+ * Política del directorio para perfiles de gestión de empresa.
+ * Administrador Cliente: niveles 2..7 de su propia empresa.
+ * Gerente: niveles 3..7 de su propia empresa (no otro Gerente ni SuperUsuario).
+ * Jefatura: política histórica 4..7, sujeta a asignación cuando corresponda.
  *
  * Alias históricos soportados:
  * - administrador_completo -> superusuario
@@ -17,6 +18,7 @@ final class SctAdminUserDirectoryPolicy
 {
     public const LEVEL_SUPERUSER = 1;
     public const MANAGED_LEVELS = [2, 3, 4, 5, 6, 7];
+    public const GERENTE_MANAGED_LEVELS = [3, 4, 5, 6, 7];
     public const JEFATURA_MANAGED_LEVELS = [4, 5, 6, 7];
 
     public static function roleLevelSql(string $roleAlias='rg'): string
@@ -90,6 +92,9 @@ final class SctAdminUserDirectoryPolicy
         $actorRole=mb_strtolower(trim($actorRole),'UTF-8');
 
         return match ($actorRole) {
+            'gerente',
+            'gerencia',
+            'cliente' => self::GERENTE_MANAGED_LEVELS,
             'jefatura' => self::JEFATURA_MANAGED_LEVELS,
             'administrador_cliente',
             'administrador' => self::MANAGED_LEVELS,

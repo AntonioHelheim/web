@@ -47,11 +47,9 @@ try {
     }
 
     /*
-     * E3 VS2 — Jefatura usa exactamente el motor de Administrador.
-     *
-     * Primero se ejecuta repo->search() sin supervisor_scope y con los
-     * niveles generales, de modo que GBU/Sitio/Proyecto funcionen igual que
-     * para Administrador.
+     * E3 VS3 — el directorio usa el mismo motor para los perfiles de
+     * gestión autorizados, pero recibe los niveles permitidos por política.
+     * Gerente queda limitado a niveles 3..7 dentro de su empresa.
      */
     $users=$repo->search(
         $companyId,
@@ -61,7 +59,7 @@ try {
         $query,
         60,
         null,
-        SctAdminUserDirectoryPolicy::MANAGED_LEVELS
+        (array)$context['managed_levels']
     );
 
     /*

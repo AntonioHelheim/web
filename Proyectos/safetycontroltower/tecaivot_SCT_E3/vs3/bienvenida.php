@@ -23,22 +23,30 @@ if ($rolPrincipal === null) { header('Location: acceso-denegado.php'); exit; }
 $rolEtiqueta = roleDisplayLabel($rolPrincipal);
 $esSuperUsuario = $rolPrincipal === 'superusuario';
 $esUsuarioPerfil = $rolPrincipal === 'usuario';
+$esParamedicoPerfil = $rolPrincipal === 'paramedico';
+$esContratistaPerfil = $rolPrincipal === 'contratista';
+$usaPortalUsuario = $esUsuarioPerfil || $esParamedicoPerfil || $esContratistaPerfil;
 $esAdministradorPerfil = $rolPrincipal === 'administrador_cliente';
 $esJefaturaPerfil = $rolPrincipal === 'jefatura';
-$usaPortalAdministrador = $esAdministradorPerfil || $esJefaturaPerfil;
+$esGerentePerfil = $rolPrincipal === 'gerente';
+$usaPortalAdministrador = $esAdministradorPerfil || $esJefaturaPerfil || $esGerentePerfil;
+$usaPortalSuperUsuario = $esSuperUsuario;
 
 /*
- * E3 VS2:
- * Jefatura conserva el portal operativo (resumen/sitio/cursos), pero queda
- * fuera del alcance de Gestión de Usuarios y Gestión de Empresas.
+ * E3 VS3:
+ * - Jefatura conserva el portal operativo, sin Gestión de Usuarios/Empresas.
+ * - Gerente hereda visualmente el portal de Jefatura, pero puede administrar
+ *   usuarios/trabajadores y estructura de SU propia empresa.
+ * - Administrador Cliente conserva su alcance vigente dentro de su empresa.
  */
-$puedeGestionarUsuariosEmpresas = $esAdministradorPerfil;
-// E3 VS2:
-// - Usuario y Administrador Cliente utilizan el mismo modal de Datos de usuario.
-// - El endpoint de salud autoriza al Administrador Cliente únicamente sobre
-//   su propio registro autenticado; no concede acceso clínico a terceros.
-// - perfil-completo.php permanece en Gestión de Usuarios para administrar
-//   cuentas de la misma empresa según la política organizacional.
+$puedeGestionarUsuariosEmpresas = $esAdministradorPerfil || $esGerentePerfil;
+// E3 VS3 — autogestión transversal:
+// - Todos los grupos de perfil autenticados usan el mismo modal "Datos de usuario"
+//   exclusivamente sobre su propia cuenta.
+// - El backend resuelve siempre currentUserProfile(); el formulario personal no
+//   acepta un id_users objetivo y no concede acceso a datos de terceros.
+// - Las funciones administrativas sobre terceros continúan separadas en Gestión
+//   de Usuarios y conservan sus políticas de autorización.
 
 $nombrePila = $perfil['name'] ?? ucfirst(explode('@',$userEmailRaw !== '' ? $userEmailRaw : 'usuario')[0]);
 $nombrePila = capitalizarNombre((string)$nombrePila);
@@ -68,12 +76,39 @@ $logros = logrosPorModulo($pdo,$userEmailRaw);
 $directModules = SctNavigationRegistry::direct($pdo,'./');
 $userOperationalModules = [];
 
-if ($esUsuarioPerfil) {
+if ($usaPortalUsuario) {
     $directModules = [];
     $userOperationalModules = SctNavigationRegistry::userOperationalModules($pdo,'./');
+
+    /*
+     * E3 VS3 — Paramédico y Contratista parten visualmente desde Usuario.
+     * Sus módulos especializados quedan declarados como futuros, sin abrir
+     * alcances adicionales antes de recibir la definición funcional del sponsor.
+     */
+    if ($esParamedicoPerfil) {
+        $userOperationalModules[] = [
+            'id' => 'occupational_health',
+            'label' => t('paramedic_health_module'),
+            'icon' => 'bi-heart-pulse',
+            'brand' => 'cyan',
+            'href' => '',
+            'disabled' => true,
+        ];
+    }
+
+    if ($esContratistaPerfil) {
+        $userOperationalModules[] = [
+            'id' => 'contractor_documents',
+            'label' => t('contractor_documents_module'),
+            'icon' => 'bi-folder2-open',
+            'brand' => 'violet',
+            'href' => '',
+            'disabled' => true,
+        ];
+    }
 }
 
-if (!$esUsuarioPerfil) {
+if (!$usaPortalUsuario) {
     $directModules = array_values(array_filter(
         $directModules,
         static fn(array $item): bool => ($item['id'] ?? '') !== 'my_data'
@@ -105,9 +140,9 @@ if ($usaPortalAdministrador) {
         $adminCompanyId = (int)($perfil['id_company'] ?? 0);
 
         /*
-         * E3 VS2 — catálogos organizacionales para creación desde Jefatura.
-         * Cada consulta está aislada para no provocar HTTP 500.
-         * No se filtran por GBU, Sitio, Proyecto ni asignación previa.
+         * E3 VS3 — catálogos organizacionales compartidos por los perfiles
+         * de gestión autorizados. Cada consulta está aislada para no provocar
+         * HTTP 500 y permanece limitada a la empresa autenticada.
          */
         try {
             $stmt=$pdo->prepare(
@@ -271,6 +306,128 @@ if ($usaPortalAdministrador) {
     }
 }
 
+
+/*
+ * E3 VS3 — SuperUsuario.
+ *
+ * Vista transversal de plataforma basada visualmente en Administrador.
+ * En esta fase se exponen datos reales de todas las empresas, usuarios,
+ * trabajadores y proyectos. Los CRUD globales/configuración avanzada
+ * permanecen fuera de alcance hasta contar con definición funcional del sponsor.
+ */
+$superUserTotals = [
+    'companies'=>0,
+    'users'=>0,
+    'workers'=>0,
+    'projects'=>0,
+];
+$superUserCompanies = [];
+$superUserUsers = [];
+
+if ($usaPortalSuperUsuario) {
+    try {
+        $superUserTotals['companies']=(int)$pdo
+            ->query('SELECT COUNT(*) FROM company WHERE state=1')
+            ->fetchColumn();
+
+        $superUserTotals['users']=(int)$pdo
+            ->query('SELECT COUNT(*) FROM users')
+            ->fetchColumn();
+
+        $superUserTotals['workers']=(int)$pdo
+            ->query('SELECT COUNT(*) FROM workers')
+            ->fetchColumn();
+
+        $superUserTotals['projects']=(int)$pdo
+            ->query('SELECT COUNT(*) FROM projects WHERE state=1')
+            ->fetchColumn();
+
+        $stmt=$pdo->query(
+            "SELECT
+                c.id_company,
+                c.razon_social,
+                c.rut,
+                c.state,
+                COUNT(DISTINCT u.id_users) AS user_count,
+                COUNT(DISTINCT w.id_worker) AS worker_count,
+                COUNT(DISTINCT CASE WHEN p.state=1 THEN p.id_project END)
+                    AS project_count
+             FROM company c
+             LEFT JOIN users u
+               ON u.id_company=c.id_company
+             LEFT JOIN workers w
+               ON w.id_company=c.id_company
+             LEFT JOIN projects p
+               ON p.id_company=c.id_company
+             GROUP BY
+                c.id_company,
+                c.razon_social,
+                c.rut,
+                c.state
+             ORDER BY
+                c.state DESC,
+                c.razon_social,
+                c.id_company"
+        );
+        $superUserCompanies=$stmt->fetchAll() ?: [];
+
+        $stmt=$pdo->query(
+            "SELECT
+                u.id_users,
+                u.name,
+                u.lastname,
+                u.state,
+                c.id_company,
+                c.razon_social AS company_name,
+                GROUP_CONCAT(
+                    DISTINCT CASE
+                        WHEN ur.state=1 AND rg.state=1
+                        THEN rg.name
+                    END
+                    ORDER BY rg.name
+                    SEPARATOR ', '
+                ) AS role_names
+             FROM users u
+             LEFT JOIN company c
+               ON c.id_company=u.id_company
+             LEFT JOIN users_role ur
+               ON ur.id_users=u.id_users
+              AND ur.state=1
+             LEFT JOIN users_role_group rg
+               ON rg.id_role_group=ur.id_role_group
+              AND rg.state=1
+             GROUP BY
+                u.id_users,
+                u.name,
+                u.lastname,
+                u.state,
+                c.id_company,
+                c.razon_social
+             ORDER BY
+                COALESCE(c.razon_social,''),
+                u.name,
+                u.lastname,
+                u.id_users
+             LIMIT 250"
+        );
+        $superUserUsers=$stmt->fetchAll() ?: [];
+    } catch (Throwable $e) {
+        error_log(
+            'bienvenida superusuario global: '
+            . $e->getMessage()
+        );
+
+        $superUserTotals = [
+            'companies'=>0,
+            'users'=>0,
+            'workers'=>0,
+            'projects'=>0,
+        ];
+        $superUserCompanies = [];
+        $superUserUsers = [];
+    }
+}
+
 $latestEvaluation = null;
 try {
     $latestEvaluation = (new SctUserEvaluationRepository($pdo))
@@ -388,7 +545,6 @@ if ($latestEvaluation) {
         <i class="bi bi-arrow-right home-module-card__arrow"></i>
       </a>
 
-      <?php if($esUsuarioPerfil || $esAdministradorPerfil || $esJefaturaPerfil): ?>
       <button
         class="home-module-card home-module-card--user-shortcut home-module-card--button"
         data-brand="navy"
@@ -404,32 +560,293 @@ if ($latestEvaluation) {
         </span>
         <i class="bi bi-pencil-square home-module-card__arrow"></i>
       </button>
-      <?php else: ?>
-      <a
-        class="home-module-card home-module-card--user-shortcut"
-        data-brand="navy"
-        href="api/usuarios/mi-perfil.php"
-      >
-        <span class="home-module-card__main">
-          <span class="home-module-card__icon"><i class="bi bi-person-vcard"></i></span>
-          <span>
-            <h3><?= htmlspecialchars(t('home_user_data'),ENT_QUOTES,'UTF-8') ?></h3>
-            <small><?= htmlspecialchars(t('home_user_data_general_intro'),ENT_QUOTES,'UTF-8') ?></small>
-          </span>
-        </span>
-        <i class="bi bi-pencil-square home-module-card__arrow"></i>
-      </a>
-      <?php endif; ?>
 
     </div>
   </section>
+
+
+  <?php if($usaPortalSuperUsuario): ?>
+  <section
+    class="worker-module-section admin-portal"
+    id="superuser-global-portal"
+    data-superuser-global-portal
+  >
+    <div class="worker-section-head">
+      <div>
+        <span class="section-label">
+          <?= htmlspecialchars(t('superuser_global_eyebrow'),ENT_QUOTES,'UTF-8') ?>
+        </span>
+        <h2>
+          <?= htmlspecialchars(t('superuser_global_title'),ENT_QUOTES,'UTF-8') ?>
+        </h2>
+        <p>
+          <?= htmlspecialchars(t('superuser_global_intro'),ENT_QUOTES,'UTF-8') ?>
+        </p>
+      </div>
+    </div>
+
+    <div class="admin-project-coverage superuser-global-kpis">
+      <div data-tone="navy">
+        <span>
+          <i class="bi bi-buildings"></i>
+          <?= htmlspecialchars(t('superuser_companies'),ENT_QUOTES,'UTF-8') ?>
+        </span>
+        <strong><?= (int)$superUserTotals['companies'] ?></strong>
+      </div>
+      <div data-tone="green">
+        <span>
+          <i class="bi bi-people"></i>
+          <?= htmlspecialchars(t('superuser_users'),ENT_QUOTES,'UTF-8') ?>
+        </span>
+        <strong><?= (int)$superUserTotals['users'] ?></strong>
+      </div>
+      <div data-tone="cyan">
+        <span>
+          <i class="bi bi-person-workspace"></i>
+          <?= htmlspecialchars(t('superuser_workers'),ENT_QUOTES,'UTF-8') ?>
+        </span>
+        <strong><?= (int)$superUserTotals['workers'] ?></strong>
+      </div>
+      <div data-tone="violet">
+        <span>
+          <i class="bi bi-diagram-3"></i>
+          <?= htmlspecialchars(t('superuser_projects'),ENT_QUOTES,'UTF-8') ?>
+        </span>
+        <strong><?= (int)$superUserTotals['projects'] ?></strong>
+      </div>
+    </div>
+
+    <div class="admin-portal-panel superuser-global-panel">
+      <div class="admin-portal-panel__head">
+        <div>
+          <span class="section-label">
+            <?= htmlspecialchars(t('superuser_companies'),ENT_QUOTES,'UTF-8') ?>
+          </span>
+          <h3>
+            <?= htmlspecialchars(t('superuser_companies_title'),ENT_QUOTES,'UTF-8') ?>
+          </h3>
+          <p>
+            <?= htmlspecialchars(t('superuser_companies_intro'),ENT_QUOTES,'UTF-8') ?>
+          </p>
+        </div>
+      </div>
+
+      <?php if(!$superUserCompanies): ?>
+        <div class="admin-portal-empty">
+          <i class="bi bi-info-circle"></i>
+          <span><?= htmlspecialchars(t('superuser_no_companies'),ENT_QUOTES,'UTF-8') ?></span>
+        </div>
+      <?php else: ?>
+        <div class="admin-site-grid admin-site-grid--database">
+          <?php foreach($superUserCompanies as $company): ?>
+          <article class="admin-site-group">
+            <div class="admin-site-group__head">
+              <span>
+                <i class="bi bi-building"></i>
+                <?= htmlspecialchars(
+                    (string)($company['razon_social'] ?? ''),
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+              </span>
+              <small>
+                <?= htmlspecialchars(
+                    ((int)($company['state'] ?? 0)===1)
+                        ? t('superuser_status_active')
+                        : t('superuser_status_inactive'),
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+              </small>
+            </div>
+
+            <div class="admin-company-summary">
+              <p>
+                <strong><?= htmlspecialchars(t('superuser_company_rut'),ENT_QUOTES,'UTF-8') ?>:</strong>
+                <?= htmlspecialchars((string)($company['rut'] ?? '—'),ENT_QUOTES,'UTF-8') ?>
+              </p>
+              <div class="admin-project-coverage">
+                <div data-tone="green">
+                  <span><?= htmlspecialchars(t('superuser_users'),ENT_QUOTES,'UTF-8') ?></span>
+                  <strong><?= (int)($company['user_count'] ?? 0) ?></strong>
+                </div>
+                <div data-tone="cyan">
+                  <span><?= htmlspecialchars(t('superuser_workers'),ENT_QUOTES,'UTF-8') ?></span>
+                  <strong><?= (int)($company['worker_count'] ?? 0) ?></strong>
+                </div>
+                <div data-tone="violet">
+                  <span><?= htmlspecialchars(t('superuser_projects'),ENT_QUOTES,'UTF-8') ?></span>
+                  <strong><?= (int)($company['project_count'] ?? 0) ?></strong>
+                </div>
+              </div>
+            </div>
+          </article>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <div class="admin-portal-panel superuser-global-panel mt-4">
+      <div class="admin-portal-panel__head">
+        <div>
+          <span class="section-label">
+            <?= htmlspecialchars(t('superuser_users'),ENT_QUOTES,'UTF-8') ?>
+          </span>
+          <h3>
+            <?= htmlspecialchars(t('superuser_users_title'),ENT_QUOTES,'UTF-8') ?>
+          </h3>
+          <p>
+            <?= htmlspecialchars(t('superuser_users_intro'),ENT_QUOTES,'UTF-8') ?>
+          </p>
+        </div>
+      </div>
+
+      <?php if(!$superUserUsers): ?>
+        <div class="admin-portal-empty">
+          <i class="bi bi-info-circle"></i>
+          <span><?= htmlspecialchars(t('superuser_no_users'),ENT_QUOTES,'UTF-8') ?></span>
+        </div>
+      <?php else: ?>
+        <div class="table-responsive">
+          <table class="table align-middle admin-user-results-table">
+            <thead>
+              <tr>
+                <th><?= htmlspecialchars(t('superuser_user'),ENT_QUOTES,'UTF-8') ?></th>
+                <th><?= htmlspecialchars(t('superuser_company'),ENT_QUOTES,'UTF-8') ?></th>
+                <th><?= htmlspecialchars(t('superuser_role'),ENT_QUOTES,'UTF-8') ?></th>
+                <th><?= htmlspecialchars(t('superuser_status'),ENT_QUOTES,'UTF-8') ?></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($superUserUsers as $globalUser): ?>
+              <tr>
+                <td>
+                  <strong>
+                    <?= htmlspecialchars(
+                        trim(
+                            (string)($globalUser['name'] ?? '')
+                            . ' '
+                            . (string)($globalUser['lastname'] ?? '')
+                        ) ?: (string)$globalUser['id_users'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                  </strong>
+                  <small class="d-block text-body-secondary">
+                    <?= htmlspecialchars((string)$globalUser['id_users'],ENT_QUOTES,'UTF-8') ?>
+                  </small>
+                </td>
+                <td>
+                  <?= htmlspecialchars(
+                      (string)($globalUser['company_name'] ?? t('superuser_platform_scope')),
+                      ENT_QUOTES,
+                      'UTF-8'
+                  ) ?>
+                </td>
+                <td>
+                  <?= htmlspecialchars(
+                      (string)($globalUser['role_names'] ?: '—'),
+                      ENT_QUOTES,
+                      'UTF-8'
+                  ) ?>
+                </td>
+                <td>
+                  <?= htmlspecialchars(
+                      ((int)$globalUser['state']===1)
+                          ? t('superuser_status_active')
+                          : t('superuser_status_inactive'),
+                      ENT_QUOTES,
+                      'UTF-8'
+                  ) ?>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <div class="admin-portal-panel superuser-global-panel mt-4">
+      <div class="admin-portal-panel__head">
+        <div>
+          <span class="section-label">
+            <?= htmlspecialchars(t('superuser_future_tools'),ENT_QUOTES,'UTF-8') ?>
+          </span>
+          <h3>
+            <?= htmlspecialchars(t('superuser_future_tools_title'),ENT_QUOTES,'UTF-8') ?>
+          </h3>
+          <p>
+            <?= htmlspecialchars(t('superuser_future_tools_intro'),ENT_QUOTES,'UTF-8') ?>
+          </p>
+        </div>
+      </div>
+
+      <div class="admin-overview-grid">
+        <button
+          type="button"
+          class="admin-overview-card is-disabled"
+          data-tone="navy"
+          disabled
+          aria-disabled="true"
+        >
+          <span class="admin-overview-card__icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <strong>
+            <?= htmlspecialchars(t('superuser_permissions_module'),ENT_QUOTES,'UTF-8') ?>
+          </strong>
+          <small><?= htmlspecialchars(t('home_coming_soon'),ENT_QUOTES,'UTF-8') ?></small>
+        </button>
+
+        <button
+          type="button"
+          class="admin-overview-card is-disabled"
+          data-tone="violet"
+          disabled
+          aria-disabled="true"
+        >
+          <span class="admin-overview-card__icon">
+            <i class="bi bi-tools"></i>
+          </span>
+          <strong>
+            <?= htmlspecialchars(t('superuser_support_module'),ENT_QUOTES,'UTF-8') ?>
+          </strong>
+          <small><?= htmlspecialchars(t('home_coming_soon'),ENT_QUOTES,'UTF-8') ?></small>
+        </button>
+
+        <button
+          type="button"
+          class="admin-overview-card is-disabled"
+          data-tone="cyan"
+          disabled
+          aria-disabled="true"
+        >
+          <span class="admin-overview-card__icon">
+            <i class="bi bi-gear-wide-connected"></i>
+          </span>
+          <strong>
+            <?= htmlspecialchars(t('superuser_configuration_module'),ENT_QUOTES,'UTF-8') ?>
+          </strong>
+          <small><?= htmlspecialchars(t('home_coming_soon'),ENT_QUOTES,'UTF-8') ?></small>
+        </button>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
 
   <?php if($usaPortalAdministrador): ?>
   <section class="worker-module-section admin-portal" id="admin-portal" data-admin-portal>
     <div class="worker-section-head">
       <div>
         <h2><?= htmlspecialchars(t('admin_portal_title'),ENT_QUOTES,'UTF-8') ?></h2>
-        <p><?= htmlspecialchars(t('admin_portal_intro'),ENT_QUOTES,'UTF-8') ?></p>
+        <p><?= htmlspecialchars(
+            $esGerentePerfil
+                ? t('gerente_portal_intro')
+                : t('admin_portal_intro'),
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?></p>
       </div>
     </div>
 
@@ -665,9 +1082,11 @@ if ($latestEvaluation) {
         <span class="section-label"><?= htmlspecialchars(t('admin_users_section_eyebrow'),ENT_QUOTES,'UTF-8') ?></span>
         <h2><?= htmlspecialchars(t('admin_users_section_title'),ENT_QUOTES,'UTF-8') ?></h2>
         <p><?= htmlspecialchars(
-            $esJefaturaPerfil
-                ? t('jefatura_users_section_intro')
-                : t('admin_users_section_intro'),
+            $esGerentePerfil
+                ? t('gerente_users_section_intro')
+                : ($esJefaturaPerfil
+                    ? t('jefatura_users_section_intro')
+                    : t('admin_users_section_intro')),
             ENT_QUOTES,
             'UTF-8'
         ) ?></p>
@@ -1077,12 +1496,20 @@ if ($latestEvaluation) {
   <?php endif; // puedeGestionarUsuariosEmpresas ?>
   <?php endif; ?>
 
-  <?php if($esUsuarioPerfil): ?>
+  <?php if($usaPortalUsuario): ?>
   <section class="worker-module-section" id="modulos">
     <div class="worker-section-head">
       <div>
         <h2><?= htmlspecialchars(t('home_user_modules_title'),ENT_QUOTES,'UTF-8') ?></h2>
-        <p><?= htmlspecialchars(t('home_user_modules_intro'),ENT_QUOTES,'UTF-8') ?></p>
+        <p><?= htmlspecialchars(
+            $esParamedicoPerfil
+                ? t('paramedic_modules_intro')
+                : ($esContratistaPerfil
+                    ? t('contractor_modules_intro')
+                    : t('home_user_modules_intro')),
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?></p>
       </div>
     </div>
 
@@ -1110,7 +1537,7 @@ if ($latestEvaluation) {
   </section>
   <?php endif; ?>
 
-  <?php if(!$esUsuarioPerfil && !$usaPortalAdministrador): ?>
+  <?php if(!$usaPortalUsuario && !$usaPortalAdministrador && !$usaPortalSuperUsuario): ?>
   <section class="worker-module-section"><div class="worker-section-head"><div><h2><?= htmlspecialchars(t('home_direct_access'),ENT_QUOTES,'UTF-8') ?></h2><p><?= htmlspecialchars(t('welcome_intro'),ENT_QUOTES,'UTF-8') ?></p></div></div>
     <div class="worker-module-grid">
       <?php foreach($directModules as $item): ?>
@@ -1124,7 +1551,7 @@ if ($latestEvaluation) {
   </section>
   <?php endif; ?>
 
-  <?php if(!$esUsuarioPerfil && !$usaPortalAdministrador && $managementModules): ?><section class="worker-module-section"><div class="worker-section-head"><div><h2><?= htmlspecialchars(t('mgmt_title'),ENT_QUOTES,'UTF-8') ?></h2></div></div><div class="management-module-grid"><?php foreach($managementModules as $module): ?><a class="management-module-card" data-tone="<?= htmlspecialchars($module['tone'],ENT_QUOTES,'UTF-8') ?>" href="<?= htmlspecialchars($module['href'],ENT_QUOTES,'UTF-8') ?>"><span class="home-module-card__icon"><i class="bi <?= htmlspecialchars($module['icon'],ENT_QUOTES,'UTF-8') ?>"></i></span><div><h3><?= htmlspecialchars($module['label'],ENT_QUOTES,'UTF-8') ?></h3><p><?= htmlspecialchars($module['description'] ?? '',ENT_QUOTES,'UTF-8') ?></p></div><i class="bi bi-arrow-right"></i></a><?php endforeach; ?></div></section><?php endif; ?>
+  <?php if(!$usaPortalUsuario && !$usaPortalAdministrador && !$usaPortalSuperUsuario && $managementModules): ?><section class="worker-module-section"><div class="worker-section-head"><div><h2><?= htmlspecialchars(t('mgmt_title'),ENT_QUOTES,'UTF-8') ?></h2></div></div><div class="management-module-grid"><?php foreach($managementModules as $module): ?><a class="management-module-card" data-tone="<?= htmlspecialchars($module['tone'],ENT_QUOTES,'UTF-8') ?>" href="<?= htmlspecialchars($module['href'],ENT_QUOTES,'UTF-8') ?>"><span class="home-module-card__icon"><i class="bi <?= htmlspecialchars($module['icon'],ENT_QUOTES,'UTF-8') ?>"></i></span><div><h3><?= htmlspecialchars($module['label'],ENT_QUOTES,'UTF-8') ?></h3><p><?= htmlspecialchars($module['description'] ?? '',ENT_QUOTES,'UTF-8') ?></p></div><i class="bi bi-arrow-right"></i></a><?php endforeach; ?></div></section><?php endif; ?>
 </main>
 
 <?php if($usaPortalAdministrador): ?>
@@ -1238,13 +1665,14 @@ if ($latestEvaluation) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <?php
-if ($esUsuarioPerfil || $esAdministradorPerfil || $esJefaturaPerfil) {
-    $healthFormForced=false;
-    $healthBasePath='./';
-    require __DIR__.'/partials/health-form-modal.php';
-}
+/*
+ * Todo usuario autenticado que llega a bienvenida.php puede administrar
+ * únicamente su propia información mediante este modal.
+ */
+$healthFormForced=false;
+$healthBasePath='./';
+require __DIR__.'/partials/health-form-modal.php';
 ?>
-<?php if($esUsuarioPerfil || $esAdministradorPerfil || $esJefaturaPerfil): ?>
 <script>
 window.SCT_SELF_ORG_I18N = <?= json_encode([
     'title'=>t('self_org_title'),
@@ -1261,7 +1689,6 @@ window.SCT_SELF_ORG_I18N = <?= json_encode([
 ], JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ?>;
 </script>
 <script src="js/self-org-profile.js?v=<?= htmlspecialchars(SCT_ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
-<?php endif; ?>
 <?php if($usaPortalAdministrador): ?>
 <script src="js/admin-portal.js?v=<?= htmlspecialchars(SCT_ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script>
 <?php endif; ?>
