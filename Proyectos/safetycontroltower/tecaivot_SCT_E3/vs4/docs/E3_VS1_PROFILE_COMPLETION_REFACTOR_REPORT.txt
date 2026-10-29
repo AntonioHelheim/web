@@ -1,0 +1,42 @@
+SAFETY CONTROL TOWER — E3-VS1
+REPORTE PERFIL INICIAL EXTENDIDO
+Fecha: 08-10-2026
+
+PHP validados: 314
+Errores de sintaxis PHP: 0
+SQL fuera de 'migracion sql': 0
+Carpetas SQL duplicadas: 0
+
+Idiomas:
+es: OK
+en: OK
+pt: OK
+fr: OK
+zh: OK
+
+Datos agregados:
+- grupo/nivel de usuario informativo
+- proyecto confirmado
+- contratado por contratista
+- nombre de contratista
+- afiliación de salud
+- años de experiencia en cargo
+- contacto emergencia nombre
+- contacto emergencia teléfono
+- contacto emergencia relación
+
+Relaciones permitidas:
+- partner = pareja
+- direct_family = familia directa
+- friend = amigo/a
+- other = otro
+
+Afiliaciones:
+- fonasa
+- isapre
+- other
+- prefer_not
+
+Usuarios existentes:
+- El onboarding considera incompleto el Paso 1 hasta que exista user_profile_details.
+- La evaluación previa se conserva si ya estaba completada.

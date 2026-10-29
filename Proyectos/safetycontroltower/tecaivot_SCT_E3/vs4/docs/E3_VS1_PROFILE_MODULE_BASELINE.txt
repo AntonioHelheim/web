@@ -1,0 +1,183 @@
+SAFETY CONTROL TOWER — E3-VS1
+MATRIZ ACTUAL DE MÓDULOS POR PERFIL
+Baseline posterior al refactor Usuario/Trabajador y restauración Jefatura
+Fecha: 07-10-2026
+
+REGLA DE IDENTIDAD
+===================
+Trabajador:
+- Es una entidad de datos en la tabla workers.
+- Puede existir sin cuenta de acceso.
+- No es un rol de autenticación.
+
+Usuario:
+- Es una cuenta en users.
+- Puede estar vinculada a workers mediante users.id_worker.
+- Representa al trabajador/persona que sí posee acceso a SCT.
+- El rol legacy "trabajador" queda inactivo y sus cuentas activas se migran a "usuario".
+
+PERFILES OPERATIVOS
+===================
+1. SuperUsuario
+2. Gerente
+3. Administrador Cliente
+4. Jefatura
+5. Usuario
+6. Paramédico
+7. Contratista
+
+MÓDULOS DEL SISTEMA
+===================
+- Bienvenida / navegación
+- Perfil propio
+- Empresa
+- Usuarios
+- Trabajadores
+- Proyectos
+- Centros / Sedes
+- Eventos / Incidentes
+- Inducción / Cursos
+- Certificados
+- Auditorías
+- Autoevaluaciones
+- Formularios dinámicos
+- Protocolos
+- Dashboard
+- Programas / Seguimiento
+- Historial de cambios
+- Matriz de permisos
+- Perfil de salud
+- Soporte
+
+ACCESO ACTUAL POR PERFIL
+========================
+
+SUPERUSUARIO
+- Alcance: global, todas las empresas.
+- Empresa: gestión global.
+- Usuarios: gestión completa.
+- Trabajadores: gestión completa.
+- Proyectos: gestión completa.
+- Centros: gestión completa.
+- Eventos: gestión completa.
+- Inducción: gestión y ejecución.
+- Auditorías: gestión y ejecución.
+- Autoevaluaciones: gestión y ejecución.
+- Formularios: gestión y envío.
+- Protocolos: gestión, ejecución y revisión.
+- Dashboard: acceso.
+- Programas: gestión y seguimiento.
+- Historial: acceso.
+- Matriz de permisos: gestión.
+- Perfil propio: acceso.
+- Salud: acceso de emergencia según capability.
+- Observación: acceso total por diseño.
+
+GERENTE
+- Alcance: empresa propia.
+- Empresa: ver y editar.
+- Usuarios: gestión completa dentro de su empresa; puede designar Administrador Cliente.
+- Trabajadores: gestión completa.
+- Proyectos: gestión completa.
+- Centros: gestión completa.
+- Eventos: gestión completa.
+- Inducción: gestión y ejecución.
+- Auditorías: gestión y ejecución.
+- Autoevaluaciones: gestión y ejecución.
+- Formularios: gestión y envío.
+- Protocolos: gestión, ejecución y revisión.
+- Dashboard: acceso.
+- Programas: gestión y seguimiento.
+- Historial: acceso.
+- Matriz de permisos: gestión.
+- Perfil propio: acceso.
+- Salud: acceso de emergencia.
+- Observación: baseline actual; se revisará en la tercera ronda definida por el proyecto.
+
+ADMINISTRADOR CLIENTE
+- Alcance: empresa propia.
+- Empresa: ver y editar.
+- Usuarios: gestión completa de perfiles inferiores.
+- Trabajadores: gestión completa.
+- Proyectos: gestión completa.
+- Centros: gestión completa.
+- Eventos: gestión completa.
+- Inducción: gestión y ejecución.
+- Auditorías: gestión y ejecución.
+- Autoevaluaciones: gestión y ejecución.
+- Formularios: gestión y envío.
+- Protocolos: gestión, ejecución y revisión.
+- Dashboard: acceso.
+- Programas: gestión y seguimiento.
+- Historial: acceso.
+- Matriz de permisos: sin gestión.
+- Perfil propio: acceso.
+- Salud: acceso de emergencia.
+- Observación: baseline actual; se revisará junto a Jefatura.
+
+JEFATURA
+- Alcance: empresa propia.
+- Empresa: visualización.
+- Usuarios: gestión de nivel Usuario.
+- Trabajadores: gestión completa.
+- Proyectos: gestión completa.
+- Centros: gestión completa.
+- Eventos: gestión completa.
+- Inducción: gestión y ejecución.
+- Auditorías: gestión y ejecución.
+- Autoevaluaciones: gestión y ejecución.
+- Formularios: gestión y envío.
+- Protocolos: gestión, ejecución y revisión.
+- Dashboard: acceso.
+- Programas: gestión y seguimiento.
+- Historial: acceso.
+- Matriz de permisos: sin gestión.
+- Perfil propio: acceso.
+- Observación: baseline recuperado de E2-VS4; pendiente revisión funcional en segunda instancia.
+
+USUARIO
+- Semántica: trabajador/persona con cuenta habilitada en users.
+- Empresa: visualización de su empresa.
+- Usuarios: sin gestión.
+- Trabajadores: visualización.
+- Proyectos: visualización.
+- Centros: visualización.
+- Eventos: visualización.
+- Inducción: visualizar y realizar.
+- Auditorías: visualización.
+- Autoevaluaciones: visualización.
+- Formularios: visualizar, responder/cargar archivos.
+- Protocolos: visualización.
+- Dashboard: visualización.
+- Programas: visualización.
+- Historial: sin acceso.
+- Matriz de permisos: sin acceso.
+- Perfil propio: edición propia.
+- Perfil de salud: formulario propio obligatorio según health gate.
+- Observación: ESTE ES EL PRIMER PERFIL A REVISAR Y AJUSTAR.
+
+PARAMÉDICO
+- Perfil propio: edición propia.
+- Inducción: visualizar y realizar.
+- Resto de módulos: sin permisos funcionales explícitos actualmente.
+- Observación: pendiente revisión en tercera instancia.
+
+CONTRATISTA
+- Formularios: visualización, envío y archivos.
+- Perfil propio: edición propia.
+- Resto de módulos: sin permisos explícitos actualmente.
+- Observación: falta todavía modelar segregación documental de personal contratista/subcontratista.
+
+TRABAJADOR SIN ACCESO
+- No es perfil de login.
+- Existe exclusivamente en workers.
+- Puede asociarse a empresa/proyecto y participar como dato en eventos, inducciones planificadas y otras entidades.
+- No posee users, user_credentials ni users_role activos.
+- No puede iniciar sesión.
+
+ORDEN DE REVISIÓN FUNCIONAL ACORDADO
+=====================================
+1. Usuario / Trabajador (modelo unificado)
+2. Jefatura + Administrador Cliente
+3. Paramédico + Gerente
+4. Contratista + SuperUsuario

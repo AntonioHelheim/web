@@ -1,0 +1,497 @@
+SAFETY CONTROL TOWER — E3-VS1
+BANCO DE PREGUNTAS — EVALUACIÓN INICIAL DE SEGURIDAD Y SALUD
+Total: 70 preguntas / 280 alternativas
+Fecha: 08-10-2026
+
+NOTA: La evaluación muestra 15 preguntas aleatorias por intento.
+      La alternativa correcta se conserva sólo en servidor/base de datos.
+
+==============================================================================
+SST001 — ¿Qué debes hacer si detectas una condición insegura en tu lugar de trabajo?
+  A. Reportarla y aplicar los controles definidos [CORRECTA]
+  B. Ignorarla mientras no ocurra un accidente [INCORRECTA]
+  C. Esperar al final de la semana [INCORRECTA]
+  D. Pedir a otro trabajador que asuma el riesgo [INCORRECTA]
+
+==============================================================================
+SST002 — ¿Qué significa la sigla EPP?
+  A. Elemento de Protección Personal [CORRECTA]
+  B. Equipo de Producción Preventiva [INCORRECTA]
+  C. Estándar de Protección Primaria [INCORRECTA]
+  D. Elemento de Prevención Pública [INCORRECTA]
+
+==============================================================================
+SST003 — ¿Cuál es el objetivo principal del EPP?
+  A. Reducir la exposición a riesgos residuales [CORRECTA]
+  B. Eliminar todos los peligros del proceso [INCORRECTA]
+  C. Reemplazar los procedimientos seguros [INCORRECTA]
+  D. Evitar la necesidad de capacitación [INCORRECTA]
+
+==============================================================================
+SST004 — ¿Qué debe hacerse con un EPP dañado?
+  A. Retirarlo de uso y solicitar reemplazo [CORRECTA]
+  B. Seguir utilizándolo hasta fin de turno [INCORRECTA]
+  C. Repararlo de manera improvisada [INCORRECTA]
+  D. Prestárselo a otro trabajador [INCORRECTA]
+
+==============================================================================
+SST005 — ¿Qué es un casi accidente o near miss?
+  A. Un evento sin daño que pudo haber causado lesiones o pérdidas [CORRECTA]
+  B. Un accidente con licencia médica [INCORRECTA]
+  C. Una situación normal del trabajo [INCORRECTA]
+  D. Una emergencia exclusivamente ambiental [INCORRECTA]
+
+==============================================================================
+SST006 — ¿Qué corresponde hacer con un casi accidente?
+  A. Reportarlo para analizarlo y prevenir recurrencias [CORRECTA]
+  B. No reportarlo porque no hubo daño [INCORRECTA]
+  C. Comentarlo sólo entre compañeros [INCORRECTA]
+  D. Esperar a que ocurra nuevamente [INCORRECTA]
+
+==============================================================================
+SST007 — Antes de iniciar una tarea no rutinaria, ¿qué es recomendable?
+  A. Identificar peligros y verificar controles [CORRECTA]
+  B. Comenzar rápido para ahorrar tiempo [INCORRECTA]
+  C. Usar cualquier herramienta disponible [INCORRECTA]
+  D. Evitar revisar el procedimiento [INCORRECTA]
+
+==============================================================================
+SST008 — Si existe un riesgo grave e inminente no controlado, ¿qué debe hacer el trabajador?
+  A. Detener la tarea y comunicar la situación [CORRECTA]
+  B. Continuar hasta terminar [INCORRECTA]
+  C. Trabajar más rápido [INCORRECTA]
+  D. Delegar la tarea sin informar [INCORRECTA]
+
+==============================================================================
+SST009 — ¿Qué ayuda a prevenir caídas al mismo nivel?
+  A. Mantener pasillos limpios, secos y despejados [CORRECTA]
+  B. Correr por las áreas de trabajo [INCORRECTA]
+  C. Dejar cables cruzando vías de tránsito [INCORRECTA]
+  D. Usar el teléfono mientras se camina [INCORRECTA]
+
+==============================================================================
+SST010 — Si se derrama líquido en una zona de tránsito, ¿qué corresponde?
+  A. Señalizar, controlar el área y gestionar la limpieza [CORRECTA]
+  B. Dejarlo hasta el aseo programado [INCORRECTA]
+  C. Cubrirlo con papel y continuar [INCORRECTA]
+  D. Ignorarlo si es poca cantidad [INCORRECTA]
+
+==============================================================================
+SST011 — ¿Qué debe mantenerse libre en todo momento?
+  A. Las rutas y salidas de emergencia [CORRECTA]
+  B. Sólo la puerta principal [INCORRECTA]
+  C. Los estacionamientos de visitas [INCORRECTA]
+  D. Las oficinas administrativas [INCORRECTA]
+
+==============================================================================
+SST012 — Al escuchar una alarma de evacuación, ¿qué corresponde?
+  A. Seguir las instrucciones y dirigirse al punto de encuentro [CORRECTA]
+  B. Volver por objetos personales [INCORRECTA]
+  C. Usar siempre el ascensor [INCORRECTA]
+  D. Esperar hasta ver humo [INCORRECTA]
+
+==============================================================================
+SST013 — ¿Para qué sirve el punto de encuentro en una evacuación?
+  A. Para verificar y contabilizar a las personas evacuadas [CORRECTA]
+  B. Para guardar equipos [INCORRECTA]
+  C. Para recibir herramientas [INCORRECTA]
+  D. Para estacionar vehículos [INCORRECTA]
+
+==============================================================================
+SST014 — Si descubres un incendio incipiente, ¿qué debes hacer primero?
+  A. Dar la alarma y actuar sólo si estás capacitado y es seguro [CORRECTA]
+  B. Ocultarlo para evitar alarma [INCORRECTA]
+  C. Intentar apagarlo siempre sin avisar [INCORRECTA]
+  D. Abrir todas las puertas y ventanas [INCORRECTA]
+
+==============================================================================
+SST015 — ¿Cuándo es apropiado usar un extintor portátil?
+  A. Cuando el fuego es incipiente, existe salida segura y la persona está capacitada [CORRECTA]
+  B. En cualquier incendio, aunque haya humo intenso [INCORRECTA]
+  C. Después de volver a entrar a un área evacuada [INCORRECTA]
+  D. Sin verificar el tipo de fuego [INCORRECTA]
+
+==============================================================================
+SST016 — Si una salida de emergencia está bloqueada, ¿qué corresponde?
+  A. Reportar y gestionar su liberación de inmediato [CORRECTA]
+  B. No hacer nada si existe otra salida [INCORRECTA]
+  C. Colocar más objetos cerca [INCORRECTA]
+  D. Esperar a la próxima inspección [INCORRECTA]
+
+==============================================================================
+SST017 — Ante una persona lesionada, ¿cuál es una acción inicial segura?
+  A. Verificar que la escena sea segura y pedir ayuda [CORRECTA]
+  B. Moverla siempre de inmediato [INCORRECTA]
+  C. Darle medicamentos personales [INCORRECTA]
+  D. Dejarla sola [INCORRECTA]
+
+==============================================================================
+SST018 — ¿Quién debe realizar primeros auxilios especializados?
+  A. Personal capacitado dentro de sus competencias [CORRECTA]
+  B. Cualquier persona sin formación [INCORRECTA]
+  C. Sólo el jefe directo [INCORRECTA]
+  D. Cualquier visitante [INCORRECTA]
+
+==============================================================================
+SST019 — Para levantar manualmente una carga, ¿qué práctica es más segura?
+  A. Evaluar peso y ruta, acercar la carga al cuerpo y usar técnica adecuada [CORRECTA]
+  B. Doblar la espalda con piernas rectas [INCORRECTA]
+  C. Girar el tronco mientras se levanta [INCORRECTA]
+  D. Levantar rápido para terminar antes [INCORRECTA]
+
+==============================================================================
+SST020 — Si una carga es demasiado pesada para una persona, ¿qué debe hacer?
+  A. Solicitar ayuda o usar asistencia mecánica [CORRECTA]
+  B. Levantarla igualmente [INCORRECTA]
+  C. Arrastrarla sin evaluar [INCORRECTA]
+  D. Lanzarla para moverla [INCORRECTA]
+
+==============================================================================
+SST021 — ¿Qué ayuda a reducir molestias en trabajo de oficina?
+  A. Ajustar el puesto, variar postura y realizar pausas [CORRECTA]
+  B. Mantener la misma postura toda la jornada [INCORRECTA]
+  C. Trabajar con la pantalla muy baja [INCORRECTA]
+  D. Sentarse lejos del escritorio [INCORRECTA]
+
+==============================================================================
+SST022 — ¿Cómo debería ubicarse normalmente la pantalla del computador?
+  A. Frente al usuario, a una altura y distancia cómodas [CORRECTA]
+  B. Detrás del usuario [INCORRECTA]
+  C. En el suelo [INCORRECTA]
+  D. De forma que obligue a girar el cuello [INCORRECTA]
+
+==============================================================================
+SST023 — Si un equipo eléctrico está defectuoso y no estás autorizado para repararlo, ¿qué debes hacer?
+  A. Retirarlo de uso o desconectarlo si es seguro y reportarlo [CORRECTA]
+  B. Abrirlo y repararlo [INCORRECTA]
+  C. Seguir usándolo hasta que falle [INCORRECTA]
+  D. Mojarlo para enfriarlo [INCORRECTA]
+
+==============================================================================
+SST024 — ¿Por qué no deben usarse enchufes o extensiones dañadas?
+  A. Porque pueden causar choque eléctrico o incendio [CORRECTA]
+  B. Porque consumen más internet [INCORRECTA]
+  C. Porque reducen la productividad [INCORRECTA]
+  D. Sólo porque se ven mal [INCORRECTA]
+
+==============================================================================
+SST025 — ¿Para qué sirve el bloqueo y etiquetado de energías peligrosas (LOTO)?
+  A. Evitar liberación inesperada de energía durante una intervención [CORRECTA]
+  B. Aumentar la velocidad del mantenimiento [INCORRECTA]
+  C. Identificar al trabajador más antiguo [INCORRECTA]
+  D. Reemplazar herramientas [INCORRECTA]
+
+==============================================================================
+SST026 — ¿Quién puede retirar normalmente un bloqueo personal LOTO?
+  A. La persona autorizada que lo instaló o según procedimiento formal de excepción [CORRECTA]
+  B. Cualquier compañero [INCORRECTA]
+  C. Cualquier supervisor sin registro [INCORRECTA]
+  D. Un visitante [INCORRECTA]
+
+==============================================================================
+SST027 — Antes de usar una escalera portátil, ¿qué debe revisarse?
+  A. Su estado, apoyo, estabilidad y adecuación a la tarea [CORRECTA]
+  B. Sólo su color [INCORRECTA]
+  C. Que sea la más alta disponible [INCORRECTA]
+  D. Que no tenga etiquetas [INCORRECTA]
+
+==============================================================================
+SST028 — ¿Qué práctica es insegura al utilizar una escalera?
+  A. Usar una escalera dañada o apoyada de forma inestable [CORRECTA]
+  B. Revisarla antes de usar [INCORRECTA]
+  C. Apoyarla sobre superficie estable [INCORRECTA]
+  D. Mantener una posición controlada [INCORRECTA]
+
+==============================================================================
+SST029 — Antes de un trabajo con riesgo de caída de altura, ¿qué corresponde?
+  A. Evaluar el riesgo y aplicar los controles de protección contra caídas [CORRECTA]
+  B. Elegir protección después de subir [INCORRECTA]
+  C. Trabajar sin protección si son pocos minutos [INCORRECTA]
+  D. Confiar sólo en la experiencia [INCORRECTA]
+
+==============================================================================
+SST030 — ¿Qué debe hacerse con una herramienta manual defectuosa?
+  A. Retirarla de uso y reportarla [CORRECTA]
+  B. Seguir usándola con cuidado [INCORRECTA]
+  C. Ocultar el daño [INCORRECTA]
+  D. Prestársela a otro turno [INCORRECTA]
+
+==============================================================================
+SST031 — ¿Para qué sirven las guardas de una máquina?
+  A. Para impedir o reducir el contacto con partes peligrosas [CORRECTA]
+  B. Para decorar el equipo [INCORRECTA]
+  C. Para aumentar el ruido [INCORRECTA]
+  D. Para reemplazar la capacitación [INCORRECTA]
+
+==============================================================================
+SST032 — ¿Es correcto retirar una guarda de máquina para trabajar más rápido?
+  A. No, salvo intervención autorizada y controlada [CORRECTA]
+  B. Sí, si el operador tiene experiencia [INCORRECTA]
+  C. Sí, durante turnos nocturnos [INCORRECTA]
+  D. Sí, si nadie está mirando [INCORRECTA]
+
+==============================================================================
+SST033 — Antes de usar un producto químico desconocido, ¿qué corresponde?
+  A. Revisar etiqueta, ficha de datos de seguridad y controles requeridos [CORRECTA]
+  B. Olerlo para identificarlo [INCORRECTA]
+  C. Mezclarlo con agua [INCORRECTA]
+  D. Probarlo con las manos [INCORRECTA]
+
+==============================================================================
+SST034 — ¿Qué documento informa peligros, almacenamiento, primeros auxilios y derrames de un producto químico?
+  A. La ficha de datos de seguridad (SDS/HDS) [CORRECTA]
+  B. La lista de asistencia [INCORRECTA]
+  C. La liquidación de sueldo [INCORRECTA]
+  D. El plano de estacionamientos [INCORRECTA]
+
+==============================================================================
+SST035 — Si un envase químico no tiene identificación legible, ¿qué debes hacer?
+  A. No utilizarlo y reportarlo para identificación o disposición segura [CORRECTA]
+  B. Usarlo igual [INCORRECTA]
+  C. Cambiarlo a una botella de bebida [INCORRECTA]
+  D. Probarlo en pequeña cantidad [INCORRECTA]
+
+==============================================================================
+SST036 — ¿Por qué es importante la ventilación al trabajar con vapores, gases o polvo?
+  A. Porque ayuda a controlar contaminantes en el aire [CORRECTA]
+  B. Sólo para mejorar la temperatura [INCORRECTA]
+  C. Para reducir el peso de herramientas [INCORRECTA]
+  D. Para evitar usar iluminación [INCORRECTA]
+
+==============================================================================
+SST037 — Si una tarea genera ruido elevado, ¿qué medida corresponde?
+  A. Aplicar controles y usar protección auditiva cuando corresponda [CORRECTA]
+  B. Gritar para comunicarse [INCORRECTA]
+  C. Quitarse la protección para escuchar [INCORRECTA]
+  D. Aumentar el tiempo de exposición [INCORRECTA]
+
+==============================================================================
+SST038 — Antes de usar protectores auditivos, ¿qué debe verificarse?
+  A. Que estén en buen estado y se utilicen correctamente [CORRECTA]
+  B. Que estén mojados [INCORRECTA]
+  C. Que puedan compartirse sin higiene [INCORRECTA]
+  D. Que hayan sido recortados [INCORRECTA]
+
+==============================================================================
+SST039 — ¿Cuándo debe utilizarse protección respiratoria?
+  A. Cuando la evaluación de riesgos y el procedimiento lo exijan [CORRECTA]
+  B. Siempre en oficinas [INCORRECTA]
+  C. Sólo después de sentir síntomas [INCORRECTA]
+  D. Cuando el trabajador la elija sin evaluación [INCORRECTA]
+
+==============================================================================
+SST040 — ¿Puede cualquier mascarilla proteger frente a cualquier contaminante?
+  A. No, debe seleccionarse según el peligro y la exposición [CORRECTA]
+  B. Sí, todas protegen igual [INCORRECTA]
+  C. Sí, si es de color oscuro [INCORRECTA]
+  D. Sí, si se usa menos de una hora [INCORRECTA]
+
+==============================================================================
+SST041 — Antes de realizar soldadura o corte, ¿qué debe verificarse?
+  A. Controles, autorización o permiso requerido y condiciones del área [CORRECTA]
+  B. Sólo la hora de inicio [INCORRECTA]
+  C. Que haya material combustible cerca [INCORRECTA]
+  D. Que todas las puertas estén cerradas [INCORRECTA]
+
+==============================================================================
+SST042 — ¿Qué caracteriza a un espacio confinado?
+  A. Acceso limitado y posibles peligros que requieren controles específicos [CORRECTA]
+  B. Cualquier oficina pequeña [INCORRECTA]
+  C. Todo lugar al aire libre [INCORRECTA]
+  D. Un comedor lleno [INCORRECTA]
+
+==============================================================================
+SST043 — ¿Debe ingresarse a un espacio confinado sin autorización ni evaluación previa?
+  A. No [CORRECTA]
+  B. Sí, si el trabajo dura poco [INCORRECTA]
+  C. Sí, si entran dos personas [INCORRECTA]
+  D. Sólo de noche [INCORRECTA]
+
+==============================================================================
+SST044 — Al conducir un vehículo de la empresa, ¿qué conducta es segura?
+  A. Usar cinturón, respetar límites y evitar distracciones [CORRECTA]
+  B. Usar el teléfono mientras conduces [INCORRECTA]
+  C. Aumentar velocidad si hay atraso [INCORRECTA]
+  D. No reportar fallas [INCORRECTA]
+
+==============================================================================
+SST045 — Si un conductor siente somnolencia intensa, ¿qué debe hacer?
+  A. Detenerse en un lugar seguro y aplicar el control de fatiga [CORRECTA]
+  B. Abrir una ventana y continuar indefinidamente [INCORRECTA]
+  C. Aumentar la velocidad [INCORRECTA]
+  D. Usar el teléfono para mantenerse despierto [INCORRECTA]
+
+==============================================================================
+SST046 — En zonas con grúas horquilla, ¿qué debe hacer un peatón?
+  A. Usar rutas peatonales, mantener distancia y respetar señalización [CORRECTA]
+  B. Caminar por cualquier zona [INCORRECTA]
+  C. Acercarse por detrás del equipo [INCORRECTA]
+  D. Pasar bajo cargas elevadas [INCORRECTA]
+
+==============================================================================
+SST047 — ¿Es seguro pasar bajo una carga suspendida?
+  A. No [CORRECTA]
+  B. Sí, si se hace rápido [INCORRECTA]
+  C. Sí, con casco [INCORRECTA]
+  D. Sí, si parece estable [INCORRECTA]
+
+==============================================================================
+SST048 — ¿Qué beneficio tiene mantener orden y aseo?
+  A. Reduce caídas, golpes, incendios y obstrucciones [CORRECTA]
+  B. Sólo mejora la apariencia [INCORRECTA]
+  C. Elimina la necesidad de inspecciones [INCORRECTA]
+  D. Permite guardar materiales en salidas [INCORRECTA]
+
+==============================================================================
+SST049 — ¿Dónde deben almacenarse los materiales?
+  A. En lugares definidos y estables, sin bloquear accesos ni emergencias [CORRECTA]
+  B. En cualquier pasillo [INCORRECTA]
+  C. Delante de extintores [INCORRECTA]
+  D. Sobre superficies inestables [INCORRECTA]
+
+==============================================================================
+SST050 — Antes de usar un arnés contra caídas, ¿qué corresponde?
+  A. Inspeccionarlo y verificar ajuste y compatibilidad [CORRECTA]
+  B. Usarlo sin revisarlo [INCORRECTA]
+  C. Cortar correas incómodas [INCORRECTA]
+  D. Prestarlo sin inspección [INCORRECTA]
+
+==============================================================================
+SST051 — ¿Cuál describe mejor la jerarquía de controles?
+  A. Priorizar eliminación, sustitución e ingeniería antes de depender sólo del EPP [CORRECTA]
+  B. Usar primero EPP y después eliminar el peligro [INCORRECTA]
+  C. Usar sólo señalización [INCORRECTA]
+  D. Confiar en la experiencia [INCORRECTA]
+
+==============================================================================
+SST052 — Si es posible eliminar completamente un peligro, ¿qué tipo de control es?
+  A. Eliminación [CORRECTA]
+  B. EPP [INCORRECTA]
+  C. Advertencia [INCORRECTA]
+  D. Capacitación [INCORRECTA]
+
+==============================================================================
+SST053 — ¿Para qué sirve un procedimiento de trabajo seguro?
+  A. Definir cómo ejecutar una actividad con sus controles preventivos [CORRECTA]
+  B. Aumentar trámites [INCORRECTA]
+  C. Reemplazar toda supervisión [INCORRECTA]
+  D. Permitir omitir capacitación [INCORRECTA]
+
+==============================================================================
+SST054 — Si no tienes capacitación o autorización para una tarea, ¿qué debes hacer?
+  A. No ejecutarla hasta contar con competencia o autorización requerida [CORRECTA]
+  B. Realizarla mirando a otros [INCORRECTA]
+  C. Improvisar [INCORRECTA]
+  D. Pedir otra herramienta [INCORRECTA]
+
+==============================================================================
+SST055 — Si un equipo tiene una falla que puede afectar la seguridad, ¿qué corresponde?
+  A. Retirarlo o detenerlo según procedimiento y reportar la falla [CORRECTA]
+  B. Seguir utilizándolo [INCORRECTA]
+  C. Ocultar la falla [INCORRECTA]
+  D. Aumentar la carga para probarlo [INCORRECTA]
+
+==============================================================================
+SST056 — ¿Para qué sirve una charla de seguridad antes de una tarea?
+  A. Para comunicar riesgos, cambios, controles y responsabilidades [CORRECTA]
+  B. Sólo para registrar asistencia [INCORRECTA]
+  C. Para reemplazar procedimientos [INCORRECTA]
+  D. Para asignar vacaciones [INCORRECTA]
+
+==============================================================================
+SST057 — Si cambian las condiciones de una tarea ya evaluada, ¿qué corresponde?
+  A. Detener y reevaluar riesgos y controles [CORRECTA]
+  B. Continuar porque ya estaba autorizada [INCORRECTA]
+  C. Eliminar señalización [INCORRECTA]
+  D. Cambiar de trabajador sin informar [INCORRECTA]
+
+==============================================================================
+SST058 — ¿Para qué sirve una señal o barrera de seguridad?
+  A. Para advertir, restringir o guiar frente a un peligro [CORRECTA]
+  B. Para decorar el área [INCORRECTA]
+  C. Para reemplazar siempre una protección física [INCORRECTA]
+  D. Para permitir acceso general [INCORRECTA]
+
+==============================================================================
+SST059 — Si una zona está delimitada por riesgo y no estás autorizado, ¿qué debes hacer?
+  A. Respetar la delimitación y solicitar autorización si corresponde [CORRECTA]
+  B. Cruzar si no ves actividad [INCORRECTA]
+  C. Mover la barrera [INCORRECTA]
+  D. Entrar por otro lado [INCORRECTA]
+
+==============================================================================
+SST060 — ¿Por qué el EPP se considera una última barrera de control?
+  A. Porque protege a la persona pero no elimina el peligro en su origen [CORRECTA]
+  B. Porque es innecesario [INCORRECTA]
+  C. Porque siempre falla [INCORRECTA]
+  D. Porque sólo sirve fuera del trabajo [INCORRECTA]
+
+==============================================================================
+SST061 — En una jornada con altas temperaturas, ¿qué ayuda a prevenir estrés térmico?
+  A. Hidratación, pausas y controles de exposición [CORRECTA]
+  B. Evitar beber agua [INCORRECTA]
+  C. Usar más ropa sin evaluación [INCORRECTA]
+  D. Trabajar sin descanso [INCORRECTA]
+
+==============================================================================
+SST062 — En labores con exposición solar, ¿qué medida es apropiada?
+  A. Usar las medidas definidas como sombra, ropa adecuada y protector solar cuando corresponda [CORRECTA]
+  B. Ignorar la radiación en días nublados [INCORRECTA]
+  C. Trabajar sin protección para acostumbrarse [INCORRECTA]
+  D. Mirar directamente al sol [INCORRECTA]
+
+==============================================================================
+SST063 — En ambientes fríos, ¿qué medida es adecuada?
+  A. Usar vestimenta apropiada y controlar el tiempo de exposición [CORRECTA]
+  B. Usar ropa húmeda [INCORRECTA]
+  C. No informar entumecimiento [INCORRECTA]
+  D. Permanecer inmóvil mucho tiempo [INCORRECTA]
+
+==============================================================================
+SST064 — ¿Por qué la fatiga es un riesgo de seguridad?
+  A. Puede reducir atención, reacción y capacidad de decisión [CORRECTA]
+  B. Sólo afecta el ánimo [INCORRECTA]
+  C. Mejora la concentración [INCORRECTA]
+  D. Sólo afecta a conductores [INCORRECTA]
+
+==============================================================================
+SST065 — Si aparecen síntomas que podrían estar relacionados con el trabajo, ¿qué corresponde?
+  A. Informarlos y seguir el canal de salud y seguridad definido [CORRECTA]
+  B. Ocultarlos [INCORRECTA]
+  C. Esperar indefinidamente [INCORRECTA]
+  D. Automedicarse sin informar [INCORRECTA]
+
+==============================================================================
+SST066 — ¿Qué es una enfermedad profesional u ocupacional?
+  A. Una condición de salud asociada a exposiciones o factores del trabajo [CORRECTA]
+  B. Cualquier enfermedad fuera del horario laboral [INCORRECTA]
+  C. Sólo una lesión traumática inmediata [INCORRECTA]
+  D. Una enfermedad que no debe reportarse [INCORRECTA]
+
+==============================================================================
+SST067 — ¿Por qué es importante participar en vigilancia de salud ocupacional cuando corresponda?
+  A. Para detectar tempranamente efectos relacionados con exposiciones laborales [CORRECTA]
+  B. Para reemplazar medidas preventivas [INCORRECTA]
+  C. Para reducir vacaciones [INCORRECTA]
+  D. Sólo por estadística [INCORRECTA]
+
+==============================================================================
+SST068 — ¿Qué medida básica ayuda a prevenir contagios de enfermedades transmisibles?
+  A. Higiene de manos y medidas sanitarias definidas [CORRECTA]
+  B. Compartir elementos personales [INCORRECTA]
+  C. Ocultar síntomas [INCORRECTA]
+  D. Evitar limpiar superficies [INCORRECTA]
+
+==============================================================================
+SST069 — ¿Qué debe hacerse con residuos peligrosos o especiales?
+  A. Gestionarlos en recipientes y circuitos definidos [CORRECTA]
+  B. Mezclarlos con basura común [INCORRECTA]
+  C. Dejarlos en pasillos [INCORRECTA]
+  D. Arrojarlos al desagüe [INCORRECTA]
+
+==============================================================================
+SST070 — Ante un derrame químico que no estás capacitado para controlar, ¿qué corresponde?
+  A. Aislar, informar y activar el procedimiento de respuesta [CORRECTA]
+  B. Limpiarlo con las manos [INCORRECTA]
+  C. Agregar otro producto sin información [INCORRECTA]
+  D. Ignorarlo [INCORRECTA]
