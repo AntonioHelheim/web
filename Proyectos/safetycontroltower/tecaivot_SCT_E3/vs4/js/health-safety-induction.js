@@ -689,9 +689,10 @@
         // - Previously completed slide: render its complete visual state immediately so the
         //   user can review/skip it without losing content that was already completed.
         const completedReview = step === 'initial' && isSlideCompleted(slide.number);
+        const reviewStartsInitial = completedReview && Boolean(slide.animation?.reviewStartsInitial);
         const targetStep = step === 'end'
             ? maxStep
-            : (completedReview
+            : (completedReview && !reviewStartsInitial
                 ? maxStep
                 : (step === 'initial'
                     ? initialStep
@@ -715,12 +716,23 @@
 
             // A completed slide opened for review is already in its final visual state.
             // Do not replay multimedia automatically and do not mark unseen slides complete.
-            sequenceCompleted = targetStep >= maxStep && maxStep > 0 && (step === 'end' || completedReview);
+            sequenceCompleted = targetStep >= maxStep && maxStep > 0 && (step === 'end' || (completedReview && !reviewStartsInitial));
             refreshControls();
             image.classList.remove('is-changing');
             image.classList.add('is-entering');
             window.setTimeout(() => image.classList.remove('is-entering'), reducedMotion ? 1 : 260);
             setLoading(false);
+
+            // E3-VS4 module presentation constant:
+            // Some visual-only/GIF slides are explicitly configured to start on entry.
+            // Never auto-replay an already completed slide in review mode.
+            if (slide.animation?.autoStart && !completedReview && !isSlideCompleted(slide.number)) {
+                window.setTimeout(() => {
+                    if (token === renderToken && currentSlide() === slide && !sequenceStarted && !sequenceRunning) {
+                        playAutomaticSequence();
+                    }
+                }, reducedMotion ? 1 : 90);
+            }
         };
 
         const onLoad = () => finish();

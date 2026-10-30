@@ -801,3 +801,17 @@ html.sct-theme-dark .hs-induction__evaluation h2{color:#f1f5fb}
         justify-content: center;
     }
 }
+
+
+/* E3-VS4 · Módulo 2 multimedia presentation refinements */
+.hs-induction__animation{
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 7px 22px rgba(18,36,72,.14);
+}
+@media(max-width:680px){
+    .hs-induction__animation{
+        border-radius:10px;
+        box-shadow:0 4px 14px rgba(18,36,72,.12);
+    }
+}

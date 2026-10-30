@@ -1,0 +1,2811 @@
+{
+  "26": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 7,
+      "name": "Freeform 7",
+      "type": 5,
+      "x": 7.8551,
+      "y": 50.4266,
+      "w": 3.8431,
+      "h": 6.0123
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 2.5,
+      "y": 6.5272,
+      "w": 36.629,
+      "h": 19.4224,
+      "text": "REGLAS QUE SALVAN VIDAS"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 10,
+      "name": "Imagen 9",
+      "type": 13,
+      "x": 88.0566,
+      "y": 6.9087,
+      "w": 10.4959,
+      "h": 18.6594,
+      "imageExt": "png",
+      "imageBytes": 16003
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 16,
+      "name": "TextBox 41",
+      "type": 17,
+      "x": 4.5705,
+      "y": 52.2326,
+      "w": 9.4325,
+      "h": 2.095,
+      "text": "ASEGURATE"
+    },
+    {
+      "shapeId": 14,
+      "name": "Group 7",
+      "type": 6,
+      "x": 3.0001,
+      "y": 48.9647,
+      "w": 13.1911,
+      "h": 24.7993
+    },
+    {
+      "shapeId": 24,
+      "name": "TextBox 54",
+      "type": 17,
+      "x": 1.679,
+      "y": 57.6819,
+      "w": 15.2155,
+      "h": 10.7858,
+      "text": "No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 5,
+      "name": "Imagen 4",
+      "type": 13,
+      "x": 20.8575,
+      "y": 25.9736,
+      "w": 74.0817,
+      "h": 72.9233,
+      "imageExt": "gif",
+      "imageBytes": 8150560
+    },
+    {
+      "shapeId": 19,
+      "name": "Freeform 31",
+      "type": 5,
+      "x": 5.3599,
+      "y": 39.0825,
+      "w": 7.9539,
+      "h": 13.1901
+    },
+    {
+      "shapeId": 21,
+      "name": "TextBox 41",
+      "type": 17,
+      "x": 4.5298,
+      "y": 53.6933,
+      "w": 9.4325,
+      "h": 2.095,
+      "text": "PARA"
+    }
+  ],
+  "27": [
+    {
+      "shapeId": 7,
+      "name": "Freeform 7",
+      "type": 5,
+      "x": 7.8551,
+      "y": 50.4266,
+      "w": 3.8431,
+      "h": 6.0123
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 2.1687,
+      "y": 1.814,
+      "w": 85.5566,
+      "h": 19.7465,
+      "text": "¿Qué riesgo corresponde a qué regla que salva vidas?"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 10,
+      "name": "Imagen 9",
+      "type": 13,
+      "x": 88.0566,
+      "y": 6.9087,
+      "w": 10.4959,
+      "h": 18.6594,
+      "imageExt": "png",
+      "imageBytes": 16003
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 3,
+      "name": "Forme libre : forme 32",
+      "type": 5,
+      "x": 2.5,
+      "y": 23.1352,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de recibir un golpe o sufrir un aplastamiento al trabajar o al pasar cerca de equipos, maquinarias o vehículos en movimiento."
+    },
+    {
+      "shapeId": 18,
+      "name": "Forme libre : forme 7",
+      "type": 5,
+      "x": 2.5,
+      "y": 35.2472,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de caída de altura"
+    },
+    {
+      "shapeId": 21,
+      "name": "Forme libre : forme 10",
+      "type": 5,
+      "x": 2.5,
+      "y": 47.2596,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de electrocución, quemaduras o lesiones por proyecciones al realizar trabajos sin energía."
+    },
+    {
+      "shapeId": 23,
+      "name": "Forme libre : forme 16",
+      "type": 5,
+      "x": 2.5,
+      "y": 59.2719,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de derrumbe"
+    },
+    {
+      "shapeId": 26,
+      "name": "Forme libre : forme 21",
+      "type": 5,
+      "x": 2.5,
+      "y": 71.2843,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de asfixia, intoxicación o explosión cuando se trabaja en espacios confinados."
+    },
+    {
+      "shapeId": 28,
+      "name": "Image 44",
+      "type": 13,
+      "x": 49.462,
+      "y": 23.1352,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 14281
+    },
+    {
+      "shapeId": 30,
+      "name": "Image 45",
+      "type": 13,
+      "x": 49.462,
+      "y": 35.2087,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 14744
+    },
+    {
+      "shapeId": 32,
+      "name": "Image 15",
+      "type": 13,
+      "x": 49.462,
+      "y": 47.2596,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 13953
+    },
+    {
+      "shapeId": 34,
+      "name": "Image 22",
+      "type": 13,
+      "x": 49.462,
+      "y": 59.2719,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 13275
+    },
+    {
+      "shapeId": 36,
+      "name": "Image 18",
+      "type": 13,
+      "x": 49.462,
+      "y": 71.384,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 10435
+    },
+    {
+      "shapeId": 37,
+      "name": "Inducción Medición entendimiento",
+      "type": 13,
+      "x": 94.5594,
+      "y": 90.574,
+      "w": 3.9931,
+      "h": 7.0988,
+      "imageExt": "png",
+      "imageBytes": 9919
+    },
+    {
+      "shapeId": 39,
+      "name": "Forme libre : forme 33",
+      "type": 5,
+      "x": 56.9298,
+      "y": 21.5605,
+      "w": 41.1955,
+      "h": 11.4197,
+      "text": "Solo baja a una zanja si las medidas de protección contra derrumbes son aplicadas y adecuadas."
+    },
+    {
+      "shapeId": 41,
+      "name": "Forme libre : forme 41",
+      "type": 5,
+      "x": 56.9298,
+      "y": 33.6537,
+      "w": 41.1955,
+      "h": 11.3606,
+      "text": "Solo ingresa a una zanja si las medidas de Protección de derrumbes son correctas y aplicadas."
+    },
+    {
+      "shapeId": 43,
+      "name": "Forme libre : forme 43",
+      "type": 5,
+      "x": 56.9298,
+      "y": 46.7183,
+      "w": 41.1955,
+      "h": 10.7681,
+      "text": "Comprueba que la atmósfera es segura antes de entrar en un espacio confinado y monitoréala durante toda la operación."
+    },
+    {
+      "shapeId": 45,
+      "name": "Forme libre : forme 35",
+      "type": 5,
+      "x": 56.9298,
+      "y": 60.0546,
+      "w": 41.1955,
+      "h": 8.6615,
+      "text": "Engancha el arnés a la línea de vida cuando trabajes en altura."
+    },
+    {
+      "shapeId": 47,
+      "name": "Forme libre : forme 37",
+      "type": 5,
+      "x": 56.9298,
+      "y": 69.7706,
+      "w": 41.1955,
+      "h": 11.4555,
+      "text": "Verifica la ausencia de energía (mecánica, química, eléctrica, fluidos bajo presión, etc.) antes de comenzar el trabajo."
+    }
+  ],
+  "28": [
+    {
+      "shapeId": 7,
+      "name": "Freeform 7",
+      "type": 5,
+      "x": 7.8551,
+      "y": 50.4266,
+      "w": 3.8431,
+      "h": 6.0123
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 2.1687,
+      "y": 1.814,
+      "w": 85.5566,
+      "h": 19.7465,
+      "text": "¿Qué riesgo corresponde a qué regla que salva vidas?"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 10,
+      "name": "Imagen 9",
+      "type": 13,
+      "x": 88.0566,
+      "y": 6.9087,
+      "w": 10.4959,
+      "h": 18.6594,
+      "imageExt": "png",
+      "imageBytes": 16003
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 3,
+      "name": "Forme libre : forme 32",
+      "type": 5,
+      "x": 2.5,
+      "y": 23.1352,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de incendio o de explosión relacionado con trabajos en caliente."
+    },
+    {
+      "shapeId": 18,
+      "name": "Forme libre : forme 7",
+      "type": 5,
+      "x": 2.5,
+      "y": 35.2472,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo de aplastamiento al estacionar o al pasar por debajo de una carga suspendida o elevada."
+    },
+    {
+      "shapeId": 21,
+      "name": "Forme libre : forme 10",
+      "type": 5,
+      "x": 2.5,
+      "y": 47.2596,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo asociado al consumo de alcohol o estupefacientes."
+    },
+    {
+      "shapeId": 23,
+      "name": "Forme libre : forme 16",
+      "type": 5,
+      "x": 2.5,
+      "y": 59.2719,
+      "w": 36.562,
+      "h": 10.4987,
+      "text": "El riesgo derivado del uso de equipos de comunicación mientras se conduce en carretera y en obras."
+    },
+    {
+      "shapeId": 39,
+      "name": "Forme libre : forme 33",
+      "type": 5,
+      "x": 56.9298,
+      "y": 21.5605,
+      "w": 41.1955,
+      "h": 11.4197,
+      "text": "No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 41,
+      "name": "Forme libre : forme 41",
+      "type": 5,
+      "x": 56.9298,
+      "y": 33.6537,
+      "w": 41.1955,
+      "h": 11.3606,
+      "text": "No trabajes ni conduzcas bajo los efectos del alcohol o estupefacientes."
+    },
+    {
+      "shapeId": 43,
+      "name": "Forme libre : forme 43",
+      "type": 5,
+      "x": 56.9298,
+      "y": 46.7183,
+      "w": 41.1955,
+      "h": 10.7681,
+      "text": "No camines bajo cargas suspendidas. No te detengas debajo de ellas."
+    },
+    {
+      "shapeId": 45,
+      "name": "Forme libre : forme 35",
+      "type": 5,
+      "x": 56.9298,
+      "y": 60.0546,
+      "w": 41.1955,
+      "h": 8.6615,
+      "text": "Antes de realizar trabajos en caliente, asegúrate de que no existen peligros de incendio o de explosión."
+    },
+    {
+      "shapeId": 5,
+      "name": "Image 31",
+      "type": 13,
+      "x": 49.462,
+      "y": 23.0741,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 12642
+    },
+    {
+      "shapeId": 13,
+      "name": "Image 27",
+      "type": 13,
+      "x": 49.462,
+      "y": 35.0865,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 10889
+    },
+    {
+      "shapeId": 15,
+      "name": "Image 29",
+      "type": 13,
+      "x": 49.462,
+      "y": 47.0988,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 9723
+    },
+    {
+      "shapeId": 17,
+      "name": "Image 30",
+      "type": 13,
+      "x": 49.462,
+      "y": 59.1112,
+      "w": 5.9055,
+      "h": 10.4987,
+      "imageExt": "png",
+      "imageBytes": 13679
+    }
+  ],
+  "29": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 5.625,
+      "y": 6.5312,
+      "w": 25.9,
+      "h": 9.9481,
+      "text": "STOP WORK"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 3,
+      "name": "Freeform 38",
+      "type": 5,
+      "x": 89.0751,
+      "y": 11.5013,
+      "w": 7.1249,
+      "h": 12.558
+    },
+    {
+      "shapeId": 18,
+      "name": "TextBox 42",
+      "type": 17,
+      "x": 49.1908,
+      "y": 25.8807,
+      "w": 32.5333,
+      "h": 8.4147,
+      "text": "SI NO ES SEGURO, NO SE INICIA EL TRABAJO"
+    },
+    {
+      "shapeId": 22,
+      "name": "TextBox 41",
+      "type": 17,
+      "x": 46.0156,
+      "y": 4.7418,
+      "w": 37.3844,
+      "h": 13.0384,
+      "text": "TODOS TENEMOS LA AUTORIDAD Y LA OBLIGACIÓN DE DETENER UN TRABAJO INSEGURO"
+    },
+    {
+      "shapeId": 25,
+      "name": "TextBox 39",
+      "type": 17,
+      "x": 0.0945,
+      "y": 30.11,
+      "w": 40.5743,
+      "h": 4.5813,
+      "text": "¿CUÁNDO DEBO APLICAR STOP WORK?"
+    },
+    {
+      "shapeId": 27,
+      "name": "Imagen 26",
+      "type": 13,
+      "x": 5.625,
+      "y": 39.0198,
+      "w": 31.2863,
+      "h": 28.9136,
+      "imageExt": "png",
+      "imageBytes": 35657
+    },
+    {
+      "shapeId": 28,
+      "name": "Imagen 27",
+      "type": 13,
+      "x": 16.0599,
+      "y": 69.1148,
+      "w": 11.6373,
+      "h": 28.558,
+      "imageExt": "png",
+      "imageBytes": 26612
+    },
+    {
+      "shapeId": 29,
+      "name": "Inducción-STOP WORK",
+      "type": 13,
+      "x": 94.7806,
+      "y": 91.0333,
+      "w": 3.9931,
+      "h": 7.0988,
+      "imageExt": "png",
+      "imageBytes": 9919
+    },
+    {
+      "shapeId": 30,
+      "name": "Imagen 29",
+      "type": 13,
+      "x": 47.4667,
+      "y": 38.6765,
+      "w": 48.1333,
+      "h": 49.8222,
+      "imageExt": "png",
+      "imageBytes": 127398
+    },
+    {
+      "shapeId": 31,
+      "name": "Picture 2",
+      "type": 13,
+      "x": 23.1633,
+      "y": 91.0333,
+      "w": 2.5651,
+      "h": 4.5601,
+      "imageExt": "jpg",
+      "imageBytes": 8360
+    }
+  ],
+  "30": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 5.625,
+      "y": 6.5312,
+      "w": 25.9,
+      "h": 9.9481,
+      "text": "STOP WORK"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 3,
+      "name": "Freeform 38",
+      "type": 5,
+      "x": 89.0751,
+      "y": 11.5013,
+      "w": 7.1249,
+      "h": 12.558
+    },
+    {
+      "shapeId": 18,
+      "name": "TextBox 42",
+      "type": 17,
+      "x": 47.8354,
+      "y": 19.8567,
+      "w": 32.5333,
+      "h": 8.4147,
+      "text": "SI NO ES SEGURO, NO SE INICIA EL TRABAJO"
+    },
+    {
+      "shapeId": 22,
+      "name": "TextBox 41",
+      "type": 17,
+      "x": 46.0156,
+      "y": 4.7418,
+      "w": 37.3844,
+      "h": 13.0384,
+      "text": "TODOS TENEMOS LA AUTORIDAD Y LA OBLIGACIÓN DE DETENER UN TRABAJO INSEGURO"
+    },
+    {
+      "shapeId": 2,
+      "name": "emmanuel-Le guilloux-ES-BD",
+      "type": 16,
+      "x": 14.351,
+      "y": 29.4267,
+      "w": 69.191,
+      "h": 64.3485,
+      "mediaPending": true
+    }
+  ],
+  "31": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 5.625,
+      "y": 5.8619,
+      "w": 37.3458,
+      "h": 19.9579,
+      "text": "VIGILANCIA COMPARTIDA"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 5,
+      "name": "TextBox 32",
+      "type": 17,
+      "x": 44.9499,
+      "y": 7.6685,
+      "w": 37.3286,
+      "h": 13.0316,
+      "text": "ES VELAR POR LA SEGURIDAD PROPIA Y LA DE CADA PERSONA, SIN IMPORTAR SU CARGO, EMPRESA O NIVEL JERÁRQUICO."
+    },
+    {
+      "shapeId": 10,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 89.1105,
+      "y": 13.1324,
+      "w": 7.6667,
+      "h": 12.7634
+    },
+    {
+      "shapeId": 13,
+      "name": "Imagen 12",
+      "type": 13,
+      "x": 9.7503,
+      "y": 33.9869,
+      "w": 16.9346,
+      "h": 18.3586,
+      "imageExt": "png",
+      "imageBytes": 22014
+    },
+    {
+      "shapeId": 14,
+      "name": "Rectángulo: esquinas redondeadas 13",
+      "type": 1,
+      "x": 10.0515,
+      "y": 56.1064,
+      "w": 16.9347,
+      "h": 25.621,
+      "text": "Es la conciencia de que todos tenemos el mismo objetivo en seguridad. En esta filosofía, cada uno fortalece el cuidado de todos, incluyéndose a sí mismo"
+    },
+    {
+      "shapeId": 15,
+      "name": "Inducción-VIGILANCIA",
+      "type": 13,
+      "x": 94.7806,
+      "y": 90.574,
+      "w": 3.9931,
+      "h": 7.0988,
+      "imageExt": "png",
+      "imageBytes": 9919
+    },
+    {
+      "shapeId": 16,
+      "name": "Rectángulo: esquinas redondeadas 15",
+      "type": 1,
+      "x": 31.525,
+      "y": 37.7112,
+      "w": 59.4185,
+      "h": 18.4066,
+      "text": "ME CUIDO Me informo de las normas del área Respeto las señales Uso el EPP específico del área Me mantengo a distancia segura de los peligros"
+    },
+    {
+      "shapeId": 17,
+      "name": "Rectángulo: esquinas redondeadas 16",
+      "type": 1,
+      "x": 31.525,
+      "y": 57.579,
+      "w": 59.4185,
+      "h": 20.7618,
+      "text": "CUIDO A MIS COMPAÑEROS • • • Me presento y explico el objetivo de estar en el área Estoy atento y listo para intervenir Hago comentarios sobre la actividad que realizan (tiempo de duración, principales riesgos, permiso de trabajo, APR, etc."
+    },
+    {
+      "shapeId": 19,
+      "name": "Rectángulo: esquinas redondeadas 18",
+      "type": 1,
+      "x": 31.525,
+      "y": 79.8019,
+      "w": 59.4185,
+      "h": 18.4066,
+      "text": "ACEPTO EL CUIDADO DE MIS COMPAÑEROS • • Me propongo escuchar y llevar a cabo sus sugerencias Consulto al equipo o al ejecutante cuando tengo dudas"
+    }
+  ],
+  "32": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 5.625,
+      "y": 5.8619,
+      "w": 56.9241,
+      "h": 9.9481,
+      "text": "VIGILANCIA COMPARTIDA"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 5,
+      "name": "TextBox 32",
+      "type": 17,
+      "x": 44.9499,
+      "y": 7.6685,
+      "w": 37.3286,
+      "h": 13.0316,
+      "text": "ES VELAR POR LA SEGURIDAD PROPIA Y LA DE CADA PERSONA, SIN IMPORTAR SU CARGO, EMPRESA O NIVEL JERÁRQUICO."
+    },
+    {
+      "shapeId": 10,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 89.1105,
+      "y": 13.1324,
+      "w": 7.6667,
+      "h": 12.7634
+    },
+    {
+      "shapeId": 2,
+      "name": "ENGIE-Vigilance_Partagee_EP4-J_Oliveira_da_Silva-VSTESP--10Mbps (1)",
+      "type": 16,
+      "x": 13.4302,
+      "y": 26.1292,
+      "w": 73.1395,
+      "h": 66.6667,
+      "mediaPending": true
+    }
+  ],
+  "33": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 1.2263,
+      "y": 5.8619,
+      "w": 43.1752,
+      "h": 19.824,
+      "text": "EL MINUTO QUE SALVA VIDAS"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 18,
+      "name": "TextBox 42",
+      "type": 17,
+      "x": 2.1832,
+      "y": 24.8012,
+      "w": 32.5333,
+      "h": 9.8546,
+      "text": "LMRA LAST MINUTE RISK ASSESSMENT"
+    },
+    {
+      "shapeId": 26,
+      "name": "Conector: angular 25",
+      "type": 9,
+      "x": 21.8786,
+      "y": 30.11,
+      "w": 77.3214,
+      "h": 5.3636
+    },
+    {
+      "shapeId": 5,
+      "name": "Freeform 37",
+      "type": 5,
+      "x": 87.7333,
+      "y": 13.1324,
+      "w": 7.8667,
+      "h": 12.558
+    },
+    {
+      "shapeId": 7,
+      "name": "Inducción-LMRA (1)",
+      "type": 13,
+      "x": 94.7806,
+      "y": 91.137,
+      "w": 3.9931,
+      "h": 7.0988,
+      "imageExt": "png",
+      "imageBytes": 9919
+    },
+    {
+      "shapeId": 10,
+      "name": "Imagen 9",
+      "type": 13,
+      "x": 53.6667,
+      "y": 37.3387,
+      "w": 41.114,
+      "h": 28.5283,
+      "imageExt": "png",
+      "imageBytes": 49227
+    },
+    {
+      "shapeId": 13,
+      "name": "Imagen 12",
+      "type": 13,
+      "x": 54.7293,
+      "y": 66.6659,
+      "w": 38.9886,
+      "h": 31.3226,
+      "imageExt": "png",
+      "imageBytes": 114171
+    },
+    {
+      "shapeId": 14,
+      "name": "CuadroTexto 13",
+      "type": 17,
+      "x": 7.768,
+      "y": 45.5833,
+      "w": 40.4224,
+      "h": 33.8084,
+      "text": "Un minuto para verificar tu entorno de trabajo y confirmar que los riesgos están controlados, antes de iniciar cualquier actividad."
+    }
+  ],
+  "34": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 1.2263,
+      "y": 5.8619,
+      "w": 46.4131,
+      "h": 19.824,
+      "text": "EL MINUTO QUE SALVA VIDAS"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 18,
+      "name": "TextBox 42",
+      "type": 17,
+      "x": 2.1832,
+      "y": 24.8012,
+      "w": 32.5333,
+      "h": 9.8546,
+      "text": "LMRA LAST MINUTE RISK ASSESSMENT"
+    },
+    {
+      "shapeId": 26,
+      "name": "Conector: angular 25",
+      "type": 9,
+      "x": 21.8786,
+      "y": 30.11,
+      "w": 77.3214,
+      "h": 5.3636
+    },
+    {
+      "shapeId": 5,
+      "name": "Freeform 37",
+      "type": 5,
+      "x": 87.7333,
+      "y": 13.1324,
+      "w": 7.8667,
+      "h": 12.558
+    },
+    {
+      "shapeId": 2,
+      "name": "Imagen 1",
+      "type": 13,
+      "x": 10.6261,
+      "y": 40.0701,
+      "w": 14.3516,
+      "h": 30.4164,
+      "imageExt": "png",
+      "imageBytes": 26226
+    },
+    {
+      "shapeId": 3,
+      "name": "Picture 4",
+      "type": 13,
+      "x": 30.1271,
+      "y": 37.7943,
+      "w": 14.3478,
+      "h": 50.9119,
+      "imageExt": "png",
+      "imageBytes": 414456
+    },
+    {
+      "shapeId": 15,
+      "name": "Imagen 14",
+      "type": 13,
+      "x": 49.3173,
+      "y": 37.7943,
+      "w": 22.4439,
+      "h": 30.3641,
+      "imageExt": "png",
+      "imageBytes": 123336
+    },
+    {
+      "shapeId": 16,
+      "name": "Imagen 15",
+      "type": 13,
+      "x": 74.8329,
+      "y": 32.2738,
+      "w": 22.7888,
+      "h": 64.5052,
+      "imageExt": "png",
+      "imageBytes": 70918
+    },
+    {
+      "shapeId": 17,
+      "name": "Imagen 16",
+      "type": 13,
+      "x": 10.8987,
+      "y": 72.6232,
+      "w": 59.0918,
+      "h": 19.4079,
+      "imageExt": "png",
+      "imageBytes": 85913
+    }
+  ],
+  "35": [
+    {
+      "shapeId": 6,
+      "name": "Freeform 6",
+      "type": 5,
+      "x": 34.7166,
+      "y": 9.7854,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 1.2263,
+      "y": 5.8619,
+      "w": 40.6902,
+      "h": 19.2885,
+      "text": "EVENTOS E INCIDENTES"
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 26,
+      "name": "Conector: angular 25",
+      "type": 9,
+      "x": 21.8786,
+      "y": 30.11,
+      "w": 77.3214,
+      "h": 5.3636
+    },
+    {
+      "shapeId": 3,
+      "name": "Imagen 2",
+      "type": 13,
+      "x": 88.4438,
+      "y": 13.1324,
+      "w": 8.3333,
+      "h": 11.6689,
+      "imageExt": "png",
+      "imageBytes": 23822
+    },
+    {
+      "shapeId": 16,
+      "name": "CuadroTexto 15",
+      "type": 17,
+      "x": 46.733,
+      "y": 8.9433,
+      "w": 37.5228,
+      "h": 12.3416,
+      "text": "REPORTAR EVITA LA REITERACIÓN DE INCIDENTES Y QUE ESTOS SE CONVIERTAN EN HECHOS GRAVES."
+    },
+    {
+      "shapeId": 17,
+      "name": "Inducción-EVENTOS INCIDENTES",
+      "type": 13,
+      "x": 94.3806,
+      "y": 90.574,
+      "w": 3.9931,
+      "h": 7.0988,
+      "imageExt": "png",
+      "imageBytes": 9919
+    },
+    {
+      "shapeId": 19,
+      "name": "Imagen 18",
+      "type": 13,
+      "x": 2.9584,
+      "y": 36.9605,
+      "w": 37.8403,
+      "h": 26.0633,
+      "imageExt": "png",
+      "imageBytes": 24191
+    },
+    {
+      "shapeId": 20,
+      "name": "Imagen 19",
+      "type": 13,
+      "x": 9.5784,
+      "y": 58.0976,
+      "w": 24.6003,
+      "h": 29.1559,
+      "imageExt": "png",
+      "imageBytes": 1240030
+    },
+    {
+      "shapeId": 21,
+      "name": "Imagen 20",
+      "type": 13,
+      "x": 42.5489,
+      "y": 46.5433,
+      "w": 56.6511,
+      "h": 43.8952,
+      "imageExt": "png",
+      "imageBytes": 116034
+    },
+    {
+      "shapeId": 22,
+      "name": "Imagen 21",
+      "type": 13,
+      "x": 63.3943,
+      "y": 32.3545,
+      "w": 25.0495,
+      "h": 13.301,
+      "imageExt": "png",
+      "imageBytes": 39564
+    }
+  ],
+  "36": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 88.0053,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 7,
+      "name": "Image 8",
+      "type": 13,
+      "x": 4.6066,
+      "y": 24.3912,
+      "w": 45.3934,
+      "h": 45.4111,
+      "imageExt": "gif",
+      "imageBytes": 8574719
+    },
+    {
+      "shapeId": 13,
+      "name": "Image 1",
+      "type": 13,
+      "x": 1.2263,
+      "y": 21.2126,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 14744
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 24.3912,
+      "w": 47.0582,
+      "h": 8.0781,
+      "text": "Cuando se trabaja en una zanja, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ Solo baja a una zanja si las medidas de protección contra derrumbes son aplicadas y adecuadas."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 33.5568,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.2114,
+      "y": 37.1026,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ Verifica la ausencia de energía (mecánica, química, eléctrica, fluidos bajo presión, etc.) antes de comenzar el trabajo."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Engancha el arnés a la línea de vida cuando trabajes en altura."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.4629,
+      "y": 78.7874,
+      "w": 83.5681,
+      "h": 15.8571,
+      "text": "En los últimos años, se han registrado accidentes graves y mortales asociados al derrumbe de zanjas durante actividades de excavación. Estos eventos evidencian la importancia de implementar medidas preventivas eficaces para proteger a las personas trabajadoras frente a este tipo de riesgos. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “Solo baja a una zanja si las medidas de protección contra derrumbes son aplicadas y adecuadas.”"
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.0919,
+      "y": 24.5559,
+      "w": 3.8766,
+      "h": 6.8917
+    }
+  ],
+  "37": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 24.3912,
+      "w": 47.0582,
+      "h": 8.0781,
+      "text": "Cuando conduces, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 33.5568,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.2114,
+      "y": 37.1026,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ Sitúate fuera de la trayectoria de los vehículos, maquinaria pesada y equipos en movimiento."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ No camines bajo cargas suspendidas. No te detengas debajo de ellas."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.8611,
+      "y": 85.7821,
+      "w": 83.5681,
+      "h": 6.8814,
+      "text": "El incumplimiento de esta regla que salva vidas multiplica por cinco el riesgo de accidentes de tráfico graves o mortales. Entonces, aplica la siguiente RQSV: “No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.0919,
+      "y": 24.5559,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 5,
+      "name": "Image 3",
+      "type": 13,
+      "x": 4.3561,
+      "y": 27.1691,
+      "w": 45.6439,
+      "h": 45.6618,
+      "imageExt": "gif",
+      "imageBytes": 8150560
+    },
+    {
+      "shapeId": 10,
+      "name": "Image 1",
+      "type": 13,
+      "x": 1.2782,
+      "y": 19.9995,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 12642
+    }
+  ],
+  "38": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 24.3912,
+      "w": 47.0582,
+      "h": 8.0781,
+      "text": "Cuando se trabaja en un cuadro eléctrico, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ Comprueba que la atmósfera es segura antes de entrar en un espacio confinado y monitoréala durante toda la operación."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 48.9533,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ Verifica la ausencia de energía (mecánica, química, eléctrica, fluidos bajo presión, etc.) antes de comenzar el trabajo."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Engancha el arnés a la línea de vida cuando trabajes en altura."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.8987,
+      "y": 82.5137,
+      "w": 83.5681,
+      "h": 15.8571,
+      "text": "Los riesgos asociados a la presencia de energías peligrosas, como la energía eléctrica, mecánica, química o de fluidos presurizados, continúan siendo una de las principales causas de lesiones graves y fatales en el trabajo. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “Verifica la ausencia de energía (mecánica, química, eléctrica, fluidos a baja o alta presión, entre otras) antes de comenzar el trabajo”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.0919,
+      "y": 24.5559,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 5,
+      "name": "Image 3",
+      "type": 13,
+      "x": 4.4628,
+      "y": 25.0189,
+      "w": 45.3934,
+      "h": 45.4111,
+      "imageExt": "gif",
+      "imageBytes": 3471639
+    },
+    {
+      "shapeId": 10,
+      "name": "Image 7",
+      "type": 13,
+      "x": 1.2782,
+      "y": 20.3744,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 10435
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.7967,
+      "y": 52.0554,
+      "w": 4.2336,
+      "h": 7.5263
+    }
+  ],
+  "39": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 21.0469,
+      "w": 47.0582,
+      "h": 11.6684,
+      "text": "Cuando se está trabajando en maniobras de izaje, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ No camines bajo cargas suspendidas. No te detengas debajo de ellas."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 33.5226,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Solo baja a una zanja si las medidas de protección contra derrumbes son aplicadas y adecuadas."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.8987,
+      "y": 82.5137,
+      "w": 83.5681,
+      "h": 12.8652,
+      "text": "Las operaciones de izaje representan riesgos críticos debido a la posible caída de cargas, lo que puede ocasionar lesiones graves o fatales a las personas expuestas. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “No camines bajo cargas suspendidas. No te detengas debajo de ellas”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.247,
+      "y": 23.1396,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 48.9662,
+      "y": 38.1899,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 6,
+      "name": "Image 8",
+      "type": 13,
+      "x": 3.2731,
+      "y": 28.2057,
+      "w": 45.6439,
+      "h": 45.6618,
+      "imageExt": "gif",
+      "imageBytes": 2530663
+    },
+    {
+      "shapeId": 11,
+      "name": "Image 2",
+      "type": 13,
+      "x": 0.5251,
+      "y": 20.509,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 9723
+    }
+  ],
+  "40": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.3248,
+      "y": 19.2102,
+      "w": 47.0582,
+      "h": 14.0619,
+      "text": "Termina de almorzar y prepárate para conducir hasta el siguiente cliente. Si estuvieras en esta situación, ¿qué regla que salva vidas deberías aplicar?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ Sitúate fuera de la trayectoria de los vehículos, maquinaria pesada y equipos en movimiento."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 62.6873,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ No trabajes ni conduzcas bajo la influencia del alcohol o drogas o estupefacientes."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.8987,
+      "y": 82.5137,
+      "w": 83.5681,
+      "h": 12.8652,
+      "text": "El consumo de alcohol y drogas aumenta significativamente el riesgo de accidentes, afectando la capacidad de percepción, reacción y toma de decisiones durante la ejecución de las tareas y la conducción de vehículos. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “No trabajes bajo la influencia del alcohol o las drogas, incluyendo la conducción de vehículos”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.247,
+      "y": 22.8389,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.5482,
+      "y": 66.7906,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 5,
+      "name": "Image 3",
+      "type": 13,
+      "x": 2.8557,
+      "y": 28.1951,
+      "w": 45.8195,
+      "h": 45.8374,
+      "imageExt": "gif",
+      "imageBytes": 5155687
+    },
+    {
+      "shapeId": 10,
+      "name": "Image 2",
+      "type": 13,
+      "x": 0.0,
+      "y": 22.3516,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 10889
+    }
+  ],
+  "41": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 50.7438,
+      "y": 22.8492,
+      "w": 47.0582,
+      "h": 6.8814,
+      "text": "Cuando se trabaja con paneles fotovoltaicos en un tejado, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ Sitúate fuera de la trayectoria de los vehículos, maquinaria pesada y equipos en movimiento."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 62.6873,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Engancha el arnés a la línea de vida cuando trabajes en altura."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 10.8987,
+      "y": 82.5137,
+      "w": 83.5681,
+      "h": 12.8652,
+      "text": "Los trabajos en altura continúan siendo una actividad de alto riesgo, con potencial de generar lesiones graves o fatales cuando no se implementan adecuadamente las medidas de control y protección contra caídas. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “Engancha el arnés a la línea de vida cuando trabajes en altura”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.247,
+      "y": 22.8389,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.5482,
+      "y": 66.7906,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 6,
+      "name": "Image 2",
+      "type": 13,
+      "x": 3.0687,
+      "y": 28.4919,
+      "w": 45.4211,
+      "h": 45.4389,
+      "imageExt": "gif",
+      "imageBytes": 1632267
+    },
+    {
+      "shapeId": 11,
+      "name": "Image 7",
+      "type": 13,
+      "x": 0.8147,
+      "y": 22.8389,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 13275
+    }
+  ],
+  "42": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 24.3912,
+      "w": 47.0582,
+      "h": 8.0781,
+      "text": "En un aparcamiento subterráneo, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ Sitúate fuera de la trayectoria de los vehículos, maquinaria pesada y equipos en movimiento."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.665,
+      "y": 33.4601,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ Engancha el arnés a la línea de vida cuando trabajes en altura."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Solo baja a una zanja si las medidas de protección contra derrumbes son aplicadas y adecuadas."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 11.48,
+      "y": 78.8239,
+      "w": 83.5681,
+      "h": 18.849,
+      "text": "Los riesgos asociados a vehículos, maquinaria pesada y equipos en movimiento pueden provocar golpes, atrapamientos o aplastamientos con consecuencias graves o fatales. Mantener una posición segura y permanecer fuera de la línea de fuego es fundamental para prevenir este tipo de eventos. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “Sitúate fuera de la trayectoria de vehículos, maquinaria pesada y equipos en movimiento”. Incluso en estacionamientos y áreas de circulación interna, respeta las zonas habilitadas para el tránsito peatonal."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.0919,
+      "y": 24.5559,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.0305,
+      "y": 38.7875,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 6,
+      "name": "Image 27",
+      "type": 13,
+      "x": 2.9139,
+      "y": 25.996,
+      "w": 45.4211,
+      "h": 45.4389,
+      "imageExt": "gif",
+      "imageBytes": 2787019
+    },
+    {
+      "shapeId": 11,
+      "name": "Image 32",
+      "type": 13,
+      "x": 0.2987,
+      "y": 19.8787,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 14281
+    }
+  ],
+  "43": [
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 8.6546,
+      "y": 81.5642,
+      "w": 2.2065,
+      "h": 8.4358
+    },
+    {
+      "shapeId": 9,
+      "name": "Freeform 9",
+      "type": 5,
+      "x": 8.6546,
+      "y": 60.5453,
+      "w": 2.2441,
+      "h": 7.3881
+    },
+    {
+      "shapeId": 4,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 12,
+      "name": "Imagen 11",
+      "type": 13,
+      "x": 1.2263,
+      "y": 82.3272,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    },
+    {
+      "shapeId": 2,
+      "name": "Espace réservé du texte 6",
+      "type": 17,
+      "x": 2.0547,
+      "y": 7.661,
+      "w": 85.5203,
+      "h": 7.6293,
+      "text": "Aquí tienes algunos ejercicios con los que podrás practicar y aplicar las reglas que salvan vidas"
+    },
+    {
+      "shapeId": 14,
+      "name": "ZoneTexte 12",
+      "type": 17,
+      "x": 51.083,
+      "y": 24.3912,
+      "w": 47.0582,
+      "h": 8.0781,
+      "text": "En esta situación, ¿qué regla que salva vidas debe aplicarse?"
+    },
+    {
+      "shapeId": 15,
+      "name": "Rectangle 15",
+      "type": 1,
+      "x": 52.247,
+      "y": 34.6348,
+      "w": 46.3207,
+      "h": 12.462,
+      "text": "1/ No manipules tu teléfono ni otros dispositivos de comunicación cuando conduzcas."
+    },
+    {
+      "shapeId": 18,
+      "name": "Rectangle : coins arrondis 20",
+      "type": 1,
+      "x": 51.4526,
+      "y": 62.9062,
+      "w": 47.4847,
+      "h": 14.618
+    },
+    {
+      "shapeId": 24,
+      "name": "Rectangle 14",
+      "type": 1,
+      "x": 52.247,
+      "y": 49.5646,
+      "w": 46.3207,
+      "h": 12.508,
+      "text": "2/ Verifica la ausencia de energía (mecánica, química, eléctrica, fluidos bajo presión, etc.) antes de comenzar el trabajo."
+    },
+    {
+      "shapeId": 25,
+      "name": "Rectangle 13",
+      "type": 1,
+      "x": 52.247,
+      "y": 64.2394,
+      "w": 46.3207,
+      "h": 10.8845,
+      "text": "3/ Comprueba que la atmósfera es segura antes de entrar en un espacio confinado y monitoréala durante toda la operación."
+    },
+    {
+      "shapeId": 28,
+      "name": "ZoneTexte 31",
+      "type": 17,
+      "x": 11.8717,
+      "y": 83.529,
+      "w": 83.5681,
+      "h": 12.8652,
+      "text": "Los trabajos en espacios confinados presentan riesgos críticos para la seguridad de las personas, especialmente por la presencia de atmósferas peligrosas que pueden generar asfixia, intoxicación, incendios o explosiones. Por lo tanto, debe aplicarse la siguiente Regla que Salva Vidas: “Comprueba que la atmósfera es segura antes de entrar en un espacio confinado y monitoréala durante toda la operación”."
+    },
+    {
+      "shapeId": 29,
+      "name": "Graphique 16",
+      "type": 13,
+      "x": 52.0919,
+      "y": 24.5559,
+      "w": 3.8766,
+      "h": 6.8917
+    },
+    {
+      "shapeId": 23,
+      "name": "Graphique 29",
+      "type": 13,
+      "x": 49.4222,
+      "y": 66.8845,
+      "w": 4.2336,
+      "h": 7.5263
+    },
+    {
+      "shapeId": 5,
+      "name": "Image 3",
+      "type": 13,
+      "x": 3.3232,
+      "y": 26.702,
+      "w": 45.7072,
+      "h": 45.7251,
+      "imageExt": "gif",
+      "imageBytes": 4085980
+    },
+    {
+      "shapeId": 10,
+      "name": "Image 7",
+      "type": 13,
+      "x": 0.8147,
+      "y": 20.3053,
+      "w": 9.6205,
+      "h": 17.1031,
+      "imageExt": "png",
+      "imageBytes": 13953
+    }
+  ],
+  "44": [
+    {
+      "shapeId": 5,
+      "name": "Freeform 5",
+      "type": 5,
+      "x": 38.3333,
+      "y": 9.3424,
+      "w": 8.8249,
+      "h": 6.6938
+    },
+    {
+      "shapeId": 8,
+      "name": "Freeform 8",
+      "type": 5,
+      "x": 51.087,
+      "y": 7.0401,
+      "w": 27.4789,
+      "h": 14.9833
+    },
+    {
+      "shapeId": 11,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 7.4892,
+      "y": 64.5037,
+      "w": 26.1953,
+      "h": 6.358,
+      "text": "PREVENCIÓN DE RIESGOS EN LOS PROCESOS INDUSTRIALE"
+    },
+    {
+      "shapeId": 13,
+      "name": "TextBox 13",
+      "type": 17,
+      "x": 63.8069,
+      "y": 63.7766,
+      "w": 29.518,
+      "h": 9.3268,
+      "text": "PREVENIR LOS RIESGOS PSICOSOCIALES Y MEJORAR EL BIENESTAR EN EL TRABAJO"
+    },
+    {
+      "shapeId": 18,
+      "name": "TextBox 11",
+      "type": 17,
+      "x": 2.2723,
+      "y": 9.4829,
+      "w": 36.629,
+      "h": 10.0977,
+      "text": "PILARES DE ENGIE"
+    },
+    {
+      "shapeId": 19,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 17,
+      "name": "engie-NMAR-ES",
+      "type": 16,
+      "x": 18.0098,
+      "y": 28.0335,
+      "w": 64.9347,
+      "h": 64.9264,
+      "mediaPending": true
+    },
+    {
+      "shapeId": 2,
+      "name": "Imagen 1",
+      "type": 13,
+      "x": 0.6228,
+      "y": 83.9324,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    }
+  ],
+  "45": [
+    {
+      "shapeId": 17,
+      "name": "Freeform 17",
+      "type": 5,
+      "x": 55.6046,
+      "y": 3.6902,
+      "w": 16.5383,
+      "h": 11.6644
+    },
+    {
+      "shapeId": 35,
+      "name": "TextBox 35",
+      "type": 17,
+      "x": 2.0331,
+      "y": 4.5837,
+      "w": 88.4133,
+      "h": 21.5417,
+      "text": "NUESTROS 9 COMPROMISOS PARA EL BIENESTAR EN LOS LUGARES DE TRABAJO"
+    },
+    {
+      "shapeId": 39,
+      "name": "Freeform 3",
+      "type": 5,
+      "x": 85.4888,
+      "y": -1.4399,
+      "w": 15.6315,
+      "h": 14.5723
+    },
+    {
+      "shapeId": 4,
+      "name": "Imagen 3",
+      "type": 13,
+      "x": 11.8428,
+      "y": 39.5359,
+      "w": 44.9533,
+      "h": 52.0266,
+      "imageExt": "png",
+      "imageBytes": 296296
+    },
+    {
+      "shapeId": 6,
+      "name": "Imagen 5",
+      "type": 13,
+      "x": 60.3639,
+      "y": 41.296,
+      "w": 36.4329,
+      "h": 34.0456,
+      "imageExt": "png",
+      "imageBytes": 980217
+    },
+    {
+      "shapeId": 8,
+      "name": "Imagen 7",
+      "type": 13,
+      "x": 59.166,
+      "y": 78.0617,
+      "w": 38.8288,
+      "h": 20.6278,
+      "imageExt": "png",
+      "imageBytes": 93640
+    },
+    {
+      "shapeId": 2,
+      "name": "Imagen 1",
+      "type": 13,
+      "x": 0.6228,
+      "y": 83.9324,
+      "w": 8.7974,
+      "h": 15.3456,
+      "imageExt": "jpg",
+      "imageBytes": 42794
+    }
+  ]
+}

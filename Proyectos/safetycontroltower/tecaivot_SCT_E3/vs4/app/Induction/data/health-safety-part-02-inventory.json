@@ -1,0 +1,47 @@
+{
+  "source": "PRESENTACION ENGIE_IRL_SCL_Mod2_26_45.pptx",
+  "slides": {
+    "from": 26,
+    "to": 45,
+    "count": 20
+  },
+  "phase": "text-images-audio",
+  "audioSlides": [
+    27,
+    29,
+    31,
+    33,
+    35
+  ],
+  "gifSlides": [
+    26,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43
+  ],
+  "videosDeferred": [
+    {
+      "slide": 30,
+      "sourceMedia": "media3.mp4",
+      "bytes": 29578536,
+      "status": "pending-video-phase"
+    },
+    {
+      "slide": 32,
+      "sourceMedia": "media5.mp4",
+      "bytes": 128438510,
+      "status": "pending-video-phase"
+    },
+    {
+      "slide": 44,
+      "sourceMedia": "media8.mp4",
+      "bytes": 49973868,
+      "status": "pending-video-phase"
+    }
+  ]
+}

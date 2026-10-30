@@ -33,6 +33,26 @@ final class SctHealthSafetyContent
             23 => 'Reglas que salvan vidas — Asegúrate',
             24 => 'Reglas que salvan vidas — Evita cargas suspendidas',
             25 => 'Reglas que salvan vidas — Descarta alcohol y estupefacientes',
+            26 => 'Reglas que salvan vidas — Asegúrate / Para',
+            27 => '¿Qué riesgo corresponde a qué regla que salva vidas? — Parte 1',
+            28 => '¿Qué riesgo corresponde a qué regla que salva vidas? — Parte 2',
+            29 => 'Stop Work',
+            30 => 'Stop Work — Video',
+            31 => 'Vigilancia compartida',
+            32 => 'Vigilancia compartida — Video',
+            33 => 'El minuto que salva vidas — LMRA',
+            34 => 'LMRA — Aplicación visual',
+            35 => 'Eventos e incidentes',
+            36 => 'Ejercicio — Riesgo de derrumbe en zanjas',
+            37 => 'Ejercicio — Uso de dispositivos al conducir',
+            38 => 'Ejercicio — Ausencia de energía',
+            39 => 'Ejercicio — Cargas suspendidas e izaje',
+            40 => 'Ejercicio — Alcohol y drogas',
+            41 => 'Ejercicio — Trabajo en altura',
+            42 => 'Ejercicio — Vehículos y equipos en movimiento',
+            43 => 'Ejercicio — Espacios confinados',
+            44 => 'Pilares de ENGIE — Procesos industriales y riesgos psicosociales',
+            45 => 'Nuestros 9 compromisos para el bienestar en los lugares de trabajo',
         ];
 
         $mediaBase = '../../assets/inductions/health-safety/part-01/media/';
@@ -48,13 +68,27 @@ final class SctHealthSafetyContent
             15 => ['type'=>'audio','durationMs'=>28654,'src'=>$mediaBase.'media10.m4a','x'=>95.003,'y'=>91.191,'w'=>3.993,'h'=>7.099],
             16 => ['type'=>'video','durationMs'=>176384,'src'=>$mediaBase.'media11.mp4','poster'=>$mediaBase.'poster-slide-16.png','x'=>12.640,'y'=>18.533,'w'=>72.849,'h'=>73.062],
             17 => ['type'=>'audio','durationMs'=>24897,'src'=>$mediaBase.'media12.m4a','x'=>93.305,'y'=>90.065,'w'=>3.993,'h'=>7.099],
-            18 => ['type'=>'video','durationMs'=>80128,'src'=>$mediaBase.'media13.mp4','poster'=>$mediaBase.'poster-slide-18.png','x'=>15.512,'y'=>16.573,'w'=>75.833,'h'=>75.833],
+            18 => ['type'=>'video','durationMs'=>80128,'src'=>$mediaBase.'media13.mp4','poster'=>$mediaBase.'poster-slide-18.png','x'=>19.000,'y'=>25.000,'w'=>68.000,'h'=>65.000],
             20 => ['type'=>'animation','durationMs'=>15660,'src'=>$mediaBase.'image80.gif','x'=>19.126,'y'=>23.945,'w'=>76.114,'h'=>74.862],
             21 => ['type'=>'animation','durationMs'=>10260,'src'=>$mediaBase.'image82.gif','x'=>18.911,'y'=>23.688,'w'=>76.330,'h'=>75.489],
             22 => ['type'=>'animation','durationMs'=>21410,'src'=>$mediaBase.'image84.gif','x'=>18.674,'y'=>23.711,'w'=>76.255,'h'=>75.441],
             23 => ['type'=>'animation','durationMs'=>12660,'src'=>$mediaBase.'image86.gif','x'=>18.754,'y'=>23.842,'w'=>76.662,'h'=>75.180],
             24 => ['type'=>'animation','durationMs'=>12830,'src'=>$mediaBase.'image88.gif','x'=>19.587,'y'=>24.030,'w'=>76.551,'h'=>74.805],
             25 => ['type'=>'animation','durationMs'=>18080,'src'=>$mediaBase.'image90.gif','x'=>19.126,'y'=>24.099,'w'=>76.551,'h'=>74.531],
+            26 => ['type'=>'animation','durationMs'=>16510,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-26-animation.gif','x'=>20.85745,'y'=>25.97365,'w'=>74.08165,'h'=>72.92333],
+            27 => ['type'=>'audio','durationMs'=>8086,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-27-audio.m4a'],
+            29 => ['type'=>'audio','durationMs'=>12498,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-29-audio.m4a'],
+            31 => ['type'=>'audio','durationMs'=>19600,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-31-audio.m4a'],
+            33 => ['type'=>'audio','durationMs'=>22782,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-33-audio.m4a'],
+            35 => ['type'=>'audio','durationMs'=>10261,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-35-audio.m4a'],
+            36 => ['type'=>'animation','durationMs'=>12660,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-36-animation.gif','x'=>4.60659,'y'=>24.39118,'w'=>45.39341,'h'=>45.41114],
+            37 => ['type'=>'animation','durationMs'=>16510,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-37-animation.gif','x'=>4.35607,'y'=>27.16912,'w'=>45.64393,'h'=>45.66177],
+            38 => ['type'=>'animation','durationMs'=>15660,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-38-animation.gif','x'=>4.4628,'y'=>25.01889,'w'=>45.3934,'h'=>45.41114],
+            39 => ['type'=>'animation','durationMs'=>12830,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-39-animation.gif','x'=>3.27306,'y'=>28.2057,'w'=>45.64393,'h'=>45.66177],
+            40 => ['type'=>'animation','durationMs'=>18080,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-40-animation.gif','x'=>2.85571,'y'=>28.19514,'w'=>45.81952,'h'=>45.83742],
+            41 => ['type'=>'animation','durationMs'=>10260,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-41-animation.gif','x'=>3.0687,'y'=>28.49189,'w'=>45.42113,'h'=>45.43889],
+            42 => ['type'=>'animation','durationMs'=>10830,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-42-animation.gif','x'=>2.91387,'y'=>25.99601,'w'=>45.42114,'h'=>45.43889],
+            43 => ['type'=>'animation','durationMs'=>21410,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-43-animation.gif','x'=>3.32322,'y'=>26.70201,'w'=>45.70723,'h'=>45.7251],
         ];
 
         $animationData = [];
@@ -74,6 +108,16 @@ final class SctHealthSafetyContent
                 'thumb' => $animation['thumbAsset'] ?? sprintf('../../assets/inductions/health-safety/part-01/slide-%02d.jpg', $number),
                 'animation' => [
                     'maxStep' => (int) ($animation['maxStep'] ?? 0),
+                    // Preserve the legacy default (first visual step) only when a slide
+                    // does not explicitly define its initial state.
+                    'initialStep' => array_key_exists('initialStep', $animation)
+                        ? (int) $animation['initialStep']
+                        : ((int) ($animation['maxStep'] ?? 0) > 0 ? 1 : 0),
+                    'autoStart' => !empty($animation['autoStart']),
+                    // Slides such as 15 and 17 intentionally reopen in their clean
+                    // initial state, even after completion, so audio can drive the
+                    // complete pedagogical sequence again without exposing layers early.
+                    'reviewStartsInitial' => !empty($animation['reviewStartsInitial']),
                     'effects' => is_array($animation['effects'] ?? null) ? $animation['effects'] : [],
                     'layers' => is_array($animation['layers'] ?? null) ? $animation['layers'] : [],
                 ],
@@ -99,7 +143,7 @@ final class SctHealthSafetyContent
                 [
                     'id' => 'module-02', 'number' => 2,
                     'title' => 'Pilares y esenciales de seguridad ENGIE',
-                    'slide_numbers' => range(14, 25), 'status' => 'partial',
+                    'slide_numbers' => range(14, 45), 'status' => 'active',
                 ],
                 ['id'=>'module-03','number'=>3,'title'=>'Módulo 3','slide_numbers'=>[],'status'=>'pending'],
                 ['id'=>'module-04','number'=>4,'title'=>'Módulo 4','slide_numbers'=>[],'status'=>'pending'],
@@ -161,7 +205,7 @@ final class SctHealthSafetyContent
                 ],
             ],
             'slides' => $slides,
-            'source' => 'PRESENTACION ENGIE_IRL_SCL — Parte 1',
+            'source' => 'PRESENTACION ENGIE_IRL_SCL — Partes 1 y 2 (slides 1–45)',
         ];
     }
 
