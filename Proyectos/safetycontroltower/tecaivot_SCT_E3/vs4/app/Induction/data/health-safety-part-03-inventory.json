@@ -1,0 +1,23 @@
+{
+  "source": "PRESENTACION ENGIE_IRL_SCL_Mod3_46_53.pptx",
+  "actualSlideCount": 12,
+  "module": "module-03",
+  "internalSlides": {
+    "from": 46,
+    "to": 57
+  },
+  "localSlides": {
+    "from": 1,
+    "to": 12
+  },
+  "audioSlides": [
+    46,
+    47,
+    48,
+    52
+  ],
+  "videoSlides": [
+    49
+  ],
+  "note": "El nombre del archivo indica 46_53, pero el PPT contiene 12 láminas reales; se integran todas para no perder contenido."
+}

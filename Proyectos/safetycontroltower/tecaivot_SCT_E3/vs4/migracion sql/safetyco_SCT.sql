@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-10-2026 a las 19:00:50
+-- Tiempo de generación: 30-10-2026 a las 19:20:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -144,7 +144,8 @@ INSERT INTO `change_history` (`id_change`, `id_company`, `module`, `action`, `ta
 (24, NULL, 'legacy', 'update', 'projects', '30', NULL, 'gbu_deactivation', 'GBU DEMO', 'inactive', 'JefaturaEmpresaDemo@demoSCT.cl', '2026-10-16 14:04:57', NULL),
 (25, 4, 'usuarios', 'update', 'users', 'ParamedicoEmpresaDemo@demoSCT.cl', 'ParamedicoEmpresaDemo@demoSCT.cl', 'mutual_code', 'achs', 'ist', 'ParamedicoEmpresaDemo@demoSCT.cl', '2026-10-26 14:25:31', '4d4a9b7af8d19811d64d11bb5e9dd55e'),
 (26, 4, 'usuarios', 'update', 'users', 'GerenteEmpresaDemo@demoSCT.cl', 'GerenteEmpresaDemo@demoSCT.cl', 'mutual_code', 'achs', 'ist', 'GerenteEmpresaDemo@demoSCT.cl', '2026-10-26 14:41:29', '8f1f44c5bcddfecfa63e288ddf53099c'),
-(27, 4, 'usuarios', 'update', 'users', 'SuperUsuarioDemo@demoSCT.cl', 'SuperUsuarioDemo@demoSCT.cl', 'mutual_code', NULL, 'mutual', 'SuperUsuarioDemo@demoSCT.cl', '2026-10-26 14:58:13', '70c5f9f1134ab3be891d09a79099b3eb');
+(27, 4, 'usuarios', 'update', 'users', 'SuperUsuarioDemo@demoSCT.cl', 'SuperUsuarioDemo@demoSCT.cl', 'mutual_code', NULL, 'mutual', 'SuperUsuarioDemo@demoSCT.cl', '2026-10-26 14:58:13', '70c5f9f1134ab3be891d09a79099b3eb'),
+(28, 4, 'usuarios', 'update', 'users', 'UsuarioEmpresaDemo@demoSCT.cl', 'UsuarioEmpresaDemo@demoSCT.cl', 'mutual_code', 'achs', 'isl', 'UsuarioEmpresaDemo@demoSCT.cl', '2026-10-28 19:17:45', 'fd93749181dafc01736bca79415297ad');
 
 -- --------------------------------------------------------
 
@@ -659,6 +660,66 @@ INSERT INTO `event_types` (`id_event_type`, `module`, `name`, `description`, `st
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `induction_content_progress`
+--
+
+CREATE TABLE `induction_content_progress` (
+  `id_progress` bigint(20) UNSIGNED NOT NULL,
+  `id_users` varchar(50) NOT NULL,
+  `role_name` varchar(50) NOT NULL,
+  `induction_id` varchar(100) NOT NULL,
+  `module_id` varchar(50) NOT NULL,
+  `last_slide` smallint(5) UNSIGNED NOT NULL DEFAULT 1,
+  `completed_slides_json` longtext NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ;
+
+--
+-- Volcado de datos para la tabla `induction_content_progress`
+--
+
+INSERT INTO `induction_content_progress` (`id_progress`, `id_users`, `role_name`, `induction_id`, `module_id`, `last_slide`, `completed_slides_json`, `created_at`, `updated_at`) VALUES
+(1, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-01', 1, '[1,2,3,4,5,6,7,8,9,10,11]', '2026-10-29 16:28:42', '2026-10-30 15:16:42'),
+(178, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-02', 14, '[14,15,16,17,18,19,20,21,22,23,24,25,26,29,30,31,32,33,34,35,44,45]', '2026-10-29 18:58:40', '2026-10-30 15:17:14'),
+(430, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-03', 47, '[46]', '2026-10-30 15:18:55', '2026-10-30 15:19:09');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `induction_module_evaluation_attempts`
+--
+
+CREATE TABLE `induction_module_evaluation_attempts` (
+  `id_attempt` bigint(20) UNSIGNED NOT NULL,
+  `id_users` varchar(50) NOT NULL,
+  `role_name` varchar(50) NOT NULL,
+  `induction_id` varchar(100) NOT NULL,
+  `module_id` varchar(50) NOT NULL,
+  `evaluation_id` varchar(100) NOT NULL,
+  `evaluation_number` smallint(5) UNSIGNED NOT NULL,
+  `attempt_number` smallint(5) UNSIGNED NOT NULL,
+  `answers_json` longtext NOT NULL,
+  `correct_count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `question_count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `score_percentage` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `passed` tinyint(1) NOT NULL DEFAULT 0,
+  `submitted_at` datetime NOT NULL DEFAULT current_timestamp()
+) ;
+
+--
+-- Volcado de datos para la tabla `induction_module_evaluation_attempts`
+--
+
+INSERT INTO `induction_module_evaluation_attempts` (`id_attempt`, `id_users`, `role_name`, `induction_id`, `module_id`, `evaluation_id`, `evaluation_number`, `attempt_number`, `answers_json`, `correct_count`, `question_count`, `score_percentage`, `passed`, `submitted_at`) VALUES
+(1, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-01', 'module-01-evaluation-01', 1, 1, '{\"M1Q1\":{\"selected\":\"a\",\"correct\":false},\"M1Q2\":{\"selected\":\"b\",\"correct\":false},\"M1Q3\":{\"selected\":\"c\",\"correct\":false},\"M1Q4\":{\"selected\":\"d\",\"correct\":false}}', 0, 4, 0.00, 0, '2026-10-29 18:57:40'),
+(2, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-01', 'module-01-evaluation-01', 1, 2, '{\"M1Q1\":{\"selected\":\"b\",\"correct\":true},\"M1Q2\":{\"selected\":\"a\",\"correct\":true},\"M1Q3\":{\"selected\":\"b\",\"correct\":true},\"M1Q4\":{\"selected\":\"c\",\"correct\":true}}', 4, 4, 100.00, 1, '2026-10-29 18:58:35'),
+(3, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-02', 'module-02-evaluation-01', 2, 1, '{\"M2Q1\":{\"selected\":\"a\",\"correct\":false},\"M2Q2\":{\"selected\":\"b\",\"correct\":false},\"M2Q3\":{\"selected\":\"c\",\"correct\":false},\"M2Q4\":{\"selected\":\"b\",\"correct\":true},\"M2Q5\":{\"selected\":\"c\",\"correct\":false},\"M2Q6\":{\"selected\":\"d\",\"correct\":false},\"M2Q7\":{\"selected\":\"a\",\"correct\":false},\"M2Q8\":{\"selected\":\"a\",\"correct\":false},\"M2Q9\":{\"selected\":\"d\",\"correct\":false},\"M2Q10\":{\"selected\":\"a\",\"correct\":false}}', 1, 10, 10.00, 0, '2026-10-30 15:05:59'),
+(4, 'UsuarioEmpresaDemo@demoSCT.cl', 'usuario', 'health-safety-engie', 'module-02', 'module-02-evaluation-01', 2, 2, '{\"M2Q1\":{\"selected\":\"b\",\"correct\":true},\"M2Q2\":{\"selected\":\"a\",\"correct\":true},\"M2Q3\":{\"selected\":\"a\",\"correct\":true},\"M2Q4\":{\"selected\":\"b\",\"correct\":true},\"M2Q5\":{\"selected\":\"b\",\"correct\":true},\"M2Q6\":{\"selected\":\"a\",\"correct\":true},\"M2Q7\":{\"selected\":\"b\",\"correct\":true},\"M2Q8\":{\"selected\":\"b\",\"correct\":true},\"M2Q9\":{\"selected\":\"a\",\"correct\":true},\"M2Q10\":{\"selected\":\"b\",\"correct\":true}}', 10, 10, 100.00, 1, '2026-10-30 15:18:50');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `log`
 --
 
@@ -696,7 +757,43 @@ INSERT INTO `login_attempts` (`id`, `identifier`, `ip_address`, `success`, `crea
 (5, 'ContratistaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:25'),
 (6, 'JefaturaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:39'),
 (7, 'adminEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:51:54'),
-(8, 'SuperUsuarioDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:57:34');
+(8, 'SuperUsuarioDemo@demoSCT.cl', '::1', 1, '2026-10-26 14:57:34'),
+(9, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 15:35:55'),
+(10, 'adminEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 15:36:13'),
+(11, 'ContratistaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 15:36:25'),
+(12, 'JefaturaEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-26 15:36:37'),
+(13, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-28 17:08:37'),
+(14, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-28 18:45:40'),
+(15, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-28 18:50:23'),
+(16, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-28 19:16:12'),
+(17, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-28 19:42:02'),
+(18, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 14:08:40'),
+(19, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 14:14:43'),
+(20, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 14:28:43'),
+(21, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 16:02:01'),
+(22, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 16:21:26'),
+(23, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 16:28:40'),
+(24, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 16:49:35'),
+(25, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 17:29:58'),
+(26, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 17:54:32'),
+(27, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 18:17:45'),
+(28, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 18:37:43'),
+(29, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 18:44:53'),
+(30, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 18:49:24'),
+(31, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 18:57:26'),
+(32, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 19:31:56'),
+(33, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 19:57:35'),
+(34, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 20:16:07'),
+(35, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 20:29:00'),
+(36, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-29 20:41:39'),
+(37, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 12:38:49'),
+(38, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 13:21:06'),
+(39, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 14:02:00'),
+(40, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 14:42:08'),
+(41, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 15:05:22'),
+(42, 'UsuarioNuevoEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 15:12:10'),
+(43, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 15:12:28'),
+(44, 'UsuarioEmpresaDemo@demoSCT.cl', '::1', 1, '2026-10-30 15:16:40');
 
 -- --------------------------------------------------------
 
@@ -727,7 +824,43 @@ INSERT INTO `login_codes` (`id_login_code`, `id_users`, `code_hash`, `expires_at
 (5, 'ContratistaEmpresaDemo@demoSCT.cl', '$2y$10$QFv0/gazVyJrYamWPSegVO7Zet4PxK7yHnpcIvRZP1uM4PzYt15t6', '2026-10-26 15:01:21', '2026-10-26 14:51:25', 0, '::1', '2026-10-26 14:51:21'),
 (6, 'JefaturaEmpresaDemo@demoSCT.cl', '$2y$10$j8wplcqeBR8silTitYrPoeywForjNYXZNHe3ifEzMovLAVaW845SG', '2026-10-26 15:01:36', '2026-10-26 14:51:39', 0, '::1', '2026-10-26 14:51:36'),
 (7, 'adminEmpresaDemo@demoSCT.cl', '$2y$10$6tusEtKq.Qa4YzdR8W2jD.1Y0JUmkT.uH4lEPzJiyVooa4pfu.25q', '2026-10-26 15:01:51', '2026-10-26 14:51:54', 0, '::1', '2026-10-26 14:51:51'),
-(8, 'SuperUsuarioDemo@demoSCT.cl', '$2y$10$j9yY5e2UPsr2tf18CmZU2exicoz9Z4dJePZOy.LFK00bXlhMLrFPS', '2026-10-26 15:07:31', '2026-10-26 14:57:34', 0, '::1', '2026-10-26 14:57:31');
+(8, 'SuperUsuarioDemo@demoSCT.cl', '$2y$10$j9yY5e2UPsr2tf18CmZU2exicoz9Z4dJePZOy.LFK00bXlhMLrFPS', '2026-10-26 15:07:31', '2026-10-26 14:57:34', 0, '::1', '2026-10-26 14:57:31'),
+(9, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$6x/OSGwJfO2zfQNDXcF/CeWvot4QxbK0kc1y.9c16MMQJ51L8Exsm', '2026-10-26 15:45:51', '2026-10-26 15:35:55', 0, '::1', '2026-10-26 15:35:51'),
+(10, 'adminEmpresaDemo@demoSCT.cl', '$2y$10$SwB1S.bMLqIvay.EQOQtJuhGyoTOZHvpa1Hj1zoR/BIOaBHKhwRtW', '2026-10-26 15:46:10', '2026-10-26 15:36:13', 0, '::1', '2026-10-26 15:36:10'),
+(11, 'ContratistaEmpresaDemo@demoSCT.cl', '$2y$10$WOm/sbHDBWL.1wkhU1F/PObH.vyDwzMpwFNcPuAj7PO/OUHZZn/9.', '2026-10-26 15:46:22', '2026-10-26 15:36:25', 0, '::1', '2026-10-26 15:36:22'),
+(12, 'JefaturaEmpresaDemo@demoSCT.cl', '$2y$10$GbsTCVNfZO2Dhy2FSprTc.L2YqnyoDpPLu3uVYDonGTpdviqkkXsm', '2026-10-26 15:46:33', '2026-10-26 15:36:36', 0, '::1', '2026-10-26 15:36:33'),
+(13, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$B6.qNA/E4fnQ/hocG840oehXoK6EXriM5SrqqPoYW8b0axqm/QRfS', '2026-10-28 17:18:32', '2026-10-28 17:08:36', 0, '::1', '2026-10-28 17:08:32'),
+(14, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$2yxTspcwgUYUIvxVz8sUpulxVCoApbGZoZIHPLxu6VBnahzNhaLZK', '2026-10-28 18:55:20', '2026-10-28 18:45:40', 0, '::1', '2026-10-28 18:45:20'),
+(15, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$PPy6bXVngrsFSknF7ad7LuMLmEIqbRn9vymOdW8SB9f2xzo/ovYZW', '2026-10-28 19:00:19', '2026-10-28 18:50:23', 0, '::1', '2026-10-28 18:50:19'),
+(16, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$uU7ktRPvFH8zuD4c91Gfe.RqeaAT4gE1Lgj/84tAVVIN6AzFXWmum', '2026-10-28 19:26:08', '2026-10-28 19:16:12', 0, '::1', '2026-10-28 19:16:08'),
+(17, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$mi/fwSX7TXu6dUnJZg1ZyerBK080nQxsL9oDlJJ6yk7sYnn4c/Wq.', '2026-10-28 19:51:57', '2026-10-28 19:42:01', 0, '::1', '2026-10-28 19:41:57'),
+(18, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$58DrVdwxcAFmVJvx3zKz0uCdrkOWzVTgsZ/VjtlRpAP3D9Lstsjyq', '2026-10-29 14:18:36', '2026-10-29 14:08:40', 0, '::1', '2026-10-29 14:08:36'),
+(19, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$W/vSbi.AG8u1zbxqgsJ1UOXy1wwsRYmfGHbqEg4y4OssflUIycuVu', '2026-10-29 14:24:38', '2026-10-29 14:14:43', 0, '::1', '2026-10-29 14:14:38'),
+(20, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$csyCTqkBUwlbozc/6CLh.ODZ0296rAA9eezqFFEofGcqXeOXTc9Ly', '2026-10-29 14:38:39', '2026-10-29 14:28:43', 0, '::1', '2026-10-29 14:28:39'),
+(21, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$6cTfe.BM2cysyIR.wr4qQOIG781hVQsONqbA7YhR280bG0hXh/X6G', '2026-10-29 16:11:57', '2026-10-29 16:02:01', 0, '::1', '2026-10-29 16:01:57'),
+(22, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$vYVUeDlykvR4EGf.5X5zh.pbe2.s07Ayvx8eH5JcUdFDHaikjOWn6', '2026-10-29 16:31:22', '2026-10-29 16:21:26', 0, '::1', '2026-10-29 16:21:22'),
+(23, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$IBHi9biQWnHYWlR6VyAyJ.SniA/uHNXgbsUu3hZ9.cjKS1HH/x3fC', '2026-10-29 16:38:37', '2026-10-29 16:28:40', 0, '::1', '2026-10-29 16:28:37'),
+(24, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$CSIVTUMxksdZekSJaReZo.bZGZc8c7kySejfyyzZ7dGoP8feN/gXu', '2026-10-29 16:59:29', '2026-10-29 16:49:34', 0, '::1', '2026-10-29 16:49:29'),
+(25, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$.oNaoIqvHDexCLCq5IPUJeVo92dydKaP/hpQ.LFStuwEsN92XQb6C', '2026-10-29 17:39:54', '2026-10-29 17:29:58', 0, '::1', '2026-10-29 17:29:54'),
+(26, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$FOZJMSRBBzI5zQglcxrF..MyY5ticwJHgK6MJLrzCtZFsImvT7Xg.', '2026-10-29 18:04:28', '2026-10-29 17:54:32', 0, '::1', '2026-10-29 17:54:28'),
+(27, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$ZRmQ3wxCBslGz3OYRFHnJ.s1pFgbjwpcP6qeUUXuR01PC7BuLN4bC', '2026-10-29 18:27:41', '2026-10-29 18:17:45', 0, '::1', '2026-10-29 18:17:41'),
+(28, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$6nNplaey9B6cRlWbGXm4vewHXWBzlllaDZiDV8xR8EOTHyMw.rBHy', '2026-10-29 18:47:39', '2026-10-29 18:37:43', 0, '::1', '2026-10-29 18:37:39'),
+(29, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$qsCe7IMMh0USxaZL7LafQeHWe/Qb67ZyxR6/zKu0.plN8g2dWhn7q', '2026-10-29 18:54:48', '2026-10-29 18:44:53', 0, '::1', '2026-10-29 18:44:48'),
+(30, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$7u2TmpJk77kqOYViSBn3.ud3dzpLKtWRuNUUcbIhOBZSGDw5dHA3O', '2026-10-29 18:59:21', '2026-10-29 18:49:24', 0, '::1', '2026-10-29 18:49:21'),
+(31, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$4m/GhmVQ.7j/9.nbE6/kAehBXzKN0YFB8TZSPpLdM1dXRlMQG0c0u', '2026-10-29 19:07:22', '2026-10-29 18:57:26', 0, '::1', '2026-10-29 18:57:22'),
+(32, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$pfGcADQuMvIoxTS/OwljU.Vpglx18jdkByeE/oXeyehMb0O80vD3C', '2026-10-29 19:41:51', '2026-10-29 19:31:55', 0, '::1', '2026-10-29 19:31:51'),
+(33, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$I7Ah6U5L3J7mMYYTb71XEeyNB6dDK9YY2RoVUJ/sOqXyQkMWt5aMO', '2026-10-29 20:07:30', '2026-10-29 19:57:35', 0, '::1', '2026-10-29 19:57:30'),
+(34, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$WF32HID4NZs.RebTY4trsu2P2psSDI7M0W6lyMRUQ2VY1xpb32imS', '2026-10-29 20:26:02', '2026-10-29 20:16:07', 0, '::1', '2026-10-29 20:16:02'),
+(35, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$osAXUpMEEcmok2wLvRCDC..1xKGE9KsxtlMDdOqws/PeYkujtxe/a', '2026-10-29 20:38:56', '2026-10-29 20:29:00', 0, '::1', '2026-10-29 20:28:56'),
+(36, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$S.xX3B0Sc7R/g0huhKJIe.5Ow2HNUMNRdLY29nVfiBHMd5QHck1rm', '2026-10-29 20:51:35', '2026-10-29 20:41:39', 0, '::1', '2026-10-29 20:41:35'),
+(37, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$BcBS1X2lLMfHF5VbGBy3teyic5yd8HqmfeBOArAYXo19//uvEfwqe', '2026-10-30 12:48:45', '2026-10-30 12:38:49', 0, '::1', '2026-10-30 12:38:45'),
+(38, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$FaCpBoF12UVz6owZUUGNtOn8Bk/3IgrZKL01GtsV9ORmWhRQbLoxe', '2026-10-30 13:31:01', '2026-10-30 13:21:06', 0, '::1', '2026-10-30 13:21:01'),
+(39, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$a2DKvD0aMigC3N4rG2HrcuEQqmSGvFYhwLAUAnDWLaVTaNr.dLLbG', '2026-10-30 14:11:55', '2026-10-30 14:01:59', 0, '::1', '2026-10-30 14:01:55'),
+(40, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$wB/OIbGs3V0BlsLjPwQcuuoYRD/t01UN2j/H0YaT1VP6aBGsxL1tS', '2026-10-30 14:52:03', '2026-10-30 14:42:08', 0, '::1', '2026-10-30 14:42:03'),
+(41, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$.GrAUsCiT8D03LmRYERfauFEVBodSVRvyoACsqLDrCjrriU6vzggW', '2026-10-30 15:15:18', '2026-10-30 15:05:22', 0, '::1', '2026-10-30 15:05:18'),
+(42, 'UsuarioNuevoEmpresaDemo@demoSCT.cl', '$2y$10$6npj0JgWY4XUMUqTBIRQ4.wSs9QYC/o/CSylJ6yXnZw5s8B379yi.', '2026-10-30 15:22:06', '2026-10-30 15:12:09', 0, '::1', '2026-10-30 15:12:06'),
+(43, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$hIHN9FEfR3t5ZQoE7I5DceoexkFo9.9KgTBXNcCFHwSLgs4L.zIBa', '2026-10-30 15:22:24', '2026-10-30 15:12:28', 0, '::1', '2026-10-30 15:12:24'),
+(44, 'UsuarioEmpresaDemo@demoSCT.cl', '$2y$10$WDqEtGWa60iotUqhr2oD9OzOSP2Bp6SlrW/Qajv3/Rb18f95tCfOq', '2026-10-30 15:26:36', '2026-10-30 15:16:40', 0, '::1', '2026-10-30 15:16:36');
 
 -- --------------------------------------------------------
 
@@ -5439,11 +5572,11 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('admin.completo.test@test.tecaivot.cl', 2, NULL, 'Francisca', 'Muñoz', '18102347-3', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-08-04 09:30:00'),
 ('admin.test@test.engie.cl', 3, NULL, 'Marcela', 'Vega', '18102701-0', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 08:30:00', '2026-09-08 08:30:00'),
 ('admin.test@test.tecaivot.cl', 2, NULL, 'Andrés', 'Pizarro', '18102439-9', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-08-04 09:30:00'),
-('adminEmpresaDemo@demoSCT.cl', 4, 19, 'Administrador', 'DEMO', '44444444-4', 1, 'es', NULL, 'isl', '2026-10-26 14:51:54', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-15 18:38:27'),
+('adminEmpresaDemo@demoSCT.cl', 4, 19, 'Administrador', 'DEMO', '44444444-4', 1, 'es', NULL, 'isl', '2026-10-26 15:36:13', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-15 18:38:27'),
 ('barbara.contreras@test.helheim.cl', 1, 1, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-05 09:00:00', '2026-10-09 00:33:11'),
 ('camila.soto@test.tecaivot.cl', 2, 3, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-05 09:30:00', '2026-10-09 00:33:11'),
 ('cliente.test@test.helheim.cl', 1, NULL, 'Ignacio', 'Bravo', '18102287-6', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:00:00', '2026-08-04 09:00:00'),
-('ContratistaEmpresaDemo@demoSCT.cl', 4, 288, 'Contratista', 'DEMO', '90000001-4', 1, 'es', NULL, 'ist', '2026-10-26 14:51:25', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:33:30'),
+('ContratistaEmpresaDemo@demoSCT.cl', 4, 288, 'Contratista', 'DEMO', '90000001-4', 1, 'es', NULL, 'ist', '2026-10-26 15:36:25', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:33:30'),
 ('cristobal.fuentes@test.engie.cl', 3, 6, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
 ('e3vs2.calama.01@demoSCT.cl', 4, 47, 'Martina', 'Molina', '72000020-2', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_e3_vs2_site20', '2026-10-15 18:23:32', '2026-10-15 18:23:32'),
 ('e3vs2.calama.02@demoSCT.cl', 4, 48, 'Benjamín', 'Riquelme', '72000021-0', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_e3_vs2_site20', '2026-10-15 18:23:32', '2026-10-15 18:23:32'),
@@ -5479,7 +5612,7 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('javiera.reyes@test.engie.cl', 3, 11, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-09-08 09:00:00', '2026-10-09 00:33:11'),
 ('jefatura.test@test.helheim.cl', 1, NULL, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:00:00', '2026-10-09 00:33:11'),
 ('jefatura.test@test.tecaivot.cl', 2, NULL, '', '', '', 1, 'es', NULL, NULL, '1970-01-01 00:00:00', 'seed_test_data', '2026-08-04 09:30:00', '2026-10-09 00:33:11'),
-('JefaturaEmpresaDemo@demoSCT.cl', 4, 17, 'Jefatura', 'DEMO', '22222222-2', 1, 'es', NULL, 'ist', '2026-10-26 14:51:39', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-16 16:21:19'),
+('JefaturaEmpresaDemo@demoSCT.cl', 4, 17, 'Jefatura', 'DEMO', '22222222-2', 1, 'es', NULL, 'ist', '2026-10-26 15:36:37', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-16 16:21:19'),
 ('jonathan.vera@engie.com', 3, NULL, 'Jonathan', 'Vera', '18102935-8', 1, 'es', NULL, NULL, '2026-09-08 01:11:21', 'phpmyadmin', '2026-09-08 01:11:21', '2026-09-08 01:11:21'),
 ('juanantonioconchaloyola@gmail.com', 1, NULL, 'antonio', 'helheim', '16725278-8', 1, 'es', 'uploads/usuarios/user_f4bcfaca519e256591fc7ccfd7734a32066c00d3302d3371653a5112e5208874_514070f45bc8a5fd.png', NULL, '2026-09-10 01:01:13', 'phpmyadmin', '2026-08-14 20:46:30', '2026-09-08 16:47:54'),
 ('Laura.Lira@external.engie.com', 3, NULL, '', '', '', 1, 'es', NULL, NULL, '2026-09-08 01:12:37', 'phpmyadmin', '2026-09-08 01:12:37', '2026-10-09 00:33:11'),
@@ -5490,8 +5623,8 @@ INSERT INTO `users` (`id_users`, `id_company`, `id_worker`, `name`, `lastname`, 
 ('SuperUsuarioDemo@demoSCT.cl', 4, NULL, 'SuperUsuario', 'DEMO', '55555555-5', 1, 'es', NULL, 'mutual', '2026-10-26 14:57:34', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-26 14:58:13'),
 ('TrabajadorEmpresaDemo@demoSCT.cl', 4, NULL, 'Trabajador', 'DEMO', '88888888-8', 0, 'es', NULL, NULL, '2026-10-07 19:18:31', 'migration_e3_vs1', '2026-10-07 18:08:04', '2026-10-08 15:48:23'),
 ('usuarioedemo@demosct.cl', 4, 286, 'Usuario2', 'DEMO2', '5648945-5', 1, 'en', NULL, 'achs', '1970-01-01 00:00:00', 'adminEmpresaDemo@demoSCT.cl', '2026-10-15 20:30:27', '2026-10-15 20:30:27'),
-('UsuarioEmpresaDemo@demoSCT.cl', 4, 18, 'Usuario', 'DEMO', '1234578-5', 1, 'es', NULL, 'achs', '2026-10-16 16:36:04', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-09 00:34:03'),
-('UsuarioNuevoEmpresaDemo@demoSCT.cl', 4, 26, 'Usuario2', 'DEMO2', '1234587-5', 1, 'en', NULL, NULL, '2026-10-16 16:35:44', 'migration_e3_vs1_onboarding', '2026-10-08 15:12:03', '2026-10-09 00:33:11'),
+('UsuarioEmpresaDemo@demoSCT.cl', 4, 18, 'Usuario', 'DEMO', '1234578-5', 1, 'es', NULL, 'isl', '2026-10-30 15:16:40', 'seed_demo_sct', '2026-09-08 18:43:22', '2026-10-28 19:17:44'),
+('UsuarioNuevoEmpresaDemo@demoSCT.cl', 4, 26, 'Usuario2', 'DEMO2', '1234587-5', 1, 'en', NULL, NULL, '2026-10-30 15:12:09', 'migration_e3_vs1_onboarding', '2026-10-08 15:12:03', '2026-10-09 00:33:11'),
 ('wagner.leite@engie.com', 3, NULL, 'Wagner', 'Leite', '18103115-8', 1, 'es', NULL, NULL, '2026-09-08 01:10:12', 'phpmyadmin', '2026-09-08 01:10:12', '2026-09-08 01:10:12');
 
 -- --------------------------------------------------------
@@ -7216,6 +7349,23 @@ ALTER TABLE `event_types`
   ADD PRIMARY KEY (`id_event_type`);
 
 --
+-- Indices de la tabla `induction_content_progress`
+--
+ALTER TABLE `induction_content_progress`
+  ADD PRIMARY KEY (`id_progress`),
+  ADD UNIQUE KEY `uq_induction_content_progress_user_role_module` (`id_users`,`role_name`,`induction_id`,`module_id`),
+  ADD KEY `idx_induction_content_progress_user` (`id_users`);
+
+--
+-- Indices de la tabla `induction_module_evaluation_attempts`
+--
+ALTER TABLE `induction_module_evaluation_attempts`
+  ADD PRIMARY KEY (`id_attempt`),
+  ADD UNIQUE KEY `uq_induction_eval_attempt` (`id_users`,`role_name`,`induction_id`,`module_id`,`evaluation_id`,`attempt_number`),
+  ADD KEY `idx_induction_eval_user_module` (`id_users`,`induction_id`,`module_id`),
+  ADD KEY `idx_induction_eval_passed` (`id_users`,`induction_id`,`module_id`,`passed`);
+
+--
 -- Indices de la tabla `log`
 --
 ALTER TABLE `log`
@@ -7617,7 +7767,7 @@ ALTER TABLE `certificates`
 -- AUTO_INCREMENT de la tabla `change_history`
 --
 ALTER TABLE `change_history`
-  MODIFY `id_change` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_change` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `company`
@@ -7680,6 +7830,18 @@ ALTER TABLE `event_types`
   MODIFY `id_event_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `induction_content_progress`
+--
+ALTER TABLE `induction_content_progress`
+  MODIFY `id_progress` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `induction_module_evaluation_attempts`
+--
+ALTER TABLE `induction_module_evaluation_attempts`
+  MODIFY `id_attempt` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `log`
 --
 ALTER TABLE `log`
@@ -7689,13 +7851,13 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `login_codes`
 --
 ALTER TABLE `login_codes`
-  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_login_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `onboarding_assessment_answers`
@@ -7959,6 +8121,18 @@ ALTER TABLE `dynamic_form_submissions`
   ADD CONSTRAINT `fk_dynamic_submission_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id_company`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_dynamic_submission_form` FOREIGN KEY (`id_form`) REFERENCES `dynamic_forms` (`id_form`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_dynamic_submission_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `induction_content_progress`
+--
+ALTER TABLE `induction_content_progress`
+  ADD CONSTRAINT `fk_induction_content_progress_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `induction_module_evaluation_attempts`
+--
+ALTER TABLE `induction_module_evaluation_attempts`
+  ADD CONSTRAINT `fk_induction_eval_user` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `log`

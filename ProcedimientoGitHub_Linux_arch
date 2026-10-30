@@ -33,7 +33,9 @@ git add -A
 git status --short
 
 # 8) Registrar cambios
-git commit -m "Actualizacion de codigo desde Linux Arch "
+git commit -m "Actualizacion de codigo desde Linux Arch HP, incluye cambios en: 
+
+"
 
 # 9) Subir a GitHub
 git push origin main 

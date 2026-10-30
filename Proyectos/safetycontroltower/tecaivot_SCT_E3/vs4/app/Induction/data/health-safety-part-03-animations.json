@@ -1,0 +1,600 @@
+{
+  "46": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-46-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-46.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 46,
+    "moduleLocalSlide": 1,
+    "reviewStartsInitial": true
+  },
+  "47": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-47-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-47.jpg",
+    "maxStep": 2,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s2-shape-2",
+        "shapeIndex": 1,
+        "shapeName": "CuadroTexto 1",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      },
+      {
+        "step": 2,
+        "shapeId": "m3-s2-shape-14",
+        "shapeIndex": 2,
+        "shapeName": "Freeform 4",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s2-shape-2",
+        "shapeName": "CuadroTexto 1",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-47-shape-2.png",
+        "x": 0.72727,
+        "y": 25.92892,
+        "w": 50.27273,
+        "h": 15.91276,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s2-shape-14",
+        "shapeName": "Freeform 4",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-47-shape-14.png",
+        "x": 3.45455,
+        "y": 55.41195,
+        "w": 42.54545,
+        "h": 26.17124,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 47,
+    "moduleLocalSlide": 2,
+    "reviewStartsInitial": true
+  },
+  "48": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-48-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-48.jpg",
+    "maxStep": 3,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s3-shape-18",
+        "shapeIndex": 1,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      },
+      {
+        "step": 2,
+        "shapeId": "m3-s3-shape-23",
+        "shapeIndex": 2,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 3,
+        "shapeId": "m3-s3-shape-27",
+        "shapeIndex": 3,
+        "shapeName": "ZoneTexte 31",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s3-shape-18",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-48-shape-18.png",
+        "x": 3.40909,
+        "y": 46.68821,
+        "w": 95.27273,
+        "h": 13.00485,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s3-shape-23",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-48-shape-23.png",
+        "x": 1.22727,
+        "y": 44.66882,
+        "w": 4.22727,
+        "h": 7.51212,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s3-shape-27",
+        "shapeName": "ZoneTexte 31",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-48-shape-27.png",
+        "x": 11.68182,
+        "y": 82.31018,
+        "w": 79.68182,
+        "h": 13.40872,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 48,
+    "moduleLocalSlide": 3,
+    "reviewStartsInitial": true
+  },
+  "49": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-49-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-49.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 49,
+    "moduleLocalSlide": 4
+  },
+  "50": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-50-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-50.jpg",
+    "maxStep": 1,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s5-shape-2",
+        "shapeIndex": 1,
+        "shapeName": "CuadroTexto 1",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s5-shape-2",
+        "shapeName": "CuadroTexto 1",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-50-shape-2.png",
+        "x": 0.72727,
+        "y": 18.25525,
+        "w": 63.0,
+        "h": 8.64297,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 50,
+    "moduleLocalSlide": 5
+  },
+  "51": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-51-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-51.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 51,
+    "moduleLocalSlide": 6
+  },
+  "52": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-52-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-52.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 52,
+    "moduleLocalSlide": 7,
+    "reviewStartsInitial": true
+  },
+  "53": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-53-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-53.jpg",
+    "maxStep": 7,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s8-shape-18",
+        "shapeIndex": 1,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      },
+      {
+        "step": 2,
+        "shapeId": "m3-s8-shape-23",
+        "shapeIndex": 2,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 3,
+        "shapeId": "m3-s8-shape-27",
+        "shapeIndex": 3,
+        "shapeName": "ZoneTexte 31",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 4,
+        "shapeId": "m3-s8-shape-24",
+        "shapeIndex": 4,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 5,
+        "shapeId": "m3-s8-shape-26",
+        "shapeIndex": 5,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 6,
+        "shapeId": "m3-s8-shape-29",
+        "shapeIndex": 6,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 7,
+        "shapeId": "m3-s8-shape-30",
+        "shapeIndex": 7,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s8-shape-18",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-18.png",
+        "x": 3.90909,
+        "y": 32.63328,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-23",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-23.png",
+        "x": 1.22727,
+        "y": 34.41034,
+        "w": 4.22727,
+        "h": 7.51212,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-27",
+        "shapeName": "ZoneTexte 31",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-27.png",
+        "x": 10.68182,
+        "y": 79.48304,
+        "w": 83.18182,
+        "h": 18.7399,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-24",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-24.png",
+        "x": 3.90909,
+        "y": 55.89661,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-26",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-26.png",
+        "x": 3.90909,
+        "y": 67.4475,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-29",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-29.png",
+        "x": 1.13636,
+        "y": 68.01292,
+        "w": 4.22727,
+        "h": 7.51212,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s8-shape-30",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-53-shape-30.png",
+        "x": 1.22727,
+        "y": 57.43134,
+        "w": 4.22727,
+        "h": 7.59289,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 53,
+    "moduleLocalSlide": 8
+  },
+  "54": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-54-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-54.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 54,
+    "moduleLocalSlide": 9
+  },
+  "55": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-55-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-55.jpg",
+    "maxStep": 3,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s10-shape-27",
+        "shapeIndex": 1,
+        "shapeName": "ZoneTexte 31",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      },
+      {
+        "step": 2,
+        "shapeId": "m3-s10-shape-24",
+        "shapeIndex": 2,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 3,
+        "shapeId": "m3-s10-shape-30",
+        "shapeIndex": 3,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s10-shape-27",
+        "shapeName": "ZoneTexte 31",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-55-shape-27.png",
+        "x": 10.68182,
+        "y": 76.41357,
+        "w": 83.18182,
+        "h": 18.7399,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s10-shape-24",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-55-shape-24.png",
+        "x": 3.90909,
+        "y": 55.89661,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s10-shape-30",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-55-shape-30.png",
+        "x": 1.22727,
+        "y": 57.43134,
+        "w": 4.22727,
+        "h": 7.59289,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 55,
+    "moduleLocalSlide": 10
+  },
+  "56": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-56-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-56.jpg",
+    "maxStep": 0,
+    "initialStep": 0,
+    "effects": [],
+    "layers": [],
+    "sourceSlide": 56,
+    "moduleLocalSlide": 11
+  },
+  "57": {
+    "baseAsset": "../../assets/inductions/health-safety/part-03/base/slide-57-base.png",
+    "thumbAsset": "../../assets/inductions/health-safety/part-03/final/slide-57.jpg",
+    "maxStep": 5,
+    "initialStep": 0,
+    "effects": [
+      {
+        "step": 1,
+        "shapeId": "m3-s12-shape-27",
+        "shapeIndex": 1,
+        "shapeName": "ZoneTexte 31",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 0,
+        "durationMs": 520
+      },
+      {
+        "step": 2,
+        "shapeId": "m3-s12-shape-24",
+        "shapeIndex": 2,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 3,
+        "shapeId": "m3-s12-shape-30",
+        "shapeIndex": 3,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 4,
+        "shapeId": "m3-s12-shape-2",
+        "shapeIndex": 4,
+        "shapeName": "Rectangle : coins arrondis 20",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      },
+      {
+        "step": 5,
+        "shapeId": "m3-s12-shape-3",
+        "shapeIndex": 5,
+        "shapeName": "Graphique 29",
+        "class": "entr",
+        "nodeType": "clickEffect",
+        "presetId": "2",
+        "filter": "fade",
+        "delayMs": 100,
+        "durationMs": 520
+      }
+    ],
+    "layers": [
+      {
+        "shapeId": "m3-s12-shape-27",
+        "shapeName": "ZoneTexte 31",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-57-shape-27.png",
+        "x": 10.68182,
+        "y": 76.41357,
+        "w": 83.18182,
+        "h": 18.7399,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s12-shape-24",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-57-shape-24.png",
+        "x": 3.90909,
+        "y": 56.94669,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s12-shape-30",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-57-shape-30.png",
+        "x": 1.54545,
+        "y": 46.44588,
+        "w": 4.22727,
+        "h": 7.51212,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s12-shape-2",
+        "shapeName": "Rectangle : coins arrondis 20",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-57-shape-2.png",
+        "x": 3.90909,
+        "y": 44.34572,
+        "w": 95.22727,
+        "h": 11.06624,
+        "initialVisible": false
+      },
+      {
+        "shapeId": "m3-s12-shape-3",
+        "shapeName": "Graphique 29",
+        "asset": "../../assets/inductions/health-safety/part-03/layers/slide-57-shape-3.png",
+        "x": 1.54545,
+        "y": 58.80452,
+        "w": 4.22727,
+        "h": 7.59289,
+        "initialVisible": false
+      }
+    ],
+    "sourceSlide": 57,
+    "moduleLocalSlide": 12
+  }
+}

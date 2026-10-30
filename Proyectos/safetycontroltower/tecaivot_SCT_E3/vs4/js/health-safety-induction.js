@@ -53,6 +53,11 @@
     const moduleStart = moduleSlideNumbers[0];
     const moduleEnd = moduleSlideNumbers[moduleSlideNumbers.length - 1];
     const moduleId = root.dataset.moduleId || 'module-01';
+    const moduleNumber = Number.parseInt(String(moduleId).replace(/\D+/g,''), 10) || 1;
+    const nextModuleNumber = moduleNumber + 1;
+    const evaluationQuestionCount = evaluationForm
+        ? evaluationForm.querySelectorAll('.onboarding-question').length
+        : 0;
     const userId = root.dataset.userId || 'anonymous';
     const userRole = root.dataset.userRole || 'usuario';
     const inductionId = root.dataset.inductionId || 'health-safety';
@@ -962,8 +967,8 @@
         if (stage) stage.hidden = true;
         evaluationPanel.hidden = false;
         evaluationVisible = true;
-        if (titleLabel) titleLabel.textContent = 'Evaluación Módulo 1';
-        if (currentLabel) currentLabel.textContent = '4 preguntas';
+        if (titleLabel) titleLabel.textContent = `Evaluación Módulo ${moduleNumber}`;
+        if (currentLabel) currentLabel.textContent = `${evaluationQuestionCount} preguntas`;
         if (progressBar) progressBar.style.width = '100%';
         if (prevButton) prevButton.disabled = true;
         if (nextButton) nextButton.disabled = true;
@@ -993,8 +998,8 @@
         const data = new FormData(evaluationForm);
         const answers = {};
         for (const [key,value] of data.entries()) answers[key] = String(value);
-        if (Object.keys(answers).length !== 4) {
-            if (evaluationResult) { evaluationResult.hidden=false; evaluationResult.className='hs-induction__evaluation-result is-fail'; evaluationResult.textContent='Debes responder las 4 preguntas antes de enviar.'; }
+        if (Object.keys(answers).length !== evaluationQuestionCount) {
+            if (evaluationResult) { evaluationResult.hidden=false; evaluationResult.className='hs-induction__evaluation-result is-fail'; evaluationResult.textContent=`Debes responder las ${evaluationQuestionCount} preguntas antes de enviar.`; }
             return;
         }
         if (evaluationSubmit) evaluationSubmit.disabled = true;
@@ -1003,24 +1008,29 @@
             const payload = await response.json();
             if (!response.ok || !payload?.success) throw new Error(payload?.message || 'No fue posible guardar la evaluación.');
             const r = payload.data;
-            const redirectUrl = String(r.redirect_url || (r.passed ? 'health-safety.php?module=2&slide=14' : 'health-safety.php?module=1&slide=1'));
+            const fallbackCurrentUrl = `health-safety.php?module=${moduleNumber}&slide=${moduleStart}`;
+            const fallbackNextUrl = `health-safety.php?module=${nextModuleNumber}`;
+            const redirectUrl = String(r.redirect_url || (r.passed ? fallbackNextUrl : fallbackCurrentUrl));
+            const passPercentage = Number(r.pass_percentage ?? 50);
             if (evaluationResult) {
                 evaluationResult.hidden = false;
                 evaluationResult.className = `hs-induction__evaluation-result ${r.passed ? 'is-pass' : 'is-fail'}`;
                 evaluationResult.innerHTML = `<strong>Evaluación N° ${Number(r.evaluation_number)} · Intento N° ${Number(r.attempt_number)}</strong>
                     <span>${Number(r.correct_count)}/${Number(r.question_count)} respuestas correctas · ${Number(r.score_percentage).toFixed(0)}%</span>
-                    <span>${r.passed ? 'Aprobado. El Módulo 2 quedó habilitado.' : 'No aprobado. Debes obtener 50% o más para aprobar.'}</span>
-                    <small>${r.passed ? 'Te llevaremos a la primera lámina del Módulo 2.' : 'Te llevaremos a la primera lámina del Módulo 1 para repasar el contenido.'}</small>
-                    <a class="btn ${r.passed ? 'btn-primary-custom' : 'btn-outline-custom'}" href="${escapeHtml(redirectUrl)}">${r.passed ? 'Ir al Módulo 2' : 'Volver al Módulo 1'} <i class="bi bi-arrow-right"></i></a>`;
+                    <span>${r.passed ? `Aprobado. El Módulo ${Number(r.next_module_number || nextModuleNumber)} quedó habilitado.` : `No aprobado. Debes obtener ${passPercentage.toFixed(0)}% o más para aprobar.`}</span>
+                    <small>${r.passed ? `Te llevaremos al Módulo ${Number(r.next_module_number || nextModuleNumber)}.` : `Te llevaremos al inicio del Módulo ${moduleNumber} para repasar el contenido.`}</small>
+                    <a class="btn ${r.passed ? 'btn-primary-custom' : 'btn-outline-custom'}" href="${escapeHtml(redirectUrl)}">${r.passed ? `Ir al Módulo ${Number(r.next_module_number || nextModuleNumber)}` : `Volver al Módulo ${moduleNumber}`} <i class="bi bi-arrow-right"></i></a>`;
             }
             await loadEvaluationHistory();
             if (r.passed) {
-                const tab = document.querySelector('.hs-induction__module-tab.is-disabled[title^="Aprueba"]');
+                const targetModuleNumber = Number(r.next_module_number || nextModuleNumber);
+                const tab = document.querySelector(`.hs-induction__module-tab.is-disabled[data-module-number="${targetModuleNumber}"]`);
                 if (tab) {
                     const link = document.createElement('a');
                     link.className = 'hs-induction__module-tab';
-                    link.href = 'health-safety.php?module=2&slide=14';
-                    link.textContent = 'Módulo 2';
+                    link.dataset.moduleNumber = String(targetModuleNumber);
+                    link.href = String(r.next_module_url || `health-safety.php?module=${targetModuleNumber}`);
+                    link.textContent = `Módulo ${targetModuleNumber}`;
                     tab.replaceWith(link);
                 }
             }

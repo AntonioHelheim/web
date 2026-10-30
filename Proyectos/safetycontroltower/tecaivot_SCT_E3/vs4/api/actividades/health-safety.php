@@ -17,20 +17,35 @@ if (empty($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_byt
 $csrfToken = (string)$_SESSION['csrf_token'];
 $induction = SctHealthSafetyContent::manifest();
 
-function hsModuleOnePassed(PDO $pdo, string $userId, string $role, string $inductionId): bool {
+function hsModuleEvaluationPassed(PDO $pdo, string $userId, string $role, string $inductionId, string $moduleId, string $evaluationId): bool {
     try {
         $check = $pdo->query("SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='induction_module_evaluation_attempts'");
         if ((int)$check->fetchColumn() < 1) return false;
-        $stmt=$pdo->prepare('SELECT 1 FROM induction_module_evaluation_attempts WHERE id_users=:u AND role_name=:r AND induction_id=:i AND module_id=\'module-01\' AND evaluation_id=\'module-01-evaluation-01\' AND passed=1 LIMIT 1');
-        $stmt->execute(['u'=>$userId,'r'=>$role,'i'=>$inductionId]);
+        $stmt=$pdo->prepare(
+            'SELECT 1 FROM induction_module_evaluation_attempts
+             WHERE id_users=:u AND role_name=:r AND induction_id=:i
+               AND module_id=:m AND evaluation_id=:e AND passed=1 LIMIT 1'
+        );
+        $stmt->execute(['u'=>$userId,'r'=>$role,'i'=>$inductionId,'m'=>$moduleId,'e'=>$evaluationId]);
         return (bool)$stmt->fetchColumn();
-    } catch (Throwable $e) { error_log('health-safety module unlock: '.$e->getMessage()); return false; }
+    } catch (Throwable $e) {
+        error_log('health-safety module unlock: '.$e->getMessage());
+        return false;
+    }
 }
 
-$moduleOnePassed = hsModuleOnePassed($pdo,$currentUserId,$primaryRole,(string)$induction['id']);
+$moduleOnePassed = hsModuleEvaluationPassed(
+    $pdo,$currentUserId,$primaryRole,(string)$induction['id'],
+    'module-01','module-01-evaluation-01'
+);
+$moduleTwoPassed = $moduleOnePassed && hsModuleEvaluationPassed(
+    $pdo,$currentUserId,$primaryRole,(string)$induction['id'],
+    'module-02','module-02-evaluation-01'
+);
+
+$maxUnlockedModule = $moduleTwoPassed ? 3 : ($moduleOnePassed ? 2 : 1);
 $requestedModule = max(1, min(7, (int)($_GET['module'] ?? 1)));
-if ($requestedModule === 2 && !$moduleOnePassed) $requestedModule = 1;
-if ($requestedModule > 2) $requestedModule = 1;
+if ($requestedModule > $maxUnlockedModule) $requestedModule = $maxUnlockedModule;
 $moduleId = sprintf('module-%02d',$requestedModule);
 $module = SctHealthSafetyContent::module($induction,$moduleId) ?? $induction['modules'][0];
 $moduleSlideNumbers = array_values(array_map('intval',$module['slide_numbers'] ?? []));
@@ -56,18 +71,38 @@ $evaluation = !empty($module['evaluation_id']) ? SctHealthSafetyContent::evaluat
  data-user-role="<?= htmlspecialchars($primaryRole,ENT_QUOTES,'UTF-8') ?>" data-module-id="<?= htmlspecialchars($module['id'],ENT_QUOTES,'UTF-8') ?>"
  data-module-start="<?= $moduleSlideNumbers ? (int)$moduleSlideNumbers[0] : 0 ?>" data-module-end="<?= $moduleSlideNumbers ? (int)$moduleSlideNumbers[count($moduleSlideNumbers)-1] : 0 ?>"
  data-csrf-token="<?= htmlspecialchars($csrfToken,ENT_QUOTES,'UTF-8') ?>" data-progress-url="health-safety-progress.php"
- data-evaluation-url="health-safety-evaluation.php" data-has-evaluation="<?= $evaluation ? '1':'0' ?>">
+ data-evaluation-url="health-safety-evaluation.php?module_id=<?= rawurlencode((string)$module['id']) ?>" data-has-evaluation="<?= $evaluation ? '1':'0' ?>">
 <header class="hs-induction__header">
  <div><span class="hs-induction__eyebrow"><i class="bi bi-shield-check"></i> Health &amp; Safety · <?= htmlspecialchars($induction['company'],ENT_QUOTES,'UTF-8') ?></span>
  <h1><?= htmlspecialchars($induction['title'],ENT_QUOTES,'UTF-8') ?></h1><p class="hs-induction__subtitle">Material oficial de inducción integrado en Safety Control Tower.</p></div>
  <nav class="hs-induction__modules" aria-label="Módulos de la inducción">
- <?php foreach($induction['modules'] as $m): $n=(int)$m['number']; $hasSlides=!empty($m['slide_numbers']); $enabled=$n===1 || ($n===2 && $moduleOnePassed); $active=$n===$requestedModule; ?>
-  <?php if($enabled && $hasSlides): ?><a class="hs-induction__module-tab<?= $active?' is-active':'' ?>" href="health-safety.php?module=<?= $n ?>&slide=<?= (int)$m['slide_numbers'][0] ?>"<?= $active?' aria-current="page"':'' ?>>Módulo <?= $n ?></a>
-  <?php else: ?><span class="hs-induction__module-tab is-disabled" aria-disabled="true" title="<?= $n===2?'Aprueba el Módulo 1 para continuar.':'Contenido pendiente de incorporar.' ?>">Módulo <?= $n ?></span><?php endif; ?>
+ <?php foreach($induction['modules'] as $m):
+     $n=(int)$m['number'];
+     $hasSlides=!empty($m['slide_numbers']);
+     $enabled=$n <= $maxUnlockedModule;
+     $active=$n===$requestedModule;
+     $canOpen=$enabled && ($hasSlides || $n===3);
+     $firstModuleSlide=$hasSlides ? (int)$m['slide_numbers'][0] : 0;
+     $href='health-safety.php?module='.$n.($firstModuleSlide ? '&slide='.$firstModuleSlide : '');
+     $lockTitle=$n===2 ? 'Aprueba el Módulo 1 para continuar.' : ($n===3 ? 'Aprueba el Módulo 2 para continuar.' : 'Contenido pendiente de incorporar.');
+ ?>
+  <?php if($canOpen): ?><a class="hs-induction__module-tab<?= $active?' is-active':'' ?>" data-module-number="<?= $n ?>" href="<?= htmlspecialchars($href,ENT_QUOTES,'UTF-8') ?>"<?= $active?' aria-current="page"':'' ?>>Módulo <?= $n ?></a>
+  <?php else: ?><span class="hs-induction__module-tab is-disabled" data-module-number="<?= $n ?>" aria-disabled="true" title="<?= htmlspecialchars($lockTitle,ENT_QUOTES,'UTF-8') ?>">Módulo <?= $n ?></span><?php endif; ?>
  <?php endforeach; ?>
- <small><?= $requestedModule===1?'11 láminas + evaluación':count($slides).' láminas incorporadas · contenido en desarrollo' ?></small>
+ <small><?php if(!$slides): ?>Módulo habilitado · contenido pendiente de incorporar<?php elseif($evaluation): ?><?= count($slides) ?> láminas + evaluación de <?= count($evaluation['questions']??[]) ?> preguntas<?php else: ?><?= count($slides) ?> láminas incorporadas<?php endif; ?></small>
  </nav>
 </header>
+<?php if(!$slides): ?>
+<section class="hs-induction__viewer" aria-label="Estado del módulo">
+ <div class="onboarding-card p-4 m-0">
+  <div class="onboarding-card__heading">
+   <span class="section-label">Módulo <?= (int)$module['number'] ?> habilitado</span>
+   <h2><?= htmlspecialchars($module['title'],ENT_QUOTES,'UTF-8') ?></h2>
+   <p>Has aprobado el módulo anterior. El contenido de este módulo está pendiente de incorporación.</p>
+  </div>
+ </div>
+</section>
+<?php else: ?>
 <div class="hs-induction__workspace">
 <section class="hs-induction__viewer" data-hs-viewer aria-label="Visor de inducción">
  <div class="hs-induction__stage" data-hs-stage>
@@ -104,9 +139,10 @@ $evaluation = !empty($module['evaluation_id']) ? SctHealthSafetyContent::evaluat
  </div>
 </section>
 <aside class="hs-induction__sidebar" aria-label="Índice de láminas"><div class="hs-induction__sidebar-head"><strong>Módulo <?= (int)$module['number'] ?></strong><span><?= count($slides) ?> láminas<?= $evaluation?' + evaluación':'' ?></span></div><div class="hs-induction__thumbs">
-<?php foreach($slides as $slide): ?><button class="hs-induction__thumb<?= $slide['number']===$firstSlide['number']?' is-active':'' ?>" type="button" data-hs-thumb data-slide-number="<?= (int)$slide['number'] ?>" aria-current="<?= $slide['number']===$firstSlide['number']?'true':'false' ?>"><span class="hs-induction__thumb-media"><img src="<?= htmlspecialchars($slide['thumb']??$slide['asset'],ENT_QUOTES,'UTF-8') ?>" alt="" loading="lazy" decoding="async"><span class="hs-induction__thumb-number"><?= (int)$slide['number'] ?></span><?php if(!empty($slide['media'])):$mt=$slide['media']['type'];?><span class="hs-induction__thumb-media-badge"><i class="bi <?= $mt==='video'?'bi-play-fill':($mt==='audio'?'bi-volume-up-fill':'bi-arrow-repeat') ?>"></i></span><?php endif;?></span><span class="hs-induction__thumb-title"><?= htmlspecialchars($slide['title'],ENT_QUOTES,'UTF-8') ?></span></button><?php endforeach; ?>
-<?php if($evaluation): ?><button class="hs-induction__thumb hs-induction__thumb--evaluation" type="button" data-hs-evaluation-open disabled><span class="hs-induction__thumb-media hs-induction__thumb-media--evaluation"><i class="bi bi-ui-checks-grid"></i></span><span class="hs-induction__thumb-title">Evaluación Módulo 1 · 4 preguntas</span></button><?php endif; ?>
+<?php foreach($slides as $slideIndex=>$slide): ?><button class="hs-induction__thumb<?= $slide['number']===$firstSlide['number']?' is-active':'' ?>" type="button" data-hs-thumb data-slide-number="<?= (int)$slide['number'] ?>" data-local-slide-number="<?= (int)$slideIndex+1 ?>" aria-current="<?= $slide['number']===$firstSlide['number']?'true':'false' ?>"><span class="hs-induction__thumb-media"><img src="<?= htmlspecialchars($slide['thumb']??$slide['asset'],ENT_QUOTES,'UTF-8') ?>" alt="" loading="lazy" decoding="async"><span class="hs-induction__thumb-number"><?= (int)$slideIndex+1 ?></span><?php if(!empty($slide['media'])):$mt=$slide['media']['type'];?><span class="hs-induction__thumb-media-badge"><i class="bi <?= $mt==='video'?'bi-play-fill':($mt==='audio'?'bi-volume-up-fill':'bi-arrow-repeat') ?>"></i></span><?php endif;?></span><span class="hs-induction__thumb-title"><?= htmlspecialchars($slide['title'],ENT_QUOTES,'UTF-8') ?></span></button><?php endforeach; ?>
+<?php if($evaluation): ?><button class="hs-induction__thumb hs-induction__thumb--evaluation" type="button" data-hs-evaluation-open disabled><span class="hs-induction__thumb-media hs-induction__thumb-media--evaluation"><i class="bi bi-ui-checks-grid"></i></span><span class="hs-induction__thumb-title">Evaluación Módulo <?= (int)$module['number'] ?> · <?= count($evaluation['questions']??[]) ?> preguntas</span></button><?php endif; ?>
 </div></aside>
-</div><p class="hs-induction__hint" aria-hidden="true"><i class="bi bi-keyboard"></i> Navegación rápida: <kbd>←</kbd><kbd>→</kbd>; <kbd>Home</kbd> inicio y <kbd>End</kbd> último contenido desbloqueado.</p>
-<script type="application/json" data-hs-manifest><?= json_encode($slides,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) ?></script>
-</main><script src="../../js/health-safety-induction.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script></body></html>
+</div>
+<?php endif; ?><p class="hs-induction__hint" aria-hidden="true"><i class="bi bi-keyboard"></i> Navegación rápida: <kbd>←</kbd><kbd>→</kbd>; <kbd>Home</kbd> inicio y <kbd>End</kbd> último contenido desbloqueado.</p>
+<?php if($slides): ?><script type="application/json" data-hs-manifest><?= json_encode($slides,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) ?></script><?php endif; ?>
+</main><?php if($slides): ?><script src="../../js/health-safety-induction.js?v=<?= htmlspecialchars($ASSET_VERSION,ENT_QUOTES,'UTF-8') ?>"></script><?php endif; ?></body></html>

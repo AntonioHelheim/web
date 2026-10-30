@@ -53,6 +53,18 @@ final class SctHealthSafetyContent
             43 => 'Ejercicio — Espacios confinados',
             44 => 'Pilares de ENGIE — Procesos industriales y riesgos psicosociales',
             45 => 'Nuestros 9 compromisos para el bienestar en los lugares de trabajo',
+            46 => 'Módulo 3 — Tipos de eventos e incidentes HIPO',
+            47 => 'Tipos de eventos — Objetivo y definición de HIPO',
+            48 => '¿Qué significa HIPO?',
+            49 => 'Tipos de eventos — Video',
+            50 => 'Identificación de situaciones peligrosas y eventos HIPO',
+            51 => 'Eventos e incidentes — Reportar hoy evita que mañana ocurra lo peor',
+            52 => 'Caso HIPO — Derrumbe y panel de entibación',
+            53 => 'Análisis del caso HIPO — Puntos esenciales no aplicados',
+            54 => 'Caso HIPO — Caída de objeto durante montaje de torre eólica',
+            55 => 'Análisis del caso HIPO — Evaluación de riesgos y EPP',
+            56 => 'Caso HIPO — Caída desde altura',
+            57 => 'Análisis del caso HIPO — Vigilancia, Stop Work y LMRA',
         ];
 
         $mediaBase = '../../assets/inductions/health-safety/part-01/media/';
@@ -78,7 +90,9 @@ final class SctHealthSafetyContent
             26 => ['type'=>'animation','durationMs'=>16510,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-26-animation.gif','x'=>20.85745,'y'=>25.97365,'w'=>74.08165,'h'=>72.92333],
             27 => ['type'=>'audio','durationMs'=>8086,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-27-audio.m4a'],
             29 => ['type'=>'audio','durationMs'=>12498,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-29-audio.m4a'],
+            30 => ['type'=>'video','durationMs'=>157972,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-30-video.mp4','poster'=>'../../assets/inductions/health-safety/part-02/media/slide-30-poster.jpg','x'=>14.351,'y'=>29.427,'w'=>69.191,'h'=>64.349],
             31 => ['type'=>'audio','durationMs'=>19600,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-31-audio.m4a'],
+            32 => ['type'=>'video','durationMs'=>113536,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-32-video.mp4','poster'=>'../../assets/inductions/health-safety/part-02/media/slide-32-poster.jpg','x'=>13.43,'y'=>26.129,'w'=>73.14,'h'=>66.667],
             33 => ['type'=>'audio','durationMs'=>22782,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-33-audio.m4a'],
             35 => ['type'=>'audio','durationMs'=>10261,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-35-audio.m4a'],
             36 => ['type'=>'animation','durationMs'=>12660,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-36-animation.gif','x'=>4.60659,'y'=>24.39118,'w'=>45.39341,'h'=>45.41114],
@@ -89,6 +103,12 @@ final class SctHealthSafetyContent
             41 => ['type'=>'animation','durationMs'=>10260,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-41-animation.gif','x'=>3.0687,'y'=>28.49189,'w'=>45.42113,'h'=>45.43889],
             42 => ['type'=>'animation','durationMs'=>10830,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-42-animation.gif','x'=>2.91387,'y'=>25.99601,'w'=>45.42114,'h'=>45.43889],
             43 => ['type'=>'animation','durationMs'=>21410,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-43-animation.gif','x'=>3.32322,'y'=>26.70201,'w'=>45.70723,'h'=>45.7251],
+            44 => ['type'=>'video','durationMs'=>120000,'src'=>'../../assets/inductions/health-safety/part-02/media/slide-44-video.mp4','poster'=>'../../assets/inductions/health-safety/part-02/media/slide-44-poster.jpg','x'=>18.01,'y'=>28.034,'w'=>64.935,'h'=>64.926],
+            46 => ['type'=>'audio','durationMs'=>6996,'src'=>'../../assets/inductions/health-safety/part-03/media/slide-46-audio.m4a'],
+            47 => ['type'=>'audio','durationMs'=>17887,'src'=>'../../assets/inductions/health-safety/part-03/media/slide-47-audio.m4a'],
+            48 => ['type'=>'audio','durationMs'=>4153,'src'=>'../../assets/inductions/health-safety/part-03/media/slide-48-audio.m4a'],
+            49 => ['type'=>'video','durationMs'=>168204,'src'=>'../../assets/inductions/health-safety/part-03/media/slide-49-video.mp4','poster'=>'../../assets/inductions/health-safety/part-03/media/slide-49-poster.jpg','x'=>19.81818,'y'=>26.41357,'w'=>63.22727,'h'=>63.57027],
+            52 => ['type'=>'audio','durationMs'=>8086,'src'=>'../../assets/inductions/health-safety/part-03/media/slide-52-audio.m4a'],
         ];
 
         $animationData = [];
@@ -96,6 +116,12 @@ final class SctHealthSafetyContent
         if (is_file($animationFile)) {
             $decoded = json_decode((string) file_get_contents($animationFile), true);
             if (is_array($decoded)) $animationData = $decoded;
+        }
+
+        $animationFilePart03 = __DIR__ . '/data/health-safety-part-03-animations.json';
+        if (is_file($animationFilePart03)) {
+            $decodedPart03 = json_decode((string) file_get_contents($animationFilePart03), true);
+            if (is_array($decodedPart03)) $animationData = array_replace($animationData, $decodedPart03);
         }
 
         $slides = [];
@@ -143,9 +169,20 @@ final class SctHealthSafetyContent
                 [
                     'id' => 'module-02', 'number' => 2,
                     'title' => 'Pilares y esenciales de seguridad ENGIE',
-                    'slide_numbers' => range(14, 45), 'status' => 'active',
+                    // Local slides removed from the active flow:
+                    // 14, 15 and 23–30 => internal/global 27, 28 and 36–43.
+                    // Their source content remains preserved in assets/animation data
+                    // and is reused by the native Module 2 evaluation.
+                    'slide_numbers' => array_merge(range(14, 26), range(29, 35), range(44, 45)),
+                    'status' => 'active',
+                    'evaluation_id' => 'module-02-evaluation-01',
                 ],
-                ['id'=>'module-03','number'=>3,'title'=>'Módulo 3','slide_numbers'=>[],'status'=>'pending'],
+                [
+                    'id'=>'module-03','number'=>3,
+                    'title'=>'Tipos de eventos e incidentes HIPO',
+                    'slide_numbers'=>range(46,57),
+                    'status'=>'active',
+                ],
                 ['id'=>'module-04','number'=>4,'title'=>'Módulo 4','slide_numbers'=>[],'status'=>'pending'],
                 ['id'=>'module-05','number'=>5,'title'=>'Módulo 5','slide_numbers'=>[],'status'=>'pending'],
                 ['id'=>'module-06','number'=>6,'title'=>'Módulo 6','slide_numbers'=>[],'status'=>'pending'],
@@ -203,9 +240,120 @@ final class SctHealthSafetyContent
                         ],
                     ],
                 ],
+                'module-02-evaluation-01' => [
+                    'id' => 'module-02-evaluation-01',
+                    'number' => 2,
+                    'module_id' => 'module-02',
+                    'title' => 'Evaluación Módulo 2',
+                    'intro' => 'Responde las 10 preguntas. Para aprobar debes obtener 50% o más de respuestas correctas.',
+                    'pass_percentage' => 50,
+                    'pass_operator' => 'greater_than_or_equal',
+                    'questions' => [
+                        [
+                            'id'=>'M2Q1',
+                            'text'=>'¿Cuál expresa correctamente el compromiso de seguridad presentado en los Pilares de ENGIE?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Las tareas urgentes pueden ejecutarse sin todos los controles si existe autorización.','correct'=>false],
+                                ['id'=>'b','text'=>'Ninguna actividad es tan urgente o importante que no pueda realizarse de forma segura.','correct'=>true],
+                                ['id'=>'c','text'=>'La seguridad depende exclusivamente del área de prevención.','correct'=>false],
+                                ['id'=>'d','text'=>'Los controles de seguridad sólo se aplican a proyectos nuevos.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q2',
+                            'text'=>'¿Cuál de las siguientes acciones forma parte de los 5 Esenciales de Seguridad de ENGIE?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Notificar eventos e incidentes para evitar que un día ocurra lo peor.','correct'=>true],
+                                ['id'=>'b','text'=>'Continuar un trabajo peligroso mientras no exista un accidente.','correct'=>false],
+                                ['id'=>'c','text'=>'Usar el teléfono durante la conducción cuando el trayecto sea corto.','correct'=>false],
+                                ['id'=>'d','text'=>'Dejar la evaluación de riesgos únicamente a la jefatura.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q3',
+                            'text'=>'¿Qué principio resume correctamente STOP WORK?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Si no es seguro, no se inicia o se detiene el trabajo hasta recuperar condiciones seguras.','correct'=>true],
+                                ['id'=>'b','text'=>'Sólo la jefatura puede detener una tarea insegura.','correct'=>false],
+                                ['id'=>'c','text'=>'Un trabajo iniciado debe terminar aunque cambien las condiciones.','correct'=>false],
+                                ['id'=>'d','text'=>'STOP WORK se aplica únicamente después de un accidente.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q4',
+                            'text'=>'¿Qué significa Vigilancia Compartida?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Supervisar únicamente a trabajadores de empresas contratistas.','correct'=>false],
+                                ['id'=>'b','text'=>'Velar por la seguridad propia y la de cada persona, sin importar cargo, empresa o nivel jerárquico.','correct'=>true],
+                                ['id'=>'c','text'=>'Delegar la seguridad del área únicamente al encargado de turno.','correct'=>false],
+                                ['id'=>'d','text'=>'Observar sin intervenir ante una condición insegura.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q5',
+                            'text'=>'¿Cuál es el propósito del LMRA o “Minuto que Salva Vidas”?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Registrar la asistencia antes de comenzar la jornada.','correct'=>false],
+                                ['id'=>'b','text'=>'Verificar el entorno y confirmar que los riesgos están controlados antes de iniciar una actividad.','correct'=>true],
+                                ['id'=>'c','text'=>'Reemplazar el permiso de trabajo y el análisis de riesgos.','correct'=>false],
+                                ['id'=>'d','text'=>'Evaluar únicamente los riesgos ocurridos después de terminar la tarea.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q6',
+                            'text'=>'¿Por qué es importante reportar eventos e incidentes?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Para evitar su reiteración y prevenir que se conviertan en hechos graves.','correct'=>true],
+                                ['id'=>'b','text'=>'Sólo para identificar responsables individuales.','correct'=>false],
+                                ['id'=>'c','text'=>'Porque reemplaza las medidas preventivas del trabajo.','correct'=>false],
+                                ['id'=>'d','text'=>'Únicamente cuando existe una lesión con tiempo perdido.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q7',
+                            'text'=>'Al trabajar o ingresar a una zanja, ¿qué Regla que Salva Vidas corresponde aplicar?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Ingresar si la excavación parece estable visualmente.','correct'=>false],
+                                ['id'=>'b','text'=>'Solo bajar si las medidas de protección contra derrumbes son aplicadas y adecuadas.','correct'=>true],
+                                ['id'=>'c','text'=>'Usar únicamente casco y guantes como control principal.','correct'=>false],
+                                ['id'=>'d','text'=>'Trabajar acompañado, aunque no existan medidas contra derrumbes.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q8',
+                            'text'=>'Antes de trabajar en un cuadro eléctrico o sobre otra fuente de energía peligrosa, ¿qué debes hacer?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Comenzar el trabajo si el equipo se encuentra detenido.','correct'=>false],
+                                ['id'=>'b','text'=>'Verificar la ausencia de energía mecánica, química, eléctrica o de fluidos bajo presión antes de comenzar.','correct'=>true],
+                                ['id'=>'c','text'=>'Usar teléfono para avisar mientras se manipula el equipo.','correct'=>false],
+                                ['id'=>'d','text'=>'Realizar primero una prueba de funcionamiento energizada.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q9',
+                            'text'=>'Durante una maniobra de izaje, ¿qué regla debe cumplirse?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'No caminar ni detenerse debajo de cargas suspendidas.','correct'=>true],
+                                ['id'=>'b','text'=>'Permanecer bajo la carga para controlar visualmente su posición.','correct'=>false],
+                                ['id'=>'c','text'=>'Acercarse a la carga mientras esté suspendida para reducir el tiempo de maniobra.','correct'=>false],
+                                ['id'=>'d','text'=>'La restricción aplica sólo cuando la carga supera una tonelada.','correct'=>false],
+                            ],
+                        ],
+                        [
+                            'id'=>'M2Q10',
+                            'text'=>'Antes de entrar en un espacio confinado, ¿qué condición debe comprobarse y mantenerse controlada?',
+                            'options'=>[
+                                ['id'=>'a','text'=>'Que exista cobertura de telefonía móvil.','correct'=>false],
+                                ['id'=>'b','text'=>'Que la atmósfera interior sea segura y que sea monitoreada durante toda la operación.','correct'=>true],
+                                ['id'=>'c','text'=>'Que la tarea pueda completarse en menos de una hora.','correct'=>false],
+                                ['id'=>'d','text'=>'Que sólo exista una persona dentro del espacio.','correct'=>false],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'slides' => $slides,
-            'source' => 'PRESENTACION ENGIE_IRL_SCL — Partes 1 y 2 (slides 1–45)',
+            'source' => 'PRESENTACION ENGIE_IRL_SCL — Partes 1, 2 y 3 (slides internas 1–57)',
         ];
     }
 

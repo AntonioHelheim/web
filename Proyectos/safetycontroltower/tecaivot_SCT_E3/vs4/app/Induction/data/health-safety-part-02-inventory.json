@@ -5,7 +5,7 @@
     "to": 45,
     "count": 20
   },
-  "phase": "text-images-audio",
+  "phase": "text-images-audio-video-complete",
   "audioSlides": [
     27,
     29,
@@ -24,24 +24,31 @@
     42,
     43
   ],
-  "videosDeferred": [
+  "videosDeferred": [],
+  "videosIntegrated": [
     {
       "slide": 30,
       "sourceMedia": "media3.mp4",
-      "bytes": 29578536,
-      "status": "pending-video-phase"
+      "optimizedAsset": "../../assets/inductions/health-safety/part-02/media/slide-30-video.mp4",
+      "poster": "../../assets/inductions/health-safety/part-02/media/slide-30-poster.jpg",
+      "durationMs": 157972,
+      "profile": "H.264/AAC 1280x720 max 30fps web optimized"
     },
     {
       "slide": 32,
       "sourceMedia": "media5.mp4",
-      "bytes": 128438510,
-      "status": "pending-video-phase"
+      "optimizedAsset": "../../assets/inductions/health-safety/part-02/media/slide-32-video.mp4",
+      "poster": "../../assets/inductions/health-safety/part-02/media/slide-32-poster.jpg",
+      "durationMs": 113536,
+      "profile": "H.264/AAC 1280x720 max 30fps web optimized"
     },
     {
       "slide": 44,
       "sourceMedia": "media8.mp4",
-      "bytes": 49973868,
-      "status": "pending-video-phase"
+      "optimizedAsset": "../../assets/inductions/health-safety/part-02/media/slide-44-video.mp4",
+      "poster": "../../assets/inductions/health-safety/part-02/media/slide-44-poster.jpg",
+      "durationMs": 120000,
+      "profile": "H.264/AAC 1280x720 max 30fps web optimized"
     }
   ]
 }
